@@ -1,0 +1,112 @@
+/* 
+===========================================
+🔗 ZAP EMPRESARIAL - LAYOUT CONECTAR WHATSAPP
+===========================================
+Evitar scroll de página e alinhar com padrão das demais telas.
+*/
+
+/* Container principal com altura fixa (sem scroll global) */
+.connect-container-fixed {
+  height: calc(100vh - 220px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Espaçamentos compactos iguais ao contacts */
+.connect-spacing-tight { margin: 0.75rem 1rem; }
+.connect-spacing-tight-first { margin: 0.75rem 1rem 0.5rem 1rem; }
+.connect-spacing-tight-middle { margin: 0 1rem 0.75rem 1rem; }
+.connect-spacing-tight-last { margin: 0 1rem 1rem 1rem; }
+
+/* Grid principal: duas colunas lado a lado sem ultrapassar a altura */
+.connect-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+  height: 100%;
+}
+
+/* Cartões internos com controle de overflow */
+.connect-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Área de conteúdo com scroll interno quando necessário */
+.connect-card-scroll {
+  flex: 1;
+  overflow: auto;
+}
+
+/* Header compacto */
+.connect-header-compact { padding: 1rem !important; }
+.connect-title-small { font-size: 1.5rem !important; }
+
+/* QR e status em bloco fixo com altura estável */
+.connect-qr-area {
+  min-height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  height: 100%;
+}
+
+/* Instruções com altura controlada */
+.connect-instructions { max-height: 260px; }
+
+/* Grid interno da coluna esquerda para reduzir altura total */
+.connect-left-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Títulos e ícones menores */
+.connect-title-sm { font-size: 1.25rem !important; line-height: 1.75rem; }
+.connect-icon-circle { width: 3rem; height: 3rem; }
+.connect-section-gap > * + * { margin-top: 0.75rem; }
+
+/* Tipografia da coluna direita (um pouco menor) */
+.connect-aside .aside-text { font-size: 0.9375rem; line-height: 1.35rem; }
+.connect-aside h4 { font-size: 1rem !important; }
+
+/* Coluna direita interna com melhor aproveitamento do espaço */
+.connect-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0; /* permite que filhos com overflow funcionem */
+}
+
+/* Instruções ocupam o espaço restante, com scroll apenas se necessário */
+.connect-right-col .connect-instructions {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* Coluna esquerda apenas QR: ocupar altura total sem criar scroll da página */
+.connect-left-only-qr { display: flex; flex-direction: column; min-height: 0; }
+.connect-left-only-qr .connect-qr-area { flex: 1; min-height: 0; }
+
+/* QR desenhado (img/canvas) ajusta ao container */
+#qrcode-container img,
+#qrcode-container canvas {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .connect-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 1024px) {
+  .connect-container-fixed { height: calc(100vh - 200px); }
+  .connect-left-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .connect-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,136 @@
+/* 
+===========================================
+🏷️ ZAP EMPRESARIAL - LOGO COMPONENT
+===========================================
+Componente padronizado da logo baseado na sidebar
+*/
+
+.zap-logo {
+  /* Estilo base idêntico à sidebar */
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; /* font-bold */
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  letter-spacing: -0.02em;
+}
+
+.zap-logo:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Cores idênticas à sidebar */
+.zap-logo .zap-text {
+  color: #4F46E5 !important; /* Azul principal - forçado */
+}
+
+.zap-logo .empresarial-text {
+  color: #ef4444 !important; /* Vermelho - forçado */
+}
+
+.zap-logo:hover .zap-text {
+  color: #4338CA !important; /* Azul mais escuro no hover */
+}
+
+.zap-logo:hover .empresarial-text {
+  color: #dc2626 !important; /* Vermelho mais escuro no hover */
+}
+
+/* === TAMANHOS DISPONÍVEIS === */
+
+/* Extra pequeno - para footer, breadcrumbs */
+.zap-logo--xs {
+  font-size: 0.75rem;  /* text-xs */
+  line-height: 1rem;
+}
+
+/* Pequeno - para navbar móvel */
+.zap-logo--sm {
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.25rem;
+}
+
+/* Médio - para header desktop */
+.zap-logo--md {
+  font-size: 1rem;     /* text-base */
+  line-height: 1.5rem;
+}
+
+/* Grande - para auth pages (padrão sidebar) */
+.zap-logo--lg {
+  font-size: 1.25rem;  /* text-xl - igual sidebar */
+  line-height: 1.75rem;
+}
+
+/* Extra grande */
+.zap-logo--xl {
+  font-size: 1.5rem;   /* text-2xl */
+  line-height: 2rem;
+}
+
+/* Jumbo */
+.zap-logo--2xl {
+  font-size: 2rem;     /* text-3xl */
+  line-height: 2.5rem;
+}
+
+/* === CONTEXTOS ESPECÍFICOS === */
+
+/* Para usar em auth pages - mesmo tamanho da sidebar */
+.zap-logo--auth {
+  font-size: 1.25rem;  /* text-xl */
+  line-height: 1.75rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Para usar em header */
+.zap-logo--header {
+  font-size: 1.125rem; /* text-lg */
+  line-height: 1.75rem;
+}
+
+/* Para usar em sidebar - tamanho original */
+.zap-logo--sidebar {
+  font-size: 1.25rem;  /* text-xl */
+  line-height: 1.75rem;
+}
+
+/* === UTILITÁRIOS === */
+
+/* Centro a logo */
+.zap-logo--center {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Logo responsiva */
+.zap-logo--responsive {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .zap-logo--responsive {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .zap-logo--responsive {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* === ESTRUTURA HTML PADRÃO === */
+/*
+<a href="dashboard.html" class="zap-logo zap-logo--lg">
+  <span class="zap-text">Zap</span> <span class="empresarial-text">Empresarial</span>
+</a>
+*/

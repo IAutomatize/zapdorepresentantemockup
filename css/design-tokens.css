@@ -1,0 +1,303 @@
+/**
+ * ============================================================================
+ * DESIGN TOKENS — Fonte única de verdade de cores (light + dark)
+ * ============================================================================
+ *
+ * Criado a partir da auditoria em docs/design-system-audit-tema-escuro.md
+ * Decisão: --primary = #2196F3 (Material Blue), o azul de-facto já em uso.
+ *
+ * ARQUITETURA EM 3 CAMADAS:
+ *   1. PRIMITIVOS  (--c-*)  → valores crus, sem semântica. Não usar direto em componentes.
+ *   2. SEMÂNTICOS  (--ds-*) → papéis (bg, surface, text, primary...). Light em :root, dark em .dark.
+ *   3. COMPONENTES (--ds-*) → aliases de alto nível (input, card, modal...).
+ *
+ * NAMESPACE `--ds-*`: escolhido de propósito para coexistir sem colisão com os
+ * tokens legados (zap-colors.css define --surface/--text-muted com OUTROS valores).
+ * Conforme cada tela migra para var(--ds-*), os tokens legados são aposentados.
+ *
+ * REGRA DE OURO: componentes consomem SOMENTE --ds-*. Nada de hex solto no CSS de tela.
+ * ============================================================================
+ */
+
+/* ===========================================================================
+ * CAMADA 1 — PRIMITIVOS (raw)
+ * =========================================================================== */
+:root {
+  /* Azul (escala Material em torno de #2196F3) */
+  --c-blue-300: #5AB6FF;
+  --c-blue-400: #38A6FF;   /* primário no dark */
+  --c-blue-500: #2196F3;   /* PRIMÁRIO oficial (light) */
+  --c-blue-600: #1F95F8;
+  --c-blue-700: #1976D2;   /* hover (light) */
+  /* Azuis legados (sky-blue / navy do Figma) — mantidos como referência de migração */
+  --c-sky-500: #0C88F1;
+  --c-sky-600: #1174DA;
+  --c-navy-700: #234365;
+  --c-navy-800: #1F4387;
+  --c-navy-900: #043B66;
+  --c-ice: #EEF6FE;
+
+  /* Neutros (slate) */
+  --c-ink-900: #1A1A2E;    /* texto forte */
+  --c-ink-800: #314158;
+  --c-ink-700: #44505F;
+  --c-slate-600: #4A5568;  /* texto secundário */
+  --c-slate-500: #64748B;
+  --c-slate-400: #8896A6;  /* label / muted (light) */
+  --c-slate-350: #90A1B9;  /* muted (dark) */
+  --c-slate-300: #94A3B8;
+  --c-slate-250: #B6C2D2;  /* texto secundário (dark) */
+  --c-slate-200: #CBD5E1;
+  --c-slate-150: #E2E8F0;
+  --c-slate-100: #E5E7EB;
+  --c-mist-200: #E9EEF5;
+  --c-mist-100: #F1F5F8;
+  --c-mist-50:  #F5F7FA;
+  --c-gray-50:  #FAFAFA;
+  --c-white:    #FFFFFF;
+
+  /* Superfícies escuras */
+  --c-night-900: #11181F;  /* bg dark */
+  --c-night-850: #0D141B;
+  --c-night-800: #111E28;  /* surface dark */
+  --c-night-700: #14222E;  /* surface-2 dark */
+  --c-night-600: #18293A;  /* surface-3 dark */
+  --c-night-500: #14304C;
+
+  /* Verde / Vermelho / Âmbar */
+  --c-green-500: #48BB78;
+  --c-green-400: #3BD17E;  /* dark */
+  --c-green-emerald: #10B981;
+  --c-red-500: #F56565;
+  --c-red-400: #FF6B6B;    /* dark */
+  --c-red-accent: #E93127;
+  --c-amber-500: #F6AD55;
+  --c-amber-600: #D69E2E;
+  --c-amber-400: #FBBF6B;  /* dark */
+}
+
+/* ===========================================================================
+ * CAMADA 2 — SEMÂNTICOS · TEMA CLARO (default)
+ * =========================================================================== */
+:root {
+  /* Faz os controles nativos (dropdown de <select>, date-picker, scrollbar) renderizarem no tema certo */
+  color-scheme: light;
+
+  /* Fundos e superfícies */
+  --ds-bg:            var(--c-gray-50);
+  --ds-bg-gradient:   linear-gradient(135deg, #eef2f7 0%, var(--c-mist-50) 50%, #eef2f7 100%);
+  /* Fundo de "shell" do app COM o glow-assinatura (mesmo das telas dashboard/stories/etc.) */
+  --ds-shell-bg:      radial-gradient(circle at 8% 8%, rgba(76, 122, 176, 0.08) 0, transparent 30%), linear-gradient(135deg, #eef2f7 0%, var(--c-mist-50) 50%, #eef2f7 100%);
+  --ds-surface:       var(--c-white);
+  --ds-surface-2:     var(--c-mist-100);
+  --ds-surface-3:     var(--c-mist-200);
+
+  /* Texto */
+  --ds-text:          var(--c-ink-900);
+  --ds-text-soft:     var(--c-slate-600);
+  --ds-text-muted:    var(--c-slate-400);
+  --ds-text-inverse:  var(--c-white);
+
+  /* Bordas */
+  --ds-border:        rgba(0, 0, 0, 0.06);
+  --ds-border-strong: rgba(0, 0, 0, 0.12);
+
+  /* Primário */
+  --ds-primary:          var(--c-blue-500);
+  --ds-primary-hover:    var(--c-blue-700);
+  --ds-primary-contrast: var(--c-white);
+  --ds-primary-soft:     rgba(33, 150, 243, 0.12);  /* tint para pills/badges/hover */
+
+  /* Estados (accent = texto/ícone · soft = fundo de pill) */
+  --ds-success:      var(--c-green-500);
+  --ds-success-soft: rgba(72, 187, 120, 0.14);
+  --ds-danger:       var(--c-red-500);
+  --ds-danger-soft:  rgba(245, 101, 101, 0.14);
+  --ds-warning:      var(--c-amber-600);
+  --ds-warning-soft: rgba(246, 173, 85, 0.16);
+
+  /* Acentos decorativos (sem papel semântico forte) — roxo/rosa/slate p/ badges/labels/fills */
+  --ds-accent-purple:      #805AD5;
+  --ds-accent-purple-soft: rgba(128, 90, 213, 0.12);
+  --ds-accent-pink:        #EC4899;
+  --ds-accent-pink-soft:   rgba(236, 72, 153, 0.12);
+  --ds-accent-slate:       #4A6FA5;
+  --ds-accent-slate-soft:  rgba(74, 111, 165, 0.14);
+
+  /* Glass / overlay / sombras */
+  --ds-glass:        rgba(255, 255, 255, 0.55);
+  --ds-glass-strong: rgba(255, 255, 255, 0.72);
+  --ds-glass-border: rgba(255, 255, 255, 0.60);
+  --ds-glass-rgb:    255, 255, 255;   /* canal base de "vidro": use rgba(var(--ds-glass-rgb), .x) */
+  --ds-overlay:      rgba(15, 23, 42, 0.45);
+  --ds-shadow:       0 1px 3px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --ds-shadow-lg:    0 10px 25px rgba(0, 0, 0, 0.12);
+
+  /* ----- CAMADA 3 · COMPONENTES (claro) ----- */
+  --ds-card-bg:       var(--ds-surface);
+  --ds-modal-bg:      var(--ds-surface);
+  --ds-input-bg:      var(--ds-glass-strong);
+  --ds-input-border:  rgba(0, 0, 0, 0.08);
+  --ds-input-text:    var(--ds-text);
+  --ds-sidebar-bg:    rgba(255, 255, 255, 0.45);
+  --ds-scrollbar:     var(--c-slate-200);
+  --ds-scrollbar-hover: var(--c-slate-300);
+}
+
+/* ===========================================================================
+ * CAMADA 2 — SEMÂNTICOS · TEMA ESCURO (.dark no <html>)
+ * Valores calibrados para contraste WCAG AA sobre superfícies escuras.
+ * =========================================================================== */
+.dark {
+  /* Controles nativos (dropdown de <select>, date-picker, scrollbar) → variante escura */
+  color-scheme: dark;
+
+  /* Fundos e superfícies */
+  --ds-bg:            var(--c-night-900);
+  --ds-bg-gradient:   linear-gradient(135deg, var(--c-night-850) 0%, var(--c-night-900) 50%, var(--c-night-850) 100%);
+  /* Mesmo glow-assinatura do .dark .dashboard-modern-shell (azul-aço sutil no canto superior-esquerdo) */
+  --ds-shell-bg:      radial-gradient(circle at 8% 8%, rgba(76, 122, 176, 0.12) 0, transparent 30%), #0F1721;
+  --ds-surface:       var(--c-night-800);
+  --ds-surface-2:     var(--c-night-700);
+  --ds-surface-3:     var(--c-night-600);
+
+  /* Texto */
+  --ds-text:          var(--c-ice);
+  --ds-text-soft:     var(--c-slate-250);
+  --ds-text-muted:    var(--c-slate-350);
+  --ds-text-inverse:  var(--c-night-900);
+
+  /* Bordas */
+  --ds-border:        rgba(255, 255, 255, 0.10);
+  --ds-border-strong: rgba(255, 255, 255, 0.18);
+
+  /* Primário (clareado p/ contraste no escuro) */
+  --ds-primary:          var(--c-blue-400);
+  --ds-primary-hover:    var(--c-blue-300);
+  --ds-primary-contrast: #07121C;
+  --ds-primary-soft:     rgba(56, 166, 255, 0.16);
+
+  /* Estados */
+  --ds-success:      var(--c-green-400);
+  --ds-success-soft: rgba(59, 209, 126, 0.16);
+  --ds-danger:       var(--c-red-400);
+  --ds-danger-soft:  rgba(255, 107, 107, 0.16);
+  --ds-warning:      var(--c-amber-400);
+  --ds-warning-soft: rgba(251, 191, 107, 0.18);
+
+  /* Acentos decorativos (clareados p/ contraste no escuro) */
+  --ds-accent-purple:      #B794F4;
+  --ds-accent-purple-soft: rgba(183, 148, 244, 0.18);
+  --ds-accent-pink:        #F472B6;
+  --ds-accent-pink-soft:   rgba(244, 114, 182, 0.18);
+  --ds-accent-slate:       #8FB0D6;
+  --ds-accent-slate-soft:  rgba(143, 176, 214, 0.18);
+
+  /* Glass / overlay / sombras */
+  --ds-glass:        rgba(20, 30, 42, 0.62);
+  --ds-glass-strong: rgba(18, 29, 42, 0.84);
+  --ds-glass-border: rgba(148, 163, 184, 0.22);
+  --ds-glass-rgb:    26, 38, 52;      /* vidro escuro elevado (preserva as opacidades originais) */
+  --ds-overlay:      rgba(0, 0, 0, 0.60);
+  --ds-shadow:       0 1px 3px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.20);
+  --ds-shadow-lg:    0 10px 25px rgba(0, 0, 0, 0.45);
+
+  /* ----- CAMADA 3 · COMPONENTES (escuro) ----- */
+  --ds-card-bg:       var(--ds-surface);
+  --ds-modal-bg:      var(--ds-surface);
+  --ds-input-bg:      var(--ds-glass-strong);
+  --ds-input-border:  rgba(148, 163, 184, 0.24);
+  --ds-input-text:    var(--ds-text);
+  --ds-sidebar-bg:    rgba(17, 24, 31, 0.55);
+  --ds-scrollbar:     #6B7280;
+  --ds-scrollbar-hover: #9CA3AF;
+}
+
+/* ===========================================================================
+ * OVERRIDE DE CHROME COMPARTILHADO — TEMA ESCURO
+ * A sidebar recebe fundo branco setado INLINE via JS (sidebar.ts), e estilo
+ * inline só é vencido por !important. Enquanto o bundle não é rebuildado,
+ * isto garante a sidebar escura em todas as páginas.
+ * =========================================================================== */
+.dark .sidebar-hover {
+  background: var(--ds-sidebar-bg) !important;
+  border-right-color: var(--ds-glass-border) !important;
+}
+
+/* Item ativo: zap-colors força ice-blue (#EEF6FE) com !important → "quadrado branco"
+   no escuro. Trocamos por um tint sutil do primário (flipa com o tema). */
+.dark .sidebar-item-active {
+  background-color: var(--ds-primary-soft) !important;
+}
+
+/* ===========================================================================
+ * BADGE DE PENDÊNCIAS DA BARRA LATERAL
+ * Mora aqui porque este é o único stylesheet carregado por TODAS as páginas que
+ * montam o mvp-sidebar — as regras base do rail estão divididas entre
+ * sidebar.css e dashboard-layout.css, e nenhum dos dois é universal.
+ *
+ * Dois estados, porque o rail tem duas larguras: recolhido (72px) o rótulo está
+ * invisível mas ainda ocupa espaço, então uma pílula no fluxo cairia fora da
+ * área visível — daí o posicionamento absoluto sobre o ícone. Expandido, ela
+ * volta para o fluxo, logo depois da palavra.
+ * ========================================================================== */
+.sidebar-item {
+  position: relative;
+}
+
+.sidebar-badge {
+  position: absolute;
+  top: 2px;
+  left: 23px;
+  z-index: 1;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: #F56565;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 0 0 2px var(--ds-surface, #fff);
+  pointer-events: none;
+}
+
+.sidebar-badge[hidden] {
+  display: none;
+}
+
+/* Expandido: sai do canto do ícone e acompanha o rótulo. */
+.sidebar-hover:hover .sidebar-badge {
+  position: static;
+  flex: 0 0 auto;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  /* Na gaveta os rótulos estão sempre visíveis e não existe :hover no toque. */
+  #mvp-sidebar .sidebar-badge {
+    position: static;
+    flex: 0 0 auto;
+    box-shadow: none;
+  }
+}
+
+/* ============================================================================
+ * Dropdowns nativos de <select> no tema escuro
+ * O Chrome/Windows muitas vezes ignora color-scheme para selects estilizados e
+ * abre a lista de opções BRANCA. Estilizar <option> diretamente força o popup
+ * escuro. Vale para TODOS os <select> do app (filtros de período, etc.).
+ * ========================================================================== */
+.dark select { color-scheme: dark; }
+.dark option,
+.dark optgroup {
+  background-color: var(--ds-surface);
+  color: var(--ds-text);
+}
+.dark option:checked,
+.dark option:hover {
+  background-color: var(--ds-primary-soft);
+}

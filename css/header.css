@@ -1,0 +1,522 @@
+/**
+ * HEADER ENTERPRISE - ESTILOS
+ * Sistema de header modular e reutilizável
+ */
+
+/* === Container Principal === */
+.zap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border-bottom: 1px solid #e5e7eb;
+  min-height: 60px;
+  gap: 1rem;
+}
+
+/* Dark mode */
+.dark .zap-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* === Título === */
+.zap-header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+}
+
+.dark .zap-header-title {
+  color: #f8fafc;
+}
+
+.zap-header-title-icon {
+  font-size: 1.5rem;
+  color: var(--color-sky-blue, #1174DA);
+}
+
+/* === Container de Ícones === */
+.zap-header-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* === Botões de Ícone === */
+.zap-header-icon-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.zap-header-icon-btn:hover {
+  background: #f1f5f9;
+}
+
+.zap-header-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.dark .zap-header-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* === Wrapper do Ícone (para posicionar badge/status) === */
+.zap-header-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* === Ícones === */
+.zap-header-icon {
+  font-size: 1.25rem;
+  color: #64748b;
+  transition: color 0.2s ease;
+}
+
+.zap-header-icon-btn:hover .zap-header-icon {
+  color: #1e293b;
+}
+
+.dark .zap-header-icon {
+  color: #94a3b8;
+}
+
+.dark .zap-header-icon-btn:hover .zap-header-icon {
+  color: #f8fafc;
+}
+
+/* === Badge (Notificações) === */
+.zap-header-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: #ef4444;
+  color: white;
+  border-radius: 9px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* === Status Dot (WhatsApp) === */
+.zap-header-status-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid white;
+  pointer-events: none;
+  transition: background-color 0.3s ease;
+}
+
+.dark .zap-header-status-dot {
+  border-color: #11181F;
+}
+
+/* Status colors */
+.zap-header-status-connected {
+  background-color: #34A853; /* WhatsApp Green */
+}
+
+.zap-header-status-disconnected {
+  background-color: #ef4444; /* Red */
+}
+
+.zap-header-status-warning {
+  background-color: #f59e0b; /* Amber */
+}
+
+/* === Responsividade === */
+@media (max-width: 768px) {
+  .zap-header {
+    padding: 0.75rem 1rem;
+    min-height: 56px;
+  }
+
+  .zap-header-title {
+    font-size: 1.25rem;
+  }
+
+  .zap-header-title-icon {
+    font-size: 1.25rem;
+  }
+
+  .zap-header-icons {
+    gap: 0.5rem;
+  }
+
+  .zap-header-icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .zap-header-icon {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .zap-header-title {
+    font-size: 1.125rem;
+  }
+
+  .zap-header-title-icon {
+    display: none; /* Esconde ícone do título em telas pequenas */
+  }
+}
+
+/* === Animações === */
+@keyframes badge-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.zap-header-badge {
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.zap-header-status-dot {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+.zap-header-status-connected {
+  animation: none; /* Remove pulse quando conectado */
+}
+
+/* =====================================================
+   NOTIFICATION POPUP - Sistema de Notificações
+   ===================================================== */
+
+/* Container do Popup */
+.zap-notification-popup {
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  z-index: 1000;
+  overflow: hidden;
+  animation: notification-popup-in 0.2s ease-out;
+}
+
+.dark .zap-notification-popup {
+  background: #11181F;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes notification-popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header do Popup */
+.zap-notification-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.dark .zap-notification-popup-header {
+  background: #181F2A;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.zap-notification-popup-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.dark .zap-notification-popup-title {
+  color: #f8fafc;
+}
+
+.zap-notification-popup-title i {
+  color: #1174DA;
+  font-size: 1.125rem;
+}
+
+.zap-notification-popup-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: all 0.15s ease;
+}
+
+.zap-notification-popup-close:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.dark .zap-notification-popup-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+/* Lista de Notificações */
+.zap-notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.zap-notification-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.zap-notification-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.zap-notification-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.dark .zap-notification-list::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+/* Item de Notificação */
+.zap-notification-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.zap-notification-item:hover {
+  background: #f8fafc;
+}
+
+.zap-notification-item:last-child {
+  border-bottom: none;
+}
+
+.dark .zap-notification-item {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .zap-notification-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Ícone da Notificação */
+.zap-notification-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+}
+
+.zap-notification-icon.type-message {
+  background: rgba(17, 116, 218, 0.1);
+  color: #1174DA;
+}
+
+.zap-notification-icon.type-system_update {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8B5CF6;
+}
+
+.zap-notification-icon.type-whatsapp_status {
+  background: rgba(52, 168, 83, 0.1);
+  color: #34A853;
+}
+
+.zap-notification-icon.type-campaign {
+  background: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+}
+
+.zap-notification-icon.type-contact {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+}
+
+.zap-notification-icon.type-alert {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+}
+
+/* Conteúdo da Notificação */
+.zap-notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.zap-notification-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dark .zap-notification-title {
+  color: #f8fafc;
+}
+
+.zap-notification-message {
+  font-size: 0.8125rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.dark .zap-notification-message {
+  color: #94a3b8;
+}
+
+.zap-notification-time {
+  font-size: 0.6875rem;
+  color: #94a3b8;
+}
+
+.dark .zap-notification-time {
+  color: #64748b;
+}
+
+/* Estado Vazio */
+.zap-notification-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.zap-notification-empty i {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  display: block;
+  opacity: 0.5;
+}
+
+.zap-notification-empty p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Estado de Loading */
+.zap-notification-loading {
+  padding: 40px 20px;
+  text-align: center;
+  color: #64748b;
+}
+
+.zap-notification-loading i {
+  font-size: 1.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Prioridade Alta/Urgente */
+.zap-notification-item.priority-high,
+.zap-notification-item.priority-urgent {
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.zap-notification-item.priority-high:hover,
+.zap-notification-item.priority-urgent:hover {
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.dark .zap-notification-item.priority-high,
+.dark .zap-notification-item.priority-urgent {
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .zap-notification-popup {
+    width: 100%;
+    max-width: none;
+    right: 0;
+    left: 0;
+    top: 56px;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .zap-notification-list {
+    max-height: 50vh;
+  }
+}

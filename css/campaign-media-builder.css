@@ -1,0 +1,56 @@
+/* 📱 Campaign Media Builder - Estilos Minimalistas */
+
+/* Media Item Styles */
+.media-item-simple {
+  transition: background-color 0.15s ease;
+}
+
+.media-item-simple:hover {
+  background-color: var(--ds-surface-2);
+}
+
+/* Upload Status */
+.upload-status [data-status="uploading"] {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Media Type Icons */
+.media-item-simple .ri-font-size { color: #6366f1; }
+.media-item-simple .ri-image-line { color: #10b981; }
+.media-item-simple .ri-music-line { color: #8b5cf6; }
+.media-item-simple .ri-video-line { color: #ef4444; }
+.media-item-simple .ri-file-line { color: #f59e0b; }
+
+/* Button Hover Effects */
+.file-select-btn:hover {
+  background-color: var(--ds-surface-2);
+}
+
+/* Content Inputs */
+.media-item-simple textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.media-item-simple input[type="text"],
+.media-item-simple textarea {
+  transition: border-color 0.15s ease;
+}
+
+/* Empty State */
+.empty-state {
+  transition: opacity 0.2s ease;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .media-item-simple .flex {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

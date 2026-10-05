@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Conversas · Protótipo — Zap do Representante</title>
+<link rel="icon" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    
+    
+    
+    
+    
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/new-design-vars.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/chats-layout.css">
+    <link rel="stylesheet" href="css/chats-sessions.css">
+    <link rel="stylesheet" href="css/chat-ai-assist.css">
+    <link rel="stylesheet" href="css/agendadas-layout.css">
+    
+    
+    
+    
+    <link rel="stylesheet" href="css/mobile-polish.css">
+<style>
+    @keyframes modalSlideIn {
+        from {
+            transform: scale(0.95) translateY(-10px);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    }
+</style><link rel="stylesheet" href="css/account-access.css"><link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"></head>
+<body class="font-sans dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 h-screen overflow-hidden flex flex-col chat-open-mobile bg-theme-surface">
+
+    <div class="min-h-screen w-full relative">
+        <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1 mvp-sidebar-surface" aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chat.html" class="sidebar-item sidebar-item-active" title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+        <button id="mvp-logout-trigger" type="button" class="sidebar-item sidebar-item-danger" title="Sair" aria-label="Sair">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-logout-box-r-line"></i>
+          </span>
+          <span class="sidebar-label">Sair</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+        <main class="relative min-h-screen chats-main-shell chats-main-shell-with-sidebar">
+            <div class="chat-layout">
+                <aside class="conversation-list">
+                    <div class="conv-menu-container">
+                        <div class="conv-top-actions"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+                            <button id="btn-new-attendance" class="btn-new-attendance" type="button">
+                                <i class="ri-add-line"></i>
+                                <span>Novo Atendimento</span>
+                            </button>
+                            <button id="conv-top-filter" class="conv-top-filter-btn" type="button" title="Filtros">
+                                <i class="ri-filter-2-line"></i>
+                            </button>
+                        </div>
+
+                        <div class="conv-header">
+                            <div class="conv-header-content">
+                                <div class="conv-main-tabs">
+                                    <button id="main-tab-attendances" class="conv-main-tab active" type="button" title="Atendimentos">
+                                        <i class="ri-message-3-line"></i>
+                                        <span>Atendimentos</span>
+                                        <span id="main-tab-attendances-badge" class="conv-main-badge">8</span>
+                                    </button>
+                                    <button id="main-tab-groups" class="conv-main-tab" type="button" title="Grupos">
+                                        <i class="ri-group-line"></i>
+                                        <span>Grupos</span>
+                                        <span id="main-tab-groups-badge" class="conv-main-badge">0</span>
+                                    </button>
+                                    <button id="main-tab-search" class="conv-main-tab" type="button" title="Busca">
+                                        <i class="ri-search-line"></i>
+                                        <span>Busca</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="conv-search-container is-hidden">
+                            <i class="ri-search-line conv-search-icon"></i>
+                            <input type="text" placeholder="Pesquisar Conversas" class="conv-search-input" id="conv-search-input">
+                        </div>
+
+                        <div class="conv-sub-tabs">
+                            <button id="conv-filter-all" class="conv-sub-tab active" type="button">Em aberto</button>
+                            <button id="conv-filter-queue" class="conv-sub-tab" type="button">Filas</button>
+                            <button id="conv-filter-chatbot" class="conv-sub-tab" type="button">Chatbot</button>
+                            <button id="conv-filter-mine" class="conv-sub-icon-tab" type="button" title="Minhas conversas" aria-label="Minhas conversas">
+                                <i class="ri-user-follow-line"></i>
+                            </button>
+                        </div>
+
+                        
+                        <div class="conv-footer legacy-hidden">
+                            <button id="conv-filter-favorites" class="conv-footer-btn" title="Favoritos">
+                                <i class="ri-star-line"></i>
+                            </button>
+                            <button id="conv-filter-groups" class="conv-footer-btn" title="Grupos">
+                                <i class="ri-group-line"></i>
+                            </button>
+                        </div>
+
+                        <div id="chats-list" class="conv-list-scroll"><div class="conv-item chat-animate-fade-in" data-id="c1" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">MC</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Mariana Costa</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 16:13">16:13</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Perfeito, pode mandar o pedido de 40 caixas 👍</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in has-unread" data-id="c2" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">MB</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Mercado Bom Preço</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 16:01">16:01</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Vocês têm o display novo em estoque?</span>
+            
+              <div class="conv-badge">
+                <span class="conv-badge-text">1</span>
+              </div>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c3" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">PA</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Pedro Almeida</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 15:28">15:28</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Recebi o boleto, obrigado!</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#2563eb22; color:#2563eb; border-color:#2563eb55;" title="Instância: Pós-venda"><i class="ri-smartphone-line"></i>Pós-venda</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c4" data-favorite="true">
+        <div class="conv-avatar"><span class="conv-avatar-text">DL</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Distribuidora Litoral</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 14:40">14:40</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Qual o prazo de entrega para Santos?</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c5" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">JR</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Juliana Ribeiro</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 13:15">13:15</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Vou ver com meu sócio e te retorno</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c6" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">EC</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Empório Central</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 11:55">11:55</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Catalogo_Outubro.pdf</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#2563eb22; color:#2563eb; border-color:#2563eb55;" title="Instância: Pós-venda"><i class="ri-smartphone-line"></i>Pós-venda</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c7" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">CM</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Carlos Mendes</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="04/10/2026, 16:15">Ontem</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Bom dia! Tudo certo para quinta?</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c8" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">PE</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Padaria Estrela</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="03/10/2026, 15:55">03/10/26</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Fechado. Aguardo a nota.</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div></div>
+                    <div id="chats-loading-indicator" class="chats-loading-indicator p-4 text-center hidden text-theme-muted">
+      <div class="flex items-center justify-center gap-2">
+        <div class="animate-spin rounded-full h-4 w-4 border-2 border-red-500 border-t-transparent"></div>
+        <span class="text-sm">Carregando conversas...</span>
+      </div>
+    </div></div>
+                </aside>
+
+                <section class="chat-area">
+                    <div class="chat-area-container">
+                        <div class="chat-header border-b dark:border-gray-600 p-4 border-theme-light" id="chat-header">
+                            <button id="btn-mobile-back" class="chat-mobile-back" type="button" title="Voltar para conversas" aria-label="Voltar para conversas">
+                                <i class="ri-arrow-left-line"></i>
+                            </button>
+                            <div class="contact-info-header" id="contact-info-header">
+                                <div class="contact-avatar"><div class="chat-avatar-fallback">M</div></div>
+                                <div class="contact-details clickable-contact" id="contact-details">
+                                    <div class="contact-title-row">
+                                        <h3 class="contact-name text-theme-primary" id="header-contact-name">Mariana Costa</h3>
+                                        <div class="chat-context-badge" id="header-chat-context">
+          <span class="chat-context-chip chat-context-channel" title="Canal da conversa">
+            <i class="ri-chat-3-line"></i>
+            <span>WhatsApp</span>
+          </span>
+          <span class="chat-context-chip chat-context-instance" title="Instância vinculada">
+            <i class="ri-links-line"></i>
+            <span>Comercial</span>
+          </span>
+        </div>
+                                    </div>
+                                    <p class="contact-phone text-theme-secondary" id="header-contact-phone">5511990000101</p>
+                                    <p class="contact-presence hidden" id="header-presence" aria-live="polite"></p>
+                                </div>
+                            </div>
+                            <div id="chat-header-actions" class="ml-auto flex items-center gap-2">
+                                <button id="btn-trigger-ai" class="btn-trigger-ai" title="Acionar IA para responder">
+                                    <i class="ri-robot-2-line"></i>
+                                    <span>Acionar IA</span>
+                                </button>
+                                <button id="btn-search-chat-messages" class="p-2 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors rounded text-theme-muted" title="Buscar mensagem na conversa">
+                                    <i class="ri-search-2-line text-lg"></i>
+                                </button>
+                                <button id="btn-transfer-chat" class="p-2 hover:text-green-500 hover:bg-green-50 dark:hover:bg-green-900 transition-colors rounded text-theme-muted" title="Transferir conversa">
+                                    <i class="ri-shuffle-line text-lg"></i>
+                                </button>
+                                <button id="btn-export-chat-pdf" class="p-2 hover:text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors rounded text-theme-muted" title="Exportar conversa em PDF">
+                                    <i class="ri-file-pdf-2-line text-lg"></i>
+                                </button>
+                                <button id="btn-finalize-chat" class="p-2 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900 transition-colors rounded text-theme-muted" title="Finalizar atendimento">
+                                    <i class="ri-check-double-line text-lg"></i>
+                                </button>
+                                <button id="btn-schedule-message" class="p-2 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors rounded text-theme-muted" title="Agendar mensagem" data-bound="1">
+                                    <i class="ri-time-line text-lg"></i>
+                                </button>
+                                <div class="chat-more-actions">
+                                    <button id="btn-chat-more-actions" class="chat-more-actions-btn p-2 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors rounded text-theme-muted" type="button" title="Mais opções" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-more-2-fill text-lg"></i>
+                                    </button>
+                                    <div id="chat-more-actions-menu" class="chat-more-actions-menu hidden" role="menu" aria-label="Mais opções da conversa">
+                                        
+                                        <button id="mob-trigger-ai" type="button" class="chat-more-actions-item chat-more-mobile-only" role="menuitem">
+                                            <i class="ri-robot-2-line" aria-hidden="true"></i>
+                                            <span>Acionar IA</span>
+                                        </button>
+                                        <button id="mob-search-chat" type="button" class="chat-more-actions-item chat-more-mobile-only" role="menuitem">
+                                            <i class="ri-search-2-line" aria-hidden="true"></i>
+                                            <span>Buscar na conversa</span>
+                                        </button>
+                                        <button id="mob-transfer-chat" type="button" class="chat-more-actions-item chat-more-mobile-only" role="menuitem">
+                                            <i class="ri-shuffle-line" aria-hidden="true"></i>
+                                            <span>Transferir atendimento</span>
+                                        </button>
+                                        <button id="mob-export-pdf" type="button" class="chat-more-actions-item chat-more-mobile-only" role="menuitem">
+                                            <i class="ri-file-pdf-2-line" aria-hidden="true"></i>
+                                            <span>Exportar PDF</span>
+                                        </button>
+                                        <button id="mob-finalize-chat" type="button" class="chat-more-actions-item chat-more-mobile-only" role="menuitem">
+                                            <i class="ri-check-double-line" aria-hidden="true"></i>
+                                            <span>Finalizar atendimento</span>
+                                        </button>
+                                        <button id="mob-schedule-message" type="button" class="chat-more-actions-item chat-more-mobile-only" role="menuitem">
+                                            <i class="ri-time-line" aria-hidden="true"></i>
+                                            <span>Agendar mensagem</span>
+                                        </button>
+                                        <button id="btn-ai-summarize-chat" type="button" class="chat-more-actions-item" role="menuitem">
+                                            <span class="chat-more-actions-emoji" aria-hidden="true">✨</span>
+                                            <span>Resumir com IA</span>
+                                        </button>
+                                        <button id="btn-block-contact" type="button" class="chat-more-actions-item is-danger" role="menuitem">
+                                            <i class="ri-prohibited-line" aria-hidden="true"></i>
+                                            <span>Bloquear contato</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="empty-state-header hidden" id="empty-state-header">
+                                
+                            </div>
+                        </div>
+                        
+                        <div id="messages-container" class="message-list flex-1 p-4 signature-off" data-actions-bound="1"><div class="message-date-divider" data-day="2026-10-05"><span>Hoje</span></div><div class="message received chat-animate-slide-up" data-id="m-c1-1" data-message-type="text" data-sent-at="2026-10-05T18:11:11.588Z" data-sender-type="contact" data-external-id="EXT1" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-1" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        
+        
+        <div class="message-text-content">Oi Ana, bom dia! Tudo bem?</div>
+        <div class="message-time">15:11</div>
+        
+      </div>
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-2" data-message-type="text" data-sent-at="2026-10-05T18:13:11.588Z" data-sender-type="user" data-external-id="EXT2" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-2" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        <div class="message-sender message-sender--own">Ana:</div>
+        
+        <div class="message-text-content">Bom dia, Mariana! Tudo ótimo, e com você?</div>
+        <div class="message-time">15:13<span class="message-status" data-status="read">✓✓</span></div>
+        
+      </div>
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-3" data-message-type="text" data-sent-at="2026-10-05T18:15:11.588Z" data-sender-type="contact" data-external-id="EXT3" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-3" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        
+        
+        <div class="message-text-content">Tudo certo! Queria saber se a tabela de outubro já saiu</div>
+        <div class="message-time">15:15</div>
+        
+      </div>
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-4" data-message-type="text" data-sent-at="2026-10-05T18:17:11.588Z" data-sender-type="user" data-external-id="EXT4" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-4" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        <div class="message-sender message-sender--own">Ana:</div>
+        
+        <div class="message-text-content">Saiu sim! Te mando agora 👇</div>
+        <div class="message-time">15:17<span class="message-status" data-status="read">✓✓</span></div>
+        
+      </div>
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-5" data-message-type="document" data-sent-at="2026-10-05T18:18:11.588Z" data-sender-type="user" data-external-id="EXT5" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-5" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        <div class="message-sender message-sender--own">Ana:</div>
+        
+        
+      
+      <div class="document-message" id="document-card-m-c1-5" data-message-id="m-c1-5">
+        <div class="document-container">
+          
+          <div class="document-info">
+            <div class="document-icon">
+              <i class="ri-file-pdf-2-line"></i>
+            </div>
+            <div class="document-details">
+              <div class="document-name" title="Tabela_Precos_Outubro.pdf">Tabela_Precos_Outubro.pdf</div>
+              <div class="document-size">6 páginas · PDF · 471 KB</div>
+            </div>
+            <button class="download-document-btn">
+             <i class="ri-download-line"></i>
+           </button>
+          </div>
+        </div>
+        
+      </div>
+    
+    
+        <div class="message-time">15:18<span class="message-status" data-status="read">✓✓</span></div>
+        
+      </div>
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-6" data-message-type="text" data-sent-at="2026-10-05T18:45:11.588Z" data-sender-type="contact" data-external-id="EXT6" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-6" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        
+        
+        <div class="message-text-content">Obrigada! Os preços do achocolatado mudaram?</div>
+        <div class="message-time">15:45</div>
+        
+      </div>
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-7" data-message-type="text" data-sent-at="2026-10-05T18:47:11.588Z" data-sender-type="user" data-external-id="EXT7" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-7" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        <div class="message-sender message-sender--own">Ana:</div>
+        
+        <div class="message-text-content">Ficaram iguais. Só a linha de biscoitos teve reajuste de 4%.</div>
+        <div class="message-time">15:47<span class="message-status" data-status="read">✓✓</span></div>
+        
+      </div>
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-8" data-message-type="text" data-sent-at="2026-10-05T19:10:11.588Z" data-sender-type="contact" data-external-id="EXT8" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-8" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        
+        
+        <div class="message-text-content">Ótimo. Então quero repetir o último pedido</div>
+        <div class="message-time">16:10</div>
+        
+      </div>
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-9" data-message-type="text" data-sent-at="2026-10-05T19:13:11.588Z" data-sender-type="contact" data-external-id="EXT9" data-day="2026-10-05">
+      <div class="message-bubble">
+        
+      <button type="button" class="message-actions-btn" data-message-actions="m-c1-9" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    
+        
+        
+        <div class="message-text-content">Perfeito, pode mandar o pedido de 40 caixas 👍</div>
+        <div class="message-time">16:13</div>
+        
+      </div>
+    </div></div>
+                        
+                        <form id="message-form" class="message-input-area border-t dark:border-gray-600 p-3 border-theme-light">
+                            <div id="composer-connection-alert" class="composer-connection-alert hidden">
+                                <div id="composer-connection-alert-text" class="composer-connection-alert-text">
+                                    A conexão Instagram desta instância está com validação vencida. Reconecte para continuar.
+                                </div>
+                                <div class="composer-connection-alert-actions">
+                                    <button type="button" id="composer-connection-snooze-btn" class="composer-connection-btn composer-connection-btn-muted">
+                                        lembrar mais tarde
+                                    </button>
+                                    <button type="button" id="composer-connection-delete-btn" class="composer-connection-btn composer-connection-btn-danger">
+                                        deletar conexão
+                                    </button>
+                                    <button type="button" id="composer-connection-reconnect-btn" class="composer-connection-btn composer-connection-btn-primary">
+                                        reconectar agora
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="composer-policy-banner" class="composer-policy-banner hidden"></div>
+
+                            <div id="composer-quick-attachment-preview" class="composer-quick-attachment-preview hidden" aria-live="polite"></div>
+
+                            
+                            <div id="composer-reply-preview" class="composer-reply-preview hidden" aria-live="polite">
+                                <div class="composer-reply-preview-body">
+                                    <div id="composer-reply-preview-label" class="composer-reply-preview-label">Respondendo</div>
+                                    <div id="composer-reply-preview-text" class="composer-reply-preview-text"></div>
+                                </div>
+                                <button type="button" id="composer-reply-cancel" class="composer-reply-cancel" title="Cancelar resposta" aria-label="Cancelar resposta">
+                                    <i class="ri-close-line"></i>
+                                </button>
+                            </div>
+
+                            <div id="composer-text-mode" class="composer-mode composer-text-mode">
+                                <button type="button" id="composer-emoji-btn" class="composer-icon-btn" title="Emoji">
+                                    <i class="ri-emotion-line"></i>
+                                </button>
+
+                                <button type="button" id="composer-quick-btn" class="composer-icon-btn" title="Respostas rápidas">
+                                    <i class="ri-flashlight-line"></i>
+                                </button>
+
+                                
+                                <div class="composer-more-wrap">
+                                    <button type="button" id="composer-more-btn" class="composer-icon-btn" title="Mais opções" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-add-line"></i>
+                                    </button>
+                                    <div id="composer-more-menu" class="composer-more-menu hidden" role="menu">
+                                        <button type="button" id="composer-more-attach" class="composer-more-item" role="menuitem">
+                                            <i class="ri-attachment-2" aria-hidden="true"></i>
+                                            <span>Anexos</span>
+                                        </button>
+                                        <button type="button" id="composer-more-camera" class="composer-more-item" role="menuitem">
+                                            <i class="ri-camera-line" aria-hidden="true"></i>
+                                            <span>Câmera</span>
+                                        </button>
+                                        <button type="button" id="composer-more-signature" class="composer-more-item" role="menuitem">
+                                            <i class="ri-edit-line" aria-hidden="true"></i>
+                                            <span>Assinatura</span>
+                                        </button>
+                                        <button type="button" id="composer-more-emoji" class="composer-more-item" role="menuitem">
+                                            <i class="ri-emotion-line" aria-hidden="true"></i>
+                                            <span>Emojis</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <textarea id="message-input" rows="1" placeholder="Digite uma mensagem..." class="composer-message-input"></textarea>
+
+                                <div class="relative composer-attach-wrap">
+                                    <button type="button" id="media-menu-btn" class="composer-icon-btn" title="Anexar mídia">
+                                        <i class="ri-attachment-2"></i>
+                                    </button>
+                                    <div id="media-menu" class="absolute bottom-full left-0 mb-2 hidden composer-media-menu z-50">
+                                        
+                                        <button type="button" id="camera-menu-btn" class="composer-media-item">
+                                            <i class="ri-camera-line"></i>
+                                            <span>Câmera</span>
+                                        </button>
+                                        <button type="button" id="photo-btn" class="composer-media-item">
+                                            <i class="ri-image-line"></i>
+                                            <span>Imagem</span>
+                                        </button>
+                                        <button type="button" id="document-btn" class="composer-media-item">
+                                            <i class="ri-file-line"></i>
+                                            <span>Documento</span>
+                                        </button>
+                                        <button type="button" id="video-btn" class="composer-media-item">
+                                            <i class="ri-video-line"></i>
+                                            <span>Vídeo</span>
+                                        </button>
+                                        <button type="button" id="audio-btn" class="composer-media-item">
+                                            <i class="ri-headphone-line"></i>
+                                            <span>Áudio</span>
+                                        </button>
+                                        <button type="button" id="contact-btn" class="composer-media-item">
+                                            <i class="ri-contacts-book-line"></i>
+                                            <span>Contato</span>
+                                        </button>
+                                    </div>
+                                    <input type="file" id="photo-input" accept="image/*" multiple="" class="hidden" title="Selecionar imagens (pode escolher várias)">
+                                    <input type="file" id="document-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip,.rar" multiple="" class="hidden" title="Selecionar documentos (pode escolher vários)">
+                                    <input type="file" id="video-input" accept="video/*" multiple="" class="hidden" title="Selecionar vídeos (pode escolher vários)">
+                                </div>
+
+                                <button type="button" id="composer-camera-btn" class="composer-icon-btn" title="Enviar foto">
+                                    <i class="ri-camera-line"></i>
+                                </button>
+
+                                <button type="button" id="composer-signature-btn" class="composer-icon-btn" title="Assinatura" aria-pressed="false">
+                                    <i class="ri-edit-line"></i>
+                                </button>
+
+                                <button type="button" class="record-btn composer-primary-btn" title="Gravar áudio" style="display: inline-flex;">
+                                    <i class="ri-mic-line"></i>
+                                </button>
+
+                                <button type="submit" class="send-btn composer-primary-btn hidden" title="Enviar mensagem" style="display: none;">
+                                    <i class="ri-send-plane-fill"></i>
+                                </button>
+
+                                <select id="quick-reply-dropdown" class="quick-replies-select hidden" title="Respostas Rápidas" aria-hidden="true" tabindex="-1">
+                                    <option value="">💬 Respostas Rápidas</option>
+                                </select>
+                            </div>
+
+                            <div id="composer-quick-panel" class="composer-floating-panel composer-quick-panel hidden" aria-hidden="true" data-bound="1">
+                                <div class="composer-popover-header">
+                                    <strong>Respostas rápidas</strong>
+                                    <button type="button" id="composer-quick-close" class="composer-popover-close" title="Fechar">
+                                        <i class="ri-close-line"></i>
+                                    </button>
+                                </div>
+                                <div id="composer-quick-categories" class="na-quick-categories composer-quick-categories"></div>
+                                <div class="composer-quick-search-row">
+                                    <i class="ri-search-line"></i>
+                                    <input id="composer-quick-search" type="text" placeholder="Buscar resposta..." autocomplete="off">
+                                </div>
+                                <div id="composer-quick-list" class="na-quick-list composer-quick-list"></div>
+                            </div>
+
+                            <div id="composer-emoji-panel" class="composer-floating-panel composer-emoji-panel hidden" aria-hidden="true">
+                                <div class="composer-popover-header">
+                                    <strong>Emojis</strong>
+                                    <button type="button" id="composer-emoji-close" class="composer-popover-close" title="Fechar">
+                                        <i class="ri-close-line"></i>
+                                    </button>
+                                </div>
+                                <div class="composer-emoji-search-row">
+                                    <i class="ri-search-line"></i>
+                                    <input id="composer-emoji-search" type="text" placeholder="Buscar emoji..." autocomplete="off">
+                                </div>
+                                <div id="composer-emoji-categories" class="composer-emoji-categories">
+        <button type="button" class="composer-emoji-cat-btn is-active" data-composer-emoji-category="Recentes" title="Recentes">
+          🕐
+        </button>
+      
+        <button type="button" class="composer-emoji-cat-btn " data-composer-emoji-category="Smileys" title="Smileys">
+          😀
+        </button>
+      
+        <button type="button" class="composer-emoji-cat-btn " data-composer-emoji-category="Pessoas" title="Pessoas">
+          👋
+        </button>
+      
+        <button type="button" class="composer-emoji-cat-btn " data-composer-emoji-category="Animais" title="Animais">
+          🐶
+        </button>
+      
+        <button type="button" class="composer-emoji-cat-btn " data-composer-emoji-category="Comida" title="Comida">
+          🍔
+        </button>
+      
+        <button type="button" class="composer-emoji-cat-btn " data-composer-emoji-category="Viagem" title="Viagem">
+          ✈️
+        </button>
+      
+        <button type="button" class="composer-emoji-cat-btn " data-composer-emoji-category="Atividades" title="Atividades">
+          ⚽
+        </button>
+      
+        <button type="button" class="composer-emoji-cat-btn " data-composer-emoji-category="Objetos" title="Objetos">
+          💡
+        </button>
+      </div>
+                                <div id="composer-emoji-grid" class="composer-emoji-grid">
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="😊">😊</button>
+      
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="👍">👍</button>
+      
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="❤️">❤️</button>
+      
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="🎉">🎉</button>
+      
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="🙏">🙏</button>
+      
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="😂">😂</button>
+      
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="🔥">🔥</button>
+      
+        <button type="button" class="composer-emoji-btn" data-composer-emoji="✨">✨</button>
+      </div>
+                            </div>
+
+                            <div id="composer-recording-mode" class="composer-mode composer-recording-mode hidden">
+                                <button type="button" id="recording-cancel-btn" class="composer-recording-cancel" title="Cancelar gravação">
+                                    <i class="ri-delete-bin-line"></i>
+                                    <span>Cancelar</span>
+                                </button>
+
+                                <div class="composer-recording-center">
+                                    <span class="composer-recording-dot"></span>
+                                    <span id="recording-timer" class="composer-recording-time">00:00</span>
+                                    <div class="composer-recording-wave" aria-hidden="true">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                </div>
+
+                                <button type="button" id="recording-send-btn" class="composer-recording-send" title="Enviar áudio">
+                                    <i class="ri-stop-fill"></i>
+                                    <span>Enviar</span>
+                                </button>
+                            </div>
+
+                            <div id="composer-template-mode" class="composer-mode composer-template-mode hidden">
+                                <div class="composer-template-row">
+                                    <label for="template-selector" class="composer-template-label">Template aprovado</label>
+                                    <select id="template-selector" class="composer-template-select"><option value="">Selecione um template...</option></select>
+                                </div>
+                                <div id="template-variables-container" class="composer-template-variables hidden"></div>
+                                <div class="composer-template-actions">
+                                    <button type="button" id="template-send-btn" class="composer-template-send-btn" disabled="">
+                                        <i class="ri-send-plane-fill"></i> Enviar template
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="composer-blocked-mode" class="composer-mode composer-blocked-mode hidden">
+                                <div class="composer-blocked-card">
+                                    <i class="ri-lock-line"></i>
+                                    <span id="composer-blocked-text">Envio bloqueado temporariamente para este canal.</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <aside id="contact-drawer" class="contact-drawer" aria-hidden="false">
+                    <div class="contact-drawer-header">
+                        <button id="btn-close-contact-drawer" type="button" class="contact-drawer-close" title="Fechar painel">
+                            <i class="ri-close-line"></i>
+                        </button>
+                        <h3>Dados do contato</h3>
+                        <button id="drawer-edit-contact-btn" type="button" class="contact-drawer-edit" title="Editar contato">
+                            <i class="ri-pencil-line"></i>
+                        </button>
+                    </div>
+                    <div class="contact-drawer-body">
+                        <div class="contact-drawer-profile">
+                            <div class="contact-drawer-avatar" id="drawer-contact-avatar">M</div>
+                            <h4 id="drawer-contact-name">Mariana Costa</h4>
+                            <p id="drawer-contact-phone">5511990000101</p>
+                            <div class="contact-drawer-chips">
+                                <span id="drawer-assignee-chip" class="contact-drawer-chip">Ana</span>
+                                <span id="drawer-instance-chip" class="contact-drawer-chip">Comercial</span>
+                                <span id="drawer-contact-tags" class="contact-drawer-tags"></span>
+                            </div>
+                        </div>
+
+                        <div class="contact-drawer-actions-row">
+                            <button id="drawer-toggle-favorite" type="button"><i class="ri-star-line"></i><span>Fav.</span></button>
+                            <button id="drawer-open-observations" type="button">
+                                <i class="ri-file-list-3-line"></i>
+                                <span>Obs.</span>
+                            </button>
+                            <button id="drawer-open-media" type="button">
+                                <i class="ri-image-line"></i>
+                                <span>Mídia</span>
+                            </button>
+                        </div>
+
+                        <section class="contact-drawer-section-block">
+                            <h5 class="contact-drawer-section-title">AÇÕES RÁPIDAS</h5>
+                            <div class="contact-quick-actions">
+                                <button id="drawer-open-tags" type="button" class="contact-quick-card">
+                                    <div class="contact-quick-card-icon">
+                                        <i class="ri-price-tag-3-line"></i>
+                                    </div>
+                                    <div class="contact-quick-card-content">
+                                        <strong>Marcadores</strong>
+                                        <span id="drawer-tags-count">0 tags</span>
+                                    </div>
+                                </button>
+                                <button id="drawer-ai-assist" type="button" class="contact-quick-card">
+                                    <div class="contact-quick-card-icon">
+                                        <i class="ri-sparkling-2-line"></i>
+                                    </div>
+                                    <div class="contact-quick-card-content">
+                                        <strong>Ajuda IA</strong>
+                                        <span>Sugerir resposta</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </section>
+
+                        <section class="contact-drawer-section-block">
+                            <div class="contact-drawer-panel-head">
+                                <h5 class="contact-drawer-section-title">CRM</h5>
+                                <span id="drawer-crm-column-pill" class="contact-drawer-chip is-crm">EM NEGOCIAÇÃO</span>
+                            </div>
+                            <select id="drawer-crm-select" class="contact-drawer-select"><option value="col-novo">Novo contato</option><option value="col-negociacao">Em negociação</option><option value="col-pedido">Pedido enviado</option></select>
+                            <p class="contact-drawer-line"><strong>Resp.:</strong> <span id="drawer-responsible-name">Ana</span></p>
+                        </section>
+
+                        <section class="contact-drawer-section-block">
+                            <h5 class="contact-drawer-section-title">DADOS DO CONTATO</h5>
+                            <div class="contact-drawer-data-list">
+                                <p id="drawer-data-display-name">Mariana Costa</p>
+                                <p id="drawer-data-phone-number">5511990000101</p>
+                                <p id="drawer-data-full-name">Mariana Costa</p>
+                                <p id="drawer-data-phone-formatted">5511990000101</p>
+                                <p id="drawer-data-email">Sem e-mail</p>
+                                <p class="contact-drawer-rating-row"><strong>Avaliação:</strong> <span id="drawer-data-rating"><span class="contact-rating-empty">Sem avaliação</span></span></p>
+                            </div>
+                        </section>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <div id="edit-contact-modal" class="contact-modal hidden" aria-hidden="true">
+        <div class="contact-modal-card contact-modal-card-edit">
+            <div class="contact-modal-header">
+                <h3><i class="ri-pencil-line"></i> Editar Contato</h3>
+                <button id="edit-contact-close" type="button" class="contact-modal-close" title="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="contact-modal-body">
+                <div class="contact-modal-avatar" id="edit-contact-avatar">C</div>
+                <label for="edit-contact-name">Nome de exibição *</label>
+                <input id="edit-contact-name" type="text" placeholder="Nome do contato">
+                <label for="edit-contact-full-name">Nome completo</label>
+                <input id="edit-contact-full-name" type="text" placeholder="Nome completo">
+                <div class="contact-modal-grid">
+                    <div>
+                        <label for="edit-contact-phone">Telefone *</label>
+                        <input id="edit-contact-phone" type="text" placeholder="+55 (__) _____-____">
+                    </div>
+                    <div>
+                        <label for="edit-contact-email">Email</label>
+                        <input id="edit-contact-email" type="email" placeholder="email@exemplo.com">
+                    </div>
+                </div>
+            </div>
+            <div class="contact-modal-footer">
+                <button id="edit-contact-cancel" type="button">Cancelar</button>
+                <button id="edit-contact-save" type="button" class="contact-modal-primary">Salvar alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-observation-modal" class="contact-modal hidden" aria-hidden="true">
+        <div class="contact-modal-card">
+            <div class="contact-modal-header">
+                <h3><i class="ri-file-list-3-line"></i> Observações do Contato</h3>
+                <button id="contact-observation-close" type="button" class="contact-modal-close" title="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="contact-modal-body">
+                <label for="contact-observation-input">Nova observação</label>
+                <textarea id="contact-observation-input" rows="4" placeholder="Escreva uma observação..."></textarea>
+                <div class="contact-modal-actions">
+                    <button id="contact-observation-add" type="button" class="contact-modal-secondary">
+                        <i class="ri-add-line"></i> Adicionar
+                    </button>
+                </div>
+                <h5 class="contact-modal-subtitle">Histórico (<span id="contact-observation-count">0</span>)</h5>
+                <div id="contact-observation-history" class="contact-modal-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-tags-modal" class="contact-modal hidden" aria-hidden="true">
+        <div class="contact-modal-card">
+            <div class="contact-modal-header">
+                <h3><i class="ri-price-tag-3-line"></i> Marcadores / Tags</h3>
+                <button id="contact-tags-close" type="button" class="contact-modal-close" title="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="contact-modal-body">
+                <h5 class="contact-modal-subtitle">Tags do contato</h5>
+                <div id="contact-tags-selected" class="contact-tags-wrap"></div>
+                <h5 class="contact-modal-subtitle">Disponíveis</h5>
+                <div id="contact-tags-available" class="contact-tags-wrap"></div>
+                <h5 class="contact-modal-subtitle">Criar novo marcador</h5>
+                <div class="contact-modal-inline">
+                    <input id="contact-tags-create-input" type="text" placeholder="Ex: Promoção">
+                    <button id="contact-tags-create-btn" type="button" class="contact-modal-secondary">
+                        <i class="ri-add-line"></i> Adicionar
+                    </button>
+                </div>
+            </div>
+            <div class="contact-modal-footer">
+                <button id="contact-tags-done-btn" type="button" class="contact-modal-primary">Concluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-media-modal" class="contact-modal hidden" aria-hidden="true">
+        <div class="contact-modal-card">
+            <div class="contact-modal-header">
+                <h3><i class="ri-gallery-line"></i> Mídias da Conversa</h3>
+                <button id="contact-media-close" type="button" class="contact-modal-close" title="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="contact-modal-body">
+                <div id="contact-media-loading" class="contact-modal-muted">Carregando mídias...</div>
+                <div id="contact-media-list" class="contact-modal-media-list"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="new-attendance-modal" class="new-attendance-modal hidden" data-bound="1">
+        <div class="new-attendance-card">
+            <div class="new-attendance-header">
+                <h3><i class="ri-add-line"></i> Novo Atendimento</h3>
+                <button id="new-attendance-close" type="button" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="new-attendance-body">
+                <div class="na-shell-grid">
+                    <section class="na-left-col">
+                        <div class="na-field">
+                            <label for="na-contact-input">Buscar contato existente</label>
+                            <input id="na-contact-input" type="text" placeholder="Buscar por nome ou número..." autocomplete="off">
+                            <div id="na-contact-results" class="na-contact-results hidden"></div>
+                        </div>
+                        <div class="na-field">
+                            <label for="na-phone">Ou digite um novo número *</label>
+                            <div class="na-phone-row">
+                                <input id="na-ddi" class="na-phone-ddi" type="text" inputmode="numeric" maxlength="3" placeholder="55" value="55" title="DDI (código do país)" aria-label="DDI">
+                                <input id="na-ddd" class="na-phone-ddd" type="text" inputmode="numeric" maxlength="2" placeholder="11" title="DDD" aria-label="DDD">
+                                <input id="na-phone" type="tel" inputmode="numeric" placeholder="99999-9999" title="Número" aria-label="Número">
+                            </div>
+                            <small class="na-phone-hint">DDI · DDD · número — preencha os três (ou selecione um contato acima).</small>
+                        </div>
+
+                        <div class="na-grid">
+                            <div class="na-field">
+                                <label for="na-instance-select">Instância</label>
+                                <select id="na-instance-select">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                            <div class="na-field">
+                                <label for="na-assignee-select">Atendente</label>
+                                <select id="na-assignee-select">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="na-field">
+                            <label for="na-message-input" class="na-message-label">
+                                Mensagem inicial
+                                <span id="na-message-managed" class="hidden">(gerenciada pela IA)</span>
+                            </label>
+                            <textarea id="na-message-input" rows="3" placeholder="Olá! Como posso ajudar?"></textarea>
+                        </div>
+
+                        <div class="na-ai-box">
+                            <div class="na-ai-head">
+                                <span class="na-ai-icon"><i class="ri-robot-2-line"></i></span>
+                                <div class="na-ai-text">
+                                    <strong>Deixar a IA atender</strong>
+                                    <span>A IA inicia a conversa e transfere para humano quando necessário</span>
+                                </div>
+                                <button id="na-ai-toggle" type="button" class="na-ai-toggle" aria-label="Ativar IA">
+                                    <span class="na-ai-toggle-knob"></span>
+                                </button>
+                            </div>
+                            <div id="na-ai-settings" class="na-ai-settings hidden">
+                                <div class="na-grid">
+                                    <div class="na-field">
+                                        <label for="na-ai-agent-select">Agente IA</label>
+                                        <select id="na-ai-agent-select">
+                                            <option>Atendente Padrão</option>
+                                            <option>Vendas IA</option>
+                                            <option>Suporte IA</option>
+                                            <option>Qualificador de Lead</option>
+                                        </select>
+                                    </div>
+                                    <div class="na-field">
+                                        <label for="na-ai-transfer-select">Transferir quando</label>
+                                        <select id="na-ai-transfer-select">
+                                            <option>Cliente solicitar</option>
+                                            <option>Lead qualificado</option>
+                                            <option>Após 5 mensagens</option>
+                                            <option>Intenção de compra</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="na-field">
+                                    <label for="na-ai-instructions">Instruções extras (opcional)</label>
+                                    <textarea id="na-ai-instructions" rows="2" placeholder="Ex: Sempre oferecer desconto de 10% para clientes recorrentes..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="na-right-col">
+                        <label class="na-quick-title">
+                            <i class="ri-flashlight-line"></i> Respostas rápidas
+                        </label>
+                        <div class="na-quick-panel">
+                            <div id="na-qr-categories" class="na-quick-categories"></div>
+                            <div id="na-quick-replies-list" class="na-quick-list"></div>
+                        </div>
+                        <div id="na-quick-hint" class="na-quick-hint">Selecione uma resposta para pré-visualizar.</div>
+                        <div id="na-quick-preview" class="na-quick-preview hidden">
+                            <div class="na-quick-preview-head">
+                                <strong id="na-quick-preview-title"></strong>
+                                <button id="na-quick-clear" type="button">Limpar</button>
+                            </div>
+                            <p id="na-quick-preview-content"></p>
+                        </div>
+                    </section>
+                </div>
+
+                <select id="na-quick-reply-select" class="hidden" aria-hidden="true">
+                    <option value="">Nenhuma</option>
+                </select>
+
+                <div id="na-error" class="na-error hidden"></div>
+            </div>
+            <div class="new-attendance-footer">
+                <button id="new-attendance-cancel" type="button">Cancelar</button>
+                <button id="new-attendance-start" type="button">Iniciar</button>
+            </div>
+        </div>
+    </div>
+    <div id="agendadas-modal" class="agendadas-modal hidden" role="dialog" aria-modal="true" aria-labelledby="agendadas-modal-title" data-bound="1">
+        <div class="agendadas-modal-card">
+            <div class="agendadas-modal-header">
+                <div class="agendadas-modal-title-wrap">
+                    <i class="ri-calendar-line"></i>
+                    <h3 id="agendadas-modal-title">Agendar Mensagem</h3>
+                </div>
+                <button id="agendadas-modal-close" type="button" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <div class="agendadas-modal-body">
+                <input id="agendar-chat-id" type="hidden">
+
+                <div class="agendadas-form-grid">
+                    <section class="agendadas-form-col">
+                        <div class="agendadas-grid-2">
+                            <div class="agendadas-form-group">
+                                <label for="agendar-title">Título *</label>
+                                <input id="agendar-title" type="text" placeholder="Ex: Lembrete de pagamento">
+                            </div>
+                            <div class="agendadas-form-group">
+                                <label for="agendar-type">Tipo de Mensagem</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-type">
+                                        <option value="texto">Texto</option>
+                                        <option value="imagem">Imagem</option>
+                                        <option value="audio">Áudio</option>
+                                        <option value="documento">Documento</option>
+                                        <option value="video">Vídeo</option>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="agendadas-grid-2">
+                            <div class="agendadas-form-group">
+                                <label for="agendar-tag">Tag</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-tag">
+                                        <option value="">Sem Tag</option>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                            <div class="agendadas-form-group">
+                                <label for="agendar-category">Categoria</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-category">
+                                        <option value="">Sem Categoria</option>
+                                        <option value="Cobrança">Cobrança</option>
+                                        <option value="Lembrete">Lembrete</option>
+                                        <option value="Promocional">Promocional</option>
+                                        <option value="Suporte">Suporte</option>
+                                        <option value="Vendas">Vendas</option>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="agendadas-grid-2">
+                            <div class="agendadas-form-group">
+                                <label for="agendar-user">Usuário</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-user">
+                                        <option value="">Selecione um usuário</option>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                            <div class="agendadas-form-group">
+                                <label for="agendar-fila">Fila</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-fila">
+                                        <option value="">Sem Fila</option>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="agendadas-form-group">
+                            <div class="agendadas-inline-head">
+                                <label for="agendar-message">Mensagem * <span id="agendar-message-count">(0 caracteres)</span></label>
+                                <button id="agendar-quick-toggle" type="button">
+                                    <i class="ri-flashlight-line"></i>
+                                    Respostas rápidas
+                                </button>
+                            </div>
+                            <div id="agendar-quick-panel" class="agendadas-quick-panel hidden"></div>
+                            <textarea id="agendar-message" rows="4" placeholder="Digite a mensagem..."></textarea>
+                        </div>
+
+                        <div class="agendadas-form-group">
+                            <div class="agendadas-attachment-buttons">
+                                <button type="button" data-attach-type="image"><i class="ri-image-line"></i> Imagem</button>
+                                <button type="button" data-attach-type="video"><i class="ri-film-line"></i> Vídeo</button>
+                                <button type="button" data-attach-type="audio"><i class="ri-mic-line"></i> Áudio</button>
+                                <button type="button" data-attach-type="document"><i class="ri-file-text-line"></i> Arquivo</button>
+                            </div>
+                            <div id="agendar-attachments" class="agendadas-attachments-list"></div>
+                        </div>
+
+                        <div class="agendadas-grid-2">
+                            <div class="agendadas-form-group">
+                                <label for="agendar-date">Data *</label>
+                                <input id="agendar-date" type="date">
+                            </div>
+                            <div class="agendadas-form-group">
+                                <label for="agendar-time">Hora *</label>
+                                <input id="agendar-time" type="time">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="agendadas-form-col">
+                        <div class="agendadas-preview-title">PRE-VISUALIZAÇÃO</div>
+                        <div class="agendadas-preview-card">
+                            <div id="agendar-preview-message" class="agendadas-preview-message">Sua mensagem aparecerá aqui...</div>
+                            <div id="agendar-preview-hour" class="agendadas-preview-hour">14:00</div>
+                        </div>
+
+                        <div class="agendadas-preview-date">
+                            Será enviada em <strong id="agendar-preview-date">--/--/----</strong> às <strong id="agendar-preview-time">--:--</strong>
+                        </div>
+
+                        <div id="agendar-rec-box" class="agendadas-rec-box">
+                            <button id="agendar-rec-toggle" type="button" class="agendadas-rec-head">
+                                <div>
+                                    <div class="agendadas-rec-title">Recorrência Avançada</div>
+                                    <div class="agendadas-rec-subtitle">Configurar disparos repetitivos</div>
+                                </div>
+                                <span class="agendadas-rec-switch"><span></span></span>
+                            </button>
+
+                            <div id="agendar-rec-panel" class="agendadas-rec-panel hidden">
+                                <div class="agendadas-grid-2">
+                                    <div class="agendadas-form-group">
+                                        <label for="agendar-rec-frequency">Frequência</label>
+                                        <label class="agendadas-select-wrap">
+                                            <select id="agendar-rec-frequency">
+                                                <option value="diario">Todo dia</option>
+                                                <option value="semanal">Semanalmente</option>
+                                                <option value="mensal">Mensalmente</option>
+                                            </select>
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </label>
+                                    </div>
+                                    <div class="agendadas-form-group">
+                                        <label for="agendar-rec-repetitions">Repetir quantas vezes?</label>
+                                        <input id="agendar-rec-repetitions" type="number" min="1" value="5">
+                                    </div>
+                                </div>
+
+                                <div id="agendar-rec-weekly" class="agendadas-form-group">
+                                    <label>Nos dias da semana</label>
+                                    <div id="agendar-rec-days" class="agendadas-week-days"></div>
+                                </div>
+
+                                <div id="agendar-rec-monthly" class="agendadas-form-group hidden">
+                                    <label for="agendar-rec-day-month">No dia do mês</label>
+                                    <div class="agendadas-month-day-wrap">
+                                        <span>Todo dia</span>
+                                        <input id="agendar-rec-day-month" type="number" min="1" max="31" value="1">
+                                        <span>do mês</span>
+                                    </div>
+                                </div>
+
+                                <div class="agendadas-form-group">
+                                    <label for="agendar-rec-hour">Horário do disparo</label>
+                                    <input id="agendar-rec-hour" type="time" value="14:00">
+                                </div>
+
+                                <div id="agendar-rec-summary" class="agendadas-rec-summary"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="agendadas-modal-error" class="agendadas-modal-error hidden"></div>
+            </div>
+
+            <div class="agendadas-modal-footer">
+                <button id="agendadas-modal-cancel" type="button" class="agendadas-btn agendadas-btn-muted">Cancelar</button>
+                <button id="agendadas-modal-save" type="button" class="agendadas-btn agendadas-btn-primary">Agendar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="finalize-chat-modal" class="contact-modal hidden" aria-hidden="true" data-bound="1">
+        <div class="contact-modal-card finalize-chat-modal-card">
+            <div class="contact-modal-header">
+                <h3><i class="ri-checkbox-circle-line"></i> Finalizar Atendimento</h3>
+                <button id="finalize-chat-modal-close" type="button" class="contact-modal-close" title="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="contact-modal-body finalize-chat-modal-body">
+                <div class="finalize-chat-target">
+                    <div class="finalize-chat-target-avatar" id="finalize-chat-target-avatar">C</div>
+                    <div>
+                        <p class="finalize-chat-target-label">Finalizando atendimento de:</p>
+                        <strong id="finalize-chat-target-name">Contato</strong>
+                    </div>
+                </div>
+
+                <label for="finalize-chat-reason-select">Motivo da finalização <span id="finalize-chat-required-asterisk">*</span></label>
+                <select id="finalize-chat-reason-select">
+                    <option value="">Selecione o motivo</option>
+                </select>
+
+                <div id="finalize-chat-other-reason-group" class="hidden">
+                    <label for="finalize-chat-other-reason">Descreva o motivo <span>*</span></label>
+                    <input id="finalize-chat-other-reason" type="text" placeholder="Digite o motivo..." maxlength="180">
+                </div>
+
+                <label for="finalize-chat-notes">Observações</label>
+                <textarea id="finalize-chat-notes" rows="3" placeholder="Descreva detalhes do atendimento..."></textarea>
+
+                <button id="finalize-chat-schedule-toggle" type="button" class="finalize-chat-schedule">
+                    <span class="finalize-chat-schedule-icon"><i class="ri-calendar-schedule-line"></i></span>
+                    <span class="finalize-chat-schedule-copy">
+                        <strong>Agendar mensagem</strong>
+                        <small>Enviar uma mensagem futura para este cliente</small>
+                    </span>
+                    <span id="finalize-chat-schedule-knob" class="finalize-chat-schedule-knob"></span>
+                </button>
+            </div>
+            <div class="contact-modal-footer">
+                <button id="finalize-chat-modal-cancel" type="button">Cancelar</button>
+                <button id="finalize-chat-modal-confirm" type="button" class="contact-modal-primary">Finalizar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat-search-modal" class="contact-modal hidden" aria-hidden="true">
+        <div class="contact-modal-card chat-search-modal-card">
+            <div class="contact-modal-header">
+                <h3><i class="ri-search-line"></i> Buscar no histórico</h3>
+                <button id="chat-search-close" type="button" class="contact-modal-close" title="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="contact-modal-body chat-search-modal-body">
+                <div class="chat-search-input-row">
+                    <input id="chat-search-input" type="text" placeholder="Digite um termo para buscar em todo o histórico...">
+                    <button id="chat-search-run" type="button" class="contact-modal-primary">Buscar</button>
+                </div>
+                <p id="chat-search-summary" class="contact-modal-muted">Digite um termo para buscar no histórico completo.</p>
+                <div id="chat-search-results" class="chat-search-results"></div>
+                <button id="chat-search-load-more" type="button" class="contact-modal-secondary hidden">Carregar mais</button>
+            </div>
+            <div class="contact-modal-footer">
+                <button id="chat-search-cancel" type="button">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="whatsapp-contacts-popup" class="fixed inset-0 bg-black bg-opacity-75 z-[9999] hidden">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="rounded-lg p-6 max-w-md w-full shadow-xl border bg-theme-surface border-theme-light">
+      <div class="text-center">
+        
+        <div class="mb-4">
+          <i class="ri-whatsapp-line text-5xl text-green-500"></i>
+        </div>
+        
+        
+        <h3 class="text-xl font-bold text-primary mb-2">
+          WhatsApp Conectado com Sucesso!
+        </h3>
+        
+        
+        <p class="text-secondary mb-4">
+          Deseja importar os contatos deste número para o Zap Empresarial?
+        </p>
+        
+        
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6">
+          <p class="text-sm text-yellow-800">
+            <i class="ri-shield-check-line mr-1"></i>
+            <strong>Segurança:</strong> Apenas você terá acesso a estes contatos
+          </p>
+        </div>
+        
+        
+        <div id="extraction-loading" class="hidden mb-4">
+          <div class="flex items-center justify-center">
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500 mr-2"></div>
+            <span class="text-sm text-secondary">Importando contatos...</span>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-success" class="hidden mb-4">
+          <div class="text-green-600">
+            <i class="ri-check-circle-line text-2xl mb-2"></i>
+            <p class="text-sm">
+              <span id="extraction-count">0</span> contatos importados com sucesso!
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-error" class="hidden mb-4">
+          <div class="text-red-600">
+            <i class="ri-error-warning-line text-2xl mb-2"></i>
+            <p class="text-sm" id="extraction-error-message">
+              Erro ao importar contatos
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="action-buttons" class="flex space-x-3">
+          <button id="extract-contacts-yes" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors focus:ring-2 focus:ring-green-500 focus:outline-none">
+            <i class="ri-download-line mr-1"></i>
+            Sim, Importar
+          </button>
+          <button id="extract-contacts-no" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors focus:ring-2 focus:ring-gray-500 focus:outline-none text-theme-secondary">
+            <i class="ri-close-line mr-1"></i>
+            Não, Obrigado
+          </button>
+        </div>
+        
+        
+        <div id="close-button" class="hidden">
+          <button id="extract-contacts-close" class="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+            <i class="ri-check-line mr-1"></i>
+            Entendi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div>
+<!-- =====================================================================================
+     MOCKUP — daqui para baixo é tudo escrito à mão. Não há backend: nada é salvo nem
+     enviado. A marcação acima é a captura do app real (tools/capture), então classes e
+     estrutura são as do produto. Para uma feature nova, edite direto neste arquivo.
+     ===================================================================================== -->
+<div class="mockup-selo" title="Protótipo para aprovação: nada aqui é salvo nem enviado">Protótipo</div>
+<div id="mockup-aviso" class="mockup-aviso" role="status" aria-live="polite"></div>
+
+<style>
+  .mockup-selo {
+    position: fixed; left: 12px; bottom: 12px; z-index: 9999;
+    padding: 3px 10px; border-radius: 999px;
+    background: rgba(15, 23, 42, .78); color: #fff;
+    font: 600 11px/1.6 Inter, system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase;
+    pointer-events: none;
+  }
+  @media (max-width: 768px) {
+    .mockup-selo { bottom: calc(84px + env(safe-area-inset-bottom)); }
+  }
+  .mockup-aviso {
+    position: fixed; left: 50%; bottom: 24px; z-index: 9999; transform: translate(-50%, 12px);
+    padding: 10px 16px; border-radius: 10px;
+    background: #0f172a; color: #fff; font: 500 13px/1.4 Inter, system-ui, sans-serif;
+    opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+  }
+  .mockup-aviso.visivel { opacity: 1; transform: translate(-50%, 0); }
+</style>
+
+<script>
+(() => {
+  // ---------------------------------------------------------------------------------
+  // Dados fictícios. Repositório público: nunca usar nome, telefone ou conversa real.
+  // `mensagens`: [quem, texto, hora] com quem = 'ela' (contato) | 'eu' (atendente) | 'doc-ela'
+  // A c1 não tem `mensagens` porque já está renderizada no HTML (captura do app).
+  // ---------------------------------------------------------------------------------
+  const CONVERSAS = {
+    c1: { nome: 'Mariana Costa', fone: '5511990000101', coluna: 'col-negociacao', instancia: 'Comercial' },
+    c2: { nome: 'Mercado Bom Preço', fone: '5511990000102', coluna: 'col-novo', instancia: 'Comercial', dia: 'Hoje', mensagens: [
+      ['ela', 'Boa tarde! Aqui é o Roberto, do Mercado Bom Preço', '15:57'],
+      ['ela', 'Vocês têm o display novo em estoque?', '16:00'],
+    ] },
+    c3: { nome: 'Pedro Almeida', fone: '5511990000103', coluna: 'col-pedido', instancia: 'Pós-venda', dia: 'Hoje', mensagens: [
+      ['eu', 'Pedro, segue o boleto do pedido 2231, vencimento dia 15.', '15:20'],
+      ['ela', 'Recebi o boleto, obrigado!', '15:27'],
+    ] },
+    c4: { nome: 'Distribuidora Litoral', fone: '5511990000104', coluna: 'col-negociacao', instancia: 'Comercial', dia: 'Hoje', mensagens: [
+      ['eu', 'Oi! O pedido de vocês foi faturado hoje cedo.', '14:20'],
+      ['ela', 'Qual o prazo de entrega para Santos?', '14:39'],
+    ] },
+    c5: { nome: 'Juliana Ribeiro', fone: '5511990000105', coluna: 'col-novo', instancia: 'Comercial', dia: 'Hoje', mensagens: [
+      ['eu', 'Juliana, consegui 5% de desconto à vista para o pedido acima de 30 caixas.', '13:02'],
+      ['ela', 'Vou ver com meu sócio e te retorno', '13:14'],
+    ] },
+    c6: { nome: 'Empório Central', fone: '5511990000106', coluna: 'col-pedido', instancia: 'Pós-venda', dia: 'Hoje', mensagens: [
+      ['ela', 'Bom dia! Pode me mandar o catálogo novo?', '11:40'],
+      ['eu', 'Claro! Acabei de pedir para o pessoal do marketing.', '11:45'],
+      ['doc-ela', 'Catalogo_Outubro.pdf', '11:54'],
+    ] },
+    c7: { nome: 'Carlos Mendes', fone: '5511990000107', coluna: 'col-novo', instancia: 'Comercial', dia: 'Ontem', mensagens: [
+      ['ela', 'Bom dia! Tudo certo para quinta?', '09:12'],
+    ] },
+    c8: { nome: 'Padaria Estrela', fone: '5511990000108', coluna: 'col-pedido', instancia: 'Comercial', dia: 'Sábado', mensagens: [
+      ['eu', 'Pedido confirmado: 12 caixas de biscoito sortido. A nota sai na segunda.', '17:35'],
+      ['ela', 'Fechado. Aguardo a nota.', '17:40'],
+    ] },
+  };
+
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const lista = $('#messages-container');
+  const entrada = $('#message-input');
+  const btnEnviar = $('.send-btn');
+  const btnGravar = $('.record-btn');
+
+  // Moldes tirados da própria captura: a bolha nova nasce com a marcação exata do app.
+  const molde = {
+    recebida: $('.message.received[data-message-type="text"]', lista).cloneNode(true),
+    enviada: $('.message.sent[data-message-type="text"]', lista).cloneNode(true),
+    documento: $('.message[data-message-type="document"]', lista).cloneNode(true),
+    divisor: $('.message-date-divider', lista).cloneNode(true),
+  };
+  const historico = { c1: lista.innerHTML };
+  let atual = 'c1';
+  let seq = 0;
+
+  function iniciais(nome) {
+    return nome.split(/\s+/).map((p) => p[0]).slice(0, 2).join('').toUpperCase();
+  }
+
+  function horaAgora() {
+    return new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function bolha(quem, texto, hora) {
+    seq += 1;
+    let el;
+    if (quem === 'doc-ela') {
+      el = molde.documento.cloneNode(true);
+      el.classList.replace('sent', 'received');
+      el.dataset.senderType = 'contact';
+      el.querySelector('.message-sender')?.remove();
+      el.querySelector('.message-status')?.remove();
+      el.querySelector('.document-name').textContent = texto;
+      el.querySelector('.document-name').title = texto;
+      el.querySelector('.document-size').textContent = '12 páginas · PDF · 2,3 MB';
+      el.querySelector('.document-message').id = `document-card-mock-${seq}`;
+    } else {
+      el = (quem === 'eu' ? molde.enviada : molde.recebida).cloneNode(true);
+      el.querySelector('.message-text-content').textContent = texto;
+    }
+    el.dataset.id = `mock-${seq}`;
+    el.querySelector('.message-time').firstChild.textContent = hora;
+    return el;
+  }
+
+  function divisor(rotulo) {
+    const el = molde.divisor.cloneNode(true);
+    el.querySelector('span').textContent = rotulo;
+    return el;
+  }
+
+  // Mesma regra do app: o selo mostra o nome da coluna em maiúsculas.
+  function atualizarSeloCrm() {
+    const crm = $('#drawer-crm-select');
+    const selo = $('#drawer-crm-column-pill');
+    if (crm && selo) selo.textContent = (crm.selectedOptions[0]?.textContent || 'Sem status').toUpperCase();
+  }
+
+  function painelContato(aberto) {
+    const painel = $('#contact-drawer');
+    if (!painel) return;
+    painel.classList.toggle('hidden', !aberto);
+    painel.setAttribute('aria-hidden', String(!aberto));
+  }
+
+  function rolarParaFim() {
+    lista.scrollTop = lista.scrollHeight;
+  }
+
+  function selecionar(id) {
+    const c = CONVERSAS[id];
+    if (!c) return;
+    historico[atual] = lista.innerHTML;
+    atual = id;
+
+    document.querySelectorAll('.conv-item').forEach((item) => {
+      const ativo = item.dataset.id === id;
+      item.classList.toggle('active', ativo);
+      if (ativo) {
+        item.classList.remove('has-unread');
+        item.querySelector('.conv-badge')?.remove();
+        item.querySelector('.conv-unread-dot')?.remove();
+      }
+    });
+
+    $('#header-contact-name').textContent = c.nome;
+    $('#header-contact-phone').textContent = c.fone;
+    const avatarCabecalho = $('.chat-avatar-fallback');
+    if (avatarCabecalho) avatarCabecalho.textContent = c.nome[0];
+    $('#drawer-contact-name').textContent = c.nome;
+    $('#drawer-contact-phone').textContent = c.fone;
+    $('#drawer-contact-avatar').textContent = c.nome[0];
+    for (const campo of ['display-name', 'full-name']) {
+      const el = $(`#drawer-data-${campo}`);
+      if (el) el.textContent = c.nome;
+    }
+    for (const campo of ['phone-number', 'phone-formatted']) {
+      const el = $(`#drawer-data-${campo}`);
+      if (el) el.textContent = c.fone;
+    }
+    const chipCabecalho = $('.chat-context-instance span');
+    if (chipCabecalho) chipCabecalho.textContent = c.instancia;
+    const chipPainel = $('#drawer-instance-chip');
+    if (chipPainel) chipPainel.textContent = c.instancia;
+    const crm = $('#drawer-crm-select');
+    if (crm) { crm.value = c.coluna; atualizarSeloCrm(); }
+
+    if (historico[id]) {
+      lista.innerHTML = historico[id];
+    } else {
+      lista.innerHTML = '';
+      lista.appendChild(divisor(c.dia || 'Hoje'));
+      for (const [quem, texto, hora] of c.mensagens || []) lista.appendChild(bolha(quem, texto, hora));
+    }
+    document.body.classList.add('chat-open-mobile');
+    rolarParaFim();
+  }
+
+  function enviar() {
+    const texto = entrada.value.trim();
+    if (!texto) return;
+    const hora = horaAgora();
+    const nova = bolha('eu', texto, hora);
+    const status = nova.querySelector('.message-status');
+    if (status) { status.dataset.status = 'sent'; status.textContent = '✓'; }
+    lista.appendChild(nova);
+    rolarParaFim();
+    // Simula o ACK do WhatsApp: entregue/lido um instante depois.
+    setTimeout(() => { if (status) { status.dataset.status = 'read'; status.textContent = '✓✓'; } }, 1200);
+
+    const item = document.querySelector(`.conv-item[data-id="${atual}"]`);
+    if (item) {
+      item.querySelector('.conv-preview').textContent = texto;
+      item.querySelector('.conv-time').textContent = hora;
+      item.parentElement.prepend(item);
+    }
+    entrada.value = '';
+    alternarBotoes();
+  }
+
+  function alternarBotoes() {
+    const temTexto = entrada.value.trim().length > 0;
+    btnEnviar.classList.toggle('hidden', !temTexto);
+    btnEnviar.style.display = temTexto ? 'inline-flex' : 'none';
+    btnGravar.style.display = temTexto ? 'none' : 'inline-flex';
+  }
+
+  let timerAviso;
+  function avisar(texto) {
+    const el = $('#mockup-aviso');
+    el.textContent = texto;
+    el.classList.add('visivel');
+    clearTimeout(timerAviso);
+    timerAviso = setTimeout(() => el.classList.remove('visivel'), 2200);
+  }
+
+  // --- eventos ---------------------------------------------------------------------
+  document.addEventListener('click', (ev) => {
+    const item = ev.target.closest('.conv-item');
+    if (item) { selecionar(item.dataset.id); return; }
+
+    if (ev.target.closest('#btn-mobile-back')) {
+      document.body.classList.remove('chat-open-mobile');
+      return;
+    }
+
+    if (ev.target.closest('#btn-close-contact-drawer')) { painelContato(false); return; }
+    if (ev.target.closest('#contact-details')) { painelContato(true); return; }
+
+    // Link para tela que não existe no mockup: avisa em vez de dar 404.
+    const link = ev.target.closest('a[href]');
+    if (link) {
+      const destino = link.getAttribute('href');
+      const existe = ['chat.html', 'index.html'].includes(destino) || destino.startsWith('#');
+      if (!existe) { ev.preventDefault(); avisar('Essa tela não faz parte deste protótipo'); }
+    }
+  });
+
+  $('#message-form').addEventListener('submit', (ev) => { ev.preventDefault(); enviar(); });
+  entrada.addEventListener('input', alternarBotoes);
+  $('#drawer-crm-select')?.addEventListener('change', atualizarSeloCrm);
+  entrada.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); enviar(); }
+  });
+
+  // Estado inicial: c1 aberta no desktop, com o painel do contato ao lado. No celular
+  // começa pela lista e o painel só abre tocando no cabeçalho, como no app.
+  selecionar('c1');
+  if (window.innerWidth <= 768) {
+    document.body.classList.remove('chat-open-mobile');
+    painelContato(false);
+  }
+})();
+</script>
+
+</body></html>

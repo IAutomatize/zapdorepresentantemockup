@@ -1,0 +1,206 @@
+/* Tema escuro para dropdown/flyout WhatsApp */
+.dark #modal-whatsapp-instances .rounded-xl {
+  background: #19232f !important;
+  border: 1px solid #314158 !important;
+  color: #eef6fe !important;
+  box-shadow: 0 4px 24px rgba(13, 13, 18, 0.35);
+}
+
+.dark #modal-whatsapp-instances h4 {
+  color: #eef6fe !important;
+}
+
+.dark #modal-whatsapp-instances .status-badge {
+  background: #14304c !important;
+  color: #eef6fe !important;
+  border: 1px solid #314158 !important;
+}
+
+.dark #modal-whatsapp-instances .instance-label {
+  color: #eef6fe !important;
+}
+
+.dark #modal-whatsapp-instances .instance-name,
+.dark #modal-whatsapp-instances .phone-number {
+  color: #aeb0b2 !important;
+}
+
+.dark #modal-whatsapp-instances button[data-close] {
+  background: #14304c !important;
+  color: #eef6fe !important;
+  border: 1px solid #314158 !important;
+  box-shadow: none !important;
+}
+
+.dark #modal-whatsapp-instances button[data-close]:hover {
+  background: #19232f !important;
+}
+
+#modal-whatsapp-instances .animate-fade-in {
+  animation: fadeInDropdown 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInDropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Sidebar hover-expand (MVP original do dashboard) */
+
+/* O <aside> do mvp-sidebar é position:fixed, logo não reserva espaço no fluxo.
+   Páginas cujo layout não embute o recuo do rail (settings, ajuda, plans, que
+   antes usavam um host de 72px no flex) pedem este recuo no container do
+   conteúdo. As demais já resolvem com padding-left inline no <main>. */
+.mvp-sidebar-offset {
+  padding-left: 72px;
+}
+
+.sidebar-hover {
+  width: 72px;
+  overflow: hidden;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.sidebar-hover:hover {
+  width: 260px;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.06);
+}
+
+.sidebar-label {
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s ease 0.1s;
+  color: #4A5568;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sidebar-hover:hover .sidebar-label {
+  opacity: 1;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 11px;
+  color: var(--label, #8896A6);
+  transition: all 0.2s ease;
+  width: 100%;
+  text-decoration: none;
+  border: none;
+  background: transparent;
+}
+
+.sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--ink-soft, #4A5568);
+}
+
+.sidebar-item:hover .sidebar-label {
+  color: var(--ink-soft, #4A5568);
+}
+
+.sidebar-icon-wrap {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  flex-shrink: 0;
+  margin-left: -10px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-icon-wrap i {
+  font-size: 20px;
+}
+
+.sidebar-item-active {
+  background: linear-gradient(90deg, rgba(33,150,243,0.08), rgba(33,150,243,0.03));
+  color: #2196F3;
+}
+
+.sidebar-item-active .sidebar-label {
+  color: #2196F3;
+  font-weight: 600;
+}
+
+.sidebar-hover:hover .sidebar-item-active {
+  box-shadow: inset 3px 0 0 #2196F3;
+}
+
+.sidebar-item-danger {
+  color: #F56565;
+}
+
+.sidebar-item-danger:hover {
+  background: rgba(245, 101, 101, 0.08);
+  color: #F56565;
+}
+
+.sidebar-item-danger:hover .sidebar-label {
+  color: #F56565;
+}
+
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.sidebar-hover:hover .sidebar-scroll {
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.sidebar-hover:hover .sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.sidebar-hover:hover .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.32);
+}
+
+#sidebar-toggle-external,
+.sidebar-toggle-external {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  /* No celular a barra vira gaveta (mobile-polish.css) e sai do fluxo: o recuo
+     do rail deixa de fazer sentido e roubaria largura da tela. */
+  .mvp-sidebar-offset {
+    padding-left: 0;
+  }
+
+  .sidebar-hover {
+    width: 64px;
+  }
+
+  .sidebar-hover:hover,
+  .sidebar-hover:focus-within {
+    width: 220px;
+  }
+}

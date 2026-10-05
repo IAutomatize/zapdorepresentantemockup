@@ -1,0 +1,281 @@
+/* ============================================================
+   📱 POLIMENTO MOBILE GLOBAL — Zap do Representante (Fase 3)
+   Carregado por último em todas as páginas do app.
+   TODAS as regras valem apenas para telas ≤768px (celular);
+   desktop e tablet largo ficam intocados.
+   ============================================================ */
+
+/* Estado padrão do gatilho da gaveta e do backdrop: invisíveis. Estas duas
+   regras ficam FORA do @media de propósito — o markup é injetado pelo
+   renderMvpSidebar() em TODAS as telas, e sem elas apareceria no desktop, onde
+   a barra lateral que expande no hover já está do jeito certo. */
+.mvp-sidebar-toggle,
+.mvp-sidebar-backdrop,
+.mvp-sidebar-close {
+  display: none;
+}
+
+/* Wrapper do cabeçalho do dashboard. Existe para o .dashboard-modern-header
+   continuar enxergando 2 filhos diretos: o space-between dele jogaria o título
+   para o meio da linha se o botão entrasse como 3º filho. No desktop o botão é
+   display:none, então um flex de um filho só renderiza igual a hoje. */
+.dashboard-header-lead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  /* ------------------------------------------------------------
+     0) BARRA LATERAL VIRA GAVETA
+        O rail fixo custava de 64px a 104px de recuo numa tela de
+        ~390px. Aqui ele sai da tela e volta pelo botão flutuante.
+        Nada disto existe fora deste @media: o desktop continua com
+        o rail que expande no hover.
+     ------------------------------------------------------------ */
+  #mvp-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1200 !important;
+  }
+
+  /* Seletor com a classe para empatar a especificidade de
+     `#mvp-sidebar.sidebar-hover{width:64px!important}` do chats-layout.css e
+     vencer por ordem (mobile-polish.css é o último stylesheet da página).
+     Aberta, a gaveta já mostra os rótulos: não existe :hover no toque.
+     Fundo SÓLIDO e sem backdrop-filter: o rail de desktop é de vidro, e como
+     gaveta isso deixava o conteúdo da página legível por trás dos itens. */
+  #mvp-sidebar.sidebar-hover {
+    width: 84vw !important;
+    max-width: 300px !important;
+    min-width: 0 !important;
+    background: var(--ds-surface) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-right: 1px solid var(--ds-border);
+    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.22);
+    padding-top: calc(env(safe-area-inset-top, 0px) + 8px) !important;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px) !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  #mvp-sidebar .sidebar-label {
+    opacity: 1 !important;
+  }
+
+  body.mvp-sidebar-open #mvp-sidebar {
+    transform: translateX(0);
+  }
+
+  /* Sem isto o fundo rola por baixo da gaveta aberta. */
+  body.mvp-sidebar-open {
+    overflow: hidden;
+  }
+
+  .mvp-sidebar-close {
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 10px);
+    right: 10px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ds-text-soft);
+    font-size: 20px;
+  }
+
+  .mvp-sidebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Os cabeçalhos do chat e de campanhas têm overflow:hidden e espremeriam
+       o botão sem gerar scrollbar — sumiria em silêncio. */
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid var(--ds-border);
+    border-radius: 10px;
+    background: var(--ds-surface);
+    color: var(--ds-text-soft);
+    font-size: 19px;
+    line-height: 1;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    touch-action: manipulation;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  /* Embutido no cabeçalho: entra no fluxo e acompanha o layout. Sem zerar o
+     position:fixed o botão continuaria flutuando mesmo dentro do header — era
+     exatamente o sintoma de "ícone sempre lá estático". */
+  .mvp-sidebar-toggle.is-embedded {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    margin: 0;
+  }
+
+  /* Fallback: página sem âncora de cabeçalho mantém o botão flutuante, para
+     nenhuma tela ficar sem gatilho de menu. */
+  .mvp-sidebar-toggle:not(.is-embedded) {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 10px);
+    left: 8px;
+    z-index: 1210;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Os ícones de título são estilizados por seletor DESCENDENTE
+     (.tasks-page-title-row i = 28px, .status-mvp-page-title i = 28px,
+     .campaigns-mvp-page-title i = 26px, .title-row i = 22px) e alcançariam o
+     <i> do botão, estourando a caixa de 36px. */
+  .mvp-sidebar-toggle i {
+    font-size: 19px !important;
+    color: inherit !important;
+    line-height: 1;
+  }
+
+  /* Com a gaveta aberta o botão some — a queixa de "ícone sempre lá estático".
+     opacity e não display: embutido ele ocupa espaço, e display:none faria o
+     título saltar ~46px para a esquerda ao abrir e voltar ao fechar. */
+  body.mvp-sidebar-open .mvp-sidebar-toggle {
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+  }
+
+  .mvp-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1190;
+    display: block;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  body.mvp-sidebar-open .mvp-sidebar-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* No chat em tela cheia quem manda é a seta de voltar. */
+  body.chat-open-mobile .mvp-sidebar-toggle {
+    display: none;
+  }
+
+  /* RECUO ZERO. Cada página reservava o espaço do rail de um jeito: 5 usam
+     padding inline no <main> (96px/104px), as outras usam classe própria com
+     padding ou margin. Agora o conteúdo encosta na borda — o botão não precisa
+     mais de faixa própria porque vive dentro do cabeçalho.
+     !important porque padding inline só perde para isso, e longhand porque as
+     regras concorrentes são shorthands !important em cada CSS de página. */
+  main[style*="padding"],
+  .chats-main-shell-with-sidebar,
+  .contacts-mvp-shell,
+  .status-mvp-main,
+  .campaigns-mvp-main {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* Conteúdo colado na borda fica cru. Devolve 12px SÓ à linha do título de
+     cada página, para o botão não nascer grudado no vidro. Cards, tabelas e o
+     board do kanban seguem sangrando de borda a borda — que é o ganho pedido. */
+  .dashboard-header-lead,
+  .conv-top-actions,
+  .contacts-mvp-title-row,
+  .kanban-page-title-row,
+  .tasks-page-title-row,
+  .agendadas-page-title-row,
+  .status-mvp-page-title,
+  .campaigns-mvp-page-title,
+  #calendar-app .title-row {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Dois ícones colados antes do título ficam ilegíveis: o hambúrguer assume o
+     papel de ícone da linha. Filho DIRETO para nunca atingir o <i> do botão. */
+  .contacts-mvp-title-row > .contacts-mvp-title-icon,
+  .kanban-page-title-row > .kanban-page-title-icon,
+  .agendadas-page-title-row > .agendadas-page-title-icon,
+  .tasks-page-title-row > i,
+  .status-mvp-page-title > i,
+  .campaigns-mvp-page-title > i,
+  #calendar-app .title-row > i {
+    display: none;
+  }
+
+  /* Único h1 sem override mobile (24px/700): com o botão à esquerda ele passava
+     por baixo do .user-menu-floating, que é fixed no canto superior direito. */
+  .agendadas-page-title-row h1 {
+    font-size: 19px;
+  }
+
+  /* ------------------------------------------------------------
+     1) ANTI-ZOOM: campos com fonte <16px fazem o navegador dar
+        zoom automático ao focar (aquele "pulo" na tela).
+        16px elimina o comportamento em todas as telas do app.
+     ------------------------------------------------------------ */
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='url'],
+  input[type='date'],
+  input[type='time'],
+  input[type='datetime-local'],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* ------------------------------------------------------------
+     2) KANBAN: colunas dimensionadas para o dedo.
+        - Coluna ocupa ~85% da tela (o pedaço da próxima fica
+          visível, convidando a rolar — padrão de apps de board).
+        - scroll-snap dá o efeito "ímã" ao parar entre colunas.
+        - Arrastar card está DESLIGADO no celular: o polyfill
+          drag-drop-touch.js iniciava o arrasto com 5px de
+          movimento e sem press-and-hold, então rolar o board
+          levava o card junto. O JS deixa de marcar os cards como
+          draggable em ≤768px (ver isTouchLayout() no kanban.ts) e
+          mover passa a ser pelo botão do card. No desktop o
+          drag&drop segue igual.
+     ------------------------------------------------------------ */
+  .kanban-board-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 12px;
+  }
+
+  .kanban-column {
+    width: min(85vw, 300px);
+    min-width: min(85vw, 300px);
+    max-width: min(85vw, 300px);
+    scroll-snap-align: start;
+  }
+
+  /* ------------------------------------------------------------
+     3) TABELAS LARGAS (ex.: contatos): rolagem horizontal suave
+        em vez de esmagar as colunas.
+     ------------------------------------------------------------ */
+  .contacts-table-scroll-area {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

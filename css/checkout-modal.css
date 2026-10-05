@@ -1,0 +1,476 @@
+/* ===========================================
+   CHECKOUT DE ASSINATURA (popup)
+   Componente de src/public/js/plans-checkout.ts, que abre em qualquer página:
+   aba de planos, faixas do teste e modal de bloqueio.
+
+   Autossuficiente de propósito: não usa as classes da página de Configurações,
+   porque no chat ou no kanban elas não existem. O visual é o mesmo dos popups das
+   Configurações, refeito aqui com os tokens do design (--ds-*), então o tema
+   escuro funciona sem regra própria.
+
+   Todo seletor fica sob #checkout-modal, para nada daqui vazar para a página.
+   A animação tem nome próprio porque o Tailwind já define um @keyframes com o
+   nome genérico.
+   =========================================== */
+
+#checkout-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(5px);
+  /* Acima do modal de bloqueio, que abre o checkout por cima de si. */
+  z-index: 2147483646;
+}
+
+#checkout-modal.open {
+  display: flex;
+}
+
+#checkout-modal *,
+#checkout-modal *::before,
+#checkout-modal *::after {
+  box-sizing: border-box;
+}
+
+#checkout-modal .hidden {
+  display: none !important;
+}
+
+#checkout-modal .checkout-card {
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow: auto;
+  padding: 24px;
+  border-radius: 18px;
+  background: var(--ds-surface, #fff);
+  color: var(--ds-text, #1e293b);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.33);
+  font-size: 14px;
+  text-align: left;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+#checkout-modal .checkout-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+#checkout-modal .checkout-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 20px;
+  background: var(--ds-primary-soft, rgba(33, 150, 243, 0.12));
+  color: var(--ds-primary, #2196f3);
+}
+
+#checkout-modal .checkout-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ds-text, #1e293b);
+}
+
+#checkout-modal .checkout-desc {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--ds-text-muted, #94a3b8);
+}
+
+#checkout-modal .checkout-icon-btn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--ds-border-strong, rgba(0, 0, 0, 0.12));
+  background: var(--ds-glass-strong, rgba(255, 255, 255, 0.72));
+  color: var(--ds-text-soft, #64748b);
+  cursor: pointer;
+}
+
+#checkout-modal .checkout-close {
+  margin-left: auto;
+  align-self: flex-start;
+  font-size: 18px;
+}
+
+/* ---------- Formulário ---------- */
+
+#checkout-modal .checkout-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#checkout-modal .checkout-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ds-text-soft, #64748b);
+}
+
+#checkout-modal .checkout-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--ds-border-strong, rgba(0, 0, 0, 0.12));
+  background: var(--ds-glass-strong, rgba(255, 255, 255, 0.72));
+  color: var(--ds-text, #1e293b);
+  font-size: 14px;
+  outline: none;
+}
+
+#checkout-modal .checkout-input::placeholder {
+  color: var(--ds-text-muted, #94a3b8);
+}
+
+#checkout-modal .checkout-input:focus {
+  border-color: rgba(33, 150, 243, 0.5);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.12);
+}
+
+/* ---------- Resumo do plano ---------- */
+
+#checkout-modal .checkout-plan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--ds-primary-soft, rgba(33, 150, 243, 0.12));
+  border: 1px solid rgba(33, 150, 243, 0.22);
+}
+
+#checkout-modal .checkout-plan-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-text-soft, #64748b);
+}
+
+#checkout-modal .checkout-plan-name {
+  display: block;
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ds-text, #1e293b);
+}
+
+#checkout-modal .checkout-plan-price-box {
+  text-align: right;
+}
+
+#checkout-modal .checkout-plan-price {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ds-primary, #2196f3);
+  white-space: nowrap;
+}
+
+#checkout-modal .checkout-plan-cycle {
+  font-size: 11px;
+  color: var(--ds-text-soft, #64748b);
+}
+
+/* ---------- Grupos ---------- */
+
+#checkout-modal .checkout-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+#checkout-modal .checkout-group-title {
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-text-muted, #94a3b8);
+}
+
+/* Espaço entre as linhas de campos dentro de um mesmo grupo. */
+#checkout-modal .checkout-group > div + div {
+  margin-top: 12px;
+}
+
+#checkout-modal .checkout-optional {
+  font-weight: 500;
+  color: var(--ds-text-muted, #94a3b8);
+}
+
+/* Grades próprias: só empilham no celular, não em qualquer notebook. */
+#checkout-modal .checkout-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#checkout-modal .checkout-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* CEP, rua mais larga e número estreito. */
+#checkout-modal .checkout-grid-cep {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) 110px;
+  gap: 16px;
+}
+
+/* ---------- Cartões de escolha ---------- */
+
+#checkout-modal .checkout-choices {
+  display: grid;
+  gap: 10px;
+}
+
+#checkout-modal .checkout-choices-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#checkout-modal .checkout-choices-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#checkout-modal .checkout-choice {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+/* O rádio continua existindo para teclado e leitor de tela, só não aparece. */
+#checkout-modal .checkout-choice input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+#checkout-modal .checkout-choice-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--ds-border-strong, rgba(0, 0, 0, 0.12));
+  background: var(--ds-glass-strong, var(--ds-surface, #fff));
+  color: var(--ds-text, #1e293b);
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+#checkout-modal .checkout-choice-body i {
+  font-size: 20px;
+  color: var(--ds-text-soft, #64748b);
+  flex-shrink: 0;
+}
+
+#checkout-modal .checkout-choice-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#checkout-modal .checkout-choice-text small {
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ds-text-soft, #64748b);
+}
+
+#checkout-modal .checkout-choice:hover .checkout-choice-body {
+  border-color: rgba(33, 150, 243, 0.4);
+}
+
+#checkout-modal .checkout-choice input:checked + .checkout-choice-body {
+  border-color: var(--ds-primary, #2196f3);
+  background: var(--ds-primary-soft, rgba(33, 150, 243, 0.12));
+}
+
+#checkout-modal .checkout-choice input:checked + .checkout-choice-body i {
+  color: var(--ds-primary, #2196f3);
+}
+
+#checkout-modal .checkout-choice input:focus-visible + .checkout-choice-body {
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.25);
+}
+
+/* ---------- Erro do servidor ---------- */
+
+#checkout-modal .checkout-error {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+#checkout-modal .checkout-error ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+#checkout-modal .checkout-input[aria-invalid="true"] {
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+/* ---------- Ações ---------- */
+
+#checkout-modal .checkout-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#checkout-modal .checkout-ghost-btn {
+  height: 42px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ds-text-soft, #64748b);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#checkout-modal .checkout-btn-primary {
+  height: 42px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  background: var(--ds-primary, #2196f3);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(33, 150, 243, 0.28);
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+#checkout-modal .checkout-btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+#checkout-modal .checkout-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- Processando ---------- */
+
+#checkout-modal .checkout-loading {
+  padding: 48px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--ds-text-soft, #64748b);
+  font-weight: 600;
+}
+
+#checkout-modal .checkout-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid var(--ds-primary-soft, rgba(33, 150, 243, 0.12));
+  border-top-color: var(--ds-primary, #2196f3);
+  animation: checkout-spin 0.8s linear infinite;
+}
+
+@keyframes checkout-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Fatura gerada ---------- */
+
+#checkout-modal .checkout-done {
+  padding: 32px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+#checkout-modal .checkout-done-icon {
+  font-size: 44px;
+  line-height: 1;
+  color: var(--ds-success, #22c55e);
+}
+
+#checkout-modal .checkout-done-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ds-text, #1e293b);
+}
+
+#checkout-modal .checkout-done .checkout-desc {
+  max-width: 420px;
+  font-size: 13px;
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 640px) {
+  #checkout-modal .checkout-choices-3,
+  #checkout-modal .checkout-grid-2,
+  #checkout-modal .checkout-grid-3,
+  #checkout-modal .checkout-grid-cep {
+    grid-template-columns: 1fr;
+  }
+
+  #checkout-modal .checkout-plan {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #checkout-modal .checkout-plan-price-box {
+    text-align: left;
+  }
+
+  #checkout-modal .checkout-actions {
+    flex-direction: column-reverse;
+  }
+
+  #checkout-modal .checkout-actions > * {
+    width: 100%;
+  }
+}

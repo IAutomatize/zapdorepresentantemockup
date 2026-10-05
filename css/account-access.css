@@ -1,0 +1,359 @@
+/* ===========================================
+   ACESSO DA CONTA NA TELA
+   Modal de bloqueio, faixa do teste, popup do último dia e cartão do teste na aba
+   de planos. Montados por src/public/js/account-access-ui.ts em qualquer página,
+   por isso só usam os tokens do design (--ds-*) com valor de reserva, e todo
+   seletor tem o prefixo zap-access- ou trial-card.
+   =========================================== */
+
+/* ---------- Sobreposição (modal de bloqueio e popup do último dia) ---------- */
+
+.zap-access-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483640;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(5px);
+}
+
+/* O bloqueio esconde o app por trás: não dá para "ler" a página bloqueada. */
+.zap-access-overlay.is-blocking {
+  z-index: 2147483645;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+.zap-access-card {
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow: auto;
+  padding: 28px 24px 20px;
+  border-radius: 18px;
+  background: var(--ds-surface, #fff);
+  color: var(--ds-text, #1e293b);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  font-size: 14px;
+}
+
+.zap-access-card .hidden,
+.trial-card .hidden {
+  display: none !important;
+}
+
+.zap-access-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  font-size: 26px;
+  background: var(--ds-primary-soft, rgba(33, 150, 243, 0.12));
+  color: var(--ds-primary, #2196f3);
+}
+
+.zap-access-icon.is-warning {
+  background: rgba(245, 158, 11, 0.14);
+  color: #d97706;
+}
+
+.zap-access-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ds-text, #1e293b);
+}
+
+.zap-access-text {
+  margin: 0 0 20px;
+  line-height: 1.5;
+  color: var(--ds-text-soft, #64748b);
+}
+
+.zap-access-note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ds-text-muted, #94a3b8);
+}
+
+.zap-access-primary {
+  height: 44px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 12px;
+  background: var(--ds-primary, #2196f3);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(33, 150, 243, 0.28);
+}
+
+.zap-access-wide {
+  width: 100%;
+}
+
+.zap-access-ghost {
+  height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ds-text-soft, #64748b);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.zap-access-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.zap-access-link {
+  display: block;
+  margin: 14px auto 0;
+  border: none;
+  background: none;
+  color: var(--ds-primary, #2196f3);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.zap-access-plans {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.zap-access-plan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--ds-border-strong, rgba(0, 0, 0, 0.12));
+  background: var(--ds-glass-strong, transparent);
+  color: var(--ds-text, #1e293b);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.zap-access-plan:hover {
+  border-color: var(--ds-primary, #2196f3);
+}
+
+.zap-access-plan span {
+  font-weight: 700;
+  color: var(--ds-primary, #2196f3);
+}
+
+.zap-access-pending {
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.zap-access-pending p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.zap-access-logout {
+  margin: 22px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  color: var(--ds-text-muted, #94a3b8);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- Faixa do topo ---------- */
+
+.zap-access-banner {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483600;
+  width: min(760px, calc(100% - 24px));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px 10px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(33, 150, 243, 0.3);
+  background: var(--ds-surface, #fff);
+  color: var(--ds-text, #1e293b);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+  font-size: 13px;
+}
+
+.zap-access-banner.is-urgent {
+  border-color: rgba(245, 158, 11, 0.55);
+  background: #fffbeb;
+  color: #78350f;
+}
+
+.dark .zap-access-banner.is-urgent {
+  background: #3a2a0c;
+  color: #fde68a;
+}
+
+.zap-access-banner > i {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--ds-primary, #2196f3);
+}
+
+.zap-access-banner.is-urgent > i {
+  color: #d97706;
+}
+
+.zap-access-banner p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.zap-access-banner-btn {
+  flex-shrink: 0;
+  height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--ds-primary, #2196f3);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.zap-access-banner-close {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .zap-access-banner {
+    flex-wrap: wrap;
+  }
+
+  .zap-access-banner-btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Cartão do teste na aba de planos ---------- */
+
+.trial-card {
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(33, 150, 243, 0.3);
+  background: var(--ds-primary-soft, rgba(33, 150, 243, 0.12));
+}
+
+.trial-card.hidden {
+  display: none;
+}
+
+.trial-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.trial-card-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ds-text-soft, #64748b);
+}
+
+.trial-card-title {
+  margin: 4px 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ds-text, #1e293b);
+}
+
+.trial-card-text {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ds-text-soft, #64748b);
+}
+
+.trial-card-btn {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--ds-primary, #2196f3);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.trial-card-bar {
+  margin-top: 14px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(33, 150, 243, 0.18);
+  overflow: hidden;
+}
+
+.trial-card-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--ds-primary, #2196f3);
+}
+
+@media (max-width: 640px) {
+  .trial-card-head {
+    flex-direction: column;
+  }
+
+  .trial-card-btn {
+    width: 100%;
+  }
+}

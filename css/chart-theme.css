@@ -1,0 +1,72 @@
+/**
+ * ESTILOS PERSONALIZADOS PARA GRÁFICOS - NOVO DESIGN FIGMA
+ * Cores: Sky Blue (#1174DA), Navy (#234365), Ice Blue (#EEF6FE)
+ * Fonte: Inter
+ */
+
+/* Configurações de gráficos tema-responsivas */
+.chart-canvas {
+  /* Garante que o canvas seja transparente e use a cor do pai */
+  background: transparent !important;
+}
+
+/* Container dos gráficos */
+.chart-container {
+  /* Cores de fundo adaptáveis */
+  background-color: #FFFFFF;
+  border-radius: 12px;
+}
+
+.dark .chart-container {
+  background-color: #111E28;
+}
+
+/* Texto dos gráficos */
+.chart-text {
+  color: #44505F;
+  font-family: 'Inter', sans-serif;
+}
+
+.dark .chart-text {
+  color: #EEF6FE;
+}
+
+/* Linhas de grade dos gráficos */
+.chart-grid {
+  color: rgba(195, 195, 195, 0.25);
+}
+
+.dark .chart-grid {
+  color: rgba(195, 195, 195, 0.15);
+}
+
+/* Texto das legendas */
+.chart-legend {
+  color: #64748B;
+  font-family: 'Inter', sans-serif;
+}
+
+.dark .chart-legend {
+  color: #94A3B8;
+}
+
+/* Cores específicas para gráficos de linha - Novo Design */
+.chart-line-primary {
+  stroke: #1174DA; /* Sky Blue */
+  fill: transparent;
+}
+
+.chart-line-success {
+  stroke: #34A853; /* WhatsApp Green */
+  fill: transparent;
+}
+
+.chart-line-warning {
+  stroke: #F59E0B;
+  fill: transparent;
+}
+
+.chart-line-danger {
+  stroke: #E93127; /* Red Accent */
+  fill: transparent;
+}

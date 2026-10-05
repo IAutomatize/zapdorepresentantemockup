@@ -1,0 +1,2162 @@
+/* 
+===========================================
+🎨 ZAP EMPRESARIAL - SISTEMA DE CORES
+===========================================
+Baseado no design das telas fornecidas
+*/
+
+:root {
+  /* === CORES PRIMÁRIAS - NOVO DESIGN FIGMA === */
+  --primary-blue: var(--ds-primary);          /* Sky Blue - Azul principal */
+  --primary-blue-hover: var(--ds-primary-hover);    /* Sky Blue hover */
+  --primary-blue-light: var(--c-ice);    /* Ice Blue - Azul claro */
+  
+  --secondary-red: #E93127;         /* Vermelho destaque Figma */
+  --secondary-red-hover: #D42B22;   /* Vermelho hover */
+  --secondary-red-light: #FEE2E2;   /* Vermelho claro */
+  --primary-red-alpha: rgba(233, 49, 39, 0.1); /* Vermelho transparente para glow */
+  
+  /* === CORES NEUTRAS - NOVO DESIGN FIGMA === */
+  --gray-50: #FAFAFA;               /* Background principal Figma */
+  --gray-100: #F8FAFC;              /* Background cards Figma */
+  --gray-200: #E2E8F0;              /* Bordas suaves Figma */
+  --gray-300: #CBD5E1;              /* Bordas médias */
+  --gray-400: #94A3B8;              /* Texto placeholder */
+  --gray-500: #64748B;              /* Texto secundário */
+  --gray-600: #44505F;              /* Texto principal Figma */
+  --gray-700: #314158;              /* Texto forte Figma */
+  --gray-800: #234365;              /* Navy - Texto muito forte Figma */
+  --gray-900: #1F4387;              /* Navy Dark Figma */
+  
+  /* === CORES DE ESTADO === */
+  --success-green: #10B981;         /* Sucesso */
+  --success-green-light: #D1FAE5;   /* Sucesso claro */
+  --warning-yellow: #F59E0B;        /* Aviso */
+  --warning-yellow-light: #FEF3C7;  /* Aviso claro */
+  --error-red: #EF4444;             /* Erro */
+  --error-red-light: #FEE2E2;       /* Erro claro */
+  
+  /* === CORES ESPECÍFICAS DO SISTEMA - FIGMA === */
+  --sidebar-bg: #FFFFFF;            /* Fundo sidebar */
+  --sidebar-active: var(--primary-blue);  /* Item ativo sidebar - Sky Blue */
+  --sidebar-active-bg: var(--primary-blue-light);  /* Background ativo - Ice Blue */
+  --sidebar-text: #234365;          /* Texto sidebar - Navy */
+  --sidebar-text-active: #FFFFFF;   /* Texto ativo */
+  
+  --header-bg: var(--primary-blue); /* Fundo header - Sky Blue */
+  --header-text: #FFFFFF;           /* Texto header */
+  
+  --card-bg: var(--ds-surface);               /* Fundo cards */
+  --card-border: var(--gray-200);   /* Borda cards */
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  
+  /* === TEXTO - VARIÁVEIS QUE FALTAVAM === */
+  --text-primary: var(--ds-text);     /* Texto principal */
+  --text-secondary: var(--ds-text-soft);   /* Texto secundário */
+  --text-muted: var(--ds-text-muted);       /* Texto esmaecido */
+  
+  /* === BACKGROUNDS - VARIÁVEIS QUE FALTAVAM === */
+  --background: var(--ds-bg);        /* Background principal */
+  --surface: var(--ds-surface);                  /* Surface (cards, modals) */
+  --accent: var(--primary-blue);       /* Cor de destaque */
+  
+  /* === BOTÕES === */
+  --btn-primary-bg: var(--primary-blue);
+  --btn-primary-hover: var(--primary-blue-hover);
+  --btn-primary-text: #FFFFFF;
+  
+  --btn-secondary-bg: var(--secondary-red);
+  --btn-secondary-hover: var(--secondary-red-hover);
+  --btn-secondary-text: #FFFFFF;
+  
+  --btn-outline-border: var(--gray-300);
+  --btn-outline-text: var(--gray-700);
+  --btn-outline-hover: var(--gray-50);
+  
+  /* === STATUS INDICATORS === */
+  --status-online: var(--success-green);
+  --status-offline: var(--gray-400);
+  --status-away: var(--warning-yellow);
+  --status-busy: var(--error-red);
+  
+  /* === BADGES === */
+  --badge-info: var(--primary-blue);
+  --badge-success: var(--success-green);
+  --badge-warning: var(--warning-yellow);
+  --badge-error: var(--error-red);
+  --badge-neutral: var(--gray-500);
+  
+  /* === MODAIS E SOBREPOSIÇÕES === */
+  --modal-overlay: rgba(0, 0, 0, 0.7);      /* Overlay de modais */
+  --modal-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1), 0 4px 6px 0 rgba(0, 0, 0, 0.06);
+  
+  /* === BORDERS - VARIÁVEIS PARA DASHBOARD === */
+  --border-light: var(--gray-200);         /* Bordas claras */
+  --border-strong: var(--gray-400);        /* Bordas fortes */
+  
+  /* === TEXTOS ESPECÍFICOS === */
+  --text-dark: var(--ds-text);             /* Texto escuro para backgrounds claros */
+}
+
+/* 
+===========================================
+� TEMA ESCURO - VARIÁVEIS CSS
+===========================================
+*/
+
+.dark {
+  /* === CORES ESPECÍFICAS DO SISTEMA - TEMA ESCURO === */
+  --card-bg: #111E28;                      /* Fundo cards escuro (novo design) */
+  --card-border: rgba(195, 195, 195, 0.16);  /* Borda cards escuro (novo design) */
+  --sidebar-bg: #11181F;                   /* Fundo sidebar escuro (novo design) */
+  --background: #11181F;                   /* Background principal escuro (novo design) */
+  --surface: #111E28;                      /* Surface escuro (novo design) */
+  
+  /* === TEXTO - TEMA ESCURO === */
+  --text-primary: #EEF6FE;                 /* Texto principal claro (novo design) */
+  --text-secondary: #EEF6FE;               /* Texto secundário claro (novo design) */
+  --text-muted: #94A3B8;                   /* Texto esmaecido claro (slate-400) */
+  --text-dark: #EEF6FE;                    /* Texto claro para backgrounds escuros */
+}
+
+/* Dark mode específico para contatos */
+.dark .contact-name {
+  color: rgb(248 250 252); /* slate-50 */
+}
+
+.dark .channel-text {
+  color: rgb(248 250 252); /* slate-50 */
+}
+
+.dark .contact-email,
+.dark .contact-phone {
+  color: rgb(148 163 184); /* slate-400 */
+}
+
+.dark .contact-row:hover {
+  background-color: rgb(71 85 105); /* slate-600 */
+}
+
+/* Dark mode para Kanban */
+.dark .kanban-column {
+  background: #334155; /* slate-700 - mais claro que o fundo para criar contraste */
+  border: 1px solid #475569; /* adiciona borda para definir melhor o container */
+}
+
+.dark .column-header {
+  border-bottom-color: #64748b; /* slate-500 - mais visível */
+}
+
+.dark .column-header h3 {
+  color: #f1f5f9; /* slate-100 - título bem visível */
+}
+
+.dark .kanban-card {
+  background: #475569; /* slate-600 - mais claro que a coluna */
+  border-color: #64748b; /* slate-500 */
+}
+
+.dark .kanban-card:hover {
+  background: #64748b; /* slate-500 */
+  border-color: #94a3b8; /* slate-400 */
+}
+
+.dark .card-title {
+  color: #f8fafc; /* slate-50 */
+}
+
+.dark .card-name {
+  color: #f8fafc; /* slate-50 */
+}
+
+.dark .card-time {
+  color: #94a3b8; /* slate-400 */
+}
+
+.dark .column-counter {
+  background: #475569; /* slate-600 */
+  color: #cbd5e1; /* slate-300 */
+}
+
+/* 
+===========================================
+🎯 CLASSES UTILITÁRIAS
+===========================================
+*/
+
+/* 
+===========================================
+�🎯 CLASSES UTILITÁRIAS
+===========================================
+*/
+
+/* === BACKGROUNDS === */
+.bg-primary { background-color: var(--primary-blue) !important; }
+.bg-secondary { background-color: var(--secondary-red) !important; }
+.bg-sidebar { background-color: var(--sidebar-bg) !important; }
+.bg-header { background-color: var(--header-bg) !important; }
+.bg-card { background-color: var(--card-bg) !important; }
+
+/* === TEXTO === */
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-header { color: var(--header-text) !important; }
+.text-sidebar { color: var(--sidebar-text) !important; }
+.text-sidebar-active { color: var(--sidebar-text-active) !important; }
+.text-success { color: var(--success-green) !important; }
+.text-error { color: var(--error-red) !important; }
+.text-warning { color: var(--warning-yellow) !important; }
+
+/* === BACKGROUNDS === */
+.bg-primary { background-color: var(--primary-blue) !important; }
+.bg-secondary { background-color: var(--secondary-red) !important; }
+.bg-background { background-color: var(--background) !important; }
+.bg-surface { background-color: var(--surface) !important; }
+.bg-accent { background-color: var(--accent) !important; }
+.bg-sidebar { background-color: var(--sidebar-bg) !important; }
+.bg-header { background-color: var(--header-bg) !important; }
+.bg-card { background-color: var(--card-bg) !important; }
+
+/* === BORDAS === */
+.border-primary { border-color: var(--primary-blue) !important; }
+.border-secondary { border-color: var(--secondary-red) !important; }
+.border-card { border-color: var(--card-border) !important; }
+
+/* === BOTÕES CUSTOMIZADOS === */
+.btn-zap-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-zap-primary:hover {
+  background-color: var(--btn-primary-hover);
+  color: var(--btn-primary-text);
+}
+
+.btn-zap-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-zap-secondary:hover {
+  background-color: var(--btn-secondary-hover);
+  color: var(--btn-secondary-text);
+}
+
+/* === SIDEBAR ATIVO === */
+.sidebar-item-active {
+  background-color: var(--sidebar-active-bg) !important;
+  color: var(--sidebar-active) !important;
+  font-weight: 600;
+}
+
+.sidebar-item-active .sidebar-icon {
+  color: var(--sidebar-active) !important;
+}
+
+/* === CARDS === */
+.card-zap {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem;
+}
+
+/* === BADGES === */
+.badge-success {
+  background-color: var(--success-green-light);
+  color: var(--success-green);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-error {
+  background-color: var(--error-red-light);
+  color: var(--error-red);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-warning {
+  background-color: var(--warning-yellow-light);
+  color: var(--warning-yellow);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-info {
+  background-color: var(--primary-blue-light);
+  color: var(--primary-blue);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* === STATUS INDICATORS === */
+.status-online {
+  width: 8px;
+  height: 8px;
+  background-color: var(--status-online);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-offline {
+  width: 8px;
+  height: 8px;
+  background-color: var(--status-offline);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* === CHAT ESPECÍFICO === */
+/* chat-layout, conversation-list, chat-area, message-list definidos em chats-layout.css */
+
+.conv-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+}
+
+.chat-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  flex-shrink: 0;
+}
+
+.message-input-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--card-border);
+  min-height: 60px;
+  flex-shrink: 0;
+}
+
+.btn-zap-icon {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+}
+
+.btn-zap-icon:hover {
+  background-color: var(--gray-100);
+  color: var(--primary-blue);
+}
+
+/* === MODAL STYLING === */
+.contact-modal-content {
+  max-width: 28rem;
+  width: 100%;
+  margin: 0 auto; /* Centralizado sem margin-top */
+}
+
+/* Modal específico para stories - versão ampla */
+#story-modal .modal-content {
+  width: min(780px, calc(100vw - 48px)) !important;
+  max-width: min(780px, calc(100vw - 48px)) !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border-radius: 20px !important;
+}
+
+/* Responsivo para telas menores */
+@media (max-width: 768px) {
+  #story-modal .modal-content {
+    width: 95% !important;
+    max-width: 100% !important;
+    margin: 1rem !important;
+    max-height: 85vh !important;
+  }
+}
+
+/* Compactar formulários em telas pequenas */
+@media (max-width: 640px) {
+  #story-modal .form-group {
+    margin-bottom: 1rem !important;
+  }
+  
+  #story-modal .space-y-4 > * + * {
+    margin-top: 1rem !important;
+  }
+  
+  #story-modal .grid {
+    gap: 0.5rem !important;
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label,
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+/* Permitir que classes do Tailwind sobrescrevam a largura */
+.form-control.w-16,
+.form-control.w-20,
+.form-control.flex-1 {
+  width: auto;
+}
+
+.form-control.w-16 {
+  width: 4rem !important;
+}
+
+.form-control.w-20 {
+  width: 5rem !important;
+}
+
+.form-control.flex-1 {
+  flex: 1 !important;
+  width: auto !important;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px var(--primary-blue-light);
+}
+
+.modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  display: none !important; /* Escondido por padrão */
+  align-items: center !important; /* Centralizado verticalmente */
+  justify-content: center !important;
+  z-index: 50 !important;
+  padding: 1rem !important; /* Padding para dispositivos menores */
+}
+
+/* Mostrar modal quando display é definido inline */
+.modal[style*="display: block"],
+.modal[style*="display: flex"] {
+  display: flex !important;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Correção específica para modal de campanhas */
+#campaign-modal .modal-content {
+  max-width: 64rem !important; /* max-w-5xl */
+  width: 90vw !important;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: auto;
+  position: relative;
+}
+
+/* Melhoria do layout do formulário de campanhas */
+#campaign-modal .form-group {
+  margin-bottom: 1.5rem;
+}
+
+#campaign-modal .grid {
+  gap: 1.5rem;
+}
+
+/* Garantir que o modal de campanhas apareça corretamente */
+#campaign-modal[style*="display: flex"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .card-zap {
+    padding: 1rem;
+  }
+  
+  .btn-zap-primary,
+  .btn-zap-secondary {
+    padding: 0.75rem 1rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .conversation-list {
+    width: 100%;
+  }
+  
+  .chat-area {
+    display: none;
+  }
+  
+  .chat-area.active {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+/* === ESTILOS PARA CONTATOS === */
+.contact-row {
+  transition: background-color 0.2s ease;
+}
+
+.contact-row:hover {
+  background-color: rgb(249 250 251);
+}
+
+.contact-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgb(59 130 246);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.contact-info {
+  margin-left: 1rem;
+  min-width: 0;
+}
+
+.contact-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(17 24 39);
+  margin-bottom: 0.125rem;
+}
+
+.contact-email {
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+  margin-bottom: 0.125rem;
+}
+
+.contact-phone {
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+}
+
+.contact-channel {
+  display: flex;
+  align-items: center;
+}
+
+.channel-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.channel-whatsapp {
+  background-color: rgb(34 197 94);
+}
+
+.channel-email {
+  background-color: rgb(59 130 246);
+}
+
+.channel-webchat {
+  background-color: rgb(59 130 246);
+}
+
+.channel-text {
+  font-size: 0.875rem;
+  color: rgb(17 24 39);
+}
+
+.status-badge {
+  display: inline-flex;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.status-online {
+  background-color: rgb(220 252 231);
+  color: rgb(22 101 52);
+}
+
+.status-offline {
+  background-color: rgb(243 244 246);
+  color: rgb(55 65 81);
+}
+
+.status-away {
+  background-color: rgb(254 249 195);
+  color: rgb(146 64 14);
+}
+
+.contact-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-button {
+  color: rgb(59 130 246);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.action-button:hover {
+  color: rgb(29 78 216);
+}
+
+.action-button.secondary {
+  color: rgb(107 114 128);
+}
+
+.action-button.secondary:hover {
+  color: rgb(55 65 81);
+}
+
+.contact-time {
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+}
+
+/* === KANBAN MODERNO - REFATORADO COMPLETO === */
+.kanban-container {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  overflow-x: auto;
+  min-height: calc(100vh - 120px);
+}
+
+.kanban-column {
+  min-width: 280px;
+  max-width: 280px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column-header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  flex: 1;
+}
+
+.column-color-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.column-counter {
+  background: #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: auto;
+}
+
+.column-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-left: 8px;
+}
+
+.kanban-column:hover .column-actions {
+  opacity: 1;
+}
+
+.column-action-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.column-action-btn:hover {
+  background: #f8fafc;
+  color: #334155;
+}
+
+.column-action-btn.delete-column:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.column-action-btn.edit-column:hover {
+  background: #f0f9ff;
+  color: #0369a1;
+}
+
+.column-cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.column-placeholder {
+  text-align: center;
+  color: var(--ds-text-muted);
+  font-size: 14px;
+  padding: 40px 20px;
+  border: 2px dashed var(--ds-border-strong);
+  border-radius: 8px;
+  background: var(--ds-surface-2);
+}
+
+/* === CARDS MODERNOS === */
+.kanban-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f5f9;
+  cursor: grab;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.kanban-card:hover {
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: #e2e8f0;
+}
+
+.kanban-card:active {
+  cursor: grabbing;
+  transform: rotate(2deg);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  word-wrap: break-word;
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-time {
+  font-size: 12px;
+  color: #10b981;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-time::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* === CORES DOS AVATARS === */
+.avatar-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.avatar-green { background: linear-gradient(135deg, #10b981, #047857); }
+.avatar-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.avatar-yellow { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.avatar-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.avatar-pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+.avatar-indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.avatar-orange { background: linear-gradient(135deg, #f97316, #ea580c); }
+
+/* === DRAG AND DROP === */
+.kanban-card.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg) scale(1.05);
+  z-index: 1000;
+}
+
+.column-cards.drag-over {
+  background: #f0f9ff;
+  border: 2px dashed #3b82f6;
+}
+
+/* === RESPONSIVO === */
+@media (max-width: 768px) {
+  .kanban-container {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .kanban-column {
+    min-width: 260px;
+    max-width: 260px;
+  }
+  
+  .kanban-card {
+    padding: 14px;
+  }
+}
+
+/* === BOTÕES MODERNOS === */
+.btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 12px 24px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  background: linear-gradient(135deg, #4F46E5, #7C3AED) !important;
+  color: white !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3) !important;
+  text-decoration: none !important;
+  min-height: 44px !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #6366F1, #8B5CF6) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4) !important;
+}
+
+.btn-primary:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3) !important;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6 !important;
+  transform: none !important;
+  cursor: not-allowed !important;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2) !important;
+}
+
+/* === SISTEMA DE NOTIFICAÇÕES MODERNAS === */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  min-width: 320px;
+  max-width: 400px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: var(--ds-surface) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--ds-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: toastSlideIn 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.toast.removing {
+  animation: toastSlideOut 0.3s ease-in forwards;
+}
+
+.toast::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--toast-color, var(--primary-blue));
+}
+
+.toast-success {
+  --toast-color: #10B981;
+}
+
+.toast-error {
+  --toast-color: #EF4444;
+}
+
+.toast-warning {
+  --toast-color: #F59E0B;
+}
+
+.toast-info {
+  --toast-color: var(--primary-blue);
+}
+
+.toast-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: var(--toast-color, var(--primary-blue));
+}
+
+.toast-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toast-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary) !important;
+  line-height: 1.2;
+}
+
+.toast-message {
+  font-size: 13px;
+  color: var(--text-secondary) !important;
+  line-height: 1.3;
+}
+
+.toast-close {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  background: var(--border-light);
+  color: var(--text-secondary);
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* === ESTILOS PARA GRAVAÇÃO DE ÁUDIO === */
+.record-btn.recording {
+  background-color: var(--secondary-red) !important;
+  color: white !important;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.dark .record-btn.recording {
+  background-color: var(--secondary-red) !important;
+  color: white !important;
+}
+
+/* === AUDIO MESSAGE PLAYER === */
+.audio-message {
+  min-width: 250px;
+  max-width: 300px;
+}
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.audio-play-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #FFFFFF;
+  font-size: 28px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-play-btn:hover {
+  transform: scale(1.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.audio-wave {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 20px;
+}
+
+.audio-wave-bars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.audio-wave-bars span {
+  width: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+  animation: audioWave 1.5s ease-in-out infinite;
+}
+
+.audio-wave-bars span:nth-child(1) { height: 8px; animation-delay: 0s; }
+.audio-wave-bars span:nth-child(2) { height: 12px; animation-delay: 0.1s; }
+.audio-wave-bars span:nth-child(3) { height: 16px; animation-delay: 0.2s; }
+.audio-wave-bars span:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+.audio-wave-bars span:nth-child(5) { height: 14px; animation-delay: 0.4s; }
+.audio-wave-bars span:nth-child(6) { height: 18px; animation-delay: 0.5s; }
+.audio-wave-bars span:nth-child(7) { height: 10px; animation-delay: 0.6s; }
+.audio-wave-bars span:nth-child(8) { height: 16px; animation-delay: 0.7s; }
+.audio-wave-bars span:nth-child(9) { height: 12px; animation-delay: 0.8s; }
+.audio-wave-bars span:nth-child(10) { height: 8px; animation-delay: 0.9s; }
+
+@keyframes audioWave {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.audio-duration {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 30px;
+  text-align: right;
+}
+
+/* Dark mode para mensagens de áudio */
+:is(.dark *) .audio-player {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:is(.dark *) .audio-play-btn {
+  color: #E5E7EB;
+}
+
+:is(.dark *) .audio-wave-bars span {
+  background: rgba(229, 231, 235, 0.6);
+}
+
+:is(.dark *) .audio-duration {
+  color: rgba(229, 231, 235, 0.8);
+}
+
+/* === DARK MODE CHAT FIXES === */
+/* Correção para nome de contato no chat-item */
+:is(.dark *) .chat-item .contact-info .contact-name {
+  color: #FFFFFF !important;
+}
+
+/* Correção adicional para garantir visibilidade em dark mode */
+:is(.dark *) .contact-name {
+  color: rgb(248, 250, 252) !important; /* slate-50 */
+}
+
+/* Correção para o texto do contato na conversation list */
+:is(.dark *) .conversation-list .contact-name {
+  color: rgb(248, 250, 252) !important; /* slate-50 - texto claro */
+}
+
+/* Garantir que no modo claro o texto seja escuro */
+.contact-name {
+  color: rgb(17, 24, 39) !important; /* gray-900 */
+}
+
+/* Específico para light mode */
+:not(.dark) .contact-name {
+  color: rgb(17, 24, 39) !important; /* gray-900 */
+}
+
+/* Correção para título "Conversas" */
+:is(.dark *) h3 {
+  color: #FFFFFF !important;
+}
+
+:is(.dark *) .text-theme-primary {
+  color: #FFFFFF !important;
+}
+
+/* ===============================================
+🖼️ MENSAGENS DE IMAGEM E DOCUMENTO
+=============================================== */
+
+/* Mensagens de Imagem */
+.image-message {
+  max-width: 300px;
+  margin: 8px 0;
+}
+
+.image-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--gray-100);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  color: var(--gray-500);
+  text-align: center;
+  position: relative;
+}
+
+.image-placeholder i {
+  font-size: 32px;
+  opacity: 0.6;
+}
+
+.download-image-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.download-image-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.chat-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.chat-image:hover {
+  transform: scale(1.02);
+}
+
+/* Modal de Imagem (lightbox com zoom e pan) */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  flex-direction: column;
+  z-index: 10000;
+}
+
+.image-modal-toolbar {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+  background: rgba(24, 24, 24, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 4px 6px;
+  backdrop-filter: blur(6px);
+}
+
+.image-modal-tool {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.image-modal-tool:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.image-modal-tool.is-close:hover {
+  background: rgba(239, 68, 68, 0.85);
+}
+
+.image-modal-zoom-label {
+  min-width: 44px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.image-modal-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Limites em unidades de viewport de propósito: max-height percentual contra pai sem
+   altura definida é no-op e foi o que deixava a imagem estourando a tela no desktop. */
+.image-modal-image {
+  max-width: 94vw;
+  max-height: calc(100vh - 32px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.08s ease-out;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.image-modal-image.is-zoomed {
+  cursor: grab;
+}
+
+.image-modal-image.is-panning {
+  cursor: grabbing;
+  transition: none;
+}
+
+/* Mensagens de Vídeo */
+.video-message {
+  max-width: 320px;
+  margin: 8px 0;
+}
+
+.video-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--gray-100);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  color: var(--gray-500);
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.video-placeholder:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.video-placeholder i {
+  font-size: 48px;
+  opacity: 0.8;
+  color: var(--primary-blue);
+}
+
+.download-video-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.download-video-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.chat-video {
+  max-width: 100%;
+  max-height: 240px;
+  border-radius: 12px;
+  background: black;
+}
+
+/* Mensagens de Documento */
+.document-message {
+  max-width: 280px;
+  margin: 8px 0;
+}
+
+.document-container {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 12px;
+  transition: background-color 0.2s;
+}
+
+.document-container:hover {
+  background: var(--gray-100);
+}
+
+.document-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.document-icon {
+  flex-shrink: 0;
+}
+
+.document-icon i {
+  font-size: 32px;
+  color: var(--primary-blue);
+}
+
+.document-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.document-name {
+  font-weight: 500;
+  color: var(--gray-700);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.document-size {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-top: 2px;
+}
+
+.download-document-btn {
+  flex-shrink: 0;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.download-document-btn:hover {
+  background: var(--primary-blue-hover);
+}
+
+/* Dark Mode para Imagens e Documentos */
+:is(.dark *) .image-container {
+  background: var(--gray-800);
+}
+
+:is(.dark *) .image-placeholder {
+  color: var(--gray-400);
+}
+
+:is(.dark *) .video-container {
+  background: var(--gray-800);
+}
+
+:is(.dark *) .video-placeholder {
+  color: var(--gray-400);
+}
+
+:is(.dark *) .video-placeholder:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+:is(.dark *) .document-container {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+}
+
+:is(.dark *) .document-container:hover {
+  background: var(--gray-700);
+}
+
+:is(.dark *) .document-name {
+  color: var(--gray-200);
+}
+
+:is(.dark *) .document-size {
+  color: var(--gray-400);
+}
+
+/* ===========================================
+   📎 MENU DE MÍDIA ESTILO WHATSAPP
+   =========================================== */
+
+/* Menu principal de mídia */
+#media-menu {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+  animation: mediaMenuSlideUp 0.2s ease-out;
+}
+
+@keyframes mediaMenuSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botões do menu de mídia */
+#media-menu button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--gray-700);
+  font-weight: 500;
+}
+
+#media-menu button:hover {
+  background: var(--gray-100);
+  color: var(--gray-900);
+}
+
+/* Ícones coloridos do menu */
+#media-menu .w-8.h-8 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+}
+
+/* Cores específicas para cada tipo de mídia */
+#photo-btn .w-8.h-8 {
+  background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+}
+
+#document-btn .w-8.h-8 {
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+}
+
+#video-btn .w-8.h-8 {
+  background: linear-gradient(135deg, #10B981, #047857);
+}
+
+#audio-btn .w-8.h-8 {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+/* Botão principal de anexar (+) */
+#media-menu-btn {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#media-menu-btn:hover {
+  transform: scale(1.1);
+  background: var(--secondary-red-light) !important;
+  color: var(--secondary-red) !important;
+  border-color: var(--secondary-red) !important;
+}
+
+#media-menu-btn i {
+  transition: transform 0.3s ease;
+}
+
+#media-menu-btn:hover i {
+  transform: rotate(45deg);
+}
+
+/* Indicador de upload */
+#upload-indicator {
+  animation: uploadSlideIn 0.3s ease-out;
+}
+
+@keyframes uploadSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Dark Mode para Menu de Mídia */
+:is(.dark *) #media-menu {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+:is(.dark *) #media-menu button {
+  color: var(--gray-300);
+}
+
+:is(.dark *) #media-menu button:hover {
+  background: var(--gray-700);
+  color: var(--gray-100);
+}
+
+:is(.dark *) #media-menu-btn:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Animação de rotação para o ícone + */
+.media-menu-icon-rotate {
+  transform: rotate(45deg);
+}
+
+/* Ripple effect nos botões */
+#media-menu button {
+  position: relative;
+  overflow: hidden;
+}
+
+#media-menu button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+#media-menu button:active::before {
+  width: 200px;
+  height: 200px;
+}
+
+/* Tooltip estilo WhatsApp */
+[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+  margin-bottom: 4px;
+}
+
+/* ===========================================
+   📎 MELHORIAS PARA MENSAGENS DE MÍDIA
+   Usando o mesmo sistema de .message-bubble
+   =========================================== */
+
+/* Componentes de mídia dentro do message-bubble */
+.message-bubble .audio-message,
+.message-bubble .image-message,
+.message-bubble .document-message,
+.message-bubble .video-message {
+  margin: -0.75rem; /* Remove o padding do bubble para mídia */
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Mensagens de áudio */
+.message-bubble .audio-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: transparent; /* Usa a cor do bubble pai */
+  transition: all 0.2s ease;
+}
+
+.message-bubble .audio-play-btn {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.message-bubble .audio-play-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.message-bubble .audio-wave {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+}
+
+.message-bubble .audio-wave-bars {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.message-bubble .audio-wave-bars span {
+  width: 3px;
+  background: currentColor;
+  border-radius: 2px;
+  opacity: 0.6;
+  animation: audioWave 1.5s ease-in-out infinite;
+}
+
+.message-bubble .audio-wave-bars span:nth-child(1) { height: 8px; animation-delay: 0s; }
+.message-bubble .audio-wave-bars span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+.message-bubble .audio-wave-bars span:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+.message-bubble .audio-wave-bars span:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+.message-bubble .audio-wave-bars span:nth-child(5) { height: 14px; animation-delay: 0.4s; }
+.message-bubble .audio-wave-bars span:nth-child(6) { height: 18px; animation-delay: 0.5s; }
+.message-bubble .audio-wave-bars span:nth-child(7) { height: 10px; animation-delay: 0.6s; }
+.message-bubble .audio-wave-bars span:nth-child(8) { height: 16px; animation-delay: 0.7s; }
+.message-bubble .audio-wave-bars span:nth-child(9) { height: 12px; animation-delay: 0.8s; }
+.message-bubble .audio-wave-bars span:nth-child(10) { height: 8px; animation-delay: 0.9s; }
+
+@keyframes audioWave {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.message-bubble .audio-duration {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Mensagens de imagem */
+.message-bubble .image-message {
+  position: relative;
+}
+
+.message-bubble .image-container {
+  position: relative;
+  max-width: 300px;
+}
+
+.message-bubble .image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.message-bubble .image-placeholder:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.message-bubble .image-placeholder i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+}
+
+.message-bubble .download-image-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.message-bubble .download-image-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+/* Mensagens de documento */
+.message-bubble .document-message {
+  padding: 1rem;
+}
+
+.message-bubble .document-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.message-bubble .document-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.message-bubble .document-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.message-bubble .document-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  word-break: break-all;
+  color: currentColor;
+}
+
+.message-bubble .document-size {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.message-bubble .download-document-btn {
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  border: 2px solid rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-bubble .download-document-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+/* Mensagens de vídeo */
+.message-bubble .video-message {
+  position: relative;
+}
+
+.message-bubble .video-container {
+  position: relative;
+  max-width: 350px;
+}
+
+.message-bubble .video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.message-bubble .video-placeholder:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.message-bubble .video-placeholder i {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.message-bubble .download-video-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.message-bubble .download-video-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+/* Efeitos especiais para mensagens de mídia */
+.message-bubble:has(.audio-message):hover,
+.message-bubble:has(.image-message):hover,
+.message-bubble:has(.document-message):hover,
+.message-bubble:has(.video-message):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 
+===========================================
+🎨 NOVO DESIGN - CORES ESPECÍFICAS
+===========================================
+Baseado no design do Figma
+Cores navy/sky-blue para modernização
+*/
+
+:root {
+  /* === NOVO DESIGN - CORES PRINCIPAIS === */
+  --navy-primary: #234365;          /* Azul navy principal */
+  --navy-dark: #1F4387;             /* Azul navy escuro */
+  --sky-blue: #0C88F1;              /* Azul céu (destaque) */
+  --sky-blue-hover: #1174DA;        /* Azul céu hover */
+  --ice-blue: var(--c-ice);         /* = #EEF6FE (single-source) */
+  --red-accent: var(--c-red-accent);/* = #E93127 (single-source) */
+  
+  /* === NOVO DESIGN - BACKGROUNDS === */
+  --bg-new-light: #FAFAFA;          /* Background light mode */
+  --bg-new-dark: #11181F;           /* Background dark mode */
+  
+  /* === NOVO DESIGN - SIDEBAR === */
+  --sidebar-text-new: #234365;      /* Texto sidebar light */
+  --sidebar-border: #C3C3C3;        /* Borda sidebar light */
+  
+  /* === NOVO DESIGN - BOTÃO TEMA TRIPLO === */
+  --theme-btn-bg: #EEF6FE;
+  --theme-btn-border: #4080C1;
+  --theme-btn-active: #1174DA;
+  --theme-btn-divider: #DAE5EF;
+}
+
+.dark {
+  /* === NOVO DESIGN - DARK MODE === */
+  --background: #11181F;                          /* Novo background dark */
+  --sidebar-text-new: #EEF6FE;                    /* Texto sidebar dark */
+  --sidebar-border: rgba(217, 217, 217, 0.5);     /* Borda sidebar dark */
+  --theme-btn-bg: #043B66;                        /* Background botão tema dark */
+  --theme-btn-border: rgba(238, 246, 254, 0.16);  /* Borda botão tema dark */
+  --theme-btn-active: #043B66;                    /* Ativo tema dark */
+}
+
+/* 
+===========================================
+🎨 CLASSES UTILITÁRIAS - NOVO DESIGN
+===========================================
+*/
+
+/* === TEXTO === */
+.text-navy { color: var(--navy-primary); }
+.text-sky-blue { color: var(--sky-blue); }
+.text-red-accent { color: var(--red-accent); }
+.text-ice-blue { color: var(--ice-blue); }
+.text-navy-dark { color: var(--navy-dark); }
+
+/* === BACKGROUND === */
+.bg-navy { background-color: var(--navy-primary); }
+.bg-sky-blue { background-color: var(--sky-blue); }
+.bg-ice-blue { background-color: var(--ice-blue); }
+.bg-new-light { background-color: var(--bg-new-light); }
+.bg-new-dark { background-color: var(--bg-new-dark); }
+
+/* === BORDERS === */
+.border-sidebar { border-color: var(--sidebar-border); }
+.border-sky-blue { border-color: var(--sky-blue); }
+.border-navy { border-color: var(--navy-primary); }
+
+/* === HOVER EFFECTS === */
+.hover\:border-sky-blue:hover { border-color: var(--sky-blue); }
+.hover\:text-sky-blue:hover { color: var(--sky-blue); }
+.hover\:bg-navy-light:hover { background-color: rgba(35, 67, 101, 0.08); }
+
+.dark .hover\:bg-navy-light:hover { background-color: rgba(238, 246, 254, 0.08); }
+
+/* 
+===========================================
+🎨 TRANSIÇÕES SUAVES DE TEMA
+===========================================
+*/
+
+html {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body,
+.card-theme,
+aside,
+nav a,
+button {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Exceções (elementos que não devem ter transição) */
+.chart-canvas,
+canvas {
+  transition: none !important;
+}
+
+/* ===== Overrides de tema escuro (auditoria 2026-06-23) ===== */
+.dark .status-online { background-color: var(--ds-success-soft); color: var(--ds-success); }
+.dark .status-offline { background-color: var(--ds-surface-3); color: var(--ds-text-soft); }
+.dark .status-away { background-color: var(--ds-warning-soft); color: var(--ds-warning); }
+.dark .column-action-btn:hover { background: var(--ds-surface-3); color: var(--ds-text); }
+.dark .action-button.secondary { color: var(--ds-text-muted); }
+.dark .action-button.secondary:hover { color: var(--ds-text-soft); }
+.dark .btn-zap-icon:hover { background: var(--ds-surface-3); }

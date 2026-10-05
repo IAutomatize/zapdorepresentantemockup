@@ -1,0 +1,61 @@
+/* ===========================================
+   AVISO DE RECURSO FORA DO PLANO
+   Aparece onde o cliente tentaria usar o recurso (aba Automações, conteúdo da
+   campanha), preenchido por src/public/js/plan-entitlements.ts. Cores pelos
+   tokens do design, então o tema escuro funciona sem regra própria.
+   =========================================== */
+
+.plan-feature-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--ds-text);
+  font-size: 13px;
+}
+
+/* Este arquivo carrega depois do Tailwind: sem isto o display:flex venceria o .hidden. */
+.plan-feature-notice.hidden {
+  display: none;
+}
+
+.plan-feature-notice > i {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: #d97706;
+}
+
+.plan-feature-notice p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.plan-feature-notice-link {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--ds-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.plan-feature-notice-link:hover {
+  text-decoration: underline;
+}
+
+/* Botão de recurso fora do plano: continua visível, para o cliente saber que existe. */
+.plan-locked,
+.plan-locked:hover {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .plan-feature-notice {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,119 @@
+/**
+ * NOVO DESIGN - VARIÁVEIS CSS
+ * Baseado no design do Figma
+ * Cores navy/sky-blue para tema claro e escuro
+ */
+
+:root {
+  /* === CORES PRINCIPAIS - NOVO DESIGN === */
+  
+  /* Navy (Azul Principal) */
+  --new-navy-primary: #234365;
+  --new-navy-dark: #1F4387;
+  
+  /* Sky Blue (Azul Céu) */
+  --new-sky-blue: #0C88F1;
+  --new-sky-blue-hover: #1174DA;
+  
+  /* Ice Blue (Azul Muito Claro) */
+  --new-ice-blue: #EEF6FE;
+  
+  /* Red Accent (Vermelho Destaque) */
+  --new-red-accent: #E93127;
+  
+  /* Backgrounds */
+  --new-bg-light: #FAFAFA;
+  --new-bg-dark: #11181F;
+  --new-bg-white: #FFFFFF;
+  
+  /* Sidebar */
+  --new-sidebar-text-light: #234365;
+  --new-sidebar-text-dark: #EEF6FE;
+  --new-sidebar-border-light: #C3C3C3;
+  --new-sidebar-border-dark: rgba(217, 217, 217, 0.5);
+  
+  /* Botão de Tema Triplo */
+  --new-theme-btn-bg-light: #EEF6FE;
+  
+  /* === CONVERSAS - NOVO DESIGN === */
+  
+  /* Menu de Conversas */
+  --conv-menu-bg: #F1F5F8;
+  --conv-item-border: rgba(195, 195, 195, 0.25);
+  --conv-item-hover: rgba(195, 195, 195, 0.1);
+  
+  /* Chat Area */
+  --chat-area-bg: #FFFFFF;
+  --chat-header-bg: #0C88F1;
+  --chat-input-bg: #FFFFFF;
+  
+  /* Avatar */
+  --conv-avatar-bg: #79AFDB;
+  --conv-avatar-text: #FFFFFF;
+  
+  /* Textos da Conversa */
+  --conv-name-primary: #234364;
+  --conv-name-secondary: #1D293D;
+  --conv-preview: #4C6B97;
+  --conv-time-primary: rgba(24, 85, 148, 0.63);
+  --conv-time-secondary: #6990B9;
+  
+  /* Badge de Não Lidas */
+  --conv-badge-bg: #0C88F1;
+  --conv-badge-text: #DAE5EF;
+  
+  /* Pesquisa */
+  --conv-search-bg: #FFFFFF;
+  --conv-search-border: #C3C3C3;
+  --conv-search-text: rgba(68, 80, 95, 0.6);
+  --conv-search-icon: #234365;
+  --new-theme-btn-bg-dark: transparent;
+  --new-theme-btn-border-light: #4080C1;
+  --new-theme-btn-border-dark: #4080C1;
+  --new-theme-btn-active: #1174DA;
+  --new-theme-btn-divider: #DAE5EF;
+  
+  /* Textos */
+  --new-text-primary-light: #314158;
+  --new-text-primary-dark: #EEF6FE;
+}
+
+/* === MODO ESCURO === */
+.dark {
+  /* Variáveis dark mode */
+  --new-bg-primary: var(--new-bg-dark);
+  --new-sidebar-text: var(--new-sidebar-text-dark);
+  --new-sidebar-border: var(--new-sidebar-border-dark);
+  --new-theme-btn-bg: var(--new-theme-btn-bg-dark);
+  --new-theme-btn-border: var(--new-theme-btn-border-dark);
+  --new-text-primary: var(--new-text-primary-dark);
+  
+  /* === CONVERSAS DARK MODE === */
+  --conv-menu-bg: #111E28;
+  --conv-item-border: rgba(195, 195, 195, 0.25);
+  --conv-item-hover: rgba(195, 195, 195, 0.08);
+  --conv-name-primary: #EEF6FE;
+  --conv-name-secondary: #EEF6FE;
+  --conv-preview: #90A1B9;
+  --conv-time-primary: #EEF6FE;
+  --conv-time-secondary: rgba(238, 246, 254, 0.62);
+  --conv-search-bg: #14304C;
+  --conv-search-border: #4D82B9;
+  --conv-search-text: rgba(238, 246, 254, 0.8);
+  --conv-search-icon: #EEF6FE;
+  
+  /* Chat Area Dark */
+  --chat-area-bg: #111E28;
+  --chat-header-bg: #043B66;
+  --chat-input-bg: #14304C;
+}
+
+/* === MODO CLARO === */
+:root:not(.dark) {
+  --new-bg-primary: var(--new-bg-light);
+  --new-sidebar-text: var(--new-sidebar-text-light);
+  --new-sidebar-border: var(--new-sidebar-border-light);
+  --new-theme-btn-bg: var(--new-theme-btn-bg-light);
+  --new-theme-btn-border: var(--new-theme-btn-border-light);
+  --new-text-primary: var(--new-text-primary-light);
+}
