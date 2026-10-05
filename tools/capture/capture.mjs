@@ -83,12 +83,46 @@ const CANVAS_PARA_IMAGEM = `(() => {
   return trocados;
 })()`;
 
+/**
+ * outerHTML não carrega o que o JS pôs em .value, .checked ou na opção selecionada:
+ * copia esse estado para os atributos, senão campos preenchidos pelo app saem vazios.
+ */
+const CONGELAR_VALORES = `(() => {
+  document.querySelectorAll('input').forEach((el) => {
+    if (el.type === 'file') return;
+    if (el.type === 'checkbox' || el.type === 'radio') { el.toggleAttribute('checked', el.checked); return; }
+    if (el.value !== (el.getAttribute('value') ?? '')) el.setAttribute('value', el.value);
+  });
+  document.querySelectorAll('textarea').forEach((el) => { if (el.value !== el.textContent) el.textContent = el.value; });
+  document.querySelectorAll('select').forEach((el) => {
+    [...el.options].forEach((op, i) => op.toggleAttribute('selected', i === el.selectedIndex));
+  });
+})()`;
+
+/**
+ * Celular com cara de real (55 + DDD + 9 + 8 dígitos) que não é do universo fictício nem
+ * placeholder óbvio (99999999, 88888888...). O app tem pelo menos um, como exemplo de
+ * formato na tela de Campanhas, e este repositório é público.
+ */
+function anonimizarTelefones(html) {
+  return html.replace(/(?<![\d\w])55\d{2}9\d{8}(?![\d\w])/g, (numero) => {
+    if (/^5511990000(0\d{2}|1\d{2})$/.test(numero)) return numero;
+    if (/(\d)\1{7}$/.test(numero)) return numero;
+    return '5511990000101';
+  });
+}
+
 function limpar(html) {
-  return html
+  return anonimizarTelefones(html)
+    // Link que levaria o cliente para o sistema real ou para um WhatsApp de verdade.
+    .replace(/href="https?:\/\/[^"]*(zapempresarial|zapdorepresentante)\.com[^"]*"/gi, 'href="#"')
+    .replace(/href="https?:\/\/(wa\.me|api\.whatsapp\.com)\/[^"]*"/gi, 'href="#suporte"')
     // Nenhum script do app vai para o mockup: o comportamento é escrito à mão, inline.
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<link[^>]+rel="(manifest|apple-touch-icon|icon)"[^>]*>/gi, '')
     .replace(/<style[^>]*data-permissions-preload[^>]*>[\s\S]*?<\/style>/gi, '')
+    // CSP do app proíbe script inline e bloquearia o bloco MOCKUP sem erro visível.
+    .replace(/<meta[^>]+http-equiv=["']?Content-Security-Policy["']?[^>]*>/gi, '')
     // Comentários são notas internas do app; handlers inline chamam funções que não existem aqui.
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/\son[a-z]+="[^"]*"/gi, '')
@@ -168,6 +202,7 @@ const main = async () => {
       }
     }
 
+    await avaliar(CONGELAR_VALORES);
     const trocados = await avaliar(CANVAS_PARA_IMAGEM);
     const bruto = await avaliar('"<!DOCTYPE html>\\n" + document.documentElement.outerHTML');
     const naoAtendidas = await avaliar('JSON.stringify([...new Set(window.__mockNaoAtendidas || [])])');

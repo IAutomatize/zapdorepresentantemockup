@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Mensagens Agendadas - Zap do Representante</title>
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+    
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
+    <link rel="stylesheet" href="css/new-design-vars.css">
+    <link rel="stylesheet" href="css/agendadas-layout.css">
+    <link rel="stylesheet" href="css/mobile-polish.css">
+<link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="stylesheet" href="css/account-access.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
+<body class="font-['Inter'] dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 bg-theme-surface">
+    <div class="min-h-screen w-full relative dashboard-modern-shell">
+        <div class="glow-blob" style="
+                width: 600px;
+                height: 600px;
+                top: -200px;
+                left: -180px;
+                background: radial-gradient(circle, rgba(180,200,220,0.35) 0%, transparent 70%);
+            "></div>
+        <div class="glow-blob" style="
+                width: 700px;
+                height: 700px;
+                bottom: -260px;
+                right: -220px;
+                background: radial-gradient(circle, rgba(197,213,228,0.3) 0%, transparent 70%);
+                animation-delay: 5s;
+            "></div>
+
+        <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+                background: rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                border-right: 1px solid rgba(255, 255, 255, 0.5);
+            " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item sidebar-item-active" title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+        <main class="relative z-10 min-h-screen" style="padding: 24px 24px 24px 96px;">
+            <section class="agendadas-page-shell">
+                <header class="agendadas-page-title-row"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+                    <span class="agendadas-page-title-icon">
+                        <i class="ri-time-line"></i>
+                    </span>
+                    <h1>Mensagens Agendadas</h1>
+                </header>
+
+                <section class="agendadas-toolbar-card">
+                    <div class="agendadas-toolbar-head">
+                        <div class="agendadas-toolbar-title">
+                            <span class="agendadas-mini-icon"><i class="ri-time-line"></i></span>
+                            <div>
+                                <h2>Mensagens Agendadas</h2>
+                                <p>Gerencie envios futuros e recorrentes para seus contatos.</p>
+                            </div>
+                        </div>
+                        <div class="agendadas-toolbar-actions">
+                            <button id="agendadas-open-modal-btn" type="button" class="agendadas-btn agendadas-btn-primary">
+                                <i class="ri-calendar-schedule-line"></i>
+                                Agendar mensagem
+                            </button>
+                            <button id="agendadas-refresh-btn" type="button" class="agendadas-btn agendadas-btn-secondary">
+                                <i class="ri-refresh-line"></i>
+                                Atualizar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="agendadas-filters-grid">
+                        <label class="agendadas-search-wrap">
+                            <i class="ri-search-line"></i>
+                            <input id="agendadas-search" type="text" placeholder="Buscar contato...">
+                        </label>
+
+                        <label class="agendadas-select-wrap">
+                            <select id="agendadas-filter-tag"><option value="" selected="">Todas as Tags</option><option value="Atacado">Atacado</option><option value="Cliente ativo">Cliente ativo</option><option value="Orçamento">Orçamento</option><option value="Reativar">Reativar</option><option value="VIP">VIP</option></select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+
+                        <label class="agendadas-select-wrap">
+                            <select id="agendadas-filter-category">
+                                <option value="" selected="">Todas Categorias</option>
+                                <option value="Cobrança">Cobrança</option>
+                                <option value="Lembrete">Lembrete</option>
+                                <option value="Promocional">Promocional</option>
+                            </select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+
+                        <label class="agendadas-select-wrap">
+                            <select id="agendadas-filter-fila"><option value="" selected="">Todas as Filas</option><option value="fila-geral">Geral</option><option value="fila-vendas">Vendas</option></select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+
+                        <label class="agendadas-select-wrap">
+                            <select id="agendadas-filter-user"><option value="" selected="">Todos Usuários</option><option value="usr-ana">Ana Souza</option><option value="usr-bruno">Bruno Lima</option><option value="usr-carla">Carla Dias</option></select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+
+                        <label class="agendadas-select-wrap">
+                            <select id="agendadas-filter-period">
+                                <option value="all" selected="">Todo o período</option>
+                                <option value="today">Hoje</option>
+                                <option value="week">Esta semana</option>
+                                <option value="month">Este mês</option>
+                                <option value="next-year">Próximo ano</option>
+                            </select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="agendadas-table-card">
+                    <div class="agendadas-table-head">
+                        <div>Contato / Mensagens</div>
+                        <button id="agendadas-sort-date" type="button" class="agendadas-sort-btn">
+                            Agendado para <i class="ri-arrow-up-line"></i>
+                        </button>
+                        <div>Usuário</div>
+                        <div>Fila / Instância</div>
+                        <div>Tag Marcador</div>
+                        <div>Categoria</div>
+                        <div class="text-right">Ações</div>
+                    </div>
+
+                    <div id="agendadas-loading" class="agendadas-state hidden">
+                        <i class="ri-loader-4-line animate-spin"></i>
+                        <p>Carregando mensagens agendadas...</p>
+                    </div>
+
+                    <div id="agendadas-empty" class="agendadas-state hidden">
+                        <i class="ri-time-line"></i>
+                        <p>Nenhuma mensagem agendada encontrada com os filtros selecionados</p>
+                    </div>
+
+                    <div id="agendadas-table-wrapper" class="">
+                        <div id="agendadas-table-body">
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Mercado Bom Preço</div>
+            <div class="ag-contact-phone">5511990000102</div>
+            <div class="ag-contact-message">"Oi! Confirmando: o display novo chega hoje à tarde e a montagem fica para amanhã ..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>05/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>19:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Orçamento</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-00" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-00" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Mariana Costa</div>
+            <div class="ag-contact-phone">5511990000101</div>
+            <div class="ag-contact-message">"Oi Mariana! Passando para lembrar do pedido quinzenal de achocolatado. Posso lanç..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>06/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>09:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Cliente ativo</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-01" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-01" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Pedro Almeida</div>
+            <div class="ag-contact-phone">5511990000103</div>
+            <div class="ag-contact-message">"Pedro, o boleto do pedido 2231 vence amanhã. Qualquer dúvida sobre o pagamento é ..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>06/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>14:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">posvenda</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Cliente ativo</span></div>
+          <div><span class="ag-badge ag-badge-cat-cobranca">Cobrança</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-02" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-02" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Camila Rocha</div>
+            <div class="ag-contact-phone">5511990000117</div>
+            <div class="ag-contact-message">"[Áudio] Agradecimento_Camila.ogg"</div>
+            <div class="flex flex-wrap gap-1 mt-1">
+          
+            <span class="ag-badge" style="background:rgba(246,173,85,0.18);color:var(--ds-warning);">
+              <i class="ri-mic-line"></i>
+              Agradecimento_Camila.ogg
+            </span>
+          
+        </div>
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>06/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>16:30</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Geral</div>
+            <span class="ag-badge ag-badge-instance">posvenda</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Cliente ativo</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-03" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-03" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Padaria Estrela</div>
+            <div class="ag-contact-phone">5511990000108</div>
+            <div class="ag-contact-message">"Bom dia! A nota do pedido de 12 caixas de biscoito sortido já foi emitida. Segue ..."</div>
+            <div class="flex flex-wrap gap-1 mt-1">
+          
+            <span class="ag-badge" style="background:rgba(66,153,225,0.16);color:var(--ds-primary);">
+              <i class="ri-file-text-line"></i>
+              NF_Pedido_2240.pdf
+            </span>
+          
+        </div>
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>07/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>08:15</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Cliente ativo</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-04" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-04" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Juliana Ribeiro</div>
+            <div class="ag-contact-phone">5511990000105</div>
+            <div class="ag-contact-message">"Juliana, conseguiu falar com seu sócio? O desconto de 5% à vista para pedidos aci..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>07/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>10:30</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Orçamento</span></div>
+          <div><span class="ag-badge ag-badge-cat-promocional">Promocional</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-05" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-05" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Fernanda Oliveira</div>
+            <div class="ag-contact-phone">5511990000109</div>
+            <div class="ag-contact-message">"Fernanda, confirmando a visita do Bruno na sua loja em Osasco na quinta às 15h. E..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>08/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>10:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Bruno Lima
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Orçamento</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-06" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-06" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Atacadão do Vale</div>
+            <div class="ag-contact-phone">5511990000114</div>
+            <div class="ag-contact-message">"Bom dia! Lembrete: a proposta trimestral de 200 caixas vale até segunda. Posso co..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>09/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>08:30</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Bruno Lima
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Atacado</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-07" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-07" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Rede Econômica</div>
+            <div class="ag-contact-phone">5511990000122</div>
+            <div class="ag-contact-message">"Olá! Lembrete de pagamento: a fatura de outubro do contrato trimestral vence no d..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>10/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>09:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Carla Dias
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Atacado</span></div>
+          <div><span class="ag-badge ag-badge-cat-cobranca">Cobrança</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-08" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-08" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Ricardo Santos</div>
+            <div class="ag-contact-phone">5511990000111</div>
+            <div class="ag-contact-message">"Ricardo, faz tempo que não conversamos! Chegou a linha de biscoitos integrais com..."</div>
+            <div class="flex flex-wrap gap-1 mt-1">
+          
+            <span class="ag-badge" style="background:rgba(183,148,244,0.15);color:#805AD5;">
+              <i class="ri-film-line"></i>
+              Linha_Integral.mp4
+            </span>
+          
+        </div>
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>11/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>10:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Reativar</span></div>
+          <div><span class="ag-badge ag-badge-cat-promocional">Promocional</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-09" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-09" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Supermercado Avenida</div>
+            <div class="ag-contact-phone">5511990000110</div>
+            <div class="ag-contact-message">"Bom dia! Já posso lançar o pedido da semana? Mesmas quantidades da semana passada?"</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>12/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>08:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Carla Dias
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Atacado</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-10" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-10" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Mercearia São José</div>
+            <div class="ag-contact-phone">5511990000116</div>
+            <div class="ag-contact-message">"Olá! Temos uma oferta especial de reativação: frete grátis no primeiro pedido aci..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>13/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>15:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Bruno Lima
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">comercial</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Reativar</span></div>
+          <div><span class="ag-badge ag-badge-cat-promocional">Promocional</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-11" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-11" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Empório Central</div>
+            <div class="ag-contact-phone">5511990000106</div>
+            <div class="ag-contact-message">"Bom dia! Segue o catálogo de novembro com os lançamentos de fim de ano."</div>
+            <div class="flex flex-wrap gap-1 mt-1">
+          
+            <span class="ag-badge" style="background:rgba(72,187,120,0.15);color:var(--ds-success);">
+              <i class="ri-image-line"></i>
+              Vitrine_Novembro.jpg
+            </span>
+          
+            <span class="ag-badge" style="background:rgba(66,153,225,0.16);color:var(--ds-primary);">
+              <i class="ri-file-text-line"></i>
+              Catalogo_Novembro.pdf
+            </span>
+          
+        </div>
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>31/10/2026</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>09:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Ana Souza
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Vendas</div>
+            <span class="ag-badge ag-badge-instance">posvenda</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Cliente ativo</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-12" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-12" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="agendadas-row-wrap">
+        <div class="agendadas-table-row">
+          <div>
+            <div class="ag-contact-name">Patrícia Gomes</div>
+            <div class="ag-contact-phone">5511990000113</div>
+            <div class="ag-contact-message">"Feliz Ano Novo, Patrícia! Obrigada pela parceria neste ano. Que o próximo venha c..."</div>
+            
+          </div>
+          <div>
+            <div class="ag-date-main"><i class="ri-calendar-line" style="color:var(--ds-primary);"></i>02/01/2027</div>
+            <div class="ag-date-time"><i class="ri-time-line"></i>09:00</div>
+          </div>
+          <div class="ag-user-cell">
+            <i class="ri-user-3-line" style="opacity:0.5;margin-right:6px;"></i>Carla Dias
+          </div>
+          <div>
+            <div class="ag-fila-title"><i class="ri-stack-line" style="opacity:0.45;margin-right:5px;"></i>Geral</div>
+            <span class="ag-badge ag-badge-instance">posvenda</span>
+          </div>
+          <div><span class="ag-badge ag-badge-tag"><i class="ri-price-tag-3-line"></i>Cliente ativo</span></div>
+          <div><span class="ag-badge ag-badge-cat-lembrete">Lembrete</span></div>
+          <div class="ag-row-actions">
+            <button class="ag-row-btn" data-action="edit" data-id="ag-13" aria-label="Editar"><i class="ri-edit-2-line"></i></button>
+            <button class="ag-row-btn ag-row-btn-danger" data-action="delete" data-id="ag-13" aria-label="Cancelar"><i class="ri-delete-bin-line"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <div id="agendadas-modal" class="agendadas-modal hidden" role="dialog" aria-modal="true" aria-labelledby="agendadas-modal-title">
+        <div class="agendadas-modal-card">
+            <div class="agendadas-modal-header">
+                <div class="agendadas-modal-title-wrap">
+                    <i class="ri-calendar-line"></i>
+                    <h3 id="agendadas-modal-title">Editar Mensagem Agendada</h3>
+                </div>
+                <button id="agendadas-modal-close" type="button" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <div class="agendadas-modal-body">
+                <input id="agendar-edit-id" type="hidden" value="ag-01">
+                <input id="agendar-chat-id" type="hidden" value="c1">
+
+                <div class="agendadas-form-grid">
+                    <section class="agendadas-form-col">
+                        <div class="agendadas-form-group">
+                            <label for="agendar-contact">Número ou contato *</label>
+                            <div class="agendadas-contact-autocomplete">
+                                <input id="agendar-contact" type="text" placeholder="Buscar contato ou digitar número..." autocomplete="off" value="Mariana Costa - 5511990000101">
+                                <div id="agendar-contact-suggestions" class="agendadas-contact-suggestions hidden"></div>
+                            </div>
+                        </div>
+
+                        <div class="agendadas-grid-2">
+                            <div class="agendadas-form-group">
+                                <label for="agendar-title">Título *</label>
+                                <input id="agendar-title" type="text" placeholder="Ex: Lembrete de pagamento" value="Pedido quinzenal">
+                            </div>
+                            <div class="agendadas-form-group">
+                                <label for="agendar-type">Tipo de Mensagem</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-type">
+                                        <option value="texto" selected="">Texto</option>
+                                        <option value="imagem">Imagem</option>
+                                        <option value="audio">Áudio</option>
+                                        <option value="documento">Documento</option>
+                                        <option value="video">Vídeo</option>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="agendadas-grid-2">
+                            <div class="agendadas-form-group">
+                                <label for="agendar-user">Usuário</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-user"><option value="">Selecione um usuário</option><option value="usr-ana" selected="">Ana Souza</option><option value="usr-bruno">Bruno Lima</option><option value="usr-carla">Carla Dias</option></select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                            <div class="agendadas-form-group">
+                                <label for="agendar-fila">Fila</label>
+                                <label class="agendadas-select-wrap">
+                                    <select id="agendar-fila"><option value="">Sem Fila</option><option value="fila-geral">Geral</option><option value="fila-vendas" selected="">Vendas</option></select>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="agendadas-form-group">
+                            <label for="agendar-instancia">Instância *</label>
+                            <label class="agendadas-select-wrap">
+                                <select id="agendar-instancia" disabled=""><option value="">Selecione a instância</option><option value="inst-comercial" selected="">Comercial</option><option value="inst-posvenda">Pós-venda</option></select>
+                                <i class="ri-arrow-down-s-line"></i>
+                            </label>
+                            <small id="agendar-instancia-hint" class="agendadas-field-hint">A conversa já existe: a instância dela não muda por aqui.</small>
+                        </div>
+
+                        <div class="agendadas-form-group">
+                            <div class="agendadas-inline-head">
+                                <label for="agendar-message">Mensagem * <span id="agendar-message-count">(104 caracteres)</span></label>
+                                <button id="agendar-quick-toggle" type="button" style="opacity: 1; cursor: pointer;"><i class="ri-flashlight-line"></i> Respostas rápidas</button>
+                            </div>
+                            <div id="agendar-quick-panel" class="agendadas-quick-panel hidden"></div>
+                            <textarea id="agendar-message" rows="4" placeholder="Digite a mensagem...">Oi Mariana! Passando para lembrar do pedido quinzenal de achocolatado. Posso lançar as mesmas 40 caixas?</textarea>
+                        </div>
+
+                        <div class="agendadas-form-group">
+                            <div class="agendadas-attachment-buttons">
+                                <button type="button" data-attach-type="image"><i class="ri-image-line"></i> Imagem</button>
+                                <button type="button" data-attach-type="video"><i class="ri-film-line"></i> Vídeo</button>
+                                <button type="button" data-attach-type="audio"><i class="ri-mic-line"></i> Áudio</button>
+                                <button type="button" data-attach-type="document"><i class="ri-file-text-line"></i> Arquivo</button>
+                            </div>
+                            <div id="agendar-attachments" class="agendadas-attachments-list"></div>
+                        </div>
+
+                        <div class="agendadas-grid-2">
+                            <div class="agendadas-form-group">
+                                <label for="agendar-date">Data *</label>
+                                <input id="agendar-date" type="date" value="2026-10-06">
+                            </div>
+                            <div class="agendadas-form-group">
+                                <label for="agendar-time">Hora *</label>
+                                <input id="agendar-time" type="time" value="09:00">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="agendadas-form-col">
+                        <div class="agendadas-preview-title">PRE-VISUALIZACAO</div>
+                        <div class="agendadas-preview-card">
+                            <div id="agendar-preview-message" class="agendadas-preview-message">Oi Mariana! Passando para lembrar do pedido quinzenal de achocolatado. Posso lançar as mesmas 40 caixas?</div>
+                            <div id="agendar-preview-hour" class="agendadas-preview-hour">09:00</div>
+                        </div>
+
+                        <div class="agendadas-preview-date">
+                            Sera enviada em <strong id="agendar-preview-date">06/10/2026</strong> as <strong id="agendar-preview-time">09:00</strong>
+                        </div>
+
+                        <div id="agendar-rec-box" class="agendadas-rec-box is-active">
+                            <button id="agendar-rec-toggle" type="button" class="agendadas-rec-head">
+                                <div>
+                                    <div class="agendadas-rec-title">Recorrencia Avancada</div>
+                                    <div class="agendadas-rec-subtitle">Configurar disparos repetitivos</div>
+                                </div>
+                                <span class="agendadas-rec-switch"><span></span></span>
+                            </button>
+
+                            <div id="agendar-rec-panel" class="agendadas-rec-panel">
+                                <div class="agendadas-grid-2">
+                                    <div class="agendadas-form-group">
+                                        <label for="agendar-rec-frequency">Frequencia</label>
+                                        <label class="agendadas-select-wrap">
+                                            <select id="agendar-rec-frequency">
+                                                <option value="diario" selected="">Todo dia</option>
+                                                <option value="semanal">Semanalmente</option>
+                                                <option value="mensal">Mensalmente</option>
+                                            </select>
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </label>
+                                    </div>
+                                    <div class="agendadas-form-group">
+                                        <label for="agendar-rec-repetitions">Repetir quantas vezes?</label>
+                                        <input id="agendar-rec-repetitions" type="number" min="1" value="5">
+                                    </div>
+                                </div>
+
+                                <div id="agendar-rec-weekly" class="agendadas-form-group">
+                                    <label>Nos dias da semana</label>
+                                    <div id="agendar-rec-days" class="agendadas-week-days">
+      <button type="button" class="ag-day-btn " data-day="Seg">Seg</button>
+    
+      <button type="button" class="ag-day-btn is-active" data-day="Ter">Ter</button>
+    
+      <button type="button" class="ag-day-btn " data-day="Qua">Qua</button>
+    
+      <button type="button" class="ag-day-btn " data-day="Qui">Qui</button>
+    
+      <button type="button" class="ag-day-btn " data-day="Sex">Sex</button>
+    
+      <button type="button" class="ag-day-btn " data-day="Sab">Sab</button>
+    
+      <button type="button" class="ag-day-btn " data-day="Dom">Dom</button>
+    </div>
+                                </div>
+
+                                <div id="agendar-rec-monthly" class="agendadas-form-group hidden">
+                                    <label for="agendar-rec-day-month">No dia do mes</label>
+                                    <div class="agendadas-month-day-wrap">
+                                        <span>Todo dia</span>
+                                        <input id="agendar-rec-day-month" type="number" min="1" max="31" value="1">
+                                        <span>do mes</span>
+                                    </div>
+                                </div>
+
+                                <div class="agendadas-form-group">
+                                    <label for="agendar-rec-hour">Horario do disparo</label>
+                                    <input id="agendar-rec-hour" type="time" value="14:00">
+                                </div>
+
+                                <div id="agendar-rec-summary" class="agendadas-rec-summary"><strong>Resumo:</strong> Disparar 8x toda Ter às 09:00.</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="agendadas-modal-error" class="agendadas-modal-error hidden"></div>
+            </div>
+
+            <div class="agendadas-modal-footer">
+                <button id="agendadas-modal-cancel" type="button" class="agendadas-btn agendadas-btn-muted">Cancelar</button>
+                <button id="agendadas-modal-save" type="button" class="agendadas-btn agendadas-btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden="">
+    <div class="dashboard-user-pop-header">
+      <span class="dashboard-user-pop-avatar">AS</span>
+      <div class="dashboard-user-pop-ident">
+        <strong title="Ana Souza">Ana Souza</strong>
+        <span title="ana@exemplo.com.br">ana@exemplo.com.br</span>
+        <em class="dashboard-user-pop-role">Proprietário</em>
+      </div>
+    </div>
+    <div class="dashboard-user-pop-company">
+      <span class="dashboard-user-pop-company-icon"><i class="ri-building-2-line"></i></span>
+      <div class="dashboard-user-pop-company-text">
+        <label>Empresa dona da conta</label>
+        <strong title="Representações Exemplo">Representações Exemplo</strong>
+      </div>
+    </div>
+    <div class="dashboard-user-pop-actions">
+      <button type="button" data-user-action="settings"><i class="ri-settings-3-line"></i> Configurações</button>
+      <button type="button" data-user-action="logout" class="is-danger"><i class="ri-logout-box-r-line"></i> Sair</button>
+    </div>
+  </div>
+  </div><div id="agendadas-quick-modal" class="ag-quick-modal hidden" aria-hidden="true">
+      <div class="ag-quick-modal-backdrop" data-ag-quick-close=""></div>
+      <section class="ag-quick-modal-card" role="dialog" aria-modal="true" aria-labelledby="ag-quick-modal-title">
+        <header class="ag-quick-modal-header">
+          <div class="ag-quick-modal-title">
+            <span><i class="ri-flashlight-line"></i></span>
+            <div>
+              <h3 id="ag-quick-modal-title">Respostas rápidas</h3>
+              <p>Escolha uma resposta pronta para preencher a mensagem agendada.</p>
+            </div>
+          </div>
+          <button type="button" class="ag-quick-modal-close" data-ag-quick-close="" aria-label="Fechar"><i class="ri-close-line"></i></button>
+        </header>
+        <div class="ag-quick-modal-body">
+          <div class="ag-quick-modal-tabs" id="ag-quick-modal-tabs">
+      <button type="button" class="ag-quick-modal-tab is-active" data-ag-quick-category="all">Todas (6)</button>
+    
+      <button type="button" class="ag-quick-modal-tab " data-ag-quick-category="qrc-vendas">💰 Vendas (3)</button>
+    
+      <button type="button" class="ag-quick-modal-tab " data-ag-quick-category="qrc-cobranca">🧾 Cobrança (2)</button>
+    
+      <button type="button" class="ag-quick-modal-tab " data-ag-quick-category="qrc-posvenda">🤝 Pós-venda (1)</button>
+    </div>
+          <label class="ag-quick-modal-search">
+            <i class="ri-search-line"></i>
+            <input type="search" id="ag-quick-modal-search" placeholder="Buscar resposta..." autocomplete="off">
+          </label>
+          <div class="ag-quick-modal-list" id="ag-quick-modal-list">
+      <button type="button" class="ag-quick-modal-item" data-ag-quick-id="qr-1">
+        <span class="ag-quick-modal-badge">💰</span>
+        <span class="ag-quick-modal-copy">
+          <strong>Tabela de preços</strong>
+          <small>Segue a tabela de preços atualizada. Qualquer dúvida, estou à disposição!</small>
+          <em><i class="ri-attachment-2"></i>1 anexo(s)</em>
+        </span>
+      </button>
+    
+      <button type="button" class="ag-quick-modal-item" data-ag-quick-id="qr-2">
+        <span class="ag-quick-modal-badge">💰</span>
+        <span class="ag-quick-modal-copy">
+          <strong>Pedido mínimo</strong>
+          <small>O pedido mínimo é de R$ 500,00, com frete grátis para a capital acima de R$ 1.200,00.</small>
+          
+        </span>
+      </button>
+    
+      <button type="button" class="ag-quick-modal-item" data-ag-quick-id="qr-3">
+        <span class="ag-quick-modal-badge">💰</span>
+        <span class="ag-quick-modal-copy">
+          <strong>Prazo de entrega</strong>
+          <small>Para a capital a entrega é em até 2 dias úteis; interior e litoral, até 4 dias úteis.</small>
+          
+        </span>
+      </button>
+    
+      <button type="button" class="ag-quick-modal-item" data-ag-quick-id="qr-4">
+        <span class="ag-quick-modal-badge">🧾</span>
+        <span class="ag-quick-modal-copy">
+          <strong>Lembrete de boleto</strong>
+          <small>Olá! Passando para lembrar que o boleto vence amanhã. Precisando da segunda via, é só...</small>
+          
+        </span>
+      </button>
+    
+      <button type="button" class="ag-quick-modal-item" data-ag-quick-id="qr-5">
+        <span class="ag-quick-modal-badge">🧾</span>
+        <span class="ag-quick-modal-copy">
+          <strong>Pagamento recebido</strong>
+          <small>Recebemos o seu pagamento. Muito obrigada!</small>
+          
+        </span>
+      </button>
+    
+      <button type="button" class="ag-quick-modal-item" data-ag-quick-id="qr-6">
+        <span class="ag-quick-modal-badge">🤝</span>
+        <span class="ag-quick-modal-copy">
+          <strong>Como foi a entrega?</strong>
+          <small>Tudo certo com a entrega? Se puder, avalie nosso atendimento de 1 a 5 ⭐</small>
+          
+        </span>
+      </button>
+    </div>
+        </div>
+      </section>
+    </div><div id="mockup-estados" hidden=""><template data-estado="sugestoes-contato">
+      <button type="button" class="ag-contact-option" data-contact-id="ct-01" data-contact-name="Mariana Costa" data-contact-phone="5511990000101">
+        <div class="ag-contact-option-name">Mariana Costa</div>
+        <div class="ag-contact-option-phone">5511990000101</div>
+      </button>
+    
+      <button type="button" class="ag-contact-option" data-contact-id="ct-19" data-contact-name="Thiago Martins" data-contact-phone="5511990000119">
+        <div class="ag-contact-option-name">Thiago Martins</div>
+        <div class="ag-contact-option-phone">5511990000119</div>
+      </button>
+    
+      <button type="button" class="ag-contact-option" data-contact-id="ct-21" data-contact-name="Beatriz Lima" data-contact-phone="5511990000121">
+        <div class="ag-contact-option-name">Beatriz Lima</div>
+        <div class="ag-contact-option-phone">5511990000121</div>
+      </button>
+    
+      <button type="button" class="ag-contact-option" data-contact-id="ct-24" data-contact-name="Café Aroma" data-contact-phone="5511990000124">
+        <div class="ag-contact-option-name">Café Aroma</div>
+        <div class="ag-contact-option-phone">5511990000124</div>
+      </button>
+    </template><template data-estado="sugestoes-vazio"><div class="ag-contact-option"><div class="ag-contact-option-name">Nenhum contato encontrado</div></div></template><template data-estado="quick-vazio"><div class="ag-quick-modal-empty">Nenhuma resposta rápida encontrada.</div></template><template data-estado="anexos-modal">
+      <span class="ag-attachment-chip" style="background:rgba(72,187,120,0.15);color:var(--ds-success);">
+        <i class="ri-image-line"></i>
+        Vitrine_Novembro.jpg
+        
+        <button type="button" data-remove-attachment="anx-4" aria-label="Remover"><i class="ri-close-line"></i></button>
+      </span>
+    
+      <span class="ag-attachment-chip" style="background:rgba(66,153,225,0.16);color:var(--ds-primary);">
+        <i class="ri-file-text-line"></i>
+        Catalogo_Novembro.pdf
+        
+        <button type="button" data-remove-attachment="anx-5" aria-label="Remover"><i class="ri-close-line"></i></button>
+      </span>
+    </template><template data-estado="resumo-recorrencia"><strong>Resumo:</strong> Disparar 8x toda Ter às 09:00.</template><template data-estado="menu-usuario">
+    <div class="dashboard-user-pop-header">
+      <span class="dashboard-user-pop-avatar">AS</span>
+      <div class="dashboard-user-pop-ident">
+        <strong title="Ana Souza">Ana Souza</strong>
+        <span title="ana@exemplo.com.br">ana@exemplo.com.br</span>
+        <em class="dashboard-user-pop-role">Proprietário</em>
+      </div>
+    </div>
+    <div class="dashboard-user-pop-company">
+      <span class="dashboard-user-pop-company-icon"><i class="ri-building-2-line"></i></span>
+      <div class="dashboard-user-pop-company-text">
+        <label>Empresa dona da conta</label>
+        <strong title="Representações Exemplo">Representações Exemplo</strong>
+      </div>
+    </div>
+    <div class="dashboard-user-pop-actions">
+      <button type="button" data-user-action="settings"><i class="ri-settings-3-line"></i> Configurações</button>
+      <button type="button" data-user-action="logout" class="is-danger"><i class="ri-logout-box-r-line"></i> Sair</button>
+    </div>
+  </template></div>
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/agendadas.html). O que só aparece depois de um clique (sugestões de
+     contato, anexos no modal, resumo da recorrência, menu do avatar) está nos
+     <template data-estado="..."> dentro de #mockup-estados. Para recapturar sem perder este bloco:
+     node tools/capture/capture.mjs agendadas "/agendadas.html" 7000 "js:window.__mockAgendadas.capturarEstados()"
+     node tools/capture/montar.mjs agendadas -->
+<script>
+(() => {
+  // ---------------------------------------------------------------------------------
+  // Dados fictícios (os mesmos de tools/capture/fixtures/agendadas.js e comum.js).
+  // Repositório público: nada real aqui.
+  //
+  // AGENDAMENTOS: o que a linha da tabela não mostra inteiro (título, mensagem completa,
+  // tipo, recorrência). `dias` conta a partir de hoje, então as datas continuam no futuro
+  // em qualquer dia em que o protótipo for aberto; `anoNovo` é 2 de janeiro do ano que vem;
+  // 'daqui-a-pouco' é a próxima meia hora cheia depois de uma hora a partir de agora.
+  // ---------------------------------------------------------------------------------
+  const AGENDAMENTOS = {
+    'ag-00': { dias: 0, hora: 'daqui-a-pouco', titulo: 'Display novo', tipo: 'texto', resp: 'usr-ana', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Oi! Confirmando: o display novo chega hoje à tarde e a montagem fica para amanhã cedo, combinado?' },
+    'ag-01': { dias: 1, hora: '09:00', titulo: 'Pedido quinzenal', tipo: 'texto', resp: 'usr-ana', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Oi Mariana! Passando para lembrar do pedido quinzenal de achocolatado. Posso lançar as mesmas 40 caixas?',
+      rec: { frequencia: 'semanal', dias: ['Ter'], diaMes: 1, hora: '09:00', vezes: 8 } },
+    'ag-02': { dias: 1, hora: '14:00', titulo: 'Vencimento do boleto 2231', tipo: 'texto', resp: 'usr-ana', fila: 'fila-vendas', inst: 'inst-posvenda',
+      mensagem: 'Pedro, o boleto do pedido 2231 vence amanhã. Qualquer dúvida sobre o pagamento é só me chamar.' },
+    'ag-03': { dias: 1, hora: '16:30', titulo: 'Agradecimento pós-entrega', tipo: 'audio', resp: 'usr-ana', fila: 'fila-geral', inst: 'inst-posvenda',
+      mensagem: '' },
+    'ag-04': { dias: 2, hora: '08:15', titulo: 'Nota fiscal do pedido', tipo: 'documento', resp: 'usr-ana', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Bom dia! A nota do pedido de 12 caixas de biscoito sortido já foi emitida. Segue em anexo.' },
+    'ag-05': { dias: 2, hora: '10:30', titulo: 'Retorno da proposta', tipo: 'texto', resp: 'usr-ana', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Juliana, conseguiu falar com seu sócio? O desconto de 5% à vista para pedidos acima de 30 caixas vale até sexta.' },
+    'ag-06': { dias: 3, hora: '10:00', titulo: 'Visita em Osasco', tipo: 'texto', resp: 'usr-bruno', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Fernanda, confirmando a visita do Bruno na sua loja em Osasco na quinta às 15h. Ele leva os mostruários!' },
+    'ag-07': { dias: 4, hora: '08:30', titulo: 'Validade da proposta trimestral', tipo: 'texto', resp: 'usr-bruno', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Bom dia! Lembrete: a proposta trimestral de 200 caixas vale até segunda. Posso confirmar o pedido?' },
+    'ag-08': { dias: 5, hora: '09:00', titulo: 'Fatura do contrato trimestral', tipo: 'texto', resp: 'usr-carla', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Olá! Lembrete de pagamento: a fatura de outubro do contrato trimestral vence no dia 15.',
+      rec: { frequencia: 'mensal', dias: ['Seg'], diaMes: 10, hora: '09:00', vezes: 3 } },
+    'ag-09': { dias: 6, hora: '10:00', titulo: 'Lançamento linha integral', tipo: 'video', resp: 'usr-ana', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Ricardo, faz tempo que não conversamos! Chegou a linha de biscoitos integrais com oferta de lançamento. Dá uma olhada no vídeo.' },
+    'ag-10': { dias: 7, hora: '08:00', titulo: 'Pedido da semana', tipo: 'texto', resp: 'usr-carla', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Bom dia! Já posso lançar o pedido da semana? Mesmas quantidades da semana passada?',
+      rec: { frequencia: 'semanal', dias: ['Seg'], diaMes: 1, hora: '08:00', vezes: 12 } },
+    'ag-11': { dias: 8, hora: '15:00', titulo: 'Reativação de cliente', tipo: 'texto', resp: 'usr-bruno', fila: 'fila-vendas', inst: 'inst-comercial',
+      mensagem: 'Olá! Temos uma oferta especial de reativação: frete grátis no primeiro pedido acima de R$ 800. Vamos conversar?' },
+    'ag-12': { dias: 26, hora: '09:00', titulo: 'Catálogo de novembro', tipo: 'imagem', resp: 'usr-ana', fila: 'fila-vendas', inst: 'inst-posvenda',
+      mensagem: 'Bom dia! Segue o catálogo de novembro com os lançamentos de fim de ano.' },
+    'ag-13': { anoNovo: true, hora: '09:00', titulo: 'Feliz Ano Novo', tipo: 'texto', resp: 'usr-carla', fila: 'fila-geral', inst: 'inst-posvenda',
+      mensagem: 'Feliz Ano Novo, Patrícia! Obrigada pela parceria neste ano. Que o próximo venha com ótimas vendas!' },
+  };
+
+  // Carteira de comum.js: [id, nome, telefone, primeira tag (ordem alfabética)].
+  const CONTATOS = [
+    ['ct-01', 'Mariana Costa', '5511990000101', 'Cliente ativo'],
+    ['ct-02', 'Mercado Bom Preço', '5511990000102', 'Orçamento'],
+    ['ct-03', 'Pedro Almeida', '5511990000103', 'Cliente ativo'],
+    ['ct-04', 'Distribuidora Litoral', '5511990000104', 'Atacado'],
+    ['ct-05', 'Juliana Ribeiro', '5511990000105', 'Orçamento'],
+    ['ct-06', 'Empório Central', '5511990000106', 'Cliente ativo'],
+    ['ct-07', 'Carlos Mendes', '5511990000107', null],
+    ['ct-08', 'Padaria Estrela', '5511990000108', 'Cliente ativo'],
+    ['ct-09', 'Fernanda Oliveira', '5511990000109', 'Orçamento'],
+    ['ct-10', 'Supermercado Avenida', '5511990000110', 'Atacado'],
+    ['ct-11', 'Ricardo Santos', '5511990000111', 'Reativar'],
+    ['ct-12', 'Loja da Esquina', '5511990000112', null],
+    ['ct-13', 'Patrícia Gomes', '5511990000113', 'Cliente ativo'],
+    ['ct-14', 'Atacadão do Vale', '5511990000114', 'Atacado'],
+    ['ct-15', 'Lucas Ferreira', '5511990000115', null],
+    ['ct-16', 'Mercearia São José', '5511990000116', 'Reativar'],
+    ['ct-17', 'Camila Rocha', '5511990000117', 'Cliente ativo'],
+    ['ct-18', 'Hortifruti Verde Vida', '5511990000118', 'Orçamento'],
+    ['ct-19', 'Thiago Martins', '5511990000119', null],
+    ['ct-20', 'Conveniência 24h Centro', '5511990000120', 'Cliente ativo'],
+    ['ct-21', 'Beatriz Lima', '5511990000121', 'VIP'],
+    ['ct-22', 'Rede Econômica', '5511990000122', 'Atacado'],
+    ['ct-23', 'Gustavo Pereira', '5511990000123', null],
+    ['ct-24', 'Café Aroma', '5511990000124', 'Orçamento'],
+  ].map(([id, nome, fone, tag]) => ({ id, nome, fone, tag }));
+
+  // Respostas rápidas: categoria, texto completo e anexos (a lista do modal mostra o texto cortado).
+  const RESPOSTAS = {
+    'qr-1': { cat: 'qrc-vendas', mensagem: 'Segue a tabela de preços atualizada. Qualquer dúvida, estou à disposição!', anexos: [['document', 'Tabela_Precos_Outubro.pdf']] },
+    'qr-2': { cat: 'qrc-vendas', mensagem: 'O pedido mínimo é de R$ 500,00, com frete grátis para a capital acima de R$ 1.200,00.' },
+    'qr-3': { cat: 'qrc-vendas', mensagem: 'Para a capital a entrega é em até 2 dias úteis; interior e litoral, até 4 dias úteis.' },
+    'qr-4': { cat: 'qrc-cobranca', mensagem: 'Olá! Passando para lembrar que o boleto vence amanhã. Precisando da segunda via, é só me avisar.' },
+    'qr-5': { cat: 'qrc-cobranca', mensagem: 'Recebemos o seu pagamento. Muito obrigada!' },
+    'qr-6': { cat: 'qrc-posvenda', mensagem: 'Tudo certo com a entrega? Se puder, avalie nosso atendimento de 1 a 5 ⭐' },
+  };
+
+  // instance_name de cada número (a coluna Fila / Instância mostra o nome técnico, como no app).
+  const NOME_INSTANCIA = { 'inst-comercial': 'comercial', 'inst-posvenda': 'posvenda' };
+
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const todos = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+  const template = (nome) => $(`#mockup-estados template[data-estado="${nome}"]`);
+  const pad = (n) => String(n).padStart(2, '0');
+  const truncar = (texto, n) => (texto.length <= n ? texto : `${texto.slice(0, Math.max(0, n - 3))}...`);
+  const paraCampoData = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const dataBr = (valor) => { const [a, m, d] = valor.split('-'); return a && m && d ? `${d}/${m}/${a}` : valor; };
+
+  const corpo = $('#agendadas-table-body');
+  const vazio = $('#agendadas-empty');
+  const tabela = $('#agendadas-table-wrapper');
+  const carregando = $('#agendadas-loading');
+  const modal = $('#agendadas-modal');
+  const modalRapidas = $('#agendadas-quick-modal');
+  // Moldes tirados da captura: linha nova e anexo novo nascem com a marcação do app.
+  const moldeLinha = $('.agendadas-row-wrap', corpo).cloneNode(true);
+  const moldeAnexo = template('anexos-modal').content.querySelector('.ag-attachment-chip').cloneNode(true);
+
+  // --- linhas: dados + datas sempre no futuro --------------------------------------
+  const linhas = new Map(); // id -> { el, quando, ...AGENDAMENTOS[id] }
+
+  function quandoDe(dado) {
+    if (dado.hora === 'daqui-a-pouco') {
+      const d = new Date(Date.now() + 3_600_000);
+      d.setMinutes(d.getMinutes() < 30 ? 30 : 60, 0, 0);
+      return d;
+    }
+    const [h, m] = dado.hora.split(':').map(Number);
+    if (dado.anoNovo) return new Date(new Date().getFullYear() + 1, 0, 2, h, m);
+    const d = new Date();
+    d.setHours(h, m, 0, 0);
+    d.setDate(d.getDate() + dado.dias);
+    return d;
+  }
+
+  /** Troca o texto que vem depois do ícone (data, hora, usuário, fila...). */
+  function textoAposIcone(el, texto) {
+    if (!el) return;
+    const no = [...el.childNodes].reverse().find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+    if (no) no.textContent = texto;
+    else el.append(texto);
+  }
+
+  function pintarData(linha) {
+    textoAposIcone($('.ag-date-main', linha.el), linha.quando.toLocaleDateString('pt-BR'));
+    textoAposIcone($('.ag-date-time', linha.el), linha.quando.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
+  }
+
+  todos('.agendadas-row-wrap', corpo).forEach((el) => {
+    const id = $('[data-action="edit"]', el).dataset.id;
+    const dado = AGENDAMENTOS[id];
+    if (!dado) return;
+    const linha = { el, id, ...dado, quando: quandoDe(dado) };
+    linhas.set(id, linha);
+    pintarData(linha);
+  });
+
+  // Anexos da linha, lidos dos selos que o app desenhou (tipo pelo ícone).
+  const TIPO_POR_ICONE = { 'ri-image-line': 'image', 'ri-film-line': 'video', 'ri-mic-line': 'audio', 'ri-file-text-line': 'document' };
+  const anexosDaLinha = (linha) => todos('.ag-contact-message + div .ag-badge', linha.el).map((selo) => ({
+    tipo: TIPO_POR_ICONE[$('i', selo)?.className] || 'document',
+    nome: selo.textContent.trim(),
+  }));
+  // Um selo capturado de cada tipo de anexo (cor e ícone vêm do app). Guardados já no
+  // início: o agendamento de onde saíram pode ser cancelado durante a demonstração.
+  const SELOS = {};
+  todos('.ag-contact-message + div .ag-badge', corpo).forEach((selo) => {
+    const tipo = TIPO_POR_ICONE[$('i', selo)?.className];
+    if (tipo && !SELOS[tipo]) SELOS[tipo] = selo.cloneNode(true);
+  });
+  const seloDoTipo = (tipo) => SELOS[tipo] || SELOS.document;
+
+  // --- filtros e ordenação (mesmas regras do app) -------------------------------------
+  let ordem = 'asc';
+  const filtro = () => ({
+    busca: $('#agendadas-search').value.trim().toLowerCase(),
+    tag: $('#agendadas-filter-tag').value,
+    categoria: $('#agendadas-filter-category').value,
+    fila: $('#agendadas-filter-fila').value,
+    usuario: $('#agendadas-filter-user').value,
+    periodo: $('#agendadas-filter-period').value,
+  });
+
+  function inicioDaSemana(d) {
+    const r = new Date(d);
+    const dia = r.getDay();
+    r.setDate(r.getDate() + (dia === 0 ? -6 : 1 - dia));
+    r.setHours(0, 0, 0, 0);
+    return r;
+  }
+
+  function aplicarFiltros() {
+    const f = filtro();
+    const agora = new Date();
+    const semana = inicioDaSemana(agora);
+    const fimSemana = new Date(semana); fimSemana.setDate(fimSemana.getDate() + 7);
+    const mesmoDia = (a, b) => a.toDateString() === b.toDateString();
+    const mesmoMes = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth();
+
+    const lista = [...linhas.values()].sort((a, b) => (ordem === 'asc' ? a.quando - b.quando : b.quando - a.quando));
+    let visiveis = 0;
+    lista.forEach((l) => {
+      const nome = $('.ag-contact-name', l.el).textContent;
+      const fone = $('.ag-contact-phone', l.el).textContent;
+      const tag = $('.ag-badge-tag', l.el).textContent.trim();
+      const categoria = $('[class*="ag-badge-cat-"]', l.el).textContent.trim();
+      const texto = `${nome} ${fone} ${l.mensagem} ${l.titulo}`.toLowerCase();
+      let mostra = (!f.busca || texto.includes(f.busca))
+        && (!f.tag || tag === f.tag)
+        && (!f.categoria || categoria === f.categoria)
+        && (!f.fila || l.fila === f.fila)
+        && (!f.usuario || l.resp === f.usuario);
+      if (f.periodo === 'today') mostra = mostra && mesmoDia(l.quando, agora);
+      if (f.periodo === 'week') mostra = mostra && l.quando >= semana && l.quando < fimSemana;
+      if (f.periodo === 'month') mostra = mostra && mesmoMes(l.quando, agora);
+      if (f.periodo === 'next-year') mostra = mostra && l.quando.getFullYear() === agora.getFullYear() + 1;
+      l.el.hidden = !mostra;
+      corpo.appendChild(l.el);
+      if (mostra) visiveis += 1;
+    });
+    vazio.classList.toggle('hidden', visiveis > 0);
+    tabela.classList.toggle('hidden', visiveis === 0);
+  }
+
+  // --- modal: abrir, preencher, prévia ------------------------------------------------
+  const campo = (id) => document.getElementById(id);
+  let editando = null;      // id da linha em edição (null = novo agendamento)
+  let contatoEscolhido = null;
+  let anexos = [];          // [{ tipo, nome }]
+  let recorrencia = { aberta: false, frequencia: 'semanal', dias: ['Seg'], diaMes: 1, hora: '14:00', vezes: 5 };
+
+  function pintarAnexos() {
+    const caixa = campo('agendar-attachments');
+    caixa.replaceChildren(...anexos.map((anexo, i) => {
+      const chip = moldeAnexo.cloneNode(true);
+      const selo = seloDoTipo(anexo.tipo);
+      if (selo) {
+        chip.setAttribute('style', selo.getAttribute('style'));
+        $('i', chip).className = $('i', selo).className;
+      }
+      const nomeNo = [...chip.childNodes].find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+      nomeNo.textContent = ` ${anexo.nome} `;
+      $('[data-remove-attachment]', chip).dataset.removeAttachment = String(i);
+      return chip;
+    }));
+  }
+
+  function previaDosAnexos() {
+    if (!anexos.length) return '';
+    const prefixo = { image: '[Imagem]', video: '[Vídeo]', audio: '[Áudio]' }[anexos[0].tipo] || '[Documento]';
+    return anexos.length === 1 ? `${prefixo} ${anexos[0].nome}` : `${prefixo} ${anexos[0].nome} (+${anexos.length - 1})`;
+  }
+
+  function atualizarPrevia() {
+    const mensagem = campo('agendar-message').value;
+    const hora = campo('agendar-time').value || '--:--';
+    const data = campo('agendar-date').value;
+    campo('agendar-preview-message').textContent = mensagem.trim() || previaDosAnexos() || 'Sua mensagem aparecerá aqui...';
+    campo('agendar-preview-hour').textContent = hora;
+    campo('agendar-preview-date').textContent = data ? dataBr(data) : '--/--/----';
+    campo('agendar-preview-time').textContent = hora;
+    campo('agendar-message-count').textContent = `(${mensagem.length} caracteres)`;
+  }
+
+  function pintarRecorrencia() {
+    campo('agendar-rec-box').classList.toggle('is-active', recorrencia.aberta);
+    campo('agendar-rec-panel').classList.toggle('hidden', !recorrencia.aberta);
+    campo('agendar-rec-weekly').classList.toggle('hidden', recorrencia.frequencia !== 'semanal');
+    campo('agendar-rec-monthly').classList.toggle('hidden', recorrencia.frequencia !== 'mensal');
+    campo('agendar-rec-frequency').value = recorrencia.frequencia;
+    campo('agendar-rec-repetitions').value = recorrencia.vezes;
+    campo('agendar-rec-day-month').value = recorrencia.diaMes;
+    campo('agendar-rec-hour').value = recorrencia.hora;
+    todos('#agendar-rec-days [data-day]').forEach((b) => b.classList.toggle('is-active', recorrencia.dias.includes(b.dataset.day)));
+    if (!recorrencia.aberta) return;
+    const quando = recorrencia.frequencia === 'diario' ? 'todos os dias'
+      : recorrencia.frequencia === 'semanal' ? `toda ${recorrencia.dias.join(', ')}` : `todo dia ${recorrencia.diaMes}`;
+    const resumo = campo('agendar-rec-summary');
+    resumo.innerHTML = template('resumo-recorrencia').innerHTML;
+    resumo.lastChild.textContent = ` Disparar ${recorrencia.vezes}x ${quando} às ${recorrencia.hora}.`;
+  }
+
+  function travarInstancia() {
+    const select = campo('agendar-instancia');
+    select.disabled = Boolean(editando);
+    campo('agendar-instancia-hint').textContent = editando
+      ? 'A conversa já existe: a instância dela não muda por aqui.'
+      : 'É por ela que a mensagem vai sair.';
+  }
+
+  function erroNoModal(texto) {
+    const caixa = campo('agendadas-modal-error');
+    caixa.textContent = texto || '';
+    caixa.classList.toggle('hidden', !texto);
+  }
+
+  function abrirModal(id) {
+    const linha = id ? linhas.get(id) : null;
+    editando = linha ? id : null;
+    contatoEscolhido = null;
+    erroNoModal('');
+    esconderSugestoes();
+    campo('agendadas-modal-title').textContent = linha ? 'Editar Mensagem Agendada' : 'Agendar Mensagem';
+    campo('agendadas-modal-save').textContent = linha ? 'Salvar Alterações' : 'Agendar';
+    campo('agendadas-modal-save').disabled = false;
+
+    if (linha) {
+      const nome = $('.ag-contact-name', linha.el).textContent;
+      const fone = $('.ag-contact-phone', linha.el).textContent;
+      campo('agendar-contact').value = fone ? `${nome} - ${fone}` : nome;
+      campo('agendar-title').value = linha.titulo;
+      campo('agendar-type').value = linha.tipo;
+      campo('agendar-user').value = linha.resp;
+      campo('agendar-fila').value = linha.fila;
+      campo('agendar-instancia').value = linha.inst;
+      campo('agendar-message').value = linha.mensagem;
+      campo('agendar-date').value = paraCampoData(linha.quando);
+      campo('agendar-time').value = `${pad(linha.quando.getHours())}:${pad(linha.quando.getMinutes())}`;
+      anexos = anexosDaLinha(linha);
+      recorrencia = linha.rec
+        ? { aberta: true, ...linha.rec, dias: [...linha.rec.dias] }
+        : { aberta: false, frequencia: 'semanal', dias: ['Seg'], diaMes: 1, hora: '14:00', vezes: 5 };
+    } else {
+      const daquiUmaHora = new Date(Date.now() + 3_600_000);
+      campo('agendar-contact').value = '';
+      campo('agendar-title').value = '';
+      campo('agendar-type').value = 'texto';
+      campo('agendar-user').value = '';
+      campo('agendar-fila').value = '';
+      // Duas instâncias conectadas: o app não escolhe sozinho.
+      campo('agendar-instancia').value = '';
+      campo('agendar-message').value = '';
+      campo('agendar-date').value = paraCampoData(daquiUmaHora);
+      campo('agendar-time').value = daquiUmaHora.toTimeString().slice(0, 5);
+      anexos = [];
+      recorrencia = { aberta: false, frequencia: 'semanal', dias: ['Seg'], diaMes: 1, hora: campo('agendar-time').value, vezes: 5 };
+    }
+    pintarAnexos();
+    pintarRecorrencia();
+    atualizarPrevia();
+    travarInstancia();
+    modal.classList.remove('hidden');
+  }
+
+  function fecharModal() {
+    modal.classList.add('hidden');
+    esconderSugestoes();
+  }
+
+  // --- contato: sugestões enquanto digita ------------------------------------------
+  let timerBusca;
+  function esconderSugestoes() {
+    const painel = campo('agendar-contact-suggestions');
+    painel.classList.add('hidden');
+    painel.innerHTML = '';
+  }
+
+  function mostrarSugestoes(termo) {
+    const painel = campo('agendar-contact-suggestions');
+    const t = termo.toLowerCase();
+    const achados = CONTATOS.filter((c) => c.nome.toLowerCase().includes(t) || c.fone.includes(t)).slice(0, 12);
+    if (!achados.length) {
+      painel.innerHTML = template('sugestoes-vazio').innerHTML;
+    } else {
+      const molde = template('sugestoes-contato').content.querySelector('.ag-contact-option');
+      painel.replaceChildren(...achados.map((c) => {
+        const opcao = molde.cloneNode(true);
+        Object.assign(opcao.dataset, { contactId: c.id, contactName: c.nome, contactPhone: c.fone });
+        $('.ag-contact-option-name', opcao).textContent = c.nome;
+        $('.ag-contact-option-phone', opcao).textContent = c.fone;
+        return opcao;
+      }));
+    }
+    painel.classList.remove('hidden');
+  }
+
+  // --- respostas rápidas --------------------------------------------------------------
+  let categoriaRapida = 'all';
+  function filtrarRapidas() {
+    const busca = campo('ag-quick-modal-search').value.trim().toLowerCase();
+    todos('[data-ag-quick-category]', modalRapidas).forEach((aba) => aba.classList.toggle('is-active', aba.dataset.agQuickCategory === categoriaRapida));
+    let visiveis = 0;
+    todos('[data-ag-quick-id]', modalRapidas).forEach((item) => {
+      const dado = RESPOSTAS[item.dataset.agQuickId];
+      const texto = `${item.textContent} ${dado.mensagem} ${(dado.anexos || []).map((a) => a[1]).join(' ')}`.toLowerCase();
+      const mostra = (categoriaRapida === 'all' || dado.cat === categoriaRapida) && (!busca || texto.includes(busca));
+      item.hidden = !mostra;
+      if (mostra) visiveis += 1;
+    });
+    $('.ag-quick-modal-empty', modalRapidas)?.remove();
+    if (!visiveis) campo('ag-quick-modal-list').insertAdjacentHTML('beforeend', template('quick-vazio').innerHTML);
+  }
+
+  function respostasRapidas(abrir) {
+    modalRapidas.classList.toggle('hidden', !abrir);
+    modalRapidas.setAttribute('aria-hidden', String(!abrir));
+    if (!abrir) return;
+    categoriaRapida = 'all';
+    campo('ag-quick-modal-search').value = '';
+    filtrarRapidas();
+    setTimeout(() => campo('ag-quick-modal-search').focus(), 0);
+  }
+
+  // --- salvar ---------------------------------------------------------------------------
+  const CATEGORIA_CLASSE = { 'Cobrança': 'ag-badge-cat-cobranca', Promocional: 'ag-badge-cat-promocional', Lembrete: 'ag-badge-cat-lembrete' };
+  function categoriaDoTexto(texto) {
+    const t = texto.toLowerCase();
+    if (t.includes('cobran') || t.includes('fatura') || t.includes('pagamento')) return 'Cobrança';
+    if (t.includes('promo') || t.includes('desconto') || t.includes('oferta')) return 'Promocional';
+    return 'Lembrete';
+  }
+
+  /** Escreve na linha o que o modal pode mudar. */
+  function preencherLinha(linha) {
+    const el = linha.el;
+    $('.ag-contact-message', el).textContent = `"${linha.mensagem ? truncar(linha.mensagem, 84) : previaDosAnexos()}"`;
+    const caixaSelos = $('.ag-contact-message + div', el);
+    if (caixaSelos) caixaSelos.remove();
+    if (anexos.length) {
+      const nova = document.createElement('div');
+      nova.className = 'flex flex-wrap gap-1 mt-1';
+      anexos.forEach((anexo) => {
+        const selo = seloDoTipo(anexo.tipo).cloneNode(true);
+        textoAposIcone(selo, ` ${anexo.nome} `);
+        nova.appendChild(selo);
+      });
+      $('.ag-contact-message', el).after(nova);
+    }
+    pintarData(linha);
+    textoAposIcone($('.ag-user-cell', el), campo('agendar-user').selectedOptions[0]?.value ? campo('agendar-user').selectedOptions[0].textContent : 'Sem responsável');
+    textoAposIcone($('.ag-fila-title', el), campo('agendar-fila').selectedOptions[0]?.value ? campo('agendar-fila').selectedOptions[0].textContent : 'Geral');
+    const categoria = categoriaDoTexto(linha.mensagem);
+    const selo = $('[class*="ag-badge-cat-"]', el);
+    selo.className = `ag-badge ${CATEGORIA_CLASSE[categoria]}`;
+    selo.textContent = categoria;
+  }
+
+  function salvar() {
+    const titulo = campo('agendar-title').value.trim();
+    const mensagem = campo('agendar-message').value.trim();
+    const data = campo('agendar-date').value;
+    const hora = campo('agendar-time').value;
+    const quando = new Date(`${data}T${hora}:00`);
+    const textoContato = campo('agendar-contact').value.trim();
+    const digitos = textoContato.replace(/\D/g, '');
+
+    if (!titulo) return erroNoModal('Título é obrigatório.');
+    if (!mensagem && !anexos.length) return erroNoModal('Mensagem ou anexo é obrigatório.');
+    if (!data || !hora || Number.isNaN(quando.getTime())) return erroNoModal('Selecione data e hora válidas.');
+    if (quando <= new Date()) return erroNoModal('A data/hora deve ser no futuro.');
+    if (!editando && !campo('agendar-instancia').value) return erroNoModal('Selecione a instância que vai enviar a mensagem.');
+    if (!editando && !contatoEscolhido && digitos.length < 10) return erroNoModal('Selecione um contato válido ou informe um número com DDD.');
+    erroNoModal('');
+
+    const botao = campo('agendadas-modal-save');
+    botao.disabled = true;
+    botao.textContent = editando ? 'Salvando...' : 'Agendando...';
+
+    setTimeout(() => {
+      const dados = {
+        titulo, mensagem, quando,
+        tipo: campo('agendar-type').value,
+        resp: campo('agendar-user').value,
+        fila: campo('agendar-fila').value || 'fila-geral',
+        rec: recorrencia.aberta ? { ...recorrencia, dias: [...recorrencia.dias] } : null,
+      };
+      if (editando) {
+        const linha = linhas.get(editando);
+        Object.assign(linha, dados);
+        preencherLinha(linha);
+        window.mockup.avisar('Mensagem agendada atualizada.');
+      } else {
+        const id = `ag-novo-${Date.now()}`;
+        const el = moldeLinha.cloneNode(true);
+        todos('[data-id]', el).forEach((b) => { b.dataset.id = id; });
+        const contato = contatoEscolhido || CONTATOS.find((c) => c.fone === digitos);
+        const nomeDigitado = textoContato.includes(' - ') ? textoContato.split(' - ')[0].trim() : (/^[\d\s()+-]+$/.test(textoContato) ? '' : textoContato);
+        $('.ag-contact-name', el).textContent = contato?.nome || nomeDigitado || 'Contato';
+        $('.ag-contact-phone', el).textContent = contato?.fone || digitos;
+        const tag = $('.ag-badge-tag', el);
+        if (contato?.tag) textoAposIcone(tag, contato.tag);
+        else tag.textContent = 'SEM TAG';
+        $('.ag-badge-instance', el).textContent = NOME_INSTANCIA[campo('agendar-instancia').value] || 'Sem instância';
+        const linha = { el, id, ...dados, inst: campo('agendar-instancia').value };
+        linhas.set(id, linha);
+        preencherLinha(linha);
+        window.mockup.avisar('Mensagem agendada com sucesso.');
+      }
+      fecharModal();
+      aplicarFiltros();
+    }, 500);
+  }
+
+  function anexarArquivo(tipo) {
+    const aceita = { image: 'image/*', video: 'video/*', audio: 'audio/*' }[tipo] || '.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.zip,.rar,.ppt,.pptx';
+    const entrada = document.createElement('input');
+    entrada.type = 'file';
+    entrada.accept = aceita;
+    entrada.addEventListener('change', () => {
+      const arquivo = entrada.files?.[0];
+      if (!arquivo) return;
+      // Só o nome: nada é enviado no protótipo.
+      anexos.push({ tipo, nome: arquivo.name });
+      pintarAnexos();
+      atualizarPrevia();
+      window.mockup.avisar('Anexo carregado para o agendamento.');
+    });
+    entrada.click();
+  }
+
+  // --- menu do avatar (flutuante nesta tela) -------------------------------------------
+  const menu = $('#mvp-user-menu');
+  const popover = menu && $('[data-user-popover]', menu);
+  function menuUsuario(abrir) {
+    if (!popover) return;
+    if (abrir) popover.innerHTML = template('menu-usuario').innerHTML;
+    popover.hidden = !abrir;
+    menu.classList.toggle('is-open', abrir);
+    $('[data-user-btn]', menu).setAttribute('aria-expanded', String(abrir));
+  }
+
+  // --- eventos ---------------------------------------------------------------------
+  document.addEventListener('click', (ev) => {
+    const alvo = ev.target;
+
+    if (alvo.closest('[data-user-btn]')) { menuUsuario(popover.hidden); return; }
+    const acaoMenu = alvo.closest('[data-user-action]');
+    if (acaoMenu) {
+      menuUsuario(false);
+      if (acaoMenu.dataset.userAction === 'settings') location.href = 'settings.html';
+      else window.mockup.avisar('Sair não faz parte do protótipo');
+      return;
+    }
+    if (popover && !popover.hidden && !menu.contains(alvo)) menuUsuario(false);
+
+    if (!alvo.closest('.agendadas-contact-autocomplete')) esconderSugestoes();
+
+    if (alvo.closest('#agendadas-open-modal-btn')) { abrirModal(null); return; }
+    if (alvo.closest('#agendadas-refresh-btn')) {
+      // O app busca a lista de novo: o "carregando" aparece por um instante.
+      carregando.classList.remove('hidden');
+      tabela.classList.add('hidden');
+      vazio.classList.add('hidden');
+      setTimeout(() => { carregando.classList.add('hidden'); aplicarFiltros(); }, 450);
+      return;
+    }
+    if (alvo.closest('#agendadas-sort-date')) {
+      ordem = ordem === 'asc' ? 'desc' : 'asc';
+      $('#agendadas-sort-date i').className = ordem === 'asc' ? 'ri-arrow-up-line' : 'ri-arrow-down-line';
+      aplicarFiltros();
+      return;
+    }
+
+    const editar = alvo.closest('[data-action="edit"]');
+    if (editar) { abrirModal(editar.dataset.id); return; }
+    const cancelar = alvo.closest('[data-action="delete"]');
+    if (cancelar) {
+      if (!confirm('Cancelar este agendamento?')) return;
+      const linha = linhas.get(cancelar.dataset.id);
+      linha?.el.remove();
+      linhas.delete(cancelar.dataset.id);
+      window.mockup.avisar('Agendamento cancelado.');
+      aplicarFiltros();
+      return;
+    }
+
+    // Modal de agendamento.
+    if (alvo === modal || alvo.closest('#agendadas-modal-close, #agendadas-modal-cancel')) { fecharModal(); return; }
+    if (alvo.closest('#agendadas-modal-save')) { salvar(); return; }
+    const sugestao = alvo.closest('.ag-contact-option[data-contact-id]');
+    if (sugestao) {
+      contatoEscolhido = CONTATOS.find((c) => c.id === sugestao.dataset.contactId) || null;
+      campo('agendar-contact').value = `${sugestao.dataset.contactName} - ${sugestao.dataset.contactPhone}`;
+      if (!campo('agendar-title').value.trim()) campo('agendar-title').value = sugestao.dataset.contactName;
+      esconderSugestoes();
+      return;
+    }
+    const tipoAnexo = alvo.closest('[data-attach-type]');
+    if (tipoAnexo) { anexarArquivo(tipoAnexo.dataset.attachType); return; }
+    const remover = alvo.closest('[data-remove-attachment]');
+    if (remover) {
+      anexos.splice(Number(remover.dataset.removeAttachment), 1);
+      pintarAnexos();
+      atualizarPrevia();
+      return;
+    }
+    if (alvo.closest('#agendar-rec-toggle')) { recorrencia.aberta = !recorrencia.aberta; pintarRecorrencia(); return; }
+    const dia = alvo.closest('#agendar-rec-days [data-day]');
+    if (dia) {
+      const d = dia.dataset.day;
+      recorrencia.dias = recorrencia.dias.includes(d) ? recorrencia.dias.filter((x) => x !== d) : [...recorrencia.dias, d];
+      if (!recorrencia.dias.length) recorrencia.dias = ['Seg'];
+      pintarRecorrencia();
+      return;
+    }
+
+    // Respostas rápidas.
+    if (alvo.closest('#agendar-quick-toggle')) { respostasRapidas(true); return; }
+    if (alvo.closest('[data-ag-quick-close]')) { respostasRapidas(false); return; }
+    const aba = alvo.closest('[data-ag-quick-category]');
+    if (aba) { categoriaRapida = aba.dataset.agQuickCategory; filtrarRapidas(); return; }
+    const resposta = alvo.closest('[data-ag-quick-id]');
+    if (resposta) {
+      const dado = RESPOSTAS[resposta.dataset.agQuickId];
+      campo('agendar-message').value = dado.mensagem;
+      anexos = (dado.anexos || []).map(([tipo, nome]) => ({ tipo, nome }));
+      pintarAnexos();
+      atualizarPrevia();
+      respostasRapidas(false);
+    }
+  });
+
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Escape') return;
+    menuUsuario(false);
+    if (!modalRapidas.classList.contains('hidden')) respostasRapidas(false);
+    else if (!modal.classList.contains('hidden')) fecharModal();
+  });
+
+  // Filtros da lista.
+  $('#agendadas-search').addEventListener('input', aplicarFiltros);
+  ['tag', 'category', 'fila', 'user', 'period'].forEach((f) => $(`#agendadas-filter-${f}`).addEventListener('change', aplicarFiltros));
+
+  // Campos do modal.
+  campo('agendar-message').addEventListener('input', atualizarPrevia);
+  campo('agendar-date').addEventListener('change', atualizarPrevia);
+  campo('agendar-time').addEventListener('change', atualizarPrevia);
+  campo('agendar-contact').addEventListener('input', () => {
+    contatoEscolhido = null;
+    clearTimeout(timerBusca);
+    const termo = campo('agendar-contact').value.trim();
+    if (termo.length < 2) { esconderSugestoes(); return; }
+    timerBusca = setTimeout(() => mostrarSugestoes(termo), 220);
+  });
+  campo('agendar-rec-frequency').addEventListener('change', (ev) => { recorrencia.frequencia = ev.target.value; pintarRecorrencia(); });
+  campo('agendar-rec-repetitions').addEventListener('input', (ev) => { recorrencia.vezes = Math.max(1, Number(ev.target.value || 1)); pintarRecorrencia(); });
+  campo('agendar-rec-day-month').addEventListener('input', (ev) => { recorrencia.diaMes = Math.min(31, Math.max(1, Number(ev.target.value || 1))); pintarRecorrencia(); });
+  campo('agendar-rec-hour').addEventListener('input', (ev) => { recorrencia.hora = ev.target.value || '14:00'; pintarRecorrencia(); });
+  campo('ag-quick-modal-search').addEventListener('input', filtrarRapidas);
+
+  aplicarFiltros();
+})();
+</script>
+</body></html>

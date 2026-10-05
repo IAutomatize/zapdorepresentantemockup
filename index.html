@@ -24,12 +24,12 @@
       background: var(--fundo); color: var(--texto);
       font-family: Inter, system-ui, sans-serif;
     }
-    main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+    main { max-width: 920px; margin: 0 auto; padding: 48px 16px 64px; }
     header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
     header img { width: 44px; height: 44px; }
     h1 { margin: 0; font-size: 22px; font-weight: 700; }
     .intro { margin: 0 0 32px; color: var(--suave); line-height: 1.55; }
-    .lista { display: grid; gap: 12px; }
+    .lista { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
     .item {
       display: flex; align-items: center; gap: 16px;
       padding: 18px 20px; border-radius: 14px;
@@ -61,17 +61,64 @@
     </p>
 
     <div class="lista">
+      <a class="item" href="dashboard.html">
+        <span class="icone"><i class="ri-dashboard-line"></i></span>
+        <span><h2>Dashboard</h2><p>Visão geral dos atendimentos e resultados.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
       <a class="item" href="chats.html">
         <span class="icone"><i class="ri-chat-3-line"></i></span>
-        <span>
-          <h2>Conversas</h2>
-          <p>Tela de atendimento como está hoje no sistema.</p>
-        </span>
+        <span><h2>Conversas</h2><p>Atendimento pelo WhatsApp, com dados do contato e CRM.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="contacts.html">
+        <span class="icone"><i class="ri-contacts-book-line"></i></span>
+        <span><h2>Contatos</h2><p>Carteira de clientes, marcadores e importação.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="kanban.html">
+        <span class="icone"><i class="ri-trello-line"></i></span>
+        <span><h2>Kanban</h2><p>Funil de vendas, um cartão por conversa.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="tasks.html">
+        <span class="icone"><i class="ri-task-line"></i></span>
+        <span><h2>Tarefas</h2><p>Tarefas e projetos da equipe.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="calendar.html">
+        <span class="icone"><i class="ri-calendar-line"></i></span>
+        <span><h2>Calendário</h2><p>Visitas, reuniões e lembretes.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="stories.html">
+        <span class="icone"><i class="ri-image-circle-line"></i></span>
+        <span><h2>Status</h2><p>Publicação de status do WhatsApp.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="campaigns.html">
+        <span class="icone"><i class="ri-megaphone-line"></i></span>
+        <span><h2>Campanhas</h2><p>Disparo em massa para a carteira.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="agendadas.html">
+        <span class="icone"><i class="ri-time-line"></i></span>
+        <span><h2>Agendadas</h2><p>Mensagens programadas para envio.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="settings.html">
+        <span class="icone"><i class="ri-settings-3-line"></i></span>
+        <span><h2>Configurações</h2><p>Conta, equipe, canais, agentes de IA, automações e plano.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="ajuda.html">
+        <span class="icone"><i class="ri-question-line"></i></span>
+        <span><h2>Ajuda</h2><p>Central de ajuda.</p></span>
         <i class="ri-arrow-right-s-line seta"></i>
       </a>
     </div>
 
-    <footer>Abra no computador ou no celular.</footer>
+    <footer>Abra no computador ou no celular. Dentro de qualquer tela, a barra lateral leva às outras.</footer>
   </main>
 </body>
 </html>

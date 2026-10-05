@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Tarefas - Zap do Representante</title>
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
+    <link rel="stylesheet" href="css/new-design-vars.css">
+    <link rel="stylesheet" href="css/tasks-layout.css">
+    <link rel="stylesheet" href="css/mobile-polish.css">
+<link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="stylesheet" href="css/account-access.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
+<body class="font-['Inter'] dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 bg-theme-surface">
+    <div class="min-h-screen w-full relative dashboard-modern-shell">
+        <div class="glow-blob" style="
+                width: 600px;
+                height: 600px;
+                top: -200px;
+                left: -180px;
+                background: radial-gradient(circle, rgba(180,200,220,0.35) 0%, transparent 70%);
+            "></div>
+        <div class="glow-blob" style="
+                width: 700px;
+                height: 700px;
+                bottom: -260px;
+                right: -220px;
+                background: radial-gradient(circle, rgba(197,213,228,0.3) 0%, transparent 70%);
+                animation-delay: 5s;
+            "></div>
+
+        <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+                background: rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                border-right: 1px solid rgba(255, 255, 255, 0.5);
+            " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item sidebar-item-active" title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+        <main class="relative z-10 min-h-screen" style="padding: 28px 32px 28px 104px;">
+            <section class="tasks-page-shell">
+                <header class="tasks-page-title-row"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+                    <i class="ri-task-line"></i>
+                    <h1>Tarefas</h1>
+                </header>
+
+                <section class="tasks-filter-bar">
+                    <div class="tasks-filter-left">
+                        <label class="tasks-search-wrap" for="search-input">
+                            <i class="ri-search-line"></i>
+                            <input type="text" id="search-input" placeholder="Buscar...">
+                        </label>
+
+                        <label class="tasks-select-wrap">
+                            <select id="status-filter">
+                                <option value="" selected="">Todos os Status</option>
+                                <option value="pending">Pendente</option>
+                                <option value="in_progress">Em Andamento</option>
+                                <option value="completed">Concluída</option>
+                                <option value="cancelled">Cancelada</option>
+                            </select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+
+                        <label class="tasks-select-wrap">
+                            <select id="priority-filter">
+                                <option value="" selected="">Todas as Prioridades</option>
+                                <option value="urgent">Urgente</option>
+                                <option value="high">Alta</option>
+                                <option value="medium">Média</option>
+                                <option value="low">Baixa</option>
+                            </select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+
+                        <label class="tasks-select-wrap">
+                            <select id="assignee-filter"><option value="" selected="">Todos os Responsáveis</option><option value="usr-ana">Ana Souza</option><option value="usr-carla">Carla Dias</option><option value="usr-bruno">Bruno Lima</option></select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+
+                        <label class="tasks-select-wrap">
+                            <select id="project-filter"><option value="" selected="">Todos os Projetos</option><option value="prj-rotina">Rotina comercial</option><option value="prj-natal">Campanha de Natal</option><option value="prj-reativar">Reativação de clientes</option><option value="prj-litoral">Expansão Litoral</option></select>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </label>
+                    </div>
+
+                    <div class="tasks-filter-actions">
+                        <button id="new-project-btn" type="button" class="tasks-btn tasks-btn-subtle">
+                            <i class="ri-folder-add-line"></i>
+                            Novo Projeto
+                        </button>
+                        <button id="new-task-btn" type="button" class="tasks-btn tasks-btn-primary">
+                            <i class="ri-add-line"></i>
+                            Nova Tarefa
+                        </button>
+                    </div>
+                </section>
+
+                <section class="tasks-kpi-grid" id="tasks-stats">
+                    <article class="tasks-kpi-card">
+                        <div class="tasks-kpi-value tone-blue" id="stat-total">17</div>
+                        <div class="tasks-kpi-label">TOTAL</div>
+                    </article>
+                    <article class="tasks-kpi-card">
+                        <div class="tasks-kpi-value tone-orange" id="stat-pending">6</div>
+                        <div class="tasks-kpi-label">PENDENTES</div>
+                    </article>
+                    <article class="tasks-kpi-card">
+                        <div class="tasks-kpi-value tone-navy" id="stat-in-progress">3</div>
+                        <div class="tasks-kpi-label">EM ANDAMENTO</div>
+                    </article>
+                    <article class="tasks-kpi-card">
+                        <div class="tasks-kpi-value tone-red" id="stat-overdue">2</div>
+                        <div class="tasks-kpi-label">VENCIDAS</div>
+                    </article>
+                    <article class="tasks-kpi-card">
+                        <div class="tasks-kpi-value tone-green" id="stat-completed">5</div>
+                        <div class="tasks-kpi-label">CONCLUÍDAS</div>
+                    </article>
+                    <article class="tasks-kpi-card">
+                        <div class="tasks-kpi-value tone-gray" id="stat-cancelled">1</div>
+                        <div class="tasks-kpi-label">CANCELADAS</div>
+                    </article>
+                </section>
+
+                <section class="tasks-table-shell">
+                    <div id="tasks-loading" class="tasks-loading" style="display: none;">
+                        <i class="ri-loader-4-line animate-spin"></i>
+                        <span>Carregando tarefas...</span>
+                    </div>
+
+                    <div id="tasks-empty" class="tasks-empty hidden">
+                        <div class="emoji">📋</div>
+                        <div class="title">Nenhuma tarefa encontrada</div>
+                        <div class="subtitle">Tente ajustar os filtros ou criar uma nova tarefa.</div>
+                        <button type="button" class="tasks-btn tasks-btn-primary">
+                            <i class="ri-add-line"></i>
+                            Criar Tarefa
+                        </button>
+                    </div>
+
+                    <div id="tasks-list" class="tasks-list-wrap">
+                        <table class="tasks-table">
+                            <thead>
+                                <tr>
+                                    <th><button type="button" class="tasks-sort" data-sort-key="title">TAREFA <i class="ri-arrow-up-down-line"></i></button></th>
+                                    <th><button type="button" class="tasks-sort" data-sort-key="status">STATUS <i class="ri-arrow-up-down-line"></i></button></th>
+                                    <th><button type="button" class="tasks-sort" data-sort-key="priority">PRIORIDADE <i class="ri-arrow-up-down-line"></i></button></th>
+                                    <th><button type="button" class="tasks-sort" data-sort-key="assigned_to_name">RESPONSÁVEL <i class="ri-arrow-up-down-line"></i></button></th>
+                                    <th>DESCRIÇÃO</th>
+                                    <th><button type="button" class="tasks-sort is-active" data-sort-key="due_date">VENCIMENTO <i class="ri-arrow-up-line"></i></button></th>
+                                    <th>ANEXOS</th>
+                                    <th>AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tasks-table-body">
+            <tr class="" data-task-id="t-14" style="animation-delay:0ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Criar display de balcão para padarias</div>
+                        <div class="project" style="color:#F56565;">
+                            <span class="dot" style="background:#F56565"></span>Campanha de Natal
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-cancelled">Cancelada</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-low">
+                        <span class="dot"></span>
+                        Baixa
+                    </span>
+                </td>
+                <td>
+                    <span class="tasks-responsavel"><span class="none">Não atribuído</span></span>
+                </td>
+                <td>
+                    <span class="tasks-desc" title="O fornecedor desistiu do modelo de papelão. Aguardar novo orçamento.">O fornecedor desistiu do modelo de papelão. Aguardar novo orçamento.</span>
+                </td>
+                <td>
+                    <span class="tasks-due overdue">6 dias atrás</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-12" style="animation-delay:40ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Atualizar a tabela de preços com o reajuste dos biscoitos</div>
+                        <div class="project" style="color:#8896A6;">
+                            Sem projeto
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-completed">Concluída</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-high">
+                        <span class="dot"></span>
+                        Alta
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Reajuste de 4% na linha de biscoitos, válido a partir de 1º de outubro.">Reajuste de 4% na linha de biscoitos, válido a partir de 1º de outubro.</span>
+                </td>
+                <td>
+                    <span class="tasks-due overdue">4 dias atrás</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-03" style="animation-delay:80ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Cobrar boleto vencido da Padaria Estrela</div>
+                        <div class="project" style="color:#4A6FA5;">
+                            <span class="dot" style="background:#4A6FA5"></span>Rotina comercial
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-urgent">
+                        <span class="dot"></span>
+                        Urgente
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4FD1C5">C</span>
+                            <span class="name">Carla Dias</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Pedido 2198, vencido desde o dia 28. Mandar a segunda via.">Pedido 2198, vencido desde o dia 28. Mandar a segunda via.</span>
+                </td>
+                <td>
+                    <span class="tasks-due overdue">3 dias atrás</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-15" style="animation-delay:120ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Confirmar prazo de entrega para Santos</div>
+                        <div class="project" style="color:#48BB78;">
+                            <span class="dot" style="background:#48BB78"></span>Expansão Litoral
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-completed">Concluída</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-medium">
+                        <span class="dot"></span>
+                        Média
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Responder à Distribuidora Litoral: 3 dias úteis.">Responder à Distribuidora Litoral: 3 dias úteis.</span>
+                </td>
+                <td>
+                    <span class="tasks-due overdue">2 dias atrás</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-06" style="animation-delay:160ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Enviar o catálogo de outubro ao Empório Central</div>
+                        <div class="project" style="color:#4A6FA5;">
+                            <span class="dot" style="background:#4A6FA5"></span>Rotina comercial
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-completed">Concluída</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-medium">
+                        <span class="dot"></span>
+                        Média
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Pediram o catálogo novo pelo WhatsApp.">Pediram o catálogo novo pelo WhatsApp.</span>
+                </td>
+                <td>
+                    <span class="tasks-due overdue">1 dia atrás</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-08" style="animation-delay:200ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Ligar para Ricardo Santos (sem pedido há 4 meses)</div>
+                        <div class="project" style="color:#F6AD55;">
+                            <span class="dot" style="background:#F6AD55"></span>Reativação de clientes
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-medium">
+                        <span class="dot"></span>
+                        Média
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#B794F4">B</span>
+                            <span class="name">Bruno Lima</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Oferecer condição especial de retorno no primeiro pedido.">Oferecer condição especial de retorno no primeiro pedido.</span>
+                </td>
+                <td>
+                    <span class="tasks-due overdue">1 dia atrás</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-17" style="animation-delay:240ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Enviar a segunda via do boleto ao Pedro Almeida</div>
+                        <div class="project" style="color:#4A6FA5;">
+                            <span class="dot" style="background:#4A6FA5"></span>Rotina comercial
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-completed">Concluída</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-low">
+                        <span class="dot"></span>
+                        Baixa
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Pedido 2231, vencimento dia 15.">Pedido 2231, vencimento dia 15.</span>
+                </td>
+                <td>
+                    <span class="tasks-due overdue">1 dia atrás</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-01" style="animation-delay:280ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Enviar tabela de atacado para Fernanda Oliveira</div>
+                        <div class="project" style="color:#4A6FA5;">
+                            <span class="dot" style="background:#4A6FA5"></span>Rotina comercial
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-high">
+                        <span class="dot"></span>
+                        Alta
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#B794F4">B</span>
+                            <span class="name">Bruno Lima</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Loja nova em Osasco, chegou pelo Instagram. Mandar tabela e pedido mínimo.">Loja nova em Osasco, chegou pelo Instagram. Mandar tabela e pedido mínimo.</span>
+                </td>
+                <td>
+                    <span class="tasks-due today">Hoje</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-10" style="animation-delay:320ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Lançar o pedido da semana do Supermercado Avenida</div>
+                        <div class="project" style="color:#4A6FA5;">
+                            <span class="dot" style="background:#4A6FA5"></span>Rotina comercial
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-completed">Concluída</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-high">
+                        <span class="dot"></span>
+                        Alta
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4FD1C5">C</span>
+                            <span class="name">Carla Dias</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Mesmas quantidades da semana passada (planilha em anexo).">Mesmas quantidades da semana passada (planilha em anexo).</span>
+                </td>
+                <td>
+                    <span class="tasks-due today">Hoje</span>
+                </td>
+                <td>
+                    
+                        <button type="button" class="tasks-attachment-pill" title="Pedido_Semana_41.xlsx">
+                            <i class="ri-attachment-2"></i> xlsx
+                        </button>
+                    
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-02" style="animation-delay:360ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Responder proposta de 8% do Atacadão do Vale</div>
+                        <div class="project" style="color:#4A6FA5;">
+                            <span class="dot" style="background:#4A6FA5"></span>Rotina comercial
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-in-progress">Em Andamento</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-urgent">
+                        <span class="dot"></span>
+                        Urgente
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#B794F4">B</span>
+                            <span class="name">Bruno Lima</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Volume de 200 caixas. Confirmar a margem com a fábrica até quarta.">Volume de 200 caixas. Confirmar a margem com a fábrica até quarta.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">Em 1 dia</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-04" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Visitar a Distribuidora Litoral em Santos</div>
+                        <div class="project" style="color:#48BB78;">
+                            <span class="dot" style="background:#48BB78"></span>Expansão Litoral
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-high">
+                        <span class="dot"></span>
+                        Alta
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Apresentar o display novo e combinar entregas às terças e quintas.">Apresentar o display novo e combinar entregas às terças e quintas.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">Em 3 dias</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-07" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Fechar contrato trimestral com a Rede Econômica</div>
+                        <div class="project" style="color:#4A6FA5;">
+                            <span class="dot" style="background:#4A6FA5"></span>Rotina comercial
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-in-progress">Em Andamento</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-urgent">
+                        <span class="dot"></span>
+                        Urgente
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4FD1C5">C</span>
+                            <span class="name">Carla Dias</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Preço mantido por 3 meses. Falta a minuta assinada pelo setor de compras.">Preço mantido por 3 meses. Falta a minuta assinada pelo setor de compras.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">Em 4 dias</span>
+                </td>
+                <td>
+                    
+                        <button type="button" class="tasks-attachment-pill" title="Minuta_Contrato_Rede_Economica.docx">
+                            <i class="ri-attachment-2"></i> docx
+                        </button>
+                    
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-09" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Reativar a Mercearia São José</div>
+                        <div class="project" style="color:#F6AD55;">
+                            <span class="dot" style="background:#F6AD55"></span>Reativação de clientes
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-low">
+                        <span class="dot"></span>
+                        Baixa
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#B794F4">B</span>
+                            <span class="name">Bruno Lima</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Último pedido em maio. Verificar se trocou de fornecedor.">Último pedido em maio. Verificar se trocou de fornecedor.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">Em 6 dias</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-13" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Separar amostras dos lançamentos para Patrícia Gomes</div>
+                        <div class="project" style="color:#8896A6;">
+                            Sem projeto
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-low">
+                        <span class="dot"></span>
+                        Baixa
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4FD1C5">C</span>
+                            <span class="name">Carla Dias</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Cliente VIP. Levar na próxima visita a Campinas.">Cliente VIP. Levar na próxima visita a Campinas.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">Em 7 dias</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-05" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Montar kits de Natal para supermercados</div>
+                        <div class="project" style="color:#F56565;">
+                            <span class="dot" style="background:#F56565"></span>Campanha de Natal
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-in-progress">Em Andamento</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-high">
+                        <span class="dot"></span>
+                        Alta
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Definir o mix de biscoitos e panetones com o fornecedor.">Definir o mix de biscoitos e panetones com o fornecedor.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">15/10/2026</span>
+                </td>
+                <td>
+                    
+                        <button type="button" class="tasks-attachment-pill" title="Kits_Natal_2026.xlsx">
+                            <i class="ri-attachment-2"></i> xlsx
+                        </button>
+                    
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-11" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Prospectar 10 mercados em São Vicente e Guarujá</div>
+                        <div class="project" style="color:#48BB78;">
+                            <span class="dot" style="background:#48BB78"></span>Expansão Litoral
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-medium">
+                        <span class="dot"></span>
+                        Média
+                    </span>
+                </td>
+                <td>
+                    
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                    
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Levantar contatos e agendar visitas para novembro.">Levantar contatos e agendar visitas para novembro.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">19/10/2026</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        
+            <tr class="" data-task-id="t-16" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Revisar as metas de vendas do 4º trimestre</div>
+                        <div class="project" style="color:#8896A6;">
+                            Sem projeto
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-pending">Pendente</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-medium">
+                        <span class="dot"></span>
+                        Média
+                    </span>
+                </td>
+                <td>
+                    <span class="tasks-responsavel"><span class="none">Não atribuído</span></span>
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Comparar com o mesmo período do ano passado, por cliente.">Comparar com o mesmo período do ano passado, por cliente.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">Sem prazo</span>
+                </td>
+                <td>
+                    <span class="tasks-attachment-empty">—</span>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <span id="tasks-count" class="sr-only" aria-hidden="true">17</span>
+            </section>
+        </main>
+    </div>
+
+    <div id="task-modal" class="modal tasks-modal">
+        <div class="tasks-modal-content tasks-modal-lg" role="dialog" aria-modal="true" aria-labelledby="task-modal-title">
+            <div class="tasks-modal-header">
+                <h3 id="task-modal-title"><i class="ri-add-line"></i>Nova Tarefa</h3>
+                <button type="button" class="tasks-close-btn close-btn" data-modal-close="" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <form id="task-form" class="tasks-modal-form">
+                <div class="tasks-modal-body">
+                    <div class="tasks-field-full">
+                        <label for="task-title">Título <span>*</span></label>
+                        <input type="text" id="task-title" name="task-title" required="">
+                    </div>
+
+                    <div class="tasks-field-grid two">
+                        <div>
+                            <label for="task-project">Projeto</label>
+                            <select id="task-project" name="task-project">
+                                <option value="" selected="">Sem projeto</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="task-priority">Prioridade <span>*</span></label>
+                            <select id="task-priority" name="task-priority" required="">
+                                <option value="urgent">Urgente</option>
+                                <option value="high">Alta</option>
+                                <option value="medium" selected="">Média</option>
+                                <option value="low">Baixa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="tasks-field-grid two">
+                        <div>
+                            <label for="task-status">Status <span>*</span></label>
+                            <select id="task-status" name="task-status" required="">
+                                <option value="pending" selected="">Pendente</option>
+                                <option value="in_progress">Em Andamento</option>
+                                <option value="completed">Concluída</option>
+                                <option value="cancelled">Cancelada</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="task-assignee">Responsável</label>
+                            <select id="task-assignee" name="task-assignee">
+                                <option value="" selected="">Não atribuído</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="tasks-field-full">
+                        <label for="task-due-date">Data de Vencimento</label>
+                        <input type="date" id="task-due-date" name="task-due-date">
+                    </div>
+
+                    <div class="tasks-field-full">
+                        <label for="task-description">Descrição</label>
+                        <textarea id="task-description" name="task-description" rows="4" placeholder="Descreva a tarefa..."></textarea>
+                    </div>
+
+                    <div class="tasks-field-full">
+                        <label>Anexos</label>
+                        <div id="task-attachments-list" class="tasks-attachment-list"></div>
+                        <div id="task-pending-list" class="tasks-attachment-list"></div>
+
+                        <div id="task-attachment-dropzone" class="tasks-dropzone">
+                            <input type="file" id="task-attachment-input" multiple="">
+                            <div class="tasks-dropzone-content">
+                                <i class="ri-upload-cloud-2-line"></i>
+                                <span>Clique ou arraste arquivos aqui</span>
+                                <small>PDF, DOCX, XLSX, Imagens (max 10MB)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tasks-modal-footer">
+                    <button type="button" class="tasks-btn tasks-btn-cancel close-btn" data-modal-close="">Cancelar</button>
+                    <button type="submit" id="task-submit-btn" class="tasks-btn tasks-btn-primary">Salvar Tarefa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="project-modal" class="modal tasks-modal">
+        <div class="tasks-modal-content" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+            <div class="tasks-modal-header">
+                <h3 id="project-modal-title"><i class="ri-folder-add-line"></i>Novo Projeto</h3>
+                <button type="button" class="tasks-close-btn close-btn" data-modal-close="" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <form id="project-form" class="tasks-modal-form">
+                <div class="tasks-modal-body">
+                    <div class="tasks-field-full">
+                        <label for="project-name">Nome do Projeto <span>*</span></label>
+                        <input type="text" id="project-name" name="project-name" required="">
+                    </div>
+
+                    <div class="tasks-field-full">
+                        <label for="project-color">Cor</label>
+                        <input type="hidden" id="project-color" name="project-color" value="#4A6FA5">
+                        <div class="tasks-color-picker" id="project-color-palette">
+                            <button type="button" class="tasks-color-dot is-active" data-project-color="#4A6FA5" style="background:#4A6FA5;color:#4A6FA5"></button>
+                            <button type="button" class="tasks-color-dot" data-project-color="#48BB78" style="background:#48BB78;color:#48BB78"></button>
+                            <button type="button" class="tasks-color-dot" data-project-color="#F6AD55" style="background:#F6AD55;color:#F6AD55"></button>
+                            <button type="button" class="tasks-color-dot" data-project-color="#F56565" style="background:#F56565;color:#F56565"></button>
+                            <button type="button" class="tasks-color-dot" data-project-color="#B794F4" style="background:#B794F4;color:#B794F4"></button>
+                            <button type="button" class="tasks-color-dot" data-project-color="#ECC94B" style="background:#ECC94B;color:#ECC94B"></button>
+                        </div>
+                    </div>
+
+                    <div class="tasks-field-full">
+                        <label for="project-description">Descrição</label>
+                        <textarea id="project-description" name="project-description" rows="3" placeholder="Descreva o projeto..."></textarea>
+                    </div>
+                </div>
+
+                <div class="tasks-modal-footer">
+                    <button type="button" class="tasks-btn tasks-btn-cancel close-btn" data-modal-close="">Cancelar</button>
+                    <button type="submit" id="project-submit-btn" class="tasks-btn tasks-btn-primary">Criar Projeto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="attachment-preview-modal" class="modal tasks-modal">
+        <div class="tasks-modal-content tasks-attachment-preview-modal" role="dialog" aria-modal="true" aria-labelledby="attachment-preview-title">
+            <div class="tasks-modal-header">
+                <h3><i class="ri-attachment-2"></i><span id="attachment-preview-title">Anexo</span></h3>
+                <button type="button" id="attachment-preview-close" class="tasks-close-btn close-btn" data-modal-close="" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="tasks-attachment-preview-shell">
+                <aside id="attachment-preview-list" class="tasks-attachment-preview-list"></aside>
+                <section class="tasks-attachment-preview-main">
+                    <div class="tasks-attachment-preview-toolbar">
+                        <span id="attachment-preview-meta"></span>
+                        <a id="attachment-preview-open" href="#" target="_blank" rel="noopener noreferrer" class="tasks-btn tasks-btn-subtle">
+                            <i class="ri-external-link-line"></i>
+                            Abrir em nova aba
+                        </a>
+                    </div>
+                    <div id="attachment-preview-body" class="tasks-attachment-preview-body"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-confirm-modal" class="modal tasks-modal">
+        <div class="tasks-modal-content" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title">
+            <div class="tasks-modal-header">
+                <h3 id="delete-confirm-title"><i class="ri-delete-bin-line"></i>Excluir Tarefa</h3>
+                <button type="button" class="tasks-close-btn close-btn" data-modal-close="" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="tasks-modal-body">
+                <p id="delete-confirm-message" class="tasks-confirm-message"></p>
+            </div>
+            <div class="tasks-modal-footer">
+                <button type="button" id="delete-confirm-cancel" class="tasks-btn tasks-btn-cancel close-btn" data-modal-close="">Cancelar</button>
+                <button type="button" id="delete-confirm-ok" class="tasks-btn tasks-btn-danger">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div>
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/tasks.html). Para recapturar sem perder este bloco:
+     node tools/capture/montar.mjs tasks -->
+<!-- Moldes: marcação do próprio app para montar linhas e estados que só existem depois de um
+     clique. O script abaixo só clona e preenche. Capturas (fixtures em
+     tools/capture/fixtures/tasks.js):
+       tasks           "/tasks.html"                      linha completa (t-05) e variações vazias
+       tasks-editar    "@tr[data-task-id='t-07'] .tasks-icon-btn.edit" + js: arquivo no
+                       #task-attachment-input (linha de anexo e de anexo pendente)
+       tasks-anexo     "@tr[data-task-id='t-10'] .tasks-attachment-pill"
+       tasks-excluir   "@tr[data-task-id='t-14'] .tasks-icon-btn.delete"
+       tasks-concluir  "@tr[data-task-id='t-01'] .tasks-icon-btn.done"   (notificação) -->
+<template id="tasks-moldes">
+<table data-molde="linha"><tbody><tr class="" data-task-id="t-05" style="animation-delay:400ms">
+                <td>
+                    <div class="tasks-task-main">
+                        <div class="title">Montar kits de Natal para supermercados</div>
+                        <div class="project" style="color:#F56565;">
+                            <span class="dot" style="background:#F56565"></span>Campanha de Natal
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="tasks-pill tasks-status-in-progress">Em Andamento</span>
+                </td>
+                <td>
+                    <span class="tasks-pill priority tasks-priority-high">
+                        <span class="dot"></span>
+                        Alta
+                    </span>
+                </td>
+                <td>
+                        <div class="tasks-responsavel">
+                            <span class="avatar" style="background:#4A6FA5">A</span>
+                            <span class="name">Ana Souza</span>
+                        </div>
+                </td>
+                <td>
+                    <span class="tasks-desc" title="Definir o mix de biscoitos e panetones com o fornecedor.">Definir o mix de biscoitos e panetones com o fornecedor.</span>
+                </td>
+                <td>
+                    <span class="tasks-due normal">15/10/2026</span>
+                </td>
+                <td>
+                        <button type="button" class="tasks-attachment-pill" title="Kits_Natal_2026.xlsx">
+                            <i class="ri-attachment-2"></i> xlsx
+                        </button>
+                </td>
+                <td>
+                    <div class="tasks-actions">
+                        <button class="tasks-icon-btn edit" title="Editar tarefa">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn done" title="Marcar como concluída">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </button>
+                        <button class="tasks-icon-btn delete" title="Excluir tarefa">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr></tbody></table>
+<div data-molde="sem-projeto"><div class="project" style="color:#8896A6;">
+                            Sem projeto
+                        </div></div>
+<div data-molde="sem-responsavel"><span class="tasks-responsavel"><span class="none">Não atribuído</span></span></div>
+<div data-molde="sem-anexo"><span class="tasks-attachment-empty">—</span></div>
+<div data-molde="anexo"><div class="tasks-attachment-row">
+                    <button type="button" class="tasks-attachment-link" title="Visualizar">
+                        <i class="ri-file-word-2-line text-blue-500"></i>
+                        <div class="tasks-attachment-meta">
+                            <span class="name">Minuta_Contrato_Rede_Economica.docx</span>
+                            <span class="size">84 KB</span>
+                        </div>
+                    </button>
+                    <div class="tasks-attachment-actions">
+                        <button type="button" class="tasks-attachment-remove" title="Remover">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div></div>
+<div data-molde="pendente"><div class="tasks-attachment-row is-pending">
+                    <div class="tasks-attachment-link">
+                        <i class="ri-file-pdf-2-line text-red-500"></i>
+                        <div class="tasks-attachment-meta">
+                            <span class="name">Proposta_Rede_Economica.pdf</span>
+                            <span class="size">Pendente para salvar - 150 KB</span>
+                        </div>
+                    </div>
+                    <div class="tasks-attachment-actions">
+                        <button type="button" class="tasks-attachment-remove" title="Remover anexo">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    </div>
+                </div></div>
+<div data-molde="previa-item"><button type="button" class="tasks-attachment-preview-item is-active">
+                    <i class="ri-file-excel-2-line text-green-500"></i>
+                    <span>Pedido_Semana_41.xlsx</span>
+                </button></div>
+<div data-molde="previa-vazia"><div class="tasks-attachment-preview-empty">
+                <i class="ri-file-excel-2-line text-green-500"></i>
+                <strong>Pedido_Semana_41.xlsx</strong>
+                <span>Este tipo de arquivo não tem pré-visualização embutida.</span>
+                <a href="https://arquivos.exemplo.com.br/tarefas/Pedido_Semana_41.xlsx" target="_blank" rel="noopener noreferrer" class="tasks-btn tasks-btn-primary">Abrir arquivo</a>
+            </div></div>
+<div data-molde="confirmar"><p id="delete-confirm-message" class="tasks-confirm-message">Tem certeza que deseja excluir a tarefa <strong>"Criar display de balcão para padarias"</strong>?<br><span style="color:var(--ds-text-muted);font-size:12px;">Esta ação não pode ser desfeita.</span></p></div>
+<div data-molde="notificacao"><div class="notification-item notification-success transform transition-all duration-300 ease-in-out max-w-sm w-full rounded-lg shadow-lg p-4 flex items-start gap-3 translate-x-0 opacity-100" style="background: var(--ds-surface); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left: 3px solid var(--ds-success); border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; color: var(--ds-text);">
+      <div class="flex-shrink-0">
+        <i class="ri-check-circle-line text-lg" style="color:var(--ds-success)"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium" style="color:var(--ds-text)">Tarefa "Enviar tabela de atacado para Fernanda Oliveira" concluída!</p>
+      </div>
+      <button class="notification-close flex-shrink-0 transition-colors" style="color:var(--ds-text-muted)">
+        <i class="ri-close-line text-sm"></i>
+      </button>
+    </div></div>
+</template>
+<style>
+  /* O aviso do protótipo precisa ficar acima dos modais do app (z-index máximo). */
+  .mockup-aviso { z-index: 2147483647; }
+</style>
+<script>
+(() => {
+  // ---------------------------------------------------------------------------------
+  // Dados fictícios (os mesmos de tools/capture/fixtures/tasks.js). Repositório público.
+  // Vencimento em dias a partir de hoje (null = sem prazo), para as datas acompanharem o dia
+  // em que a página é aberta. Anexos: [arquivo, bytes].
+  // ---------------------------------------------------------------------------------
+  const USUARIOS = [['usr-ana', 'Ana Souza'], ['usr-carla', 'Carla Dias'], ['usr-bruno', 'Bruno Lima']];
+  const PROJETOS = [
+    { id: 'prj-rotina', name: 'Rotina comercial', color: '#4A6FA5' },
+    { id: 'prj-natal', name: 'Campanha de Natal', color: '#F56565' },
+    { id: 'prj-reativar', name: 'Reativação de clientes', color: '#F6AD55' },
+    { id: 'prj-litoral', name: 'Expansão Litoral', color: '#48BB78' },
+  ];
+  // [id, título, descrição, status, prioridade, responsável, projeto, vencimento, anexos]
+  const BASE = [
+    ['t-01', 'Enviar tabela de atacado para Fernanda Oliveira', 'Loja nova em Osasco, chegou pelo Instagram. Mandar tabela e pedido mínimo.', 'pending', 'high', 'usr-bruno', 'prj-rotina', 0],
+    ['t-02', 'Responder proposta de 8% do Atacadão do Vale', 'Volume de 200 caixas. Confirmar a margem com a fábrica até quarta.', 'in_progress', 'urgent', 'usr-bruno', 'prj-rotina', 1],
+    ['t-03', 'Cobrar boleto vencido da Padaria Estrela', 'Pedido 2198, vencido desde o dia 28. Mandar a segunda via.', 'pending', 'urgent', 'usr-carla', 'prj-rotina', -3],
+    ['t-04', 'Visitar a Distribuidora Litoral em Santos', 'Apresentar o display novo e combinar entregas às terças e quintas.', 'pending', 'high', 'usr-ana', 'prj-litoral', 3],
+    ['t-05', 'Montar kits de Natal para supermercados', 'Definir o mix de biscoitos e panetones com o fornecedor.', 'in_progress', 'high', 'usr-ana', 'prj-natal', 10, [['Kits_Natal_2026.xlsx', 48_640]]],
+    ['t-06', 'Enviar o catálogo de outubro ao Empório Central', 'Pediram o catálogo novo pelo WhatsApp.', 'completed', 'medium', 'usr-ana', 'prj-rotina', -1],
+    ['t-07', 'Fechar contrato trimestral com a Rede Econômica', 'Preço mantido por 3 meses. Falta a minuta assinada pelo setor de compras.', 'in_progress', 'urgent', 'usr-carla', 'prj-rotina', 4, [['Minuta_Contrato_Rede_Economica.docx', 86_016]]],
+    ['t-08', 'Ligar para Ricardo Santos (sem pedido há 4 meses)', 'Oferecer condição especial de retorno no primeiro pedido.', 'pending', 'medium', 'usr-bruno', 'prj-reativar', -1],
+    ['t-09', 'Reativar a Mercearia São José', 'Último pedido em maio. Verificar se trocou de fornecedor.', 'pending', 'low', 'usr-bruno', 'prj-reativar', 6],
+    ['t-10', 'Lançar o pedido da semana do Supermercado Avenida', 'Mesmas quantidades da semana passada (planilha em anexo).', 'completed', 'high', 'usr-carla', 'prj-rotina', 0, [['Pedido_Semana_41.xlsx', 22_528]]],
+    ['t-11', 'Prospectar 10 mercados em São Vicente e Guarujá', 'Levantar contatos e agendar visitas para novembro.', 'pending', 'medium', 'usr-ana', 'prj-litoral', 14],
+    ['t-12', 'Atualizar a tabela de preços com o reajuste dos biscoitos', 'Reajuste de 4% na linha de biscoitos, válido a partir de 1º de outubro.', 'completed', 'high', 'usr-ana', null, -4],
+    ['t-13', 'Separar amostras dos lançamentos para Patrícia Gomes', 'Cliente VIP. Levar na próxima visita a Campinas.', 'pending', 'low', 'usr-carla', null, 7],
+    ['t-14', 'Criar display de balcão para padarias', 'O fornecedor desistiu do modelo de papelão. Aguardar novo orçamento.', 'cancelled', 'low', null, 'prj-natal', -6],
+    ['t-15', 'Confirmar prazo de entrega para Santos', 'Responder à Distribuidora Litoral: 3 dias úteis.', 'completed', 'medium', 'usr-ana', 'prj-litoral', -2],
+    ['t-16', 'Revisar as metas de vendas do 4º trimestre', 'Comparar com o mesmo período do ano passado, por cliente.', 'pending', 'medium', null, null, null],
+    ['t-17', 'Enviar a segunda via do boleto ao Pedro Almeida', 'Pedido 2231, vencimento dia 15.', 'completed', 'low', 'usr-ana', 'prj-rotina', -1],
+  ];
+
+  const dataLocal = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const daquiA = (dias) => dataLocal(new Date(Date.now() + dias * 86_400_000));
+  const nomeDoUsuario = (id) => (USUARIOS.find(([u]) => u === id) || [])[1];
+
+  let seqAnexo = 0;
+  function novoAnexo(tarefaId, nome, bytes, arquivo) {
+    seqAnexo += 1;
+    return { id: `anx-${seqAnexo}`, taskId: tarefaId, originalName: nome, fileSize: bytes, arquivo };
+  }
+  const tarefas = BASE.map(([id, title, description, status, priority, resp, projeto, vence, anexos = []]) => ({
+    id, title, description, status, priority,
+    assigned_to: resp, project_id: projeto,
+    due_date: vence == null ? '' : daquiA(vence),
+    attachments: anexos.map(([nome, bytes]) => novoAnexo(id, nome, bytes)),
+  }));
+  const projetos = PROJETOS.map((p) => ({ ...p }));
+  const projetoDe = (t) => projetos.find((p) => p.id === t.project_id);
+
+  // ---------------------------------------------------------------------------------
+  // Utilitários e regras do app (tasks.ts)
+  // ---------------------------------------------------------------------------------
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const todos = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+  const moldes = $('#tasks-moldes').content;
+  const molde = (nome) => (nome === 'linha'
+    ? moldes.querySelector('[data-molde="linha"] tr')
+    : moldes.querySelector(`[data-molde="${nome}"]`).firstElementChild).cloneNode(true);
+  const avisar = (texto) => window.mockup.avisar(texto);
+
+  const STATUS = {
+    pending: ['Pendente', 'tasks-status-pending'],
+    in_progress: ['Em Andamento', 'tasks-status-in-progress'],
+    review: ['Em Revisão', 'tasks-status-review'],
+    completed: ['Concluída', 'tasks-status-completed'],
+    cancelled: ['Cancelada', 'tasks-status-cancelled'],
+  };
+  const PRIORIDADE = {
+    low: ['Baixa', 'tasks-priority-low'],
+    medium: ['Média', 'tasks-priority-medium'],
+    high: ['Alta', 'tasks-priority-high'],
+    urgent: ['Urgente', 'tasks-priority-urgent'],
+  };
+
+  function corDoAvatar(nome) {
+    const paleta = ['#4A6FA5', '#48BB78', '#F6AD55', '#B794F4', '#4FD1C5', '#F56565'];
+    let hash = 0;
+    for (let i = 0; i < nome.length; i += 1) hash = (hash * 31 + nome.charCodeAt(i)) >>> 0;
+    return paleta[hash % paleta.length];
+  }
+  // Hoje o app mostra só a primeira letra (o split dele não separa os nomes); igual aqui.
+  const iniciais = (nome) => nome.trim().charAt(0).toUpperCase();
+
+  const meiaNoite = (iso) => { const d = new Date(`${iso}T00:00:00`); d.setHours(0, 0, 0, 0); return d; };
+  const hoje = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+  function rotuloDoVencimento(iso) {
+    if (!iso) return 'Sem prazo';
+    const data = meiaNoite(iso);
+    const diff = Math.round((data - hoje()) / 86_400_000);
+    if (diff < 0) return `${Math.abs(diff)} ${Math.abs(diff) === 1 ? 'dia' : 'dias'} atrás`;
+    if (diff === 0) return 'Hoje';
+    if (diff <= 7) return `Em ${diff} ${diff === 1 ? 'dia' : 'dias'}`;
+    return `${String(data.getDate()).padStart(2, '0')}/${String(data.getMonth() + 1).padStart(2, '0')}/${data.getFullYear()}`;
+  }
+  const vencida = (t) => t.status === 'pending' && t.due_date && meiaNoite(t.due_date) < hoje();
+
+  function iconeDoArquivo(nome) {
+    const ext = nome.split('.').pop().toLowerCase();
+    if (ext === 'pdf') return 'ri-file-pdf-2-line text-red-500';
+    if (ext === 'doc' || ext === 'docx') return 'ri-file-word-2-line text-blue-500';
+    if (['xls', 'xlsx', 'csv'].includes(ext)) return 'ri-file-excel-2-line text-green-500';
+    if (['jpg', 'jpeg', 'png'].includes(ext)) return 'ri-image-2-line text-purple-500';
+    return 'ri-file-3-line text-gray-400';
+  }
+  function formatarBytes(bytes) {
+    if (!+bytes) return '0 Bytes';
+    const k = 1024;
+    const tamanhos = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return `${parseFloat((bytes / k ** i).toFixed(2))} ${tamanhos[i]}`;
+  }
+
+  // Troca o último texto solto de um elemento (ex.: "Alta" depois da bolinha da prioridade).
+  function trocarTexto(el, texto) {
+    const nos = [...el.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+    if (nos.length) nos[nos.length - 1].textContent = texto; else el.append(texto);
+  }
+
+  // Notificação do app (canto superior direito), com as cores e ícones por tipo.
+  const TIPOS_NOTIFICACAO = {
+    success: ['var(--ds-success)', 'ri-check-circle-line'],
+    error: ['var(--ds-danger)', 'ri-error-warning-line'],
+    warning: ['var(--ds-warning)', 'ri-alert-line'],
+    info: ['var(--ds-primary)', 'ri-information-line'],
+  };
+  function notificar(texto, tipo = 'success') {
+    const [cor, icone] = TIPOS_NOTIFICACAO[tipo];
+    const el = molde('notificacao');
+    el.classList.remove('notification-success', 'translate-x-0', 'opacity-100');
+    el.classList.add(`notification-${tipo}`, 'translate-x-full', 'opacity-0');
+    el.style.borderLeft = `3px solid ${cor}`;
+    const i = $('i', el);
+    i.className = `${icone} text-lg`;
+    i.style.color = cor;
+    $('p', el).textContent = texto;
+    $('#notification-container').appendChild(el);
+    const sair = () => {
+      el.classList.remove('translate-x-0', 'opacity-100');
+      el.classList.add('translate-x-full', 'opacity-0');
+      setTimeout(() => el.remove(), 300);
+    };
+    setTimeout(() => { el.classList.remove('translate-x-full', 'opacity-0'); el.classList.add('translate-x-0', 'opacity-100'); }, 10);
+    setTimeout(sair, 4000);
+    $('.notification-close', el).addEventListener('click', sair);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Lista: filtros, ordenação, indicadores e linhas
+  // ---------------------------------------------------------------------------------
+  const corpo = $('#tasks-table-body');
+  const filtros = { search: '', status: '', priority: '', assigned_to: '', project_id: '' };
+  let ordem = { chave: 'due_date', direcao: 'asc' };
+  let piscando = null;
+
+  function valorParaOrdenar(t, chave) {
+    if (chave === 'due_date') return t.due_date ? meiaNoite(t.due_date).getTime() : Number.MAX_SAFE_INTEGER;
+    if (chave === 'assigned_to_name') return (nomeDoUsuario(t.assigned_to) || '').toLowerCase();
+    return String(t[chave] || '').toLowerCase();
+  }
+
+  function filtradas() {
+    const termo = filtros.search.toLowerCase();
+    const lista = tarefas.filter((t) => {
+      if (termo && !`${t.title} ${t.description || ''} ${projetoDe(t)?.name || ''} ${nomeDoUsuario(t.assigned_to) || ''}`.toLowerCase().includes(termo)) return false;
+      if (filtros.status && t.status !== filtros.status) return false;
+      if (filtros.priority && t.priority !== filtros.priority) return false;
+      if (filtros.assigned_to && t.assigned_to !== filtros.assigned_to) return false;
+      if (filtros.project_id && t.project_id !== filtros.project_id) return false;
+      return true;
+    });
+    const sinal = ordem.direcao === 'asc' ? 1 : -1;
+    return lista.sort((a, b) => {
+      const va = valorParaOrdenar(a, ordem.chave);
+      const vb = valorParaOrdenar(b, ordem.chave);
+      return va < vb ? -sinal : (va > vb ? sinal : 0);
+    });
+  }
+
+  function linhaDa(t, indice) {
+    const tr = molde('linha');
+    const celulas = todos(':scope > td', tr);
+    tr.dataset.taskId = t.id;
+    tr.className = piscando === t.id ? 'tasks-flash' : '';
+    tr.style.animationDelay = `${Math.min(indice * 40, 400)}ms`;
+
+    $('.title', tr).textContent = t.title;
+    const projeto = projetoDe(t);
+    if (projeto) {
+      const caixa = $('.project', tr);
+      caixa.style.color = projeto.color;
+      $('.dot', caixa).style.background = projeto.color;
+      trocarTexto(caixa, projeto.name);
+    } else {
+      $('.project', tr).replaceWith(molde('sem-projeto'));
+    }
+
+    const [rotuloStatus, classeStatus] = STATUS[t.status];
+    const status = $('.tasks-pill', celulas[1]);
+    status.className = `tasks-pill ${classeStatus}`;
+    status.textContent = rotuloStatus;
+
+    const [rotuloPrioridade, classePrioridade] = PRIORIDADE[t.priority];
+    const prioridade = $('.tasks-pill', celulas[2]);
+    prioridade.className = `tasks-pill priority ${classePrioridade}`;
+    trocarTexto(prioridade, rotuloPrioridade);
+
+    const responsavel = nomeDoUsuario(t.assigned_to);
+    if (responsavel) {
+      const avatar = $('.avatar', celulas[3]);
+      avatar.style.background = corDoAvatar(responsavel);
+      avatar.textContent = iniciais(responsavel);
+      $('.name', celulas[3]).textContent = responsavel;
+    } else {
+      celulas[3].replaceChildren(molde('sem-responsavel'));
+    }
+
+    const descricao = $('.tasks-desc', celulas[4]);
+    descricao.textContent = t.description || '—';
+    descricao.title = t.description || '—';
+
+    const vencimento = $('.tasks-due', celulas[5]);
+    const rotulo = rotuloDoVencimento(t.due_date);
+    vencimento.className = `tasks-due ${rotulo === 'Hoje' ? 'today' : (rotulo.includes('atrás') ? 'overdue' : 'normal')}`;
+    vencimento.textContent = rotulo;
+
+    // Coluna de anexos: a listagem do app mostra a extensão do primeiro e "+N".
+    const pilula = $('.tasks-attachment-pill', celulas[6]);
+    if (t.attachments.length) {
+      const primeiro = t.attachments[0];
+      pilula.title = primeiro.originalName;
+      trocarTexto(pilula, ` ${(primeiro.originalName.split('.').pop() || 'file').toLowerCase()}${t.attachments.length > 1 ? ` +${t.attachments.length - 1}` : ''}`);
+    } else {
+      pilula.replaceWith(molde('sem-anexo'));
+    }
+    return tr;
+  }
+
+  function atualizarIndicadores(lista) {
+    const valores = {
+      'stat-total': lista.length,
+      'stat-pending': lista.filter((t) => t.status === 'pending' && !vencida(t)).length,
+      'stat-in-progress': lista.filter((t) => t.status === 'in_progress' || t.status === 'review').length,
+      'stat-overdue': lista.filter(vencida).length,
+      'stat-completed': lista.filter((t) => t.status === 'completed').length,
+      'stat-cancelled': lista.filter((t) => t.status === 'cancelled').length,
+    };
+    for (const [id, n] of Object.entries(valores)) $(`#${id}`).textContent = String(n);
+  }
+
+  function renderizar() {
+    const lista = filtradas();
+    $('#tasks-empty').classList.toggle('hidden', lista.length > 0);
+    $('#tasks-list').classList.toggle('hidden', lista.length === 0);
+    corpo.replaceChildren(...lista.map(linhaDa));
+    $('#tasks-count').textContent = String(lista.length);
+    atualizarIndicadores(lista);
+  }
+
+  function sincronizarCabecalhos() {
+    for (const botao of todos('.tasks-sort')) {
+      const ativo = botao.dataset.sortKey === ordem.chave;
+      botao.classList.toggle('is-active', ativo);
+      $('i', botao).className = !ativo ? 'ri-arrow-up-down-line' : (ordem.direcao === 'asc' ? 'ri-arrow-up-line' : 'ri-arrow-down-line');
+    }
+  }
+
+  let timerBusca;
+  $('#search-input').addEventListener('input', (ev) => {
+    clearTimeout(timerBusca);
+    timerBusca = setTimeout(() => { filtros.search = ev.target.value; renderizar(); }, 300);
+  });
+  [['#status-filter', 'status'], ['#priority-filter', 'priority'], ['#assignee-filter', 'assigned_to'], ['#project-filter', 'project_id']].forEach(([sel, chave]) => {
+    $(sel).addEventListener('change', (ev) => { filtros[chave] = ev.target.value; renderizar(); });
+  });
+  for (const botao of todos('.tasks-sort')) {
+    botao.addEventListener('click', () => {
+      const chave = botao.dataset.sortKey;
+      ordem = ordem.chave === chave ? { chave, direcao: ordem.direcao === 'asc' ? 'desc' : 'asc' } : { chave, direcao: 'asc' };
+      sincronizarCabecalhos();
+      renderizar();
+    });
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Modais (mesmo mecanismo do app: classe .show + display flex)
+  // ---------------------------------------------------------------------------------
+  function mostrarModal(id) {
+    const modal = $(`#${id}`);
+    modal.classList.add('show');
+    modal.style.display = 'flex';
+  }
+  function fecharModais() {
+    todos('.modal').forEach((m) => { m.classList.remove('show'); m.style.display = 'none'; });
+    tarefaParaExcluir = null;
+  }
+  for (const modal of todos('.modal')) {
+    modal.addEventListener('click', (ev) => {
+      if (ev.target === modal || ev.target.closest('.close-btn, [data-modal-close]')) fecharModais();
+    });
+  }
+
+  // --- Nova tarefa / editar -------------------------------------------------------------
+  const form = $('#task-form');
+  let editando = null;
+  let pendentes = [];
+
+  function opcoes(select, primeira, itens) {
+    select.replaceChildren(new Option(primeira, ''), ...itens.map(([valor, rotulo]) => new Option(rotulo, valor)));
+  }
+  function preencherSelects() {
+    opcoes($('#task-project'), 'Sem projeto', projetos.map((p) => [p.id, p.name]));
+    opcoes($('#task-assignee'), 'Não atribuído', USUARIOS);
+  }
+
+  function renderizarAnexosDoModal() {
+    const lista = $('#task-attachments-list');
+    lista.replaceChildren(...(editando ? editando.attachments : []).map((a) => {
+      const linha = molde('anexo');
+      linha.dataset.anexo = a.id;
+      $('.tasks-attachment-link i', linha).className = iconeDoArquivo(a.originalName);
+      $('.name', linha).textContent = a.originalName;
+      $('.size', linha).textContent = formatarBytes(a.fileSize || 0);
+      return linha;
+    }));
+  }
+  function renderizarPendentes() {
+    $('#task-pending-list').replaceChildren(...pendentes.map((arquivo, i) => {
+      const linha = molde('pendente');
+      linha.dataset.pendente = String(i);
+      $('.tasks-attachment-link i', linha).className = iconeDoArquivo(arquivo.name);
+      $('.name', linha).textContent = arquivo.name;
+      $('.size', linha).textContent = `Pendente para salvar - ${formatarBytes(arquivo.size)}`;
+      return linha;
+    }));
+  }
+  function adicionarArquivos(lista) {
+    for (const arquivo of lista) {
+      if (arquivo.size > 10 * 1024 * 1024) { notificar(`Arquivo ${arquivo.name} excede o limite de 10MB`, 'error'); continue; }
+      pendentes.push(arquivo);
+    }
+    renderizarPendentes();
+  }
+
+  function abrirTarefa(tarefa) {
+    editando = tarefa || null;
+    pendentes = [];
+    form.reset();
+    preencherSelects();
+    const titulo = $('#task-modal-title');
+    $('i', titulo).className = tarefa ? 'ri-edit-line' : 'ri-add-line';
+    trocarTexto(titulo, tarefa ? 'Editar Tarefa' : 'Nova Tarefa');
+    $('#task-submit-btn').textContent = tarefa ? 'Salvar Alterações' : 'Criar Tarefa';
+    if (tarefa) {
+      $('#task-title').value = tarefa.title;
+      $('#task-description').value = tarefa.description || '';
+      $('#task-priority').value = tarefa.priority;
+      $('#task-status').value = tarefa.status === 'review' ? 'in_progress' : tarefa.status;
+      $('#task-project').value = tarefa.project_id || '';
+      $('#task-assignee').value = tarefa.assigned_to || '';
+      $('#task-due-date').value = tarefa.due_date || '';
+    } else {
+      $('#task-due-date').value = dataLocal(new Date());
+    }
+    renderizarAnexosDoModal();
+    renderizarPendentes();
+    mostrarModal('task-modal');
+  }
+
+  form.addEventListener('submit', () => {
+    const dados = {
+      title: $('#task-title').value.trim(),
+      description: $('#task-description').value.trim(),
+      status: $('#task-status').value,
+      priority: $('#task-priority').value,
+      project_id: $('#task-project').value || null,
+      assigned_to: $('#task-assignee').value || null,
+      due_date: $('#task-due-date').value,
+    };
+    let tarefa = editando;
+    if (tarefa) {
+      Object.assign(tarefa, dados);
+    } else {
+      tarefa = { id: `t-nova-${Date.now()}`, ...dados, attachments: [] };
+      tarefas.push(tarefa);
+    }
+    // Os arquivos escolhidos viram anexos da tarefa (no app, sobem depois de salvar).
+    pendentes.forEach((arquivo) => tarefa.attachments.push(novoAnexo(tarefa.id, arquivo.name, arquivo.size, arquivo)));
+    const eraEdicao = Boolean(editando);
+    fecharModais();
+    editando = null;
+    pendentes = [];
+    renderizar();
+    notificar(eraEdicao ? 'Tarefa atualizada com sucesso!' : 'Tarefa criada com sucesso!');
+  });
+
+  $('#task-attachment-input').addEventListener('change', (ev) => {
+    if (ev.target.files.length) adicionarArquivos(ev.target.files);
+    ev.target.value = '';
+  });
+  const zona = $('#task-attachment-dropzone');
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach((tipo) => zona.addEventListener(tipo, (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    zona.classList.toggle('is-drag', tipo === 'dragenter' || tipo === 'dragover');
+    if (tipo === 'drop' && ev.dataTransfer?.files?.length) adicionarArquivos(ev.dataTransfer.files);
+  }));
+
+  $('#task-modal').addEventListener('click', (ev) => {
+    const remover = ev.target.closest('.tasks-attachment-remove');
+    if (remover) {
+      const pendente = remover.closest('[data-pendente]');
+      if (pendente) { pendentes.splice(Number(pendente.dataset.pendente), 1); renderizarPendentes(); return; }
+      const linha = remover.closest('[data-anexo]');
+      if (linha && window.confirm('Tem certeza que deseja remover este anexo?')) {
+        editando.attachments = editando.attachments.filter((a) => a.id !== linha.dataset.anexo);
+        renderizarAnexosDoModal();
+        renderizar();
+        notificar('Anexo removido!');
+      }
+      return;
+    }
+    const link = ev.target.closest('[data-anexo] .tasks-attachment-link');
+    if (link) abrirAnexo(editando.id, link.closest('[data-anexo]').dataset.anexo);
+  });
+
+  // --- Novo projeto ---------------------------------------------------------------------
+  function marcarCorDoProjeto(cor) {
+    $('#project-color').value = cor;
+    todos('.tasks-color-dot').forEach((dot) => dot.classList.toggle('is-active', dot.dataset.projectColor === cor));
+  }
+  $('#project-color-palette').addEventListener('click', (ev) => {
+    const dot = ev.target.closest('[data-project-color]');
+    if (dot) marcarCorDoProjeto(dot.dataset.projectColor);
+  });
+  $('#project-form').addEventListener('submit', () => {
+    const projeto = { id: `prj-novo-${Date.now()}`, name: $('#project-name').value.trim(), color: $('#project-color').value };
+    projetos.push(projeto);
+    const filtro = $('#project-filter');
+    const atual = filtro.value;
+    opcoes(filtro, 'Todos os Projetos', projetos.map((p) => [p.id, p.name]));
+    filtro.value = atual;
+    fecharModais();
+    notificar('Projeto criado com sucesso!');
+  });
+
+  // --- Concluir e excluir ---------------------------------------------------------------
+  function concluir(tarefa) {
+    if (tarefa.status === 'completed') return;
+    tarefa.status = 'completed';
+    piscando = tarefa.id;
+    renderizar();
+    setTimeout(() => { piscando = null; renderizar(); }, 1100);
+    notificar(`Tarefa "${tarefa.title}" concluída!`);
+  }
+
+  let tarefaParaExcluir = null;
+  function pedirExclusao(tarefa) {
+    const mensagem = molde('confirmar');
+    $('strong', mensagem).textContent = `"${tarefa.title}"`;
+    $('#delete-confirm-message').replaceChildren(...mensagem.childNodes);
+    mostrarModal('delete-confirm-modal');
+    tarefaParaExcluir = tarefa;
+  }
+  $('#delete-confirm-ok').addEventListener('click', () => {
+    const tarefa = tarefaParaExcluir;
+    fecharModais();
+    if (!tarefa) return;
+    tarefas.splice(tarefas.indexOf(tarefa), 1);
+    renderizar();
+    notificar('Tarefa excluída com sucesso!');
+  });
+
+  // --- Pré-visualização de anexo --------------------------------------------------------
+  // Os anexos de exemplo são planilhas e documentos (o app não tem prévia embutida para eles).
+  // Arquivo escolhido nesta visita, se for imagem ou PDF, aparece de verdade: mesma imagem ou
+  // quadro com as classes que o app usa.
+  function abrirAnexo(tarefaId, anexoId) {
+    const tarefa = tarefas.find((t) => t.id === tarefaId);
+    const anexo = tarefa.attachments.find((a) => a.id === anexoId) || tarefa.attachments[0];
+    if (!anexo) return;
+    $('#attachment-preview-title').textContent = anexo.originalName;
+    $('#attachment-preview-meta').textContent = formatarBytes(anexo.fileSize || 0);
+    const corpoPrevia = $('#attachment-preview-body');
+    const tipo = anexo.arquivo?.type || '';
+    if (anexo.arquivo && (tipo.startsWith('image/') || tipo === 'application/pdf')) {
+      const el = document.createElement(tipo === 'application/pdf' ? 'iframe' : 'img');
+      el.className = tipo === 'application/pdf' ? 'tasks-attachment-preview-frame' : 'tasks-attachment-preview-image';
+      el.src = URL.createObjectURL(anexo.arquivo);
+      el.title = anexo.originalName;
+      corpoPrevia.replaceChildren(el);
+    } else {
+      const vazio = molde('previa-vazia');
+      $('i', vazio).className = iconeDoArquivo(anexo.originalName);
+      $('strong', vazio).textContent = anexo.originalName;
+      corpoPrevia.replaceChildren(vazio);
+    }
+    $('#attachment-preview-list').replaceChildren(...tarefa.attachments.map((a) => {
+      const item = molde('previa-item');
+      item.classList.toggle('is-active', a.id === anexo.id);
+      item.dataset.tarefa = tarefa.id;
+      item.dataset.anexo = a.id;
+      $('i', item).className = iconeDoArquivo(a.originalName);
+      $('span', item).textContent = a.originalName;
+      return item;
+    }));
+    mostrarModal('attachment-preview-modal');
+  }
+  $('#attachment-preview-modal').addEventListener('click', (ev) => {
+    const item = ev.target.closest('.tasks-attachment-preview-item');
+    if (item) { abrirAnexo(item.dataset.tarefa, item.dataset.anexo); return; }
+    if (ev.target.closest('#attachment-preview-open, .tasks-attachment-preview-empty a')) {
+      ev.preventDefault();
+      avisar('Abrir o arquivo não faz parte deste protótipo');
+    }
+  });
+
+  // ---------------------------------------------------------------------------------
+  // Cliques da página
+  // ---------------------------------------------------------------------------------
+  document.addEventListener('click', (ev) => {
+    const t = ev.target;
+    if (t.closest('#new-task-btn, #tasks-empty .tasks-btn')) { abrirTarefa(null); return; }
+    if (t.closest('#new-project-btn')) {
+      $('#project-form').reset();
+      marcarCorDoProjeto('#4A6FA5');
+      mostrarModal('project-modal');
+      return;
+    }
+    const linha = t.closest('#tasks-table-body tr');
+    if (!linha) return;
+    const tarefa = tarefas.find((x) => x.id === linha.dataset.taskId);
+    if (t.closest('.tasks-icon-btn.edit')) abrirTarefa(tarefa);
+    else if (t.closest('.tasks-icon-btn.done')) concluir(tarefa);
+    else if (t.closest('.tasks-icon-btn.delete')) pedirExclusao(tarefa);
+    else if (t.closest('.tasks-attachment-pill')) abrirAnexo(tarefa.id, tarefa.attachments[0].id);
+  });
+
+  // Estado inicial: a lista é refeita com os dados acima, para os vencimentos ("Hoje",
+  // "Em 2 dias", "3 dias atrás") e os indicadores valerem para o dia em que a página abre.
+  sincronizarCabecalhos();
+  renderizar();
+})();
+</script>
+</body></html>

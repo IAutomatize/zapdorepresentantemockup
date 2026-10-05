@@ -180,9 +180,17 @@
   mock.rota('GET', '/me', () => me);
   mock.rota('POST', '/logout', () => ({ success: true }));
   mock.rota('GET', '/api/billing/access', () => ({ situacao: 'ativa', liberado: true }));
-  mock.rota('GET', '/api/memberships', () => ({ success: true, data: usuarios, memberships: usuarios }));
-  mock.rota('GET', '/api/contacts/tags', () => ({ success: true, data: tags, tags }));
-  mock.rota('GET', '/api/tags', () => ({ success: true, data: tags, tags }));
+  // Formatos iguais aos do backend (memberships.controller, contacts.controller).
+  mock.rota('GET', '/api/memberships', () => ({
+    page: 1, limit: 100, total: usuarios.length,
+    data: usuarios.map((u) => ({ ...u, id: u.membership_id })),
+  }));
+  mock.rota('GET', '/api/contacts/tags', () => tags);
+  mock.rota('GET', '/api/tags', () => tags);
+  // Barra lateral e cabeçalho, presentes em quase todas as telas.
+  mock.rota('GET', '/api/tasks/assignments/unseen', () => ({ count: 0 }));
+  mock.rota('GET', '/api/channels/meta/connection-alerts', () => ({ alerts: [] }));
+  mock.rota('GET', '/api/notifications/count', () => ({ count: 3 }));
   mock.rota('GET', '/api/chats/filter-options', () => ({ success: true, data: { queues: filas, users: usuarios, instances: instancias } }));
   mock.rota('GET', '/api/kanban/columns', () => colunas);
   mock.rota('GET', '/api/kanban/board', () => ({ columns: colunas, contacts: cards }));
@@ -194,12 +202,9 @@
     const lista = aba === 'all' ? conversas : [];
     return { success: true, chats: lista, total: lista.length };
   });
-  mock.rota('GET', /^\/api\/chats\/([^/]+)$/, ({ params: [id] }) => {
-    const c = conversas.find((x) => x.id === id);
-    return c || mock.json({ error: 'nao_encontrado' }, 404);
-  });
-  mock.rota('GET', /^\/api\/contacts\/([^/]+)$/, ({ params: [id] }) => {
-    const c = contatos.find((x) => x.id === id);
-    return c ? { success: true, data: c, contact: c } : undefined;
-  });
+  // Rotas genéricas devolvem undefined quando o id não é delas, para não engolir
+  // caminhos como /api/chats/filter-options, registrados antes.
+  mock.rota('GET', /^\/api\/chats\/([^/]+)$/, ({ params: [id] }) => conversas.find((x) => x.id === id));
+  // O backend devolve o contato puro (contacts.controller: res.json(contact)).
+  mock.rota('GET', /^\/api\/contacts\/([^/]+)$/, ({ params: [id] }) => contatos.find((x) => x.id === id));
 })();

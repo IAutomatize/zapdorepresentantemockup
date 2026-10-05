@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Kanban - Zap do Representante</title>
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+    
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
+    <link rel="stylesheet" href="css/new-design-vars.css">
+    <link rel="stylesheet" href="css/kanban-mvp.css">
+    <link rel="stylesheet" href="css/kanban-chat-float.css">
+    <link rel="stylesheet" href="css/chat-ai-assist.css">
+    <link rel="stylesheet" href="css/mobile-polish.css">
+<link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="stylesheet" href="css/account-access.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
+<body class="font-['Inter'] dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 bg-theme-surface">
+    <div class="min-h-screen w-full relative dashboard-modern-shell">
+        <div class="glow-blob" style="
+                width: 600px;
+                height: 600px;
+                top: -200px;
+                left: -180px;
+                background: radial-gradient(circle, rgba(180,200,220,0.35) 0%, transparent 70%);
+            "></div>
+        <div class="glow-blob" style="
+                width: 700px;
+                height: 700px;
+                bottom: -260px;
+                right: -220px;
+                background: radial-gradient(circle, rgba(197,213,228,0.3) 0%, transparent 70%);
+                animation-delay: 5s;
+            "></div>
+
+        <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+                background: rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                border-right: 1px solid rgba(255, 255, 255, 0.5);
+            " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item sidebar-item-active" title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+        <main class="relative z-10 min-h-screen" style="padding: 24px 24px 24px 96px;">
+            <section class="kanban-page-shell">
+                <header class="kanban-page-title-row"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+                    <span class="kanban-page-title-icon">
+                        <i class="ri-layout-column-line"></i>
+                    </span>
+                    <div>
+                        <h1>Kanban</h1>
+                        <p>Organize conversas em filas com drag &amp; drop.</p>
+                    </div>
+                </header>
+
+                <section class="kanban-top-filters" aria-label="Filtros do Kanban">
+                    <label class="kanban-select-wrap">
+                        <select id="kanban-user-filter" title=""><option value="todos" selected="">Usuário: Todos os Usuários</option><option value="usr-ana">Usuário: Ana Souza</option><option value="usr-bruno">Usuário: Bruno Lima</option><option value="usr-carla">Usuário: Carla Dias</option></select>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </label>
+
+                    <label class="kanban-select-wrap">
+                        <select id="kanban-fila-filter"><option value="todas" selected="">Fila: Todas as Filas</option><option value="fila-geral">Fila: Geral</option><option value="fila-vendas">Fila: Vendas</option></select>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </label>
+
+                    <label class="kanban-select-wrap">
+                        <select id="kanban-instance-filter"><option value="todas" selected="">Instância: Todas</option><option value="inst-comercial">Instância: Comercial</option><option value="inst-posvenda">Instância: Pós-venda</option></select>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </label>
+
+                    <label class="kanban-global-search" for="kanban-search-input">
+                        <i class="ri-search-line"></i>
+                        <input id="kanban-search-input" type="text" placeholder="Buscar contato..." autocomplete="off">
+                    </label>
+
+                    <button id="reorder-columns-btn" type="button" class="kanban-reorder-columns-btn" aria-label="Ordenar colunas" title="Ordenar colunas">
+                        <i class="ri-list-settings-line"></i>
+                    </button>
+
+                    <button id="add-column-btn" type="button" class="kanban-add-column-btn" aria-label="Adicionar coluna" title="Adicionar coluna">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </section>
+
+                <section class="kanban-board-scroll">
+                    <div id="kanban-columns" class="kanban-board" aria-live="polite"><div class="kanban-column" id="column-col-novo" data-column-id="col-novo"><div class="kanban-column-topline" style="background: rgb(100, 116, 139);"></div><div class="column-header"><h3 class="column-title">NOVO CONTATO</h3><span class="column-counter">4</span><div class="column-menu-shell"><button type="button" class="column-header-btn" title="Mais opções"><i class="ri-more-2-fill"></i></button></div></div><div class="column-cards" data-column-id="col-novo"><div class="kanban-card" draggable="true" data-contact-id="ct-02" data-column-id="col-novo"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(236, 201, 75);">MP</div><span class="kb-card-name">Mercado Bom Preço</span><span class="kb-card-online"></span></div><p class="kb-card-preview">Vocês têm o display novo em estoque?</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(245, 158, 11); color: rgb(26, 26, 46);">Orçamento</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-09" data-column-id="col-novo"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(74, 111, 165);">FO</div><span class="kb-card-name">Fernanda Oliveira</span></div><p class="kb-card-preview">Pode me passar a tabela de atacado?</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(245, 158, 11); color: rgb(26, 26, 46);">Orçamento</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-05" data-column-id="col-novo"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(74, 111, 165);">JR</div><span class="kb-card-name">Juliana Ribeiro</span></div><p class="kb-card-preview">Vou ver com meu sócio e te retorno</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn is-warning" title="Mensagens agendadas (1)"><i class="ri-calendar-schedule-line"></i><span class="kb-card-action-badge">1</span></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(245, 158, 11); color: rgb(26, 26, 46);">Orçamento</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-07" data-column-id="col-novo"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(74, 111, 165);">CM</div><span class="kb-card-name">Carlos Mendes</span></div><p class="kb-card-preview">Bom dia! Tudo certo para quinta?</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div></div></div></div><div class="kanban-column" id="column-col-negociacao" data-column-id="col-negociacao"><div class="kanban-column-topline" style="background: rgb(245, 158, 11);"></div><div class="column-header"><h3 class="column-title">EM NEGOCIAÇÃO</h3><span class="column-counter">4</span><div class="column-menu-shell"><button type="button" class="column-header-btn" title="Mais opções"><i class="ri-more-2-fill"></i></button></div></div><div class="column-cards" data-column-id="col-negociacao"><div class="kanban-card" draggable="true" data-contact-id="ct-01" data-column-id="col-negociacao"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(245, 101, 101);">MC</div><span class="kb-card-name">Mariana Costa</span><span class="kb-card-online"></span></div><p class="kb-card-preview">Perfeito, pode mandar o pedido de 40 caixas 👍</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn is-obs" title="Observações (com nota)"><i class="ri-file-text-line"></i><span class="kb-card-action-dot"></span></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span><span class="kb-tag" style="background: rgb(124, 58, 237); color: rgb(255, 255, 255);">VIP</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-04" data-column-id="col-negociacao"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(74, 111, 165);">DL</div><span class="kb-card-name">Distribuidora Litoral</span></div><p class="kb-card-preview">Qual o prazo de entrega para Santos?</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn is-obs" title="Observações (com nota)"><i class="ri-file-text-line"></i><span class="kb-card-action-dot"></span></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(14, 165, 233); color: rgb(255, 255, 255);">Atacado</span><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-14" data-column-id="col-negociacao"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(245, 101, 101);">AV</div><span class="kb-card-name">Atacadão do Vale</span></div><p class="kb-card-preview">Consegue fazer 8% no volume de 200 caixas?</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn is-obs" title="Observações (com nota)"><i class="ri-file-text-line"></i><span class="kb-card-action-dot"></span></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(14, 165, 233); color: rgb(255, 255, 255);">Atacado</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-22" data-column-id="col-negociacao"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(245, 101, 101);">RE</div><span class="kb-card-name">Rede Econômica</span></div><p class="kb-card-preview">Vamos fechar o contrato trimestral</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn is-obs" title="Observações (com nota)"><i class="ri-file-text-line"></i><span class="kb-card-action-dot"></span></button><button type="button" class="kb-card-action-btn is-warning" title="Mensagens agendadas (2)"><i class="ri-calendar-schedule-line"></i><span class="kb-card-action-badge">2</span></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(14, 165, 233); color: rgb(255, 255, 255);">Atacado</span><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span></div></div></div></div><div class="kanban-column" id="column-col-pedido" data-column-id="col-pedido"><div class="kanban-column-topline" style="background: rgb(22, 163, 74);"></div><div class="column-header"><h3 class="column-title">PEDIDO ENVIADO</h3><span class="column-counter">3</span><div class="column-menu-shell"><button type="button" class="column-header-btn" title="Mais opções"><i class="ri-more-2-fill"></i></button></div></div><div class="column-cards" data-column-id="col-pedido"><div class="kanban-card" draggable="true" data-contact-id="ct-10" data-column-id="col-pedido"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(74, 111, 165);">SA</div><span class="kb-card-name">Supermercado Avenida</span></div><p class="kb-card-preview">Segue o pedido da semana em anexo</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(14, 165, 233); color: rgb(255, 255, 255);">Atacado</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-06" data-column-id="col-pedido"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(246, 173, 85);">EC</div><span class="kb-card-name">Empório Central</span></div><p class="kb-card-preview">Documento</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Pós-venda" style="background: rgba(37, 99, 235, 0.133); color: rgb(37, 99, 235); border-color: rgba(37, 99, 235, 0.333);"><i class="ri-smartphone-line"></i><span>Pós-venda</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-08" data-column-id="col-pedido"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(246, 173, 85);">PE</div><span class="kb-card-name">Padaria Estrela</span></div><p class="kb-card-preview">Fechado. Aguardo a nota.</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Comercial" style="background: rgba(22, 163, 74, 0.133); color: rgb(22, 163, 74); border-color: rgba(22, 163, 74, 0.333);"><i class="ri-smartphone-line"></i><span>Comercial</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span></div></div></div></div><div class="kanban-column" id="column-col-posvenda" data-column-id="col-posvenda"><div class="kanban-column-topline" style="background: rgb(37, 99, 235);"></div><div class="column-header"><h3 class="column-title">PÓS-VENDA</h3><span class="column-counter">3</span><div class="column-menu-shell"><button type="button" class="column-header-btn" title="Mais opções"><i class="ri-more-2-fill"></i></button></div></div><div class="column-cards" data-column-id="col-posvenda"><div class="kanban-card" draggable="true" data-contact-id="ct-03" data-column-id="col-posvenda"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(201, 123, 146);">PA</div><span class="kb-card-name">Pedro Almeida</span></div><p class="kb-card-preview">Recebi o boleto, obrigado!</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Pós-venda" style="background: rgba(37, 99, 235, 0.133); color: rgb(37, 99, 235); border-color: rgba(37, 99, 235, 0.333);"><i class="ri-smartphone-line"></i><span>Pós-venda</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn is-warning" title="Mensagens agendadas (1)"><i class="ri-calendar-schedule-line"></i><span class="kb-card-action-badge">1</span></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-13" data-column-id="col-posvenda"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(74, 111, 165);">PG</div><span class="kb-card-name">Patrícia Gomes</span></div><p class="kb-card-preview">Amei os produtos novos!</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Pós-venda" style="background: rgba(37, 99, 235, 0.133); color: rgb(37, 99, 235); border-color: rgba(37, 99, 235, 0.333);"><i class="ri-smartphone-line"></i><span>Pós-venda</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn is-warning" title="Mensagens agendadas (1)"><i class="ri-calendar-schedule-line"></i><span class="kb-card-action-badge">1</span></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span><span class="kb-tag" style="background: rgb(124, 58, 237); color: rgb(255, 255, 255);">VIP</span></div></div><div class="kanban-card" draggable="true" data-contact-id="ct-17" data-column-id="col-posvenda"><div class="kb-card-head"><div class="kb-card-avatar" style="background: rgb(236, 201, 75);">CR</div><span class="kb-card-name">Camila Rocha</span></div><p class="kb-card-preview">Obrigada pelo atendimento 😊</p><div class="kb-card-context"><span class="kb-card-chip kb-card-chip--instance" title="Instância: Pós-venda" style="background: rgba(37, 99, 235, 0.133); color: rgb(37, 99, 235); border-color: rgba(37, 99, 235, 0.333);"><i class="ri-smartphone-line"></i><span>Pós-venda</span></span><span class="kb-card-chip kb-card-chip--queue" title="Fila: Vendas" style="background: rgba(245, 158, 11, 0.133); color: rgb(245, 158, 11); border-color: rgba(245, 158, 11, 0.333);"><i class="ri-inbox-line"></i><span>Vendas</span></span></div><div class="kb-card-actions"><button type="button" class="kb-card-action-btn" title="Observações"><i class="ri-file-text-line"></i></button><button type="button" class="kb-card-action-btn" title="Mensagens agendadas"><i class="ri-calendar-schedule-line"></i></button><button type="button" class="kb-card-action-btn" title="Marcadores"><i class="ri-price-tag-3-line"></i></button><span class="kb-social-icon"><i class="ri-whatsapp-line" style="color:#25D366"></i></span><button type="button" class="kb-card-action-btn is-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i></button><button type="button" class="kb-card-action-btn is-primary" title="Abrir conversa"><i class="ri-message-2-line"></i></button><button type="button" class="kb-card-action-btn kb-card-move-btn" title="Mover para outra coluna"><i class="ri-drag-move-2-line"></i></button></div><div class="kb-tags"><span class="kb-tag" style="background: rgb(22, 163, 74); color: rgb(255, 255, 255);">Cliente ativo</span></div></div></div></div></div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="kanban-popover-root"></div>
+
+    <div id="column-modal" class="kanban-modal hidden" role="dialog" aria-modal="true" aria-labelledby="column-modal-title">
+        <div class="kanban-modal-content">
+            <div class="kanban-modal-header">
+                <h3 id="column-modal-title">Nova coluna</h3>
+                <button type="button" class="kanban-modal-close close-btn" aria-label="Fechar">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <form id="column-form" class="kanban-modal-form">
+                <input type="hidden" id="column-id">
+                <input type="hidden" id="column-color" value="#4A6FA5">
+
+                <label class="kanban-form-field" for="column-name">
+                    <span>Nome da coluna</span>
+                    <input id="column-name" type="text" placeholder="Ex: PROSPECTS" maxlength="32" required="">
+                </label>
+
+                <div class="kanban-form-field">
+                    <span>Cor da coluna</span>
+                    <div id="column-color-palette" class="kanban-color-palette" aria-label="Paleta de cores"><button type="button" class="kanban-color-chip is-active" aria-label="Cor #4A6FA5" style="background: rgb(74, 111, 165); color: rgb(74, 111, 165);"></button><button type="button" class="kanban-color-chip" aria-label="Cor #F6AD55" style="background: rgb(246, 173, 85); color: rgb(246, 173, 85);"></button><button type="button" class="kanban-color-chip" aria-label="Cor #F56565" style="background: rgb(245, 101, 101); color: rgb(245, 101, 101);"></button><button type="button" class="kanban-color-chip" aria-label="Cor #48BB78" style="background: rgb(72, 187, 120); color: rgb(72, 187, 120);"></button><button type="button" class="kanban-color-chip" aria-label="Cor #B794F4" style="background: rgb(183, 148, 244); color: rgb(183, 148, 244);"></button><button type="button" class="kanban-color-chip" aria-label="Cor #ECC94B" style="background: rgb(236, 201, 75); color: rgb(236, 201, 75);"></button><button type="button" class="kanban-color-chip" aria-label="Cor #4FD1C5" style="background: rgb(79, 209, 197); color: rgb(79, 209, 197);"></button><button type="button" class="kanban-color-chip" aria-label="Cor #C97B92" style="background: rgb(201, 123, 146); color: rgb(201, 123, 146);"></button></div>
+                </div>
+
+                <div class="kanban-modal-footer">
+                    <button type="button" class="kanban-btn-secondary cancel-btn">Cancelar</button>
+                    <button id="column-submit-btn" type="submit" class="kanban-btn-primary">Criar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="kanban-chat-float" class="kcf-hidden" aria-hidden="true">
+      <div class="kcf-backdrop"></div>
+      <div class="kcf-modal" role="dialog" aria-modal="true" aria-labelledby="kcf-modal-title">
+        <div class="kcf-modal-top">
+          <button class="kcf-close-btn" type="button" title="Fechar"><i class="ri-close-line"></i></button>
+          <h2 id="kcf-modal-title">Chat — <span class="kcf-modal-contact-title">Contato</span></h2>
+        </div>
+
+        <div class="kcf-modal-body">
+          <section class="kcf-chat-panel">
+            <div class="kcf-header">
+              <div class="kcf-header-main">
+                <div class="kcf-avatar"><img class="kcf-avatar-img kcf-panel-hidden" alt=""><span class="kcf-avatar-text">C</span></div>
+                <div class="kcf-header-info">
+                  <p class="kcf-contact-name">-</p>
+                  <span class="kcf-contact-phone"></span>
+                  <div class="kcf-tags-row">
+                    <div class="kcf-tag-chips"></div>
+                    <button class="kcf-add-tag-btn" type="button" title="Adicionar tag"><i class="ri-price-tag-3-line"></i></button>
+                  </div>
+                  <div class="kcf-tag-dropdown kcf-panel-hidden"></div>
+                </div>
+              </div>
+              <div class="kcf-header-actions">
+                <button type="button" class="kcf-action-btn kcf-trigger-ai" data-action="trigger-ai" title="Acionar IA para responder"><i class="ri-robot-2-line"></i><span>Acionar IA</span></button>
+                <button type="button" class="kcf-action-btn" data-action="search" title="Buscar"><i class="ri-search-line"></i></button>
+                <button type="button" class="kcf-action-btn" data-action="transfer" title="Transferir"><i class="ri-arrow-left-right-line"></i></button>
+                <button type="button" class="kcf-action-btn" data-action="schedule" title="Agendar mensagem"><i class="ri-time-line"></i></button>
+                <button type="button" class="kcf-action-btn" data-action="finalize" title="Finalizar atendimento"><i class="ri-check-double-line"></i></button>
+                <button type="button" class="kcf-action-btn" data-action="notes" title="Anotações"><i class="ri-sticky-note-line"></i></button>
+                <button type="button" class="kcf-action-btn" data-action="open" title="Abrir no chat completo"><i class="ri-external-link-line"></i></button>
+                <div class="kcf-more-actions">
+                  <button type="button" class="kcf-action-btn" data-action="more" title="Mais opções" aria-haspopup="true" aria-expanded="false"><i class="ri-more-2-fill"></i></button>
+                  <div class="kcf-more-menu kcf-panel-hidden" role="menu" aria-label="Mais opções da conversa">
+                    
+                    <button type="button" class="kcf-more-item kcf-mobile-only" data-mobile-action="trigger-ai" role="menuitem"><i class="ri-robot-2-line" aria-hidden="true"></i><span>Acionar IA</span></button>
+                    <button type="button" class="kcf-more-item kcf-mobile-only" data-mobile-action="search" role="menuitem"><i class="ri-search-line" aria-hidden="true"></i><span>Buscar na conversa</span></button>
+                    <button type="button" class="kcf-more-item kcf-mobile-only" data-mobile-action="transfer" role="menuitem"><i class="ri-arrow-left-right-line" aria-hidden="true"></i><span>Transferir atendimento</span></button>
+                    <button type="button" class="kcf-more-item kcf-mobile-only" data-mobile-action="schedule" role="menuitem"><i class="ri-time-line" aria-hidden="true"></i><span>Agendar mensagem</span></button>
+                    <button type="button" class="kcf-more-item kcf-mobile-only" data-mobile-action="finalize" role="menuitem"><i class="ri-check-double-line" aria-hidden="true"></i><span>Finalizar atendimento</span></button>
+                    <button type="button" class="kcf-more-item kcf-mobile-only" data-mobile-action="notes" role="menuitem"><i class="ri-sticky-note-line" aria-hidden="true"></i><span>Anotações</span></button>
+                    <button type="button" class="kcf-more-item" data-action="ai-summary" role="menuitem"><span class="kcf-more-emoji" aria-hidden="true">✨</span><span>Resumir com IA</span></button>
+                    <button type="button" class="kcf-more-item is-danger" data-action="block" role="menuitem"><i class="ri-prohibited-line" aria-hidden="true"></i><span>Bloquear contato</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="kcf-stage">
+              <div class="kcf-messages"></div>
+
+              <div class="kcf-quick-panel kcf-panel-hidden">
+                <div class="kcf-quick-header">Respostas rápidas</div>
+                <div class="kcf-quick-categories"></div>
+                <div class="kcf-quick-search-wrap">
+                  <i class="ri-search-line"></i>
+                  <input type="text" class="kcf-quick-search" placeholder="Buscar resposta...">
+                </div>
+                <div class="kcf-quick-list"></div>
+              </div>
+
+              <div class="kcf-emoji-panel kcf-panel-hidden"><button type="button" class="kcf-emoji-btn-item">😀</button><button type="button" class="kcf-emoji-btn-item">😂</button><button type="button" class="kcf-emoji-btn-item">😍</button><button type="button" class="kcf-emoji-btn-item">🙏</button><button type="button" class="kcf-emoji-btn-item">👍</button><button type="button" class="kcf-emoji-btn-item">🔥</button><button type="button" class="kcf-emoji-btn-item">🥹</button><button type="button" class="kcf-emoji-btn-item">😎</button><button type="button" class="kcf-emoji-btn-item">🎉</button><button type="button" class="kcf-emoji-btn-item">❤️</button><button type="button" class="kcf-emoji-btn-item">✅</button><button type="button" class="kcf-emoji-btn-item">😅</button><button type="button" class="kcf-emoji-btn-item">🤝</button><button type="button" class="kcf-emoji-btn-item">👀</button><button type="button" class="kcf-emoji-btn-item">👏</button><button type="button" class="kcf-emoji-btn-item">🤔</button><button type="button" class="kcf-emoji-btn-item">💬</button><button type="button" class="kcf-emoji-btn-item">📌</button><button type="button" class="kcf-emoji-btn-item">🧠</button><button type="button" class="kcf-emoji-btn-item">🚀</button><button type="button" class="kcf-emoji-btn-item">⭐</button><button type="button" class="kcf-emoji-btn-item">🥰</button><button type="button" class="kcf-emoji-btn-item">💙</button><button type="button" class="kcf-emoji-btn-item">📣</button></div>
+
+              <div class="kcf-media-options kcf-panel-hidden">
+                <button class="kcf-media-opt" type="button" data-media-type="image"><i class="ri-image-line"></i><span>Imagem</span></button>
+                <button class="kcf-media-opt" type="button" data-media-type="video"><i class="ri-film-line"></i><span>Vídeo</span></button>
+                <button class="kcf-media-opt" type="button" data-media-type="document"><i class="ri-file-line"></i><span>Documento</span></button>
+                <button class="kcf-media-opt" type="button" data-media-type="audio"><i class="ri-mic-line"></i><span>Áudio</span></button>
+              </div>
+
+              <input type="file" class="kcf-file-input" hidden="">
+
+              <div class="kcf-recording kcf-panel-hidden">
+                <button class="kcf-record-cancel" type="button"><i class="ri-delete-bin-line"></i> Cancelar</button>
+                <div class="kcf-record-timer">00:00</div>
+                <div class="kcf-record-wave"></div>
+                <button class="kcf-record-send" type="button"><i class="ri-stop-fill"></i> Enviar</button>
+              </div>
+
+              <div class="kcf-quick-attachment-preview kcf-panel-hidden" aria-live="polite"></div>
+
+              <div class="kcf-compose">
+                <button class="kcf-icon-btn kcf-emoji-btn" type="button" title="Emoji"><i class="ri-emotion-line"></i></button>
+                <button class="kcf-icon-btn kcf-quick-btn" type="button" title="Respostas rápidas"><i class="ri-flashlight-line"></i></button>
+                
+                <div class="kcf-compose-more">
+                  <button class="kcf-icon-btn kcf-compose-more-btn" type="button" title="Mais opções" aria-haspopup="true" aria-expanded="false"><i class="ri-add-line"></i></button>
+                  <div class="kcf-more-menu kcf-compose-more-menu kcf-panel-hidden" role="menu" aria-label="Mais opções de envio">
+                    <button type="button" class="kcf-more-item" data-compose-action="media" role="menuitem"><i class="ri-attachment-2" aria-hidden="true"></i><span>Anexos</span></button>
+                    <button type="button" class="kcf-more-item" data-compose-action="camera" role="menuitem"><i class="ri-camera-line" aria-hidden="true"></i><span>Câmera</span></button>
+                    <button type="button" class="kcf-more-item" data-compose-action="signature" role="menuitem" aria-pressed="false"><i class="ri-quill-pen-line" aria-hidden="true"></i><span>Assinatura</span></button>
+                    <button type="button" class="kcf-more-item" data-compose-action="emoji" role="menuitem"><i class="ri-emotion-line" aria-hidden="true"></i><span>Emojis</span></button>
+                  </div>
+                </div>
+                <textarea class="kcf-input" placeholder="Digite uma mensagem..." rows="1"></textarea>
+                <button class="kcf-icon-btn kcf-media-btn" type="button" title="Anexar"><i class="ri-attachment-2"></i></button>
+                <button class="kcf-icon-btn kcf-camera-btn" type="button" title="Foto"><i class="ri-camera-line"></i></button>
+                <button class="kcf-icon-btn kcf-signature-btn" type="button" title="Assinatura" aria-pressed="false"><i class="ri-quill-pen-line"></i></button>
+                <button class="kcf-send-btn" type="button" title="Enviar"><i class="ri-mic-line"></i></button>
+              </div>
+            </div>
+          </section>
+
+          <aside class="kcf-contact-panel">
+            <div class="contact-drawer-header">
+              <button type="button" class="contact-drawer-close kcf-drawer-close-btn" title="Fechar painel">
+                <i class="ri-close-line"></i>
+              </button>
+              <h3>Dados do contato</h3>
+              <button type="button" class="contact-drawer-edit kcf-drawer-edit-btn" title="Editar contato">
+                <i class="ri-pencil-line"></i>
+              </button>
+            </div>
+
+            <div class="contact-drawer-body">
+              <div class="contact-drawer-profile">
+                <div class="contact-drawer-avatar" id="kcf-drawer-contact-avatar">C</div>
+                <h4 id="kcf-drawer-contact-name">Contato</h4>
+                <p id="kcf-drawer-contact-phone">-</p>
+                <div class="contact-drawer-chips">
+                  <span id="kcf-drawer-assignee-chip" class="contact-drawer-chip">Sem responsável</span>
+                  <span id="kcf-drawer-instance-chip" class="contact-drawer-chip">Sem fila</span>
+                </div>
+              </div>
+
+              <div class="contact-drawer-actions-row">
+                <button id="kcf-drawer-toggle-favorite" type="button">
+                  <i class="ri-star-line"></i>
+                  <span>Fav.</span>
+                </button>
+                <button id="kcf-drawer-open-observations" type="button">
+                  <i class="ri-file-list-3-line"></i>
+                  <span>Obs.</span>
+                </button>
+                <button id="kcf-drawer-open-media" type="button">
+                  <i class="ri-image-line"></i>
+                  <span>Mídia</span>
+                </button>
+              </div>
+
+              <section class="contact-drawer-section-block">
+                <h5 class="contact-drawer-section-title">AÇÕES RÁPIDAS</h5>
+                <div class="contact-quick-actions">
+                  <button id="kcf-drawer-open-tags" type="button" class="contact-quick-card">
+                    <div class="contact-quick-card-icon">
+                      <i class="ri-price-tag-3-line"></i>
+                    </div>
+                    <div class="contact-quick-card-content">
+                      <strong>Marcadores</strong>
+                      <span id="kcf-drawer-tags-count">0 tags</span>
+                    </div>
+                  </button>
+                  <button id="kcf-drawer-ai-assist" type="button" class="contact-quick-card">
+                    <div class="contact-quick-card-icon">
+                      <i class="ri-sparkling-2-line"></i>
+                    </div>
+                    <div class="contact-quick-card-content">
+                      <strong>Ajuda IA</strong>
+                      <span>Sugerir resposta</span>
+                    </div>
+                  </button>
+                </div>
+              </section>
+
+              <section class="contact-drawer-section-block">
+                <div class="contact-drawer-panel-head">
+                  <h5 class="contact-drawer-section-title">CRM</h5>
+                  <span id="kcf-drawer-crm-column-pill" class="contact-drawer-chip is-crm">SEM STATUS</span>
+                </div>
+                <select id="kcf-drawer-crm-select" class="contact-drawer-select">
+                  <option value="" selected="">Sem status</option>
+                </select>
+                <p class="contact-drawer-line"><strong>Resp.:</strong> <span id="kcf-drawer-responsible-name">Sem responsável</span></p>
+              </section>
+
+              <section class="contact-drawer-section-block">
+                <h5 class="contact-drawer-section-title">DADOS DO CONTATO</h5>
+                <div class="contact-drawer-data-list">
+                  <p id="kcf-drawer-data-display-name">—</p>
+                  <p id="kcf-drawer-data-phone-number">—</p>
+                  <p id="kcf-drawer-data-full-name">—</p>
+                  <p id="kcf-drawer-data-phone-formatted">—</p>
+                  <p id="kcf-drawer-data-email">—</p>
+                </div>
+              </section>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div><div id="whatsapp-contacts-popup" class="fixed inset-0 bg-black bg-opacity-75 z-[9999] hidden">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="rounded-lg p-6 max-w-md w-full shadow-xl border bg-theme-surface border-theme-light">
+      <div class="text-center">
+        
+        <div class="mb-4">
+          <i class="ri-whatsapp-line text-5xl text-green-500"></i>
+        </div>
+        
+        
+        <h3 class="text-xl font-bold text-primary mb-2">
+          WhatsApp Conectado com Sucesso!
+        </h3>
+        
+        
+        <p class="text-secondary mb-4">
+          Deseja importar os contatos deste número para o Zap Empresarial?
+        </p>
+        
+        
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6">
+          <p class="text-sm text-yellow-800">
+            <i class="ri-shield-check-line mr-1"></i>
+            <strong>Segurança:</strong> Apenas você terá acesso a estes contatos
+          </p>
+        </div>
+        
+        
+        <div id="extraction-loading" class="hidden mb-4">
+          <div class="flex items-center justify-center">
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500 mr-2"></div>
+            <span class="text-sm text-secondary">Importando contatos...</span>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-success" class="hidden mb-4">
+          <div class="text-green-600">
+            <i class="ri-check-circle-line text-2xl mb-2"></i>
+            <p class="text-sm">
+              <span id="extraction-count">0</span> contatos importados com sucesso!
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-error" class="hidden mb-4">
+          <div class="text-red-600">
+            <i class="ri-error-warning-line text-2xl mb-2"></i>
+            <p class="text-sm" id="extraction-error-message">
+              Erro ao importar contatos
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="action-buttons" class="flex space-x-3">
+          <button id="extract-contacts-yes" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors focus:ring-2 focus:ring-green-500 focus:outline-none">
+            <i class="ri-download-line mr-1"></i>
+            Sim, Importar
+          </button>
+          <button id="extract-contacts-no" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors focus:ring-2 focus:ring-gray-500 focus:outline-none text-theme-secondary">
+            <i class="ri-close-line mr-1"></i>
+            Não, Obrigado
+          </button>
+        </div>
+        
+        
+        <div id="close-button" class="hidden">
+          <button id="extract-contacts-close" class="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+            <i class="ri-check-line mr-1"></i>
+            Entendi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/kanban.html). Para recapturar sem perder este bloco:
+     node tools/capture/montar.mjs kanban -->
+<!-- Moldes: marcação do próprio app em estados que só existem depois de um clique (mini-chat
+     aberto, popovers, menus e modais). O script abaixo só clona e preenche; não escreve HTML.
+     Cada molde veio de uma captura com as fixtures de tools/capture/fixtures/kanban.js
+     (PORTA_APP/PORTA_CDP à parte, se houver outra captura rodando):
+       kanban-chat        "/kanban.html" 7000 "@[data-contact-id='ct-01'] .kb-card-action-btn.is-primary" "~2500"
+       kanban-chat-c7     "/kanban.html" 7000 "@[data-contact-id='ct-07'] .kb-card-action-btn.is-primary" "~2500" "@.kcf-quick-btn"
+                          + js: busca "xyz" no .kcf-quick-search (lista vazia)
+       kanban-chat-tag    como kanban-chat + "@.kcf-add-tag-btn"
+       kanban-menu        "@#column-col-negociacao .column-header-btn"
+       kanban-moveall     kanban-menu + "@#column-col-negociacao .column-menu button:nth-of-type(3)"
+       kanban-ordenar     "@#reorder-columns-btn"
+       kanban-obs         "@[data-contact-id='ct-04'] .kb-card-action-btn"   (kanban-obs-vazio: ct-02)
+       kanban-ag          "@[data-contact-id='ct-22'] .kb-card-action-btn:nth-child(2)"   (kanban-ag-vazio: ct-02)
+       kanban-agendar     ag do ct-03 + "@.kanban-popover-panel .kanban-popover-btn.primary"
+       kanban-tag         "@[data-contact-id='ct-02'] .kb-card-action-btn:nth-child(3)" "@.kanban-popover-panel .kanban-popover-btn.secondary"
+       kanban-mover       "@[data-contact-id='ct-02'] .kb-card-move-btn"
+       kanban-vazio       js: busca "Mariana" no #kanban-search-input (colunas "Sem cards") -->
+<template id="kanban-moldes">
+<div data-molde="msg-divisor"><div class="kcf-date-divider" data-day="2026-10-05"><span>Hoje</span></div></div>
+<div data-molde="msg-in"><div class="kcf-msg kcf-msg--in" data-msg-id="m-c1-1" data-sender-type="contact" data-message-type="text" data-sent-at="2026-10-05T18:58:54.612Z" data-external-id="EXT1" data-day="2026-10-05">
+      <div class="kcf-msg-bubble">
+        <button type="button" class="kcf-msg-actions-btn" title="Ações da mensagem" aria-haspopup="true"><i class="ri-arrow-down-s-line"></i></button>
+        <div class="kcf-msg-content"><div class="kcf-msg-text">Oi Ana, bom dia! Tudo bem?</div></div>
+        <span class="kcf-msg-time">15:58</span>
+      </div>
+    </div></div>
+<div data-molde="msg-out"><div class="kcf-msg kcf-msg--out" data-msg-id="m-c1-2" data-sender-type="user" data-message-type="text" data-sent-at="2026-10-05T19:00:54.612Z" data-external-id="EXT2" data-day="2026-10-05">
+      <div class="kcf-msg-bubble">
+        <button type="button" class="kcf-msg-actions-btn" title="Ações da mensagem" aria-haspopup="true"><i class="ri-arrow-down-s-line"></i></button>
+        <div class="kcf-msg-signature">Ana Souza:</div>
+        <div class="kcf-msg-content"><div class="kcf-msg-text">Bom dia, Mariana! Tudo ótimo, e com você?</div></div>
+        <span class="kcf-msg-time">16:00</span>
+      </div>
+    </div></div>
+<div data-molde="msg-doc"><div class="kcf-msg kcf-msg--out" data-msg-id="m-c1-5" data-sender-type="user" data-message-type="document" data-sent-at="2026-10-05T19:05:54.612Z" data-external-id="EXT5" data-day="2026-10-05">
+      <div class="kcf-msg-bubble">
+        <button type="button" class="kcf-msg-actions-btn" title="Ações da mensagem" aria-haspopup="true"><i class="ri-arrow-down-s-line"></i></button>
+        <div class="kcf-msg-signature">Ana Souza:</div>
+        <div class="kcf-msg-content"><button type="button" class="kcf-doc-card" data-kcf-load="document" data-ext="EXT5" data-mid="m-c1-5" data-name="Tabela_Precos_Outubro.pdf"><span class="kcf-doc-icon"><i class="ri-file-pdf-line"></i></span><span class="kcf-doc-name">Tabela_Precos_Outubro.pdf</span><i class="ri-download-line kcf-doc-action"></i></button></div>
+        <span class="kcf-msg-time">16:05</span>
+      </div>
+    </div></div>
+<div data-molde="tag-chip"><span class="kcf-tag-chip" data-tag-id="tag-cliente">
+      <span class="kcf-tag-chip-dot" style="background:#16a34a"></span>
+      <span>Cliente ativo</span>
+      <button type="button" class="kcf-tag-remove" title="Remover tag">×</button>
+    </span></div>
+<div data-molde="sem-tags"><span class="kcf-tags-empty">Sem tags</span></div>
+<div data-molde="tag-opcao"><button type="button" class="kcf-media-opt" style="justify-content: flex-start;"><i class="ri-price-tag-3-line"></i><span>Orçamento</span></button></div>
+<div data-molde="respostas-categorias"><div class="kcf-quick-categories"><button type="button" class="kcf-quick-cat is-active">Todas (5)</button><button type="button" class="kcf-quick-cat " style="color: rgb(22, 163, 74); background: rgba(22, 163, 74, 0.133);">💰 Vendas (3)</button><button type="button" class="kcf-quick-cat " style="color: rgb(245, 158, 11); background: rgba(245, 158, 11, 0.133);">🧾 Cobrança (1)</button><button type="button" class="kcf-quick-cat " style="color: rgb(37, 99, 235); background: rgba(37, 99, 235, 0.133);">📦 Pós-venda (1)</button></div></div>
+<div data-molde="respostas-lista"><div class="kcf-quick-list"><button type="button" class="kcf-quick-item">
+        <span class="kcf-quick-item-title">Tabela de preços</span>
+        <span class="kcf-quick-item-body">Segue a tabela de preços atualizada de outubro. Qualquer dúvida, estou à disposição!</span>
+      </button><button type="button" class="kcf-quick-item">
+        <span class="kcf-quick-item-title">Prazo de entrega</span>
+        <span class="kcf-quick-item-body">Para a capital o prazo é de 2 dias úteis; interior e litoral, de 3 a 5 dias úteis.</span>
+      </button><button type="button" class="kcf-quick-item">
+        <span class="kcf-quick-item-title">Pedido mínimo</span>
+        <span class="kcf-quick-item-body">O pedido mínimo é de 10 caixas, e dá para misturar os sabores.</span>
+      </button><button type="button" class="kcf-quick-item">
+        <span class="kcf-quick-item-title">Segunda via de boleto</span>
+        <span class="kcf-quick-item-body">Olá! Identificamos um boleto em aberto. Posso te mandar a segunda via?</span>
+      </button><button type="button" class="kcf-quick-item">
+        <span class="kcf-quick-item-title">Pedido faturado</span>
+        <span class="kcf-quick-item-body">Seu pedido foi faturado hoje e já segue para entrega. Obrigado pela preferência!</span>
+      </button></div></div>
+<div data-molde="respostas-vazio"><div class="kcf-empty">Nenhuma resposta encontrada.</div></div>
+<div data-molde="coluna-vazia"><div class="kb-empty-column">Sem cards</div></div>
+<div data-molde="kb-tags"><div class="kb-tags"><span class="kb-tag" style="background: rgb(245, 158, 11); color: rgb(26, 26, 46);">Orçamento</span></div></div>
+<div data-molde="obs-ponto"><span class="kb-card-action-dot"></span></div>
+<div data-molde="ag-selo"><span class="kb-card-action-badge">1</span></div>
+<div data-molde="toast"><div class="kb-toast">Criação de marcador disponível em Contatos &gt; Tags</div></div>
+<div data-molde="menu-coluna"><div class="column-menu"><button type="button"><i class="ri-edit-line"></i><span>Renomear coluna</span></button><button type="button"><i class="ri-palette-line"></i><span>Alterar cor</span></button><button type="button"><i class="ri-arrow-left-right-line"></i><span>Mover todos para...</span></button><div class="column-menu-divider"></div><button type="button" class="danger"><i class="ri-delete-bin-line"></i><span>Excluir coluna</span></button></div></div>
+<div data-molde="pop-obs"><div class="kanban-popover-backdrop"><div class="kanban-popover-panel" style="left: 418px; top: 445px; width: 320px;"><div class="kanban-popover-inner">
+    <div class="kanban-popover-title">
+      <i class="ri-file-text-line" style="color:var(--ds-primary);font-size:14px"></i>
+      <h4>Observações</h4>
+      <button type="button" class="kanban-popover-close"><i class="ri-close-line"></i></button>
+    </div>
+    <p class="kanban-popover-subtitle">Distribuidora Litoral</p>
+    <label class="kanban-obs-label">NOVA OBSERVAÇÃO</label>
+    <textarea class="kanban-popover-textarea kanban-obs-input" rows="3" placeholder="Escreva uma observação..."></textarea>
+    <div class="kanban-popover-actions kanban-obs-actions">
+      <button type="button" class="kanban-popover-btn primary kanban-obs-add"><i class="ri-add-line"></i> Adicionar</button>
+    </div>
+    <div class="kanban-obs-history-head">HISTÓRICO (<span class="kanban-obs-count">2</span>)</div>
+    <div class="kanban-obs-list">
+        <div class="kanban-obs-item">
+          <p>Entrega em Santos só às terças e quintas.</p>
+          <small>29/09/2026, 17:03</small>
+        </div>
+        <div class="kanban-obs-item">
+          <p>Pagamento sempre no boleto 28 dias.</p>
+          <small>26/08/2026, 17:03</small>
+        </div>
+      </div>
+  </div></div></div></div>
+<div data-molde="obs-vazio"><div class="kanban-obs-empty">Nenhuma observação registrada.</div></div>
+<div data-molde="pop-ag"><div class="kanban-popover-backdrop"><div class="kanban-popover-panel" style="left: 448px; top: 565px; width: 320px;"><div class="kanban-popover-inner">
+    <div class="kanban-popover-title">
+      <i class="ri-calendar-schedule-line" style="color:var(--ds-warning);font-size:14px"></i>
+      <h4>Mensagens Agendadas</h4>
+      <button type="button" class="kanban-popover-close"><i class="ri-close-line"></i></button>
+    </div>
+    <p class="kanban-popover-subtitle">Rede Econômica</p>
+  <div class="kanban-scheduled-list"><div class="kanban-scheduled-item">
+        <div class="title">Bom dia! Segue a minuta do contrato trimestral para revisão.</div>
+        <div class="meta">📅 06/10/2026, 08:30</div>
+      </div><div class="kanban-scheduled-item">
+        <div class="title">Lembrete: reunião de fechamento do contrato na quinta às 15h.</div>
+        <div class="meta">📅 08/10/2026, 09:00</div>
+      </div></div><button type="button" class="kanban-popover-btn primary" style="width: 100%; margin-top: 10px;">+ Agendar nova mensagem</button></div></div></div></div>
+<div data-molde="ag-vazio"><div class="kanban-scheduled-empty">Nenhuma mensagem agendada</div></div>
+<div data-molde="pop-tag"><div class="kanban-popover-backdrop"><div class="kanban-popover-panel" style="left: 194px; top: 412.5px; width: 280px;"><div class="kanban-popover-inner">
+    <div class="kanban-popover-title">
+      <i class="ri-price-tag-3-line" style="color:var(--ds-primary);font-size:14px"></i>
+      <h4>Marcadores</h4>
+      <button type="button" class="kanban-popover-close"><i class="ri-close-line"></i></button>
+    </div>
+  <input class="kanban-popover-input" type="text" placeholder="Buscar marcador..."><div class="kanban-tag-list"><label class="kanban-tag-option"><input type="checkbox"><span class="kanban-tag-dot" style="background: rgb(22, 163, 74);"></span><span class="kanban-tag-label">Cliente ativo</span></label><label class="kanban-tag-option"><input type="checkbox"><span class="kanban-tag-dot" style="background: rgb(245, 158, 11);"></span><span class="kanban-tag-label">Orçamento</span></label><label class="kanban-tag-option"><input type="checkbox"><span class="kanban-tag-dot" style="background: rgb(124, 58, 237);"></span><span class="kanban-tag-label">VIP</span></label><label class="kanban-tag-option"><input type="checkbox"><span class="kanban-tag-dot" style="background: rgb(14, 165, 233);"></span><span class="kanban-tag-label">Atacado</span></label><label class="kanban-tag-option"><input type="checkbox"><span class="kanban-tag-dot" style="background: rgb(239, 68, 68);"></span><span class="kanban-tag-label">Reativar</span></label></div><button type="button" class="kanban-popover-btn secondary" style="width: 100%; margin-top: 8px; color: var(--ds-primary);">+ Criar novo marcador</button></div></div></div></div>
+<div data-molde="menu-mover"><div id="kanban-move-card-menu" class="kb-move-menu" role="menu" style="left: 8px; top: 8px;">
+    <div class="kb-move-menu-title">Mover para</div>
+      <button type="button" class="kb-move-menu-item" role="menuitem" data-target-id="col-negociacao">
+        <span class="kb-move-menu-dot" style="background:#F59E0B"></span>
+        <span class="kb-move-menu-name">Em negociação</span>
+        <span class="kb-move-menu-count">4</span>
+      </button>
+      <button type="button" class="kb-move-menu-item" role="menuitem" data-target-id="col-pedido">
+        <span class="kb-move-menu-dot" style="background:#16A34A"></span>
+        <span class="kb-move-menu-name">Pedido enviado</span>
+        <span class="kb-move-menu-count">3</span>
+      </button>
+      <button type="button" class="kb-move-menu-item" role="menuitem" data-target-id="col-posvenda">
+        <span class="kb-move-menu-dot" style="background:#2563EB"></span>
+        <span class="kb-move-menu-name">Pós-venda</span>
+        <span class="kb-move-menu-count">3</span>
+      </button>
+  </div></div>
+<div data-molde="mover-todos"><div id="kanban-move-all-modal" class="kanban-modal" role="dialog" aria-modal="true">
+    <div class="kanban-modal-content">
+      <div class="kanban-modal-header">
+        <h3>Mover todos os cards</h3>
+        <button type="button" class="kanban-modal-close" data-move-all-close="" aria-label="Fechar"><i class="ri-close-line"></i></button>
+      </div>
+      <div class="kanban-modal-form">
+        <p class="kanban-move-all-copy">Mover os <strong>4</strong> card(s) de <strong>Em negociação</strong> para:</p>
+        <div class="kanban-move-all-list">
+            <button type="button" class="kanban-move-all-option" data-target-id="col-novo">
+              <span class="kanban-move-all-dot" style="background:#64748B"></span>
+              <span class="kanban-move-all-name">Novo contato</span>
+              <span class="kanban-move-all-count">4</span>
+            </button>
+            <button type="button" class="kanban-move-all-option" data-target-id="col-pedido">
+              <span class="kanban-move-all-dot" style="background:#16A34A"></span>
+              <span class="kanban-move-all-name">Pedido enviado</span>
+              <span class="kanban-move-all-count">3</span>
+            </button>
+            <button type="button" class="kanban-move-all-option" data-target-id="col-posvenda">
+              <span class="kanban-move-all-dot" style="background:#2563EB"></span>
+              <span class="kanban-move-all-name">Pós-venda</span>
+              <span class="kanban-move-all-count">3</span>
+            </button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+<div data-molde="ordenar"><div id="kanban-reorder-modal" class="kanban-modal" role="dialog" aria-modal="true">
+    <div class="kanban-modal-content">
+      <div class="kanban-modal-header">
+        <h3>Ordenar colunas</h3>
+        <button type="button" class="kanban-modal-close" data-reorder-close="" aria-label="Fechar"><i class="ri-close-line"></i></button>
+      </div>
+      <div class="kanban-modal-form">
+        <p class="kanban-reorder-copy">A ordem aqui é a ordem do quadro, da esquerda para a direita.</p>
+        <div class="kanban-reorder-list" role="list">
+        <div class="kanban-reorder-item" role="listitem">
+          <span class="kanban-reorder-dot" style="background:#64748B"></span>
+          <span class="kanban-reorder-name">Novo contato</span>
+          <span class="kanban-reorder-badge">padrão</span>
+          <button type="button" class="kanban-reorder-move" data-move="up" data-index="0" disabled="" aria-label="Mover Novo contato para cima">
+            <i class="ri-arrow-up-s-line"></i>
+          </button>
+          <button type="button" class="kanban-reorder-move" data-move="down" data-index="0" aria-label="Mover Novo contato para baixo">
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+        </div>
+        <div class="kanban-reorder-item" role="listitem">
+          <span class="kanban-reorder-dot" style="background:#F59E0B"></span>
+          <span class="kanban-reorder-name">Em negociação</span>
+          <button type="button" class="kanban-reorder-move" data-move="up" data-index="1" aria-label="Mover Em negociação para cima">
+            <i class="ri-arrow-up-s-line"></i>
+          </button>
+          <button type="button" class="kanban-reorder-move" data-move="down" data-index="1" aria-label="Mover Em negociação para baixo">
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+        </div>
+        <div class="kanban-reorder-item" role="listitem">
+          <span class="kanban-reorder-dot" style="background:#16A34A"></span>
+          <span class="kanban-reorder-name">Pedido enviado</span>
+          <button type="button" class="kanban-reorder-move" data-move="up" data-index="2" aria-label="Mover Pedido enviado para cima">
+            <i class="ri-arrow-up-s-line"></i>
+          </button>
+          <button type="button" class="kanban-reorder-move" data-move="down" data-index="2" aria-label="Mover Pedido enviado para baixo">
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+        </div>
+        <div class="kanban-reorder-item" role="listitem">
+          <span class="kanban-reorder-dot" style="background:#2563EB"></span>
+          <span class="kanban-reorder-name">Pós-venda</span>
+          <button type="button" class="kanban-reorder-move" data-move="up" data-index="3" aria-label="Mover Pós-venda para cima">
+            <i class="ri-arrow-up-s-line"></i>
+          </button>
+          <button type="button" class="kanban-reorder-move" data-move="down" data-index="3" disabled="" aria-label="Mover Pós-venda para baixo">
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+        </div>
+      </div>
+      </div>
+      <div class="kanban-modal-footer">
+        <button type="button" class="kanban-btn-secondary" data-reorder-close="">Cancelar</button>
+        <button type="button" class="kanban-btn-primary" data-reorder-save="">Salvar ordem</button>
+      </div>
+    </div>
+  </div></div>
+<div data-molde="agendar"><div id="kanban-schedule-modal" class="kanban-modal kanban-schedule-modal kb-hidden" role="dialog" aria-modal="true" aria-labelledby="kanban-schedule-title-heading">
+    <div class="kanban-modal-content kanban-schedule-content">
+      <div class="kanban-modal-header">
+        <h3 id="kanban-schedule-title-heading"><i class="ri-calendar-schedule-line"></i> Agendar Mensagem</h3>
+        <button type="button" class="kanban-modal-close" data-action="close-schedule" aria-label="Fechar">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <form class="kanban-modal-form kanban-schedule-form">
+        <input id="kanban-schedule-chat-id" type="hidden">
+        <div class="kanban-schedule-body">
+          <section class="kanban-schedule-col">
+            <div class="kanban-schedule-grid">
+              <label class="kanban-form-field" for="kanban-schedule-title">
+                <span>Título *</span>
+                <input id="kanban-schedule-title" type="text" maxlength="100" placeholder="Ex: Lembrete de pagamento" required="">
+              </label>
+              <label class="kanban-form-field" for="kanban-schedule-type">
+                <span>Tipo de Mensagem</span>
+                <select id="kanban-schedule-type">
+                  <option value="texto">Texto</option>
+                  <option value="imagem">Imagem</option>
+                  <option value="audio">Áudio</option>
+                  <option value="documento">Documento</option>
+                  <option value="video">Vídeo</option>
+                </select>
+              </label>
+            </div>
+            <div class="kanban-schedule-grid">
+              <label class="kanban-form-field" for="kanban-schedule-tag">
+                <span>Tag</span>
+                <select id="kanban-schedule-tag"><option value="">Sem Tag</option><option value="Atacado">Atacado</option><option value="Cliente ativo">Cliente ativo</option><option value="Orçamento">Orçamento</option><option value="Reativar">Reativar</option><option value="VIP">VIP</option></select>
+              </label>
+              <label class="kanban-form-field" for="kanban-schedule-category">
+                <span>Categoria</span>
+                <select id="kanban-schedule-category">
+                  <option value="">Sem Categoria</option>
+                  <option value="Cobrança">Cobrança</option>
+                  <option value="Lembrete">Lembrete</option>
+                  <option value="Promocional">Promocional</option>
+                  <option value="Suporte">Suporte</option>
+                  <option value="Vendas">Vendas</option>
+                </select>
+              </label>
+            </div>
+            <div class="kanban-schedule-grid">
+              <label class="kanban-form-field" for="kanban-schedule-user">
+                <span>Usuário</span>
+                <select id="kanban-schedule-user"><option value="">Selecione um usuário</option><option value="usr-ana">Ana Souza</option><option value="usr-bruno">Bruno Lima</option><option value="usr-carla">Carla Dias</option></select>
+              </label>
+              <label class="kanban-form-field" for="kanban-schedule-fila">
+                <span>Fila</span>
+                <select id="kanban-schedule-fila"><option value="">Sem Fila</option><option value="fila-geral">Geral</option><option value="fila-vendas">Vendas</option></select>
+              </label>
+            </div>
+            <div class="kanban-form-field">
+              <div class="kanban-schedule-inline-head">
+                <label for="kanban-schedule-message">Mensagem * <span id="kanban-schedule-message-count">(0 caracteres)</span></label>
+                <button id="kanban-schedule-quick-toggle" type="button" style="cursor: pointer;"><i class="ri-flashlight-line"></i> Respostas rápidas</button>
+              </div>
+              <div id="kanban-schedule-quick-panel" class="kanban-schedule-quick-panel kb-hidden">
+    <button type="button" class="kanban-schedule-quick-item" data-kanban-quick-id="qr-1">
+      <span>Tabela de preços</span>
+      <small>Segue a tabela de preços atualizada de outubro. Qualquer dúvida, estou à disposição!</small>
+    </button>
+    <button type="button" class="kanban-schedule-quick-item" data-kanban-quick-id="qr-2">
+      <span>Prazo de entrega</span>
+      <small>Para a capital o prazo é de 2 dias úteis; interior e litoral, de 3 a 5 dias úteis.</small>
+    </button>
+    <button type="button" class="kanban-schedule-quick-item" data-kanban-quick-id="qr-3">
+      <span>Pedido mínimo</span>
+      <small>O pedido mínimo é de 10 caixas, e dá para misturar os sabores.</small>
+    </button>
+    <button type="button" class="kanban-schedule-quick-item" data-kanban-quick-id="qr-4">
+      <span>Segunda via de boleto</span>
+      <small>Olá! Identificamos um boleto em aberto. Posso te mandar a segunda via?</small>
+    </button>
+    <button type="button" class="kanban-schedule-quick-item" data-kanban-quick-id="qr-5">
+      <span>Pedido faturado</span>
+      <small>Seu pedido foi faturado hoje e já segue para entrega. Obrigado pela preferência!</small>
+    </button>
+  </div>
+              <textarea id="kanban-schedule-message" rows="4" placeholder="Digite a mensagem..."></textarea>
+            </div>
+            <div class="kanban-schedule-attachment-buttons">
+              <button type="button" data-kanban-attach-type="image"><i class="ri-image-line"></i> Imagem</button>
+              <button type="button" data-kanban-attach-type="video"><i class="ri-film-line"></i> Vídeo</button>
+              <button type="button" data-kanban-attach-type="audio"><i class="ri-mic-line"></i> Áudio</button>
+              <button type="button" data-kanban-attach-type="document"><i class="ri-file-text-line"></i> Arquivo</button>
+            </div>
+            <div id="kanban-schedule-attachments" class="kanban-schedule-attachments-list"></div>
+            <div class="kanban-schedule-grid kanban-schedule-date-grid">
+              <label class="kanban-form-field" for="kanban-schedule-date">
+                <span>Data *</span>
+                <input id="kanban-schedule-date" type="date" required="">
+              </label>
+              <label class="kanban-form-field" for="kanban-schedule-time">
+                <span>Hora *</span>
+                <input id="kanban-schedule-time" type="time" required="">
+              </label>
+            </div>
+          </section>
+          <section class="kanban-schedule-col">
+            <div class="kanban-schedule-preview-title">PRE-VISUALIZAÇÃO</div>
+            <div class="kanban-schedule-preview-card">
+              <div id="kanban-schedule-preview-message" class="kanban-schedule-preview-message">Sua mensagem aparecerá aqui...</div>
+              <div id="kanban-schedule-preview-hour" class="kanban-schedule-preview-hour">18:00</div>
+            </div>
+            <div class="kanban-schedule-preview-date">
+              Será enviada em <strong id="kanban-schedule-preview-date">05/10/2026</strong> às <strong id="kanban-schedule-preview-time">18:00</strong>
+            </div>
+            <div id="kanban-schedule-rec-box" class="kanban-schedule-rec-box">
+              <button id="kanban-schedule-rec-toggle" type="button" class="kanban-schedule-rec-head">
+                <div>
+                  <div class="kanban-schedule-rec-title">Recorrência Avançada</div>
+                  <div class="kanban-schedule-rec-subtitle">Configurar disparos repetitivos</div>
+                </div>
+                <span class="kanban-schedule-rec-switch"><span></span></span>
+              </button>
+              <div id="kanban-schedule-rec-panel" class="kanban-schedule-rec-panel kb-hidden">
+                <div class="kanban-schedule-grid">
+                  <label class="kanban-form-field" for="kanban-schedule-rec-frequency">
+                    <span>Frequência</span>
+                    <select id="kanban-schedule-rec-frequency">
+                      <option value="diario">Todo dia</option>
+                      <option value="semanal">Semanalmente</option>
+                      <option value="mensal">Mensalmente</option>
+                    </select>
+                  </label>
+                  <label class="kanban-form-field" for="kanban-schedule-rec-repetitions">
+                    <span>Repetir quantas vezes?</span>
+                    <input id="kanban-schedule-rec-repetitions" type="number" min="1" value="5">
+                  </label>
+                </div>
+                <div id="kanban-schedule-rec-weekly" class="kanban-form-field">
+                  <span>Nos dias da semana</span>
+                  <div id="kanban-schedule-rec-days" class="kanban-schedule-week-days">
+    <button type="button" class="kanban-schedule-day-btn is-active" data-kanban-schedule-day="Seg">
+      Seg
+    </button>
+    <button type="button" class="kanban-schedule-day-btn " data-kanban-schedule-day="Ter">
+      Ter
+    </button>
+    <button type="button" class="kanban-schedule-day-btn " data-kanban-schedule-day="Qua">
+      Qua
+    </button>
+    <button type="button" class="kanban-schedule-day-btn " data-kanban-schedule-day="Qui">
+      Qui
+    </button>
+    <button type="button" class="kanban-schedule-day-btn " data-kanban-schedule-day="Sex">
+      Sex
+    </button>
+    <button type="button" class="kanban-schedule-day-btn " data-kanban-schedule-day="Sab">
+      Sab
+    </button>
+    <button type="button" class="kanban-schedule-day-btn " data-kanban-schedule-day="Dom">
+      Dom
+    </button>
+  </div>
+                </div>
+                <div id="kanban-schedule-rec-monthly" class="kanban-form-field kb-hidden">
+                  <span>No dia do mês</span>
+                  <div class="kanban-schedule-month-day-wrap">
+                    <span>Todo dia</span>
+                    <input id="kanban-schedule-rec-day-month" type="number" min="1" max="31" value="1">
+                    <span>do mês</span>
+                  </div>
+                </div>
+                <label class="kanban-form-field" for="kanban-schedule-rec-hour">
+                  <span>Horário do disparo</span>
+                  <input id="kanban-schedule-rec-hour" type="time" value="14:00">
+                </label>
+                <div id="kanban-schedule-rec-summary" class="kanban-schedule-rec-summary"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="kanban-schedule-error kb-hidden"></div>
+        <div class="kanban-modal-footer">
+          <button type="button" class="kanban-btn-secondary" data-action="close-schedule">Cancelar</button>
+          <button type="submit" class="kanban-btn-primary">Agendar</button>
+        </div>
+      </form>
+    </div>
+  </div></div>
+</template>
+<style>
+  /* O aviso do protótipo precisa ficar acima dos modais do app (z-index 12000 a 13000). */
+  .mockup-aviso { z-index: 13001; }
+</style>
+<script>
+(() => {
+  // ---------------------------------------------------------------------------------
+  // Dados fictícios (os mesmos de tools/capture/fixtures/comum.js e kanban.js).
+  // Repositório público: nada real aqui.
+  // ---------------------------------------------------------------------------------
+  const EU = 'Ana Souza';
+  const USUARIOS = { 'usr-ana': 'Ana Souza', 'usr-carla': 'Carla Dias', 'usr-bruno': 'Bruno Lima' };
+
+  // [nome, cor], na ordem em que o app lista os marcadores.
+  const TAGS = [['Cliente ativo', '#16A34A'], ['Orçamento', '#F59E0B'], ['VIP', '#7C3AED'], ['Atacado', '#0EA5E9'], ['Reativar', '#EF4444']];
+
+  // Colunas do comum.js: [nome, cor, é a coluna padrão].
+  const COLUNAS = {
+    'col-novo': ['Novo contato', '#64748B', true],
+    'col-negociacao': ['Em negociação', '#F59E0B', false],
+    'col-pedido': ['Pedido enviado', '#16A34A', false],
+    'col-posvenda': ['Pós-venda', '#2563EB', false],
+  };
+
+  // Um card é uma conversa. A chave é o contato, que é o data-contact-id do card.
+  //   min    minutos desde a última mensagem (os mesmos do comum.js)
+  //   msgs   [quem, texto, minutos antes da última]; quem = 'ela' | 'eu' | 'doc-ela' | 'doc-eu'
+  //          (o mesmo texto do chats.html)
+  //   obs    [texto, dias atrás]          agenda  [texto, daqui a N dias, 'hh:mm']
+  // Responsável (resp) e instância (inst) alimentam os filtros; a fila é Vendas em todas.
+  const CONVERSAS = {
+    'ct-01': { chat: 'c1', fone: '5511990000101', email: 'mariana.costa@exemplo.com.br', resp: 'usr-ana', inst: 'inst-comercial', min: 2,
+      obs: [['Cliente VIP: costuma repetir o pedido do mês anterior.', 20]],
+      msgs: [
+        ['ela', 'Oi Ana, bom dia! Tudo bem?', 62],
+        ['eu', 'Bom dia, Mariana! Tudo ótimo, e com você?', 60],
+        ['ela', 'Tudo certo! Queria saber se a tabela de outubro já saiu', 58],
+        ['eu', 'Saiu sim! Te mando agora 👇', 56],
+        ['doc-eu', 'Tabela_Precos_Outubro.pdf', 55],
+        ['ela', 'Obrigada! Os preços do achocolatado mudaram?', 28],
+        ['eu', 'Ficaram iguais. Só a linha de biscoitos teve reajuste de 4%.', 26],
+        ['ela', 'Ótimo. Então quero repetir o último pedido', 3],
+        ['ela', 'Perfeito, pode mandar o pedido de 40 caixas 👍', 0],
+      ] },
+    'ct-02': { chat: 'c2', fone: '5511990000102', email: 'compras@bompreco.exemplo.com.br', resp: 'usr-ana', inst: 'inst-comercial', min: 14,
+      msgs: [['ela', 'Boa tarde! Aqui é o Roberto, do Mercado Bom Preço', 3], ['ela', 'Vocês têm o display novo em estoque?', 0]] },
+    'ct-03': { chat: 'c3', fone: '5511990000103', email: null, resp: 'usr-ana', inst: 'inst-posvenda', min: 47,
+      agenda: [['Pedro, lembrete: o boleto do pedido 2231 vence amanhã.', 2, '09:00']],
+      msgs: [['eu', 'Pedro, segue o boleto do pedido 2231, vencimento dia 15.', 7], ['ela', 'Recebi o boleto, obrigado!', 0]] },
+    'ct-04': { chat: 'c4', fone: '5511990000104', email: 'pedidos@litoral.exemplo.com.br', resp: 'usr-ana', inst: 'inst-comercial', min: 95, fav: true,
+      obs: [['Pagamento sempre no boleto 28 dias.', 40], ['Entrega em Santos só às terças e quintas.', 6]],
+      msgs: [['eu', 'Oi! O pedido de vocês foi faturado hoje cedo.', 19], ['ela', 'Qual o prazo de entrega para Santos?', 0]] },
+    'ct-05': { chat: 'c5', fone: '5511990000105', email: 'juliana.ribeiro@exemplo.com.br', resp: 'usr-ana', inst: 'inst-comercial', min: 180,
+      agenda: [['Oi Juliana! Conseguiu conversar com seu sócio sobre o pedido?', 1, '10:00']],
+      msgs: [['eu', 'Juliana, consegui 5% de desconto à vista para o pedido acima de 30 caixas.', 12], ['ela', 'Vou ver com meu sócio e te retorno', 0]] },
+    'ct-06': { chat: 'c6', fone: '5511990000106', email: 'contato@emporio.exemplo.com.br', resp: 'usr-ana', inst: 'inst-posvenda', min: 260,
+      msgs: [['ela', 'Bom dia! Pode me mandar o catálogo novo?', 14], ['eu', 'Claro! Acabei de pedir para o pessoal do marketing.', 9], ['doc-ela', 'Catalogo_Outubro.pdf', 0]] },
+    'ct-07': { chat: 'c7', fone: '5511990000107', email: null, resp: 'usr-ana', inst: 'inst-comercial', min: 1440,
+      msgs: [['ela', 'Bom dia! Tudo certo para quinta?', 0]] },
+    'ct-08': { chat: 'c8', fone: '5511990000108', email: null, resp: 'usr-ana', inst: 'inst-comercial', min: 2900,
+      msgs: [['eu', 'Pedido confirmado: 12 caixas de biscoito sortido. A nota sai na segunda.', 5], ['ela', 'Fechado. Aguardo a nota.', 0]] },
+    'ct-09': { chat: 'c9', fone: '5511990000109', email: 'fernanda.o@exemplo.com.br', resp: 'usr-bruno', inst: 'inst-comercial', min: 25,
+      msgs: [['ela', 'Oi! Vi o anúncio de vocês no Instagram', 4], ['ela', 'Tenho uma loja em Osasco', 3], ['ela', 'Pode me passar a tabela de atacado?', 0]] },
+    'ct-10': { chat: 'c10', fone: '5511990000110', email: 'compras@avenida.exemplo.com.br', resp: 'usr-carla', inst: 'inst-comercial', min: 70,
+      msgs: [['eu', 'Bom dia! Já posso lançar o pedido da semana?', 40], ['ela', 'Pode sim, mesmas quantidades da semana passada', 15], ['ela', 'Segue o pedido da semana em anexo', 0]] },
+    'ct-13': { chat: 'c11', fone: '5511990000113', email: 'patricia.gomes@exemplo.com.br', resp: 'usr-carla', inst: 'inst-posvenda', min: 130, fav: true,
+      agenda: [['Patrícia, os lançamentos de novembro chegaram! Quer que eu separe uma amostra?', 7, '14:00']],
+      msgs: [['eu', 'Patrícia, chegou tudo certinho?', 25], ['ela', 'Chegou sim!', 2], ['ela', 'Amei os produtos novos!', 0]] },
+    'ct-14': { chat: 'c12', fone: '5511990000114', email: 'pedidos@atacadaovale.exemplo.com.br', resp: 'usr-bruno', inst: 'inst-comercial', min: 300,
+      obs: [['Pediu 8% no volume de 200 caixas. Aguardando aprovação da fábrica.', 1]],
+      msgs: [['eu', 'Segue a proposta para o pedido trimestral.', 60], ['ela', 'Recebi a proposta.', 5], ['ela', 'Consegue fazer 8% no volume de 200 caixas?', 0]] },
+    'ct-17': { chat: 'c13', fone: '5511990000117', email: 'camila.rocha@exemplo.com.br', resp: 'usr-ana', inst: 'inst-posvenda', min: 1500,
+      msgs: [['eu', 'Camila, seu pedido saiu para entrega hoje.', 30], ['ela', 'Obrigada pelo atendimento 😊', 0]] },
+    'ct-22': { chat: 'c14', fone: '5511990000122', email: 'compras@economica.exemplo.com.br', resp: 'usr-carla', inst: 'inst-comercial', min: 3100,
+      obs: [['Falar com o setor de compras antes das 11h.', 30], ['Contrato trimestral: enviar a minuta até sexta.', 2]],
+      agenda: [['Bom dia! Segue a minuta do contrato trimestral para revisão.', 1, '08:30'], ['Lembrete: reunião de fechamento do contrato na quinta às 15h.', 3, '09:00']],
+      msgs: [['eu', 'Conversei com a diretoria: dá para manter o preço por 3 meses.', 45], ['ela', 'Vamos fechar o contrato trimestral', 0]] },
+  };
+
+  // Horários sempre relativos a quando a página abre, para a conversa parecer de hoje.
+  const AGORA = Date.now();
+  for (const c of Object.values(CONVERSAS)) {
+    const ultima = AGORA - c.min * 60_000;
+    c.fila = 'fila-vendas';
+    c.mensagens = c.msgs.map(([quem, texto, antes]) => ({ quem, texto, quando: new Date(ultima - antes * 60_000), assinatura: USUARIOS[c.resp] }));
+    c.observacoes = (c.obs || []).map(([texto, d]) => ({ texto, quando: new Date(AGORA - d * 86_400_000) }));
+    c.agendadas = (c.agenda || []).map(([texto, d, hora]) => {
+      const quando = new Date(AGORA + d * 86_400_000);
+      quando.setHours(Number(hora.slice(0, 2)), Number(hora.slice(3)), 0, 0);
+      return { texto, quando };
+    });
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Utilitários
+  // ---------------------------------------------------------------------------------
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const todos = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+  const moldes = $('#kanban-moldes').content;
+  const molde = (nome) => moldes.querySelector(`[data-molde="${nome}"]`).firstElementChild.cloneNode(true);
+  const avisar = (texto) => window.mockup.avisar(texto);
+  const ehCelular = () => window.matchMedia('(max-width: 768px)').matches;
+
+  const fmtHora = (d) => d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const fmtDataHora = (d) => d.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const truncar = (texto, limite) => (texto.length > limite ? `${texto.slice(0, limite - 1)}…` : texto);
+  const corDaTag = (nome) => (TAGS.find(([n]) => n === nome) || [nome, '#8896A6'])[1];
+
+  // As regras abaixo repetem as do app (kanban.ts / kanban-chat-float.ts).
+  function contraste(hex) {
+    const h = hex.replace('#', '');
+    const lum = (0.299 * parseInt(h.slice(0, 2), 16) + 0.587 * parseInt(h.slice(2, 4), 16) + 0.114 * parseInt(h.slice(4, 6), 16)) / 255;
+    return lum > 0.62 ? '#1A1A2E' : '#FFFFFF';
+  }
+  function iniciaisDoChat(nome) {
+    const partes = nome.split(/\s+/).filter(Boolean);
+    if (!partes.length) return 'C';
+    return (partes.length === 1 ? partes[0][0] : partes[0][0] + partes[1][0]).toUpperCase();
+  }
+  const chaveDoDia = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  function rotuloDoDia(d) {
+    const inicio = (x) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
+    const hoje = new Date();
+    const diff = Math.round((inicio(hoje) - inicio(d)) / 86_400_000);
+    if (diff === 0) return 'Hoje';
+    if (diff === 1) return 'Ontem';
+    const rotulo = d.toLocaleDateString('pt-BR', d.getFullYear() === hoje.getFullYear()
+      ? { weekday: 'long', day: '2-digit', month: 'long' }
+      : { day: '2-digit', month: 'long', year: 'numeric' });
+    return rotulo.charAt(0).toUpperCase() + rotulo.slice(1);
+  }
+  function limitarNaTela(x, y, largura, altura) {
+    return {
+      x: Math.max(8, Math.min(x, window.innerWidth - largura - 8)),
+      y: Math.max(8, Math.min(y, window.innerHeight - altura - 8)),
+    };
+  }
+
+  // Toast do app (.kb-toast), com as mesmas cores por tipo e o mesmo tempo na tela.
+  const CORES_TOAST = { success: 'rgba(34, 197, 94, 0.92)', error: 'rgba(239, 68, 68, 0.92)', warning: 'rgba(245, 158, 11, 0.92)' };
+  function toast(texto, tipo = 'info') {
+    const el = molde('toast');
+    el.textContent = texto;
+    if (CORES_TOAST[tipo]) el.style.background = CORES_TOAST[tipo];
+    $('#toast-container').appendChild(el);
+    setTimeout(() => {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity 0.22s ease';
+      setTimeout(() => el.remove(), 220);
+    }, 2600);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Quadro: colunas, cards, contadores e filtros
+  // ---------------------------------------------------------------------------------
+  const board = $('#kanban-columns');
+  const colunas = () => todos('.kanban-column', board);
+  const cardsDa = (col) => todos('.kanban-card', col);
+  const visiveisDa = (col) => cardsDa(col).filter((c) => c.style.display !== 'none');
+  const colunaPorId = (id) => colunas().find((c) => c.dataset.columnId === id);
+  const nomeDoCard = (card) => $('.kb-card-name', card).textContent.trim();
+  const conversaDoCard = (card) => CONVERSAS[card.dataset.contactId];
+  const tagsDoCard = (card) => todos('.kb-tag', card).map((t) => t.textContent.trim());
+
+  // Nome, cor e "padrão" ficam no elemento da coluna: o protótipo cria, renomeia,
+  // recolore, reordena e exclui colunas.
+  for (const col of colunas()) {
+    const [nome, cor, padrao] = COLUNAS[col.dataset.columnId] || [$('.column-title', col).textContent, '#4A6FA5', false];
+    col.dataset.nome = nome;
+    col.dataset.cor = cor;
+    if (padrao) col.dataset.padrao = '1';
+  }
+
+  // Contador = cards visíveis (com filtro aplicado), e "Sem cards" quando a coluna esvazia.
+  function atualizarColuna(col) {
+    const qtd = visiveisDa(col).length;
+    $('.column-counter', col).textContent = String(qtd);
+    const lista = $('.column-cards', col);
+    const vazio = $('.kb-empty-column', lista);
+    if (!qtd && !vazio) lista.appendChild(molde('coluna-vazia'));
+    if (qtd && vazio) vazio.remove();
+  }
+
+  /** Move o card para `indice` entre os cards visíveis do destino (null = fim da coluna). */
+  function moverCard(card, destino, indice, avisarMovimento = true) {
+    const origem = card.closest('.kanban-column');
+    const lista = $('.column-cards', destino);
+    const outros = visiveisDa(destino).filter((c) => c !== card);
+    const referencia = indice == null ? null : outros[indice] || null;
+    if (referencia) lista.insertBefore(card, referencia); else lista.appendChild(card);
+    card.dataset.columnId = destino.dataset.columnId;
+    atualizarColuna(origem);
+    atualizarColuna(destino);
+    if (avisarMovimento && origem !== destino) toast(`${nomeDoCard(card)} movido para ${destino.dataset.nome}`, 'success');
+  }
+
+  function aplicarFiltros() {
+    const usuario = $('#kanban-user-filter').value;
+    const fila = $('#kanban-fila-filter').value;
+    const instancia = $('#kanban-instance-filter').value;
+    const termo = $('#kanban-search-input').value.trim().toLowerCase();
+    for (const card of todos('.kanban-card', board)) {
+      const c = conversaDoCard(card);
+      const passa = (usuario === 'todos' || c.resp === usuario)
+        && (fila === 'todas' || c.fila === fila)
+        && (instancia === 'todas' || c.inst === instancia)
+        && (!termo || `${nomeDoCard(card)} ${c.fone}`.toLowerCase().includes(termo));
+      card.style.display = passa ? '' : 'none';
+    }
+    colunas().forEach(atualizarColuna);
+  }
+
+  ['#kanban-user-filter', '#kanban-fila-filter', '#kanban-instance-filter'].forEach((sel) => {
+    $(sel).addEventListener('change', () => { fecharPopover(); fecharMenuColuna(); aplicarFiltros(); });
+  });
+  const busca = $('#kanban-search-input');
+  let timerBusca;
+  busca.addEventListener('input', () => { clearTimeout(timerBusca); timerBusca = setTimeout(aplicarFiltros, 130); });
+  busca.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') { busca.value = ''; aplicarFiltros(); }
+  });
+
+  // ---------------------------------------------------------------------------------
+  // Arrastar e soltar (só no desktop, como no app: no celular move pelo botão do card)
+  // ---------------------------------------------------------------------------------
+  function sincronizarArrastavel() {
+    const pode = !ehCelular();
+    todos('.kanban-card', board).forEach((card) => { card.draggable = pode; });
+  }
+  sincronizarArrastavel();
+  window.matchMedia('(max-width: 768px)').addEventListener('change', sincronizarArrastavel);
+
+  let arrastado = null;
+  let alturaArrastado = 0;
+  let indiceAlvo = null;
+  let colunaSobre = null;
+  // O vão de destino é um div vazio criado na hora, como o app faz (só existe durante o arrasto).
+  const indicador = document.createElement('div');
+  indicador.className = 'kanban-drop-indicator';
+
+  function indiceDeSoltura(lista, y) {
+    const cards = visiveisDa(lista).filter((c) => c !== arrastado);
+    const i = cards.findIndex((c) => { const r = c.getBoundingClientRect(); return y < r.top + r.height / 2; });
+    return i < 0 ? cards.length : i;
+  }
+  function limparVisualDoArrasto() {
+    colunaSobre?.classList.remove('is-drag-over');
+    colunaSobre = null;
+    indiceAlvo = null;
+    indicador.remove();
+  }
+  function limparArrasto() {
+    arrastado?.classList.remove('dragging', 'is-drag-source');
+    arrastado = null;
+    alturaArrastado = 0;
+    limparVisualDoArrasto();
+  }
+
+  board.addEventListener('dragstart', (ev) => {
+    const card = ev.target.closest && ev.target.closest('.kanban-card');
+    if (!card) return;
+    if (ehCelular()) { ev.preventDefault(); return; }
+    arrastado = card;
+    card.classList.add('dragging');
+    alturaArrastado = card.getBoundingClientRect().height;
+    ev.dataTransfer.setData('text/plain', card.dataset.contactId);
+    ev.dataTransfer.effectAllowed = 'move';
+    // Esconder a origem dentro do próprio dragstart abortaria o arrasto.
+    setTimeout(() => { if (arrastado === card) card.classList.add('is-drag-source'); }, 0);
+    fecharMenuColuna();
+    fecharPopover();
+  });
+
+  board.addEventListener('dragover', (ev) => {
+    const lista = arrastado && ev.target.closest('.column-cards');
+    if (!lista) return;
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = 'move';
+    const col = lista.closest('.kanban-column');
+    if (colunaSobre && colunaSobre !== col) colunaSobre.classList.remove('is-drag-over');
+    col.classList.add('is-drag-over');
+    colunaSobre = col;
+    indiceAlvo = indiceDeSoltura(lista, ev.clientY);
+    if (alturaArrastado > 0) indicador.style.height = `${alturaArrastado}px`;
+    const cards = visiveisDa(lista).filter((c) => c !== arrastado);
+    if (indiceAlvo >= cards.length) lista.appendChild(indicador); else lista.insertBefore(indicador, cards[indiceAlvo]);
+  });
+
+  board.addEventListener('dragleave', (ev) => {
+    const lista = ev.target.closest && ev.target.closest('.column-cards');
+    if (!lista || (ev.relatedTarget && lista.contains(ev.relatedTarget))) return;
+    if (colunaSobre === lista.closest('.kanban-column')) limparVisualDoArrasto();
+  });
+
+  board.addEventListener('drop', (ev) => {
+    const lista = arrastado && ev.target.closest('.column-cards');
+    if (!lista) return;
+    ev.preventDefault();
+    const card = arrastado;
+    const indice = indiceAlvo ?? indiceDeSoltura(lista, ev.clientY);
+    limparVisualDoArrasto();
+    moverCard(card, lista.closest('.kanban-column'), indice);
+    limparArrasto();
+  });
+
+  board.addEventListener('dragend', limparArrasto);
+
+  // ---------------------------------------------------------------------------------
+  // Menu "Mover para" do card (celular, onde o card não arrasta)
+  // ---------------------------------------------------------------------------------
+  let menuMover = null;
+  function fecharMenuMover() {
+    menuMover?.remove();
+    menuMover = null;
+  }
+  function abrirMenuMover(card, botao) {
+    const origem = card.closest('.kanban-column');
+    const alvos = colunas().filter((c) => c !== origem);
+    if (!alvos.length) { toast('Não há outra coluna para onde mover', 'info'); return; }
+    fecharMenuMover();
+    const menu = molde('menu-mover');
+    const modelo = $('.kb-move-menu-item', menu);
+    todos('.kb-move-menu-item', menu).forEach((item) => item.remove());
+    for (const col of alvos) {
+      const item = modelo.cloneNode(true);
+      item.dataset.targetId = col.dataset.columnId;
+      $('.kb-move-menu-dot', item).style.background = col.dataset.cor;
+      $('.kb-move-menu-name', item).textContent = col.dataset.nome;
+      $('.kb-move-menu-count', item).textContent = String(cardsDa(col).length);
+      menu.appendChild(item);
+    }
+    document.body.appendChild(menu);
+    // Mesma regra do app: abaixo do botão se couber, senão acima; borda direita alinhada.
+    const r = botao.getBoundingClientRect();
+    const m = menu.getBoundingClientRect();
+    const y = window.innerHeight - r.bottom >= m.height + 12 ? r.bottom + 6 : r.top - m.height - 6;
+    const pos = limitarNaTela(r.right - m.width, y, m.width, m.height);
+    menu.style.left = `${pos.x}px`;
+    menu.style.top = `${pos.y}px`;
+    menu.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const opcao = ev.target.closest('[data-target-id]');
+      if (!opcao) return;
+      fecharMenuMover();
+      moverCard(card, colunaPorId(opcao.dataset.targetId), null);
+    });
+    menuMover = menu;
+  }
+  window.addEventListener('scroll', () => fecharMenuMover(), true);
+
+  // ---------------------------------------------------------------------------------
+  // Botões do card: observações, agendadas, marcadores, IA e abrir conversa
+  // ---------------------------------------------------------------------------------
+  const raizPopover = $('#kanban-popover-root');
+  const TAMANHO_POPOVER = { obs: [320, 460], ag: [320, 340], tag: [280, 360] };
+
+  function fecharPopover() { raizPopover.replaceChildren(); }
+
+  function mostrarPopover(tipo, pop, botao) {
+    const painel = $('.kanban-popover-panel', pop);
+    const [largura, altura] = TAMANHO_POPOVER[tipo];
+    const r = botao.getBoundingClientRect();
+    const pos = limitarNaTela(r.left, r.bottom + 6, largura, altura);
+    painel.style.left = `${pos.x}px`;
+    painel.style.top = `${pos.y}px`;
+    painel.style.width = `${largura}px`;
+    pop.addEventListener('click', (ev) => { if (ev.target === pop) fecharPopover(); });
+    painel.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      if (ev.target.closest('.kanban-popover-close')) fecharPopover();
+    });
+    raizPopover.replaceChildren(pop);
+  }
+
+  function marcarComNota(card) {
+    const botao = $('.kb-card-action-btn', card);
+    botao.classList.add('is-obs');
+    botao.title = 'Observações (com nota)';
+    if (!$('.kb-card-action-dot', botao)) botao.appendChild(molde('obs-ponto'));
+  }
+
+  function abrirObservacoes(card, botao) {
+    const c = conversaDoCard(card);
+    const pop = molde('pop-obs');
+    $('.kanban-popover-subtitle', pop).textContent = nomeDoCard(card);
+    const lista = $('.kanban-obs-list', pop);
+    const modelo = $('.kanban-obs-item', pop).cloneNode(true);
+    const entradaObs = $('.kanban-obs-input', pop);
+    function renderizar() {
+      $('.kanban-obs-count', pop).textContent = String(c.observacoes.length);
+      if (!c.observacoes.length) { lista.replaceChildren(molde('obs-vazio')); return; }
+      // Mais recente primeiro, como no app.
+      lista.replaceChildren(...c.observacoes.slice().reverse().map((o) => {
+        const item = modelo.cloneNode(true);
+        $('p', item).textContent = o.texto;
+        $('small', item).textContent = fmtDataHora(o.quando);
+        return item;
+      }));
+    }
+    renderizar();
+    $('.kanban-obs-add', pop).addEventListener('click', () => {
+      const texto = entradaObs.value.trim();
+      if (!texto) return;
+      c.observacoes.push({ texto, quando: new Date() });
+      entradaObs.value = '';
+      renderizar();
+      marcarComNota(card);
+      toast('Observação adicionada', 'success');
+    });
+    mostrarPopover('obs', pop, botao);
+  }
+
+  function atualizarSeloAgendadas(card) {
+    const qtd = conversaDoCard(card).agendadas.length;
+    const botao = todos('.kb-card-action-btn', card)[1];
+    botao.classList.toggle('is-warning', qtd > 0);
+    botao.title = qtd > 0 ? `Mensagens agendadas (${qtd})` : 'Mensagens agendadas';
+    let selo = $('.kb-card-action-badge', botao);
+    if (qtd > 0 && !selo) { selo = molde('ag-selo'); botao.appendChild(selo); }
+    if (selo) selo.textContent = String(Math.min(qtd, 9));
+  }
+
+  function abrirAgendadas(card, botao) {
+    const c = conversaDoCard(card);
+    const pop = molde('pop-ag');
+    $('.kanban-popover-subtitle', pop).textContent = nomeDoCard(card);
+    const lista = $('.kanban-scheduled-list', pop);
+    const modelo = $('.kanban-scheduled-item', pop).cloneNode(true);
+    const itens = c.agendadas.slice().sort((a, b) => a.quando - b.quando);
+    if (!itens.length) lista.replaceChildren(molde('ag-vazio'));
+    else {
+      lista.replaceChildren(...itens.map((a) => {
+        const item = modelo.cloneNode(true);
+        $('.title', item).textContent = truncar(a.texto, 70);
+        $('.meta', item).textContent = `📅 ${fmtDataHora(a.quando)}`;
+        return item;
+      }));
+    }
+    $('.kanban-popover-btn.primary', pop).addEventListener('click', () => {
+      fecharPopover();
+      abrirAgendamento(card, '');
+    });
+    mostrarPopover('ag', pop, botao);
+  }
+
+  /** Liga/desliga um marcador no card. Devolve true se ficou marcado. */
+  function alternarTagNoCard(card, nome) {
+    const chip = todos('.kb-tag', card).find((t) => t.textContent.trim() === nome);
+    if (chip) {
+      const linha = chip.parentElement;
+      chip.remove();
+      if (!linha.children.length) linha.remove();
+      return false;
+    }
+    let linha = $('.kb-tags', card);
+    if (!linha) {
+      linha = molde('kb-tags');
+      linha.replaceChildren();
+      card.appendChild(linha);
+    }
+    const novo = molde('kb-tags').firstElementChild;
+    const cor = corDaTag(nome);
+    novo.textContent = nome;
+    novo.style.background = cor;
+    novo.style.color = contraste(cor);
+    linha.appendChild(novo);
+    return true;
+  }
+
+  function abrirMarcadores(card, botao) {
+    const pop = molde('pop-tag');
+    const entradaBusca = $('.kanban-popover-input', pop);
+    const lista = $('.kanban-tag-list', pop);
+    const nenhum = molde('ag-vazio');
+    nenhum.textContent = 'Nenhum marcador encontrado';
+    const atuais = tagsDoCard(card);
+    for (const opcao of todos('.kanban-tag-option', lista)) {
+      const nome = $('.kanban-tag-label', opcao).textContent.trim();
+      const caixa = $('input', opcao);
+      caixa.checked = atuais.includes(nome);
+      caixa.addEventListener('change', () => {
+        const marcado = alternarTagNoCard(card, nome);
+        caixa.checked = marcado;
+        toast(marcado ? 'Marcador adicionado' : 'Marcador removido', 'success');
+      });
+    }
+    entradaBusca.addEventListener('input', () => {
+      const termo = entradaBusca.value.trim().toLowerCase();
+      let algum = false;
+      for (const opcao of todos('.kanban-tag-option', lista)) {
+        const passa = $('.kanban-tag-label', opcao).textContent.toLowerCase().includes(termo);
+        opcao.style.display = passa ? '' : 'none';
+        algum = algum || passa;
+      }
+      if (algum) nenhum.remove(); else lista.appendChild(nenhum);
+    });
+    $('.kanban-popover-btn.secondary', pop).addEventListener('click', () => {
+      toast('Criação de marcador disponível em Contatos > Tags', 'info');
+    });
+    mostrarPopover('tag', pop, botao);
+    entradaBusca.focus();
+  }
+
+  // Botão de IA do card (e do cabeçalho do mini-chat): alterna entre acionar e pausar.
+  // No app, acionar passa antes pela escolha do agente; aqui vai direto.
+  function pintarIA(card, ativa) {
+    const botao = $('.kb-card-action-btn.is-ai', card);
+    botao.classList.toggle('is-ai-active', ativa);
+    botao.title = ativa ? 'A IA está respondendo esta conversa. Clique para assumir.' : 'Acionar IA para responder';
+    $('i', botao).className = ativa ? 'ri-pause-circle-line' : 'ri-robot-2-line';
+    if (card === cardAberto) pintarIADoChat(ativa);
+  }
+  function alternarIA(card) {
+    const ativa = !$('.kb-card-action-btn.is-ai', card).classList.contains('is-ai-active');
+    pintarIA(card, ativa);
+    toast(ativa ? 'IA acionada. A partir de agora ela responde esta conversa.' : 'IA pausada. Você assumiu esta conversa.', 'success');
+  }
+
+  function acaoDoCard(card, botao) {
+    if (botao.classList.contains('kb-card-move-btn')) { abrirMenuMover(card, botao); return; }
+    if (botao.classList.contains('is-primary')) { fecharPopover(); abrirChat(card); return; }
+    if (botao.classList.contains('is-ai')) { alternarIA(card); return; }
+    const icone = $('i', botao).className;
+    if (icone.includes('ri-file-text-line')) abrirObservacoes(card, botao);
+    else if (icone.includes('ri-calendar-schedule-line')) abrirAgendadas(card, botao);
+    else if (icone.includes('ri-price-tag-3-line')) abrirMarcadores(card, botao);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Colunas: menu ⋮, nova coluna, renomear, cor, mover todos, excluir e ordenar
+  // ---------------------------------------------------------------------------------
+  const PALETA = ['#4A6FA5', '#F6AD55', '#F56565', '#48BB78', '#B794F4', '#ECC94B', '#4FD1C5', '#C97B92'];
+
+  function fecharMenuColuna() { $('.column-menu', board)?.remove(); }
+
+  function alternarMenuColuna(col) {
+    const aberto = $('.column-menu', col);
+    fecharMenuColuna();
+    if (aberto) return;
+    const menu = molde('menu-coluna');
+    // Coluna padrão não pode ser excluída: o app nem mostra a opção.
+    if (col.dataset.padrao) { $('.column-menu-divider', menu).remove(); $('.danger', menu).remove(); }
+    $('.column-menu-shell', col).appendChild(menu);
+  }
+
+  function acaoDoMenuColuna(item) {
+    const col = item.closest('.kanban-column');
+    const icone = $('i', item).className;
+    fecharMenuColuna();
+    if (icone.includes('ri-edit-line')) abrirModalColuna('edit', col);
+    else if (icone.includes('ri-palette-line')) {
+      const atual = PALETA.indexOf(col.dataset.cor.toUpperCase());
+      pintarColuna(col, PALETA[(atual + 1) % PALETA.length]);
+      toast('Cor da coluna atualizada', 'success');
+    } else if (icone.includes('ri-arrow-left-right-line')) abrirMoverTodos(col);
+    else if (icone.includes('ri-delete-bin-line')) excluirColuna(col);
+  }
+
+  function pintarColuna(col, cor) {
+    col.dataset.cor = cor;
+    $('.kanban-column-topline', col).style.background = cor;
+  }
+
+  // Modal "Nova coluna" / "Editar coluna" (já está na captura, escondido).
+  const modalColuna = $('#column-modal');
+  const campoNome = $('#column-name');
+  const campoCor = $('#column-color');
+  let colunaEditada = null;
+
+  function marcarCor(cor) {
+    campoCor.value = cor;
+    todos('.kanban-color-chip', modalColuna).forEach((chip) => {
+      chip.classList.toggle('is-active', chip.getAttribute('aria-label') === `Cor ${cor.toUpperCase()}`);
+    });
+  }
+  function abrirModalColuna(modo, col) {
+    colunaEditada = modo === 'edit' ? col : null;
+    const padrao = Boolean(col && col.dataset.padrao);
+    $('#column-modal-title').textContent = modo === 'create' ? 'Nova coluna' : (padrao ? 'Editar cor da coluna' : 'Editar coluna');
+    $('#column-submit-btn').textContent = modo === 'create' ? 'Criar' : 'Salvar';
+    campoNome.value = col ? col.dataset.nome : '';
+    campoNome.disabled = padrao;
+    marcarCor(col ? col.dataset.cor : PALETA[0]);
+    modalColuna.classList.remove('hidden');
+    setTimeout(() => { if (!campoNome.disabled) { campoNome.focus(); campoNome.select(); } }, 0);
+  }
+  function fecharModalColuna() {
+    modalColuna.classList.add('hidden');
+    campoNome.value = '';
+    campoNome.disabled = false;
+    colunaEditada = null;
+  }
+  modalColuna.addEventListener('click', (ev) => {
+    if (ev.target === modalColuna || ev.target.closest('.close-btn, .cancel-btn, .kanban-modal-close')) { fecharModalColuna(); return; }
+    const chip = ev.target.closest('.kanban-color-chip');
+    if (chip) marcarCor(chip.getAttribute('aria-label').replace('Cor ', ''));
+  });
+  $('#column-form').addEventListener('submit', () => {
+    const nome = campoNome.value.trim();
+    const cor = campoCor.value;
+    if (!colunaEditada) {
+      if (!nome) { toast('Informe o nome da coluna', 'warning'); return; }
+      criarColuna(nome, cor);
+      toast('Coluna criada com sucesso', 'success');
+    } else {
+      if (!colunaEditada.dataset.padrao) {
+        if (!nome) { toast('Informe o nome da coluna', 'warning'); return; }
+        colunaEditada.dataset.nome = nome;
+        $('.column-title', colunaEditada).textContent = nome.toUpperCase();
+      }
+      pintarColuna(colunaEditada, cor);
+      toast('Coluna atualizada com sucesso', 'success');
+    }
+    fecharModalColuna();
+  });
+
+  let seqColuna = 0;
+  function criarColuna(nome, cor) {
+    // A coluna nova é cópia de uma existente, sem cards, no fim do quadro (como o app).
+    const modelo = colunas().find((c) => !c.dataset.padrao) || colunas()[0];
+    const col = modelo.cloneNode(true);
+    seqColuna += 1;
+    const id = `col-nova-${seqColuna}`;
+    col.id = `column-${id}`;
+    col.dataset.columnId = id;
+    col.dataset.nome = nome;
+    delete col.dataset.padrao;
+    col.classList.remove('is-drag-over');
+    $('.column-cards', col).dataset.columnId = id;
+    $('.column-cards', col).replaceChildren();
+    $('.column-menu', col)?.remove();
+    $('.column-title', col).textContent = nome.toUpperCase();
+    pintarColuna(col, cor);
+    board.appendChild(col);
+    atualizarColuna(col);
+    $('.kanban-board-scroll').scrollTo({ left: board.scrollWidth, behavior: 'smooth' });
+  }
+
+  function excluirColuna(col) {
+    // Mesmas perguntas do app (window.confirm).
+    const cards = cardsDa(col);
+    const outra = colunas().find((c) => c !== col);
+    let moverPara = null;
+    if (!cards.length) {
+      if (!window.confirm(`Excluir a coluna "${col.dataset.nome}"?`)) return;
+    } else {
+      if (outra && window.confirm(`A coluna "${col.dataset.nome}" possui ${cards.length} contatos.\n\nOK: mover para "${outra.dataset.nome}" e excluir a coluna.\nCancelar: excluir coluna e contatos.`)) {
+        moverPara = outra;
+      } else if (!window.confirm(`Tem certeza que deseja excluir a coluna "${col.dataset.nome}" com todos os ${cards.length} contatos desta coluna?`)) {
+        return;
+      }
+    }
+    if (moverPara) cards.forEach((card) => $('.column-cards', moverPara).appendChild(card));
+    col.remove();
+    if (moverPara) atualizarColuna(moverPara);
+    toast('Coluna excluída com sucesso', 'success');
+  }
+
+  // "Mover todos para..." e "Ordenar colunas": modais criados na hora, como no app.
+  function abrirMoverTodos(origem) {
+    const qtd = cardsDa(origem).length;
+    if (!qtd) { toast('Esta coluna não tem cards para mover', 'info'); return; }
+    const alvos = colunas().filter((c) => c !== origem);
+    const modal = molde('mover-todos');
+    const [qtdEl, nomeEl] = todos('.kanban-move-all-copy strong', modal);
+    qtdEl.textContent = String(qtd);
+    nomeEl.textContent = origem.dataset.nome;
+    const lista = $('.kanban-move-all-list', modal);
+    const modelo = $('.kanban-move-all-option', lista).cloneNode(true);
+    lista.replaceChildren(...alvos.map((col) => {
+      const opcao = modelo.cloneNode(true);
+      opcao.dataset.targetId = col.dataset.columnId;
+      $('.kanban-move-all-dot', opcao).style.background = col.dataset.cor;
+      $('.kanban-move-all-name', opcao).textContent = col.dataset.nome;
+      $('.kanban-move-all-count', opcao).textContent = String(cardsDa(col).length);
+      return opcao;
+    }));
+    modal.addEventListener('click', (ev) => {
+      if (ev.target === modal || ev.target.closest('[data-move-all-close]')) { modal.remove(); return; }
+      const opcao = ev.target.closest('[data-target-id]');
+      if (!opcao) return;
+      const destino = colunaPorId(opcao.dataset.targetId);
+      cardsDa(origem).forEach((card) => {
+        $('.column-cards', destino).appendChild(card);
+        card.dataset.columnId = destino.dataset.columnId;
+      });
+      atualizarColuna(origem);
+      atualizarColuna(destino);
+      modal.remove();
+      toast(`${qtd} card(s) movido(s) para ${destino.dataset.nome}`, 'success');
+    });
+    document.body.appendChild(modal);
+  }
+
+  function abrirOrdenar() {
+    const atuais = colunas();
+    if (atuais.length < 2) { toast('É preciso ter pelo menos duas colunas para ordenar', 'info'); return; }
+    $('#kanban-reorder-modal')?.remove();
+    const modal = molde('ordenar');
+    const lista = $('.kanban-reorder-list', modal);
+    const modelo = todos('.kanban-reorder-item', lista).find((i) => !$('.kanban-reorder-badge', i)).cloneNode(true);
+    const selo = $('.kanban-reorder-badge', lista).cloneNode(true);
+    const ordem = [...atuais];
+    const original = ordem.map((c) => c.dataset.columnId).join('|');
+    function renderizar() {
+      lista.replaceChildren(...ordem.map((col, i) => {
+        const item = modelo.cloneNode(true);
+        $('.kanban-reorder-dot', item).style.background = col.dataset.cor;
+        $('.kanban-reorder-name', item).textContent = col.dataset.nome;
+        if (col.dataset.padrao) $('.kanban-reorder-name', item).after(selo.cloneNode(true));
+        const [cima, baixo] = todos('.kanban-reorder-move', item);
+        cima.dataset.index = String(i);
+        baixo.dataset.index = String(i);
+        cima.disabled = i === 0;
+        baixo.disabled = i === ordem.length - 1;
+        cima.setAttribute('aria-label', `Mover ${col.dataset.nome} para cima`);
+        baixo.setAttribute('aria-label', `Mover ${col.dataset.nome} para baixo`);
+        return item;
+      }));
+    }
+    renderizar();
+    modal.addEventListener('click', (ev) => {
+      if (ev.target === modal || ev.target.closest('[data-reorder-close]')) { modal.remove(); return; }
+      const seta = ev.target.closest('[data-move]');
+      if (seta) {
+        const i = Number(seta.dataset.index);
+        const destino = seta.dataset.move === 'up' ? i - 1 : i + 1;
+        if (destino < 0 || destino >= ordem.length) return;
+        [ordem[i], ordem[destino]] = [ordem[destino], ordem[i]];
+        renderizar();
+        $(`[data-move="${seta.dataset.move}"][data-index="${destino}"]`, lista)?.focus();
+        return;
+      }
+      if (ev.target.closest('[data-reorder-save]')) {
+        modal.remove();
+        if (ordem.map((c) => c.dataset.columnId).join('|') === original) return;
+        ordem.forEach((col) => board.appendChild(col));
+        toast('Ordem das colunas atualizada', 'success');
+      }
+    });
+    document.body.appendChild(modal);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Agendar mensagem (modal completo do app, aberto pelo card ou pelo mini-chat)
+  // ---------------------------------------------------------------------------------
+  let modalAgenda = null;
+  let cardAgendado = null;
+  const rec = { aberta: false, freq: 'semanal', dias: ['Seg'], vezes: 5, diaDoMes: 1, hora: '14:00' };
+
+  const doAgenda = (sel) => $(sel, modalAgenda);
+  const dataBr = (iso) => (iso ? iso.split('-').reverse().join('/') : '--/--/----');
+  const dataInput = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+  function sincronizarPrevia() {
+    const texto = doAgenda('#kanban-schedule-message').value;
+    const hora = doAgenda('#kanban-schedule-time').value || '--:--';
+    doAgenda('#kanban-schedule-preview-message').textContent = texto.trim() ? texto : 'Sua mensagem aparecerá aqui...';
+    doAgenda('#kanban-schedule-preview-hour').textContent = hora;
+    doAgenda('#kanban-schedule-preview-date').textContent = dataBr(doAgenda('#kanban-schedule-date').value);
+    doAgenda('#kanban-schedule-preview-time').textContent = hora;
+    doAgenda('#kanban-schedule-message-count').textContent = `(${texto.length} caracteres)`;
+  }
+
+  function sincronizarRecorrencia() {
+    doAgenda('#kanban-schedule-rec-box').classList.toggle('is-active', rec.aberta);
+    doAgenda('#kanban-schedule-rec-panel').classList.toggle('kb-hidden', !rec.aberta);
+    doAgenda('#kanban-schedule-rec-weekly').classList.toggle('kb-hidden', rec.freq !== 'semanal');
+    doAgenda('#kanban-schedule-rec-monthly').classList.toggle('kb-hidden', rec.freq !== 'mensal');
+    todos('.kanban-schedule-day-btn', modalAgenda).forEach((b) => b.classList.toggle('is-active', rec.dias.includes(b.dataset.kanbanScheduleDay)));
+    if (!rec.aberta) return;
+    const frequencia = rec.freq === 'diario' ? 'todos os dias' : rec.freq === 'semanal' ? `toda ${rec.dias.join(', ')}` : `todo dia ${rec.diaDoMes}`;
+    const resumo = doAgenda('#kanban-schedule-rec-summary');
+    const negrito = resumo.querySelector('strong') || document.createElement('strong');
+    negrito.textContent = 'Resumo:';
+    resumo.replaceChildren(negrito, ` Disparar ${rec.vezes}x ${frequencia} às ${rec.hora}.`);
+  }
+
+  function alternarRespostasDoAgendamento(abrir) {
+    const botao = doAgenda('#kanban-schedule-quick-toggle');
+    doAgenda('#kanban-schedule-quick-panel').classList.toggle('kb-hidden', !abrir);
+    $('i', botao).className = abrir ? 'ri-close-line' : 'ri-flashlight-line';
+    botao.lastChild.textContent = abrir ? ' Fechar' : ' Respostas rápidas';
+  }
+
+  function erroDoAgendamento(texto) {
+    const caixa = doAgenda('.kanban-schedule-error');
+    caixa.textContent = texto;
+    caixa.classList.toggle('kb-hidden', !texto);
+  }
+
+  function fecharAgendamento() {
+    modalAgenda?.classList.add('kb-hidden');
+    cardAgendado = null;
+  }
+
+  function montarAgendamento() {
+    modalAgenda = molde('agendar');
+    document.body.appendChild(modalAgenda);
+    modalAgenda.addEventListener('click', (ev) => {
+      const t = ev.target;
+      if (t === modalAgenda || t.closest('[data-action="close-schedule"]')) { fecharAgendamento(); return; }
+      if (t.closest('#kanban-schedule-rec-toggle')) { rec.aberta = !rec.aberta; sincronizarRecorrencia(); return; }
+      const dia = t.closest('.kanban-schedule-day-btn');
+      if (dia) {
+        const d = dia.dataset.kanbanScheduleDay;
+        rec.dias = rec.dias.includes(d) ? rec.dias.filter((x) => x !== d) : [...rec.dias, d];
+        if (!rec.dias.length) rec.dias = ['Seg'];
+        sincronizarRecorrencia();
+        return;
+      }
+      if (t.closest('#kanban-schedule-quick-toggle')) {
+        alternarRespostasDoAgendamento(doAgenda('#kanban-schedule-quick-panel').classList.contains('kb-hidden'));
+        return;
+      }
+      const resposta = t.closest('.kanban-schedule-quick-item');
+      if (resposta) {
+        doAgenda('#kanban-schedule-message').value = $('small', resposta).textContent;
+        alternarRespostasDoAgendamento(false);
+        sincronizarPrevia();
+        return;
+      }
+      if (t.closest('[data-kanban-attach-type]')) avisar('Anexar arquivo não faz parte deste protótipo');
+    });
+    for (const sel of ['#kanban-schedule-message', '#kanban-schedule-date', '#kanban-schedule-time', '#kanban-schedule-type']) {
+      doAgenda(sel).addEventListener('input', sincronizarPrevia);
+      doAgenda(sel).addEventListener('change', sincronizarPrevia);
+    }
+    doAgenda('#kanban-schedule-rec-frequency').addEventListener('change', (ev) => { rec.freq = ev.target.value; sincronizarRecorrencia(); });
+    doAgenda('#kanban-schedule-rec-repetitions').addEventListener('input', (ev) => { rec.vezes = Math.max(1, Number(ev.target.value || 1)); sincronizarRecorrencia(); });
+    doAgenda('#kanban-schedule-rec-day-month').addEventListener('input', (ev) => { rec.diaDoMes = Math.min(31, Math.max(1, Number(ev.target.value || 1))); sincronizarRecorrencia(); });
+    doAgenda('#kanban-schedule-rec-hour').addEventListener('input', (ev) => { rec.hora = ev.target.value || '14:00'; sincronizarRecorrencia(); });
+    doAgenda('.kanban-schedule-form').addEventListener('submit', agendar);
+  }
+
+  function abrirAgendamento(card, rascunho) {
+    if (!modalAgenda) montarAgendamento();
+    cardAgendado = card;
+    const c = conversaDoCard(card);
+    // Próxima hora cheia, como o app.
+    const quando = new Date();
+    quando.setHours(quando.getHours() + 1, 0, 0, 0);
+    doAgenda('#kanban-schedule-title').value = `Mensagem para ${nomeDoCard(card)}`;
+    doAgenda('#kanban-schedule-type').value = 'texto';
+    doAgenda('#kanban-schedule-tag').value = '';
+    doAgenda('#kanban-schedule-category').value = '';
+    doAgenda('#kanban-schedule-user').value = c.resp;
+    doAgenda('#kanban-schedule-fila').value = '';
+    doAgenda('#kanban-schedule-message').value = rascunho;
+    doAgenda('#kanban-schedule-date').value = dataInput(quando);
+    doAgenda('#kanban-schedule-time').value = quando.toTimeString().slice(0, 5);
+    Object.assign(rec, { aberta: false, freq: 'semanal', dias: ['Seg'], vezes: 5, diaDoMes: 1, hora: quando.toTimeString().slice(0, 5) });
+    doAgenda('#kanban-schedule-rec-frequency').value = rec.freq;
+    doAgenda('#kanban-schedule-rec-repetitions').value = String(rec.vezes);
+    doAgenda('#kanban-schedule-rec-day-month').value = String(rec.diaDoMes);
+    doAgenda('#kanban-schedule-rec-hour').value = rec.hora;
+    erroDoAgendamento('');
+    alternarRespostasDoAgendamento(false);
+    sincronizarRecorrencia();
+    sincronizarPrevia();
+    modalAgenda.classList.remove('kb-hidden');
+    setTimeout(() => doAgenda('#kanban-schedule-message').focus(), 0);
+  }
+
+  function agendar() {
+    const titulo = doAgenda('#kanban-schedule-title').value.trim();
+    const texto = doAgenda('#kanban-schedule-message').value.trim();
+    const data = doAgenda('#kanban-schedule-date').value;
+    const hora = doAgenda('#kanban-schedule-time').value;
+    const quando = new Date(`${data}T${hora}:00`);
+    // Mesmas validações e mensagens do app.
+    if (!titulo) { erroDoAgendamento('Título é obrigatório.'); return; }
+    if (!texto) { erroDoAgendamento('Mensagem ou anexo é obrigatório.'); return; }
+    if (!data || !hora || Number.isNaN(quando.getTime())) { erroDoAgendamento('Selecione data e hora válidas.'); return; }
+    if (quando <= new Date()) { erroDoAgendamento('A data/hora deve ser no futuro.'); return; }
+    const card = cardAgendado;
+    conversaDoCard(card).agendadas.push({ texto, quando });
+    atualizarSeloAgendadas(card);
+    fecharAgendamento();
+    toast('Mensagem agendada com sucesso', 'success');
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Mini-chat (kanban-chat-float): abre por cima do quadro no botão "Abrir conversa"
+  // ---------------------------------------------------------------------------------
+  const chat = $('#kanban-chat-float');
+  const doChat = (sel) => $(sel, chat);
+  const listaMsgs = doChat('.kcf-messages');
+  const entrada = doChat('.kcf-input');
+  const btnEnviar = doChat('.kcf-send-btn');
+  let cardAberto = null;
+  let assinaturaLigada = false;
+  const favoritas = new Set(Object.keys(CONVERSAS).filter((k) => CONVERSAS[k].fav));
+  const chatAberto = () => !chat.classList.contains('kcf-hidden');
+
+  // Respostas rápidas: o app só preenche o painel na primeira conversa aberta.
+  doChat('.kcf-quick-categories').replaceWith(molde('respostas-categorias'));
+  doChat('.kcf-quick-list').replaceWith(molde('respostas-lista'));
+  const estiloDaCategoria = new Map(todos('.kcf-quick-cat', chat).map((b) => [b, b.getAttribute('style')]));
+  const CATEGORIA_DA_RESPOSTA = {
+    'Tabela de preços': 'Vendas', 'Prazo de entrega': 'Vendas', 'Pedido mínimo': 'Vendas',
+    'Segunda via de boleto': 'Cobrança', 'Pedido faturado': 'Pós-venda',
+  };
+  let categoriaAtiva = 'Todas';
+  const respostasVazio = molde('respostas-vazio');
+
+  function filtrarRespostas() {
+    const termo = doChat('.kcf-quick-search').value.trim().toLowerCase();
+    let alguma = false;
+    for (const item of todos('.kcf-quick-item', chat)) {
+      const titulo = $('.kcf-quick-item-title', item).textContent;
+      const passa = (categoriaAtiva === 'Todas' || CATEGORIA_DA_RESPOSTA[titulo] === categoriaAtiva)
+        && (!termo || item.textContent.toLowerCase().includes(termo));
+      item.style.display = passa ? '' : 'none';
+      alguma = alguma || passa;
+    }
+    if (alguma) respostasVazio.remove(); else doChat('.kcf-quick-list').appendChild(respostasVazio);
+  }
+  function escolherCategoria(botao) {
+    // "💰 Vendas (3)" → "Vendas"; "Todas (5)" → "Todas".
+    categoriaAtiva = botao.textContent.replace(/\s*\(\d+\)\s*$/, '').replace(/^[^\p{L}]+/u, '').trim();
+    for (const [b, estilo] of estiloDaCategoria) {
+      const ativa = b === botao;
+      b.classList.toggle('is-active', ativa);
+      if (ativa || !estilo) b.removeAttribute('style'); else b.setAttribute('style', estilo);
+    }
+    filtrarRespostas();
+  }
+
+  const paineis = {
+    tags: () => doChat('.kcf-tag-dropdown'),
+    midia: () => doChat('.kcf-media-options'),
+    respostas: () => doChat('.kcf-quick-panel'),
+    emoji: () => doChat('.kcf-emoji-panel'),
+    mais: () => doChat('.kcf-more-actions > .kcf-more-menu'),
+    maisEnvio: () => doChat('.kcf-compose-more-menu'),
+  };
+  const painelAberto = (nome) => !paineis[nome]().classList.contains('kcf-panel-hidden');
+  function mostrarPainel(nome, aberto) {
+    paineis[nome]().classList.toggle('kcf-panel-hidden', !aberto);
+    if (nome === 'mais') doChat('[data-action="more"]').setAttribute('aria-expanded', String(aberto));
+    if (nome === 'maisEnvio') doChat('.kcf-compose-more-btn').setAttribute('aria-expanded', String(aberto));
+  }
+  function fecharPaineis() { Object.keys(paineis).forEach((nome) => mostrarPainel(nome, false)); }
+
+  // Mesmo critério do app para fechar cada painel com clique fora dele.
+  function fecharPaineisComCliqueFora(t) {
+    if (!chat.contains(t)) { fecharPaineis(); return; }
+    if (!t.closest('.kcf-more-actions')) mostrarPainel('mais', false);
+    if (!t.closest('.kcf-compose-more')) mostrarPainel('maisEnvio', false);
+    if (!t.closest('.kcf-tag-dropdown, .kcf-add-tag-btn, #kcf-drawer-open-tags')) mostrarPainel('tags', false);
+    if (!t.closest('.kcf-media-options, .kcf-media-btn, .kcf-camera-btn')) mostrarPainel('midia', false);
+    if (!t.closest('.kcf-quick-panel, .kcf-quick-btn')) mostrarPainel('respostas', false);
+    if (!t.closest('.kcf-emoji-panel, .kcf-emoji-btn')) mostrarPainel('emoji', false);
+  }
+
+  function crescerEntrada() {
+    entrada.style.height = 'auto';
+    entrada.style.height = `${Math.max(46, Math.min(120, entrada.scrollHeight))}px`;
+  }
+  function sincronizarEnviar() {
+    $('i', btnEnviar).className = entrada.value.trim() ? 'ri-send-plane-fill' : 'ri-mic-line';
+  }
+
+  let seqMsg = 0;
+  function adicionarBolha({ quem, texto, quando, assinatura }) {
+    const dia = chaveDoDia(quando);
+    const bolhas = todos('.kcf-msg', listaMsgs);
+    if (!bolhas.length || bolhas[bolhas.length - 1].dataset.day !== dia) {
+      const divisor = molde('msg-divisor');
+      divisor.dataset.day = dia;
+      $('span', divisor).textContent = rotuloDoDia(quando);
+      listaMsgs.appendChild(divisor);
+    }
+    const documento = quem.startsWith('doc-');
+    const minha = quem === 'eu' || quem === 'doc-eu';
+    const bolha = molde(documento ? 'msg-doc' : (minha ? 'msg-out' : 'msg-in'));
+    if (documento) {
+      $('.kcf-doc-name', bolha).textContent = texto;
+      $('.kcf-doc-card', bolha).dataset.name = texto;
+    } else {
+      $('.kcf-msg-text', bolha).textContent = texto;
+    }
+    if (minha) {
+      $('.kcf-msg-signature', bolha).textContent = `${assinatura}:`;
+    } else if (documento) {
+      // O molde de documento é de uma mensagem enviada: vira recebida.
+      bolha.classList.replace('kcf-msg--out', 'kcf-msg--in');
+      bolha.dataset.senderType = 'contact';
+      $('.kcf-msg-signature', bolha).remove();
+    }
+    seqMsg += 1;
+    bolha.dataset.msgId = `mock-${seqMsg}`;
+    bolha.dataset.externalId = `MOCK${seqMsg}`;
+    bolha.dataset.sentAt = quando.toISOString();
+    bolha.dataset.day = dia;
+    $('.kcf-msg-time', bolha).textContent = fmtHora(quando);
+    listaMsgs.appendChild(bolha);
+  }
+
+  function pintarIADoChat(ativa) {
+    for (const sel of ['[data-action="trigger-ai"]', '[data-mobile-action="trigger-ai"]']) {
+      const el = doChat(sel);
+      el.classList.toggle('is-ai-active', ativa);
+      el.title = ativa ? 'A IA está respondendo esta conversa. Clique para assumir.' : 'Acionar IA para responder';
+      $('i', el).className = ativa ? 'ri-pause-circle-line' : 'ri-robot-2-line';
+      $('span', el).textContent = ativa ? 'Pausar IA' : 'Acionar IA';
+    }
+  }
+
+  function pintarFavorito() {
+    const fav = favoritas.has(cardAberto.dataset.contactId);
+    const botao = $('#kcf-drawer-toggle-favorite');
+    $('i', botao).className = fav ? 'ri-star-fill' : 'ri-star-line';
+    botao.classList.toggle('is-active', fav);
+  }
+
+  function renderizarTagsDoChat() {
+    const nomes = tagsDoCard(cardAberto);
+    $('#kcf-drawer-tags-count').textContent = `${nomes.length} ${nomes.length === 1 ? 'tag' : 'tags'}`;
+    const caixa = doChat('.kcf-tag-chips');
+    if (!nomes.length) { caixa.replaceChildren(molde('sem-tags')); return; }
+    caixa.replaceChildren(...nomes.map((nome) => {
+      const chip = molde('tag-chip');
+      chip.dataset.tag = nome;
+      $('.kcf-tag-chip-dot', chip).style.background = corDaTag(nome);
+      chip.children[1].textContent = nome;
+      return chip;
+    }));
+  }
+
+  function abrirListaDeTags() {
+    if (painelAberto('tags')) { mostrarPainel('tags', false); return; }
+    const atuais = tagsDoCard(cardAberto);
+    const livres = TAGS.filter(([nome]) => !atuais.includes(nome));
+    const caixa = paineis.tags();
+    if (!livres.length) {
+      const vazio = molde('sem-tags');
+      vazio.textContent = 'Todas as tags já estão atribuídas';
+      caixa.replaceChildren(vazio);
+    } else {
+      caixa.replaceChildren(...livres.map(([nome]) => {
+        const opcao = molde('tag-opcao');
+        opcao.dataset.tag = nome;
+        $('span', opcao).textContent = nome;
+        return opcao;
+      }));
+    }
+    mostrarPainel('tags', true);
+  }
+
+  function montarSelectCrm() {
+    const select = $('#kcf-drawer-crm-select');
+    select.replaceChildren(select.options[0], ...colunas().map((col) => new Option(col.dataset.nome, col.dataset.columnId)));
+    select.value = cardAberto.closest('.kanban-column').dataset.columnId;
+    pintarPilulaCrm();
+  }
+  function pintarPilulaCrm() {
+    const col = colunaPorId($('#kcf-drawer-crm-select').value);
+    const pilula = $('#kcf-drawer-crm-column-pill');
+    pilula.textContent = (col ? col.dataset.nome : 'Sem status').toUpperCase();
+    pilula.style.background = col ? col.dataset.cor : '#35b66a';
+  }
+
+  function abrirChat(card) {
+    const c = conversaDoCard(card);
+    const nome = nomeDoCard(card);
+    const iniciais = iniciaisDoChat(nome);
+    const resp = USUARIOS[c.resp];
+    cardAberto = card;
+    fecharPaineis();
+
+    doChat('.kcf-modal-contact-title').textContent = nome;
+    doChat('.kcf-contact-name').textContent = nome;
+    doChat('.kcf-contact-phone').textContent = c.fone;
+    doChat('.kcf-avatar-text').textContent = iniciais;
+    $('#kcf-drawer-contact-avatar').textContent = iniciais;
+    $('#kcf-drawer-contact-name').textContent = nome;
+    $('#kcf-drawer-contact-phone').textContent = c.fone;
+    $('#kcf-drawer-assignee-chip').textContent = resp;
+    // O chip mostra a fila da conversa (ou a instância, se não houver fila).
+    $('#kcf-drawer-instance-chip').textContent = $('.kb-card-chip--queue span', card)?.textContent || $('.kb-card-chip--instance span', card)?.textContent || 'Sem fila';
+    $('#kcf-drawer-responsible-name').textContent = resp;
+    $('#kcf-drawer-data-display-name').textContent = nome;
+    $('#kcf-drawer-data-phone-number').textContent = c.fone;
+    $('#kcf-drawer-data-full-name').textContent = nome;
+    $('#kcf-drawer-data-phone-formatted').textContent = c.fone;
+    $('#kcf-drawer-data-email').textContent = c.email || 'Sem e-mail';
+    renderizarTagsDoChat();
+    montarSelectCrm();
+    pintarFavorito();
+    pintarIADoChat($('.kb-card-action-btn.is-ai', card).classList.contains('is-ai-active'));
+
+    listaMsgs.replaceChildren();
+    c.mensagens.forEach(adicionarBolha);
+    entrada.value = '';
+    entrada.disabled = false;
+    sincronizarEnviar();
+
+    document.body.style.overflow = 'hidden';
+    chat.classList.remove('kcf-hidden');
+    chat.classList.add('kcf-visible');
+    chat.setAttribute('aria-hidden', 'false');
+    crescerEntrada();
+    listaMsgs.scrollTop = listaMsgs.scrollHeight;
+    entrada.focus();
+  }
+
+  function fecharChat() {
+    pararGravacao(false);
+    fecharPaineis();
+    chat.classList.remove('kcf-visible');
+    chat.classList.add('kcf-hidden');
+    chat.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    listaMsgs.replaceChildren();
+    entrada.value = '';
+    entrada.style.height = '';
+    cardAberto = null;
+  }
+
+  function enviar() {
+    if (gravando) { pararGravacao(true); return; }
+    const texto = entrada.value.trim();
+    if (!texto) { iniciarGravacao(); return; }
+    const msg = { quem: 'eu', texto, quando: new Date(), assinatura: EU };
+    conversaDoCard(cardAberto).mensagens.push(msg);
+    adicionarBolha(msg);
+    listaMsgs.scrollTop = listaMsgs.scrollHeight;
+    entrada.value = '';
+    crescerEntrada();
+    sincronizarEnviar();
+    entrada.focus();
+    // Como no app depois do aviso em tempo real: o card mostra a nova mensagem e sobe
+    // para o topo da coluna.
+    $('.kb-card-preview', cardAberto).textContent = truncar(`Você: ${texto}`, 66);
+    moverCard(cardAberto, cardAberto.closest('.kanban-column'), 0, false);
+  }
+
+  // Gravação de áudio: só a barra do app com o cronômetro; nada é gravado.
+  let gravando = null;
+  let segundos = 0;
+  function iniciarGravacao() {
+    segundos = 0;
+    doChat('.kcf-record-timer').textContent = '00:00';
+    doChat('.kcf-recording').classList.remove('kcf-panel-hidden');
+    entrada.disabled = true;
+    $('i', btnEnviar).className = 'ri-stop-fill';
+    gravando = setInterval(() => {
+      segundos += 1;
+      doChat('.kcf-record-timer').textContent = `${String(Math.floor(segundos / 60)).padStart(2, '0')}:${String(segundos % 60).padStart(2, '0')}`;
+    }, 1000);
+  }
+  function pararGravacao(enviarAudio) {
+    if (!gravando) return;
+    clearInterval(gravando);
+    gravando = null;
+    doChat('.kcf-recording').classList.add('kcf-panel-hidden');
+    doChat('.kcf-record-timer').textContent = '00:00';
+    entrada.disabled = false;
+    sincronizarEnviar();
+    if (enviarAudio) avisar('No protótipo o áudio gravado não é enviado');
+  }
+
+  const AVISOS_DO_CHAT = {
+    search: 'Buscar na conversa não faz parte deste protótipo',
+    transfer: 'Transferir atendimento não faz parte deste protótipo',
+    finalize: 'Finalizar atendimento não faz parte deste protótipo',
+    notes: 'Anotações do mini-chat não fazem parte deste protótipo',
+    'ai-summary': 'Resumir com IA não faz parte deste protótipo',
+    block: 'Bloquear contato não faz parte deste protótipo',
+  };
+
+  function acaoDoCabecalho(acao) {
+    if (acao === 'more') { mostrarPainel('mais', !painelAberto('mais')); return; }
+    mostrarPainel('mais', false);
+    if (acao === 'trigger-ai') { alternarIA(cardAberto); return; }
+    if (acao === 'schedule') { abrirAgendamento(cardAberto, entrada.value.trim()); return; }
+    if (acao === 'open') { window.location.href = `chats.html?chat=${encodeURIComponent(conversaDoCard(cardAberto).chat)}`; return; }
+    if (AVISOS_DO_CHAT[acao]) avisar(AVISOS_DO_CHAT[acao]);
+  }
+
+  function acaoDoChat(t) {
+    if (t.classList.contains('kcf-backdrop') || t.closest('.kcf-close-btn, .kcf-drawer-close-btn')) { fecharChat(); return; }
+    const cabecalho = t.closest('[data-action], [data-mobile-action]');
+    if (cabecalho) { acaoDoCabecalho(cabecalho.dataset.action || cabecalho.dataset.mobileAction); return; }
+
+    if (t.closest('.kcf-msg-actions-btn')) { avisar('Responder, reagir, encaminhar e apagar mensagens não fazem parte deste protótipo'); return; }
+    if (t.closest('.kcf-doc-card')) { avisar('Baixar o arquivo não faz parte deste protótipo'); return; }
+
+    // Marcadores da conversa (refletem no card, que é a mesma conversa).
+    const remover = t.closest('.kcf-tag-remove');
+    if (remover) {
+      alternarTagNoCard(cardAberto, remover.closest('.kcf-tag-chip').dataset.tag);
+      renderizarTagsDoChat();
+      toast('Tag removida', 'success');
+      return;
+    }
+    if (t.closest('.kcf-add-tag-btn, #kcf-drawer-open-tags')) { abrirListaDeTags(); return; }
+    const novaTag = t.closest('.kcf-tag-dropdown [data-tag]');
+    if (novaTag) {
+      alternarTagNoCard(cardAberto, novaTag.dataset.tag);
+      renderizarTagsDoChat();
+      mostrarPainel('tags', false);
+      toast('Tag adicionada', 'success');
+      return;
+    }
+
+    // Barra de envio.
+    if (t.closest('.kcf-emoji-btn')) { mostrarPainel('emoji', !painelAberto('emoji')); return; }
+    const emoji = t.closest('.kcf-emoji-btn-item');
+    if (emoji) { entrada.value += emoji.textContent; crescerEntrada(); sincronizarEnviar(); entrada.focus(); return; }
+    if (t.closest('.kcf-quick-btn')) { mostrarPainel('respostas', !painelAberto('respostas')); return; }
+    const categoria = t.closest('.kcf-quick-cat');
+    if (categoria) { escolherCategoria(categoria); return; }
+    const resposta = t.closest('.kcf-quick-item');
+    if (resposta) {
+      entrada.value = $('.kcf-quick-item-body', resposta).textContent.trim();
+      mostrarPainel('respostas', false);
+      crescerEntrada();
+      sincronizarEnviar();
+      entrada.focus();
+      return;
+    }
+    if (t.closest('.kcf-media-btn')) { mostrarPainel('midia', !painelAberto('midia')); return; }
+    if (t.closest('.kcf-media-opt[data-media-type]')) { mostrarPainel('midia', false); avisar('Enviar arquivo não faz parte deste protótipo'); return; }
+    if (t.closest('.kcf-camera-btn')) { avisar('Enviar foto não faz parte deste protótipo'); return; }
+    if (t.closest('.kcf-signature-btn')) { alternarAssinatura(); return; }
+    if (t.closest('.kcf-compose-more-btn')) { mostrarPainel('maisEnvio', !painelAberto('maisEnvio')); return; }
+    const itemMais = t.closest('[data-compose-action]');
+    if (itemMais) {
+      mostrarPainel('maisEnvio', false);
+      const acao = itemMais.dataset.composeAction;
+      if (acao === 'media') mostrarPainel('midia', true);
+      else if (acao === 'emoji') mostrarPainel('emoji', true);
+      else if (acao === 'signature') alternarAssinatura();
+      else avisar('Enviar foto não faz parte deste protótipo');
+      return;
+    }
+    if (t.closest('.kcf-send-btn')) { enviar(); return; }
+    if (t.closest('.kcf-record-cancel')) { pararGravacao(false); return; }
+    if (t.closest('.kcf-record-send')) { pararGravacao(true); return; }
+
+    // Painel do contato.
+    if (t.closest('#kcf-drawer-toggle-favorite')) {
+      const id = cardAberto.dataset.contactId;
+      const fav = !favoritas.has(id);
+      if (fav) favoritas.add(id); else favoritas.delete(id);
+      pintarFavorito();
+      toast(fav ? 'Conversa favoritada' : 'Conversa removida dos favoritos', 'success');
+      return;
+    }
+    if (t.closest('#kcf-drawer-open-observations')) { avisar(AVISOS_DO_CHAT.notes); return; }
+    if (t.closest('#kcf-drawer-open-media')) { avisar('A galeria de mídias não faz parte deste protótipo'); return; }
+    if (t.closest('#kcf-drawer-ai-assist')) { avisar('Ajuda IA não faz parte deste protótipo'); return; }
+    if (t.closest('.kcf-drawer-edit-btn')) { window.location.href = 'chats.html'; }
+  }
+
+  function alternarAssinatura() {
+    assinaturaLigada = !assinaturaLigada;
+    const botao = doChat('.kcf-signature-btn');
+    botao.classList.toggle('is-active', assinaturaLigada);
+    botao.setAttribute('aria-pressed', String(assinaturaLigada));
+    botao.title = assinaturaLigada ? 'Assinatura ativada' : 'Assinatura';
+    const item = doChat('[data-compose-action="signature"]');
+    item.classList.toggle('is-active', assinaturaLigada);
+    $('span', item).textContent = assinaturaLigada ? 'Assinatura ativada' : 'Assinatura';
+    toast(assinaturaLigada ? 'Assinatura ativada' : 'Assinatura desativada', 'info');
+  }
+
+  entrada.addEventListener('input', () => { crescerEntrada(); sincronizarEnviar(); });
+  entrada.addEventListener('keydown', (ev) => {
+    // No celular Enter quebra linha (o envio é pelo botão), como no app.
+    if (ev.key === 'Enter' && !ev.shiftKey && !ehCelular()) { ev.preventDefault(); enviar(); }
+  });
+  doChat('.kcf-quick-search').addEventListener('input', filtrarRespostas);
+  $('#kcf-drawer-crm-select').addEventListener('change', (ev) => {
+    const destino = colunaPorId(ev.target.value);
+    if (!destino || !cardAberto || destino === cardAberto.closest('.kanban-column')) return;
+    // O card vai para o topo da coluna escolhida (é o evento mais recente dele).
+    moverCard(cardAberto, destino, 0, false);
+    pintarPilulaCrm();
+    toast('CRM atualizado com sucesso', 'success');
+  });
+
+  // ---------------------------------------------------------------------------------
+  // Eventos gerais
+  // ---------------------------------------------------------------------------------
+  document.addEventListener('click', (ev) => {
+    const t = ev.target;
+    if (menuMover && !t.closest('#kanban-move-card-menu')) fecharMenuMover();
+    if (!t.closest('.column-menu-shell')) fecharMenuColuna();
+    if (chatAberto()) fecharPaineisComCliqueFora(t);
+
+    const botaoCard = t.closest('.kanban-card .kb-card-action-btn');
+    if (botaoCard) { acaoDoCard(botaoCard.closest('.kanban-card'), botaoCard); return; }
+    const botaoColuna = t.closest('.column-header-btn');
+    if (botaoColuna) { alternarMenuColuna(botaoColuna.closest('.kanban-column')); return; }
+    const itemMenu = t.closest('.column-menu button');
+    if (itemMenu) { acaoDoMenuColuna(itemMenu); return; }
+    if (t.closest('#add-column-btn')) { abrirModalColuna('create'); return; }
+    if (t.closest('#reorder-columns-btn')) { abrirOrdenar(); return; }
+    if (chatAberto() && chat.contains(t)) acaoDoChat(t);
+  });
+
+  // Esc fecha o que estiver por cima, um de cada vez.
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Escape') return;
+    if (menuMover) { fecharMenuMover(); return; }
+    if (raizPopover.children.length) { fecharPopover(); return; }
+    if ($('.column-menu', board)) { fecharMenuColuna(); return; }
+    const modalSolto = $('#kanban-move-all-modal, #kanban-reorder-modal');
+    if (modalSolto) { modalSolto.remove(); return; }
+    if (modalAgenda && !modalAgenda.classList.contains('kb-hidden')) { fecharAgendamento(); return; }
+    if (!modalColuna.classList.contains('hidden')) { fecharModalColuna(); return; }
+    if (chatAberto()) fecharChat();
+  });
+})();
+</script>
+</body></html>

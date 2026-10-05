@@ -59,7 +59,7 @@
         .mockup-selo { left: auto; right: 12px; bottom: calc(84px + env(safe-area-inset-bottom)); }
       }
       .mockup-aviso {
-        position: fixed; left: 50%; bottom: 24px; z-index: 10000; transform: translate(-50%, 12px);
+        position: fixed; left: 50%; bottom: 24px; z-index: 2147483647; transform: translate(-50%, 12px);
         max-width: calc(100vw - 32px); padding: 10px 16px; border-radius: 10px;
         background: #0f172a; color: #fff; font: 500 13px/1.4 Inter, system-ui, sans-serif;
         opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;

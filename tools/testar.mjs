@@ -5,9 +5,12 @@
  *
  *   node tools/testar.mjs <pagina> [ações...]
  *   node tools/testar.mjs kanban
- *   node tools/testar.mjs settings "@[data-tab=tags]" ~500
+ *   node tools/testar.mjs settings "@[data-tab=tags]" "~500"
+ *   node tools/testar.mjs "settings?tab=planos"
  *
- * Ações (só no desktop, antes do print): @seletor clica, ~ms espera, js:expr avalia.
+ * Ações (antes do print do desktop): @seletor clica, ~ms espera, js:expr avalia.
+ * ACOES_NO_CELULAR=1 repete as ações também no celular.
+ * Diálogos nativos (confirm, prompt, alert) são aceitos sozinhos; prompt recebe PROMPT_TEXTO.
  * Prints em tools/capture/out/testes/<pagina>-desktop.png e <pagina>-celular.png.
  * Portas: PORTA_TESTE (padrão 47914) e PORTA_CDP_TESTE (padrão 9334).
  */
@@ -27,8 +30,10 @@ const PORTA = Number(process.env.PORTA_TESTE || 47914);
 const PORTA_CDP = Number(process.env.PORTA_CDP_TESTE || 9334);
 const TIPOS = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.json': 'application/json' };
 
-const [, , pagina, ...acoes] = process.argv;
-if (!pagina) { console.error('uso: node tools/testar.mjs <pagina> [ações...]'); process.exit(1); }
+const [, , paginaArg, ...acoes] = process.argv;
+if (!paginaArg) { console.error('uso: node tools/testar.mjs <pagina>[?query] [ações...]'); process.exit(1); }
+const [pagina, query = ''] = paginaArg.split(/\?(.*)/s);
+const busca = query ? `?${query}` : '';
 const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const servidor = createServer(async (req, res) => {
@@ -68,33 +73,44 @@ async function main() {
     ws.onmessage = (ev) => {
       const m = JSON.parse(ev.data);
       if (m.id && pendentes.has(m.id)) { pendentes.get(m.id)(m); pendentes.delete(m.id); return; }
+      // confirm/prompt nativos travam o Chrome headless até alguém responder.
+      if (m.method === 'Page.javascriptDialogOpening') {
+        ws.send(JSON.stringify({ id: 900000 + (id += 1), method: 'Page.handleJavaScriptDialog', params: { accept: true, promptText: process.env.PROMPT_TEXTO || '' } }));
+        return;
+      }
       if (m.method === 'Runtime.exceptionThrown') erros.push(m.params.exceptionDetails.exception?.description?.split('\n')[0] || m.params.exceptionDetails.text);
       if (m.method === 'Runtime.consoleAPICalled' && m.params.type === 'error') erros.push(m.params.args.map((a) => a.value ?? a.description).join(' '));
       if (m.method === 'Network.responseReceived' && m.params.response.status >= 400) falhas.push(`${m.params.response.status} ${m.params.response.url}`);
       if (m.method === 'Network.loadingFailed' && !m.params.canceled) falhas.push(`falhou ${m.params.errorText} (${m.params.type})`);
+      // Violação de CSP não vira exceção: o script inline simplesmente não roda.
+      if (m.method === 'Log.entryAdded' && (m.params.entry.source === 'security' || /Content Security Policy/i.test(m.params.entry.text))) erros.push(`segurança: ${m.params.entry.text.slice(0, 200)}`);
     };
     const cdp = (method, params = {}) => new Promise((ok) => { id += 1; pendentes.set(id, ok); ws.send(JSON.stringify({ id, method, params })); });
     const avaliar = async (expression) => (await cdp('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true })).result?.result?.value;
     const print = async (arquivo) => writeFileSync(join(SAIDA, arquivo), Buffer.from((await cdp('Page.captureScreenshot', { format: 'png' })).result.data, 'base64'));
-    const url = `http://127.0.0.1:${PORTA}${PREFIXO}/${pagina}.html`;
+    const url = `http://127.0.0.1:${PORTA}${PREFIXO}/${pagina}.html${busca}`;
+    const executar = async () => {
+      for (const acao of acoes) {
+        if (acao.startsWith('~')) await dormir(Number(acao.slice(1)));
+        else if (acao.startsWith('@')) {
+          const ok = await avaliar(`(() => { const el = document.querySelector(${JSON.stringify(acao.slice(1))}); if (!el) return false; el.click(); return true; })()`);
+          if (!ok) erros.push(`ação sem alvo: ${acao}`);
+          await dormir(500);
+        } else if (acao.startsWith('js:')) { console.log(`  ${acao.slice(3, 60)} → ${JSON.stringify(await avaliar(acao.slice(3)))}`); }
+      }
+    };
 
-    await cdp('Page.enable'); await cdp('Runtime.enable'); await cdp('Network.enable');
+    await cdp('Page.enable'); await cdp('Runtime.enable'); await cdp('Network.enable'); await cdp('Log.enable');
     await cdp('Page.navigate', { url });
     await dormir(2500);
     const titulo = await avaliar('document.title');
-    for (const acao of acoes) {
-      if (acao.startsWith('~')) await dormir(Number(acao.slice(1)));
-      else if (acao.startsWith('@')) {
-        const ok = await avaliar(`(() => { const el = document.querySelector(${JSON.stringify(acao.slice(1))}); if (!el) return false; el.click(); return true; })()`);
-        if (!ok) erros.push(`ação sem alvo: ${acao}`);
-        await dormir(500);
-      } else if (acao.startsWith('js:')) { console.log(`  ${acao.slice(3, 60)} → ${JSON.stringify(await avaliar(acao.slice(3)))}`); }
-    }
+    await executar();
     await print(`${pagina}-desktop.png`);
 
     await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
     await cdp('Page.navigate', { url });
     await dormir(2500);
+    if (process.env.ACOES_NO_CELULAR === '1') await executar();
     await print(`${pagina}-celular.png`);
 
     console.log(`${pagina}: "${titulo}"`);

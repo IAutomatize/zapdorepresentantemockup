@@ -11,7 +11,9 @@ Publicado pelo GitHub Pages a partir da `main`:
 ## Regras
 
 - **Só dados fictícios.** O repositório é público. Nunca coloque nome, telefone, e-mail ou
-  conversa de cliente real, nem print do sistema em produção.
+  conversa de cliente real, nem print do sistema em produção. Antes de todo push rode
+  `node tools/verificar-dados.mjs`: ele falha se achar telefone, e-mail, link de WhatsApp ou
+  domínio que não seja do universo fictício.
 - **Nada do backend.** Não copie JS do app, `.env`, `src/` nem chaves. O `tools/sync.sh` só
   traz CSS e imagens.
 - **Protótipo não é produto.** Feature aprovada aqui é construída do zero no
@@ -28,7 +30,9 @@ mockup-comum.js         o que é igual em todas as telas: selo "Protótipo", avi
 css/                    cópia do CSS do app (não editar aqui; rode o sync)
 *.png, *.svg, *.ico     logos e favicon do app
 tools/sync.sh           atualiza css/ e imagens a partir do app
-tools/testar.mjs        abre uma tela como o Pages serve e aponta erros e 404
+tools/recapturar.sh     refaz a parte capturada de todas as telas, testa e confere os dados
+tools/testar.mjs        abre uma tela como o Pages serve e aponta erros, 404 e bloqueio de CSP
+tools/verificar-dados.mjs  garante que só há dado fictício (rode antes de todo push)
 tools/capture/          gera e atualiza a parte capturada de cada tela
   mock-api.js           troca a API por um registro de rotas
   fixtures/comum.js     universo fictício: conta, equipe, 24 contatos, 14 conversas, Kanban
@@ -47,20 +51,30 @@ Cada `<tela>.html` tem duas partes: em cima, a marcação capturada do app; no f
    visual continuar igual ao produto, e escreva o comportamento no bloco MOCKUP.
 3. Se for uma página nova, acrescente o nome dela em `PAGINAS` no `mockup-comum.js` (senão
    o link mostra o aviso de "fora do protótipo") e um cartão em `index.html`.
-4. Confira: `node tools/testar.mjs chats-nome-da-feature`.
+4. Confira: `node tools/testar.mjs chats-nome-da-feature` e `node tools/verificar-dados.mjs`.
 5. `git add -A && git commit -m "..." && git push`. O Pages publica em cerca de 1 minuto.
 6. Mande o link direto da página para o cliente.
 
 Abrir localmente: `python3 -m http.server 8000` na raiz e acesse `http://localhost:8000`.
 
-## Atualizar quando o app mudar
+## Atualizar quando o app mudar (ou as datas ficarem velhas)
+
+As datas da parte capturada ficam congeladas no dia da captura: depois de algumas semanas,
+"agendada para 07/10" vai parecer passado. Recapturar resolve:
 
 ```bash
-./tools/sync.sh                                         # só o CSS e as imagens
-node tools/capture/capture.mjs kanban "/kanban.html"    # recaptura a marcação
-node tools/capture/montar.mjs kanban                    # troca a parte capturada, mantém o bloco MOCKUP
-node tools/testar.mjs kanban
+./tools/sync.sh                  # CSS e imagens do app
+./tools/recapturar.sh            # todas as telas: captura, montagem, testes e verificação de dados
+./tools/recapturar.sh kanban     # só uma
 ```
+
+O `recapturar.sh` tem o comando de captura de cada tela. Algumas precisam de cliques na
+captura (eles deixam renderizados os modais que o bloco MOCKUP usa); os comandos estão também
+no topo do bloco MOCKUP de cada página. Se mudar um, mude o outro.
+
+A limpeza da captura também protege o repositório público: troca por `#` qualquer link para o
+sistema real ou para `wa.me`, e troca celular com cara de real (como o exemplo de formato na
+tela de Campanhas do app) pelo fictício.
 
 ## Capturar uma tela
 
@@ -84,6 +98,13 @@ ações e salva em `tools/capture/out/` (fora do git):
 
 Ações: `@seletor` clica, `~ms` espera, `js:expressão` avalia na página. No zsh, ponha cada
 ação entre aspas (`"~500"`), senão o `~` vira diretório.
+
+Estados que só existem depois de um clique (um modal preenchido, um menu aberto) entram na
+página como `<template>`: ou por capturas extras copiadas para o bloco MOCKUP, ou por uma
+função na fixture da tela que percorre os estados durante a captura e grava cada um como
+`<template>` (veja `capturarEstados` em `fixtures/dashboard.js` e `__capturarMoldes` em
+`fixtures/settings.js`). O bloco MOCKUP só clona esses moldes: não escreve marcação do app à
+mão.
 
 No fim ele lista as rotas da API que a tela chamou sem resposta preparada. Se a tela vier
 vazia ou com erro, leia no app o formato que ela espera, acrescente a rota em

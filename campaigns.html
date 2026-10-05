@@ -1,0 +1,3254 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Campanhas - Zap do Representante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/campaign-media-builder.css">
+    <link rel="stylesheet" href="css/plan-feature-notice.css">
+    <link rel="stylesheet" href="css/contacts-layout.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/campaigns-mvp.css">
+    <link rel="stylesheet" href="css/mobile-polish.css">
+<link rel="stylesheet" href="css/account-access.css"><link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
+<body class="campaigns-mvp-page font-sans transition-all duration-200">
+    <div class="campaigns-mvp-app">
+        <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+                background: rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                border-right: 1px solid rgba(255, 255, 255, 0.5);
+            " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item sidebar-item-active" title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+        <div class="campaigns-mvp-shell">
+            <main class="campaigns-mvp-main">
+                <div class="campaigns-mvp-blob campaigns-mvp-blob-1"></div>
+                <div class="campaigns-mvp-blob campaigns-mvp-blob-2"></div>
+                <div class="campaigns-mvp-blob campaigns-mvp-blob-3"></div>
+
+                <section class="campaigns-mvp-page-title"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+                    <i class="ri-megaphone-line"></i>
+                    <h1>Campanhas</h1>
+                </section>
+
+                <section class="campaigns-mvp-glass campaigns-mvp-filters">
+                    <div class="campaigns-mvp-search-wrap">
+                        <i class="ri-search-line"></i>
+                        <input type="text" id="search-campaigns" placeholder="Buscar campanha...">
+                    </div>
+
+                    <div class="campaigns-mvp-responsibility">
+                        <i class="ri-shield-check-line"></i>
+                        Use com responsabilidade
+                    </div>
+
+                    <div class="campaigns-mvp-grow"></div>
+
+                    <button id="new-category-btn" class="campaigns-mvp-category-btn" type="button">
+                        <i class="ri-folder-open-line"></i>
+                        Minhas Categorias
+                    </button>
+
+                    <button id="new-campaign-btn" class="campaigns-mvp-primary-btn" type="button">
+                        <i class="ri-add-line"></i>
+                        Nova Campanha
+                    </button>
+                </section>
+
+                <h2 class="campaigns-mvp-subtitle">Suas Campanhas</h2>
+
+                <section class="campaigns-mvp-glass campaigns-mvp-table-wrap">
+                    <table class="campaigns-mvp-table">
+                        <thead>
+                            <tr>
+                                <th data-sort="name">Nome da Campanha</th>
+                                <th data-sort="status">Status</th>
+                                <th data-sort="progress">Progresso</th>
+                                <th data-sort="envio">Agendamento</th>
+                                <th>Conteúdo</th>
+                                <th>Público</th>
+                                <th>Instâncias</th>
+                                <th class="campaigns-mvp-actions-header">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="campaigns-list"><tr class="campaigns-mvp-row">
+        <td class="campaigns-mvp-name" title="Tabela de preços — Novembro">Tabela de preços — Novembro</td>
+        <td>
+          <span class="campaigns-mvp-status-badge campaigns-status-scheduled">Agendada</span>
+        </td>
+        <td>
+          <div class="campaigns-mvp-progress-wrap">
+            <div class="campaigns-mvp-progress-bar">
+              <div class="campaigns-mvp-progress-fill " style="width:0%"></div>
+            </div>
+            <span class="campaigns-mvp-progress-text">
+              <span class="campaigns-mvp-progress-percent">0%</span>
+              <span class="campaigns-mvp-progress-count">0/9</span>
+            </span>
+          </div>
+        </td>
+        <td class="campaigns-mvp-cell-text">07/10/2026, 08:00</td>
+        <td class="campaigns-mvp-cell-text" title="Texto, Documento">Texto +1</td>
+        <td class="campaigns-mvp-cell-text is-audience" title="Por tag">Por tag</td>
+        <td class="campaigns-mvp-cell-text" title="Comercial">Comercial</td>
+        <td>
+          <div class="campaigns-mvp-actions">
+            <button data-id="cmp-1" class="btn-details campaigns-mvp-action-btn report">
+              <i class="ri-bar-chart-grouped-line"></i>
+              <span>Ver relatório</span>
+            </button>
+            
+            <button data-id="cmp-1" class="btn-cancel campaigns-mvp-action-btn cancel">Cancelar</button>
+            <div class="campaigns-mvp-row-menu-wrap">
+              <button type="button" data-id="cmp-1" class="btn-row-menu campaigns-mvp-row-menu-trigger" aria-label="Mais ações">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <div class="campaigns-mvp-row-menu hidden" data-id="cmp-1">
+                <button type="button" data-id="cmp-1" class="btn-duplicate campaigns-mvp-row-menu-item">
+                  <i class="ri-file-copy-line"></i>
+                  <span>Duplicar</span>
+                </button>
+                <button type="button" data-id="cmp-1" class="btn-delete campaigns-mvp-row-menu-item is-danger">
+                  <i class="ri-delete-bin-line"></i>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td></tr><tr class="campaigns-mvp-row">
+        <td class="campaigns-mvp-name" title="Promoção do mês — Biscoitos 10% off">Promoção do mês — Biscoitos 10% off</td>
+        <td>
+          <span class="campaigns-mvp-status-badge campaigns-status-running">Executando</span>
+        </td>
+        <td>
+          <div class="campaigns-mvp-progress-wrap">
+            <div class="campaigns-mvp-progress-bar">
+              <div class="campaigns-mvp-progress-fill " style="width:38%"></div>
+            </div>
+            <span class="campaigns-mvp-progress-text">
+              <span class="campaigns-mvp-progress-percent">38%</span>
+              <span class="campaigns-mvp-progress-count">9/24</span>
+            </span>
+          </div>
+        </td>
+        <td class="campaigns-mvp-cell-text">05/10/2026, 17:04</td>
+        <td class="campaigns-mvp-cell-text" title="Imagem, Texto">Imagem +1</td>
+        <td class="campaigns-mvp-cell-text is-audience" title="Todos contatos">Todos contatos</td>
+        <td class="campaigns-mvp-cell-text" title="Comercial, Pós-venda">Comercial +1</td>
+        <td>
+          <div class="campaigns-mvp-actions">
+            <button data-id="cmp-2" class="btn-details campaigns-mvp-action-btn report">
+              <i class="ri-bar-chart-grouped-line"></i>
+              <span>Ver relatório</span>
+            </button>
+            
+            <button data-id="cmp-2" class="btn-cancel campaigns-mvp-action-btn cancel">Cancelar</button>
+            <div class="campaigns-mvp-row-menu-wrap">
+              <button type="button" data-id="cmp-2" class="btn-row-menu campaigns-mvp-row-menu-trigger" aria-label="Mais ações">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <div class="campaigns-mvp-row-menu hidden" data-id="cmp-2">
+                <button type="button" data-id="cmp-2" class="btn-duplicate campaigns-mvp-row-menu-item">
+                  <i class="ri-file-copy-line"></i>
+                  <span>Duplicar</span>
+                </button>
+                <button type="button" data-id="cmp-2" class="btn-delete campaigns-mvp-row-menu-item is-danger">
+                  <i class="ri-delete-bin-line"></i>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td></tr><tr class="campaigns-mvp-row">
+        <td class="campaigns-mvp-name" title="Reativação de clientes inativos (cópia)">Reativação de clientes inativos (cópia)</td>
+        <td>
+          <span class="campaigns-mvp-status-badge campaigns-status-draft">Rascunho</span>
+        </td>
+        <td>
+          <div class="campaigns-mvp-progress-wrap">
+            <div class="campaigns-mvp-progress-bar">
+              <div class="campaigns-mvp-progress-fill " style="width:0%"></div>
+            </div>
+            <span class="campaigns-mvp-progress-text">
+              <span class="campaigns-mvp-progress-percent">0%</span>
+              <span class="campaigns-mvp-progress-count">0/6</span>
+            </span>
+          </div>
+        </td>
+        <td class="campaigns-mvp-cell-text">03/10/2026, 17:42</td>
+        <td class="campaigns-mvp-cell-text" title="Texto">Texto</td>
+        <td class="campaigns-mvp-cell-text is-audience" title="Seleção manual">Seleção manual</td>
+        <td class="campaigns-mvp-cell-text" title="Pós-venda">Pós-venda</td>
+        <td>
+          <div class="campaigns-mvp-actions">
+            <button data-id="cmp-3" class="btn-details campaigns-mvp-action-btn report">
+              <i class="ri-bar-chart-grouped-line"></i>
+              <span>Ver relatório</span>
+            </button>
+            <button data-id="cmp-3" class="btn-start campaigns-mvp-action-btn start">Iniciar</button>
+            <button data-id="cmp-3" class="btn-cancel campaigns-mvp-action-btn cancel">Cancelar</button>
+            <div class="campaigns-mvp-row-menu-wrap">
+              <button type="button" data-id="cmp-3" class="btn-row-menu campaigns-mvp-row-menu-trigger" aria-label="Mais ações">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <div class="campaigns-mvp-row-menu hidden" data-id="cmp-3">
+                <button type="button" data-id="cmp-3" class="btn-duplicate campaigns-mvp-row-menu-item">
+                  <i class="ri-file-copy-line"></i>
+                  <span>Duplicar</span>
+                </button>
+                <button type="button" data-id="cmp-3" class="btn-delete campaigns-mvp-row-menu-item is-danger">
+                  <i class="ri-delete-bin-line"></i>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td></tr><tr class="campaigns-mvp-row">
+        <td class="campaigns-mvp-name" title="Lançamento catálogo Outubro">Lançamento catálogo Outubro</td>
+        <td>
+          <span class="campaigns-mvp-status-badge campaigns-status-completed">Concluída</span>
+        </td>
+        <td>
+          <div class="campaigns-mvp-progress-wrap">
+            <div class="campaigns-mvp-progress-bar">
+              <div class="campaigns-mvp-progress-fill " style="width:91%"></div>
+            </div>
+            <span class="campaigns-mvp-progress-text">
+              <span class="campaigns-mvp-progress-percent">91%</span>
+              <span class="campaigns-mvp-progress-count">10/11</span>
+            </span>
+          </div>
+        </td>
+        <td class="campaigns-mvp-cell-text">30/09/2026, 09:30</td>
+        <td class="campaigns-mvp-cell-text" title="Texto, Documento, Imagem">Texto +2</td>
+        <td class="campaigns-mvp-cell-text is-audience" title="Categorias">Categorias</td>
+        <td class="campaigns-mvp-cell-text" title="Comercial, Pós-venda">Comercial +1</td>
+        <td>
+          <div class="campaigns-mvp-actions">
+            <button data-id="cmp-4" class="btn-details campaigns-mvp-action-btn report">
+              <i class="ri-bar-chart-grouped-line"></i>
+              <span>Ver relatório</span>
+            </button>
+            
+            
+            <div class="campaigns-mvp-row-menu-wrap">
+              <button type="button" data-id="cmp-4" class="btn-row-menu campaigns-mvp-row-menu-trigger" aria-label="Mais ações">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <div class="campaigns-mvp-row-menu hidden" data-id="cmp-4">
+                <button type="button" data-id="cmp-4" class="btn-duplicate campaigns-mvp-row-menu-item">
+                  <i class="ri-file-copy-line"></i>
+                  <span>Duplicar</span>
+                </button>
+                <button type="button" data-id="cmp-4" class="btn-delete campaigns-mvp-row-menu-item is-danger">
+                  <i class="ri-delete-bin-line"></i>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td></tr><tr class="campaigns-mvp-row">
+        <td class="campaigns-mvp-name" title="Reativação de clientes inativos">Reativação de clientes inativos</td>
+        <td>
+          <span class="campaigns-mvp-status-badge campaigns-status-completed">Concluída</span>
+        </td>
+        <td>
+          <div class="campaigns-mvp-progress-wrap">
+            <div class="campaigns-mvp-progress-bar">
+              <div class="campaigns-mvp-progress-fill is-complete" style="width:100%"></div>
+            </div>
+            <span class="campaigns-mvp-progress-text">
+              <span class="campaigns-mvp-progress-percent">100%</span>
+              <span class="campaigns-mvp-progress-count">6/6</span>
+            </span>
+          </div>
+        </td>
+        <td class="campaigns-mvp-cell-text">26/09/2026, 10:00</td>
+        <td class="campaigns-mvp-cell-text" title="Texto">Texto</td>
+        <td class="campaigns-mvp-cell-text is-audience" title="Seleção manual">Seleção manual</td>
+        <td class="campaigns-mvp-cell-text" title="Pós-venda">Pós-venda</td>
+        <td>
+          <div class="campaigns-mvp-actions">
+            <button data-id="cmp-5" class="btn-details campaigns-mvp-action-btn report">
+              <i class="ri-bar-chart-grouped-line"></i>
+              <span>Ver relatório</span>
+            </button>
+            
+            
+            <div class="campaigns-mvp-row-menu-wrap">
+              <button type="button" data-id="cmp-5" class="btn-row-menu campaigns-mvp-row-menu-trigger" aria-label="Mais ações">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <div class="campaigns-mvp-row-menu hidden" data-id="cmp-5">
+                <button type="button" data-id="cmp-5" class="btn-duplicate campaigns-mvp-row-menu-item">
+                  <i class="ri-file-copy-line"></i>
+                  <span>Duplicar</span>
+                </button>
+                <button type="button" data-id="cmp-5" class="btn-delete campaigns-mvp-row-menu-item is-danger">
+                  <i class="ri-delete-bin-line"></i>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td></tr><tr class="campaigns-mvp-row">
+        <td class="campaigns-mvp-name" title="Convite: feira de panificação">Convite: feira de panificação</td>
+        <td>
+          <span class="campaigns-mvp-status-badge campaigns-status-cancelled">Cancelada</span>
+        </td>
+        <td>
+          <div class="campaigns-mvp-progress-wrap">
+            <div class="campaigns-mvp-progress-bar">
+              <div class="campaigns-mvp-progress-fill " style="width:33%"></div>
+            </div>
+            <span class="campaigns-mvp-progress-text">
+              <span class="campaigns-mvp-progress-percent">33%</span>
+              <span class="campaigns-mvp-progress-count">2/6</span>
+            </span>
+          </div>
+        </td>
+        <td class="campaigns-mvp-cell-text">23/09/2026, 14:00</td>
+        <td class="campaigns-mvp-cell-text" title="Imagem, Texto">Imagem +1</td>
+        <td class="campaigns-mvp-cell-text is-audience" title="Categorias">Categorias</td>
+        <td class="campaigns-mvp-cell-text" title="Comercial">Comercial</td>
+        <td>
+          <div class="campaigns-mvp-actions">
+            <button data-id="cmp-6" class="btn-details campaigns-mvp-action-btn report">
+              <i class="ri-bar-chart-grouped-line"></i>
+              <span>Ver relatório</span>
+            </button>
+            
+            
+            <div class="campaigns-mvp-row-menu-wrap">
+              <button type="button" data-id="cmp-6" class="btn-row-menu campaigns-mvp-row-menu-trigger" aria-label="Mais ações">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <div class="campaigns-mvp-row-menu hidden" data-id="cmp-6">
+                <button type="button" data-id="cmp-6" class="btn-duplicate campaigns-mvp-row-menu-item">
+                  <i class="ri-file-copy-line"></i>
+                  <span>Duplicar</span>
+                </button>
+                <button type="button" data-id="cmp-6" class="btn-delete campaigns-mvp-row-menu-item is-danger">
+                  <i class="ri-delete-bin-line"></i>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td></tr><tr class="campaigns-mvp-row">
+        <td class="campaigns-mvp-name" title="Boas-vindas a novos clientes">Boas-vindas a novos clientes</td>
+        <td>
+          <span class="campaigns-mvp-status-badge campaigns-status-completed">Concluída</span>
+        </td>
+        <td>
+          <div class="campaigns-mvp-progress-wrap">
+            <div class="campaigns-mvp-progress-bar">
+              <div class="campaigns-mvp-progress-fill is-complete" style="width:100%"></div>
+            </div>
+            <span class="campaigns-mvp-progress-text">
+              <span class="campaigns-mvp-progress-percent">100%</span>
+              <span class="campaigns-mvp-progress-count">4/4</span>
+            </span>
+          </div>
+        </td>
+        <td class="campaigns-mvp-cell-text">15/09/2026, 11:00</td>
+        <td class="campaigns-mvp-cell-text" title="Texto">Texto</td>
+        <td class="campaigns-mvp-cell-text is-audience" title="Kanban">Kanban</td>
+        <td class="campaigns-mvp-cell-text" title="Comercial">Comercial</td>
+        <td>
+          <div class="campaigns-mvp-actions">
+            <button data-id="cmp-7" class="btn-details campaigns-mvp-action-btn report">
+              <i class="ri-bar-chart-grouped-line"></i>
+              <span>Ver relatório</span>
+            </button>
+            
+            
+            <div class="campaigns-mvp-row-menu-wrap">
+              <button type="button" data-id="cmp-7" class="btn-row-menu campaigns-mvp-row-menu-trigger" aria-label="Mais ações">
+                <i class="ri-more-2-fill"></i>
+              </button>
+              <div class="campaigns-mvp-row-menu hidden" data-id="cmp-7">
+                <button type="button" data-id="cmp-7" class="btn-duplicate campaigns-mvp-row-menu-item">
+                  <i class="ri-file-copy-line"></i>
+                  <span>Duplicar</span>
+                </button>
+                <button type="button" data-id="cmp-7" class="btn-delete campaigns-mvp-row-menu-item is-danger">
+                  <i class="ri-delete-bin-line"></i>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td></tr></tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    
+    <div class="modal campaigns-mvp-modal hidden" id="campaign-modal" style="display: none;">
+        <div class="modal-content card-zap max-w-5xl campaigns-mvp-modal-card">
+            
+            <div class="modal-header border-b-2 border-theme-border pb-4 mb-6">
+                <h3 class="text-xl font-semibold text-theme-primary flex items-center">
+                    <i class="ri-megaphone-line text-secondary-red mr-3 text-2xl"></i>Nova Campanha
+                </h3>
+                <button class="close-btn modal-close text-theme-secondary hover:text-secondary-red cursor-pointer text-2xl transition-colors">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <form id="campaign-form" class="space-y-8">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="campaign-name" class="form-label">
+                            <i class="ri-text text-theme-secondary mr-2"></i>Nome da Campanha *
+                        </label>
+                        <input type="text" id="campaign-name" class="form-control focus:ring-secondary-red focus:border-secondary-red" placeholder="Ex: Promoção Black Friday" required="">
+                    </div>
+                    <div class="form-group hidden">
+                        <label for="delay-seconds" class="form-label">
+                            <i class="ri-timer-line mr-2 text-theme-secondary"></i>Delay Base (fallback)
+                        </label>
+                        <select id="delay-seconds" class="form-control focus:ring-secondary-red focus:border-secondary-red" required="">
+                            <option value="5">⏱️ 5 segundos</option>
+                            <option value="10" selected="">⏱️ 10 segundos (Recomendado)</option>
+                            <option value="15">⏱️ 15 segundos</option>
+                            <option value="20">⏱️ 20 segundos</option>
+                            <option value="30">⏱️ 30 segundos</option>
+                            <option value="45">⏱️ 45 segundos</option>
+                            <option value="60">⏱️ 60 segundos</option>
+                        </select>
+                    </div>
+                </div>
+
+                
+                <div class="border-2 rounded-xl p-6 bg-secondary-red-light campaigns-interval-section border-theme-light">
+                    <h4 class="text-lg font-semibold mb-6 flex items-center text-theme-primary">
+                        <i class="ri-time-line text-secondary-red mr-3 text-xl"></i>
+                        Intervalo entre Mensagens
+                    </h4>
+
+                    <div class="campaigns-interval-group">
+                        <div class="campaigns-interval-group-title">── LOTE DE ENVIO ──</div>
+                        <p class="campaigns-interval-desc">Quantas mensagens enviar por lote:</p>
+                        <div class="campaigns-interval-lot-row">
+                            <input type="hidden" id="lot-size-selected" value="5">
+                            <button type="button" class="campaigns-interval-lot-btn is-active" data-value="5">5</button>
+                            <button type="button" class="campaigns-interval-lot-btn" data-value="10">10</button>
+                            <button type="button" class="campaigns-interval-lot-btn" data-value="15">15</button>
+                            <button type="button" class="campaigns-interval-lot-btn" data-value="20">20</button>
+                        </div>
+                    </div>
+
+                    <div class="campaigns-interval-group mt-4">
+                        <div class="campaigns-interval-group-title">── TEMPO ENTRE CADA MENSAGEM (DENTRO DO LOTE) ──</div>
+                        <div class="campaigns-interval-pair-grid">
+                            <div class="campaigns-interval-field">
+                                <label for="msg-delay-min">Mínimo:</label>
+                                <div class="campaigns-interval-input-wrap">
+                                    <input type="number" id="msg-delay-min" class="form-control" min="30" value="30">
+                                    <span>segundos</span>
+                                </div>
+                            </div>
+                            <div class="campaigns-interval-field">
+                                <label for="msg-delay-max-min">Máximo:</label>
+                                <div class="campaigns-interval-input-wrap">
+                                    <input type="number" id="msg-delay-max-min" class="form-control" min="1" value="1">
+                                    <span>minuto(s)</span>
+                                </div>
+                                <input type="hidden" id="msg-delay-max" value="60">
+                            </div>
+                        </div>
+                        <p class="campaigns-interval-hint">(será aleatório entre o mínimo e máximo)</p>
+                    </div>
+
+                    <div class="campaigns-interval-group mt-4">
+                        <div class="campaigns-interval-group-title">── PAUSA ENTRE LOTES ──</div>
+                        <div class="campaigns-interval-pair-grid">
+                            <div class="campaigns-interval-field">
+                                <label for="lot-pause-minutes">Mínimo:</label>
+                                <div class="campaigns-interval-input-wrap">
+                                    <input type="number" id="lot-pause-minutes" class="form-control" min="2" value="2" max="30">
+                                    <span>minuto(s)</span>
+                                </div>
+                                <input type="hidden" id="lot-pause-min" value="120">
+                            </div>
+                            <div class="campaigns-interval-field">
+                                <label for="lot-pause-max-minutes">Máximo:</label>
+                                <div class="campaigns-interval-input-wrap">
+                                    <input type="number" id="lot-pause-max-minutes" class="form-control" min="2" value="4" max="30">
+                                    <span>minuto(s)</span>
+                                </div>
+                                <input type="hidden" id="lot-pause-max" value="240">
+                            </div>
+                        </div>
+                        <p class="campaigns-interval-hint">(aleatório entre mínimo e máximo; mínimo permitido: 2 minutos; máximo sugerido: 4 minutos)</p>
+                    </div>
+
+                    <div class="campaigns-interval-group mt-4">
+                        <div class="campaigns-interval-group-title">── PAUSA DE SEGURANÇA ──</div>
+                        <div class="campaigns-interval-pair-grid">
+                            <div class="campaigns-interval-field">
+                                <label for="safety-every">A cada:</label>
+                                <div class="campaigns-interval-input-wrap">
+                                    <input type="number" id="safety-every" class="form-control" min="1" value="50">
+                                    <span>mensagens</span>
+                                </div>
+                            </div>
+                            <div class="campaigns-interval-field">
+                                <label for="safety-pause">Pausar por:</label>
+                                <div class="campaigns-interval-input-wrap">
+                                    <input type="number" id="safety-pause" class="form-control" min="8" max="20" value="8">
+                                    <span>minuto(s)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="campaigns-interval-hint">(mínimo automático: dobro da pausa entre lotes)</p>
+                    </div>
+
+                    <div class="campaigns-simulation-card mt-4">
+                        <h5>📊 Simulação</h5>
+                        <p>Com essas configurações, para <strong id="simulation-contacts">500</strong> contatos:</p>
+                        <p>⏱️ Tempo estimado: <strong id="simulation-time">~12h 35min</strong></p>
+                        <p>📨 Velocidade média: <strong id="simulation-speed">~0.7 msgs/min</strong></p>
+                        <div class="campaigns-simulation-security">
+                            <span>🛡️ Nível de segurança:</span>
+                            <div class="campaigns-simulation-bar-wrap">
+                                <div id="simulation-security-bar" class="campaigns-simulation-bar-fill" style="width: 100%; background: var(--ds-success);"></div>
+                            </div>
+                            <strong id="simulation-security-label" style="color: var(--ds-success);">Máximo</strong>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="border-2 rounded-xl p-6 bg-secondary-red-light border-theme-light">
+                    <h4 class="text-lg font-semibold mb-6 flex items-center text-theme-primary">
+                        <i class="ri-file-text-line text-secondary-red mr-3 text-xl"></i>
+                        Conteúdo da Campanha
+                    </h4>
+
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center space-x-2">
+                            <input type="radio" id="content-multimedia" name="content_type" value="multimedia" class="text-secondary-red focus:ring-secondary-red" checked="">
+                            <label for="content-multimedia" class="flex items-center cursor-pointer">
+                                <span class="text-sm font-medium">
+                                    <i class="ri-slideshow-line mr-1"></i>Conteúdo da Campanha (Texto, Imagens, Vídeos, Áudios)
+                                </span>
+                            </label>
+                        </div>
+                        <p class="text-xs mt-2 ml-6 text-theme-muted">
+                            <i class="ri-information-line mr-1"></i>
+                            Configure variações de texto ou mídia. Para cada contato, o sistema escolherá uma variação aleatória.
+                        </p>
+                    </div>
+
+                    
+                    <div id="multimedia-content-section" class="space-y-4">
+                        <div class="campaign-content-actions-head mb-4">
+                            <p class="campaign-content-helper">
+                                <i class="ri-information-line mr-2"></i>
+                                Adicione textos, imagens, vídeos, áudios e documentos. O sistema escolherá uma variação configurada e enviará aleatoriamente para humanizar a campanha. Respostas rápidas podem incluir texto e anexos.
+                            </p>
+                            <div class="campaign-content-type-row">
+                                <button type="button" class="campaign-content-type-btn">
+                                    <i class="ri-font-size"></i>
+                                    <span>Texto</span>
+                                </button>
+                                <button type="button" class="campaign-content-type-btn" data-plan-feature="multimedia_campaigns">
+                                    <i class="ri-image-line"></i>
+                                    <span>Imagem</span>
+                                </button>
+                                <button type="button" class="campaign-content-type-btn" data-plan-feature="multimedia_campaigns">
+                                    <i class="ri-music-line"></i>
+                                    <span>Áudio</span>
+                                </button>
+                                <button type="button" class="campaign-content-type-btn" data-plan-feature="multimedia_campaigns">
+                                    <i class="ri-video-line"></i>
+                                    <span>Vídeo</span>
+                                </button>
+                                <button type="button" class="campaign-content-type-btn" data-plan-feature="multimedia_campaigns">
+                                    <i class="ri-file-line"></i>
+                                    <span>Documento</span>
+                                </button>
+                                <button type="button" id="campaign-quick-replies-btn" class="campaign-content-type-btn is-quick">
+                                    <i class="ri-flashlight-line"></i>
+                                    <span>Respostas Rápidas</span>
+                                </button>
+                            </div>
+                            <div id="campaign-media-plan-notice" class="plan-feature-notice hidden" role="status">
+                              <i class="ri-lock-line" aria-hidden="true"></i>
+                              <p data-plan-notice-text=""></p>
+                              <a href="settings.html?tab=planos" class="plan-feature-notice-link">Ver planos</a>
+                            </div>
+                        </div>
+                        <div id="campaign-quick-replies-panel" class="hidden"></div>
+
+                        
+                        <input type="file" id="modal-image-input" accept="image/*" class="hidden" title="Selecionar imagem">
+                        <input type="file" id="modal-audio-input" accept="audio/*" class="hidden" title="Selecionar áudio">
+                        <input type="file" id="modal-video-input" accept="video/*" class="hidden" title="Selecionar vídeo">
+                        <input type="file" id="modal-document-input" accept=".pdf,.doc,.docx,.txt,.xls,.xlsx" class="hidden" title="Selecionar documento">
+
+                        
+                        <div id="campaign-media-sequence" class="border rounded-lg border-theme-light bg-theme-surface">
+        <div class="empty-state text-center py-8 text-gray-500">
+          <i class="ri-add-circle-line text-2xl mb-2 text-gray-300"></i>
+          <p class="text-sm">Pool de mensagens vazio</p>
+          <p class="text-xs text-gray-400">Adicione variações usando os botões acima</p>
+        </div>
+      </div>
+
+                        
+                        <div class="rounded-lg p-4 border bg-gray-50 dark:bg-gray-800 border-theme-light">
+                            <h5 class="text-sm font-medium mb-3 flex items-center text-theme-secondary">
+                                <i class="ri-bar-chart-line mr-2"></i>
+                                Resumo do Pool Aleatório
+                            </h5>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-theme-secondary">Itens:</span>
+                                    <span id="media-count-display" class="font-semibold text-gray-800">0</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-theme-secondary">Tamanho:</span>
+                                    <span id="media-size-display" class="font-semibold text-gray-800">0 Bytes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="border-2 rounded-xl p-6 bg-secondary-red-light border-theme-light">
+                    <h4 class="text-lg font-semibold mb-6 flex items-center text-theme-primary">
+                        <i class="ri-group-line text-secondary-red mr-3 text-xl"></i>
+                        Selecione o Público-Alvo
+                    </h4>
+                    
+                    <div class="space-y-6">
+                        
+                        <label class="hidden">
+                            <input type="radio" name="audience_type" value="all" class="mt-1 text-secondary-red focus:ring-secondary-red">
+                            <div class="ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-user-line mr-2"></i>Todos os Contatos
+                                </div>
+                                <div class="text-sm mt-1 text-theme-muted" id="total-contacts-count">
+                                    <i class="ri-loader-4-line animate-spin mr-1"></i>Carregando contagem...
+                                </div>
+                            </div>
+                        </label>
+
+                        
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="audience_type" value="tag" class="mt-1 text-secondary-red focus:ring-secondary-red">
+                            <div class="flex-1 ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-price-tag-3-line mr-2"></i>Selecionar por Tag/Marcador
+                                </div>
+                                <div class="text-sm mt-1 mb-3 text-theme-muted">Puxa todos os contatos com aquela tag</div>
+                                <select id="tag-select" class="form-control focus:ring-secondary-red focus:border-secondary-red disabled:opacity-50" disabled=""><option value="" selected="">Selecione uma tag</option><option value="tag-atacado">Atacado (4 contatos)</option><option value="tag-cliente">Cliente ativo (9 contatos)</option><option value="tag-orcamento">Orçamento (5 contatos)</option><option value="tag-reativar">Reativar (2 contatos)</option><option value="tag-vip">VIP (3 contatos)</option></select>
+                            </div>
+                        </label>
+
+                        
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="audience_type" value="manual" class="mt-1 text-secondary-red focus:ring-secondary-red">
+                            <div class="flex-1 ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-user-add-line mr-2"></i>Seleção Manual de Contatos
+                                </div>
+                                <div class="text-sm mt-1 mb-3 text-theme-muted">Busque e selecione contatos individualmente</div>
+                                <div class="space-y-3">
+                                  <div class="flex gap-2 flex-wrap">
+                                    <button type="button" id="manual-select-all-btn" class="px-3 py-1.5 text-xs bg-blue-50 text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-100 disabled:opacity-50" disabled="">
+                                      <i class="ri-check-double-line mr-1"></i>Selecionar contatos carregados (<span id="manual-total-count">24</span>)
+                                    </button>
+                                    <button type="button" id="manual-clear-btn" class="px-3 py-1.5 text-xs border rounded-lg hover:bg-gray-50 disabled:opacity-50 bg-theme-surface text-theme-muted border-theme-light" disabled="">
+                                      Limpar seleção
+                                    </button>
+                                  </div>
+                                  <input type="text" id="manual-contacts-search" class="form-control focus:ring-secondary-red focus:border-secondary-red disabled:opacity-50" placeholder="Buscar contato..." disabled="">
+                                  <div id="manual-contacts-list" class="border rounded-lg max-h-64 overflow-y-auto p-2 disabled:opacity-50 bg-theme-surface border-theme-light opacity-60"><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-14">
+        <div class="contact-avatar">AD</div>
+        <span class="text-sm flex-1">Atacadão do Vale <span class="text-text-muted">(5511990000114)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-21">
+        <div class="contact-avatar">BL</div>
+        <span class="text-sm flex-1">Beatriz Lima <span class="text-text-muted">(5511990000121)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-24">
+        <div class="contact-avatar">CA</div>
+        <span class="text-sm flex-1">Café Aroma <span class="text-text-muted">(5511990000124)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-17">
+        <div class="contact-avatar">CR</div>
+        <span class="text-sm flex-1">Camila Rocha <span class="text-text-muted">(5511990000117)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-07">
+        <div class="contact-avatar">CM</div>
+        <span class="text-sm flex-1">Carlos Mendes <span class="text-text-muted">(5511990000107)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-20">
+        <div class="contact-avatar">C2</div>
+        <span class="text-sm flex-1">Conveniência 24h Centro <span class="text-text-muted">(5511990000120)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-04">
+        <div class="contact-avatar">DL</div>
+        <span class="text-sm flex-1">Distribuidora Litoral <span class="text-text-muted">(5511990000104)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-06">
+        <div class="contact-avatar">EC</div>
+        <span class="text-sm flex-1">Empório Central <span class="text-text-muted">(5511990000106)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-09">
+        <div class="contact-avatar">FO</div>
+        <span class="text-sm flex-1">Fernanda Oliveira <span class="text-text-muted">(5511990000109)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-23">
+        <div class="contact-avatar">GP</div>
+        <span class="text-sm flex-1">Gustavo Pereira <span class="text-text-muted">(5511990000123)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-18">
+        <div class="contact-avatar">HV</div>
+        <span class="text-sm flex-1">Hortifruti Verde Vida <span class="text-text-muted">(5511990000118)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-05">
+        <div class="contact-avatar">JR</div>
+        <span class="text-sm flex-1">Juliana Ribeiro <span class="text-text-muted">(5511990000105)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-12">
+        <div class="contact-avatar">LD</div>
+        <span class="text-sm flex-1">Loja da Esquina <span class="text-text-muted">(5511990000112)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-15">
+        <div class="contact-avatar">LF</div>
+        <span class="text-sm flex-1">Lucas Ferreira <span class="text-text-muted">(5511990000115)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-01">
+        <div class="contact-avatar">MC</div>
+        <span class="text-sm flex-1">Mariana Costa <span class="text-text-muted">(5511990000101)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-02">
+        <div class="contact-avatar">MB</div>
+        <span class="text-sm flex-1">Mercado Bom Preço <span class="text-text-muted">(5511990000102)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-16">
+        <div class="contact-avatar">MS</div>
+        <span class="text-sm flex-1">Mercearia São José <span class="text-text-muted">(5511990000116)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-08">
+        <div class="contact-avatar">PE</div>
+        <span class="text-sm flex-1">Padaria Estrela <span class="text-text-muted">(5511990000108)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-13">
+        <div class="contact-avatar">PG</div>
+        <span class="text-sm flex-1">Patrícia Gomes <span class="text-text-muted">(5511990000113)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-03">
+        <div class="contact-avatar">PA</div>
+        <span class="text-sm flex-1">Pedro Almeida <span class="text-text-muted">(5511990000103)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-22">
+        <div class="contact-avatar">RE</div>
+        <span class="text-sm flex-1">Rede Econômica <span class="text-text-muted">(5511990000122)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-11">
+        <div class="contact-avatar">RS</div>
+        <span class="text-sm flex-1">Ricardo Santos <span class="text-text-muted">(5511990000111)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-10">
+        <div class="contact-avatar">SA</div>
+        <span class="text-sm flex-1">Supermercado Avenida <span class="text-text-muted">(5511990000110)</span></span>
+      </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
+        <input type="checkbox" class="manual-contact-checkbox" data-id="ct-19">
+        <div class="contact-avatar">TM</div>
+        <span class="text-sm flex-1">Thiago Martins <span class="text-text-muted">(5511990000119)</span></span>
+      </label></div>
+                                  <button type="button" id="manual-contacts-load-more" class="btn-outline-secondary hidden" disabled="">Carregar mais</button>
+                                  <div id="manual-selected-count" class="text-xs text-theme-muted">0 contatos selecionados</div>
+                                  
+                                  <input type="hidden" id="manual-contact-ids" value="" disabled="">
+                                </div>
+                            </div>
+                        </label>
+
+                        
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="audience_type" value="categories" class="mt-1 text-secondary-red focus:ring-secondary-red">
+                            <div class="flex-1 ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-folders-line mr-2"></i>Usar Categoria
+                                </div>
+                                <div class="text-sm mt-1 mb-3 text-theme-muted">Categorias criadas previamente</div>
+                                <div class="space-y-3">
+                                  <div id="categories-empty-hint" class="text-xs bg-secondary-red-light border border-secondary-red rounded p-3 hidden text-theme-muted">
+                                    Você ainda não tem categorias configuradas. Envie sua primeira campanha e, no histórico, use o botão "Transformar em categoria específica" para criar uma categoria a partir dos destinatários.
+                                  </div>
+                                  <div class="flex gap-2 flex-wrap">
+                                    <button type="button" id="categories-toggle-all-btn" class="px-3 py-1.5 text-xs bg-blue-50 text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-100 disabled:opacity-50" disabled="">
+                                      <i class="ri-check-line mr-1"></i><span id="categories-toggle-all-label">Selecionar TODAS as categorias (0)</span>
+                                    </button>
+                                  </div>
+                                  <div id="categories-list" class="border rounded-lg max-h-64 overflow-y-auto p-2 disabled:opacity-50 opacity-60 bg-theme-surface border-theme-light"><div class="text-sm text-text-muted px-2 py-3">Selecione "Contatos por Categorias" para carregar a lista.</div></div>
+                                  <div id="categories-selection-summary" class="text-xs text-green-600 font-semibold hidden"></div>
+                                  
+                                  <input type="hidden" id="category-ids" value="" disabled="">
+                                </div>
+                            </div>
+                        </label>
+
+                        
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="audience_type" value="kanban" class="mt-1 text-secondary-red focus:ring-secondary-red" checked="">
+                            <div class="flex-1 ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-layout-column-line mr-2"></i>Contatos de uma Etapa do Kanban
+                                </div>
+                                <div class="text-sm mt-1 mb-3 text-theme-muted">Filtre os cards pelo usuário responsável e pela etapa do Kanban</div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                  <div>
+                                    <label for="kanban-user-select" class="form-label">Usuário</label>
+                                    <select id="kanban-user-select" class="form-control focus:ring-secondary-red focus:border-secondary-red disabled:opacity-50"><option value="" selected="">Todos os usuários</option><option value="usr-ana">Ana Souza (owner)</option><option value="usr-carla">Carla Dias (admin)</option><option value="usr-bruno">Bruno Lima (member)</option></select>
+                                  </div>
+                                  <div>
+                                    <label for="kanban-column-select" class="form-label">Etapa</label>
+                                    <select id="kanban-column-select" class="form-control focus:ring-secondary-red focus:border-secondary-red disabled:opacity-50"><option value="" selected="">Selecione uma etapa...</option><option value="col-novo">Novo contato (4 contatos)</option><option value="col-negociacao">Em negociação (4 contatos)</option><option value="col-pedido">Pedido enviado (3 contatos)</option><option value="col-posvenda">Pós-venda (3 contatos)</option></select>
+                                    <div id="kanban-column-count" class="text-sm hidden text-theme-muted"></div>
+                                    <input type="hidden" id="kanban-column-id" value="">
+                                  </div>
+                                </div>
+                            </div>
+                        </label>
+
+                        
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="audience_type" value="csv" class="mt-1 text-secondary-red focus:ring-secondary-red">
+                            <div class="flex-1 ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-file-excel-2-line mr-2"></i>Upload de Lista (CSV)
+                                </div>
+                                <div class="text-sm mt-1 mb-4 text-theme-muted">Faça upload de uma lista personalizada</div>
+                                
+                                <div class="space-y-4">
+                                    <input type="file" id="csv-file" accept=".csv" class="form-control file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-secondary-red file:text-white hover:file:bg-secondary-red-hover disabled:opacity-50" disabled="">
+                                    
+                                    <div class="text-xs p-3 rounded-lg border text-theme-muted bg-theme-surface border-theme-light">
+                                        <div class="flex items-start">
+                                            <i class="ri-information-line mr-2 mt-0.5 text-secondary-red"></i>
+                                            <div>
+                                                <p><strong>Formato obrigatório:</strong> Colunas "nome" e "whatsapp"</p>
+                                                <p><strong>Telefone:</strong> Apenas números (ex: 5511990000101)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="hidden">
+                                        <select id="csv-tag-select" class="form-control focus:ring-secondary-red focus:border-secondary-red disabled:opacity-50" disabled=""><option value="" selected="">Sem tag</option><option value="tag-atacado">Atacado (4 contatos)</option><option value="tag-cliente">Cliente ativo (9 contatos)</option><option value="tag-orcamento">Orçamento (5 contatos)</option><option value="tag-reativar">Reativar (2 contatos)</option><option value="tag-vip">VIP (3 contatos)</option></select>
+                                    </div>
+
+                                    <div id="csv-validation-result" class="hidden"></div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                
+                <div class="border-2 rounded-xl p-6 bg-secondary-red-light border-theme-light">
+                    <h4 class="text-lg font-semibold mb-6 flex items-center text-theme-primary">
+                        <i class="ri-calendar-schedule-line text-secondary-red mr-3 text-xl"></i>
+                        Configurar Agendamento
+                    </h4>
+                    
+                    <div class="space-y-6">
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="schedule_type" value="immediate" class="mt-1 text-secondary-red focus:ring-secondary-red" checked="">
+                            <div class="ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-rocket-line mr-2"></i>Enviar Imediatamente
+                                </div>
+                                <div class="text-sm mt-1 text-theme-muted">A campanha será iniciada assim que criada</div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="schedule_type" value="scheduled" class="mt-1 text-secondary-red focus:ring-secondary-red">
+                            <div class="flex-1 ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-calendar-event-line mr-2"></i>Agendar para Data Específica
+                                </div>
+                                <div class="text-sm mt-1 mb-4 text-theme-muted">Escolha quando a campanha deve ser iniciada</div>
+                                <input type="datetime-local" id="scheduled-date" class="form-control focus:ring-secondary-red focus:border-secondary-red disabled:opacity-50" disabled="" min="2026-10-05T17:42">
+                            </div>
+                        </label>
+
+                        <label class="flex items-start p-4 border-2 rounded-lg hover:border-secondary-red transition-colors cursor-pointer border-theme-light bg-theme-surface">
+                            <input type="radio" name="schedule_type" value="recurring" class="mt-1 text-secondary-red focus:ring-secondary-red">
+                            <div class="flex-1 ml-4">
+                                <div class="font-semibold flex items-center text-theme-primary">
+                                    <i class="ri-repeat-2-line mr-2"></i>Recorrente
+                                </div>
+                                <div class="text-sm mt-1 mb-4 text-theme-muted">Disparar automaticamente com frequência</div>
+
+                                <div id="recurring-fields" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
+                                    <div>
+                                        <label for="recurring-frequency" class="form-label">Frequência</label>
+                                        <select id="recurring-frequency" class="form-control" disabled="">
+                                            <option value="daily" selected="">Diária</option>
+                                            <option value="weekly">Semanal</option>
+                                            <option value="monthly">Mensal</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="recurring-time" class="form-label">Horário</label>
+                                        <input type="time" id="recurring-time" class="form-control" value="08:00" disabled="">
+                                    </div>
+                                    <div>
+                                        <label for="recurring-start-date" class="form-label">Início</label>
+                                        <input type="date" id="recurring-start-date" class="form-control" disabled="" min="2026-10-05">
+                                    </div>
+                                    <div>
+                                        <label for="recurring-end-date" class="form-label">Fim</label>
+                                        <input type="date" id="recurring-end-date" class="form-control" disabled="" min="2026-10-05">
+                                        <label class="text-xs mt-2 flex items-center gap-2 text-theme-muted">
+                                            <input type="checkbox" id="recurring-no-end" disabled="">
+                                            Sem fim
+                                        </label>
+                                    </div>
+
+                                    <div id="recurring-weekly-fields" class="md:col-span-2 hidden">
+                                        <label class="form-label">Dias da semana</label>
+                                        <div id="recurring-weekdays" class="campaigns-weekday-grid">
+                                            <button type="button" class="recurring-weekday-btn" data-day="0" disabled="">Domingo</button>
+                                            <button type="button" class="recurring-weekday-btn" data-day="1" disabled="">Segunda</button>
+                                            <button type="button" class="recurring-weekday-btn" data-day="2" disabled="">Terça</button>
+                                            <button type="button" class="recurring-weekday-btn" data-day="3" disabled="">Quarta</button>
+                                            <button type="button" class="recurring-weekday-btn" data-day="4" disabled="">Quinta</button>
+                                            <button type="button" class="recurring-weekday-btn" data-day="5" disabled="">Sexta</button>
+                                            <button type="button" class="recurring-weekday-btn" data-day="6" disabled="">Sábado</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="recurring-monthly-fields" class="md:col-span-2 hidden">
+                                        <label for="recurring-month-day" class="form-label">Dia do mês</label>
+                                        <input type="number" id="recurring-month-day" class="form-control w-28" min="1" max="31" value="1" disabled="">
+                                    </div>
+
+                                    <input type="hidden" id="recurring-weekdays-value" value="">
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                
+                <div class="border-2 rounded-xl p-6 bg-theme-surface border-theme-light">
+                    <h5 class="font-semibold mb-4 flex items-center text-theme-primary">
+                        <i class="ri-smartphone-line text-secondary-red mr-3"></i>
+                        Instâncias WhatsApp
+                    </h5>
+                    <div class="space-y-4">
+                        <p class="text-sm text-theme-muted">
+                            Selecione qual(is) instância(s) do WhatsApp usar para enviar a campanha. 
+                            Os envios serão distribuídos entre as instâncias selecionadas.
+                        </p>
+                        
+                        
+                        <div class="flex gap-2 mb-4">
+                            <button type="button" id="select-all-instances" class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600 text-theme-primary">
+                                Todas
+                            </button>
+                            <button type="button" id="clear-all-instances" class="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600 text-theme-primary">
+                                Nenhuma
+                            </button>
+                        </div>
+                        
+                        
+                        <div id="instances-list" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-32 overflow-y-auto border rounded-lg p-2 border-theme-light">
+        <div class="flex items-center gap-3 p-2 border rounded-lg hover:bg-gray-50">
+          <input type="checkbox" name="instance_ids" value="inst-comercial" class="w-4 h-4 text-blue-600 border-gray-300 rounded">
+          <div class="flex-1">
+            <div class="font-medium text-gray-900">Comercial</div>
+            <div class="text-sm text-green-600">Conectada</div>
+          </div>
+        </div>
+      
+        <div class="flex items-center gap-3 p-2 border rounded-lg hover:bg-gray-50">
+          <input type="checkbox" name="instance_ids" value="inst-posvenda" class="w-4 h-4 text-blue-600 border-gray-300 rounded">
+          <div class="flex-1">
+            <div class="font-medium text-gray-900">Pós-venda</div>
+            <div class="text-sm text-green-600">Conectada</div>
+          </div>
+        </div>
+      </div>
+                        
+                        
+                        <div class="text-xs text-theme-muted">
+                            <strong>Importante:</strong> É necessário ter pelo menos uma instância WhatsApp conectada para enviar campanhas.
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                            <div>
+                                <label for="responsible-user-select" class="form-label">Usuário responsável</label>
+                                <select id="responsible-user-select" class="form-control">
+          <option value="keep_existing" selected="">Manter usuário já atribuído à conversa</option>
+          <option value="none">Sem responsável</option>
+        <option value="usr-ana">Ana Souza (owner)</option><option value="usr-carla">Carla Dias (admin)</option><option value="usr-bruno">Bruno Lima (member)</option></select>
+                            </div>
+                            <div>
+                                <label for="responsible-queue-select" class="form-label">Fila de atendimento</label>
+                                <select id="responsible-queue-select" class="form-control"><option value="" selected="">Sem fila</option><option value="fila-geral">Geral</option><option value="fila-vendas">Vendas</option></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="border-2 rounded-xl p-6 bg-theme-surface border-theme-light">
+                    <h5 class="font-semibold mb-4 flex items-center text-theme-primary">
+                        <i class="ri-file-list-3-line text-secondary-red mr-3"></i>
+                        Resumo da Campanha
+                    </h5>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="flex items-center">
+                            <span class="w-24 text-theme-muted">📝 Nome:</span> 
+                            <span id="summary-name" class="font-medium">Não informado</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-theme-muted">👥 Público:</span> 
+                            <span id="summary-audience" class="font-medium">Kanban — etapa não selecionada</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-theme-muted">📊 Contatos:</span> 
+                            <span id="summary-contacts" class="font-medium text-secondary-red">Selecione uma etapa</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-theme-muted">⏱️ Intervalo:</span> 
+                            <span id="summary-delay" class="font-medium">Lote 5 • 30s-1min entre msgs</span>
+                        </div>
+                        <div class="flex items-center md:col-span-2">
+                            <span class="w-24 text-theme-muted">📅 Agenda:</span> 
+                            <span id="summary-schedule" class="font-medium">Envio imediato</span>
+                        </div>
+                        <div class="flex items-center md:col-span-2">
+                            <span class="w-24 text-theme-muted">📱 Instâncias:</span> 
+                            <span id="summary-instances" class="font-medium">Não informado</span>
+                        </div>
+                        <div class="flex items-center md:col-span-2">
+                            <span class="w-24 text-theme-muted">📋 Conteúdo:</span> 
+                            <span id="summary-content" class="font-medium">Não informado</span>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="bg-secondary-red-light border-2 border-secondary-red rounded-xl p-6">
+                    <div class="flex items-start space-x-4">
+                        <i class="ri-shield-cross-line text-secondary-red text-3xl mt-1"></i>
+                        <div class="flex-1">
+                            <h5 class="font-bold text-secondary-red mb-3 text-lg">⚠️ AVISO IMPORTANTE</h5>
+                            <div class="text-sm space-y-3 text-theme-primary">
+                                <p class="font-medium">Mensagens em massa são <strong>altamente passíveis de banimento</strong> por parte do WhatsApp devido ao comportamento robótico.</p>
+                                <p>Ao ativar esta função, você está colocando sua conta do WhatsApp em <strong>risco por conta própria</strong>.</p>
+                                <p class="text-secondary-red font-medium">Use esta ferramenta com responsabilidade e moderação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="flex items-start p-4 border-2 border-secondary-red rounded-lg bg-secondary-red-light">
+                    <input type="checkbox" id="terms-accepted" class="mt-1 text-secondary-red focus:ring-secondary-red" required="">
+                    <label for="terms-accepted" class="ml-3 text-sm font-medium text-theme-primary">
+                        <i class="ri-checkbox-line mr-2"></i>
+                        Eu li e compreendo os riscos. Aceito total responsabilidade pelo uso desta funcionalidade e possíveis consequências, incluindo o banimento da minha conta do WhatsApp.
+                    </label>
+                </div>
+
+                
+                <div class="modal-footer border-t-2 border-theme-border pt-6 mt-8">
+                    <div class="flex justify-end gap-4">
+                        <button type="button" class="btn-outline-secondary cancel-btn">
+                            <i class="ri-close-line mr-2"></i>Cancelar
+                        </button>
+                        <button type="submit" id="campaign-submit-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors font-medium">
+                            <i class="ri-rocket-line mr-2"></i><span id="campaign-submit-label">Criar e enviar agora</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div class="modal hidden" id="campaign-details-modal" style="display: none;">
+      <div class="modal-content campaigns-report-modal">
+        <div class="campaigns-report-header">
+          <div class="campaigns-report-title-wrap">
+            <i class="ri-bar-chart-grouped-line campaigns-report-title-icon"></i>
+            <div>
+              <h3 class="campaigns-report-title">Relatório da Campanha</h3>
+              <div id="campaign-report-name" class="campaigns-report-subtitle">Tabela de preços — Novembro</div>
+            </div>
+          </div>
+          <button type="button" class="close-btn modal-close campaigns-report-close" aria-label="Fechar">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <div class="campaigns-report-body">
+          <div id="campaign-details-summary" class="campaigns-report-summary">
+        <div class="campaigns-report-top-cards">
+          <div class="campaigns-report-card campaigns-report-card-status">
+            <div class="campaigns-report-card-label">Status</div>
+            <div class="campaigns-report-status-chip">Agendada</div>
+          </div>
+          <div class="campaigns-report-card campaigns-report-card-sent">
+            <div class="campaigns-report-card-label">Enviados</div>
+            <div class="campaigns-report-card-value">0/9</div>
+          </div>
+          <div class="campaigns-report-card campaigns-report-card-progress">
+            <div class="campaigns-report-card-label">Progresso</div>
+            <div class="campaigns-report-card-value">0%</div>
+          </div>
+        </div>
+        <div class="campaigns-report-progress-track">
+          <div class="campaigns-report-progress-fill" style="width:0%"></div>
+        </div>
+        <div class="campaigns-report-metrics-grid">
+          <div class="campaigns-report-metric"><span class="campaigns-report-metric-label">📨 Entregues</span><span class="campaigns-report-metric-value is-green">0</span></div>
+          <div class="campaigns-report-metric"><span class="campaigns-report-metric-label">⚠️ Falhas</span><span class="campaigns-report-metric-value is-red">0</span></div>
+        </div>
+        <div class="campaigns-report-details-box">
+          <div class="campaigns-report-detail-row"><span class="campaigns-report-detail-label">Agendamento:</span><span class="campaigns-report-detail-value">07/10/2026, 08:00</span></div>
+          <div class="campaigns-report-detail-row"><span class="campaigns-report-detail-label">Conteúdo:</span><span class="campaigns-report-detail-value">Texto, Documento</span></div>
+          <div class="campaigns-report-detail-row"><span class="campaigns-report-detail-label">Público:</span><span class="campaigns-report-detail-value">Por tag</span></div>
+          <div class="campaigns-report-detail-row"><span class="campaigns-report-detail-label">Instâncias:</span><span class="campaigns-report-detail-value">Comercial</span></div>
+        </div>
+      </div>
+        </div>
+
+        <div class="campaigns-report-footer">
+          <button type="button" class="campaigns-report-btn-close modal-close">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    
+    
+
+    
+    
+    
+    
+    
+        
+    <div id="category-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden modal" style="display: none;">
+        <div class="bg-theme-background rounded-lg shadow-xl max-w-md w-full mx-4">
+            <div class="px-6 py-4 border-b border-theme-border">
+                <h3 class="text-lg font-semibold text-theme-primary">
+                    <i class="ri-bookmark-line mr-2"></i>
+                    Criar Categoria
+                </h3>
+            </div>
+            
+            <div class="px-6 py-4">
+                <p class="text-theme-secondary mb-4">
+                    Digite o nome da nova categoria que será criada com os contatos desta campanha:
+                </p>
+                
+                <div class="mb-4">
+                    <label for="category-name" class="block text-sm font-medium text-theme-primary mb-2">
+                        Nome da Categoria *
+                    </label>
+                    <input type="text" id="category-name" class="w-full px-3 py-2 border border-theme-border rounded-md bg-theme-background text-theme-primary focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-transparent" placeholder="Ex: Clientes Interessados" maxlength="100">
+                </div>
+                
+                <div id="category-error" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                    <p class="text-red-700 text-sm"></p>
+                </div>
+                
+                <div id="category-success" class="hidden mb-4 p-3 bg-green-50 border border-green-200 rounded-md">
+                    <p class="text-green-700 text-sm"></p>
+                </div>
+            </div>
+            
+            <div class="px-6 py-4 border-t border-theme-border flex justify-end gap-3">
+                <button type="button" class="cancel-btn px-4 py-2 border border-theme-border rounded-md text-theme-secondary hover:bg-theme-hover transition-colors">
+                    Cancelar
+                </button>
+                <button type="button" id="create-category-btn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2">
+                    <span id="create-category-text">Criar Categoria</span>
+                    <i id="create-category-loading" class="ri-loader-4-line animate-spin hidden"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="edit-category-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center modal hidden" style="display: none;">
+        <div class="dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden bg-theme-surface">
+            <div class="px-6 py-4 border-b border-theme-border">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-theme-primary flex items-center gap-2">
+                        <i class="ri-edit-line"></i>
+                        Editar Categoria
+                    </h3>
+                    <button type="button" class="modal-close text-theme-secondary hover:text-theme-primary">
+                        <i class="ri-close-line text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="px-6 py-4 max-h-[70vh] overflow-y-auto">
+                <div class="mb-4">
+                    <h4 id="edit-category-title" class="text-md font-medium text-theme-primary mb-2">
+                        Editando categoria: <span id="edit-category-name" class="text-blue-600">Leads da feira</span>
+                    </h4>
+                    <p class="text-sm text-theme-secondary">
+                        Marque ou desmarque os contatos que devem pertencer a esta categoria:
+                    </p>
+                </div>
+
+                
+                <div class="mb-4">
+                    <div class="relative">
+                        <input type="text" id="edit-category-search" placeholder="Buscar contatos..." class="w-full px-3 py-2 border border-theme-border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <i class="ri-search-line absolute right-3 top-3 text-theme-secondary"></i>
+                    </div>
+                </div>
+
+                
+                <div id="edit-category-loading" class="flex items-center justify-center py-8 hidden">
+                    <i class="ri-loader-4-line animate-spin text-2xl text-blue-600"></i>
+                    <span class="ml-2 text-theme-secondary">Carregando contatos...</span>
+                </div>
+
+                
+                <div id="edit-category-contacts" class="space-y-2 max-h-96 overflow-y-auto border border-theme-border rounded-lg p-3"><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-14">
+        <div class="contact-avatar">AD</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Atacadão do Vale</div>
+          <div class="text-sm text-theme-secondary">5511990000114 • pedidos@atacadaovale.exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-21">
+        <div class="contact-avatar">BL</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Beatriz Lima</div>
+          <div class="text-sm text-theme-secondary">5511990000121 • beatriz.lima@exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-24">
+        <div class="contact-avatar">CA</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Café Aroma</div>
+          <div class="text-sm text-theme-secondary">5511990000124 • cafe.aroma@exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-17">
+        <div class="contact-avatar">CR</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Camila Rocha</div>
+          <div class="text-sm text-theme-secondary">5511990000117 • camila.rocha@exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-07">
+        <div class="contact-avatar">CM</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Carlos Mendes</div>
+          <div class="text-sm text-theme-secondary">5511990000107</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-20">
+        <div class="contact-avatar">C2</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Conveniência 24h Centro</div>
+          <div class="text-sm text-theme-secondary">5511990000120</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-04">
+        <div class="contact-avatar">DL</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Distribuidora Litoral</div>
+          <div class="text-sm text-theme-secondary">5511990000104 • pedidos@litoral.exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-06">
+        <div class="contact-avatar">EC</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Empório Central</div>
+          <div class="text-sm text-theme-secondary">5511990000106 • contato@emporio.exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-09" checked="">
+        <div class="contact-avatar">FO</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Fernanda Oliveira</div>
+          <div class="text-sm text-theme-secondary">5511990000109 • fernanda.o@exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-23">
+        <div class="contact-avatar">GP</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Gustavo Pereira</div>
+          <div class="text-sm text-theme-secondary">5511990000123</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-18" checked="">
+        <div class="contact-avatar">HV</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Hortifruti Verde Vida</div>
+          <div class="text-sm text-theme-secondary">5511990000118</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-05" checked="">
+        <div class="contact-avatar">JR</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Juliana Ribeiro</div>
+          <div class="text-sm text-theme-secondary">5511990000105 • juliana.ribeiro@exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-12">
+        <div class="contact-avatar">LD</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Loja da Esquina</div>
+          <div class="text-sm text-theme-secondary">5511990000112</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-15" checked="">
+        <div class="contact-avatar">LF</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Lucas Ferreira</div>
+          <div class="text-sm text-theme-secondary">5511990000115</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-01">
+        <div class="contact-avatar">MC</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Mariana Costa</div>
+          <div class="text-sm text-theme-secondary">5511990000101 • mariana.costa@exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-02">
+        <div class="contact-avatar">MB</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Mercado Bom Preço</div>
+          <div class="text-sm text-theme-secondary">5511990000102 • compras@bompreco.exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-16">
+        <div class="contact-avatar">MS</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Mercearia São José</div>
+          <div class="text-sm text-theme-secondary">5511990000116</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-08">
+        <div class="contact-avatar">PE</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Padaria Estrela</div>
+          <div class="text-sm text-theme-secondary">5511990000108</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-13">
+        <div class="contact-avatar">PG</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Patrícia Gomes</div>
+          <div class="text-sm text-theme-secondary">5511990000113 • patricia.gomes@exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-03">
+        <div class="contact-avatar">PA</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Pedro Almeida</div>
+          <div class="text-sm text-theme-secondary">5511990000103</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-22">
+        <div class="contact-avatar">RE</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Rede Econômica</div>
+          <div class="text-sm text-theme-secondary">5511990000122 • compras@economica.exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-11">
+        <div class="contact-avatar">RS</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Ricardo Santos</div>
+          <div class="text-sm text-theme-secondary">5511990000111</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-10">
+        <div class="contact-avatar">SA</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Supermercado Avenida</div>
+          <div class="text-sm text-theme-secondary">5511990000110 • compras@avenida.exemplo.com.br</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="edit-contact-checkbox" data-id="ct-19">
+        <div class="contact-avatar">TM</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Thiago Martins</div>
+          <div class="text-sm text-theme-secondary">5511990000119</div>
+        </div>
+      </div></div>
+
+                
+                <div class="mt-4 text-sm text-theme-secondary">
+                    <span id="edit-category-count">4 contatos selecionados</span>
+                </div>
+
+                
+                <div id="edit-category-error" class="mt-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-md hidden">
+                    <p></p>
+                </div>
+
+                <div id="edit-category-success" class="mt-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded-md hidden">
+                    <p></p>
+                </div>
+            </div>
+            
+            <div class="px-6 py-4 border-t border-theme-border flex justify-end gap-3">
+                <button type="button" class="cancel-btn px-4 py-2 border border-theme-border rounded-md text-theme-secondary hover:bg-theme-hover transition-colors">
+                    Cancelar
+                </button>
+                <button type="button" id="save-category-btn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2">
+                    <span id="save-category-text">Salvar Alterações</span>
+                    <i id="save-category-loading" class="ri-loader-4-line animate-spin hidden"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div id="new-category-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center modal hidden" style="display: none;">
+        <div class="dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden bg-theme-surface">
+            
+            <div class="px-6 py-4 border-b border-theme-border">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-theme-primary flex items-center gap-2">
+                        <i class="ri-bookmark-line text-green-600"></i>
+                        Nova Categoria
+                    </h3>
+                    <button type="button" class="modal-close text-theme-secondary hover:text-theme-primary">
+                        <i class="ri-close-line text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="px-6 py-4 max-h-[70vh] overflow-y-auto">
+                
+                <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg">
+                    <div class="flex items-start gap-3">
+                        <i class="ri-information-line text-blue-600 text-xl mt-0.5"></i>
+                        <div>
+                            <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-1">Para que servem as categorias?</h4>
+                            <p class="text-sm text-blue-700 dark:text-blue-300">
+                                As categorias servem para deixar contatos pré-selecionados, evitando o trabalho de selecionar contatos manualmente toda vez que criar uma nova campanha. 
+                                Organize seus contatos por segmentos como "Clientes VIP", "Leads Qualificados", "Prospects", etc.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="mb-6">
+                    <label for="new-category-name" class="block text-sm font-medium text-theme-primary mb-2">
+                        Nome da Categoria <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="new-category-name" placeholder="Ex: Clientes VIP, Leads Qualificados, Prospects..." class="w-full px-3 py-2 border border-theme-border rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500" maxlength="100">
+                    <p class="mt-1 text-xs text-theme-secondary">Escolha um nome descritivo para identificar facilmente esta categoria</p>
+                </div>
+
+                
+                <div class="mb-4">
+                    <label for="new-category-search" class="block text-sm font-medium text-theme-primary mb-2">
+                        Buscar Contatos
+                    </label>
+                    <div class="relative">
+                        <input type="text" id="new-category-search" placeholder="Buscar por nome ou telefone..." class="w-full px-3 py-2 pl-10 border border-theme-border rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        <i class="ri-search-line absolute left-3 top-3 text-theme-secondary"></i>
+                    </div>
+                </div>
+
+                
+                <div id="new-category-loading" class="flex items-center justify-center py-8 hidden">
+                    <i class="ri-loader-4-line animate-spin text-2xl text-green-600"></i>
+                    <span class="ml-2 text-theme-secondary">Carregando contatos...</span>
+                </div>
+
+                
+                <div id="new-category-contacts" class="space-y-2 max-h-96 overflow-y-auto border border-theme-border rounded-lg p-3"><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-14">
+        <div class="contact-avatar">AD</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Atacadão do Vale</div>
+          <div class="text-sm text-theme-secondary">5511990000114</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-21">
+        <div class="contact-avatar">BL</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Beatriz Lima</div>
+          <div class="text-sm text-theme-secondary">5511990000121</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-24">
+        <div class="contact-avatar">CA</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Café Aroma</div>
+          <div class="text-sm text-theme-secondary">5511990000124</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-17">
+        <div class="contact-avatar">CR</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Camila Rocha</div>
+          <div class="text-sm text-theme-secondary">5511990000117</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-07">
+        <div class="contact-avatar">CM</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Carlos Mendes</div>
+          <div class="text-sm text-theme-secondary">5511990000107</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-20">
+        <div class="contact-avatar">C2</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Conveniência 24h Centro</div>
+          <div class="text-sm text-theme-secondary">5511990000120</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-04">
+        <div class="contact-avatar">DL</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Distribuidora Litoral</div>
+          <div class="text-sm text-theme-secondary">5511990000104</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-06">
+        <div class="contact-avatar">EC</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Empório Central</div>
+          <div class="text-sm text-theme-secondary">5511990000106</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-09">
+        <div class="contact-avatar">FO</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Fernanda Oliveira</div>
+          <div class="text-sm text-theme-secondary">5511990000109</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-23">
+        <div class="contact-avatar">GP</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Gustavo Pereira</div>
+          <div class="text-sm text-theme-secondary">5511990000123</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-18">
+        <div class="contact-avatar">HV</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Hortifruti Verde Vida</div>
+          <div class="text-sm text-theme-secondary">5511990000118</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-05">
+        <div class="contact-avatar">JR</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Juliana Ribeiro</div>
+          <div class="text-sm text-theme-secondary">5511990000105</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-12">
+        <div class="contact-avatar">LD</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Loja da Esquina</div>
+          <div class="text-sm text-theme-secondary">5511990000112</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-15">
+        <div class="contact-avatar">LF</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Lucas Ferreira</div>
+          <div class="text-sm text-theme-secondary">5511990000115</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-01">
+        <div class="contact-avatar">MC</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Mariana Costa</div>
+          <div class="text-sm text-theme-secondary">5511990000101</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-02">
+        <div class="contact-avatar">MB</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Mercado Bom Preço</div>
+          <div class="text-sm text-theme-secondary">5511990000102</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-16">
+        <div class="contact-avatar">MS</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Mercearia São José</div>
+          <div class="text-sm text-theme-secondary">5511990000116</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-08">
+        <div class="contact-avatar">PE</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Padaria Estrela</div>
+          <div class="text-sm text-theme-secondary">5511990000108</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-13">
+        <div class="contact-avatar">PG</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Patrícia Gomes</div>
+          <div class="text-sm text-theme-secondary">5511990000113</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-03">
+        <div class="contact-avatar">PA</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Pedro Almeida</div>
+          <div class="text-sm text-theme-secondary">5511990000103</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-22">
+        <div class="contact-avatar">RE</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Rede Econômica</div>
+          <div class="text-sm text-theme-secondary">5511990000122</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-11">
+        <div class="contact-avatar">RS</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Ricardo Santos</div>
+          <div class="text-sm text-theme-secondary">5511990000111</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-10">
+        <div class="contact-avatar">SA</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Supermercado Avenida</div>
+          <div class="text-sm text-theme-secondary">5511990000110</div>
+        </div>
+      </div><div class="contact-item flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
+        <input type="checkbox" class="new-category-contact-checkbox" data-id="ct-19">
+        <div class="contact-avatar">TM</div>
+        <div class="flex-1">
+          <div class="font-medium text-theme-primary">Thiago Martins</div>
+          <div class="text-sm text-theme-secondary">5511990000119</div>
+        </div>
+      </div></div>
+
+                
+                <div class="mt-4 text-sm text-theme-secondary">
+                    <span id="new-category-count">0 contatos selecionados</span>
+                </div>
+
+                
+                <div id="new-category-error" class="mt-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-md hidden">
+                    <p></p>
+                </div>
+
+                <div id="new-category-success" class="mt-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded-md hidden">
+                    <p></p>
+                </div>
+            </div>
+            
+            
+            <div class="px-6 py-4 border-t border-theme-border flex justify-end gap-3">
+                <button type="button" class="cancel-btn px-4 py-2 border border-theme-border rounded-md text-theme-secondary hover:bg-theme-hover transition-colors">
+                    Cancelar
+                </button>
+                <button type="button" id="new-category-create-btn" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors flex items-center gap-2">
+                    <span id="new-category-create-loading" class="hidden">
+                        <i class="ri-loader-4-line animate-spin"></i>
+                    </span>
+                    <span id="new-category-create-text">Criar Categoria</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+<div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div><div class="fixed inset-0 bg-black bg-opacity-50 z-[10000] hidden items-center justify-center">
+      <div class="border border-white/10 rounded-lg p-6 w-full max-w-md mx-4 transform scale-95 transition-transform duration-200 bg-theme-surface">
+        <div class="flex items-center gap-3 mb-4">
+          <i class="confirm-icon text-2xl"></i>
+          <h3 class="confirm-title text-lg font-semibold"></h3>
+        </div>
+        <p class="confirm-message text-gray-300 mb-6"></p>
+        <div class="flex gap-3 justify-end">
+          <button class="confirm-cancel px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
+            Cancelar
+          </button>
+          <button class="confirm-ok px-4 py-2 rounded-md transition-colors">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div><div id="whatsapp-contacts-popup" class="fixed inset-0 bg-black bg-opacity-75 z-[9999] hidden">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="rounded-lg p-6 max-w-md w-full shadow-xl border bg-theme-surface border-theme-light">
+      <div class="text-center">
+        
+        <div class="mb-4">
+          <i class="ri-whatsapp-line text-5xl text-green-500"></i>
+        </div>
+        
+        
+        <h3 class="text-xl font-bold text-primary mb-2">
+          WhatsApp Conectado com Sucesso!
+        </h3>
+        
+        
+        <p class="text-secondary mb-4">
+          Deseja importar os contatos deste número para o Zap Empresarial?
+        </p>
+        
+        
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6">
+          <p class="text-sm text-yellow-800">
+            <i class="ri-shield-check-line mr-1"></i>
+            <strong>Segurança:</strong> Apenas você terá acesso a estes contatos
+          </p>
+        </div>
+        
+        
+        <div id="extraction-loading" class="hidden mb-4">
+          <div class="flex items-center justify-center">
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500 mr-2"></div>
+            <span class="text-sm text-secondary">Importando contatos...</span>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-success" class="hidden mb-4">
+          <div class="text-green-600">
+            <i class="ri-check-circle-line text-2xl mb-2"></i>
+            <p class="text-sm">
+              <span id="extraction-count">0</span> contatos importados com sucesso!
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-error" class="hidden mb-4">
+          <div class="text-red-600">
+            <i class="ri-error-warning-line text-2xl mb-2"></i>
+            <p class="text-sm" id="extraction-error-message">
+              Erro ao importar contatos
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="action-buttons" class="flex space-x-3">
+          <button id="extract-contacts-yes" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors focus:ring-2 focus:ring-green-500 focus:outline-none">
+            <i class="ri-download-line mr-1"></i>
+            Sim, Importar
+          </button>
+          <button id="extract-contacts-no" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors focus:ring-2 focus:ring-gray-500 focus:outline-none text-theme-secondary">
+            <i class="ri-close-line mr-1"></i>
+            Não, Obrigado
+          </button>
+        </div>
+        
+        
+        <div id="close-button" class="hidden">
+          <button id="extract-contacts-close" class="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+            <i class="ri-check-line mr-1"></i>
+            Entendi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div id="campaign-quick-replies-modal" class="campaign-quick-modal hidden" aria-hidden="true">
+      <div class="campaign-quick-modal-backdrop" data-campaign-quick-close=""></div>
+      <section class="campaign-quick-modal-card" role="dialog" aria-modal="true" aria-labelledby="campaign-quick-modal-title">
+        <header class="campaign-quick-modal-header">
+          <div class="campaign-quick-modal-title">
+            <span class="campaign-quick-modal-icon"><i class="ri-flashlight-line"></i></span>
+            <div>
+              <h3 id="campaign-quick-modal-title">Respostas Rápidas</h3>
+              <p>Escolha uma resposta pronta para adicionar ao conteúdo da campanha.</p>
+            </div>
+          </div>
+          <button type="button" class="campaign-quick-modal-close" data-campaign-quick-close="" aria-label="Fechar"><i class="ri-close-line"></i></button>
+        </header>
+        <div class="campaign-quick-modal-body">
+          <div class="campaign-quick-tabs" id="campaign-quick-tabs">
+      <button type="button" class="campaign-quick-tab is-active" data-campaign-quick-category="all">Todas (5)</button>
+    
+      <button type="button" class="campaign-quick-tab " data-campaign-quick-category="qr-vendas">💰 Vendas (3)</button>
+    
+      <button type="button" class="campaign-quick-tab " data-campaign-quick-category="qr-posvenda">📦 Pós-venda (2)</button>
+    </div>
+          <label class="campaign-quick-search">
+            <i class="ri-search-line"></i>
+            <input type="search" id="campaign-quick-search" placeholder="Buscar resposta..." autocomplete="off">
+          </label>
+          <div class="campaign-quick-list" id="campaign-quick-list">
+        <button type="button" class="campaign-quick-card" data-campaign-quick-id="qr-1">
+          <span class="campaign-quick-card-badge">💰</span>
+          <span class="campaign-quick-card-copy">
+            <strong>Tabela de preços</strong>
+            <small>Olá {{primeiro_nome}}! Segue a tabela de preços atualizada. Qualquer dúvida, estou à disposição.</small>
+            <span class="campaign-quick-attachment"><i class="ri-attachment-2"></i>1 anexo(s)</span>
+          </span>
+        </button>
+      
+        <button type="button" class="campaign-quick-card" data-campaign-quick-id="qr-2">
+          <span class="campaign-quick-card-badge">💰</span>
+          <span class="campaign-quick-card-copy">
+            <strong>Prazo de entrega</strong>
+            <small>Para a capital o prazo é de 2 dias úteis; para o interior, de 3 a 5 dias úteis após o faturamento.</small>
+            
+          </span>
+        </button>
+      
+        <button type="button" class="campaign-quick-card" data-campaign-quick-id="qr-3">
+          <span class="campaign-quick-card-badge">💰</span>
+          <span class="campaign-quick-card-copy">
+            <strong>Pedido mínimo</strong>
+            <small>O pedido mínimo é de R$ 800,00 ou 10 caixas, o que for atingido primeiro.</small>
+            
+          </span>
+        </button>
+      
+        <button type="button" class="campaign-quick-card" data-campaign-quick-id="qr-4">
+          <span class="campaign-quick-card-badge">📦</span>
+          <span class="campaign-quick-card-copy">
+            <strong>Boleto enviado</strong>
+            <small>{{primeiro_nome}}, o boleto do seu pedido já foi enviado por e-mail. Vencimento em 28 dias.</small>
+            
+          </span>
+        </button>
+      
+        <button type="button" class="campaign-quick-card" data-campaign-quick-id="qr-5">
+          <span class="campaign-quick-card-badge">📦</span>
+          <span class="campaign-quick-card-copy">
+            <strong>Pesquisa de satisfação</strong>
+            <small>Como foi sua experiência com o último pedido? Responda de 1 a 5 😊</small>
+            
+          </span>
+        </button>
+      </div>
+        </div>
+      </section>
+    </div><div id="categories-hub-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center modal hidden" style="display: none;">
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-lg mx-4 max-h-[85vh] flex flex-col overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+            <i class="ri-folder-line text-yellow-500"></i> Minhas Categorias
+          </h3>
+          <button type="button" id="categories-hub-close" class="text-gray-400 hover:text-gray-600" aria-label="Fechar"><i class="ri-close-line text-xl"></i></button>
+        </div>
+        <div class="px-6 py-4 overflow-y-auto">
+          <button type="button" id="categories-hub-new" class="w-full mb-4 px-4 py-3 rounded-lg border border-blue-200 bg-blue-50 text-blue-600 font-semibold hover:bg-blue-100 flex items-center justify-center gap-2">
+            <i class="ri-add-line"></i> Nova Categoria
+          </button>
+          <div id="categories-hub-list" class="space-y-2">
+          <div class="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/40">
+            <div class="flex items-center gap-2 min-w-0">
+              <i class="ri-price-tag-3-line text-yellow-500"></i>
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">Leads da feira</div>
+                <div class="text-xs text-text-muted">4 contatos</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 shrink-0">
+              <button class="hub-edit-category p-2 text-blue-500 hover:bg-blue-50 rounded" data-id="cat-leads" data-name="Leads da feira" title="Editar"><i class="ri-pencil-line"></i></button>
+              <button class="hub-delete-category p-2 text-red-500 hover:bg-red-50 rounded" data-id="cat-leads" data-name="Leads da feira" title="Excluir"><i class="ri-delete-bin-6-line"></i></button>
+            </div>
+          </div>
+        
+          <div class="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/40">
+            <div class="flex items-center gap-2 min-w-0">
+              <i class="ri-price-tag-3-line text-yellow-500"></i>
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">Padarias e mercearias</div>
+                <div class="text-xs text-text-muted">6 contatos</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 shrink-0">
+              <button class="hub-edit-category p-2 text-blue-500 hover:bg-blue-50 rounded" data-id="cat-padarias" data-name="Padarias e mercearias" title="Editar"><i class="ri-pencil-line"></i></button>
+              <button class="hub-delete-category p-2 text-red-500 hover:bg-red-50 rounded" data-id="cat-padarias" data-name="Padarias e mercearias" title="Excluir"><i class="ri-delete-bin-6-line"></i></button>
+            </div>
+          </div>
+        
+          <div class="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/40">
+            <div class="flex items-center gap-2 min-w-0">
+              <i class="ri-price-tag-3-line text-yellow-500"></i>
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">Região de Campinas</div>
+                <div class="text-xs text-text-muted">4 contatos</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 shrink-0">
+              <button class="hub-edit-category p-2 text-blue-500 hover:bg-blue-50 rounded" data-id="cat-campinas" data-name="Região de Campinas" title="Editar"><i class="ri-pencil-line"></i></button>
+              <button class="hub-delete-category p-2 text-red-500 hover:bg-red-50 rounded" data-id="cat-campinas" data-name="Região de Campinas" title="Excluir"><i class="ri-delete-bin-6-line"></i></button>
+            </div>
+          </div>
+        
+          <div class="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/40">
+            <div class="flex items-center gap-2 min-w-0">
+              <i class="ri-price-tag-3-line text-yellow-500"></i>
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">Supermercados e atacarejos</div>
+                <div class="text-xs text-text-muted">5 contatos</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 shrink-0">
+              <button class="hub-edit-category p-2 text-blue-500 hover:bg-blue-50 rounded" data-id="cat-supermercados" data-name="Supermercados e atacarejos" title="Editar"><i class="ri-pencil-line"></i></button>
+              <button class="hub-delete-category p-2 text-red-500 hover:bg-red-50 rounded" data-id="cat-supermercados" data-name="Supermercados e atacarejos" title="Excluir"><i class="ri-delete-bin-6-line"></i></button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/campaigns.html). Para recapturar sem perder este bloco:
+     node tools/capture/montar.mjs campaigns
+
+     A captura principal precisa destes cliques: eles deixam renderizados, e escondidos, o
+     modal "Nova Campanha" (marcadores, instâncias, usuários, etapas do Kanban e a lista de
+     contatos), o modal de respostas rápidas, o hub "Minhas Categorias", os modais de nova
+     categoria e de edição e o relatório (que este bloco preenche para cada campanha).
+       node tools/capture/capture.mjs campaigns "/campaigns.html" 7000 "@#new-campaign-btn"
+         "~1500" "@input[name=audience_type][value=manual]" "~900"
+         "@input[name=audience_type][value=kanban]" "~400" "@#campaign-quick-replies-btn"
+         "~1200" "@[data-campaign-quick-close]" "~300" "@#campaign-modal .cancel-btn" "~300"
+         "@#new-category-btn" "~900" "@.hub-edit-category" "~900"
+         "@#edit-category-modal .modal-close" "~300" "@#new-category-btn" "~900"
+         "@#categories-hub-new" "~900" "@#new-category-modal .modal-close" "~300"
+         "@#new-category-btn" "~700" "@#categories-hub-close" "~300" "@.btn-details" "~900"
+         "@#campaign-details-modal .campaigns-report-close" "~300"
+
+     Os <template> abaixo vêm de capturas extras (tools/capture/out/campaigns-*.html):
+       categorias       campaigns-categorias   "@#new-campaign-btn" "~1200"
+                                               "@input[name=audience_type][value=categories]" "~1200"
+       midia-*          campaigns-conteudo     "@#new-campaign-btn" "~1200" "js:__mock.encherPool()"
+                                               "~300" "@#campaign-quick-replies-btn" "~1200"
+                                               "@[data-campaign-quick-id=qr-1]" "~800"
+       campanha-vazia   campaigns-busca-vazia  busca "zzz" no campo #search-campaigns -->
+<template id="mockup-tpl-categorias">
+<label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700" data-contact-count="4">
+          <input type="checkbox" class="category-checkbox" data-id="cat-leads">
+          <span class="text-sm flex-1">Leads da feira <span class="text-text-muted">(4 contatos)</span></span>
+          <div class="flex gap-1">
+            <button class="btn-edit-category text-blue-500 hover:text-blue-700 hover:bg-blue-50 p-1 rounded" data-id="cat-leads" data-name="Leads da feira" title="Editar categoria">
+              ✏️
+            </button>
+            <button class="btn-delete-category text-red-500 hover:text-red-700 hover:bg-red-50 p-1 rounded" data-id="cat-leads" data-name="Leads da feira" title="Deletar categoria">
+              🗑️
+            </button>
+          </div>
+        </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700" data-contact-count="6">
+          <input type="checkbox" class="category-checkbox" data-id="cat-padarias">
+          <span class="text-sm flex-1">Padarias e mercearias <span class="text-text-muted">(6 contatos)</span></span>
+          <div class="flex gap-1">
+            <button class="btn-edit-category text-blue-500 hover:text-blue-700 hover:bg-blue-50 p-1 rounded" data-id="cat-padarias" data-name="Padarias e mercearias" title="Editar categoria">
+              ✏️
+            </button>
+            <button class="btn-delete-category text-red-500 hover:text-red-700 hover:bg-red-50 p-1 rounded" data-id="cat-padarias" data-name="Padarias e mercearias" title="Deletar categoria">
+              🗑️
+            </button>
+          </div>
+        </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700" data-contact-count="4">
+          <input type="checkbox" class="category-checkbox" data-id="cat-campinas">
+          <span class="text-sm flex-1">Região de Campinas <span class="text-text-muted">(4 contatos)</span></span>
+          <div class="flex gap-1">
+            <button class="btn-edit-category text-blue-500 hover:text-blue-700 hover:bg-blue-50 p-1 rounded" data-id="cat-campinas" data-name="Região de Campinas" title="Editar categoria">
+              ✏️
+            </button>
+            <button class="btn-delete-category text-red-500 hover:text-red-700 hover:bg-red-50 p-1 rounded" data-id="cat-campinas" data-name="Região de Campinas" title="Deletar categoria">
+              🗑️
+            </button>
+          </div>
+        </label><label class="flex items-center gap-3 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700" data-contact-count="5">
+          <input type="checkbox" class="category-checkbox" data-id="cat-supermercados">
+          <span class="text-sm flex-1">Supermercados e atacarejos <span class="text-text-muted">(5 contatos)</span></span>
+          <div class="flex gap-1">
+            <button class="btn-edit-category text-blue-500 hover:text-blue-700 hover:bg-blue-50 p-1 rounded" data-id="cat-supermercados" data-name="Supermercados e atacarejos" title="Editar categoria">
+              ✏️
+            </button>
+            <button class="btn-delete-category text-red-500 hover:text-red-700 hover:bg-red-50 p-1 rounded" data-id="cat-supermercados" data-name="Supermercados e atacarejos" title="Deletar categoria">
+              🗑️
+            </button>
+          </div>
+        </label>
+</template>
+<template id="mockup-tpl-midia-text">
+<div class="media-item-simple border-b border-gray-200 py-3 px-2 hover:bg-gray-50 transition-colors" data-item-id="media_1791232345147_pay21syr4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3 flex-1">
+          <span class="text-lg">💬</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center space-x-2">
+              <span class="text-sm font-medium text-gray-700">Texto</span>
+              <span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">variação</span>
+              <span class="text-xs text-gray-500">●</span>
+            </div>
+            <div class="text-xs text-gray-500 truncate mt-1">
+              Clique para editar texto
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1 ml-3">
+          <button class="remove-item p-1 text-red-400 hover:text-red-600 transition-colors ml-1" title="Remover">
+            <i class="ri-close-line text-sm"></i>
+          </button>
+        </div>
+      </div>
+      <div class="media-item-content mt-2 ">
+        
+          <div class="flex flex-wrap items-center gap-2 mb-2" data-placeholder-toolbar="">
+            <button type="button" data-placeholder="{{nome}}" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100 transition-colors">
+              {{nome}}
+            </button>
+            <button type="button" data-placeholder="{{primeiro_nome}}" title="Só o primeiro nome do contato" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100 transition-colors">
+              {{primeiro_nome}}
+            </button>
+            <button type="button" data-placeholder="{{telefone}}" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100 transition-colors">
+              {{telefone}}
+            </button>
+            <button type="button" data-placeholder="{{email}}" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100 transition-colors">
+              {{email}}
+            </button>
+          </div>
+          <textarea placeholder="Digite sua mensagem... Use {{primeiro_nome}}, {{nome}}, {{telefone}}, {{email}} para personalizar" data-field="content" class="w-full p-2 text-sm border border-gray-200 rounded resize-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500" rows="3"></textarea>
+        
+      </div>
+    </div>
+</template>
+<template id="mockup-tpl-midia-image">
+<div class="media-item-simple border-b border-gray-200 py-3 px-2 hover:bg-gray-50 transition-colors" data-item-id="media_cap_image">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3 flex-1">
+          <span class="text-lg">🖼️</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center space-x-2">
+              <span class="text-sm font-medium text-gray-700">Imagem</span>
+              <span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">variação</span>
+              <span class="text-xs text-green-500">●</span>
+            </div>
+            <div class="text-xs text-gray-500 truncate mt-1">
+              Promo_Outubro.jpg (242.19 KB)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1 ml-3">
+          <button class="remove-item p-1 text-red-400 hover:text-red-600 transition-colors ml-1" title="Remover">
+            <i class="ri-close-line text-sm"></i>
+          </button>
+        </div>
+      </div>
+      <div class="media-item-content mt-2 hidden">
+        
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-600">Arquivo: Promo_Outubro.jpg</span>
+              <button type="button" class="change-file text-blue-600 hover:text-blue-800 underline text-xs">
+                Alterar
+              </button>
+            </div>
+            <input type="file" data-field="file" accept="image/*" class="hidden">
+            <input type="text" placeholder="Legenda (opcional)" data-field="caption" value="" class="w-full p-2 mt-2 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+          
+      </div>
+    </div>
+</template>
+<template id="mockup-tpl-midia-audio">
+<div class="media-item-simple border-b border-gray-200 py-3 px-2 hover:bg-gray-50 transition-colors" data-item-id="media_cap_audio">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3 flex-1">
+          <span class="text-lg">🎵</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center space-x-2">
+              <span class="text-sm font-medium text-gray-700">Áudio</span>
+              <span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">variação</span>
+              <span class="text-xs text-green-500">●</span>
+            </div>
+            <div class="text-xs text-gray-500 truncate mt-1">
+              Recado_da_Ana.ogg (93.75 KB)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1 ml-3">
+          <button class="remove-item p-1 text-red-400 hover:text-red-600 transition-colors ml-1" title="Remover">
+            <i class="ri-close-line text-sm"></i>
+          </button>
+        </div>
+      </div>
+      <div class="media-item-content mt-2 hidden">
+        
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-600">Arquivo: Recado_da_Ana.ogg</span>
+              <button type="button" class="change-file text-blue-600 hover:text-blue-800 underline text-xs">
+                Alterar
+              </button>
+            </div>
+            <input type="file" data-field="file" accept="audio/*" class="hidden">
+            <input type="text" placeholder="Legenda (opcional)" data-field="caption" value="" class="w-full p-2 mt-2 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+          
+      </div>
+    </div>
+</template>
+<template id="mockup-tpl-midia-video">
+<div class="media-item-simple border-b border-gray-200 py-3 px-2 hover:bg-gray-50 transition-colors" data-item-id="media_cap_video">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3 flex-1">
+          <span class="text-lg">🎬</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center space-x-2">
+              <span class="text-sm font-medium text-gray-700">Vídeo</span>
+              <span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">variação</span>
+              <span class="text-xs text-green-500">●</span>
+            </div>
+            <div class="text-xs text-gray-500 truncate mt-1">
+              Demonstracao_Produto.mp4 (4.01 MB)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1 ml-3">
+          <button class="remove-item p-1 text-red-400 hover:text-red-600 transition-colors ml-1" title="Remover">
+            <i class="ri-close-line text-sm"></i>
+          </button>
+        </div>
+      </div>
+      <div class="media-item-content mt-2 hidden">
+        
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-600">Arquivo: Demonstracao_Produto.mp4</span>
+              <button type="button" class="change-file text-blue-600 hover:text-blue-800 underline text-xs">
+                Alterar
+              </button>
+            </div>
+            <input type="file" data-field="file" accept="video/*" class="hidden">
+            <input type="text" placeholder="Legenda (opcional)" data-field="caption" value="" class="w-full p-2 mt-2 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+          
+      </div>
+    </div>
+</template>
+<template id="mockup-tpl-midia-document">
+<div class="media-item-simple border-b border-gray-200 py-3 px-2 hover:bg-gray-50 transition-colors" data-item-id="media_cap_document">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3 flex-1">
+          <span class="text-lg">📄</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center space-x-2">
+              <span class="text-sm font-medium text-gray-700">Documento</span>
+              <span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">variação</span>
+              <span class="text-xs text-green-500">●</span>
+            </div>
+            <div class="text-xs text-gray-500 truncate mt-1">
+              Tabela_Precos_Novembro.pdf (500.39 KB)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1 ml-3">
+          <button class="remove-item p-1 text-red-400 hover:text-red-600 transition-colors ml-1" title="Remover">
+            <i class="ri-close-line text-sm"></i>
+          </button>
+        </div>
+      </div>
+      <div class="media-item-content mt-2 hidden">
+        
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-600">Arquivo: Tabela_Precos_Novembro.pdf</span>
+              <button type="button" class="change-file text-blue-600 hover:text-blue-800 underline text-xs">
+                Alterar
+              </button>
+            </div>
+            <input type="file" data-field="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv" class="hidden">
+            <input type="text" placeholder="Legenda (opcional)" data-field="caption" value="" class="w-full p-2 mt-2 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+          
+      </div>
+    </div>
+</template>
+<template id="mockup-tpl-midia-quick_reply">
+<div class="media-item-simple border-b border-gray-200 py-3 px-2 hover:bg-gray-50 transition-colors" data-item-id="media_1791232347770_46absm1wy">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3 flex-1">
+          <span class="text-lg">⚡</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center space-x-2">
+              <span class="text-sm font-medium text-gray-700">Resposta rápida</span>
+              <span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">variação</span>
+              <span class="text-xs text-green-500">●</span>
+            </div>
+            <div class="text-xs text-gray-500 truncate mt-1">
+              Olá {{primeiro_nome}}! Segue a tabela de preç... + 1 anexo(s)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1 ml-3">
+          <button class="remove-item p-1 text-red-400 hover:text-red-600 transition-colors ml-1" title="Remover">
+            <i class="ri-close-line text-sm"></i>
+          </button>
+        </div>
+      </div>
+      <div class="media-item-content mt-2 ">
+        
+          <div class="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-gray-700">
+            <div class="font-semibold text-amber-700 mb-1">Resposta rápida como pacote</div>
+            <div class="whitespace-pre-wrap">Olá {{primeiro_nome}}! Segue a tabela de preços atualizada. Qualquer dúvida, estou à disposição.</div>
+            <ul class="mt-2 space-y-1 text-xs text-gray-600"><li class="flex items-center gap-2"><i class="ri-attachment-2"></i><span>Tabela_Precos_Outubro.pdf</span></li></ul>
+          </div>
+        
+      </div>
+    </div>
+</template>
+<template id="mockup-tpl-campanha-vazia">
+<tr class="no-campaigns-message">
+          <td colspan="8" class="campaigns-mvp-empty-cell">
+            <i class="ri-megaphone-line"></i>
+            Nenhuma campanha encontrada. Crie sua primeira campanha!
+          </td>
+        </tr>
+</template>
+<script>
+(() => {
+  // ---------------------------------------------------------------------------------
+  // Dados fictícios (os mesmos de tools/capture/fixtures/campaigns.js e comum.js).
+  // Repositório público: nada real aqui. As linhas da tabela, as listas do modal e o
+  // relatório já vêm renderizados pelo app na captura; aqui fica só o que a tela precisa
+  // saber e não está escrito nela.
+  // ---------------------------------------------------------------------------------
+  const FALHAS = { 'cmp-4': 1 };                      // envios com falha por campanha
+  const CATEGORIAS = {                                // categoria → contatos
+    'cat-campinas': ['ct-03', 'ct-13', 'ct-19', 'ct-22'],
+    'cat-padarias': ['ct-01', 'ct-08', 'ct-12', 'ct-16', 'ct-20', 'ct-24'],
+    'cat-leads': ['ct-05', 'ct-09', 'ct-15', 'ct-18'],
+    'cat-supermercados': ['ct-02', 'ct-04', 'ct-10', 'ct-14', 'ct-22'],
+  };
+  // Etapa do Kanban → responsável de cada card (para o filtro "Usuário" recontar as etapas).
+  const KANBAN = {
+    'col-novo': ['usr-ana', 'usr-ana', 'usr-ana', 'usr-bruno'],
+    'col-negociacao': ['usr-ana', 'usr-ana', 'usr-bruno', 'usr-carla'],
+    'col-pedido': ['usr-ana', 'usr-ana', 'usr-carla'],
+    'col-posvenda': ['usr-ana', 'usr-carla', 'usr-ana'],
+  };
+  // Respostas rápidas: categoria e anexos (o cartão do modal só mostra a contagem).
+  const RESPOSTAS = {
+    'qr-1': { cat: 'qr-vendas', anexos: [['Tabela_Precos_Outubro.pdf', 482133]] },
+    'qr-2': { cat: 'qr-vendas', anexos: [] },
+    'qr-3': { cat: 'qr-vendas', anexos: [] },
+    'qr-4': { cat: 'qr-posvenda', anexos: [] },
+    'qr-5': { cat: 'qr-posvenda', anexos: [] },
+  };
+
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+  const avisar = (texto) => window.mockup.avisar(texto);
+
+  // --- mesmas regras do campaigns.ts --------------------------------------------------------
+  const STATUS = { draft: 'Rascunho', scheduled: 'Agendada', running: 'Executando', paused: 'Pausada', completed: 'Concluída', cancelled: 'Cancelada', failed: 'Falhou' };
+  const podeIniciar = (st) => st === 'draft' || st === 'paused';
+  const podeCancelar = (st) => st === 'running' || st === 'scheduled' || st === 'draft';
+  const PUBLICO = { all: 'Todos contatos', tag: 'Por tag', manual: 'Seleção manual', categories: 'Categorias', csv: 'Lista importada', kanban: 'Kanban' };
+  const TIPO_ROTULO = { text: 'Texto', image: 'Imagem', audio: 'Áudio', video: 'Vídeo', document: 'Documento', quick_reply: 'Texto' };
+  const dataHora = (d) => d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+  function lerDataHora(texto) {
+    const m = String(texto).match(/(\d{2})\/(\d{2})\/(\d{4}),?\s+(\d{2}):(\d{2})/);
+    return m ? new Date(+m[3], +m[2] - 1, +m[1], +m[4], +m[5]).getTime() : 0;
+  }
+  function tamanhoDoArquivo(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    return `${parseFloat((bytes / 1024 ** i).toFixed(2))} ${['Bytes', 'KB', 'MB', 'GB'][i]}`;
+  }
+  const abrir = (m) => { m.classList.remove('hidden'); m.classList.add('show'); m.style.display = 'flex'; };
+  const fechar = (m) => { m.classList.remove('show'); m.style.display = 'none'; m.classList.add('hidden'); };
+
+  // =========================================================================================
+  // Lista de campanhas
+  // =========================================================================================
+  const tbody = $('#campaigns-list');
+  const linhas = () => $$('tr.campaigns-mvp-row', tbody);
+  const linhaDe = (id) => linhas().find((tr) => tr.dataset.id === id);
+  // Moldes intocados: linha "executando" (Cancelar) e "rascunho" (Iniciar + Cancelar).
+  const linhaPorStatus = (st) => linhas().find((tr) => $('.campaigns-mvp-status-badge', tr).classList.contains(`campaigns-status-${st}`));
+  const molde = {
+    ativa: linhaPorStatus('running').cloneNode(true),
+    rascunho: linhaPorStatus('draft').cloneNode(true),
+    vazia: $('#mockup-tpl-campanha-vazia').content.firstElementChild,
+  };
+
+  // Estado de cada linha guardado nela mesma (dataset), lido da marcação capturada.
+  function lerLinha(tr) {
+    const [enviados, total] = $('.campaigns-mvp-progress-count', tr).textContent.split('/').map(Number);
+    tr.dataset.id = $('.btn-details', tr).dataset.id;
+    tr.dataset.status = [...$('.campaigns-mvp-status-badge', tr).classList].find((c) => c.startsWith('campaigns-status-')).slice(17);
+    tr.dataset.enviados = enviados;
+    tr.dataset.total = total;
+    tr.dataset.falhas = FALHAS[tr.dataset.id] || 0;
+    tr.dataset.data = lerDataHora(tr.children[3].textContent);
+  }
+  linhas().forEach(lerLinha);
+
+  // Redesenha status, progresso e botões da linha a partir do dataset.
+  function pintarLinha(tr) {
+    const { status } = tr.dataset;
+    const enviados = Number(tr.dataset.enviados);
+    const total = Number(tr.dataset.total);
+    const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((enviados / total) * 100))) : 0;
+    const selo = $('.campaigns-mvp-status-badge', tr);
+    selo.className = `campaigns-mvp-status-badge campaigns-status-${status}`;
+    selo.textContent = STATUS[status] || status;
+    const barra = $('.campaigns-mvp-progress-fill', tr);
+    barra.style.width = `${pct}%`;
+    barra.classList.toggle('is-complete', pct >= 100);
+    $('.campaigns-mvp-progress-percent', tr).textContent = `${pct}%`;
+    $('.campaigns-mvp-progress-count', tr).textContent = `${enviados}/${total}`;
+    if (!podeIniciar(status)) $('.btn-start', tr)?.remove();
+    if (!podeCancelar(status)) $('.btn-cancel', tr)?.remove();
+  }
+
+  // Busca e ordenação: mesmas chaves do app (status ordena pelo código em inglês).
+  let busca = '';
+  let ordem = null;
+  let sentido = 'asc';
+  function aplicarListagem() {
+    const valor = (tr) => {
+      if (ordem === 'name') return tr.children[0].textContent.toLowerCase();
+      if (ordem === 'status') return tr.dataset.status;
+      if (ordem === 'progress') return Number(tr.dataset.enviados) / Math.max(1, Number(tr.dataset.total));
+      return Number(tr.dataset.data);
+    };
+    let lista = linhas();
+    if (ordem) {
+      lista.sort((a, b) => (valor(a) < valor(b) ? -1 : valor(a) > valor(b) ? 1 : 0) * (sentido === 'asc' ? 1 : -1));
+      tbody.append(...lista);
+    }
+    let visiveis = 0;
+    for (const tr of lista) {
+      const texto = [tr.children[0].textContent, STATUS[tr.dataset.status], tr.children[5].textContent, tr.children[4].title, tr.children[3].textContent].join(' ').toLowerCase();
+      const mostra = !busca || texto.includes(busca);
+      tr.style.display = mostra ? '' : 'none';
+      if (mostra) visiveis += 1;
+    }
+    $('tr.no-campaigns-message', tbody)?.remove();
+    if (!visiveis) tbody.append(molde.vazia.cloneNode(true));
+    for (const th of $$('th[data-sort]')) {
+      th.classList.remove('sorted-asc', 'sorted-desc');
+      if (th.dataset.sort === ordem) th.classList.add(sentido === 'asc' ? 'sorted-asc' : 'sorted-desc');
+    }
+  }
+
+  // O app consulta a lista a cada 5 s enquanto há campanha ativa: aqui o envio avança.
+  setInterval(() => {
+    if (!$('#campaign-details-modal').classList.contains('hidden')) return;
+    for (const tr of linhas().filter((x) => x.dataset.status === 'running')) {
+      const total = Number(tr.dataset.total);
+      tr.dataset.enviados = Math.min(total, Number(tr.dataset.enviados) + 1);
+      if (Number(tr.dataset.enviados) >= total) tr.dataset.status = 'completed';
+      pintarLinha(tr);
+    }
+  }, 5000);
+
+  let seq = 0;
+  // Linha nova: clone de uma linha capturada com o mesmo conjunto de botões.
+  function novaLinha(base, dados) {
+    seq += 1;
+    const tr = (base === 'rascunho' ? molde.rascunho : molde.ativa).cloneNode(true);
+    const id = `cmp-novo-${seq}`;
+    for (const el of $$('[data-id]', tr)) el.dataset.id = id;
+    const [nome, , , quando, conteudo, publico, instancias] = tr.children;
+    nome.textContent = dados.nome;
+    nome.title = dados.nome;
+    quando.textContent = dataHora(dados.data);
+    conteudo.textContent = dados.conteudo.rotulo;
+    conteudo.title = dados.conteudo.titulo;
+    publico.textContent = dados.publico;
+    publico.title = dados.publico;
+    instancias.textContent = dados.instancias.rotulo;
+    instancias.title = dados.instancias.titulo;
+    Object.assign(tr.dataset, { id, status: dados.status, enviados: 0, total: dados.total, falhas: 0, data: dados.data.getTime() });
+    pintarLinha(tr);
+    $('tr.no-campaigns-message', tbody)?.remove();
+    tbody.prepend(tr);
+    aplicarListagem();
+    return tr;
+  }
+
+  function duplicar(id) {
+    const origem = linhaDe(id);
+    const [nome, , , , conteudo, publico, instancias] = origem.children;
+    novaLinha('rascunho', {
+      nome: `${nome.textContent} (cópia)`, status: 'draft', total: Number(origem.dataset.total), data: new Date(),
+      conteudo: { rotulo: conteudo.textContent, titulo: conteudo.title }, publico: publico.textContent,
+      instancias: { rotulo: instancias.textContent, titulo: instancias.title },
+    });
+  }
+
+  // Relatório: a marcação é a que o app montou na captura; só os valores mudam.
+  function abrirRelatorio(id) {
+    const tr = linhaDe(id);
+    const enviados = Number(tr.dataset.enviados);
+    const total = Number(tr.dataset.total);
+    const pct = total > 0 ? Math.round((enviados / total) * 100) : 0;
+    const resumo = $('#campaign-details-summary');
+    $('#campaign-report-name').textContent = tr.children[0].textContent;
+    $('.campaigns-report-status-chip', resumo).textContent = STATUS[tr.dataset.status];
+    $('.campaigns-report-card-sent .campaigns-report-card-value', resumo).textContent = `${enviados}/${total}`;
+    $('.campaigns-report-card-progress .campaigns-report-card-value', resumo).textContent = `${pct}%`;
+    $('.campaigns-report-progress-fill', resumo).style.width = `${Math.max(0, Math.min(100, pct))}%`;
+    const [entregues, falhas] = $$('.campaigns-report-metric-value', resumo);
+    entregues.textContent = enviados;
+    falhas.textContent = tr.dataset.falhas;
+    const [agenda, conteudo, publico, instancias] = $$('.campaigns-report-detail-value', resumo);
+    agenda.textContent = tr.children[3].textContent;
+    conteudo.textContent = tr.children[4].title;
+    publico.textContent = tr.children[5].textContent;
+    instancias.textContent = tr.children[6].textContent;
+    abrir($('#campaign-details-modal'));
+  }
+
+  // =========================================================================================
+  // Modal "Nova Campanha"
+  // =========================================================================================
+  const modal = $('#campaign-modal');
+  const form = $('#campaign-form');
+  const pool = $('#campaign-media-sequence');
+  const vazioPool = $('.empty-state', pool).cloneNode(true);
+  const listaCategorias = $('#categories-list');
+  const placeholderCategorias = listaCategorias.innerHTML;
+  const moldeCategorias = $('#mockup-tpl-categorias').content;
+  const manualSelecionados = new Set();
+  const categoriasSelecionadas = new Set();
+  let categoriasCarregadas = false;
+  let contatosCsv = 0;
+  let seqItem = 0;
+
+  const publicoEscolhido = () => $('input[name="audience_type"]:checked')?.value || 'all';
+  const agendaEscolhida = () => $('input[name="schedule_type"]:checked')?.value || 'immediate';
+
+  function contatosDasCategorias() {
+    return new Set([...categoriasSelecionadas].flatMap((id) => CATEGORIAS[id] || [])).size;
+  }
+
+  function aplicarPublico() {
+    const tipo = publicoEscolhido();
+    $('#tag-select').disabled = tipo !== 'tag';
+    $('#csv-tag-select').disabled = tipo !== 'csv';
+    $('#csv-file').disabled = tipo !== 'csv';
+    $('#manual-contacts-search').disabled = tipo !== 'manual';
+    $('#manual-contacts-list').classList.toggle('opacity-60', tipo !== 'manual');
+    $('#manual-select-all-btn').disabled = tipo !== 'manual';
+    $('#manual-clear-btn').disabled = tipo !== 'manual';
+    listaCategorias.classList.toggle('opacity-60', tipo !== 'categories');
+    $('#categories-toggle-all-btn').disabled = tipo !== 'categories';
+    if (tipo === 'categories' && !categoriasCarregadas) {
+      listaCategorias.replaceChildren(moldeCategorias.cloneNode(true));
+      categoriasCarregadas = true;
+    } else if (tipo !== 'categories' && categoriasCarregadas) {
+      listaCategorias.innerHTML = placeholderCategorias;
+      categoriasSelecionadas.clear();
+      categoriasCarregadas = false;
+    }
+    const etapa = $('#kanban-column-select');
+    etapa.disabled = tipo !== 'kanban';
+    etapa.classList.toggle('opacity-60', tipo !== 'kanban');
+    $('#kanban-user-select').disabled = tipo !== 'kanban';
+    if (tipo !== 'kanban') { $('#kanban-column-id').value = ''; $('#kanban-column-count').classList.add('hidden'); }
+    resumirCategorias();
+    resumir();
+  }
+
+  function resumirCategorias() {
+    const total = $$('#categories-list .category-checkbox').length;
+    const marcadas = $$('#categories-list .category-checkbox:checked').length;
+    $('#categories-toggle-all-label').textContent = total > 0 && marcadas === total ? 'Desmarcar todas' : `Selecionar TODAS as categorias (${total})`;
+    const resumo = $('#categories-selection-summary');
+    resumo.classList.toggle('hidden', marcadas === 0);
+    resumo.textContent = marcadas ? `✓ ${contatosDasCategorias()} contatos no total (${marcadas} ${marcadas === 1 ? 'categoria' : 'categorias'})` : '';
+  }
+
+  function contarManuais() {
+    const n = manualSelecionados.size;
+    $('#manual-selected-count').textContent = `${n} contato${n !== 1 ? 's' : ''} selecionado${n !== 1 ? 's' : ''}`;
+  }
+
+  // Etapas do Kanban recontadas pelo usuário escolhido (o app pede ao servidor de novo).
+  function recontarEtapas() {
+    const usuario = $('#kanban-user-select').value;
+    const select = $('#kanban-column-select');
+    for (const opcao of $$('option[value]:not([value=""])', select)) {
+      const n = (KANBAN[opcao.value] || []).filter((u) => !usuario || u === usuario).length;
+      opcao.textContent = `${opcao.textContent.replace(/\s*\(\d+ contatos?\)$/, '')} (${n} contato${n !== 1 ? 's' : ''})`;
+    }
+    select.value = '';
+    $('#kanban-column-id').value = '';
+    $('#kanban-column-count').classList.add('hidden');
+  }
+
+  function aplicarAgenda() {
+    const tipo = agendaEscolhida();
+    const data = $('#scheduled-date');
+    data.disabled = tipo !== 'scheduled';
+    if (data.disabled) data.value = '';
+    $('#recurring-fields').classList.toggle('hidden', tipo !== 'recurring');
+    const recorrente = tipo === 'recurring';
+    const semFim = $('#recurring-no-end');
+    const fim = $('#recurring-end-date');
+    fim.disabled = semFim.checked || !recorrente;
+    if (fim.disabled) fim.value = '';
+    const frequencia = $('#recurring-frequency');
+    frequencia.disabled = !recorrente;
+    $('#recurring-time').disabled = !recorrente;
+    $('#recurring-start-date').disabled = !recorrente;
+    semFim.disabled = !recorrente;
+    $('#recurring-weekly-fields').classList.toggle('hidden', !recorrente || frequencia.value !== 'weekly');
+    $('#recurring-monthly-fields').classList.toggle('hidden', !recorrente || frequencia.value !== 'monthly');
+    $('#recurring-month-day').disabled = !recorrente || frequencia.value !== 'monthly';
+    for (const b of $$('.recurring-weekday-btn')) b.disabled = !recorrente || frequencia.value !== 'weekly';
+    const rotulo = $('#campaign-submit-label');
+    const icone = $('#campaign-submit-btn i');
+    if (tipo === 'scheduled') { rotulo.textContent = 'Agendar campanha'; icone.className = 'ri-calendar-check-line mr-2'; }
+    else if (tipo === 'recurring') { rotulo.textContent = 'Criar recorrência'; icone.className = 'ri-repeat-2-line mr-2'; }
+    else { rotulo.textContent = 'Criar e enviar agora'; icone.className = 'ri-rocket-line mr-2'; }
+  }
+
+  // Intervalos: as mesmas travas de syncDispatchIntervalInputs (mínimos de segurança).
+  function intervalos() {
+    const inteiro = (id, padrao) => { const v = parseInt($(`#${id}`).value, 10); return Number.isNaN(v) ? padrao : v; };
+    const limitar = (v, a, b) => Math.min(b, Math.max(a, v));
+    const minSeg = Math.max(30, inteiro('msg-delay-min', 30));
+    const minMax = Math.max(1, Math.ceil(minSeg / 60));
+    const maxMin = Math.max(minMax, inteiro('msg-delay-max-min', minMax));
+    const pausa = limitar(inteiro('lot-pause-minutes', 2), 2, 30);
+    const pausaMax = limitar(inteiro('lot-pause-max-minutes', Math.max(4, pausa)), pausa, 30);
+    const segurancaMin = Math.min(20, pausaMax * 2);
+    const seguranca = limitar(inteiro('safety-pause', segurancaMin), segurancaMin, 20);
+    $('#msg-delay-min').value = minSeg;
+    $('#msg-delay-max-min').value = maxMin;
+    $('#msg-delay-max').value = maxMin * 60;
+    $('#lot-pause-minutes').value = pausa;
+    $('#lot-pause-min').value = pausa * 60;
+    $('#lot-pause-max-minutes').value = pausaMax;
+    $('#lot-pause-max').value = pausaMax * 60;
+    $('#safety-pause').value = seguranca;
+    $('#safety-pause').min = segurancaMin;
+    const lote = [5, 10, 15, 20].includes(Number($('#lot-size-selected').value)) ? Number($('#lot-size-selected').value) : 5;
+    return { lote, minSeg, maxSeg: maxMin * 60, pausaMin: pausa * 60, pausaMax: pausaMax * 60, cada: Math.max(1, inteiro('safety-every', 50)), seguranca };
+  }
+
+  function estimarContatos() {
+    const tipo = publicoEscolhido();
+    if (tipo === 'manual') return manualSelecionados.size;
+    if (tipo === 'categories') return contatosDasCategorias();
+    if (tipo === 'kanban') { const m = ($('#kanban-column-select').selectedOptions[0]?.text || '').match(/(\d+)\s*contato/i); return m ? +m[1] : 0; }
+    if (tipo === 'tag') { const m = ($('#tag-select').selectedOptions[0]?.text || '').match(/\((\d+)\s*contatos?\)/i); return m ? +m[1] : 0; }
+    if (tipo === 'csv') return contatosCsv;
+    return 0;
+  }
+
+  function simular(cfg) {
+    const contatos = estimarContatos() || 500;
+    const mediaMsg = (cfg.minSeg + cfg.maxSeg) / 2;
+    const mediaPausa = (cfg.pausaMin + cfg.pausaMax) / 2;
+    const segundos = contatos * mediaMsg + Math.max(1, Math.ceil(contatos / cfg.lote)) * mediaPausa + Math.floor(contatos / cfg.cada) * cfg.seguranca * 60;
+    const h = Math.floor(segundos / 3600);
+    const m = Math.floor((segundos % 3600) / 60);
+    const pontos = mediaMsg * 2 + mediaPausa * 1.5 + cfg.seguranca * 10;
+    const nivel = pontos >= 100 ? ['Máximo', 100, 'var(--ds-success)'] : pontos >= 60 ? ['Alto', 75, 'var(--ds-success)'] : pontos >= 30 ? ['Médio', 50, 'var(--ds-warning)'] : ['Baixo', 25, 'var(--ds-danger)'];
+    $('#simulation-contacts').textContent = contatos;
+    $('#simulation-time').textContent = h > 0 ? `~${h}h ${m}min` : m > 0 ? `~${m}min` : `~${Math.round(segundos)}s`;
+    $('#simulation-speed').textContent = `~${(contatos / (segundos / 60)).toFixed(1)} msgs/min`;
+    const rotulo = $('#simulation-security-label');
+    rotulo.textContent = nivel[0];
+    rotulo.style.color = nivel[2];
+    const barra = $('#simulation-security-bar');
+    barra.style.width = `${nivel[1]}%`;
+    barra.style.background = nivel[2];
+  }
+
+  const itensDoPool = () => $$('.media-item-simple', pool);
+  function tiposDoPool() {
+    return [...new Set(itensDoPool().map((el) => TIPO_ROTULO[el.dataset.tipo]))];
+  }
+
+  // Resumo da campanha: mesmas frases de doUpdateSummary.
+  let timerResumo;
+  const resumir = () => { clearTimeout(timerResumo); timerResumo = setTimeout(resumirAgora, 300); };
+  function resumirAgora() {
+    const cfg = intervalos();
+    const tipo = publicoEscolhido();
+    $('#summary-name').textContent = $('#campaign-name').value || 'Não informado';
+    $('#summary-delay').textContent = `Lote ${cfg.lote} • ${cfg.minSeg}s-${Math.round(cfg.maxSeg / 60)}min entre msgs`;
+    let publico = 'Não selecionado';
+    if (tipo === 'tag') publico = $('#tag-select').value ? `Tag — ${$('#tag-select').selectedOptions[0].text}` : 'Tag';
+    else if (tipo === 'manual') publico = manualSelecionados.size ? `Manual — ${manualSelecionados.size} contatos` : 'Seleção manual';
+    else if (tipo === 'categories') publico = categoriasSelecionadas.size ? `Categoria — ${categoriasSelecionadas.size} selecionada${categoriasSelecionadas.size !== 1 ? 's' : ''}` : 'Categoria';
+    else if (tipo === 'kanban') {
+      const etapa = $('#kanban-column-select');
+      const usuario = $('#kanban-user-select');
+      publico = etapa.value ? `Kanban — ${usuario.value ? usuario.selectedOptions[0].text : 'Todos os usuários'} / ${etapa.selectedOptions[0].text}` : 'Kanban — etapa não selecionada';
+    } else if (tipo === 'csv') publico = contatosCsv ? `CSV — ${contatosCsv} contatos` : 'CSV';
+    $('#summary-audience').textContent = publico;
+
+    let agenda = 'Envio imediato';
+    const quando = $('#scheduled-date').value;
+    if (agendaEscolhida() === 'scheduled' && quando) agenda = `Agendado para ${new Date(quando).toLocaleString('pt-BR')}`;
+    else if (agendaEscolhida() === 'recurring') agenda = `Recorrente (${{ weekly: 'semanal', monthly: 'mensal' }[$('#recurring-frequency').value] || 'diária'})`;
+    $('#summary-schedule').textContent = agenda;
+
+    const instancias = $$('#instances-list input[name="instance_ids"]:checked').map((c) => $('.font-medium', c.closest('div')).textContent.trim());
+    $('#summary-instances').textContent = instancias.length ? instancias.join(', ') : 'Não informado';
+    const n = itensDoPool().length;
+    $('#summary-content').textContent = n ? `${n} ${n === 1 ? 'item' : 'itens'} (${tiposDoPool().join(', ')})` : 'Não informado';
+
+    const contatos = $('#summary-contacts');
+    if (tipo === 'csv') contatos.textContent = !$('#csv-file').files[0] ? 'Selecione arquivo CSV' : contatosCsv ? `${contatosCsv} contatos` : 'Validando arquivo...';
+    else if (tipo === 'tag' && $('#tag-select').value) { const m = $('#tag-select').selectedOptions[0].text.match(/\((\d+) contatos\)/); contatos.textContent = m ? `${m[1]} contatos` : 'Tag sem contatos'; }
+    else if (tipo === 'manual') contatos.textContent = `${manualSelecionados.size} contato(s)`;
+    else if (tipo === 'categories') contatos.textContent = `${$$('#categories-list .category-checkbox:checked').reduce((s, c) => s + Number(c.closest('label').dataset.contactCount || 0), 0)} contato(s)`;
+    else if (tipo === 'kanban') {
+      const etapa = $('#kanban-column-select');
+      const m = etapa.value && etapa.selectedOptions[0].text.match(/(\d+) contato/);
+      contatos.textContent = !etapa.value ? 'Selecione uma etapa' : m ? `${m[1]} contato${+m[1] !== 1 ? 's' : ''}` : 'Contando...';
+    } else contatos.textContent = 'Selecione o público';
+    simular(cfg);
+  }
+
+  // Pool de conteúdo --------------------------------------------------------------------------
+  function contarPool() {
+    const itens = itensDoPool();
+    if (!itens.length && !$('.empty-state', pool)) pool.replaceChildren(vazioPool.cloneNode(true));
+    $('#media-count-display').textContent = itens.length;
+    $('#media-size-display').textContent = tamanhoDoArquivo(itens.reduce((s, el) => s + Number(el.dataset.tamanho || 0), 0));
+    resumir();
+  }
+  function novoItem(tipo, tamanho = 0) {
+    seqItem += 1;
+    const el = $(`#mockup-tpl-midia-${tipo}`).content.firstElementChild.cloneNode(true);
+    el.dataset.itemId = `media_mockup_${seqItem}`;
+    el.dataset.tipo = tipo;
+    el.dataset.tamanho = tamanho;
+    $('.empty-state', pool)?.remove();
+    pool.append(el);
+    return el;
+  }
+  const descricao = (el) => $('.text-xs.text-gray-500.truncate', el);
+  function itemDeArquivo(tipo, arquivo) {
+    const el = novoItem(tipo, arquivo.size);
+    descricao(el).textContent = `${arquivo.name} (${tamanhoDoArquivo(arquivo.size)})`;
+    $('.media-item-content .text-gray-600', el).textContent = `Arquivo: ${arquivo.name}`;
+    contarPool();
+  }
+  function itemDeResposta(id) {
+    const cartao = $(`[data-campaign-quick-id="${id}"]`);
+    const texto = $('small', cartao).textContent.trim();
+    const anexos = RESPOSTAS[id]?.anexos || [];
+    const el = novoItem('quick_reply', anexos.reduce((s, [, t]) => s + t, 0));
+    descricao(el).textContent = anexos.length
+      ? `${texto.substring(0, 45)}${texto.length > 45 ? '...' : ''} + ${anexos.length} anexo(s)`
+      : `${texto.substring(0, 60)}${texto.length > 60 ? '...' : ''}`;
+    $('.whitespace-pre-wrap', el).textContent = texto;
+    const lista = $('ul', el);
+    if (!anexos.length) lista.remove();
+    else lista.replaceChildren(...anexos.map(([nome]) => { const li = $('li', lista).cloneNode(true); $('span', li).textContent = nome; return li; }));
+    contarPool();
+  }
+  function inserirNoCursor(campo, valor) {
+    const ini = campo.selectionStart ?? campo.value.length;
+    const fim = campo.selectionEnd ?? campo.value.length;
+    const antes = campo.value.slice(0, ini);
+    const depois = campo.value.slice(fim);
+    const texto = `${antes.length && !/\s$/.test(antes) ? ' ' : ''}${valor}${depois.length && !/^\s/.test(depois) ? ' ' : ''}`;
+    campo.value = antes + texto + depois;
+    campo.focus();
+    campo.setSelectionRange(antes.length + texto.length, antes.length + texto.length);
+    campo.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  // Respostas rápidas (modal do app, já preenchido na captura)
+  const modalRespostas = $('#campaign-quick-replies-modal');
+  let categoriaResposta = 'all';
+  function filtrarRespostas() {
+    const q = $('#campaign-quick-search').value.trim().toLowerCase();
+    for (const aba of $$('.campaign-quick-tab', modalRespostas)) aba.classList.toggle('is-active', aba.dataset.campaignQuickCategory === categoriaResposta);
+    for (const cartao of $$('.campaign-quick-card', modalRespostas)) {
+      const id = cartao.dataset.campaignQuickId;
+      const daAba = categoriaResposta === 'all' || RESPOSTAS[id]?.cat === categoriaResposta;
+      cartao.style.display = daAba && (!q || cartao.textContent.toLowerCase().includes(q)) ? '' : 'none';
+    }
+  }
+  function abrirRespostas(abre) {
+    modalRespostas.classList.toggle('hidden', !abre);
+    modalRespostas.setAttribute('aria-hidden', String(!abre));
+    if (abre) { categoriaResposta = 'all'; $('#campaign-quick-search').value = ''; filtrarRespostas(); }
+  }
+
+  function abrirNovaCampanha() {
+    form.reset();
+    pool.replaceChildren(vazioPool.cloneNode(true));
+    $('#lot-size-selected').value = '5';
+    for (const b of $$('.campaigns-interval-lot-btn')) b.classList.toggle('is-active', b.dataset.value === '5');
+    for (const b of $$('.recurring-weekday-btn')) b.classList.remove('is-active');
+    $('#csv-validation-result').classList.add('hidden');
+    contatosCsv = 0;
+    manualSelecionados.clear();
+    contarManuais();
+    for (const l of $$('#manual-contacts-list label')) l.style.display = '';
+    $('#manual-contacts-list .no-results-message')?.remove();
+    categoriasCarregadas = true; // força o reset da lista de categorias em aplicarPublico
+    recontarEtapas();
+    aplicarPublico();
+    aplicarAgenda();
+    contarPool();
+    abrir(modal);
+    requestAnimationFrame(() => { $('.campaigns-mvp-modal-card', modal).scrollTop = 0; modal.scrollTop = 0; });
+  }
+
+  function criarCampanha() {
+    const erro = (texto) => { avisar(texto); return null; };
+    if (!$$('input[name="instance_ids"]:checked').length) return erro('Selecione pelo menos uma instância WhatsApp para enviar a campanha');
+    const itens = itensDoPool();
+    if (!itens.length) return erro('Problemas com a mídia da campanha: Adicione pelo menos um item ao pool');
+    const vazios = itens.filter((el) => el.dataset.tipo === 'text' && !$('textarea', el).value.trim()).length;
+    if (vazios) return erro(`Problemas com a mídia da campanha: ${vazios} item(s) sem conteúdo`);
+    const tipo = publicoEscolhido();
+    if (tipo === 'kanban' && !$('#kanban-column-id').value) return erro('Selecione uma etapa do Kanban');
+    if (tipo === 'csv' && !contatosCsv) return erro('Selecione e valide um arquivo CSV');
+    let data = new Date();
+    const agenda = agendaEscolhida();
+    if (agenda === 'scheduled') {
+      const valor = $('#scheduled-date').value;
+      if (!valor) return erro('Selecione data e hora para o agendamento');
+      data = new Date(valor);
+      if (data.getTime() <= Date.now()) return erro('Data de agendamento deve estar no futuro');
+    } else if (agenda === 'recurring') {
+      if (!$('#recurring-start-date').value) return erro('Informe a data de início da recorrência');
+      if (!$('#recurring-time').value) return erro('Informe o horário da recorrência');
+      data = new Date(`${$('#recurring-start-date').value}T${$('#recurring-time').value}`);
+      if (data.getTime() <= Date.now()) return erro('Data inicial da recorrência deve estar no futuro');
+    }
+    const total = estimarContatos();
+    if (!total) return erro('Nenhum contato elegível encontrado para o público selecionado');
+
+    const tipos = tiposDoPool();
+    const instancias = $$('#instances-list input[name="instance_ids"]:checked').map((c) => $('.font-medium', c.closest('div')).textContent.trim());
+    const tr = novaLinha('ativa', {
+      nome: $('#campaign-name').value.trim(), status: agenda === 'immediate' ? 'running' : 'scheduled', total, data,
+      conteudo: { rotulo: tipos.length > 1 ? `${tipos[0]} +${tipos.length - 1}` : tipos[0], titulo: tipos.join(', ') },
+      publico: PUBLICO[tipo],
+      instancias: { rotulo: instancias.length > 1 ? `${instancias[0]} +${instancias.length - 1}` : instancias[0], titulo: instancias.join(', ') },
+    });
+    fechar(modal);
+    avisar(agenda === 'immediate' ? 'Campanha criada e envio iniciado' : 'Campanha agendada');
+    return tr;
+  }
+
+  // =========================================================================================
+  // Minhas Categorias (hub, nova e edição)
+  // =========================================================================================
+  const hub = $('#categories-hub-modal');
+  const modalNovaCategoria = $('#new-category-modal');
+  const modalEdicao = $('#edit-category-modal');
+  let categoriaEmEdicao = null;
+
+  // Abrir um destes fecha os outros modais, como no app.
+  function fecharOutrosModais(exceto) {
+    for (const m of $$('.modal')) if (m !== exceto) { m.classList.add('hidden'); m.style.display = 'none'; }
+  }
+  function mostrar(m) { m.classList.remove('hidden'); m.style.display = 'flex'; }
+  function mensagem(id, texto) {
+    for (const tipo of ['error', 'success']) $(`#${id}-${tipo}`).classList.add('hidden');
+    if (!texto) return;
+    const caixa = $(`#${id}-${texto[0]}`);
+    $('p', caixa).textContent = texto[1];
+    caixa.classList.remove('hidden');
+  }
+
+  function abrirNovaCategoria() {
+    fecharOutrosModais(modalNovaCategoria);
+    $('#new-category-name').value = '';
+    $('#new-category-search').value = '';
+    for (const item of $$('#new-category-contacts .contact-item')) { item.style.display = ''; $('input', item).checked = false; }
+    $('#new-category-count').textContent = '0 contatos selecionados';
+    mensagem('new-category', null);
+    mostrar(modalNovaCategoria);
+  }
+
+  function abrirEdicao(id, nome) {
+    fecharOutrosModais(modalEdicao);
+    categoriaEmEdicao = { id, nome };
+    $('#edit-category-name').textContent = nome;
+    $('#edit-category-search').value = '';
+    for (const item of $$('#edit-category-contacts .contact-item')) {
+      item.style.display = 'flex';
+      $('input', item).checked = (CATEGORIAS[id] || []).includes($('input', item).dataset.id);
+    }
+    contarEdicao();
+    mensagem('edit-category', null);
+    mostrar(modalEdicao);
+  }
+  const contarEdicao = () => { $('#edit-category-count').textContent = `${$$('.edit-contact-checkbox:checked').length} contatos selecionados`; };
+
+  // Atualiza a contagem da categoria no hub e na lista do modal de campanha.
+  function atualizarContagem(id) {
+    const n = (CATEGORIAS[id] || []).length;
+    const linhaHub = $(`.hub-edit-category[data-id="${id}"]`, hub)?.closest('.flex.items-center.justify-between');
+    if (linhaHub) $('.text-xs', linhaHub).textContent = `${n} contato${n !== 1 ? 's' : ''}`;
+    for (const raiz of [moldeCategorias, listaCategorias]) {
+      const rotulo = $(`.category-checkbox[data-id="${id}"]`, raiz)?.closest('label');
+      if (!rotulo) continue;
+      rotulo.dataset.contactCount = n;
+      $('.text-text-muted', rotulo).textContent = `(${n} contatos)`;
+    }
+  }
+
+  function criarCategoria() {
+    const nome = $('#new-category-name').value.trim();
+    const ids = $$('.new-category-contact-checkbox:checked').map((c) => c.dataset.id);
+    if (!nome) { mensagem('new-category', ['error', 'Por favor, digite um nome para a categoria']); return; }
+    if (!ids.length) { mensagem('new-category', ['error', 'Por favor, selecione pelo menos um contato para a categoria']); return; }
+    seq += 1;
+    const id = `cat-nova-${seq}`;
+    CATEGORIAS[id] = ids;
+    // Clones das linhas capturadas (hub e lista do modal), em ordem alfabética como o app.
+    const linhaHub = $('#categories-hub-list > div', hub).cloneNode(true);
+    $('.font-semibold', linhaHub).textContent = nome;
+    for (const b of $$('button', linhaHub)) { b.dataset.id = id; b.dataset.name = nome; }
+    const rotulo = $('label', moldeCategorias).cloneNode(true);
+    $('.category-checkbox', rotulo).dataset.id = id;
+    $('.category-checkbox', rotulo).checked = false;
+    $('.text-sm', rotulo).firstChild.textContent = `${nome} `;
+    for (const b of $$('button', rotulo)) { b.dataset.id = id; b.dataset.name = nome; }
+    const emOrdem = (lista, el, nomeDe) => { const depois = lista.find((x) => nomeDe(x).localeCompare(nome, 'pt-BR') > 0); if (depois) depois.before(el); else (lista[0]?.parentNode || moldeCategorias).append(el); };
+    emOrdem($$('#categories-hub-list > div', hub), linhaHub, (x) => $('.font-semibold', x).textContent);
+    emOrdem($$('label', moldeCategorias), rotulo, (x) => $('.text-sm', x).firstChild.textContent);
+    atualizarContagem(id);
+    recarregarCategorias();
+    mensagem('new-category', ['success', `Categoria "${nome}" criada com sucesso! ${ids.length} contatos adicionados.`]);
+    setTimeout(() => { fechar(modalNovaCategoria); mensagem('new-category', null); }, 800);
+  }
+
+  // Lista de categorias do modal de campanha já aberta: o app recarrega do servidor
+  // mantendo as marcadas; aqui é um novo clone do molde com as mesmas marcações.
+  function recarregarCategorias() {
+    if (!categoriasCarregadas) return;
+    listaCategorias.replaceChildren(moldeCategorias.cloneNode(true));
+    for (const c of $$('.category-checkbox', listaCategorias)) c.checked = categoriasSelecionadas.has(c.dataset.id);
+    resumirCategorias();
+    resumir();
+  }
+
+  function salvarEdicao() {
+    const { id, nome } = categoriaEmEdicao;
+    CATEGORIAS[id] = $$('.edit-contact-checkbox:checked').map((c) => c.dataset.id);
+    atualizarContagem(id);
+    mensagem('edit-category', ['success', `Categoria "${nome}" atualizada com sucesso!`]);
+    setTimeout(() => modalEdicao.classList.add('hidden'), 2000);
+  }
+
+  function excluirCategoria(id, nome) {
+    if (!confirm(`Tem certeza que deseja deletar a categoria "${nome}"?\n\nTodos os contatos associados serão desvinculados desta categoria.`)) return;
+    delete CATEGORIAS[id];
+    $(`.hub-delete-category[data-id="${id}"]`, hub)?.closest('.flex.items-center.justify-between')?.remove();
+    $(`.category-checkbox[data-id="${id}"]`, moldeCategorias)?.closest('label')?.remove();
+    $(`.category-checkbox[data-id="${id}"]`, listaCategorias)?.closest('label')?.remove();
+    categoriasSelecionadas.delete(id);
+    resumirCategorias();
+    resumir();
+    avisar(`Categoria "${nome}" deletada com sucesso!`);
+  }
+
+  // =========================================================================================
+  // Eventos
+  // =========================================================================================
+  document.addEventListener('click', (ev) => {
+    const alvo = ev.target;
+    const botao = alvo.closest('button');
+
+    // Menu "mais ações" da linha (fecha com qualquer outro clique, como no app)
+    const gatilho = alvo.closest('.btn-row-menu');
+    const menuAberto = $('.campaigns-mvp-row-menu:not(.hidden)');
+    if (gatilho) {
+      const menu = $(`.campaigns-mvp-row-menu[data-id="${gatilho.dataset.id}"]`, gatilho.parentElement);
+      const abria = menu !== menuAberto;
+      menuAberto?.classList.add('hidden');
+      if (abria) menu.classList.remove('hidden');
+      return;
+    }
+    menuAberto?.classList.add('hidden');
+
+    // Ações da linha
+    if (botao?.matches('.btn-details')) { abrirRelatorio(botao.dataset.id); return; }
+    if (botao?.matches('.btn-start')) {
+      if (!confirm('Iniciar campanha?')) return;
+      const tr = linhaDe(botao.dataset.id);
+      tr.dataset.status = 'running';
+      tr.dataset.data = Date.now();
+      tr.children[3].textContent = dataHora(new Date());
+      pintarLinha(tr);
+      return;
+    }
+    if (botao?.matches('.btn-cancel')) {
+      if (!confirm('Cancelar campanha?')) return;
+      const tr = linhaDe(botao.dataset.id);
+      tr.dataset.status = 'cancelled';
+      pintarLinha(tr);
+      return;
+    }
+    if (botao?.matches('.btn-duplicate')) { if (confirm('Duplicar esta campanha?')) duplicar(botao.dataset.id); return; }
+    if (botao?.matches('.btn-delete')) {
+      if (!confirm('Excluir esta campanha? Essa ação não pode ser desfeita.')) return;
+      linhaDe(botao.dataset.id).remove();
+      aplicarListagem();
+      return;
+    }
+
+    // Ordenação pelos cabeçalhos
+    const th = alvo.closest('th[data-sort]');
+    if (th) {
+      if (ordem === th.dataset.sort) sentido = sentido === 'asc' ? 'desc' : 'asc';
+      else { ordem = th.dataset.sort; sentido = 'asc'; }
+      aplicarListagem();
+      return;
+    }
+
+    // Abrir modais da página
+    if (alvo.closest('#new-campaign-btn')) { abrirNovaCampanha(); return; }
+    if (alvo.closest('#new-category-btn')) { mostrar(hub); return; }
+
+    // Hub de categorias
+    if (alvo.closest('#categories-hub-close') || alvo === hub) { hub.classList.add('hidden'); hub.style.display = 'none'; return; }
+    if (alvo.closest('#categories-hub-new')) { abrirNovaCategoria(); return; }
+    const editar = alvo.closest('.hub-edit-category, .btn-edit-category');
+    if (editar) { ev.preventDefault(); abrirEdicao(editar.dataset.id, editar.dataset.name); return; }
+    const excluir = alvo.closest('.hub-delete-category, .btn-delete-category');
+    if (excluir) { ev.preventDefault(); excluirCategoria(excluir.dataset.id, excluir.dataset.name); return; }
+    if (alvo.closest('#new-category-create-btn')) { criarCategoria(); return; }
+    if (alvo.closest('#save-category-btn')) { salvarEdicao(); return; }
+    if (alvo === modalNovaCategoria) { modalNovaCategoria.classList.add('hidden'); return; }
+
+    // Fechar qualquer modal da página (mesmos seletores do app)
+    const fecha = alvo.closest('.modal-close, .cancel-btn, .close-modal');
+    if (fecha) { fechar(fecha.closest('.modal') || modal); return; }
+
+    // Dentro do modal "Nova Campanha"
+    const lote = alvo.closest('.campaigns-interval-lot-btn');
+    if (lote) {
+      for (const b of $$('.campaigns-interval-lot-btn')) b.classList.toggle('is-active', b === lote);
+      $('#lot-size-selected').value = lote.dataset.value;
+      resumir();
+      return;
+    }
+    const diaSemana = alvo.closest('.recurring-weekday-btn');
+    if (diaSemana) { diaSemana.classList.toggle('is-active'); resumir(); return; }
+    if (alvo.closest('.campaign-content-type-btn')) {
+      const tipoBotao = $('i', alvo.closest('.campaign-content-type-btn')).className;
+      if (tipoBotao.includes('ri-font-size')) { novoItem('text'); contarPool(); return; }
+      if (tipoBotao.includes('ri-flashlight-line')) { abrirRespostas(true); return; }
+      const entrada = { 'ri-image-line': 'image', 'ri-music-line': 'audio', 'ri-video-line': 'video', 'ri-file-line': 'document' }[tipoBotao.trim()];
+      if (entrada) $(`#modal-${entrada}-input`).click();
+      return;
+    }
+    if (alvo.closest('[data-campaign-quick-close]')) { abrirRespostas(false); return; }
+    const aba = alvo.closest('[data-campaign-quick-category]');
+    if (aba) { categoriaResposta = aba.dataset.campaignQuickCategory; filtrarRespostas(); return; }
+    const resposta = alvo.closest('[data-campaign-quick-id]');
+    if (resposta) { itemDeResposta(resposta.dataset.campaignQuickId); abrirRespostas(false); return; }
+    const item = alvo.closest('.media-item-simple');
+    if (item && alvo.closest('.remove-item')) {
+      if (confirm('Remover este item do pool?')) { item.remove(); contarPool(); }
+      return;
+    }
+    if (item && alvo.closest('[data-placeholder]')) { inserirNoCursor($('textarea', item), alvo.closest('[data-placeholder]').dataset.placeholder); return; }
+    if (item && alvo.closest('.change-file')) { $('input[type="file"]', item).click(); return; }
+    if (alvo.closest('#select-all-instances, #clear-all-instances')) {
+      const marcar = Boolean(alvo.closest('#select-all-instances'));
+      for (const c of $$('input[name="instance_ids"]')) c.checked = marcar;
+      resumir();
+      return;
+    }
+    if (alvo.closest('#manual-select-all-btn, #manual-clear-btn')) {
+      ev.preventDefault();
+      const marcar = Boolean(alvo.closest('#manual-select-all-btn'));
+      for (const c of $$('#manual-contacts-list .manual-contact-checkbox')) {
+        c.checked = marcar;
+        if (marcar) manualSelecionados.add(c.dataset.id); else manualSelecionados.delete(c.dataset.id);
+      }
+      contarManuais();
+      resumir();
+      return;
+    }
+    if (alvo.closest('#categories-toggle-all-btn')) {
+      ev.preventDefault();
+      const caixas = $$('#categories-list .category-checkbox');
+      const todas = caixas.length > 0 && caixas.every((c) => c.checked);
+      categoriasSelecionadas.clear();
+      for (const c of caixas) { c.checked = !todas; if (!todas) categoriasSelecionadas.add(c.dataset.id); }
+      resumirCategorias();
+      resumir();
+    }
+  });
+
+  document.addEventListener('change', (ev) => {
+    const alvo = ev.target;
+    if (alvo.name === 'audience_type') aplicarPublico();
+    else if (alvo.name === 'schedule_type' || ['recurring-no-end', 'recurring-frequency'].includes(alvo.id)) { aplicarAgenda(); resumir(); }
+    else if (alvo.id === 'kanban-user-select') { recontarEtapas(); resumir(); }
+    else if (alvo.id === 'kanban-column-select') {
+      $('#kanban-column-id').value = alvo.value;
+      const contagem = $('#kanban-column-count');
+      const m = alvo.value && alvo.selectedOptions[0].text.match(/\((\d+) contatos?\)/);
+      contagem.classList.toggle('hidden', !m);
+      contagem.textContent = m ? `${m[1]} contato${+m[1] !== 1 ? 's' : ''} nesta etapa` : '';
+      resumir();
+    } else if (alvo.matches('.manual-contact-checkbox')) {
+      if (alvo.checked) manualSelecionados.add(alvo.dataset.id); else manualSelecionados.delete(alvo.dataset.id);
+      contarManuais();
+      resumir();
+    } else if (alvo.matches('#categories-list .category-checkbox')) {
+      if (alvo.checked) categoriasSelecionadas.add(alvo.dataset.id); else categoriasSelecionadas.delete(alvo.dataset.id);
+      resumirCategorias();
+      resumir();
+    } else if (alvo.id === 'csv-file') {
+      // O arquivo é lido só no navegador, para contar as linhas (nada é enviado).
+      const arquivo = alvo.files[0];
+      const resultado = $('#csv-validation-result');
+      if (!arquivo) { contatosCsv = 0; resultado.classList.add('hidden'); resumir(); return; }
+      arquivo.text().then((texto) => {
+        contatosCsv = Math.max(0, texto.split(/\r?\n/).filter((l) => /\d{8,}/.test(l.replace(/\D/g, ''))).length);
+        resultado.className = contatosCsv
+          ? 'rounded-lg border px-3 py-2 text-xs bg-green-50 border-green-200 text-green-700'
+          : 'rounded-lg border px-3 py-2 text-xs bg-red-50 border-red-200 text-red-700';
+        resultado.textContent = contatosCsv
+          ? `✓ ${contatosCsv} contato${contatosCsv !== 1 ? 's' : ''} válido${contatosCsv !== 1 ? 's' : ''} carregado${contatosCsv !== 1 ? 's' : ''}`
+          : 'Nenhum contato válido encontrado. Use as colunas "nome" e "whatsapp".';
+        resumir();
+      });
+    } else if (alvo.matches('#modal-image-input, #modal-audio-input, #modal-video-input, #modal-document-input')) {
+      // Arquivo escolhido de verdade: entra no pool com nome e tamanho, sem upload.
+      if (alvo.files[0]) itemDeArquivo(alvo.id.split('-')[1], alvo.files[0]);
+      alvo.value = '';
+    } else if (alvo.matches('.media-item-simple input[type="file"]') && alvo.files[0]) {
+      const el = alvo.closest('.media-item-simple');
+      el.dataset.tamanho = alvo.files[0].size;
+      descricao(el).textContent = `${alvo.files[0].name} (${tamanhoDoArquivo(alvo.files[0].size)})`;
+      $('.media-item-content .text-gray-600', el).textContent = `Arquivo: ${alvo.files[0].name}`;
+      contarPool();
+    } else if (alvo.matches('input[name="instance_ids"], #tag-select, #lot-size-selected')) {
+      resumir();
+    } else if (alvo.matches('.new-category-contact-checkbox')) {
+      const n = $$('.new-category-contact-checkbox:checked').length;
+      $('#new-category-count').textContent = `${n} contato${n !== 1 ? 's' : ''} selecionado${n !== 1 ? 's' : ''}`;
+    } else if (alvo.matches('.edit-contact-checkbox')) {
+      contarEdicao();
+    }
+  });
+
+  let timerManual;
+  document.addEventListener('input', (ev) => {
+    const alvo = ev.target;
+    if (alvo.id === 'search-campaigns') { busca = alvo.value.trim().toLowerCase(); aplicarListagem(); }
+    else if (alvo.closest('#campaign-form') && ['campaign-name', 'msg-delay-min', 'msg-delay-max-min', 'lot-pause-minutes', 'lot-pause-max-minutes', 'safety-every', 'safety-pause', 'scheduled-date', 'recurring-time', 'recurring-start-date', 'recurring-end-date', 'recurring-month-day'].includes(alvo.id)) resumir();
+    else if (alvo.matches('.media-item-simple textarea[data-field="content"]')) {
+      const v = alvo.value;
+      descricao(alvo.closest('.media-item-simple')).textContent = v ? v.substring(0, 60) + (v.length > 60 ? '...' : '') : 'Clique para editar texto';
+      resumir();
+    } else if (alvo.id === 'manual-contacts-search') {
+      clearTimeout(timerManual);
+      timerManual = setTimeout(() => {
+        const q = alvo.value.trim().toLowerCase();
+        const lista = $('#manual-contacts-list');
+        let visiveis = 0;
+        for (const l of $$('label', lista)) { const ok = !q || l.textContent.toLowerCase().includes(q); l.style.display = ok ? '' : 'none'; if (ok) visiveis += 1; }
+        const aviso = $('.no-results-message', lista);
+        if (!visiveis && !aviso) {
+          // Mesma marcação da dica "Selecione..." da lista de categorias, com a classe do app.
+          const el = document.createRange().createContextualFragment(placeholderCategorias).firstElementChild;
+          el.classList.add('no-results-message');
+          el.textContent = 'Nenhum contato encontrado.';
+          lista.append(el);
+        } else if (visiveis && aviso) aviso.remove();
+      }, 300);
+    } else if (alvo.id === 'campaign-quick-search') filtrarRespostas();
+    else if (alvo.id === 'new-category-search' || alvo.id === 'edit-category-search') {
+      const q = alvo.value.trim().toLowerCase();
+      const lista = alvo.id === 'new-category-search' ? '#new-category-contacts' : '#edit-category-contacts';
+      for (const item of $$(`${lista} .contact-item`)) item.style.display = !q || item.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+    }
+  });
+
+  form.addEventListener('submit', criarCampanha);
+
+  aplicarListagem();
+})();
+</script>
+</body></html>

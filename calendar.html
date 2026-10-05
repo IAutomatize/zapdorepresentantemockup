@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Calendário - Zap do Representante</title>
+    
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    
+    
+    
+    
+    
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
+    <link rel="stylesheet" href="css/new-design-vars.css">
+    
+    
+    <style data-mockup-css="dist/calendar/calendar.css">.mvp-page[data-v-7efa6c0f]{min-height:calc(100vh - 56px);animation:viewIn-7efa6c0f .3s ease both}.title-row[data-v-7efa6c0f]{display:flex;align-items:center;gap:8px;margin-bottom:10px}.title-row i[data-v-7efa6c0f]{font-size:22px;color:var(--ds-text)}.title-row h1[data-v-7efa6c0f]{margin:0;font-size:26px;color:var(--ds-text);font-weight:700}.glass[data-v-7efa6c0f]{background:rgba(var(--ds-glass-rgb),.55);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid var(--ds-glass-border);box-shadow:var(--ds-shadow),inset 0 1px rgba(var(--ds-glass-rgb),.7)}.toolbar[data-v-7efa6c0f]{border-radius:14px;padding:12px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.btn[data-v-7efa6c0f]{border:none;cursor:pointer;border-radius:8px}.subtle[data-v-7efa6c0f]{padding:8px 14px;border:1px solid var(--ds-border);background:rgba(var(--ds-glass-rgb),.7);color:var(--ds-text-soft);font-weight:600;font-size:12px}.icon[data-v-7efa6c0f]{width:32px;height:32px;padding:0}.icon i[data-v-7efa6c0f]{font-size:16px}.period[data-v-7efa6c0f]{flex:1;min-width:190px;font-size:22px;text-transform:capitalize;color:var(--ds-text);font-weight:600}.seg[data-v-7efa6c0f]{display:flex;gap:2px;background:var(--ds-surface-2);border-radius:9px;padding:2px}.seg-btn[data-v-7efa6c0f]{border:none;border-radius:7px;background:transparent;padding:7px 12px;font-size:12px;font-weight:700;color:var(--ds-text-muted);text-transform:capitalize;cursor:pointer}.seg-btn.active[data-v-7efa6c0f]{background:var(--ds-surface);color:var(--ds-text);box-shadow:var(--ds-shadow)}.primary[data-v-7efa6c0f]{background:var(--ds-primary);color:var(--ds-primary-contrast);padding:8px 18px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;box-shadow:0 2px 8px #2196f34d}.danger[data-v-7efa6c0f]{background:var(--ds-danger);color:#fff;padding:8px 14px}.panel[data-v-7efa6c0f]{border-radius:16px;overflow:hidden}.weekdays[data-v-7efa6c0f]{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--ds-border)}.weekdays>div[data-v-7efa6c0f]{text-align:center;padding:10px;font-size:11px;font-weight:700;color:var(--ds-text-muted)}.month-grid[data-v-7efa6c0f]{display:grid;grid-template-columns:repeat(7,1fr)}.cell[data-v-7efa6c0f]{min-height:88px;padding:7px;border-right:1px solid var(--ds-border);border-bottom:1px solid var(--ds-border);cursor:pointer}.cell.other[data-v-7efa6c0f]{opacity:.35}.cell.today[data-v-7efa6c0f]{background:var(--ds-primary-soft)}.num[data-v-7efa6c0f]{font-size:12px;color:var(--ds-text-soft);font-weight:600;margin-bottom:3px}.todayNum[data-v-7efa6c0f]{width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--ds-primary);color:#fff}.pill[data-v-7efa6c0f]{color:#fff;font-size:9px;font-weight:600;padding:1px 5px;border-radius:4px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.more[data-v-7efa6c0f]{font-size:9px;color:var(--ds-text-muted)}.week-head[data-v-7efa6c0f],.wr[data-v-7efa6c0f]{display:grid;grid-template-columns:44px repeat(7,1fr)}.wh[data-v-7efa6c0f]{text-align:center;padding:8px 6px;border-bottom:1px solid var(--ds-border)}.wd[data-v-7efa6c0f]{font-size:10px;color:var(--ds-text-muted);font-weight:700}.wn[data-v-7efa6c0f]{font-size:14px;color:var(--ds-text);font-weight:700}.tn[data-v-7efa6c0f]{width:24px;height:24px;border-radius:999px;margin:2px auto 0;display:inline-flex;align-items:center;justify-content:center;background:var(--ds-primary);color:#fff;font-size:12px}.week-body[data-v-7efa6c0f]{max-height:calc(100vh - 300px);overflow-y:auto}.wr[data-v-7efa6c0f]{min-height:42px;border-bottom:1px solid var(--ds-border)}.hh[data-v-7efa6c0f]{text-align:right;padding:3px 6px;font-size:10px;color:var(--ds-text-muted)}.slot[data-v-7efa6c0f]{border-left:1px solid var(--ds-border);position:relative;cursor:pointer}.se[data-v-7efa6c0f]{position:absolute;left:2px;right:2px;border-radius:5px;color:#fff;font-size:10px;font-weight:600;padding:3px 5px;overflow:hidden}.day-head[data-v-7efa6c0f]{padding:10px 14px;border-bottom:1px solid var(--ds-border);font-size:13px;font-weight:600;color:var(--ds-text);text-transform:capitalize}.list-wrap[data-v-7efa6c0f]{display:flex;flex-direction:column;gap:12px}.filters[data-v-7efa6c0f]{border-radius:12px;padding:8px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.metrics-row[data-v-7efa6c0f]{border-radius:12px;padding:10px 14px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.metric[data-v-7efa6c0f]{border:1px solid var(--ds-border);border-radius:10px;background:rgba(var(--ds-glass-rgb),.55);padding:8px 10px;display:flex;align-items:baseline;justify-content:space-between}.metric span[data-v-7efa6c0f]{font-size:10px;color:var(--ds-text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.02em}.metric strong[data-v-7efa6c0f]{font-size:16px;color:var(--ds-text);line-height:1}.search[data-v-7efa6c0f]{position:relative;min-width:180px;flex:1;max-width:280px}.search i[data-v-7efa6c0f]{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ds-text-muted)}.search input[data-v-7efa6c0f],.filters select[data-v-7efa6c0f],.calendar-modal input[data-v-7efa6c0f],.calendar-modal select[data-v-7efa6c0f],.calendar-modal textarea[data-v-7efa6c0f]{width:100%;border-radius:10px;border:1px solid var(--ds-input-border);background:var(--ds-input-bg);color:var(--ds-input-text);padding:8px 10px;font-size:12px}.search input[data-v-7efa6c0f]{padding-left:34px}.group[data-v-7efa6c0f]{margin-bottom:4px}.ghead[data-v-7efa6c0f]{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--ds-border);margin-bottom:8px;font-size:12px;font-weight:600;color:var(--ds-text);text-transform:capitalize}.ghead small[data-v-7efa6c0f]{color:var(--ds-text-muted);font-size:10px;font-weight:500;text-transform:none}.card[data-v-7efa6c0f]{background:rgba(var(--ds-glass-rgb),.65);border:1px solid var(--ds-glass-border);border-left:4px solid #4A6FA5;border-radius:12px;padding:12px 14px;margin-bottom:8px}.ctop[data-v-7efa6c0f]{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.st[data-v-7efa6c0f]{font-size:9px;font-weight:700;color:var(--ds-success);background:var(--ds-success-soft);border-radius:5px;padding:2px 8px}.acts[data-v-7efa6c0f]{display:flex;gap:6px}.acts button[data-v-7efa6c0f]{width:24px;height:24px;border-radius:6px;border:none;background:transparent;color:var(--ds-text-muted);cursor:pointer}.card h4[data-v-7efa6c0f]{margin:0 0 4px;font-size:13px;font-weight:700;color:var(--ds-text)}.card p[data-v-7efa6c0f]{margin:0 0 8px;color:var(--ds-text-soft);font-size:11px}.meta[data-v-7efa6c0f]{color:var(--ds-text-soft);font-size:10px}.calendar-modal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;background:var(--ds-overlay);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px}.calendar-modal[data-v-7efa6c0f]{width:100%;max-width:650px;max-height:90vh;overflow-y:auto;background:var(--ds-modal-bg);border:1px solid var(--ds-border);border-radius:24px;box-shadow:0 16px 64px #0000002e;padding:32px;animation:modalIn-7efa6c0f .3s cubic-bezier(.4,0,.2,1);position:relative;z-index:2147483001}.mhead[data-v-7efa6c0f]{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;color:var(--ds-text);font-weight:700;font-size:15px}.mhead button[data-v-7efa6c0f],.ph button[data-v-7efa6c0f]{border:none;background:transparent;color:var(--ds-text-muted);font-size:18px;cursor:pointer}.mvp-modal-head>div[data-v-7efa6c0f]{font-size:18px;font-weight:700;letter-spacing:0;color:var(--ds-text);display:flex;align-items:center;gap:8px}.mvp-section-title[data-v-7efa6c0f]{font-size:11px;font-weight:700;color:var(--ds-text-muted);text-transform:uppercase;letter-spacing:1px;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--ds-border)}.mvp-field-label[data-v-7efa6c0f]{margin:0 0 6px;color:var(--ds-text-soft);font-size:12px;font-weight:600}.mvp-required[data-v-7efa6c0f]{color:var(--ds-danger)}.mvp-input[data-v-7efa6c0f]{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--ds-input-border);background:var(--ds-input-bg);font-size:14px;color:var(--ds-input-text);outline:none}.mvp-input[data-v-7efa6c0f]:focus{border-color:var(--ds-primary);box-shadow:0 0 0 2px var(--ds-primary-soft)}.mvp-r3[data-v-7efa6c0f]{gap:12px;margin-top:6px}.mvp-r2[data-v-7efa6c0f]{gap:12px}.mvp-add-tipo-row[data-v-7efa6c0f]{display:flex;gap:8px;margin-top:8px}.mvp-mini-primary[data-v-7efa6c0f]{padding:10px 14px}.colors[data-v-7efa6c0f]{display:flex;gap:10px;padding-top:8px}.colors button[data-v-7efa6c0f]{width:30px;height:30px;border-radius:999px;border:3px solid transparent;cursor:pointer;transition:all .15s ease}.colors button[data-v-7efa6c0f]:hover{transform:scale(1.08)}.colors button.on[data-v-7efa6c0f]{border-color:var(--ds-text);box-shadow:0 0 0 2px var(--ds-surface),0 0 0 4px currentColor}.mvp-contact-wrap[data-v-7efa6c0f]{position:relative}.mvp-contact-dropdown[data-v-7efa6c0f]{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--ds-surface);border:1px solid var(--ds-border);border-radius:12px;box-shadow:0 8px 24px #0000001a;z-index:8;padding:4px;max-height:200px;overflow-y:auto;animation:dropIn-7efa6c0f .15s ease}.mvp-contact-item[data-v-7efa6c0f]{padding:8px 12px;border-radius:8px;color:var(--ds-text-soft);cursor:pointer}.mvp-contact-item[data-v-7efa6c0f]:hover{background:var(--ds-surface-2)}.mvp-contact-name[data-v-7efa6c0f]{font-weight:600;font-size:13px}.mvp-contact-phone[data-v-7efa6c0f]{font-size:11px;color:var(--ds-text-muted)}.mvp-contatos-chips[data-v-7efa6c0f]{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.mvp-chip[data-v-7efa6c0f]{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:var(--ds-primary-soft);font-size:12px;font-weight:500;color:var(--ds-text-soft)}.mvp-chip button[data-v-7efa6c0f]{border:none;background:transparent;color:var(--ds-text-muted);padding:0;cursor:pointer;display:inline-flex;align-items:center}.mvp-reminder-card[data-v-7efa6c0f]{border:1px solid var(--ds-border);border-radius:16px;padding:18px 20px;background:var(--ds-surface-2)}.mvp-reminder-card.user[data-v-7efa6c0f]{border-left:3px solid var(--ds-primary)}.mvp-reminder-card.client[data-v-7efa6c0f]{border-left:3px solid var(--ds-success)}.mvp-reminder-card.user .mvp-reminder-head .left i[data-v-7efa6c0f]{color:var(--ds-primary)}.mvp-reminder-card.client .mvp-reminder-head .left i[data-v-7efa6c0f]{color:var(--ds-success)}.mvp-reminder-head[data-v-7efa6c0f]{display:flex;align-items:center;gap:8px;margin-bottom:10px}.mvp-reminder-head .left[data-v-7efa6c0f]{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ds-text)}.mvp-reminder-head .hint[data-v-7efa6c0f]{margin-left:auto;font-size:11px;font-weight:500;color:var(--ds-text-muted)}.mvp-when-title[data-v-7efa6c0f]{font-size:11px;font-weight:700;margin-bottom:8px;color:var(--ds-text-muted);text-transform:uppercase;letter-spacing:.5px}.mvp-tempos-grid[data-v-7efa6c0f]{display:grid;grid-template-columns:repeat(2,1fr);gap:2px 10px}.mvp-tempo-check[data-v-7efa6c0f]{display:flex;align-items:center;gap:8px;cursor:pointer;color:var(--ds-text-soft);font-size:13px;padding:6px 0}.mvp-hidden-check[data-v-7efa6c0f]{display:none}.mvp-check-box[data-v-7efa6c0f]{width:16px;height:16px;border-radius:4px;border:2px solid var(--ds-border-strong);background:var(--ds-surface);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0;transition:all .15s ease}.mvp-check-box.on.user[data-v-7efa6c0f]{border-color:var(--ds-primary);background:var(--ds-primary)}.mvp-check-box.on.client[data-v-7efa6c0f]{border-color:var(--ds-success);background:var(--ds-success)}.mvp-custom-grid[data-v-7efa6c0f]{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}.mvp-rem-grid2[data-v-7efa6c0f]{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}.mvp-client-toggle[data-v-7efa6c0f]{display:flex;align-items:center;gap:10px;color:var(--ds-text-soft);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:10px}.mvp-warning[data-v-7efa6c0f]{padding:12px 16px;border-radius:12px;background:var(--ds-warning-soft);border:1px solid rgba(246,173,85,.2);font-size:12px;color:var(--ds-warning)}.mvp-target-actions[data-v-7efa6c0f]{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--ds-text-muted);font-size:12px;font-weight:600}.mvp-target-actions span[data-v-7efa6c0f]{flex:1}.mvp-target-actions button[data-v-7efa6c0f]{border:1px solid rgba(72,187,120,.24);background:var(--ds-success-soft);color:var(--ds-success);border-radius:999px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer}.mvp-target-actions button[data-v-7efa6c0f]:hover{background:#48bb7824}.mvp-client-target-list[data-v-7efa6c0f]{display:grid;gap:8px;margin-bottom:10px}.mvp-client-target[data-v-7efa6c0f]{display:flex;align-items:center;gap:10px;border:1px solid var(--ds-border);background:rgba(var(--ds-glass-rgb),.72);border-radius:12px;padding:10px 12px;cursor:pointer}.mvp-client-target[data-v-7efa6c0f]:hover{border-color:#48bb7852;background:#48bb780a}.mvp-client-target strong[data-v-7efa6c0f]{display:block;color:var(--ds-text);font-size:13px}.mvp-client-target small[data-v-7efa6c0f]{display:block;margin-top:2px;color:var(--ds-text-muted);font-size:11px}.mvp-msg-area[data-v-7efa6c0f]{min-height:70px;resize:vertical;font-family:inherit}.mvp-var-chips[data-v-7efa6c0f]{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.mvp-var-chips button[data-v-7efa6c0f]{padding:2px 8px;border-radius:6px;background:var(--ds-success-soft);font-size:11px;font-weight:600;color:var(--ds-success);border:none;cursor:pointer}.mvp-preview[data-v-7efa6c0f]{margin-top:10px;padding:12px 16px;border-radius:12px;background:var(--ds-surface-2);border:1px solid var(--ds-border)}.mvp-preview .title[data-v-7efa6c0f]{font-size:10px;font-weight:700;color:var(--ds-text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}.mvp-preview .text[data-v-7efa6c0f]{font-size:13px;color:var(--ds-text-soft);line-height:1.5;white-space:pre-wrap}.mvp-details-area[data-v-7efa6c0f]{min-height:80px;resize:vertical}.mvp-mt-12[data-v-7efa6c0f]{margin-top:12px}.mvp-cancel[data-v-7efa6c0f]{padding:10px 20px;border-radius:12px;background:var(--ds-surface-2);font-size:13px}.ma[data-v-7efa6c0f]{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.popup[data-v-7efa6c0f]{position:fixed;z-index:99999}.pop[data-v-7efa6c0f]{min-width:260px;max-width:300px;border-left:4px solid #4A6FA5;background:var(--ds-modal-bg);border:1px solid var(--ds-border);border-radius:12px;box-shadow:0 8px 32px #0000002e;padding:12px}.ph[data-v-7efa6c0f]{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;color:var(--ds-text)}.pb[data-v-7efa6c0f]{color:var(--ds-text-soft);font-size:10px;margin-bottom:5px}.pa[data-v-7efa6c0f]{display:flex;gap:8px;margin-top:8px;padding-top:10px;border-top:1px solid var(--ds-border)}.confirm[data-v-7efa6c0f]{width:100%;max-width:360px;background:var(--ds-modal-bg);border:1px solid var(--ds-border);border-radius:18px;box-shadow:0 16px 64px #0000002e;padding:18px}.confirm h3[data-v-7efa6c0f]{margin:0 0 8px;color:var(--ds-text);display:flex;align-items:center;gap:8px}.confirm h3 i[data-v-7efa6c0f]{color:var(--ds-danger)}.confirm p[data-v-7efa6c0f]{margin:0 0 5px;color:var(--ds-text-soft);font-size:12px}.confirm small[data-v-7efa6c0f]{color:var(--ds-text-muted);font-size:10px}@keyframes viewIn-7efa6c0f{0%{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes modalIn-7efa6c0f{0%{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes dropIn-7efa6c0f{0%{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}@media (max-width: 768px){.title-row h1[data-v-7efa6c0f]{font-size:22px}.period[data-v-7efa6c0f]{min-width:100%;font-size:16px}.r3[data-v-7efa6c0f],.r2[data-v-7efa6c0f],.mvp-custom-grid[data-v-7efa6c0f],.mvp-rem-grid2[data-v-7efa6c0f]{grid-template-columns:1fr}.metrics-row[data-v-7efa6c0f]{grid-template-columns:repeat(2,minmax(0,1fr))}.calendar-modal[data-v-7efa6c0f]{padding:20px;border-radius:18px}.mvp-modal-head>div[data-v-7efa6c0f]{font-size:16px}}.calendar-app{width:100%;height:100%;min-height:calc(100vh - 200px)}
+</style>
+    <link rel="stylesheet" href="css/mobile-polish.css">
+<link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="stylesheet" href="css/account-access.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
+<body class="font-['Inter'] dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 bg-theme-surface">
+
+    <div class="min-h-screen w-full relative dashboard-modern-shell">
+        <div class="glow-blob" style="
+                width: 600px;
+                height: 600px;
+                top: -200px;
+                left: -180px;
+                background: radial-gradient(circle, rgba(180,200,220,0.35) 0%, transparent 70%);
+            "></div>
+        <div class="glow-blob" style="
+                width: 700px;
+                height: 700px;
+                bottom: -260px;
+                right: -220px;
+                background: radial-gradient(circle, rgba(197,213,228,0.3) 0%, transparent 70%);
+                animation-delay: 5s;
+            "></div>
+
+        <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+                background: rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                border-right: 1px solid rgba(255, 255, 255, 0.5);
+            " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item sidebar-item-active" title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+        <main class="relative z-10 min-h-screen" style="padding: 28px 32px 28px 104px;">
+            <div id="calendar-app" class="h-full" data-v-app=""><div class="calendar-app"><div data-v-7efa6c0f="" class="mvp-page"><div data-v-7efa6c0f="" class="title-row"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button><i data-v-7efa6c0f="" class="ri-calendar-line"></i><h1 data-v-7efa6c0f="">Calendário</h1></div><div data-v-7efa6c0f="" class="toolbar glass"><button data-v-7efa6c0f="" type="button" class="btn subtle">Hoje</button><button data-v-7efa6c0f="" type="button" class="btn subtle icon"><i data-v-7efa6c0f="" class="ri-arrow-left-s-line"></i></button><button data-v-7efa6c0f="" type="button" class="btn subtle icon"><i data-v-7efa6c0f="" class="ri-arrow-right-s-line"></i></button><div data-v-7efa6c0f="" class="period">outubro de 2026</div><div data-v-7efa6c0f="" class="seg"><button data-v-7efa6c0f="" type="button" class="seg-btn active">Mês</button><button data-v-7efa6c0f="" type="button" class="seg-btn">semana</button><button data-v-7efa6c0f="" type="button" class="seg-btn">dia</button><button data-v-7efa6c0f="" type="button" class="seg-btn">lista</button></div><button data-v-7efa6c0f="" type="button" class="btn primary"><i data-v-7efa6c0f="" class="ri-add-line"></i> Novo Evento</button></div><div data-v-7efa6c0f="" class="panel glass"><div data-v-7efa6c0f="" class="weekdays"><div data-v-7efa6c0f="">DOM</div><div data-v-7efa6c0f="">SEG</div><div data-v-7efa6c0f="">TER</div><div data-v-7efa6c0f="">QUA</div><div data-v-7efa6c0f="">QUI</div><div data-v-7efa6c0f="">SEX</div><div data-v-7efa6c0f="">SÁB</div></div><div data-v-7efa6c0f="" class="month-grid"><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">27</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">28</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">29</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">30</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">1</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">09:00 Visita – Mercado Bom Preço</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(183, 148, 244);">14:30 Alinhamento com a fábrica</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">2</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(246, 173, 85);">08:00 Entrega – Distribuidora Litoral</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(236, 201, 75);">16:00 Ligar para Juliana Ribeiro</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">3</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">4</div></div><div data-v-7efa6c0f="" class="cell today"><div data-v-7efa6c0f="" class="num todayNum">5</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(183, 148, 244);">08:30 Reunião semanal da equipe</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">10:30 Visita – Padaria Estrela</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(236, 201, 75);">15:00 Follow-up: proposta do Atacadão do Vale</div><div data-v-7efa6c0f="" class="more">+1 mais</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">6</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">09:00 Visita – Empório Central</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(246, 173, 85);">14:00 Degustação no Supermercado Avenida</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">7</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(183, 148, 244);">11:00 Reunião – Rede Econômica</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(236, 201, 75);">16:00 Ligar para Pedro Almeida</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">8</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">09:30 Visita – Carlos Mendes</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(72, 187, 120);">15:00 Entrega – Mariana Costa (40 caixas)</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">9</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">10:00 Visita – Hortifruti Verde Vida</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(72, 187, 120);">15:00 Fechamento semanal de pedidos</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">10</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">11</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">12</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(245, 101, 101);">08:00 Feriado – sem expediente</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">13</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">09:00 Visita – Fernanda Oliveira (loja nova)</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">14</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(246, 173, 85);">14:00 Treinamento de produto: achocolatados</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">15</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">10:00 Visita – Patrícia Gomes</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">16</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(183, 148, 244);">09:00 Reunião mensal com o gerente regional</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">17</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">18</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">19</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(183, 148, 244);">08:30 Reunião semanal da equipe</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">20</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">10:30 Visita – Atacadão do Vale</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">21</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">22</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">14:00 Visita – Café Aroma</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">23</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">24</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">25</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">26</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(183, 148, 244);">08:30 Reunião semanal da equipe</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">27</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(74, 111, 165);">09:00 Visita – Distribuidora Litoral</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">28</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">29</div><div data-v-7efa6c0f="" class="pill" style="background: rgb(72, 187, 120);">16:00 Fechamento do mês: relatório de vendas</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">30</div></div><div data-v-7efa6c0f="" class="cell"><div data-v-7efa6c0f="" class="num">31</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">1</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">2</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">3</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">4</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">5</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">6</div></div><div data-v-7efa6c0f="" class="cell other"><div data-v-7efa6c0f="" class="num">7</div></div></div></div></div></div></div>
+        </main>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <style>
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+    
+
+
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div>
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/calendar.html), com o CSS do Vue (dist/calendar/calendar.css) já embutido
+     num <style> pela própria captura, porque esse arquivo não existe no protótipo.
+     Para recapturar sem perder este bloco (zsh; a ação js troca o <link> pelo <style>):
+       CSS='js:(async()=>{const l=[...document.querySelectorAll("link")].find(x=>x.href.includes("calendar/calendar.css"));const css=await (await fetch(l.href)).text();const s=document.createElement("style");s.setAttribute("data-mockup-css","dist/calendar/calendar.css");s.textContent=css;l.replaceWith(s);return 1})()'
+       node tools/capture/capture.mjs calendar "/calendar.html" 7000 "$CSS"
+       node tools/capture/montar.mjs calendar
+     Os moldes abaixo vêm de outras capturas da mesma tela, todas com "$CSS" antes das ações:
+       molde-semana        calendar-semana       "@.seg-btn:nth-child(2)"
+       molde-dia           calendar-dia          "@.seg-btn:nth-child(3)"
+       molde-lista         calendar-lista        "@.seg-btn:nth-child(4)"
+       molde-popup         calendar-popup        clique na 2ª pílula de hoje
+       molde-modal         calendar-editar       popup → Editar (evento com lembrete do cliente)
+       molde-excluir       calendar-excluir      popup → Excluir
+       molde-modal-extras  calendar-novo-extras  Novo Evento + duração personalizada, novo tipo,
+                                                  lembrete personalizado, cliente sem contato e busca "Ma" -->
+<template id="molde-semana"><div data-v-7efa6c0f="" class="panel glass"><div data-v-7efa6c0f="" class="week-head"><div data-v-7efa6c0f=""></div><div data-v-7efa6c0f="" class="wh"><div data-v-7efa6c0f="" class="wd">DOM</div><div data-v-7efa6c0f="" class="wn">4</div></div><div data-v-7efa6c0f="" class="wh"><div data-v-7efa6c0f="" class="wd">SEG</div><div data-v-7efa6c0f="" class="wn tn">5</div></div><div data-v-7efa6c0f="" class="wh"><div data-v-7efa6c0f="" class="wd">TER</div><div data-v-7efa6c0f="" class="wn">6</div></div><div data-v-7efa6c0f="" class="wh"><div data-v-7efa6c0f="" class="wd">QUA</div><div data-v-7efa6c0f="" class="wn">7</div></div><div data-v-7efa6c0f="" class="wh"><div data-v-7efa6c0f="" class="wd">QUI</div><div data-v-7efa6c0f="" class="wn">8</div></div><div data-v-7efa6c0f="" class="wh"><div data-v-7efa6c0f="" class="wd">SEX</div><div data-v-7efa6c0f="" class="wn">9</div></div><div data-v-7efa6c0f="" class="wh"><div data-v-7efa6c0f="" class="wd">SÁB</div><div data-v-7efa6c0f="" class="wn">10</div></div></div><div data-v-7efa6c0f="" class="week-body"><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">00:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">01:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">02:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">03:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">04:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">05:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">06:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">07:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">08:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 30px; height: 43px; background: rgb(183, 148, 244);">08:30 Reunião semanal da equipe</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">09:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 88px; background: rgb(74, 111, 165);">09:00 Visita – Empório Central</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 30px; height: 58px; background: rgb(74, 111, 165);">09:30 Visita – Carlos Mendes</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">10:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 30px; height: 58px; background: rgb(74, 111, 165);">10:30 Visita – Padaria Estrela</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 58px; background: rgb(74, 111, 165);">10:00 Visita – Hortifruti Verde Vida</div></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">11:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 58px; background: rgb(183, 148, 244);">11:00 Reunião – Rede Econômica</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">12:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">13:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">14:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 178px; background: rgb(246, 173, 85);">14:00 Degustação no Supermercado Avenida</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">15:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 28px; background: rgb(236, 201, 75);">15:00 Follow-up: proposta do Atacadão do Vale</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 58px; background: rgb(72, 187, 120);">15:00 Entrega – Mariana Costa (40 caixas)</div></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 58px; background: rgb(72, 187, 120);">15:00 Fechamento semanal de pedidos</div></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">16:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 20px; background: rgb(236, 201, 75);">16:00 Ligar para Pedro Almeida</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">17:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 30px; height: 28px; background: rgb(72, 187, 120);">17:30 Enviar pedidos da semana para a fábrica</div></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">18:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">19:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">20:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">21:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">22:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">23:00</div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div><div data-v-7efa6c0f="" class="slot"></div></div></div></div></template>
+<template id="molde-dia"><div data-v-7efa6c0f="" class="panel glass"><div data-v-7efa6c0f="" class="day-head">segunda-feira, 5 de outubro</div><div data-v-7efa6c0f="" class="week-body"><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">00:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">01:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">02:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">03:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">04:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">05:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">06:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">07:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">08:00</div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 30px; height: 43px; background: rgb(183, 148, 244);">08:30 Reunião semanal da equipe</div></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">09:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">10:00</div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 30px; height: 58px; background: rgb(74, 111, 165);">10:30 Visita – Padaria Estrela</div></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">11:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">12:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">13:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">14:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">15:00</div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 0px; height: 28px; background: rgb(236, 201, 75);">15:00 Follow-up: proposta do Atacadão do Vale</div></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">16:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">17:00</div><div data-v-7efa6c0f="" class="slot"><div data-v-7efa6c0f="" class="se" style="top: 30px; height: 28px; background: rgb(72, 187, 120);">17:30 Enviar pedidos da semana para a fábrica</div></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">18:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">19:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">20:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">21:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">22:00</div><div data-v-7efa6c0f="" class="slot"></div></div><div data-v-7efa6c0f="" class="wr"><div data-v-7efa6c0f="" class="hh">23:00</div><div data-v-7efa6c0f="" class="slot"></div></div></div></div></template>
+<template id="molde-lista"><div data-v-7efa6c0f="" class="list-wrap"><div data-v-7efa6c0f="" class="glass filters"><div data-v-7efa6c0f="" class="search"><i data-v-7efa6c0f="" class="ri-search-line"></i><input data-v-7efa6c0f="" placeholder="Buscar evento..."></div><select data-v-7efa6c0f=""><option value="todos" data-v-7efa6c0f="">Todos os Tipos</option><option value="compromisso" data-v-7efa6c0f="">Compromisso</option><option value="reuniao" data-v-7efa6c0f="">Reunião</option><option value="evento" data-v-7efa6c0f="">Evento</option><option value="palestra" data-v-7efa6c0f="">Palestra</option></select><select data-v-7efa6c0f=""><option data-v-7efa6c0f="" value="todos">Todos os Status</option><option data-v-7efa6c0f="" value="agendado">Agendado</option><option data-v-7efa6c0f="" value="hoje">Hoje</option><option data-v-7efa6c0f="" value="atrasado">Atrasado</option></select><select data-v-7efa6c0f=""><option data-v-7efa6c0f="" value="todos">Todos os Usuários</option><option data-v-7efa6c0f="" value="Ana Souza">Ana Souza</option></select></div><div data-v-7efa6c0f="" class="glass metrics-row"><div data-v-7efa6c0f="" class="metric"><span data-v-7efa6c0f="">Total</span><strong data-v-7efa6c0f="">40</strong></div><div data-v-7efa6c0f="" class="metric"><span data-v-7efa6c0f="">Agendados</span><strong data-v-7efa6c0f="">23</strong></div><div data-v-7efa6c0f="" class="metric"><span data-v-7efa6c0f="">Hoje</span><strong data-v-7efa6c0f="">4</strong></div><div data-v-7efa6c0f="" class="metric"><span data-v-7efa6c0f="">Atrasados</span><strong data-v-7efa6c0f="">13</strong></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">quarta-feira, 18 de novembro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Visita – Supermercado Avenida</h4><div data-v-7efa6c0f="" class="meta">⏰ 09:30 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">terça-feira, 10 de novembro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(246, 173, 85);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Degustação no Empório Central</h4><div data-v-7efa6c0f="" class="meta">⏰ 14:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">quinta-feira, 5 de novembro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(183, 148, 244);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Reunião – Rede Econômica (revisão)</h4><div data-v-7efa6c0f="" class="meta">⏰ 10:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">terça-feira, 3 de novembro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Visita – Mercado Bom Preço</h4><div data-v-7efa6c0f="" class="meta">⏰ 09:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">quinta-feira, 29 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(72, 187, 120);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Fechamento do mês: relatório de vendas</h4><div data-v-7efa6c0f="" class="meta">⏰ 16:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">terça-feira, 27 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Visita – Distribuidora Litoral</h4><div data-v-7efa6c0f="" class="meta">⏰ 09:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">segunda-feira, 26 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(183, 148, 244);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Reunião semanal da equipe</h4><p data-v-7efa6c0f="">"Metas da semana e carteira de clientes"</p><div data-v-7efa6c0f="" class="meta">⏰ 08:30 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">quinta-feira, 22 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Visita – Café Aroma</h4><p data-v-7efa6c0f="">"Primeiro pedido"</p><div data-v-7efa6c0f="" class="meta">⏰ 14:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">terça-feira, 20 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Visita – Atacadão do Vale</h4><p data-v-7efa6c0f="">"Assinar o pedido trimestral"</p><div data-v-7efa6c0f="" class="meta">⏰ 10:30 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">segunda-feira, 19 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(183, 148, 244);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Reunião semanal da equipe</h4><p data-v-7efa6c0f="">"Metas da semana e carteira de clientes"</p><div data-v-7efa6c0f="" class="meta">⏰ 08:30 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">sexta-feira, 16 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(183, 148, 244);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Reunião mensal com o gerente regional</h4><p data-v-7efa6c0f="">"Resultados do mês e metas"</p><div data-v-7efa6c0f="" class="meta">⏰ 09:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">quinta-feira, 15 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Visita – Patrícia Gomes</h4><div data-v-7efa6c0f="" class="meta">⏰ 10:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">quarta-feira, 14 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(246, 173, 85);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Treinamento de produto: achocolatados</h4><p data-v-7efa6c0f="">"Treinamento da equipe de vendas"</p><div data-v-7efa6c0f="" class="meta">⏰ 14:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">terça-feira, 13 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Visita – Fernanda Oliveira (loja nova)</h4><p data-v-7efa6c0f="">"Levar a tabela de atacado"</p><div data-v-7efa6c0f="" class="meta">⏰ 09:00 · 👤 Ana Souza</div></div></div><div data-v-7efa6c0f="" class="group"><div data-v-7efa6c0f="" class="ghead"><div data-v-7efa6c0f="">segunda-feira, 12 de outubro</div><small data-v-7efa6c0f="">1 evento</small></div><div data-v-7efa6c0f="" class="card" style="border-left-color: rgb(245, 101, 101);"><div data-v-7efa6c0f="" class="ctop"><span data-v-7efa6c0f="" class="st">AGENDADO</span><div data-v-7efa6c0f="" class="acts"><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-edit-line"></i></button><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i></button></div></div><h4 data-v-7efa6c0f="">Feriado – sem expediente</h4><div data-v-7efa6c0f="" class="meta">⏰ 08:00 · 👤 Ana Souza</div></div></div></div></template>
+<template id="molde-popup"><div data-v-7efa6c0f="" class="popup" style="left: 278.266px; top: 345.5px;"><div data-v-7efa6c0f="" class="pop" style="border-left-color: rgb(74, 111, 165);"><div data-v-7efa6c0f="" class="ph"><strong data-v-7efa6c0f="">Visita – Padaria Estrela</strong><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-close-line"></i></button></div><div data-v-7efa6c0f="" class="pb">📅 segunda-feira, 5 de outubro · 10:30</div><div data-v-7efa6c0f="" class="pb">👤 Ana Souza</div><div data-v-7efa6c0f="" class="pb">📍 Rua das Palmeiras, 120 – São Paulo</div><div data-v-7efa6c0f="" class="pa"><button data-v-7efa6c0f="" type="button" class="btn subtle">Editar</button><button data-v-7efa6c0f="" type="button" class="btn danger">Excluir</button></div></div></div></template>
+<template id="molde-excluir"><div data-v-7efa6c0f="" class="calendar-modal-overlay confirm-overlay"><div data-v-7efa6c0f="" class="confirm"><h3 data-v-7efa6c0f=""><i data-v-7efa6c0f="" class="ri-delete-bin-line"></i> Excluir Evento</h3><p data-v-7efa6c0f="">Excluir evento <strong data-v-7efa6c0f="">"Visita – Padaria Estrela"</strong>?</p><small data-v-7efa6c0f="">Esta ação não pode ser desfeita.</small><div data-v-7efa6c0f="" class="ma"><button data-v-7efa6c0f="" type="button" class="btn subtle">Cancelar</button><button data-v-7efa6c0f="" type="button" class="btn danger">Excluir</button></div></div></div></template>
+<template id="molde-modal"><div data-v-7efa6c0f="" class="calendar-modal-overlay"><div data-v-7efa6c0f="" class="calendar-modal"><div data-v-7efa6c0f="" class="mhead mvp-modal-head"><div data-v-7efa6c0f=""><i data-v-7efa6c0f="" class="ri-edit-line"></i> Editar Evento</div><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-close-line"></i></button></div><div data-v-7efa6c0f="" class="mvp-section-title">Informações Básicas</div><div data-v-7efa6c0f="" class="mvp-field-label">Título <span data-v-7efa6c0f="" class="mvp-required">*</span></div><input data-v-7efa6c0f="" class="mvp-input"><div data-v-7efa6c0f="" class="r3 mvp-r3"><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Data <span data-v-7efa6c0f="" class="mvp-required">*</span></div><input data-v-7efa6c0f="" type="date" class="mvp-input"></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Hora <span data-v-7efa6c0f="" class="mvp-required">*</span></div><input data-v-7efa6c0f="" type="time" class="mvp-input"></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Duração</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="sem">Sem duração</option><option data-v-7efa6c0f="" value="15min">15 minutos</option><option data-v-7efa6c0f="" value="30min">30 minutos</option><option data-v-7efa6c0f="" value="45min">45 minutos</option><option data-v-7efa6c0f="" value="1h">1 hora</option><option data-v-7efa6c0f="" value="1h30">1 hora 30 min</option><option data-v-7efa6c0f="" value="2h">2 horas</option><option data-v-7efa6c0f="" value="3h">3 horas</option><option data-v-7efa6c0f="" value="dia">Dia inteiro</option><option data-v-7efa6c0f="" value="custom">Personalizado...</option></select></div></div><div data-v-7efa6c0f="" class="r2 mvp-r2" style="margin-top: 14px;"><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Tipo <span data-v-7efa6c0f="" class="mvp-required">*</span></div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="compromisso">📋 Compromisso</option><option data-v-7efa6c0f="" value="reuniao">👥 Reunião</option><option data-v-7efa6c0f="" value="evento">🎉 Evento</option><option data-v-7efa6c0f="" value="palestra">🎤 Palestra</option><option data-v-7efa6c0f="" value="__add__">➕ Adicionar novo tipo</option></select></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Cor</div><div data-v-7efa6c0f="" class="colors"><button data-v-7efa6c0f="" type="button" class="on" style="background: rgb(74, 111, 165); border-color: rgb(26, 26, 46); box-shadow: white 0px 0px 0px 2px, rgb(74, 111, 165) 0px 0px 0px 4px;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(72, 187, 120); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(246, 173, 85); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(245, 101, 101); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(183, 148, 244); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(236, 201, 75); border-color: transparent; box-shadow: none;"></button></div></div></div><div data-v-7efa6c0f="" class="mvp-field-label">Responsável</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="Ana Souza">Ana Souza</option></select><div data-v-7efa6c0f="" class="mvp-section-title">Participantes</div><div data-v-7efa6c0f="" class="mvp-field-label">Contato Vinculado</div><div data-v-7efa6c0f="" class="mvp-contact-wrap"><input data-v-7efa6c0f="" class="mvp-input" placeholder="Buscar contato..."></div><div data-v-7efa6c0f="" class="mvp-contatos-chips"><span data-v-7efa6c0f="" class="mvp-chip">Padaria Estrela <button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-close-line"></i></button></span></div><div data-v-7efa6c0f="" class="mvp-section-title">Lembretes</div><div data-v-7efa6c0f="" class="mvp-reminder-card user"><div data-v-7efa6c0f="" class="mvp-reminder-head"><div data-v-7efa6c0f="" class="left"><i data-v-7efa6c0f="" class="ri-notification-3-line"></i><span data-v-7efa6c0f="">Lembrete do Usuário</span></div><div data-v-7efa6c0f="" class="hint">quem conduz</div></div><div data-v-7efa6c0f="" class="mvp-when-title">Quando avisar</div><div data-v-7efa6c0f="" class="mvp-tempos-grid"><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box user"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">10 min antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box on user">✓</span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check" checked=""><span data-v-7efa6c0f="">30 min antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box user"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">1 hora antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box user"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">1 dia antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box user"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">Personalizado</span></label></div><div data-v-7efa6c0f="" class="mvp-rem-grid2"><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Enviar por</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="whatsapp">WhatsApp</option><option data-v-7efa6c0f="" value="email">E-mail</option><option data-v-7efa6c0f="" value="sms">SMS</option><option data-v-7efa6c0f="" value="sistema">Notificação do sistema</option></select></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Instância</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="inst-comercial">Comercial</option><option data-v-7efa6c0f="" value="inst-posvenda">Pós-venda</option></select></div></div><div data-v-7efa6c0f="" class="mvp-field-label">Enviar para</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="Ana Souza">Ana Souza</option></select></div><div data-v-7efa6c0f="" class="mvp-reminder-card client"><div data-v-7efa6c0f="" class="mvp-reminder-head"><div data-v-7efa6c0f="" class="left"><i data-v-7efa6c0f="" class="ri-user-heart-line"></i><span data-v-7efa6c0f="">Lembrete do Cliente</span></div><div data-v-7efa6c0f="" class="hint">contato vinculado</div></div><label data-v-7efa6c0f="" class="mvp-client-toggle"><span data-v-7efa6c0f="" class="mvp-check-box on client">✓</span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">Enviar lembrete para o cliente</span></label><div data-v-7efa6c0f="" class="mvp-when-title">Quando avisar</div><div data-v-7efa6c0f="" class="mvp-tempos-grid"><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box client"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">10 min antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box client"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">30 min antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box on client">✓</span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check" checked=""><span data-v-7efa6c0f="">1 hora antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box client"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">1 dia antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box client"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">Personalizado</span></label></div><div data-v-7efa6c0f="" class="mvp-field-label">Instância</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="inst-comercial">Comercial</option><option data-v-7efa6c0f="" value="inst-posvenda">Pós-venda</option></select><div data-v-7efa6c0f="" class="mvp-field-label">Enviar para (contatos)</div><div data-v-7efa6c0f="" class="mvp-target-actions"><span data-v-7efa6c0f="">1 de 1 selecionados</span><button data-v-7efa6c0f="" type="button">Selecionar todos</button><button data-v-7efa6c0f="" type="button">Limpar</button></div><div data-v-7efa6c0f="" class="mvp-client-target-list"><label data-v-7efa6c0f="" class="mvp-client-target"><span data-v-7efa6c0f="" class="mvp-check-box on client">✓</span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check" value="ct-08"><span data-v-7efa6c0f=""><strong data-v-7efa6c0f="">Padaria Estrela</strong><small data-v-7efa6c0f="">5511990000108</small></span></label></div><div data-v-7efa6c0f="" class="mvp-field-label">Mensagem personalizada</div><textarea data-v-7efa6c0f="" class="mvp-input mvp-msg-area"></textarea><div data-v-7efa6c0f="" class="mvp-var-chips"><button data-v-7efa6c0f="" type="button">{nome}</button><button data-v-7efa6c0f="" type="button">{hora}</button><button data-v-7efa6c0f="" type="button">{data}</button><button data-v-7efa6c0f="" type="button">{titulo}</button></div><div data-v-7efa6c0f="" class="mvp-preview"><div data-v-7efa6c0f="" class="title">Pré-visualização</div><div data-v-7efa6c0f="" class="text">"Olá Padaria Estrela, lembrando do nosso compromisso 05/10 às 10:30. Até lá! 😊"</div></div></div><div data-v-7efa6c0f="" class="mvp-section-title">Detalhes</div><div data-v-7efa6c0f="" class="mvp-field-label">Descrição</div><textarea data-v-7efa6c0f="" class="mvp-input mvp-details-area"></textarea><div data-v-7efa6c0f="" class="mvp-field-label mvp-mt-12">Local / URL da Reunião</div><input data-v-7efa6c0f="" class="mvp-input" placeholder="ex: &quot;Sala 3&quot; ou &quot;https://meet.google.com/...&quot;"><div data-v-7efa6c0f="" class="ma"><button data-v-7efa6c0f="" type="button" class="btn subtle mvp-cancel">Cancelar</button><button data-v-7efa6c0f="" type="button" class="btn primary">Salvar Alterações</button></div></div></div></template>
+<template id="molde-modal-extras"><div data-v-7efa6c0f="" class="calendar-modal-overlay"><div data-v-7efa6c0f="" class="calendar-modal"><div data-v-7efa6c0f="" class="mhead mvp-modal-head"><div data-v-7efa6c0f=""><i data-v-7efa6c0f="" class="ri-add-line"></i> Novo Evento</div><button data-v-7efa6c0f="" type="button"><i data-v-7efa6c0f="" class="ri-close-line"></i></button></div><div data-v-7efa6c0f="" class="mvp-section-title">Informações Básicas</div><div data-v-7efa6c0f="" class="mvp-field-label">Título <span data-v-7efa6c0f="" class="mvp-required">*</span></div><input data-v-7efa6c0f="" class="mvp-input"><div data-v-7efa6c0f="" class="r3 mvp-r3"><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Data <span data-v-7efa6c0f="" class="mvp-required">*</span></div><input data-v-7efa6c0f="" type="date" class="mvp-input"></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Hora <span data-v-7efa6c0f="" class="mvp-required">*</span></div><input data-v-7efa6c0f="" type="time" class="mvp-input"></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Duração</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="sem">Sem duração</option><option data-v-7efa6c0f="" value="15min">15 minutos</option><option data-v-7efa6c0f="" value="30min">30 minutos</option><option data-v-7efa6c0f="" value="45min">45 minutos</option><option data-v-7efa6c0f="" value="1h">1 hora</option><option data-v-7efa6c0f="" value="1h30">1 hora 30 min</option><option data-v-7efa6c0f="" value="2h">2 horas</option><option data-v-7efa6c0f="" value="3h">3 horas</option><option data-v-7efa6c0f="" value="dia">Dia inteiro</option><option data-v-7efa6c0f="" value="custom">Personalizado...</option></select></div></div><div data-v-7efa6c0f="" class="r2 mvp-r2" style="margin-top: 10px;"><input data-v-7efa6c0f="" type="number" min="1" class="mvp-input"><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="minutos">minutos</option><option data-v-7efa6c0f="" value="horas">horas</option></select></div><div data-v-7efa6c0f="" class="r2 mvp-r2" style="margin-top: 14px;"><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Tipo <span data-v-7efa6c0f="" class="mvp-required">*</span></div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="compromisso">📋 Compromisso</option><option data-v-7efa6c0f="" value="reuniao">👥 Reunião</option><option data-v-7efa6c0f="" value="evento">🎉 Evento</option><option data-v-7efa6c0f="" value="palestra">🎤 Palestra</option><option data-v-7efa6c0f="" value="__add__">➕ Adicionar novo tipo</option></select><div data-v-7efa6c0f="" class="mvp-add-tipo-row"><input data-v-7efa6c0f="" class="mvp-input" placeholder="Nome do tipo"><button data-v-7efa6c0f="" type="button" class="btn primary mvp-mini-primary"><i data-v-7efa6c0f="" class="ri-check-line"></i></button></div></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Cor</div><div data-v-7efa6c0f="" class="colors"><button data-v-7efa6c0f="" type="button" class="on" style="background: rgb(74, 111, 165); border-color: rgb(26, 26, 46); box-shadow: white 0px 0px 0px 2px, rgb(74, 111, 165) 0px 0px 0px 4px;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(72, 187, 120); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(246, 173, 85); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(245, 101, 101); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(183, 148, 244); border-color: transparent; box-shadow: none;"></button><button data-v-7efa6c0f="" type="button" class="" style="background: rgb(236, 201, 75); border-color: transparent; box-shadow: none;"></button></div></div></div><div data-v-7efa6c0f="" class="mvp-field-label">Responsável</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="Ana Souza">Ana Souza</option></select><div data-v-7efa6c0f="" class="mvp-section-title">Participantes</div><div data-v-7efa6c0f="" class="mvp-field-label">Contato Vinculado</div><div data-v-7efa6c0f="" class="mvp-contact-wrap"><input data-v-7efa6c0f="" class="mvp-input" placeholder="Buscar contato..."><div data-v-7efa6c0f="" class="mvp-contact-dropdown"><div data-v-7efa6c0f="" class="mvp-contact-item"><div data-v-7efa6c0f="" class="mvp-contact-name">Mariana Costa</div><div data-v-7efa6c0f="" class="mvp-contact-phone">5511990000101</div></div><div data-v-7efa6c0f="" class="mvp-contact-item"><div data-v-7efa6c0f="" class="mvp-contact-name">Thiago Martins</div><div data-v-7efa6c0f="" class="mvp-contact-phone">5511990000119</div></div><div data-v-7efa6c0f="" class="mvp-contact-item"><div data-v-7efa6c0f="" class="mvp-contact-name">Beatriz Lima</div><div data-v-7efa6c0f="" class="mvp-contact-phone">5511990000121</div></div><div data-v-7efa6c0f="" class="mvp-contact-item"><div data-v-7efa6c0f="" class="mvp-contact-name">Café Aroma</div><div data-v-7efa6c0f="" class="mvp-contact-phone">5511990000124</div></div></div></div><div data-v-7efa6c0f="" class="mvp-section-title">Lembretes</div><div data-v-7efa6c0f="" class="mvp-reminder-card user"><div data-v-7efa6c0f="" class="mvp-reminder-head"><div data-v-7efa6c0f="" class="left"><i data-v-7efa6c0f="" class="ri-notification-3-line"></i><span data-v-7efa6c0f="">Lembrete do Usuário</span></div><div data-v-7efa6c0f="" class="hint">quem conduz</div></div><div data-v-7efa6c0f="" class="mvp-when-title">Quando avisar</div><div data-v-7efa6c0f="" class="mvp-tempos-grid"><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box user"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">10 min antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box on user">✓</span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check" checked=""><span data-v-7efa6c0f="">30 min antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box user"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">1 hora antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box user"></span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">1 dia antes</span></label><label data-v-7efa6c0f="" class="mvp-tempo-check"><span data-v-7efa6c0f="" class="mvp-check-box on user">✓</span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check" checked=""><span data-v-7efa6c0f="">Personalizado</span></label></div><div data-v-7efa6c0f="" class="mvp-custom-grid"><input data-v-7efa6c0f="" type="number" min="1" class="mvp-input"><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="minutos">minutos</option><option data-v-7efa6c0f="" value="horas">horas</option><option data-v-7efa6c0f="" value="dias">dias</option></select></div><div data-v-7efa6c0f="" class="mvp-rem-grid2"><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Enviar por</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="whatsapp">WhatsApp</option><option data-v-7efa6c0f="" value="email">E-mail</option><option data-v-7efa6c0f="" value="sms">SMS</option><option data-v-7efa6c0f="" value="sistema">Notificação do sistema</option></select></div><div data-v-7efa6c0f=""><div data-v-7efa6c0f="" class="mvp-field-label">Instância</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="inst-comercial">Comercial</option><option data-v-7efa6c0f="" value="inst-posvenda">Pós-venda</option></select></div></div><div data-v-7efa6c0f="" class="mvp-field-label">Enviar para</div><select data-v-7efa6c0f="" class="mvp-input"><option data-v-7efa6c0f="" value="Ana Souza">Ana Souza</option></select></div><div data-v-7efa6c0f="" class="mvp-reminder-card client"><div data-v-7efa6c0f="" class="mvp-reminder-head"><div data-v-7efa6c0f="" class="left"><i data-v-7efa6c0f="" class="ri-user-heart-line"></i><span data-v-7efa6c0f="">Lembrete do Cliente</span></div><div data-v-7efa6c0f="" class="hint">contato vinculado</div></div><label data-v-7efa6c0f="" class="mvp-client-toggle"><span data-v-7efa6c0f="" class="mvp-check-box on client">✓</span><input data-v-7efa6c0f="" type="checkbox" class="mvp-hidden-check"><span data-v-7efa6c0f="">Enviar lembrete para o cliente</span></label><div data-v-7efa6c0f="" class="mvp-warning"> ⚠️ Vincule um contato no campo acima para habilitar o lembrete do cliente. </div></div><div data-v-7efa6c0f="" class="mvp-section-title">Detalhes</div><div data-v-7efa6c0f="" class="mvp-field-label">Descrição</div><textarea data-v-7efa6c0f="" class="mvp-input mvp-details-area"></textarea><div data-v-7efa6c0f="" class="mvp-field-label mvp-mt-12">Local / URL da Reunião</div><input data-v-7efa6c0f="" class="mvp-input" placeholder="ex: &quot;Sala 3&quot; ou &quot;https://meet.google.com/...&quot;"><div data-v-7efa6c0f="" class="ma"><button data-v-7efa6c0f="" type="button" class="btn subtle mvp-cancel">Cancelar</button><button data-v-7efa6c0f="" type="button" class="btn primary" disabled="">Criar Evento</button></div></div></div></template>
+<script>
+(() => {
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+  const molde = (id) => $(`#${id}`).content.firstElementChild;
+
+  // ---------------------------------------------------------------------------------
+  // Datas: mesmas regras e textos do app (CalendarView.vue).
+  // ---------------------------------------------------------------------------------
+  const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  const DIAS_SEM = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+  const DIAS_SEM_ABR = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+  const pad = (n) => String(n).padStart(2, '0');
+  const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const lerYmd = (s) => { const [a, m, d] = s.split('-').map(Number); return new Date(a, m - 1, d); };
+  const mesmoDia = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  const inicioSemana = (d) => { const r = new Date(d); r.setDate(d.getDate() - d.getDay()); r.setHours(0, 0, 0, 0); return r; };
+  const somarDias = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+  const rotuloDia = (data) => { const d = lerYmd(data); return `${DIAS_SEM[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]}`; };
+  const situacao = (ev) => { const d = lerYmd(ev.data); if (mesmoDia(d, hoje)) return 'HOJE'; return d < hoje ? 'ATRASADO' : 'AGENDADO'; };
+
+  // ---------------------------------------------------------------------------------
+  // Dados fictícios (os mesmos de tools/capture/fixtures/calendar.js). Repositório público.
+  // ---------------------------------------------------------------------------------
+  const CONTATOS = [
+    ['ct-01', 'Mariana Costa'], ['ct-02', 'Mercado Bom Preço'], ['ct-03', 'Pedro Almeida'], ['ct-04', 'Distribuidora Litoral'],
+    ['ct-05', 'Juliana Ribeiro'], ['ct-06', 'Empório Central'], ['ct-07', 'Carlos Mendes'], ['ct-08', 'Padaria Estrela'],
+    ['ct-09', 'Fernanda Oliveira'], ['ct-10', 'Supermercado Avenida'], ['ct-11', 'Ricardo Santos'], ['ct-12', 'Loja da Esquina'],
+    ['ct-13', 'Patrícia Gomes'], ['ct-14', 'Atacadão do Vale'], ['ct-15', 'Lucas Ferreira'], ['ct-16', 'Mercearia São José'],
+    ['ct-17', 'Camila Rocha'], ['ct-18', 'Hortifruti Verde Vida'], ['ct-19', 'Thiago Martins'], ['ct-20', 'Conveniência 24h Centro'],
+    ['ct-21', 'Beatriz Lima'], ['ct-22', 'Rede Econômica'], ['ct-23', 'Gustavo Pereira'], ['ct-24', 'Café Aroma'],
+  ].map(([id, nome]) => ({ id, nome, numero: `55119900001${id.slice(3)}` }));
+  const contatoPorId = (id) => CONTATOS.find((c) => c.id === id);
+
+  const RESPONSAVEL = 'Ana Souza'; // o backend não manda o dono do evento: a tela usa o usuário logado
+  const INSTANCIA = 'inst-comercial';
+  const MSG_PADRAO = 'Olá {nome}, lembrando do nosso compromisso {data} às {hora}. Até lá! 😊';
+  const CORES = ['#4A6FA5', '#48BB78', '#F6AD55', '#F56565', '#B794F4', '#ECC94B'];
+  const TEMPOS = ['10min', '30min', '1h', '1dia', 'custom'];
+  const TIPO_UI = { appointment: 'compromisso', meeting: 'reuniao', event: 'evento' };
+  const DURACAO_UI = { 15: '15min', 30: '30min', 45: '45min', 60: '1h', 90: '1h30', 120: '2h', 180: '3h', 1440: 'dia' };
+  const DURACAO_MIN = { sem: 30, '15min': 15, '30min': 30, '45min': 45, '1h': 60, '1h30': 90, '2h': 120, '3h': 180, dia: 1440 };
+
+  // [offset em dias, hora, duração (min), título, tipo, cor, contato, local, descrição, lembretes]
+  // lembretes: u30/u1d = usuário 30 min/1 dia antes; c1d/c1h = cliente 1 dia/1 hora antes
+  const BASE = [
+    [-28, '08:30', 45, 'Reunião semanal da equipe', 'meeting', '#B794F4', null, 'Escritório', 'Metas da semana e carteira de clientes', ['u30']],
+    [-24, '10:00', 60, 'Visita – Patrícia Gomes', 'appointment', '#4A6FA5', 'ct-13', 'Campinas – SP', 'Levar amostras da linha nova', ['u30']],
+    [-21, '08:30', 45, 'Reunião semanal da equipe', 'meeting', '#B794F4', null, 'Escritório', 'Metas da semana e carteira de clientes', ['u30']],
+    [-18, '15:00', 60, 'Entrega – Padaria Estrela', 'event', '#F6AD55', 'ct-08', 'São Paulo – SP', '', []],
+    [-14, '08:30', 45, 'Reunião semanal da equipe', 'meeting', '#B794F4', null, 'Escritório', 'Metas da semana e carteira de clientes', ['u30']],
+    [-10, '14:00', 60, 'Visita – Supermercado Avenida', 'appointment', '#4A6FA5', 'ct-10', 'Santo André – SP', 'Revisar pedido semanal', ['u30']],
+    [-7, '08:30', 45, 'Reunião semanal da equipe', 'meeting', '#B794F4', null, 'Escritório', 'Metas da semana e carteira de clientes', ['u30']],
+    [-7, '10:00', 90, 'Visita – Rede Econômica', 'appointment', '#4A6FA5', 'ct-22', 'Campinas – SP', 'Proposta do contrato trimestral', ['u30', 'c1d']],
+    [-6, '14:00', 60, 'Reunião com a fábrica: metas do mês', 'meeting', '#B794F4', null, 'https://meet.exemplo.com.br/fabrica', '', ['u30']],
+    [-4, '09:00', 60, 'Visita – Mercado Bom Preço', 'appointment', '#4A6FA5', 'ct-02', 'Guarulhos – SP', 'Apresentar o display novo e a tabela do mês', ['u30', 'c1d']],
+    [-4, '14:30', 60, 'Alinhamento com a fábrica', 'meeting', '#B794F4', null, 'https://meet.exemplo.com.br/alinhamento', '', ['u30']],
+    [-3, '08:00', 180, 'Entrega – Distribuidora Litoral', 'event', '#F6AD55', 'ct-04', 'Santos – SP', 'Pedido de 120 caixas', []],
+    [-3, '16:00', 15, 'Ligar para Juliana Ribeiro', 'appointment', '#ECC94B', 'ct-05', '', 'Retorno do orçamento de 30 caixas', ['u30']],
+    [0, '08:30', 45, 'Reunião semanal da equipe', 'meeting', '#B794F4', null, 'Escritório', 'Metas da semana e carteira de clientes', ['u30']],
+    [0, '10:30', 60, 'Visita – Padaria Estrela', 'appointment', '#4A6FA5', 'ct-08', 'Rua das Palmeiras, 120 – São Paulo', 'Conferir a reposição do biscoito sortido', ['u30', 'c1h']],
+    [0, '15:00', 30, 'Follow-up: proposta do Atacadão do Vale', 'appointment', '#ECC94B', 'ct-14', '', 'Responder o pedido de 8% no volume de 200 caixas', ['u30']],
+    [0, '17:30', 30, 'Enviar pedidos da semana para a fábrica', 'event', '#48BB78', null, '', '', ['u30']],
+    [1, '09:00', 90, 'Visita – Empório Central', 'appointment', '#4A6FA5', 'ct-06', 'Jundiaí – SP', 'Levar o catálogo novo', ['u30', 'c1d']],
+    [1, '14:00', 180, 'Degustação no Supermercado Avenida', 'event', '#F6AD55', 'ct-10', 'Santo André – SP', 'Promotora + 2 caixas de amostra', ['u1d']],
+    [2, '11:00', 60, 'Reunião – Rede Econômica', 'meeting', '#B794F4', 'ct-22', 'Campinas – SP', 'Fechar o contrato trimestral', ['u30', 'c1d']],
+    [2, '16:00', 15, 'Ligar para Pedro Almeida', 'appointment', '#ECC94B', 'ct-03', '', 'Pós-venda do último pedido', ['u30']],
+    [3, '09:30', 60, 'Visita – Carlos Mendes', 'appointment', '#4A6FA5', 'ct-07', 'Sorocaba – SP', 'Primeira visita: apresentar a empresa', ['u30', 'c1d']],
+    [3, '15:00', 60, 'Entrega – Mariana Costa (40 caixas)', 'event', '#48BB78', 'ct-01', 'São Paulo – SP', '', ['c1h']],
+    [4, '10:00', 60, 'Visita – Hortifruti Verde Vida', 'appointment', '#4A6FA5', 'ct-18', 'Barueri – SP', 'Orçamento da linha de sucos', ['u30']],
+    [4, '15:00', 60, 'Fechamento semanal de pedidos', 'event', '#48BB78', null, 'Escritório', '', ['u30']],
+    [7, '08:00', 1440, 'Feriado – sem expediente', 'event', '#F56565', null, '', '', []],
+    [8, '09:00', 60, 'Visita – Fernanda Oliveira (loja nova)', 'appointment', '#4A6FA5', 'ct-09', 'Osasco – SP', 'Levar a tabela de atacado', ['u30', 'c1d']],
+    [9, '14:00', 120, 'Treinamento de produto: achocolatados', 'event', '#F6AD55', null, 'Fábrica – São Paulo', 'Treinamento da equipe de vendas', ['u1d']],
+    [10, '10:00', 60, 'Visita – Patrícia Gomes', 'appointment', '#4A6FA5', 'ct-13', 'Campinas – SP', '', ['u30', 'c1d']],
+    [11, '09:00', 90, 'Reunião mensal com o gerente regional', 'meeting', '#B794F4', null, 'https://meet.exemplo.com.br/regional', 'Resultados do mês e metas', ['u30']],
+    [14, '08:30', 45, 'Reunião semanal da equipe', 'meeting', '#B794F4', null, 'Escritório', 'Metas da semana e carteira de clientes', ['u30']],
+    [15, '10:30', 60, 'Visita – Atacadão do Vale', 'appointment', '#4A6FA5', 'ct-14', 'São José dos Campos – SP', 'Assinar o pedido trimestral', ['u30', 'c1d']],
+    [17, '14:00', 60, 'Visita – Café Aroma', 'appointment', '#4A6FA5', 'ct-24', 'São Paulo – SP', 'Primeiro pedido', ['u30']],
+    [21, '08:30', 45, 'Reunião semanal da equipe', 'meeting', '#B794F4', null, 'Escritório', 'Metas da semana e carteira de clientes', ['u30']],
+    [22, '09:00', 60, 'Visita – Distribuidora Litoral', 'appointment', '#4A6FA5', 'ct-04', 'Santos – SP', '', ['u30', 'c1d']],
+    [24, '16:00', 60, 'Fechamento do mês: relatório de vendas', 'event', '#48BB78', null, 'Escritório', '', ['u1d']],
+    [29, '09:00', 60, 'Visita – Mercado Bom Preço', 'appointment', '#4A6FA5', 'ct-02', 'Guarulhos – SP', '', ['u30']],
+    [31, '10:00', 60, 'Reunião – Rede Econômica (revisão)', 'meeting', '#B794F4', 'ct-22', 'Campinas – SP', '', ['u30']],
+    [36, '14:00', 180, 'Degustação no Empório Central', 'event', '#F6AD55', 'ct-06', 'Jundiaí – SP', '', ['u1d']],
+    [44, '09:30', 60, 'Visita – Supermercado Avenida', 'appointment', '#4A6FA5', 'ct-10', 'Santo André – SP', '', ['u30']],
+  ];
+  const TEMPO_DO_LEMBRETE = { u30: '30min', u1d: '1dia', c1d: '1dia', c1h: '1h' };
+
+  // Mesmo mapeamento do toUiEvent do app (lembretes de usuário x de cliente).
+  let seq = 0;
+  let EVENTOS = BASE.map(([offset, hora, duracao, titulo, tipo, cor, contatoId, local, descricao, lembretes]) => {
+    seq += 1;
+    const doUsuario = lembretes.filter((l) => l.startsWith('u')).map((l) => TEMPO_DO_LEMBRETE[l]);
+    const doCliente = lembretes.filter((l) => l.startsWith('c')).map((l) => TEMPO_DO_LEMBRETE[l]);
+    const ct = contatoId ? contatoPorId(contatoId) : null;
+    return {
+      id: `ev-${pad(seq)}`,
+      titulo,
+      descricao,
+      data: ymd(somarDias(hoje, offset)),
+      hora,
+      duracao: DURACAO_UI[duracao],
+      tipo: TIPO_UI[tipo],
+      cor,
+      responsavel: RESPONSAVEL,
+      local,
+      contatos: ct ? [{ ...ct }] : [],
+      lembrete: {
+        usuario: { tempos: doUsuario.length ? doUsuario : ['30min'], canal: 'whatsapp', instancia: INSTANCIA, enviarPara: RESPONSAVEL, customValue: undefined, customUnit: 'minutos' },
+        cliente: { ativo: doCliente.length > 0, tempos: doCliente.length ? doCliente : ['1dia'], instancia: INSTANCIA, enviarPara: doCliente.length && ct ? [ct.id] : [], mensagem: MSG_PADRAO, customValue: undefined, customUnit: 'minutos' },
+      },
+    };
+  });
+  const ordenarEventos = () => EVENTOS.sort((a, b) => `${a.data}T${a.hora}`.localeCompare(`${b.data}T${b.hora}`));
+  const doDia = (d) => EVENTOS.filter((e) => e.data === ymd(d));
+  const daHora = (d, h) => doDia(d).filter((e) => Number(e.hora.split(':')[0]) === h);
+
+  // ---------------------------------------------------------------------------------
+  // Estado da tela e moldes (tudo clonado da captura: marcação idêntica à do app).
+  // ---------------------------------------------------------------------------------
+  const pagina = $('.mvp-page');
+  const VIEWS = ['mes', 'semana', 'dia', 'lista'];
+  let view = 'mes';
+  let cursor = new Date();
+
+  const painel = {
+    mes: $('.mvp-page > .panel'),
+    semana: molde('molde-semana').cloneNode(true),
+    dia: molde('molde-dia').cloneNode(true),
+    lista: molde('molde-lista').cloneNode(true),
+  };
+  const grade = $('.month-grid', painel.mes);
+  const pecas = {
+    celula: (() => { const c = $('.cell:not(.other):not(.today)', grade).cloneNode(true); $$('.pill, .more', c).forEach((x) => x.remove()); return c; })(),
+    pilula: $('.pill', grade).cloneNode(true),
+    mais: $('.more', grade).cloneNode(true),
+    bloco: $('.se', painel.semana).cloneNode(true),
+    grupo: (() => {
+      const card = $$('.card', painel.lista).find((c) => $('p', c));
+      const g = card.closest('.group').cloneNode(true);
+      $$('.card', g).slice(1).forEach((c) => c.remove());
+      return g;
+    })(),
+  };
+  const cartaoComDescricao = $('.card', pecas.grupo);
+  $$('.group', painel.lista).forEach((g) => g.remove());
+
+  // ---------------------------------------------------------------------------------
+  // Visões: mês, semana, dia e lista.
+  // ---------------------------------------------------------------------------------
+  function tituloDoPeriodo() {
+    if (view === 'mes') return `${MESES[cursor.getMonth()]} de ${cursor.getFullYear()}`;
+    if (view === 'semana') {
+      const s = inicioSemana(cursor);
+      const e = somarDias(s, 6);
+      return `${s.getDate()} ${MESES[s.getMonth()].slice(0, 3)} - ${e.getDate()} ${MESES[e.getMonth()].slice(0, 3)} de ${e.getFullYear()}`;
+    }
+    if (view === 'dia') return `${DIAS_SEM[cursor.getDay()]}, ${cursor.getDate()} de ${MESES[cursor.getMonth()]} de ${cursor.getFullYear()}`;
+    return 'Todos os Eventos';
+  }
+
+  function blocoDeEvento(ev) {
+    const b = pecas.bloco.cloneNode(true);
+    const min = Number(ev.hora.split(':')[1]);
+    const dur = DURACAO_MIN[ev.duracao] || 60;
+    Object.assign(b.style, { top: `${(min / 60) * 60}px`, height: `${Math.max(20, (dur / 60) * 60 - 2)}px`, background: ev.cor });
+    b.textContent = `${ev.hora} ${ev.titulo}`;
+    b.dataset.id = ev.id;
+    return b;
+  }
+
+  function renderMes() {
+    const inicio = inicioSemana(new Date(cursor.getFullYear(), cursor.getMonth(), 1));
+    const celulas = Array.from({ length: 42 }, (_, i) => {
+      const d = somarDias(inicio, i);
+      const doMes = d.getMonth() === cursor.getMonth();
+      const c = pecas.celula.cloneNode(true);
+      c.className = `cell${doMes ? '' : ' other'}${mesmoDia(d, hoje) ? ' today' : ''}`;
+      const num = $('.num', c);
+      num.className = `num${mesmoDia(d, hoje) ? ' todayNum' : ''}`;
+      num.textContent = d.getDate();
+      c.dataset.data = ymd(d);
+      // Como no app: só vêm do servidor os eventos do mês do cursor.
+      const evs = doMes ? doDia(d) : [];
+      evs.slice(0, 3).forEach((ev) => {
+        const p = pecas.pilula.cloneNode(true);
+        p.style.background = ev.cor;
+        p.textContent = `${ev.hora} ${ev.titulo}`;
+        p.dataset.id = ev.id;
+        c.appendChild(p);
+      });
+      if (evs.length > 3) {
+        const m = pecas.mais.cloneNode(true);
+        m.textContent = `+${evs.length - 3} mais`;
+        c.appendChild(m);
+      }
+      return c;
+    });
+    grade.replaceChildren(...celulas);
+  }
+
+  function renderSemana() {
+    const p = painel.semana;
+    const s = inicioSemana(cursor);
+    $$('.wh', p).forEach((wh, i) => {
+      const d = somarDias(s, i);
+      $('.wd', wh).textContent = DIAS_SEM_ABR[d.getDay()];
+      const wn = $('.wn', wh);
+      wn.textContent = d.getDate();
+      wn.classList.toggle('tn', mesmoDia(d, hoje));
+    });
+    $$('.wr', p).forEach((wr, h) => {
+      $$('.slot', wr).forEach((slot, i) => {
+        const d = somarDias(s, i);
+        slot.dataset.data = ymd(d);
+        slot.dataset.hora = `${pad(h)}:00`;
+        slot.replaceChildren(...daHora(d, h).map(blocoDeEvento));
+      });
+    });
+  }
+
+  function renderDia() {
+    const p = painel.dia;
+    $('.day-head', p).textContent = `${DIAS_SEM[cursor.getDay()]}, ${cursor.getDate()} de ${MESES[cursor.getMonth()]}`;
+    $$('.wr', p).forEach((wr, h) => {
+      const slot = $('.slot', wr);
+      slot.dataset.data = ymd(cursor);
+      slot.dataset.hora = `${pad(h)}:00`;
+      slot.replaceChildren(...daHora(cursor, h).map(blocoDeEvento));
+    });
+  }
+
+  function renderLista() {
+    const p = painel.lista;
+    const busca = $('.search input', p).value.toLowerCase();
+    const [fTipo, fStatus, fUsuario] = $$('.filters select', p).map((s) => s.value);
+    const filtrados = EVENTOS.filter((e) => {
+      const texto = !busca || `${e.titulo} ${e.descricao}`.toLowerCase().includes(busca);
+      const usuario = fUsuario === 'todos' || e.responsavel === fUsuario;
+      const tipo = fTipo === 'todos' || e.tipo === fTipo;
+      const st = situacao(e).toLowerCase();
+      return texto && usuario && tipo && (fStatus === 'todos' || fStatus === st);
+    });
+
+    const [total, agendados, deHoje, atrasados] = $$('.metric strong', p);
+    total.textContent = filtrados.length;
+    agendados.textContent = filtrados.filter((e) => situacao(e) === 'AGENDADO').length;
+    deHoje.textContent = filtrados.filter((e) => situacao(e) === 'HOJE').length;
+    atrasados.textContent = filtrados.filter((e) => situacao(e) === 'ATRASADO').length;
+
+    // Lista: no máximo os 15 mais recentes, agrupados por dia (igual ao app).
+    const ultimos = [...filtrados].sort((a, b) => `${b.data}T${b.hora}`.localeCompare(`${a.data}T${a.hora}`)).slice(0, 15);
+    const porDia = new Map();
+    ultimos.forEach((e) => { if (!porDia.has(e.data)) porDia.set(e.data, []); porDia.get(e.data).push(e); });
+    $$('.group', p).forEach((g) => g.remove());
+    [...porDia.entries()].sort((a, b) => b[0].localeCompare(a[0])).forEach(([data, evs]) => {
+      const g = pecas.grupo.cloneNode(true);
+      const [rotulo, contagem] = $('.ghead', g).children;
+      rotulo.textContent = rotuloDia(data);
+      contagem.textContent = `${evs.length} evento${evs.length > 1 ? 's' : ''}`;
+      $('.card', g).remove();
+      evs.sort((a, b) => b.hora.localeCompare(a.hora)).forEach((ev) => {
+        const card = cartaoComDescricao.cloneNode(true);
+        card.style.borderLeftColor = ev.cor;
+        card.dataset.id = ev.id;
+        $('.st', card).textContent = situacao(ev);
+        $('h4', card).textContent = ev.titulo;
+        if (ev.descricao) $('p', card).textContent = `"${ev.descricao}"`;
+        else $('p', card).remove();
+        $('.meta', card).textContent = `⏰ ${ev.hora} · 👤 ${ev.responsavel}`;
+        g.appendChild(card);
+      });
+      p.appendChild(g);
+    });
+  }
+
+  function renderizar() {
+    $('.toolbar .period', pagina).textContent = tituloDoPeriodo();
+    $$('.seg-btn', pagina).forEach((b, i) => b.classList.toggle('active', VIEWS[i] === view));
+    const atual = $('.mvp-page > .panel, .mvp-page > .list-wrap');
+    if (atual !== painel[view]) atual.replaceWith(painel[view]);
+    ({ mes: renderMes, semana: renderSemana, dia: renderDia, lista: renderLista })[view]();
+  }
+
+  function navegar(dir) {
+    fecharPopup();
+    if (dir === 0) { cursor = new Date(); renderizar(); return; }
+    const c = new Date(cursor);
+    if (view === 'mes') c.setMonth(c.getMonth() + dir);
+    else if (view === 'semana') c.setDate(c.getDate() + dir * 7);
+    else c.setDate(c.getDate() + dir);
+    cursor = c;
+    renderizar();
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Popup do evento (clique numa pílula ou bloco) e confirmação de exclusão.
+  // ---------------------------------------------------------------------------------
+  function fecharPopup() { $('.mvp-page > .popup')?.remove(); }
+
+  function abrirPopup(ev, el) {
+    fecharPopup();
+    const r = el.getBoundingClientRect();
+    const p = molde('molde-popup').cloneNode(true);
+    p.style.left = `${Math.min(r.left, innerWidth - 360)}px`;
+    p.style.top = `${Math.min(r.bottom + 4, innerHeight - 320)}px`;
+    p.dataset.id = ev.id;
+    $('.pop', p).style.borderLeftColor = ev.cor;
+    $('.ph strong', p).textContent = ev.titulo;
+    const [quando, quem, onde] = $$('.pb', p);
+    quando.textContent = `📅 ${rotuloDia(ev.data)} · ${ev.hora}`;
+    quem.textContent = `👤 ${ev.responsavel}`;
+    if (ev.local) onde.textContent = `📍 ${ev.local}`;
+    else onde.remove();
+    pagina.appendChild(p);
+  }
+
+  function travarRolagem() {
+    document.body.style.overflow = $('body > .calendar-modal-overlay') ? 'hidden' : '';
+  }
+
+  function confirmarExclusao(ev) {
+    const o = molde('molde-excluir').cloneNode(true);
+    $('p strong', o).textContent = `"${ev.titulo}"`;
+    o.addEventListener('click', (e) => {
+      const fechar = () => { o.remove(); travarRolagem(); };
+      if (e.target === o || e.target.closest('.btn.subtle')) { fechar(); return; }
+      if (e.target.closest('.btn.danger')) {
+        EVENTOS = EVENTOS.filter((x) => x !== ev);
+        fechar();
+        renderizar();
+      }
+    });
+    document.body.appendChild(o);
+    travarRolagem();
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Modal de novo evento / editar evento.
+  // A base é a captura do "Editar Evento" (com lembrete do cliente ligado); os pedaços
+  // que só aparecem em outros estados vêm da captura "calendar-novo-extras".
+  // ---------------------------------------------------------------------------------
+  const baseModal = molde('molde-modal');
+  const extras = molde('molde-modal-extras');
+  const cartaoClienteBase = $('.mvp-reminder-card.client', baseModal);
+  const pedaco = {
+    chip: $('.mvp-chip', baseModal),
+    chips: (() => { const c = $('.mvp-contatos-chips', baseModal).cloneNode(true); c.replaceChildren(); return c; })(),
+    clienteAtivo: (() => {
+      const nos = [];
+      let n = $('.mvp-client-toggle', cartaoClienteBase).nextElementSibling;
+      while (n) { nos.push(n); n = n.nextElementSibling; }
+      return nos;
+    })(),
+    alvo: $('.mvp-client-target', cartaoClienteBase),
+    duracaoCustom: $('.r2.mvp-r2[style*="margin-top: 10px"]', extras),
+    novoTipo: $('.mvp-add-tipo-row', extras),
+    lista: (() => { const d = $('.mvp-contact-dropdown', extras).cloneNode(true); d.replaceChildren(); return d; })(),
+    itemContato: $('.mvp-contact-item', extras),
+    aviso: $('.mvp-reminder-card.client .mvp-warning', extras),
+    customGrid: $('.mvp-reminder-card.user .mvp-custom-grid', extras),
+  };
+  const ROTULOS_DE_TIPO = { compromisso: true, reuniao: true, evento: true, palestra: true };
+
+  let form = null;
+  let editando = null;
+  let modal = null;
+  let mostrarNovoTipo = false;
+  let buscaContato = '';
+  let duracaoCustom = { valor: 30, unidade: 'minutos' };
+
+  const copiar = (o) => JSON.parse(JSON.stringify(o));
+  const opcoes = (sel, valor) => { if (sel) sel.value = valor; };
+
+  function formNovo(data, hora) {
+    return {
+      id: '', titulo: '', descricao: '', data: ymd(data || new Date()), hora: hora || '09:00', duracao: '1h',
+      tipo: 'compromisso', cor: CORES[0], responsavel: RESPONSAVEL, local: '', contatos: [],
+      lembrete: {
+        usuario: { tempos: ['30min'], canal: 'whatsapp', instancia: INSTANCIA, enviarPara: RESPONSAVEL, customValue: undefined, customUnit: 'minutos' },
+        cliente: { ativo: false, tempos: ['1dia'], instancia: INSTANCIA, enviarPara: [], mensagem: MSG_PADRAO, customValue: undefined, customUnit: 'minutos' },
+      },
+    };
+  }
+
+  function textoPrevia() {
+    const id = form.lembrete.cliente.enviarPara[0] || form.contatos[0]?.id || '';
+    const nome = form.contatos.find((c) => c.id === id)?.nome || form.contatos[0]?.nome || 'Cliente';
+    const d = form.data ? lerYmd(form.data) : null;
+    const data = d ? `${pad(d.getDate())}/${pad(d.getMonth() + 1)}` : '';
+    return form.lembrete.cliente.mensagem
+      .replace(/\{nome\}/g, nome || 'Cliente').replace(/\{hora\}/g, form.hora || '')
+      .replace(/\{data\}/g, data).replace(/\{titulo\}/g, form.titulo || '');
+  }
+
+  function marcarTempos(grade, tempos) {
+    $$('.mvp-tempo-check', grade).forEach((label, i) => {
+      const on = tempos.includes(TEMPOS[i]);
+      const caixa = $('.mvp-check-box', label);
+      caixa.classList.toggle('on', on);
+      caixa.textContent = on ? '✓' : '';
+      $('input', label).checked = on;
+      label.dataset.tempo = TEMPOS[i];
+    });
+  }
+
+  function gradeCustom(lembrete, quem) {
+    const g = pedaco.customGrid.cloneNode(true);
+    g.dataset.quem = quem;
+    $('input', g).value = lembrete.customValue ?? '';
+    $('select', g).value = lembrete.customUnit || 'minutos';
+    return g;
+  }
+
+  function pintarCabecalhoERodape() {
+    const cab = $('.mhead > div', modal);
+    $('i', cab).className = editando ? 'ri-edit-line' : 'ri-add-line';
+    cab.lastChild.textContent = editando ? ' Editar Evento' : ' Novo Evento';
+    const salvar = $('.ma .btn.primary', modal);
+    salvar.textContent = editando ? 'Salvar Alterações' : 'Criar Evento';
+    salvar.disabled = !form.titulo.trim();
+  }
+
+  function pintarDuracaoETipo() {
+    const r3 = $('.r3', modal);
+    $('.r2.mvp-r2[style*="margin-top: 10px"]', modal)?.remove();
+    if (form.duracao === 'custom') {
+      const linha = pedaco.duracaoCustom.cloneNode(true);
+      $('input', linha).value = duracaoCustom.valor;
+      $('select', linha).value = duracaoCustom.unidade;
+      r3.after(linha);
+    }
+    const tipo = $('.r2.mvp-r2[style*="margin-top: 14px"] select', modal);
+    $('.mvp-add-tipo-row', modal)?.remove();
+    if (mostrarNovoTipo) tipo.after(pedaco.novoTipo.cloneNode(true));
+    tipo.value = form.tipo;
+  }
+
+  function pintarCores() {
+    $$('.colors button', modal).forEach((b, i) => {
+      const hex = CORES[i];
+      const on = form.cor === hex;
+      b.className = on ? 'on' : '';
+      b.style.borderColor = on ? '#1A1A2E' : 'transparent';
+      b.style.boxShadow = on ? `0 0 0 2px white, 0 0 0 4px ${hex}` : 'none';
+    });
+  }
+
+  function pintarContatos() {
+    const wrap = $('.mvp-contact-wrap', modal);
+    $('.mvp-contact-dropdown', wrap)?.remove();
+    const q = buscaContato.trim().toLowerCase();
+    const achados = q ? CONTATOS.filter((c) => (c.nome.toLowerCase().includes(q) || c.numero.includes(q))
+      && !form.contatos.some((s) => s.id === c.id)) : [];
+    if (achados.length) {
+      const lista = pedaco.lista.cloneNode(true);
+      achados.forEach((c) => {
+        const item = pedaco.itemContato.cloneNode(true);
+        $('.mvp-contact-name', item).textContent = c.nome;
+        $('.mvp-contact-phone', item).textContent = c.numero;
+        item.dataset.id = c.id;
+        lista.appendChild(item);
+      });
+      wrap.appendChild(lista);
+    }
+    $('.mvp-contatos-chips', modal)?.remove();
+    if (form.contatos.length) {
+      const chips = pedaco.chips.cloneNode(true);
+      form.contatos.forEach((c) => {
+        const chip = pedaco.chip.cloneNode(true);
+        chip.firstChild.textContent = `${c.nome} `;
+        chip.dataset.id = c.id;
+        chips.appendChild(chip);
+      });
+      wrap.after(chips);
+    }
+  }
+
+  function pintarLembreteUsuario() {
+    const card = $('.mvp-reminder-card.user', modal);
+    const u = form.lembrete.usuario;
+    marcarTempos($('.mvp-tempos-grid', card), u.tempos);
+    $('.mvp-custom-grid', card)?.remove();
+    if (u.tempos.includes('custom')) $('.mvp-tempos-grid', card).after(gradeCustom(u, 'usuario'));
+    const [canal, instancia] = $$('.mvp-rem-grid2 select', card);
+    opcoes(canal, u.canal);
+    opcoes(instancia, u.instancia);
+    opcoes($('.mvp-reminder-card.user > select', modal), u.enviarPara);
+  }
+
+  function pintarLembreteCliente() {
+    const card = $('.mvp-reminder-card.client', modal);
+    const c = form.lembrete.cliente;
+    const toggle = $('.mvp-client-toggle', card);
+    const caixa = $('.mvp-check-box', toggle);
+    caixa.classList.toggle('on', c.ativo);
+    caixa.textContent = c.ativo ? '✓' : '';
+    $('input', toggle).checked = c.ativo;
+    while (toggle.nextElementSibling) toggle.nextElementSibling.remove();
+    if (!c.ativo) return;
+    if (!form.contatos.length) { card.appendChild(pedaco.aviso.cloneNode(true)); return; }
+
+    const nos = pedaco.clienteAtivo.map((n) => n.cloneNode(true));
+    card.append(...nos);
+    marcarTempos($('.mvp-tempos-grid', card), c.tempos);
+    if (c.tempos.includes('custom')) $('.mvp-tempos-grid', card).after(gradeCustom(c, 'cliente'));
+    opcoes($(':scope > select', card), c.instancia);
+    $('.mvp-target-actions span', card).textContent = `${c.enviarPara.length} de ${form.contatos.length} selecionados`;
+    const alvos = $('.mvp-client-target-list', card);
+    alvos.replaceChildren(...form.contatos.map((ct) => {
+      const a = pedaco.alvo.cloneNode(true);
+      const on = c.enviarPara.includes(ct.id);
+      const cx = $('.mvp-check-box', a);
+      cx.classList.toggle('on', on);
+      cx.textContent = on ? '✓' : '';
+      const input = $('input', a);
+      input.value = ct.id;
+      input.checked = on;
+      $('strong', a).textContent = ct.nome;
+      $('small', a).textContent = ct.numero;
+      a.dataset.id = ct.id;
+      return a;
+    }));
+    if (!c.enviarPara.length) {
+      const aviso = pedaco.aviso.cloneNode(true);
+      aviso.textContent = ' ⚠️ Selecione pelo menos um contato para receber o lembrete. ';
+      alvos.after(aviso);
+    }
+    $('textarea.mvp-msg-area', card).value = c.mensagem;
+    pintarPrevia();
+  }
+
+  function pintarPrevia() {
+    const t = $('.mvp-preview .text', modal);
+    if (t) t.textContent = `"${textoPrevia()}"`;
+  }
+
+  function pintarTudo() {
+    pintarCabecalhoERodape();
+    pintarDuracaoETipo();
+    pintarCores();
+    pintarContatos();
+    pintarLembreteUsuario();
+    pintarLembreteCliente();
+  }
+
+  function abrirModal(ev, data, hora) {
+    fecharPopup();
+    editando = ev || null;
+    form = ev ? copiar(ev) : formNovo(data, hora);
+    mostrarNovoTipo = false;
+    buscaContato = '';
+    duracaoCustom = { valor: 30, unidade: 'minutos' };
+
+    modal = baseModal.cloneNode(true);
+    const caixa = $('.calendar-modal', modal);
+    const campos = $$(':scope > input.mvp-input', caixa);
+    campos[0].value = form.titulo;
+    campos[0].dataset.campo = 'titulo';
+    campos[1].value = form.local;
+    campos[1].dataset.campo = 'local';
+    $('input[type=date]', caixa).value = form.data;
+    $('input[type=date]', caixa).dataset.campo = 'data';
+    $('input[type=time]', caixa).value = form.hora;
+    $('input[type=time]', caixa).dataset.campo = 'hora';
+    $('.r3 select', caixa).value = form.duracao;
+    $('.r3 select', caixa).dataset.campo = 'duracao';
+    $(':scope > select.mvp-input', caixa).value = form.responsavel;
+    $(':scope > select.mvp-input', caixa).dataset.campo = 'responsavel';
+    $('.mvp-contact-wrap input', caixa).value = '';
+    $('textarea.mvp-details-area', caixa).value = form.descricao;
+    $('textarea.mvp-details-area', caixa).dataset.campo = 'descricao';
+    pintarTudo();
+    ligarModal(modal);
+    document.body.appendChild(modal);
+    travarRolagem();
+  }
+
+  function fecharModal() {
+    modal?.remove();
+    modal = null;
+    travarRolagem();
+  }
+
+  function adicionarContato(id) {
+    const c = CONTATOS.find((x) => x.id === id);
+    if (!c || form.contatos.some((s) => s.id === id)) return;
+    form.contatos.push({ ...c });
+    if (!form.lembrete.cliente.enviarPara.includes(id)) form.lembrete.cliente.enviarPara.push(id);
+    buscaContato = '';
+    $('.mvp-contact-wrap input', modal).value = '';
+    pintarContatos();
+    pintarLembreteCliente();
+  }
+
+  function salvarEvento() {
+    if (!form.titulo.trim()) return;
+    if (form.duracao === 'custom') {
+      const minutos = duracaoCustom.unidade === 'horas' ? duracaoCustom.valor * 60 : duracaoCustom.valor;
+      if (![15, 30, 45, 60, 90, 120, 180, 1440].includes(minutos)) {
+        window.alert('No backend atual, duração personalizada só salva se resultar em: 15, 30, 45, 60, 90, 120, 180 ou 1440 minutos.');
+        return;
+      }
+      form.duracao = DURACAO_UI[minutos];
+    }
+    form.titulo = form.titulo.trim();
+    form.descricao = form.descricao.trim();
+    form.local = form.local.trim();
+    if (editando) Object.assign(editando, form);
+    else EVENTOS.push(Object.assign(form, { id: `novo-${Date.now()}` }));
+    ordenarEventos();
+    fecharModal();
+    renderizar();
+  }
+
+  function ligarModal(o) {
+    o.addEventListener('click', (e) => {
+      const alvo = e.target;
+      if (alvo === o || alvo.closest('.mhead button, .mvp-cancel')) { fecharModal(); return; }
+      if (alvo.closest('.ma .btn.primary')) { salvarEvento(); return; }
+
+      const cor = alvo.closest('.colors button');
+      if (cor) { form.cor = CORES[$$('.colors button', o).indexOf(cor)]; pintarCores(); return; }
+
+      const item = alvo.closest('.mvp-contact-item');
+      if (item) { adicionarContato(item.dataset.id); return; }
+
+      const tirar = alvo.closest('.mvp-chip button');
+      if (tirar) {
+        const id = tirar.closest('.mvp-chip').dataset.id;
+        form.contatos = form.contatos.filter((c) => c.id !== id);
+        form.lembrete.cliente.enviarPara = form.lembrete.cliente.enviarPara.filter((x) => x !== id);
+        pintarContatos();
+        pintarLembreteCliente();
+        return;
+      }
+
+      // Caixas de seleção do app são <label> com <input> escondido: tratamos o clique aqui.
+      const tempo = alvo.closest('.mvp-tempo-check');
+      if (tempo) {
+        e.preventDefault();
+        const quem = tempo.closest('.mvp-reminder-card.user') ? 'usuario' : 'cliente';
+        const l = form.lembrete[quem];
+        const t = tempo.dataset.tempo;
+        l.tempos = l.tempos.includes(t) ? l.tempos.filter((x) => x !== t) : [...l.tempos, t];
+        if (quem === 'usuario') pintarLembreteUsuario(); else pintarLembreteCliente();
+        return;
+      }
+      if (alvo.closest('.mvp-client-toggle')) {
+        e.preventDefault();
+        const c = form.lembrete.cliente;
+        c.ativo = !c.ativo;
+        if (c.ativo && form.contatos.length && !c.enviarPara.length) c.enviarPara = form.contatos.map((x) => x.id);
+        pintarLembreteCliente();
+        return;
+      }
+      const destino = alvo.closest('.mvp-client-target');
+      if (destino) {
+        e.preventDefault();
+        const c = form.lembrete.cliente;
+        const id = destino.dataset.id;
+        c.enviarPara = c.enviarPara.includes(id) ? c.enviarPara.filter((x) => x !== id) : [...c.enviarPara, id];
+        pintarLembreteCliente();
+        return;
+      }
+      const acaoAlvos = alvo.closest('.mvp-target-actions button');
+      if (acaoAlvos) {
+        const todos = acaoAlvos === $$('.mvp-target-actions button', o)[0];
+        form.lembrete.cliente.enviarPara = todos ? form.contatos.map((c) => c.id) : [];
+        pintarLembreteCliente();
+        return;
+      }
+      const variavel = alvo.closest('.mvp-var-chips button');
+      if (variavel) {
+        form.lembrete.cliente.mensagem += variavel.textContent.trim();
+        $('textarea.mvp-msg-area', o).value = form.lembrete.cliente.mensagem;
+        pintarPrevia();
+        return;
+      }
+      if (alvo.closest('.mvp-add-tipo-row button')) adicionarTipo();
+    });
+
+    o.addEventListener('input', (e) => {
+      const alvo = e.target;
+      const campo = alvo.dataset.campo;
+      if (campo) {
+        form[campo] = alvo.value;
+        if (campo === 'titulo') pintarCabecalhoERodape();
+        if (['titulo', 'data', 'hora'].includes(campo)) pintarPrevia();
+        return;
+      }
+      if (alvo.closest('.mvp-contact-wrap')) { buscaContato = alvo.value; pintarContatos(); return; }
+      if (alvo.matches('textarea.mvp-msg-area')) { form.lembrete.cliente.mensagem = alvo.value; pintarPrevia(); return; }
+      const grade = alvo.closest('.mvp-custom-grid');
+      if (grade && alvo.matches('input')) form.lembrete[grade.dataset.quem].customValue = Number(alvo.value) || undefined;
+      if (alvo.closest('.r2.mvp-r2[style*="margin-top: 10px"]') && alvo.matches('input')) duracaoCustom.valor = Number(alvo.value) || 0;
+    });
+
+    o.addEventListener('change', (e) => {
+      const alvo = e.target;
+      if (!alvo.matches('select')) return;
+      const campo = alvo.dataset.campo;
+      if (campo) {
+        form[campo] = alvo.value;
+        if (campo === 'duracao') pintarDuracaoETipo();
+        return;
+      }
+      if (alvo.closest('.r2.mvp-r2[style*="margin-top: 14px"]')) {
+        // "Adicionar novo tipo" abre o campo do nome e volta o select para o primeiro tipo.
+        if (alvo.value === '__add__') { mostrarNovoTipo = true; form.tipo = alvo.options[0].value; }
+        else form.tipo = alvo.value;
+        pintarDuracaoETipo();
+        return;
+      }
+      if (alvo.closest('.r2.mvp-r2[style*="margin-top: 10px"]')) { duracaoCustom.unidade = alvo.value; return; }
+      const grade = alvo.closest('.mvp-custom-grid');
+      if (grade) { form.lembrete[grade.dataset.quem].customUnit = alvo.value; return; }
+      const cardUsuario = alvo.closest('.mvp-reminder-card.user');
+      if (cardUsuario) {
+        const [canal, instancia] = $$('.mvp-rem-grid2 select', cardUsuario);
+        if (alvo === canal) form.lembrete.usuario.canal = alvo.value;
+        else if (alvo === instancia) form.lembrete.usuario.instancia = alvo.value;
+        else form.lembrete.usuario.enviarPara = alvo.value;
+        return;
+      }
+      if (alvo.closest('.mvp-reminder-card.client')) form.lembrete.cliente.instancia = alvo.value;
+    });
+
+    o.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.closest('.mvp-add-tipo-row')) { e.preventDefault(); adicionarTipo(); }
+    });
+  }
+
+  function adicionarTipo() {
+    const input = $('.mvp-add-tipo-row input', modal);
+    const nome = input.value.trim();
+    if (!nome) return;
+    const id = nome.toLowerCase().replace(/\s+/g, '_');
+    const select = $('.r2.mvp-r2[style*="margin-top: 14px"] select', modal);
+    if (!ROTULOS_DE_TIPO[id]) {
+      ROTULOS_DE_TIPO[id] = true;
+      // O novo tipo entra no select deste e dos próximos modais, como no app.
+      [select, $('.r2.mvp-r2[style*="margin-top: 14px"] select', baseModal)].forEach((s) => {
+        const op = s.options[0].cloneNode(true);
+        op.value = id;
+        op.textContent = `🔖 ${nome}`;
+        s.insertBefore(op, s.querySelector('option[value="__add__"]'));
+      });
+    }
+    form.tipo = id;
+    mostrarNovoTipo = false;
+    pintarDuracaoETipo();
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Eventos da página.
+  // ---------------------------------------------------------------------------------
+  pagina.addEventListener('click', (e) => {
+    const alvo = e.target;
+    const botoes = $$('.toolbar > button', pagina);
+    const botao = alvo.closest('.toolbar > button');
+    if (botao) {
+      const i = botoes.indexOf(botao);
+      if (i === 0) navegar(0);
+      else if (i === 1) navegar(-1);
+      else if (i === 2) navegar(1);
+      else abrirModal(null);
+      return;
+    }
+    const seg = alvo.closest('.seg-btn');
+    if (seg) { fecharPopup(); view = VIEWS[$$('.seg-btn', pagina).indexOf(seg)]; renderizar(); return; }
+
+    const popup = alvo.closest('.popup');
+    if (popup) {
+      const ev = EVENTOS.find((x) => x.id === popup.dataset.id);
+      if (alvo.closest('.ph button')) fecharPopup();
+      else if (alvo.closest('.btn.subtle')) abrirModal(ev);
+      else if (alvo.closest('.btn.danger')) { fecharPopup(); confirmarExclusao(ev); }
+      return;
+    }
+
+    const evento = alvo.closest('.pill, .se');
+    if (evento) { abrirPopup(EVENTOS.find((x) => x.id === evento.dataset.id), evento); return; }
+
+    const celula = alvo.closest('.cell');
+    if (celula) { cursor = lerYmd(celula.dataset.data); view = 'dia'; renderizar(); return; }
+
+    const slot = alvo.closest('.slot');
+    if (slot) { abrirModal(null, lerYmd(slot.dataset.data), slot.dataset.hora); return; }
+
+    const card = alvo.closest('.list-wrap .card');
+    if (card) {
+      const ev = EVENTOS.find((x) => x.id === card.dataset.id);
+      const [editar, excluir] = $$('.acts button', card);
+      if (alvo.closest('button') === editar) abrirModal(ev);
+      else if (alvo.closest('button') === excluir) confirmarExclusao(ev);
+    }
+  });
+
+  painel.lista.addEventListener('input', (e) => { if (e.target.matches('.search input')) renderLista(); });
+  painel.lista.addEventListener('change', (e) => { if (e.target.matches('.filters select')) renderLista(); });
+
+  // Estado inicial: mês atual, como o app abre.
+  ordenarEventos();
+  renderizar();
+})();
+</script>
+</body></html>

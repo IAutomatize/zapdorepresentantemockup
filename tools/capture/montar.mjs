@@ -59,5 +59,6 @@ if (existia) {
 </script>`;
 }
 
-writeFileSync(destino, html.replace(/<\/body>/i, `\n${bloco}\n</body>`));
+// Função como substituto: com texto, `$$`, `$&` e afins dentro do bloco seriam interpretados.
+writeFileSync(destino, html.replace(/<\/body>/i, () => `\n${bloco}\n</body>`));
 console.log(`${nome}.html montado (${existia ? 'bloco MOCKUP preservado' : 'novo, com bloco MOCKUP vazio'})`);

@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <title>Central de Ajuda - Zap do Representante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    
+    
+    
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/mobile-polish.css">
+
+    <style>
+      .help-main { max-width: 1060px; margin: 0 auto; padding: 28px 24px 64px; width: 100%; }
+      .help-hero { text-align: center; padding: 26px 16px 8px; }
+      .help-hero-icon { width: 56px; height: 56px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; color: #fff; background: linear-gradient(135deg, #2196F3 0%, #0C88F1 100%); box-shadow: 0 8px 22px rgba(33,150,243,.35); margin-bottom: 14px; }
+      .help-hero h1 { font-size: 26px; font-weight: 700; }
+      .help-hero p { margin-top: 6px; font-size: 14px; }
+
+      .help-search-wrap { max-width: 620px; margin: 20px auto 6px; position: relative; }
+      .help-search-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #8896A6; font-size: 18px; }
+      #help-search { width: 100%; height: 46px; border-radius: 12px; padding: 0 16px 0 42px; font-size: 14px; border: 1px solid rgba(148,163,184,.45); background: #fff; color: #1A1A2E; outline: none; transition: border-color .15s, box-shadow .15s; }
+      #help-search:focus { border-color: #2196F3; box-shadow: 0 0 0 3px rgba(33,150,243,.15); }
+      .dark #help-search { background: #1B242E; border-color: rgba(148,163,184,.25); color: #EEF6FE; }
+      .help-search-empty { display: none; text-align: center; padding: 40px 12px; color: #8896A6; }
+      .help-search-empty i { font-size: 34px; display: block; margin-bottom: 8px; }
+
+      .help-cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin: 26px 0 8px; }
+      .help-cat { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(148,163,184,.28); background: #fff; cursor: pointer; text-decoration: none; color: inherit; transition: transform .12s, border-color .12s, box-shadow .12s; }
+      .help-cat:hover { transform: translateY(-1px); border-color: #2196F3; box-shadow: 0 6px 16px rgba(33,150,243,.12); }
+      .dark .help-cat { background: #1B242E; border-color: rgba(148,163,184,.18); }
+      .help-cat i { width: 34px; height: 34px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; flex: 0 0 auto; }
+      .help-cat span { font-size: 12.5px; font-weight: 600; line-height: 1.25; }
+
+      .help-section { margin-top: 34px; scroll-margin-top: 24px; }
+      .help-section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+      .help-section-head i { width: 34px; height: 34px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; }
+      .help-section-head h2 { font-size: 17px; font-weight: 700; }
+
+      details.help-item { border: 1px solid rgba(148,163,184,.28); border-radius: 12px; background: #fff; margin-bottom: 8px; overflow: hidden; }
+      .dark details.help-item { background: #1B242E; border-color: rgba(148,163,184,.18); }
+      details.help-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; font-size: 14px; font-weight: 600; }
+      details.help-item summary::-webkit-details-marker { display: none; }
+      details.help-item summary .help-caret { color: #8896A6; transition: transform .15s; flex: 0 0 auto; }
+      details.help-item[open] summary .help-caret { transform: rotate(180deg); }
+      .help-answer { padding: 0 16px 15px; font-size: 13.5px; line-height: 1.65; }
+      .help-answer p + p { margin-top: 8px; }
+      .help-answer ol, .help-answer ul { margin: 8px 0 8px 18px; }
+      .help-answer ol { list-style: decimal; }
+      .help-answer ul { list-style: disc; }
+      .help-answer li + li { margin-top: 4px; }
+      .help-answer .help-path { display: inline-block; padding: 1px 7px; border-radius: 6px; font-size: 12px; font-weight: 600; background: rgba(33,150,243,.10); color: #1976D2; border: 1px solid rgba(33,150,243,.25); white-space: nowrap; }
+      .dark .help-answer .help-path { color: #5AB6FF; }
+      .help-tip { display: flex; gap: 8px; margin-top: 10px; padding: 10px 12px; border-radius: 10px; font-size: 12.5px; background: rgba(69,191,119,.10); border: 1px solid rgba(69,191,119,.25); }
+      .help-tip i { color: #278d55; flex: 0 0 auto; margin-top: 1px; }
+      .help-warn { display: flex; gap: 8px; margin-top: 10px; padding: 10px 12px; border-radius: 10px; font-size: 12.5px; background: rgba(246,173,85,.12); border: 1px solid rgba(246,173,85,.35); }
+      .help-warn i { color: #b7791f; flex: 0 0 auto; margin-top: 1px; }
+
+      .help-footer-card { margin-top: 40px; text-align: center; padding: 26px 18px; border-radius: 14px; border: 1px dashed rgba(148,163,184,.45); }
+      .help-footer-card i { font-size: 26px; color: #2196F3; }
+      .help-footer-card p { margin-top: 6px; font-size: 13px; }
+      .help-support-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 11px 22px; border-radius: 12px; font-size: 14px; font-weight: 700; color: #fff; text-decoration: none; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); box-shadow: 0 6px 16px rgba(37,211,102,.35); transition: transform .12s, box-shadow .12s; }
+      .help-support-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(37,211,102,.45); }
+      .help-support-btn i { font-size: 18px; }
+
+      mark.help-hl { background: rgba(246,173,85,.45); border-radius: 3px; padding: 0 1px; color: inherit; }
+    </style>
+<link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="stylesheet" href="css/account-access.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
+<body class="font-sans dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 bg-theme-surface">
+
+  <div class="flex">
+    
+    <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border-right: 1px solid rgba(255, 255, 255, 0.5);
+      " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item sidebar-item-active" title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+    <main class="flex-1 min-h-screen overflow-y-auto bg-theme-background transition-theme mvp-sidebar-offset" style="height:100vh;">
+      <div class="help-main">
+
+        
+        <div class="help-hero">
+          <span class="help-hero-icon"><i class="ri-question-answer-line"></i></span>
+          <h1 class="text-theme-primary">Central de Ajuda</h1>
+          <p class="text-theme-secondary">Tudo sobre o Zap do Representante: primeiros passos, conversas, filas, campanhas, IA e mais.</p>
+          <div class="help-search-wrap">
+            <i class="ri-search-line"></i>
+            <input id="help-search" type="text" placeholder="Busque por uma dúvida... (ex.: conectar whatsapp, transferir conversa)" autocomplete="off">
+          </div>
+        </div>
+
+        
+        <nav class="help-cats" id="help-cats">
+          <a class="help-cat" href="#primeiros-passos"><i class="ri-rocket-line" style="background:rgba(33,150,243,.12);color:#1976D2;"></i><span>Primeiros passos</span></a>
+          <a class="help-cat" href="#conversas"><i class="ri-chat-3-line" style="background:rgba(69,191,119,.12);color:#278d55;"></i><span>Conversas</span></a>
+          <a class="help-cat" href="#filas"><i class="ri-team-line" style="background:rgba(159,122,234,.12);color:#805AD5;"></i><span>Filas &amp; Atendimento</span></a>
+          <a class="help-cat" href="#canais"><i class="ri-smartphone-line" style="background:rgba(37,211,102,.14);color:#128C7E;"></i><span>Canais &amp; Instâncias</span></a>
+          <a class="help-cat" href="#contatos"><i class="ri-contacts-book-line" style="background:rgba(66,153,225,.12);color:#2B6CB0;"></i><span>Contatos</span></a>
+          <a class="help-cat" href="#kanban"><i class="ri-trello-line" style="background:rgba(246,173,85,.14);color:#B7791F;"></i><span>Kanban (CRM)</span></a>
+          <a class="help-cat" href="#campanhas"><i class="ri-megaphone-line" style="background:rgba(245,101,101,.12);color:#C53030;"></i><span>Campanhas</span></a>
+          <a class="help-cat" href="#agendadas"><i class="ri-time-line" style="background:rgba(56,178,172,.12);color:#2C7A7B;"></i><span>Agendadas &amp; Follow-up</span></a>
+          <a class="help-cat" href="#status"><i class="ri-image-circle-line" style="background:rgba(237,100,166,.12);color:#B83280;"></i><span>Status (Stories)</span></a>
+          <a class="help-cat" href="#ia"><i class="ri-robot-2-line" style="background:rgba(102,126,234,.12);color:#4C51BF;"></i><span>Agentes de IA</span></a>
+          <a class="help-cat" href="#automacoes"><i class="ri-flow-chart" style="background:rgba(113,128,150,.14);color:#4A5568;"></i><span>Automações</span></a>
+          <a class="help-cat" href="#organizacao"><i class="ri-task-line" style="background:rgba(72,187,120,.12);color:#276749;"></i><span>Tarefas &amp; Calendário</span></a>
+          <a class="help-cat" href="#equipe"><i class="ri-group-line" style="background:rgba(144,205,244,.18);color:#2C5282;"></i><span>Equipe &amp; Permissões</span></a>
+          <a class="help-cat" href="#planos"><i class="ri-vip-crown-2-line" style="background:rgba(214,158,46,.14);color:#975A16;"></i><span>Planos &amp; Cobrança</span></a>
+          <a class="help-cat" href="#problemas"><i class="ri-tools-line" style="background:rgba(229,62,62,.10);color:#C53030;"></i><span>Solução de problemas</span></a>
+        </nav>
+
+        <div class="help-search-empty" id="help-search-empty">
+          <i class="ri-search-eye-line"></i>
+          Nenhum resultado para sua busca. Tente outras palavras.
+        </div>
+
+        
+        <section class="help-section" id="primeiros-passos">
+          <div class="help-section-head">
+            <i class="ri-rocket-line" style="background:rgba(33,150,243,.12);color:#1976D2;"></i>
+            <h2 class="text-theme-primary">Primeiros passos</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como começar a usar a plataforma? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ol>
+                <li><strong>Conecte seu WhatsApp</strong>: acesse <span class="help-path">Configurações → Integrações → Evolution API (WhatsApp)</span>, clique em <strong>Nova Instância</strong>, dê um nome e gere o <strong>QR Code</strong>. Escaneie com o WhatsApp do celular (Dispositivos conectados).</li>
+                <li><strong>Importe seus contatos</strong>: na primeira conexão, a plataforma pergunta se você quer importar os contatos do WhatsApp automaticamente.</li>
+                <li><strong>Convide sua equipe</strong>: em <span class="help-path">Configurações → Usuários &amp; Acesso → Convites</span>, envie convites por e-mail com a função de cada pessoa.</li>
+                <li><strong>Comece a atender</strong>: as conversas chegam na aba <strong>Filas</strong> do módulo Conversas. Aceite uma conversa para assumi-la.</li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como conectar meu número de WhatsApp? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ol>
+                <li>Vá em <span class="help-path">Configurações → Integrações → Evolution API (WhatsApp)</span>.</li>
+                <li>Clique em <strong>Nova Instância</strong> e informe um rótulo (ex.: "Comercial").</li>
+                <li>Clique em <strong>QR Code</strong> no card da instância criada.</li>
+                <li>No celular, abra o WhatsApp → <strong>Configurações → Dispositivos conectados → Conectar dispositivo</strong> e escaneie o código.</li>
+                <li>Aguarde o status mudar para <strong>online</strong>. Na primeira conexão, aguarde ~1 minuto para a sincronização inicial dos contatos.</li>
+              </ol>
+              <div class="help-tip"><i class="ri-lightbulb-line"></i><span>Você pode conectar vários números — cada um vira uma <strong>instância</strong> separada, e você pode dar uma <strong>cor</strong> para cada uma (a cor aparece na tag das conversas).</span></div>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Confirmei meu e-mail, e agora? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Após o cadastro, você recebe um e-mail de confirmação (válido por 24 horas). Confirmar o e-mail libera todos os recursos da conta. Se não recebeu, verifique a caixa de spam ou solicite o reenvio na tela de aviso.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Esqueci minha senha, como recuperar? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Na tela de login, clique em <strong>Esqueci minha senha</strong> e informe seu e-mail. Você receberá um link seguro para criar uma nova senha. Por segurança:</p>
+              <ul>
+                <li>O link expira após o tempo indicado no e-mail.</li>
+                <li>Ao trocar a senha, todas as sessões abertas são desconectadas.</li>
+                <li>Há um limite de solicitações por hora.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="conversas">
+          <div class="help-section-head">
+            <i class="ri-chat-3-line" style="background:rgba(69,191,119,.12);color:#278d55;"></i>
+            <h2 class="text-theme-primary">Conversas</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>O que são as abas Em Aberto, Filas e Chatbot? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ul>
+                <li><strong>Em Aberto</strong>: conversas já aceitas, em andamento com um atendente.</li>
+                <li><strong>Filas</strong>: conversas aguardando atendimento. Use os botões à direita do card para <strong>aceitar</strong> (✓) ou <strong>transferir</strong> (➦).</li>
+                <li><strong>Chatbot</strong>: conversas sendo atendidas automaticamente por um <strong>Agente de IA</strong>.</li>
+              </ul>
+              <p>As tags no card mostram a <strong>instância</strong> (número de WhatsApp, com a cor definida nas Integrações) e a <strong>fila</strong> (com a cor da fila).</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como aceitar ou transferir uma conversa? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p><strong>Aceitar</strong>: na aba Filas, clique no ✓ do card. A conversa passa a ser sua e vai para Em Aberto. Responder uma conversa da fila também a aceita automaticamente.</p>
+              <p><strong>Transferir</strong>: clique no ícone ➦ (no card ou dentro da conversa) e escolha o destino — uma <strong>fila</strong> (a conversa volta a aguardar) ou um <strong>usuário</strong> (vai direto para a pessoa). Você pode incluir uma <strong>nota de transferência</strong> visível para o próximo atendente.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como enviar fotos, vídeos, documentos e áudios? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Use os ícones ao lado do campo de mensagem: 📎 para arquivos (imagem, vídeo, documento), 📷 para foto pela câmera e 🎤 para gravar áudio.</p>
+              <ul>
+                <li>Limite geral de envio: <strong>50 MB</strong> por arquivo.</li>
+                <li>Vídeos grandes (até 250 MB) são <strong>comprimidos automaticamente</strong> para o formato ideal do WhatsApp.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como usar respostas rápidas? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Crie modelos de mensagem em <span class="help-path">Configurações → Respostas Rápidas</span>, organizados por categorias com cores. Na conversa, clique no ícone ⚡ para escolher uma resposta.</p>
+              <p>Você pode usar variáveis que são preenchidas automaticamente: <strong>{{nome}}</strong>, <strong>{{primeiro_nome}}</strong>, <strong>{{telefone}}</strong> e <strong>{{email}}</strong> do contato. O <strong>{{primeiro_nome}}</strong> envia só o primeiro nome, útil quando o cadastro tem o nome completo. Respostas rápidas também aceitam anexos.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como finalizar um atendimento? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Dentro da conversa, use a ação <strong>Finalizar</strong>. Dependendo das <span class="help-path">Regras de Atendimento</span> configuradas, pode ser necessário informar um <strong>motivo de finalização</strong>, e o sistema pode enviar automaticamente uma <strong>pesquisa de avaliação</strong> ao cliente (estrelas, nota 0–10 ou texto).</p>
+              <p>Se o cliente mandar mensagem depois, a conversa <strong>reabre automaticamente</strong> e volta para a fila.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>O que é o resumo por IA da conversa? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Com uma chave OpenAI configurada (em <span class="help-path">Configurações → Agentes</span>), você pode gerar um <strong>resumo automático</strong> dos últimos 3 dias da conversa — incluindo transcrição de áudios. Disponível no painel da conversa, 1 resumo por dia por conversa.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como funcionam grupos de WhatsApp? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Grupos aparecem na aba <strong>Grupos</strong> e não entram nas filas de atendimento. Por padrão, apenas <strong>donos e administradores</strong> da conta veem os grupos; é possível liberar o acesso para usuários específicos por grupo.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como agendar uma mensagem para ser enviada depois? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Dentro da conversa, use a opção de <strong>agendar mensagem</strong>: escolha data/hora e o texto. As mensagens agendadas ficam visíveis no módulo <span class="help-path">Agendadas</span>, onde podem ser editadas ou canceladas antes do envio. Também há suporte a <strong>recorrência</strong> (ex.: enviar toda semana).</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como bloquear um contato? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Dentro da conversa, use a ação <strong>Bloquear contato</strong>. Contatos bloqueados não geram novas conversas nem recebem follow-up automático. O desbloqueio é feito na lista de contatos bloqueados.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="filas">
+          <div class="help-section-head">
+            <i class="ri-team-line" style="background:rgba(159,122,234,.12);color:#805AD5;"></i>
+            <h2 class="text-theme-primary">Filas &amp; Atendimento</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>O que é a fila Geral? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>A fila <strong>Geral</strong> é a fila padrão da conta — <strong>única</strong> e compartilhada por todas as instâncias de WhatsApp. Toda conversa nova entra nela aguardando atendimento, a menos que uma automação ou agente de IA a direcione.</p>
+              <p>Ela é criada automaticamente pelo sistema e <strong>não pode ser excluída</strong> nem renomeada. O nome "Geral" é reservado.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como criar filas personalizadas? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Em <span class="help-path">Configurações → Usuários &amp; Acesso → Filas</span> (apenas dono/admin), clique em <strong>Adicionar Nova Fila</strong>. Defina:</p>
+              <ul>
+                <li><strong>Nome e cor</strong> — a cor aparece na tag da fila em cada card de conversa.</li>
+                <li><strong>Membros</strong> — quem pode ver e atender as conversas dessa fila.</li>
+                <li><strong>Transferência automática</strong> (opcional) — se ninguém responder em X minutos (15min a 24h), a conversa é movida para outra fila ou usuário.</li>
+              </ul>
+              <p>Ao excluir uma fila, as conversas dela voltam para a fila Geral.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como funciona a transferência automática por inatividade? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Cada fila pode ter uma regra: se uma conversa ficar parada além do tempo configurado (15 min, 30 min, 1h, 6h ou 24h), ela é transferida automaticamente para a fila ou usuário de destino. O sistema verifica a cada minuto. Conversas transferidas ficam marcadas como transferência automática.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>O que são as Regras de Atendimento? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Em <span class="help-path">Configurações → Regras de Atendimento</span> você configura o comportamento do atendimento:</p>
+              <ul>
+                <li><strong>Motivos de finalização</strong> — exigir (ou não) um motivo ao encerrar conversas, com lista personalizável.</li>
+                <li><strong>Avaliação do atendimento</strong> — pesquisa automática ao finalizar: estrelas, nota 0–10 ou texto, com mensagens personalizáveis.</li>
+                <li><strong>Chamadas</strong> — o que fazer quando o cliente liga (rejeitar / avisar e rejeitar).</li>
+                <li><strong>Aniversários</strong> — felicitações automáticas com sequência de mensagens (texto e mídia), horário de envio e recorrência anual.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como configurar horário de expediente e mensagem de ausência? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Em <span class="help-path">Configurações → Expediente &amp; Fuso</span>, defina o fuso horário e os horários de funcionamento por dia da semana (com intervalo de almoço). Também dá para configurar horários individuais por atendente.</p>
+              <p>Quando um cliente escreve <strong>fora do expediente</strong>, o sistema envia automaticamente a <strong>sequência de ausência</strong> configurada (uma vez por período, para não repetir a cada mensagem).</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="canais">
+          <div class="help-section-head">
+            <i class="ri-smartphone-line" style="background:rgba(37,211,102,.14);color:#128C7E;"></i>
+            <h2 class="text-theme-primary">Canais &amp; Instâncias</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Quais canais de atendimento são suportados? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ul>
+                <li><strong>WhatsApp (Evolution API)</strong> — conexão via QR Code com seu número atual. É o canal principal.</li>
+                <li><strong>WhatsApp Cloud API (oficial Meta)</strong> — conexão oficial via login Meta, com suporte a templates aprovados.</li>
+                <li><strong>Instagram Direct</strong> e <strong>Messenger</strong> — via login Meta.</li>
+                <li><strong>Telegram</strong> — informando o token do bot.</li>
+                <li><strong>E-mail (SMTP/IMAP)</strong> — atendimento por e-mail na mesma tela de conversas.</li>
+              </ul>
+              <p>Gerencie tudo em <span class="help-path">Configurações → Integrações</span>.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Posso conectar mais de um número de WhatsApp? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Sim. Cada número é uma <strong>instância</strong> separada, com nome, cor e status próprios. O limite de instâncias depende do seu plano. Cada conversa fica vinculada à instância pela qual chegou — as respostas sempre saem pelo mesmo número.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como definir uma cor para cada instância? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Em <span class="help-path">Configurações → Integrações → Evolution API</span>, cada card de instância tem um <strong>seletor de cor</strong> ao lado do botão QR Code. A cor escolhida aparece na <strong>tag da instância</strong> em cada card de conversa — útil para identificar rapidamente por qual número o cliente chamou.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>O que significam os status da instância? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ul>
+                <li><strong>online / CONNECTED</strong> — instância conectada, enviando e recebendo normalmente.</li>
+                <li><strong>CONNECTING</strong> — aguardando leitura do QR Code ou reconectando.</li>
+                <li><strong>DISCONNECTED / offline</strong> — sessão caiu (ex.: WhatsApp desconectado no celular). Gere um novo QR Code.</li>
+                <li><strong>ERROR</strong> — falha na comunicação; tente gerar o QR novamente.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como restringir quem vê as conversas de uma instância? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Donos e administradores podem definir <strong>usuários permitidos por instância</strong>. Sem restrição definida, todos os membros da conta têm acesso; com restrição, apenas os usuários listados (e os donos/admins) veem e atendem as conversas daquele número.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="contatos">
+          <div class="help-section-head">
+            <i class="ri-contacts-book-line" style="background:rgba(66,153,225,.12);color:#2B6CB0;"></i>
+            <h2 class="text-theme-primary">Contatos</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como importar contatos do WhatsApp? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Na <strong>primeira conexão</strong> de uma instância, a plataforma oferece a importação automática de todos os contatos do número. Você também pode criar contatos manualmente no módulo <span class="help-path">Contatos</span>, e todo cliente novo que enviar mensagem vira contato automaticamente.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como organizar contatos com marcadores (tags)? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Crie marcadores em <span class="help-path">Configurações → Marcadores</span> e aplique-os aos contatos. Um contato pode ter vários marcadores, que servem de filtro nos módulos de Contatos e Campanhas (ex.: enviar campanha só para "Clientes VIP").</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>O que são as observações do contato? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Anotações internas sobre o contato, visíveis na conversa e no Kanban. Use para registrar contexto importante (ex.: "prefere contato à tarde"). O histórico de observações fica salvo no contato.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como cadastrar aniversário e dados extras do contato? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Na ficha do contato você pode preencher e-mail, data de nascimento e <strong>campos personalizados</strong>. Com o aniversário preenchido e as felicitações automáticas ativas (Regras de Atendimento), o sistema envia a mensagem de parabéns na data, no horário configurado.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="kanban">
+          <div class="help-section-head">
+            <i class="ri-trello-line" style="background:rgba(246,173,85,.14);color:#B7791F;"></i>
+            <h2 class="text-theme-primary">Kanban (CRM)</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como funciona o Kanban? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>O Kanban organiza seus contatos em <strong>colunas de funil</strong> (ex.: Novo lead → Em negociação → Fechado). Arraste os cards entre colunas conforme o contato avança. Novos contatos entram automaticamente na coluna padrão <strong>Geral</strong>, que não pode ser excluída.</p>
+              <ul>
+                <li>Crie, renomeie e exclua colunas livremente.</li>
+                <li>Cada contato pode ter <strong>notas</strong> específicas por coluna.</li>
+                <li>Abra a conversa do contato direto do card (mini-chat flutuante).</li>
+                <li>Filtre por fila de atendimento para focar em um time.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="campanhas">
+          <div class="help-section-head">
+            <i class="ri-megaphone-line" style="background:rgba(245,101,101,.12);color:#C53030;"></i>
+            <h2 class="text-theme-primary">Campanhas</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como criar uma campanha de envio em massa? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ol>
+                <li>No módulo <span class="help-path">Campanhas</span>, clique em criar campanha.</li>
+                <li>Monte o conteúdo: <strong>texto</strong> ou <strong>multimídia</strong> (imagem, vídeo, áudio, documento) — pode combinar vários itens em sequência.</li>
+                <li>Escolha os destinatários: todos os contatos, por marcador ou seleção manual.</li>
+                <li>Selecione as <strong>instâncias</strong> de envio — usar várias distribui o volume e reduz risco de bloqueio.</li>
+                <li>Envie imediatamente ou <strong>agende</strong> data e hora.</li>
+              </ol>
+              <p>Acompanhe em tempo real os status: enviado, <strong>entregue</strong> e <strong>lido</strong> por destinatário.</p>
+              <div class="help-warn"><i class="ri-alert-line"></i><span>Envios em massa têm limite mensal conforme o plano. Prefira volumes graduais e conteúdo relevante para evitar bloqueios do WhatsApp.</span></div>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Minha campanha travou ou o servidor reiniciou. Perco os envios? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Não. O sistema tem <strong>recuperação automática</strong>: campanhas interrompidas são retomadas do ponto onde pararam, sem duplicar mensagens para quem já recebeu.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="agendadas">
+          <div class="help-section-head">
+            <i class="ri-time-line" style="background:rgba(56,178,172,.12);color:#2C7A7B;"></i>
+            <h2 class="text-theme-primary">Agendadas &amp; Follow-up</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como ver e gerenciar mensagens agendadas? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>O módulo <span class="help-path">Agendadas</span> lista todas as mensagens programadas: conteúdo, destinatário, data de envio e status. Você pode editar ou cancelar antes do disparo. Atendentes veem apenas as próprias mensagens; donos/admins veem todas. Mensagens com <strong>recorrência</strong> recriam a próxima ocorrência automaticamente após cada envio.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>O que é o follow-up automático? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>O follow-up reengaja clientes que <strong>pararam de responder</strong>: você configura uma sequência de mensagens (com intervalos) em <span class="help-path">Configurações → Follow-up</span>, e o sistema envia automaticamente para conversas elegíveis.</p>
+              <ul>
+                <li>Se o cliente <strong>responder</strong>, a sequência é interrompida na hora.</li>
+                <li>Contatos <strong>bloqueados</strong> nunca recebem follow-up.</li>
+                <li>Suporta anexos e horários aleatórios para parecer natural.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="status">
+          <div class="help-section-head">
+            <i class="ri-image-circle-line" style="background:rgba(237,100,166,.12);color:#B83280;"></i>
+            <h2 class="text-theme-primary">Status (Stories)</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como publicar e agendar Status do WhatsApp? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>No módulo <span class="help-path">Status</span>, crie publicações de <strong>texto</strong> (com cor de fundo), <strong>imagem</strong> ou <strong>vídeo</strong> e publique na hora ou agende. Recursos:</p>
+              <ul>
+                <li>Agendamento único ou <strong>recorrente</strong> (diário, semanal com dias específicos, mensal).</li>
+                <li>Contadores de publicados, agendados e falhas.</li>
+                <li>Vídeos são comprimidos automaticamente para o formato do WhatsApp.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="ia">
+          <div class="help-section-head">
+            <i class="ri-robot-2-line" style="background:rgba(102,126,234,.12);color:#4C51BF;"></i>
+            <h2 class="text-theme-primary">Agentes de IA</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>O que é um Agente de IA e como criar um? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Um Agente de IA atende conversas automaticamente usando inteligência artificial, com o perfil que você definir (SDR, qualificação, vendas ou suporte). Para criar:</p>
+              <ol>
+                <li>Em <span class="help-path">Configurações → Agentes</span>, cadastre sua <strong>chave da OpenAI</strong> (obrigatória).</li>
+                <li>Crie o agente: nome, tipo, perfil de comportamento, dados da empresa, produtos e material de treinamento (inclusive anexos).</li>
+                <li>Vincule o agente a uma ou mais <strong>filas</strong> e escolha o modo de ativação.</li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Quais são os modos de ativação do agente? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ul>
+                <li><strong>Todas as conversas</strong> — o agente assume automaticamente toda conversa nova da fila.</li>
+                <li><strong>Palavras-chave</strong> — assume apenas quando a mensagem do cliente contém os termos configurados.</li>
+                <li><strong>Manual</strong> — o agente nunca age sozinho; o atendente aciona pelo botão <strong>Acionar IA</strong> dentro da conversa.</li>
+              </ul>
+              <p>Conversas com IA ativa aparecem na aba <strong>Chatbot</strong>.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>A IA entende áudio e imagem? E quando ela passa para um humano? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Sim — áudios são <strong>transcritos</strong> e imagens são <strong>descritas</strong> automaticamente antes de a IA responder.</p>
+              <p>O agente transfere para atendimento humano (<strong>handoff</strong>) quando o cliente pede para falar com uma pessoa, quando o assunto foge do escopo ou quando a mídia não é suportada. A conversa volta para a fila e a IA fica pausada nela.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="automacoes">
+          <div class="help-section-head">
+            <i class="ri-flow-chart" style="background:rgba(113,128,150,.14);color:#4A5568;"></i>
+            <h2 class="text-theme-primary">Automações (Workflows)</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>O que são as Automações e como criar uma? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Automações são fluxos visuais (estilo chatbot de blocos) que respondem mensagens automaticamente. Em <span class="help-path">Configurações → Automações</span>, crie um fluxo no <strong>editor visual</strong> arrastando e conectando blocos:</p>
+              <ul>
+                <li><strong>Gatilhos</strong>: qualquer mensagem, palavra-chave, expressão regular, clique em botão ou seleção em lista.</li>
+                <li><strong>Ações</strong>: enviar texto/mídia/lista/botões, aguardar resposta, condições (se/senão), salvar variável, atraso, aplicar marcador, conversar com IA e encerrar.</li>
+              </ul>
+              <p>Ative o fluxo quando estiver pronto — ele roda para conversas que casarem com o gatilho. É possível pausar, duplicar e ver estatísticas e logs de execução.</p>
+              <div class="help-tip"><i class="ri-lightbulb-line"></i><span>Se um <strong>Agente de IA</strong> assumir a conversa, a automação não roda nela — o agente tem prioridade.</span></div>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="organizacao">
+          <div class="help-section-head">
+            <i class="ri-task-line" style="background:rgba(72,187,120,.12);color:#276749;"></i>
+            <h2 class="text-theme-primary">Tarefas &amp; Calendário</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como usar o módulo de Tarefas? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Em <span class="help-path">Tarefas</span>, organize o trabalho interno da equipe: crie tarefas com responsável, prazo, prioridade, anexos e agrupe-as em <strong>projetos</strong>. Acompanhe por status (a fazer, em andamento, concluída, cancelada).</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Como funciona o Calendário e os lembretes? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>No <span class="help-path">Calendário</span>, crie eventos e compromissos (ex.: reunião com cliente). Você pode configurar <strong>lembretes automáticos</strong> que são enviados por WhatsApp ao contato vinculado ou como notificação interna, no tempo escolhido antes do evento.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="equipe">
+          <div class="help-section-head">
+            <i class="ri-group-line" style="background:rgba(144,205,244,.18);color:#2C5282;"></i>
+            <h2 class="text-theme-primary">Equipe &amp; Permissões</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Como convidar pessoas para a minha conta? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Em <span class="help-path">Configurações → Usuários &amp; Acesso → Convites</span>, informe o e-mail e a função da pessoa. Ela recebe um link de convite válido por <strong>72 horas</strong>. Convites pendentes podem ser revogados a qualquer momento.</p>
+              <p>O número de usuários da conta é limitado pelo seu plano.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Quais são as funções e o que cada uma pode fazer? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ul>
+                <li><strong>Dono (owner)</strong> — acesso total, incluindo gestão de funções, billing e exclusão da conta. Toda conta precisa ter ao menos um dono.</li>
+                <li><strong>Administrador</strong> — acesso total operacional (equivalente ao dono, exceto ações exclusivas dele).</li>
+                <li><strong>Membro</strong> — acesso conforme as permissões da função.</li>
+              </ul>
+              <p>Você também pode criar <strong>funções personalizadas</strong> em <span class="help-path">Usuários &amp; Acesso → Funções</span>, marcando permissão por recurso (ver/editar/excluir em conversas, contatos, campanhas, etc.). Os menus laterais se ajustam automaticamente ao que o usuário pode ver.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Um atendente vê as conversas dos outros? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Atendentes (não-admins) veem as conversas das <strong>filas das quais são membros</strong> e as conversas <strong>atribuídas a eles</strong>. Donos e administradores veem tudo. Grupos de WhatsApp e instâncias podem ter restrições adicionais de acesso.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="planos">
+          <div class="help-section-head">
+            <i class="ri-vip-crown-2-line" style="background:rgba(214,158,46,.14);color:#975A16;"></i>
+            <h2 class="text-theme-primary">Planos &amp; Cobrança</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>O que cada plano limita? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Os planos limitam quatro recursos: <strong>instâncias</strong> (números conectados), <strong>contatos</strong>, <strong>envios de campanha por mês</strong> e <strong>usuários</strong> da equipe. Veja a comparação completa e faça upgrade em <span class="help-path">Planos &amp; Cobrança</span>.</p>
+              <p>Ao atingir um limite, a ação correspondente é bloqueada com aviso (ex.: convidar mais um usuário, criar mais uma instância).</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Meu pagamento falhou. O que acontece? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Enquanto o pagamento estiver pendente ou falho, a conta opera temporariamente com os <strong>limites do plano gratuito</strong>. Regularizando o pagamento, os limites do seu plano voltam automaticamente — nenhum dado é perdido.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <section class="help-section" id="problemas">
+          <div class="help-section-head">
+            <i class="ri-tools-line" style="background:rgba(229,62,62,.10);color:#C53030;"></i>
+            <h2 class="text-theme-primary">Solução de problemas</h2>
+          </div>
+
+          <details class="help-item">
+            <summary>Meu WhatsApp desconectou. Como reconectar? <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ol>
+                <li>Vá em <span class="help-path">Configurações → Integrações → Evolution API</span>.</li>
+                <li>Localize a instância <strong>offline</strong> e clique em <strong>QR Code</strong>.</li>
+                <li>Escaneie novamente com o celular (WhatsApp → Dispositivos conectados).</li>
+              </ol>
+              <p>Causas comuns de queda: celular sem internet por muito tempo, WhatsApp desconectado manualmente no aparelho, ou troca de aparelho.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>As mensagens não estão chegando na plataforma <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <ol>
+                <li>Confira se a instância está <strong>online</strong> nas Integrações.</li>
+                <li>Verifique se o celular do número conectado está com internet.</li>
+                <li>Gere um novo QR Code e reconecte, se necessário.</li>
+                <li>Atualize a página de Conversas (F5).</li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Uma foto ou áudio não carrega na conversa <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>As mídias são baixadas <strong>sob demanda</strong> quando você abre a conversa. Se uma mídia recém-recebida não carregar de primeira, aguarde alguns segundos e tente de novo — mídias muito antigas podem ter expirado no WhatsApp.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Fui deslogado do nada / sessão expirada <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>Por segurança, a sessão é encerrada quando: a senha é trocada, sua função na conta é alterada, ou o login expira (7 dias). Basta entrar novamente. Se acontecer com frequência sem motivo, fale com o administrador da conta.</p>
+            </div>
+          </details>
+
+          <details class="help-item">
+            <summary>Não consigo excluir uma fila ou coluna <i class="ri-arrow-down-s-line help-caret"></i></summary>
+            <div class="help-answer text-theme-secondary">
+              <p>A fila <strong>Geral</strong> e a coluna <strong>Geral</strong> do Kanban são padrões do sistema e não podem ser excluídas. Filas personalizadas podem ser excluídas normalmente — as conversas delas voltam para a fila Geral.</p>
+            </div>
+          </details>
+        </section>
+
+        
+        <div class="help-footer-card card-theme">
+          <i class="ri-customer-service-2-line"></i>
+          <p class="text-theme-primary" style="font-weight:600;">Não encontrou o que procurava?</p>
+          <p class="text-theme-secondary">Fale com o administrador da sua conta ou chame o suporte da plataforma.</p>
+          <a class="help-support-btn" href="#suporte" target="_blank" rel="noopener noreferrer">
+            <i class="ri-whatsapp-line"></i> Contactar suporte
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+
+
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button><div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div>
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/ajuda.html). Para recapturar sem perder este bloco (a ação js tira o
+     WhatsApp do suporte da plataforma, que não deve ir para o repositório público):
+       node tools/capture/capture.mjs ajuda "/ajuda.html" 6000 'js:document.querySelector(".help-support-btn").setAttribute("href","#suporte")'
+       node tools/capture/montar.mjs ajuda -->
+<script>
+(() => {
+  // As perguntas são <details>: abrir e fechar já funciona sem script, e as categorias são
+  // âncoras para as seções. Aqui ficam a busca e o botão de suporte.
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+
+  const busca = $('#help-search');
+  const secoes = $$('.help-section');
+  const categorias = $('#help-cats');
+  const semResultado = $('#help-search-empty');
+
+  // Sem acento e em minúsculas: "conexao" acha "conexão".
+  const normalizar = (texto) => String(texto || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  // Mesmo comportamento da tela: a partir de 2 letras, mostra só as perguntas que contêm o
+  // termo (já abertas), esconde seções sem resultado e as categorias; apagando, volta tudo fechado.
+  function filtrar() {
+    const termo = normalizar(busca.value.trim());
+    const buscando = termo.length >= 2;
+    let algum = false;
+    secoes.forEach((secao) => {
+      let temNaSecao = false;
+      $$('details.help-item', secao).forEach((item) => {
+        const casa = !buscando || normalizar(item.textContent).includes(termo);
+        item.style.display = casa ? '' : 'none';
+        item.open = buscando && casa;
+        if (casa) temNaSecao = true;
+      });
+      secao.style.display = temNaSecao ? '' : 'none';
+      if (temNaSecao) algum = true;
+    });
+    categorias.style.display = buscando ? 'none' : '';
+    semResultado.style.display = buscando && !algum ? 'block' : 'none';
+  }
+
+  let espera;
+  busca.addEventListener('input', () => {
+    clearTimeout(espera);
+    espera = setTimeout(filtrar, 120);
+  });
+
+  document.addEventListener('click', (ev) => {
+    if (ev.target.closest('.help-support-btn')) {
+      ev.preventDefault();
+      window.mockup.avisar('No produto, este botão abre o WhatsApp do suporte da plataforma');
+    }
+  });
+})();
+</script>
+</body></html>

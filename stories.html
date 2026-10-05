@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Status - Zap do Representante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+    
+    
+
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css">
+    <link rel="stylesheet" href="css/stories-mvp.css">
+      <link rel="stylesheet" href="css/mobile-polish.css">
+<link rel="stylesheet" href="css/account-access.css"><link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
+  <body class="status-mvp-page font-sans transition-all duration-200">
+    <div class="status-mvp-app">
+      <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+          background: rgba(255, 255, 255, 0.45);
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          border-right: 1px solid rgba(255, 255, 255, 0.5);
+        " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item sidebar-item-active" title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+      <div class="status-mvp-shell">
+        <main class="status-mvp-main">
+          <div class="status-mvp-blob status-mvp-blob-1"></div>
+          <div class="status-mvp-blob status-mvp-blob-2"></div>
+          <div class="status-mvp-blob status-mvp-blob-3"></div>
+
+          <section class="status-mvp-page-title"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+            <i class="ri-pulse-line"></i>
+            <h1>Status</h1>
+          </section>
+
+          <section class="status-mvp-glass status-mvp-filters">
+            <div class="status-mvp-search-wrap">
+              <i class="ri-search-line"></i>
+              <input id="search-input" type="text" placeholder="Buscar publicação...">
+            </div>
+
+            <select id="filter-status">
+              <option value="" selected="">Todos os Status</option>
+              <option value="agendado">Agendados</option>
+              <option value="publicado">Publicados</option>
+              <option value="falha">Falhas</option>
+              <option value="cancelado">Cancelados</option>
+            </select>
+
+            <select id="filter-type">
+              <option value="" selected="">Tipo</option>
+              <option value="texto">Texto</option>
+              <option value="imagem">Imagem</option>
+              <option value="video">Vídeo</option>
+            </select>
+
+            <div class="status-mvp-grow"></div>
+
+            <button id="new-story-btn" type="button" class="status-mvp-primary-btn">
+              <i class="ri-add-line"></i>
+              Criar Publicação
+            </button>
+          </section>
+
+          <section class="status-mvp-kpis" id="stories-summary-cards">
+            <article class="status-mvp-kpi status-mvp-kpi-total">
+              <span>Total Status</span>
+              <strong id="stat-total">11</strong>
+            </article>
+            <article class="status-mvp-kpi status-mvp-kpi-scheduled">
+              <span>Agendados</span>
+              <strong id="stat-agendados">5</strong>
+            </article>
+            <article class="status-mvp-kpi status-mvp-kpi-published">
+              <span>Publicados</span>
+              <strong id="stat-publicados">4</strong>
+            </article>
+            <article class="status-mvp-kpi status-mvp-kpi-failed">
+              <span>Falhas</span>
+              <strong id="stat-falhas">1</strong>
+            </article>
+          </section>
+
+          <section class="status-mvp-glass status-mvp-table-wrap">
+            <table class="status-mvp-table">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Conteúdo</th>
+                  <th>Data</th>
+                  <th>Horário</th>
+                  <th>Recorrência</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="stories-table-body">
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-imagem">Imagem</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb">
+              <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22540%22%20height%3D%22960%22%20viewBox%3D%220%200%20540%20960%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2348BB78%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2322543D%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%0A%3Crect%20width%3D%22540%22%20height%3D%22960%22%20fill%3D%22url(%23g)%22%2F%3E%0A%3Ccircle%20cx%3D%22450%22%20cy%3D%22150%22%20r%3D%22190%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%22820%22%20r%3D%22230%22%20fill%3D%22%23fff%22%20opacity%3D%22.07%22%2F%3E%0A%3Crect%20x%3D%2260%22%20y%3D%22300%22%20width%3D%22333%22%20height%3D%2252%22%20rx%3D%2226%22%20fill%3D%22%23fff%22%20opacity%3D%22.95%22%2F%3E%0A%3Ctext%20x%3D%2284%22%20y%3D%22335%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%2322543D%22%3ECAT%C3%81LOGO%20DO%20M%C3%8AS%3C%2Ftext%3E%0A%3Ctext%20x%3D%2260%22%20y%3D%22430%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2258%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EConfira%20as%3C%2Ftext%3E%3Ctext%20x%3D%2260%22%20y%3D%22496%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2258%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3Enovidades%3C%2Ftext%3E%0A%3Ctext%20x%3D%2260%22%20y%3D%22860%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22600%22%20fill%3D%22%23fff%22%20opacity%3D%22.9%22%3ERepresenta%C3%A7%C3%B5es%20Exemplo%3C%2Ftext%3E%0A%3C%2Fsvg%3E" alt="Imagem">
+            </div>
+            <span class="status-mvp-content-text" title="Catálogo do mês: confira as novidades 📦">Catálogo do mês: confira as novidades 📦</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">Mensalmente</span></td>
+        <td><span class="status-mvp-cell-text">09:00</span></td>
+        <td><span class="status-mvp-recorrencia">Mensal</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-agendado">Agendado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn" title="Cancelar agendamento">
+              <i class="ri-close-circle-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-texto">Texto</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb" style="background:#1A1A2E">
+              <span class="status-mvp-thumb-icon status-mvp-thumb-icon-on-color"><i class="ri-text"></i></span>
+            </div>
+            <span class="status-mvp-content-text" title="Atenção: segunda-feira é feriado e não teremos expediente. Pedidos feitos até sexta serão entregues na terça. 🗓️">Atenção: segunda-feira é feriado e não teremo...</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">09/10/2026</span></td>
+        <td><span class="status-mvp-cell-text">17:00</span></td>
+        <td><span class="status-mvp-recorrencia">Única</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-agendado">Agendado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn" title="Cancelar agendamento">
+              <i class="ri-close-circle-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-texto">Texto</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb" style="background:#F56565">
+              <span class="status-mvp-thumb-icon status-mvp-thumb-icon-on-color"><i class="ri-text"></i></span>
+            </div>
+            <span class="status-mvp-content-text" title="🔥 Promoção da semana: biscoito sortido 400g com 15% de desconto acima de 20 caixas. Chame no WhatsApp!">🔥 Promoção da semana: biscoito sortido 400g ...</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">08/10/2026</span></td>
+        <td><span class="status-mvp-cell-text">09:00</span></td>
+        <td><span class="status-mvp-recorrencia">Única</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-agendado">Agendado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn" title="Cancelar agendamento">
+              <i class="ri-close-circle-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-imagem">Imagem</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb">
+              <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22540%22%20height%3D%22960%22%20viewBox%3D%220%200%20540%20960%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23F6AD55%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%239C4221%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%0A%3Crect%20width%3D%22540%22%20height%3D%22960%22%20fill%3D%22url(%23g)%22%2F%3E%0A%3Ccircle%20cx%3D%22450%22%20cy%3D%22150%22%20r%3D%22190%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%22820%22%20r%3D%22230%22%20fill%3D%22%23fff%22%20opacity%3D%22.07%22%2F%3E%0A%3Crect%20x%3D%2260%22%20y%3D%22300%22%20width%3D%22238%22%20height%3D%2252%22%20rx%3D%2226%22%20fill%3D%22%23fff%22%20opacity%3D%22.95%22%2F%3E%0A%3Ctext%20x%3D%2284%22%20y%3D%22335%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%239C4221%22%3ELAN%C3%87AMENTO%3C%2Ftext%3E%0A%3Ctext%20x%3D%2260%22%20y%3D%22430%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2258%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3ENova%20linha%20de%3C%2Ftext%3E%3Ctext%20x%3D%2260%22%20y%3D%22496%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2258%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3Eachocolatados%3C%2Ftext%3E%0A%3Ctext%20x%3D%2260%22%20y%3D%22860%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22600%22%20fill%3D%22%23fff%22%20opacity%3D%22.9%22%3ERepresenta%C3%A7%C3%B5es%20Exemplo%3C%2Ftext%3E%0A%3C%2Fsvg%3E" alt="Imagem">
+            </div>
+            <span class="status-mvp-content-text" title="Lançamento: nova linha de achocolatados 🍫 Peça sua amostra!">Lançamento: nova linha de achocolatados 🍫 Pe...</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">07/10/2026</span></td>
+        <td><span class="status-mvp-cell-text">08:30</span></td>
+        <td><span class="status-mvp-recorrencia">Única</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-agendado">Agendado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn" title="Cancelar agendamento">
+              <i class="ri-close-circle-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-texto">Texto</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb" style="background:#A0522D">
+              <span class="status-mvp-thumb-icon status-mvp-thumb-icon-on-color"><i class="ri-text"></i></span>
+            </div>
+            <span class="status-mvp-content-text" title="Equipe de degustação no Empório Central neste sábado, das 9h às 13h. Passe lá! ☕">Equipe de degustação no Empório Central neste...</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">06/10/2026</span></td>
+        <td><span class="status-mvp-cell-text">10:00</span></td>
+        <td><span class="status-mvp-recorrencia">Única</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-cancelado">Cancelado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-imagem">Imagem</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb">
+              <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22540%22%20height%3D%22960%22%20viewBox%3D%220%200%20540%20960%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%234FD1C5%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%232B6CB0%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%0A%3Crect%20width%3D%22540%22%20height%3D%22960%22%20fill%3D%22url(%23g)%22%2F%3E%0A%3Ccircle%20cx%3D%22450%22%20cy%3D%22150%22%20r%3D%22190%22%20fill%3D%22%23fff%22%20opacity%3D%22.08%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%22820%22%20r%3D%22230%22%20fill%3D%22%23fff%22%20opacity%3D%22.07%22%2F%3E%0A%3Crect%20x%3D%2260%22%20y%3D%22300%22%20width%3D%22200%22%20height%3D%2252%22%20rx%3D%2226%22%20fill%3D%22%23fff%22%20opacity%3D%22.95%22%2F%3E%0A%3Ctext%20x%3D%2284%22%20y%3D%22335%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20fill%3D%22%232B6CB0%22%3ENOVIDADE%3C%2Ftext%3E%0A%3Ctext%20x%3D%2260%22%20y%3D%22430%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2258%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3EDisplay%20de%3C%2Ftext%3E%3Ctext%20x%3D%2260%22%20y%3D%22496%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2258%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3Ebalc%C3%A3o%20gr%C3%A1tis%3C%2Ftext%3E%3Ctext%20x%3D%2260%22%20y%3D%22562%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2258%22%20font-weight%3D%22800%22%20fill%3D%22%23fff%22%3Eno%20pedido%3C%2Ftext%3E%0A%3Ctext%20x%3D%2260%22%20y%3D%22860%22%20font-family%3D%22Arial%2C%20Helvetica%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22600%22%20fill%3D%22%23fff%22%20opacity%3D%22.9%22%3EPe%C3%A7a%20pelo%20WhatsApp%3C%2Ftext%3E%0A%3C%2Fsvg%3E" alt="Imagem">
+            </div>
+            <span class="status-mvp-content-text" title="Chegou o display novo para balcão! Peça o seu junto com o pedido.">Chegou o display novo para balcão! Peça o seu...</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">03/10/2026</span></td>
+        <td><span class="status-mvp-cell-text">10:00</span></td>
+        <td><span class="status-mvp-recorrencia">Única</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-publicado">Publicado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-texto">Texto</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb" style="background:#2196F3">
+              <span class="status-mvp-thumb-icon status-mvp-thumb-icon-on-color"><i class="ri-text"></i></span>
+            </div>
+            <span class="status-mvp-content-text" title="Semana do cliente: 5% extra em pedidos acima de R$ 1.500 💙">Semana do cliente: 5% extra em pedidos acima ...</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">Personalizado</span></td>
+        <td><span class="status-mvp-cell-text">12:00</span></td>
+        <td><span class="status-mvp-recorrencia">Período Específico</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-agendado">Agendado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn" title="Cancelar agendamento">
+              <i class="ri-close-circle-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    
+      <tr class="status-mvp-row">
+        <td><span class="status-mvp-type-badge status-mvp-type-video">Vídeo</span></td>
+        <td>
+          <div class="status-mvp-content-cell">
+            <div class="status-mvp-thumb">
+              <span class="status-mvp-thumb-icon "><i class="ri-play-line"></i></span>
+            </div>
+            <span class="status-mvp-content-text" title="Veja como montar o display de achocolatado em 30 segundos">Veja como montar o display de achocolatado em...</span>
+          </div>
+        </td>
+        <td><span class="status-mvp-cell-text">01/10/2026</span></td>
+        <td><span class="status-mvp-cell-text">15:00</span></td>
+        <td><span class="status-mvp-recorrencia">Única</span></td>
+        <td><span class="status-mvp-status-badge status-mvp-status-publicado">Publicado</span></td>
+        <td>
+          <div class="status-mvp-actions">
+            <button class="status-mvp-action-btn" title="Editar publicação">
+              <i class="ri-pencil-line"></i>
+            </button>
+            
+            <button class="status-mvp-action-btn status-mvp-action-danger" title="Excluir publicação">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+       </td>
+      </tr>
+    </tbody>
+            </table>
+
+            <div id="pagination-controls" class="status-mvp-pagination">
+              <span>
+                Mostrando <strong id="showing-start">1</strong> a <strong id="showing-end">8</strong> de
+                <strong id="total-stories">11</strong> stories
+              </span>
+
+              <div class="status-mvp-pagination-right">
+                <button id="prev-page-btn" type="button" disabled="">
+                  <i class="ri-arrow-left-line"></i>
+                  Anterior
+                </button>
+                <span>Página <strong id="current-page">1</strong> de <strong id="total-pages">2</strong></span>
+                <button id="next-page-btn" type="button">
+                  Próximo
+                  <i class="ri-arrow-right-line"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="story-modal" class="modal status-mvp-modal">
+      <div class="modal-content status-mvp-modal-card">
+        <div class="status-mvp-modal-header">
+          <h2 class="status-mvp-modal-title-wrap">
+            <span id="modal-title-icon" class="status-mvp-modal-title-icon">
+              <i class="ri-add-line"></i>
+            </span>
+            <span id="modal-title">Criar Publicação</span>
+          </h2>
+          <button type="button" class="modal-close status-mvp-close-btn" aria-label="Fechar">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+
+        <form id="story-form" class="status-mvp-form">
+          <input type="hidden" id="story-id" name="id">
+
+          <section class="status-mvp-section">
+            <h3>── Tipo de Story ──</h3>
+            <div class="status-mvp-type-grid">
+              <label class="status-mvp-type-card">
+                <input type="radio" name="tipo" value="texto" checked="">
+                <span><i class="ri-text"></i>Texto</span>
+              </label>
+              <label class="status-mvp-type-card">
+                <input type="radio" name="tipo" value="imagem">
+                <span><i class="ri-image-line"></i>Imagem</span>
+              </label>
+              <label class="status-mvp-type-card">
+                <input type="radio" name="tipo" value="video">
+                <span><i class="ri-video-line"></i>Vídeo</span>
+              </label>
+            </div>
+          </section>
+
+          <section class="status-mvp-section">
+            <h3>── Destino ──</h3>
+            <label class="status-mvp-label">Instâncias *</label>
+
+            <div class="status-mvp-destination-box">
+              <label class="status-mvp-radio-row">
+                <input id="instance-mode-all" type="radio" name="instance_mode" value="all" checked="">
+                Todas as instâncias
+              </label>
+              <label class="status-mvp-radio-row">
+                <input id="instance-mode-custom" type="radio" name="instance_mode" value="custom">
+                Selecionar instâncias:
+              </label>
+
+              <div id="instance-selection-wrap" class="status-mvp-instance-selection hidden">
+                <div class="status-mvp-quick-actions">
+                  <button type="button" id="select-all-instances" disabled="">Selecionar todas</button>
+                  <button type="button" id="clear-all-instances" disabled="">Limpar seleção</button>
+                </div>
+
+                <div id="selected-instances-summary" class="status-mvp-selected-summary">Todas as instâncias selecionadas (2)</div><div id="instances-list" class="status-mvp-instances-list">
+      <label class="status-mvp-instance-row">
+        <input type="checkbox" name="instance_ids" value="inst-comercial" class="status-mvp-instance-check" disabled="" checked="">
+        <div class="status-mvp-instance-name" title="Comercial">
+          <i class="ri-smartphone-line" aria-hidden="true"></i>
+          <span class="status-mvp-instance-name-text">Comercial</span>
+        </div>
+        <div class="status-mvp-instance-status status-connected">Conectada</div>
+      </label>
+    
+      <label class="status-mvp-instance-row">
+        <input type="checkbox" name="instance_ids" value="inst-posvenda" class="status-mvp-instance-check" disabled="" checked="">
+        <div class="status-mvp-instance-name" title="Pós-venda">
+          <i class="ri-smartphone-line" aria-hidden="true"></i>
+          <span class="status-mvp-instance-name-text">Pós-venda</span>
+        </div>
+        <div class="status-mvp-instance-status status-connected">Conectada</div>
+      </label>
+    </div>
+              </div>
+            </div>
+
+            <div class="status-mvp-field-stack">
+              <label for="story-responsavel" class="status-mvp-label">Usuário responsável</label>
+              <select id="story-responsavel" name="responsavel" class="status-mvp-responsavel-select"><option value="Ana Souza" selected="">Ana Souza</option><option value="Bruno Lima">Bruno Lima</option><option value="Carla Dias">Carla Dias</option><option value="Sem responsável">Sem responsável</option></select>
+            </div>
+          </section>
+
+          <section id="texto-fields" class="status-mvp-section">
+            <h3>── Conteúdo ──</h3>
+
+            <div class="status-mvp-field-row">
+              <label for="story-text" class="status-mvp-label">Texto do Status *</label>
+              <span id="story-text-counter" class="status-mvp-counter">Caracteres: 0/700</span>
+            </div>
+
+            <div class="status-mvp-textarea-wrap">
+              <textarea id="story-text" name="texto" rows="4" maxlength="700" placeholder="Escreva o texto do seu status..."></textarea>
+              <button type="button" id="emoji-picker-btn" class="status-mvp-emoji-btn" aria-label="Emoji">
+                <i class="ri-emotion-happy-line"></i>
+              </button>
+              <div id="emoji-picker" class="status-mvp-emoji-panel hidden">
+                <button type="button" class="emoji-btn" data-emoji="🔥">🔥</button>
+                <button type="button" class="emoji-btn" data-emoji="💬">💬</button>
+                <button type="button" class="emoji-btn" data-emoji="🚀">🚀</button>
+                <button type="button" class="emoji-btn" data-emoji="🎉">🎉</button>
+                <button type="button" class="emoji-btn" data-emoji="✅">✅</button>
+                <button type="button" class="emoji-btn" data-emoji="💙">💙</button>
+              </div>
+            </div>
+
+            <label class="status-mvp-label" for="color-value">Cor de Fundo</label>
+            <div class="status-mvp-color-row">
+              <div class="status-mvp-color-swatches">
+                <button type="button" class="status-mvp-color-swatch is-selected" data-color="#2196F3" style="background:#2196F3" aria-pressed="true"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#48BB78" style="background:#48BB78" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#F6AD55" style="background:#F6AD55" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#F56565" style="background:#F56565" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#B794F4" style="background:#B794F4" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#ECC94B" style="background:#ECC94B" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#1A1A2E" style="background:#1A1A2E" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#718096" style="background:#718096" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#4FD1C5" style="background:#4FD1C5" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#ED64A6" style="background:#ED64A6" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#A0522D" style="background:#A0522D" aria-pressed="false"></button>
+                <button type="button" class="status-mvp-color-swatch" data-color="#E2E8F0" style="background:#E2E8F0" aria-pressed="false"></button>
+              </div>
+              <button type="button" id="custom-color-trigger" aria-label="Selecionar cor" style="background-color: rgb(33, 150, 243); border-color: rgb(33, 150, 243);">
+                <i class="ri-brush-3-fill"></i>
+              </button>
+              <div class="pickr">
+
+        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog" style="--pcr-color: rgba(33, 150, 243, 1);"></button>
+
+        
+      </div>
+              <input id="color-value" name="cor_background" type="text" value="#2196F3">
+            </div>
+
+            <label class="status-mvp-label">Pré-visualização</label>
+            <div id="text-preview" class="status-mvp-story-preview" style="background:#2196F3">
+              <span>Seu texto aqui...</span>
+            </div>
+          </section>
+
+          <section id="imagem-fields" class="status-mvp-section hidden">
+            <h3>── Conteúdo ──</h3>
+
+            <label for="imagem-input" class="status-mvp-label">
+              <i id="media-field-icon" class="ri-image-add-line"></i>
+              <span class="font-medium">Imagem</span>
+            </label>
+
+            <label class="status-mvp-upload-box" for="imagem-input">
+              <i class="ri-upload-cloud-2-line"></i>
+              <strong id="media-upload-title">Arraste a imagem ou clique para selecionar</strong>
+              <small id="media-upload-hint">JPG, PNG, GIF ou WebP (máx. 5MB)</small>
+            </label>
+            <input id="imagem-input" name="imagem" type="file" accept="image/*" class="hidden">
+
+            <div class="status-mvp-field-stack">
+              <label for="story-media-caption" class="status-mvp-label">Legenda (opcional)</label>
+              <input id="story-media-caption" type="text" maxlength="300" placeholder="Adicione uma legenda...">
+            </div>
+
+            <label class="status-mvp-label">Pré-visualização</label>
+            <div id="image-preview" class="status-mvp-media-preview">
+              <div class="status-mvp-story-preview status-mvp-story-preview-media">
+                <div class="status-mvp-story-preview-media-inner">
+                  <div class="status-mvp-story-preview-media-empty">
+                  <i class="ri-image-line"></i>
+                  <span>Nenhuma imagem selecionada</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="status-mvp-section">
+            <h3>── Agendamento ──</h3>
+
+            <label class="status-mvp-label">Tipo de Agendamento *</label>
+            <div id="recurrence-chips" class="status-mvp-recurrence-chips">
+              <button type="button" class="status-mvp-recurrence-chip is-active" data-recorrencia="unico" aria-pressed="true">Único</button>
+              <button type="button" class="status-mvp-recurrence-chip" data-recorrencia="diario" aria-pressed="false">Diário</button>
+              <button type="button" class="status-mvp-recurrence-chip" data-recorrencia="semanal" aria-pressed="false">Semanal</button>
+              <button type="button" class="status-mvp-recurrence-chip" data-recorrencia="mensal" aria-pressed="false">Mensal</button>
+              <button type="button" class="status-mvp-recurrence-chip" data-recorrencia="personalizado" aria-pressed="false">Personalizado</button>
+            </div>
+
+            <select id="story-recurrence" name="recorrencia" class="hidden">
+              <option value="unico" selected="">Único</option>
+              <option value="diario">Diário</option>
+              <option value="semanal">Semanal</option>
+              <option value="mensal">Mensal</option>
+              <option value="personalizado">Personalizado</option>
+            </select>
+
+            <div id="unico-fields" class="status-mvp-schedule-block">
+              <label for="story-datetime" class="status-mvp-label">Data e Hora</label>
+              <input id="story-datetime" name="data_hora_agendada" type="datetime-local">
+            </div>
+
+            <div id="recorrencia-basica-fields" class="status-mvp-schedule-block hidden">
+              <div class="status-mvp-grid-2">
+                <div>
+                  <label for="story-date" class="status-mvp-label">Data de Início</label>
+                  <input id="story-date" name="data_agendada" type="date">
+                </div>
+                <div>
+                  <label for="story-time" class="status-mvp-label">Horário</label>
+                  <input id="story-time" name="hora" type="time">
+                </div>
+              </div>
+            </div>
+
+            <div id="weekday-fields" class="status-mvp-schedule-block hidden">
+              <label class="status-mvp-label">Dias da Semana</label>
+              <div class="status-mvp-weekdays">
+                <label><input type="checkbox" name="dias_semana" value="0">Dom</label>
+                <label><input type="checkbox" name="dias_semana" value="1">Seg</label>
+                <label><input type="checkbox" name="dias_semana" value="2">Ter</label>
+                <label><input type="checkbox" name="dias_semana" value="3">Qua</label>
+                <label><input type="checkbox" name="dias_semana" value="4">Qui</label>
+                <label><input type="checkbox" name="dias_semana" value="5">Sex</label>
+                <label><input type="checkbox" name="dias_semana" value="6">Sáb</label>
+              </div>
+            </div>
+
+            <div id="periodo-fields" class="status-mvp-schedule-block hidden">
+              <div class="status-mvp-grid-2">
+                <div>
+                  <label for="data-inicio" class="status-mvp-label">Data início</label>
+                  <input id="data-inicio" name="data_inicio" type="date">
+                </div>
+                <div>
+                  <label for="data-fim" class="status-mvp-label">Data fim</label>
+                  <input id="data-fim" name="data_fim" type="date">
+                </div>
+              </div>
+
+              <div class="status-mvp-grid-2">
+                <div>
+                  <label for="frequencia-periodo" class="status-mvp-label">Frequência</label>
+                  <select id="frequencia-periodo" name="frequencia_periodo">
+                    <option value="diario" selected="">Todos os dias</option>
+                    <option value="semanal">Uma vez por semana</option>
+                    <option value="quinzenal">A cada 15 dias</option>
+                    <option value="mensal">Uma vez por mês</option>
+                    <option value="personalizado">Intervalo customizado</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="periodo-horario" class="status-mvp-label">Horário</label>
+                  <input id="periodo-horario" name="periodo_horario" type="time" value="09:00">
+                </div>
+              </div>
+
+              <div id="intervalo-customizado" class="status-mvp-inline-row hidden">
+                <span>A cada</span>
+                <input id="intervalo-numero" name="intervalo_numero" type="number" min="1" max="365" value="1">
+                <select id="intervalo-unidade" name="intervalo_unidade">
+                  <option value="dias" selected="">dias</option>
+                  <option value="semanas">semanas</option>
+                  <option value="meses">meses</option>
+                </select>
+              </div>
+
+              <div id="periodo-preview" class="status-mvp-period-preview">
+                Configure as datas para ver o resumo
+              </div>
+            </div>
+          </section>
+
+          <div class="status-mvp-modal-footer">
+            <button type="button" class="cancel-btn status-mvp-cancel-btn">Cancelar</button>
+            <button id="story-submit-btn" type="submit" class="status-mvp-primary-btn">Agendar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="confirm-modal" class="modal status-mvp-modal">
+      <div class="modal-content status-mvp-confirm-card">
+        <h3>Confirmação</h3>
+        <p id="confirm-message">Tem certeza que deseja realizar esta ação?</p>
+        <div class="status-mvp-modal-footer">
+          <button type="button" class="cancel-btn status-mvp-cancel-btn">Cancelar</button>
+          <button id="confirm-button" type="button" class="status-mvp-danger-btn">Confirmar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="error-modal" class="modal status-mvp-modal">
+      <div class="modal-content status-mvp-confirm-card">
+        <h3>Detalhes da Falha</h3>
+        <div id="error-details">Detalhes do erro aparecerão aqui...</div>
+        <div class="status-mvp-modal-footer">
+          <button id="close-error-btn" type="button" class="status-mvp-primary-btn">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+
+
+<div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div><div id="whatsapp-contacts-popup" class="fixed inset-0 bg-black bg-opacity-75 z-[9999] hidden">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="rounded-lg p-6 max-w-md w-full shadow-xl border bg-theme-surface border-theme-light">
+      <div class="text-center">
+        
+        <div class="mb-4">
+          <i class="ri-whatsapp-line text-5xl text-green-500"></i>
+        </div>
+        
+        
+        <h3 class="text-xl font-bold text-primary mb-2">
+          WhatsApp Conectado com Sucesso!
+        </h3>
+        
+        
+        <p class="text-secondary mb-4">
+          Deseja importar os contatos deste número para o Zap Empresarial?
+        </p>
+        
+        
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6">
+          <p class="text-sm text-yellow-800">
+            <i class="ri-shield-check-line mr-1"></i>
+            <strong>Segurança:</strong> Apenas você terá acesso a estes contatos
+          </p>
+        </div>
+        
+        
+        <div id="extraction-loading" class="hidden mb-4">
+          <div class="flex items-center justify-center">
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500 mr-2"></div>
+            <span class="text-sm text-secondary">Importando contatos...</span>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-success" class="hidden mb-4">
+          <div class="text-green-600">
+            <i class="ri-check-circle-line text-2xl mb-2"></i>
+            <p class="text-sm">
+              <span id="extraction-count">0</span> contatos importados com sucesso!
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="extraction-error" class="hidden mb-4">
+          <div class="text-red-600">
+            <i class="ri-error-warning-line text-2xl mb-2"></i>
+            <p class="text-sm" id="extraction-error-message">
+              Erro ao importar contatos
+            </p>
+          </div>
+        </div>
+        
+        
+        <div id="action-buttons" class="flex space-x-3">
+          <button id="extract-contacts-yes" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors focus:ring-2 focus:ring-green-500 focus:outline-none">
+            <i class="ri-download-line mr-1"></i>
+            Sim, Importar
+          </button>
+          <button id="extract-contacts-no" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors focus:ring-2 focus:ring-gray-500 focus:outline-none text-theme-secondary">
+            <i class="ri-close-line mr-1"></i>
+            Não, Obrigado
+          </button>
+        </div>
+        
+        
+        <div id="close-button" class="hidden">
+          <button id="extract-contacts-close" class="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+            <i class="ri-check-line mr-1"></i>
+            Entendi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div class="pcr-app " data-theme="classic" aria-label="color picker dialog" role="window" style="left: 0px; top: 8px;">
+          <div class="pcr-selection">
+            <div class="pcr-color-preview">
+              <button type="button" class="pcr-last-color" aria-label="use previous color" style="--pcr-color: rgba(33, 150, 243, 1);"></button>
+              <div class="pcr-current-color" style="--pcr-color: rgba(33, 150, 243, 1);"></div>
+            </div>
+
+            <div class="pcr-color-palette">
+              <div class="pcr-picker" style="left: calc(86.4198% - 9px); top: calc(4.70588% - 9px); background: rgb(33, 150, 243);"></div>
+              <div class="pcr-palette" tabindex="0" aria-label="color selection area" role="listbox" style="background: linear-gradient(to top, rgb(0, 0, 0), transparent), linear-gradient(to left, rgb(0, 142, 255), rgb(255, 255, 255));"></div>
+            </div>
+
+            <div class="pcr-color-chooser">
+              <div class="pcr-picker" style="top: calc(57.381% - 9px); background-color: rgb(0, 142, 255);"></div>
+              <div class="pcr-hue pcr-slider" tabindex="0" aria-label="hue selection slider" role="slider"></div>
+            </div>
+
+            <div class="pcr-color-opacity" style="display:none" hidden="">
+              <div class="pcr-picker"></div>
+              <div class="pcr-opacity pcr-slider" tabindex="0" aria-label="selection slider" role="slider"></div>
+            </div>
+          </div>
+
+          <div class="pcr-swatches "><button type="button" style="--pcr-color: rgba(33, 150, 243, 1)" aria-label="color swatch" class="pcr-active"></button><button type="button" style="--pcr-color: rgba(72, 187, 120, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(246, 173, 85, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(245, 101, 101, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(183, 148, 244, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(236, 201, 75, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(26, 26, 46, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(113, 128, 150, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(79, 209, 197, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(237, 100, 166, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(160, 82, 45, 1)" aria-label="color swatch"></button><button type="button" style="--pcr-color: rgba(226, 232, 240, 1)" aria-label="color swatch"></button></div>
+
+          <div class="pcr-interaction">
+            <input class="pcr-result" type="text" spellcheck="false" aria-label="color input field" value="hsla(207, 90%, 54%, 1)">
+
+            <input class="pcr-type" data-type="HEXA" value="HEXA" type="button">
+            <input class="pcr-type" data-type="RGBA" value="RGBA" type="button" style="display:none" hidden="">
+            <input class="pcr-type active" data-type="HSLA" value="HSLA" type="button" style="display:none" hidden="">
+            <input class="pcr-type" data-type="HSVA" value="HSVA" type="button" style="display:none" hidden="">
+            <input class="pcr-type" data-type="CMYK" value="CMYK" type="button" style="display:none" hidden="">
+
+            <input class="pcr-save" value="Save" type="button" aria-label="save and close">
+            <input class="pcr-cancel" value="Cancel" type="button" style="display:none" hidden="" aria-label="cancel and close">
+            <input class="pcr-clear" value="Clear" type="button" style="display:none" hidden="" aria-label="clear and close">
+          </div>
+        </div>
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/stories.html). Para recapturar sem perder este bloco:
+     node tools/capture/capture.mjs stories "/stories.html"
+     node tools/capture/montar.mjs stories
+     Os moldes abaixo vêm de outras capturas da mesma tela (tools/capture/out/):
+       stories-vazio          busca sem resultado         → molde-vazio
+       stories-editar-imagem  editStory('st-04')          → molde-midia
+       stories-editar-periodo editStory('st-07')          → molde-periodo
+       stories-novo-periodo   Personalizado sem datas     → molde-periodo-vazio
+       stories-toast          cancelStory('st-03')        → molde-toast -->
+<template id="molde-vazio">
+      <tr>
+        <td colspan="7" class="status-mvp-empty-cell">
+          <div>
+            <i class="ri-file-list-3-line"></i>
+            <p>Nenhum status encontrado</p>
+            <small>Crie sua primeira publicação para começar.</small>
+          </div>
+        </td>
+      </tr>
+</template>
+<template id="molde-midia">
+    <div class="status-mvp-story-preview status-mvp-story-preview-media">
+      <div class="status-mvp-story-preview-media-inner">
+        <img src="" alt="Pré-visualização do status">
+      </div>
+      <div class="status-mvp-story-preview-caption"></div>
+    </div>
+</template>
+<template id="molde-periodo">
+    <div class="status-mvp-period-lines">
+      <div><i class="ri-calendar-line"></i><strong>Período:</strong> </div>
+      <div><i class="ri-time-line"></i><strong>Frequência:</strong> </div>
+      <div><i class="ri-bar-chart-line"></i><strong>Estimativa:</strong> </div>
+    </div>
+</template>
+<template id="molde-periodo-vazio"><span class="status-mvp-period-empty"><i class="ri-information-line"></i> Configure as datas para ver o resumo</span></template>
+<template id="molde-toast"><style id="toast-styles">
+      .toast {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        color: white;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .toast-success { background-color: #10b981; }
+      .toast-error { background-color: #ef4444; }
+      .toast-warning { background-color: #f59e0b; }
+      .toast-info { background-color: #3b82f6; }
+    </style><div class="toast toast-success"></div></template>
+<script>
+(() => {
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+
+  // ---------------------------------------------------------------------------------
+  // Datas: tudo relativo a hoje, para a tela continuar atual em qualquer dia da demo.
+  // ---------------------------------------------------------------------------------
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+  const ymd = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const lerYmd = (s) => { const [a, m, d] = s.split('-').map(Number); return new Date(a, m - 1, d); };
+  const dia = (n) => { const d = new Date(hoje); d.setDate(d.getDate() + n); return ymd(d); };
+  const fmtData = (s) => lerYmd(s).toLocaleDateString('pt-BR');
+
+  // Imagens fictícias (SVG em data: URI) lidas das miniaturas da própria captura.
+  function imagemDe(inicioDoTexto) {
+    const linha = $$('#stories-table-body .status-mvp-row')
+      .find((tr) => ($('.status-mvp-content-text', tr)?.title || '').startsWith(inicioDoTexto));
+    return linha ? $('.status-mvp-thumb img', linha)?.getAttribute('src') : null;
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Dados fictícios (os mesmos de tools/capture/fixtures/stories.js). Repositório público.
+  // situacao: agendado | publicado | falha | cancelado (o que a tela mostra).
+  // postado: rótulo do recorrente que já saiu no ciclo atual ("Diário postado"...).
+  // ---------------------------------------------------------------------------------
+  const TODAS = ['inst-comercial', 'inst-posvenda'];
+  let STATUS = [
+    { id: 'st-01', tipo: 'imagem', texto: 'Catálogo do mês: confira as novidades 📦', img: imagemDe('Catálogo do mês'),
+      recorrencia: 'mensal', data: ymd(new Date(hoje.getFullYear(), hoje.getMonth() + 1, 1)), hora: '09:00', situacao: 'agendado' },
+    { id: 'st-02', tipo: 'texto', cor: '#1A1A2E', texto: 'Atenção: segunda-feira é feriado e não teremos expediente. Pedidos feitos até sexta serão entregues na terça. 🗓️',
+      recorrencia: 'unico', data: dia(4), hora: '17:00', situacao: 'agendado' },
+    { id: 'st-03', tipo: 'texto', cor: '#F56565', texto: '🔥 Promoção da semana: biscoito sortido 400g com 15% de desconto acima de 20 caixas. Chame no WhatsApp!',
+      recorrencia: 'unico', data: dia(3), hora: '09:00', situacao: 'agendado', instancias: ['inst-comercial'] },
+    { id: 'st-04', tipo: 'imagem', texto: 'Lançamento: nova linha de achocolatados 🍫 Peça sua amostra!', img: imagemDe('Lançamento'),
+      recorrencia: 'unico', data: dia(2), hora: '08:30', situacao: 'agendado', instancias: ['inst-comercial'] },
+    { id: 'st-05', tipo: 'texto', cor: '#A0522D', texto: 'Equipe de degustação no Empório Central neste sábado, das 9h às 13h. Passe lá! ☕',
+      recorrencia: 'unico', data: dia(1), hora: '10:00', situacao: 'cancelado', responsavel: 'Carla Dias' },
+    { id: 'st-06', tipo: 'imagem', texto: 'Chegou o display novo para balcão! Peça o seu junto com o pedido.', img: imagemDe('Chegou o display'),
+      recorrencia: 'unico', data: dia(-2), hora: '10:00', situacao: 'publicado' },
+    { id: 'st-07', tipo: 'texto', cor: '#2196F3', texto: 'Semana do cliente: 5% extra em pedidos acima de R$ 1.500 💙',
+      recorrencia: 'personalizado', data: dia(-3), hora: '12:00', situacao: 'agendado',
+      periodo: { inicio: dia(-3), fim: dia(11), frequencia: 'diario' } },
+    { id: 'st-08', tipo: 'video', texto: 'Veja como montar o display de achocolatado em 30 segundos',
+      recorrencia: 'unico', data: dia(-4), hora: '15:00', situacao: 'publicado', instancias: ['inst-posvenda'], responsavel: 'Bruno Lima' },
+    { id: 'st-09', tipo: 'texto', cor: '#ECC94B', texto: 'Últimas unidades do kit panetone com o preço do mês passado!',
+      recorrencia: 'unico', data: dia(-6), hora: '18:00', situacao: 'falha', instancias: ['inst-comercial'] },
+    { id: 'st-10', tipo: 'texto', cor: '#48BB78', texto: 'Pedidos feitos até as 15h saem no mesmo dia para a Grande SP 🚚',
+      recorrencia: 'diario', data: dia(-20), hora: '07:30', situacao: 'publicado', postado: 'Diário postado' },
+    { id: 'st-11', tipo: 'texto', cor: '#4FD1C5', texto: 'Bom dia! A tabela de preços da semana já está disponível. Peça a sua 📋',
+      recorrencia: 'semanal', dias: [1], data: dia(-28), hora: '08:00', situacao: 'publicado', postado: 'Semanal postado', responsavel: 'Carla Dias' },
+  ].map((s) => Object.assign({ instancias: TODAS, responsavel: 'Ana Souza', dias: [], periodo: null, cor: null, img: null }, s));
+
+  const POR_PAGINA = 8;
+  const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  const ROTULO_RECORRENCIA = { unico: 'Única', diario: 'Diária', semanal: 'Semanal', mensal: 'Mensal', personalizado: 'Período Específico' };
+  const ROTULO_SITUACAO = { agendado: 'Agendado', publicado: 'Publicado', falha: 'Falha', cancelado: 'Cancelado' };
+  const ROTULO_TIPO = { texto: 'Texto', imagem: 'Imagem', video: 'Vídeo' };
+
+  // ---------------------------------------------------------------------------------
+  // Moldes tirados da própria captura: a linha nova nasce com a marcação exata do app.
+  // ---------------------------------------------------------------------------------
+  const corpo = $('#stories-table-body');
+  const linhasCapturadas = $$('.status-mvp-row', corpo);
+  const linhaDoTipo = (tipo) => linhasCapturadas.find((tr) => $(`.status-mvp-type-${tipo}`, tr));
+  const molde = {
+    linha: linhasCapturadas.find((tr) => $$('.status-mvp-action-btn', tr).length === 3).cloneNode(true),
+    tipo: Object.fromEntries(['texto', 'imagem', 'video'].map((t) => [t, $('.status-mvp-type-badge', linhaDoTipo(t)).cloneNode(true)])),
+    miniatura: Object.fromEntries(['texto', 'imagem', 'video'].map((t) => [t, $('.status-mvp-thumb', linhaDoTipo(t)).cloneNode(true)])),
+    situacao: $('.status-mvp-status-badge', corpo).cloneNode(true),
+    vazio: $('#molde-vazio').content.firstElementChild,
+    midia: $('#molde-midia').content.firstElementChild,
+    midiaVazia: $('#image-preview').firstElementChild.cloneNode(true),
+    periodo: $('#molde-periodo').content.firstElementChild,
+    periodoVazio: $('#molde-periodo-vazio').content.firstElementChild,
+    toastEstilo: $('#molde-toast').content.querySelector('style'),
+    toast: $('#molde-toast').content.querySelector('.toast'),
+  };
+
+  // ---------------------------------------------------------------------------------
+  // Toast (mesmo comportamento do app: aparece no canto e some em 3 s).
+  // ---------------------------------------------------------------------------------
+  function toast(texto, tipo = 'success') {
+    if (!$('#toast-styles')) document.head.appendChild(molde.toastEstilo.cloneNode(true));
+    const el = molde.toast.cloneNode(true);
+    el.className = `toast toast-${tipo}`;
+    el.textContent = texto;
+    document.body.appendChild(el);
+    setTimeout(() => { el.style.opacity = '1'; }, 100);
+    setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3000);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Lista: filtros, KPIs e paginação (8 por página, como no app).
+  // ---------------------------------------------------------------------------------
+  let pagina = 1;
+
+  // Ordem do backend: data DESC, hora ASC.
+  function ordenar() {
+    STATUS.sort((a, b) => b.data.localeCompare(a.data) || a.hora.localeCompare(b.hora));
+  }
+
+  function filtrados() {
+    const busca = $('#search-input').value.trim().toLowerCase();
+    const situacao = $('#filter-status').value;
+    const tipo = $('#filter-type').value;
+    return STATUS.filter((s) => {
+      if (situacao && s.situacao !== situacao) return false;
+      if (tipo && s.tipo !== tipo) return false;
+      if (!busca) return true;
+      return [s.texto, s.tipo, s.recorrencia, s.situacao].join(' ').toLowerCase().includes(busca);
+    });
+  }
+
+  function textoDaData(s) {
+    if (s.recorrencia === 'unico') return fmtData(s.data);
+    return { diario: 'Todos os dias', semanal: 'Semanalmente', mensal: 'Mensalmente' }[s.recorrencia] || 'Personalizado';
+  }
+
+  function linha(s) {
+    const tr = molde.linha.cloneNode(true);
+    const [celTipo, celConteudo, celData, celHora, celRecorrencia, celSituacao, celAcoes] = tr.children;
+
+    celTipo.replaceChildren(molde.tipo[s.tipo].cloneNode(true));
+
+    const miniatura = molde.miniatura[s.tipo === 'imagem' && s.img ? 'imagem' : s.tipo].cloneNode(true);
+    if (s.tipo === 'texto') miniatura.style.background = s.cor;
+    if (s.tipo === 'imagem' && s.img) $('img', miniatura).src = s.img;
+    $('.status-mvp-thumb', celConteudo).replaceWith(miniatura);
+    const texto = $('.status-mvp-content-text', celConteudo);
+    const bruto = s.texto || ROTULO_TIPO[s.tipo];
+    texto.title = bruto;
+    texto.textContent = bruto.length > 45 ? `${bruto.substring(0, 45)}...` : bruto;
+
+    $('.status-mvp-cell-text', celData).textContent = textoDaData(s);
+    $('.status-mvp-cell-text', celHora).textContent = s.hora;
+
+    const recorrencia = $('.status-mvp-recorrencia', celRecorrencia);
+    recorrencia.textContent = ROTULO_RECORRENCIA[s.recorrencia];
+    if (s.recorrencia === 'semanal' && s.dias.length) recorrencia.title = s.dias.map((d) => DIAS_SEMANA[d]).join(', ');
+    else recorrencia.removeAttribute('title');
+
+    const selo = molde.situacao.cloneNode(true);
+    selo.className = `status-mvp-status-badge status-mvp-status-${s.situacao}`;
+    selo.textContent = s.postado || ROTULO_SITUACAO[s.situacao];
+    celSituacao.replaceChildren(selo);
+
+    const [editar, cancelar, excluir] = $$('.status-mvp-action-btn', celAcoes);
+    editar.dataset.acao = 'editar';
+    cancelar.dataset.acao = 'cancelar';
+    excluir.dataset.acao = 'excluir';
+    if (s.situacao !== 'agendado') cancelar.remove();
+    tr.dataset.id = s.id;
+    return tr;
+  }
+
+  function renderizar() {
+    const lista = filtrados();
+    const totalPaginas = Math.max(1, Math.ceil(lista.length / POR_PAGINA));
+    pagina = Math.min(pagina, totalPaginas);
+    const daPagina = lista.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA);
+
+    // KPIs contam o que está filtrado, como no app.
+    $('#stat-total').textContent = lista.length;
+    $('#stat-agendados').textContent = lista.filter((s) => s.situacao === 'agendado').length;
+    $('#stat-publicados').textContent = lista.filter((s) => s.situacao === 'publicado').length;
+    $('#stat-falhas').textContent = lista.filter((s) => s.situacao === 'falha').length;
+
+    corpo.replaceChildren(...(daPagina.length ? daPagina.map(linha) : [molde.vazio.cloneNode(true)]));
+
+    const paginacao = $('#pagination-controls');
+    paginacao.classList.toggle('hidden', lista.length === 0);
+    const inicio = (pagina - 1) * POR_PAGINA + 1;
+    $('#showing-start').textContent = inicio;
+    $('#showing-end').textContent = inicio + daPagina.length - 1;
+    $('#total-stories').textContent = lista.length;
+    $('#current-page').textContent = pagina;
+    $('#total-pages').textContent = totalPaginas;
+    $('#prev-page-btn').disabled = pagina <= 1;
+    $('#next-page-btn').disabled = pagina >= totalPaginas;
+  }
+
+  function aplicarFiltros() {
+    pagina = 1;
+    renderizar();
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Modal de criar/editar publicação.
+  // ---------------------------------------------------------------------------------
+  const modal = $('#story-modal');
+  const form = $('#story-form');
+  const textoStatus = $('#story-text');
+  const legenda = $('#story-media-caption');
+  const corInput = $('#color-value');
+  const previaMidia = $('#image-preview');
+  const seletorCor = $('.pcr-app');
+  let editando = null;
+  let arquivoUrl = null;
+
+  const tipoAtual = () => $('input[name="tipo"]:checked').value;
+
+  function mostrarTipo() {
+    const tipo = tipoAtual();
+    $('#texto-fields').classList.toggle('hidden', tipo !== 'texto');
+    $('#imagem-fields').classList.toggle('hidden', tipo === 'texto');
+    if (tipo === 'texto') return;
+    const video = tipo === 'video';
+    $('#imagem-input').accept = video ? 'video/mp4,video/mpeg,video/quicktime,video/webm' : 'image/jpeg,image/png,image/gif,image/webp';
+    $('label[for="imagem-input"] .font-medium').textContent = video ? 'Vídeo' : 'Imagem';
+    $('#media-field-icon').className = video ? 'ri-video-line' : 'ri-image-add-line';
+    $('#media-upload-title').textContent = video ? 'Arraste o vídeo ou clique para selecionar' : 'Arraste a imagem ou clique para selecionar';
+    $('#media-upload-hint').textContent = video ? 'MP4, MOV, MPEG ou WebM (máx. 30MB)' : 'JPG, PNG, GIF ou WebP (máx. 5MB)';
+    const atual = $('img,video', previaMidia);
+    mostrarMidia(atual && atual.getAttribute('src'));
+  }
+
+  // Pré-visualização em formato de celular: mídia + legenda (vazia quando não há arquivo).
+  function mostrarMidia(url) {
+    const video = tipoAtual() === 'video';
+    const legendaTexto = legenda.value.trim();
+    let previa;
+    if (url) {
+      previa = molde.midia.cloneNode(true);
+      const interno = $('.status-mvp-story-preview-media-inner', previa);
+      if (video) {
+        // O app usa <video muted playsinline loop autoplay> no lugar da <img>.
+        const el = document.createElement('video');
+        Object.assign(el, { src: url, muted: true, playsInline: true, loop: true, autoplay: true, preload: 'metadata' });
+        interno.replaceChildren(el);
+      } else {
+        $('img', interno).src = url;
+      }
+      if (legendaTexto) $('.status-mvp-story-preview-caption', previa).textContent = legendaTexto;
+      else $('.status-mvp-story-preview-caption', previa).remove();
+    } else {
+      previa = molde.midiaVazia.cloneNode(true);
+      $('.status-mvp-story-preview-media-empty i', previa).className = video ? 'ri-play-circle-line' : 'ri-image-line';
+      $('.status-mvp-story-preview-media-empty span', previa).textContent = video ? 'Nenhum vídeo selecionado' : 'Nenhuma imagem selecionada';
+      if (legendaTexto) {
+        const cap = $('.status-mvp-story-preview-caption', molde.midia).cloneNode(true);
+        cap.textContent = legendaTexto;
+        previa.appendChild(cap);
+      }
+    }
+    previaMidia.replaceChildren(previa);
+  }
+
+  function atualizarTexto() {
+    $('#story-text-counter').textContent = `Caracteres: ${textoStatus.value.length}/700`;
+    const previa = $('#text-preview');
+    previa.style.background = corInput.value || '#2196F3';
+    $('span', previa).textContent = textoStatus.value || 'Seu texto aqui...';
+  }
+
+  function definirCor(cor) {
+    corInput.value = cor;
+    $$('.status-mvp-color-swatch').forEach((b) => {
+      const sel = b.dataset.color.toLowerCase() === cor.toLowerCase();
+      b.classList.toggle('is-selected', sel);
+      b.setAttribute('aria-pressed', String(sel));
+    });
+    const gatilho = $('#custom-color-trigger');
+    gatilho.style.backgroundColor = cor;
+    gatilho.style.borderColor = cor;
+    $('.pcr-button')?.style.setProperty('--pcr-color', cor);
+    $('.pcr-current-color')?.style.setProperty('--pcr-color', cor);
+    $$('.pcr-swatches button').forEach((b) => b.classList.toggle('pcr-active', b.dataset.cor === cor.toLowerCase()));
+    atualizarTexto();
+  }
+
+  function mostrarRecorrencia() {
+    const valor = $('#story-recurrence').value;
+    $$('.status-mvp-recurrence-chip').forEach((b) => {
+      const ativo = b.dataset.recorrencia === valor;
+      b.classList.toggle('is-active', ativo);
+      b.setAttribute('aria-pressed', String(ativo));
+    });
+    $('#unico-fields').classList.toggle('hidden', valor !== 'unico');
+    $('#recorrencia-basica-fields').classList.toggle('hidden', !['diario', 'semanal', 'mensal'].includes(valor));
+    $('#weekday-fields').classList.toggle('hidden', valor !== 'semanal');
+    $('#periodo-fields').classList.toggle('hidden', valor !== 'personalizado');
+    if (valor === 'personalizado') {
+      $('#data-inicio').min = ymd(hoje);
+      $('#data-fim').min = $('#data-inicio').value || ymd(hoje);
+      resumirPeriodo();
+    }
+  }
+
+  function resumirPeriodo() {
+    const caixa = $('#periodo-preview');
+    const ini = $('#data-inicio').value;
+    const fim = $('#data-fim').value;
+    $('#intervalo-customizado').classList.toggle('hidden', $('#frequencia-periodo').value !== 'personalizado');
+    if (!ini || !fim) { caixa.replaceChildren(molde.periodoVazio.cloneNode(true)); return; }
+    const dias = Math.round((lerYmd(fim) - lerYmd(ini)) / 86_400_000) + 1;
+    const numero = parseInt($('#intervalo-numero').value, 10) || 1;
+    const unidade = $('#intervalo-unidade').value;
+    const intervalo = numero * ({ semanas: 7, meses: 30 }[unidade] || 1);
+    const [frequencia, estimativa] = {
+      diario: ['todos os dias', dias],
+      semanal: ['uma vez por semana', Math.ceil(dias / 7)],
+      quinzenal: ['a cada 15 dias', Math.ceil(dias / 15)],
+      mensal: ['uma vez por mês', Math.ceil(dias / 30)],
+      personalizado: [`a cada ${numero} ${unidade}`, Math.ceil(dias / intervalo)],
+    }[$('#frequencia-periodo').value];
+    const linhas = molde.periodo.cloneNode(true);
+    const valores = [
+      `${fmtData(ini)} até ${fmtData(fim)} (${dias} dias)`,
+      `${frequencia} às ${$('#periodo-horario').value || '09:00'}`,
+      `~${estimativa} publicações`,
+    ];
+    $$('strong', linhas).forEach((strong, i) => { strong.nextSibling.textContent = ` ${valores[i]}`; });
+    caixa.replaceChildren(linhas);
+  }
+
+  // Destino: "Todas as instâncias" ou escolha manual, com o resumo em cima da lista.
+  function mostrarInstancias() {
+    const todas = $('#instance-mode-all').checked;
+    $('#instance-selection-wrap').classList.toggle('hidden', todas);
+    $$('input[name="instance_ids"]').forEach((c) => { c.disabled = todas; if (todas) c.checked = true; });
+    $('#select-all-instances').disabled = todas;
+    $('#clear-all-instances').disabled = todas;
+    resumirInstancias();
+  }
+
+  function resumirInstancias() {
+    const resumo = $('#selected-instances-summary');
+    const caixas = $$('input[name="instance_ids"]');
+    if ($('#instance-mode-all').checked) {
+      resumo.textContent = `Todas as instâncias selecionadas (${caixas.length})`;
+      resumo.classList.remove('is-empty');
+      return;
+    }
+    const nomes = caixas.filter((c) => c.checked)
+      .map((c) => $('.status-mvp-instance-name-text', c.closest('label')).textContent.trim());
+    resumo.textContent = nomes.length ? `Selecionadas (${nomes.length}): ${nomes.join(' • ')}` : 'Nenhuma instância selecionada';
+    resumo.classList.toggle('is-empty', nomes.length === 0);
+  }
+
+  function limparArquivo() {
+    if (arquivoUrl) URL.revokeObjectURL(arquivoUrl);
+    arquivoUrl = null;
+  }
+
+  function resetarFormulario() {
+    form.reset();
+    limparArquivo();
+    editando = null;
+    $('#modal-title-icon i').className = 'ri-add-line';
+    $('#story-recurrence').value = 'unico';
+    mostrarTipo();
+    mostrarRecorrencia();
+    mostrarMidia(null);
+    $('#instance-mode-all').checked = true;
+    mostrarInstancias();
+    definirCor(corInput.value || '#2196F3');
+    $('#emoji-picker').classList.add('hidden');
+    seletorCor.classList.remove('visible');
+  }
+
+  function fecharModais() {
+    $$('.modal').forEach((m) => { m.style.display = 'none'; });
+    resetarFormulario();
+  }
+
+  function abrirModal(s) {
+    resetarFormulario();
+    editando = s || null;
+    $('#modal-title').textContent = s ? 'Editar Publicação' : 'Criar Publicação';
+    $('#modal-title-icon i').className = s ? 'ri-edit-line' : 'ri-add-line';
+    $('#story-submit-btn').textContent = s ? 'Salvar Alterações' : 'Agendar';
+    $('#story-responsavel').value = s ? s.responsavel : 'Ana Souza';
+
+    if (s) {
+      $(`input[name="tipo"][value="${s.tipo}"]`).checked = true;
+      if (s.tipo === 'texto') textoStatus.value = s.texto;
+      else legenda.value = s.texto;
+      if (s.cor) corInput.value = s.cor;
+      $('#story-recurrence').value = s.recorrencia;
+      if (s.recorrencia === 'unico') $('#story-datetime').value = `${s.data}T${s.hora}`;
+      if (['diario', 'semanal', 'mensal'].includes(s.recorrencia)) {
+        $('#story-date').value = s.data;
+        $('#story-time').value = s.hora;
+      }
+      s.dias.forEach((d) => { $(`input[name="dias_semana"][value="${d}"]`).checked = true; });
+      if (s.periodo) {
+        $('#data-inicio').value = s.periodo.inicio;
+        $('#data-fim').value = s.periodo.fim;
+        $('#frequencia-periodo').value = s.periodo.frequencia;
+        $('#periodo-horario').value = s.hora;
+      }
+      // Com instâncias gravadas, o app abre em "Selecionar instâncias" com as marcadas.
+      $('#instance-mode-custom').checked = true;
+      mostrarInstancias();
+      $$('input[name="instance_ids"]').forEach((c) => { c.checked = s.instancias.includes(c.value); });
+      resumirInstancias();
+      mostrarTipo();
+      mostrarRecorrencia();
+      mostrarMidia(s.tipo === 'texto' ? null : s.img);
+      definirCor(corInput.value);
+    }
+    atualizarTexto();
+    modal.style.display = 'flex';
+  }
+
+  // Mesmas validações do app, com as mesmas mensagens.
+  function validar() {
+    const tipo = tipoAtual();
+    const recorrencia = $('#story-recurrence').value;
+    if (!$('#instance-mode-all').checked && !$$('input[name="instance_ids"]:checked').length) return 'Selecione pelo menos uma instância WhatsApp';
+    if (recorrencia === 'unico' && !$('#story-datetime').value) return 'Data e hora são obrigatórios para publicação única';
+    if (recorrencia === 'personalizado') {
+      if (!$('#data-inicio').value || !$('#data-fim').value) return 'Data de início e fim são obrigatórias para período específico';
+      if (!$('#periodo-horario').value) return 'Horário das publicações é obrigatório';
+    }
+    if (['diario', 'semanal', 'mensal'].includes(recorrencia) && (!$('#story-date').value || !$('#story-time').value)) {
+      return 'Data de início e horário são obrigatórios';
+    }
+    if (tipo === 'texto' && !textoStatus.value.trim()) return 'Texto e cor de fundo são obrigatórios';
+    if (tipo === 'imagem' && !editando && !arquivoUrl) return 'Imagem é obrigatória';
+    if (tipo === 'video' && !editando && !arquivoUrl) return 'Vídeo é obrigatório';
+    if (recorrencia === 'semanal' && !$$('input[name="dias_semana"]:checked').length) return 'Selecione pelo menos um dia da semana';
+    return null;
+  }
+
+  function salvar() {
+    const erro = validar();
+    if (erro) { toast(erro, 'error'); return; }
+
+    const tipo = tipoAtual();
+    const recorrencia = $('#story-recurrence').value;
+    let data;
+    let hora;
+    if (recorrencia === 'unico') [data, hora] = $('#story-datetime').value.split('T');
+    else if (recorrencia === 'personalizado') [data, hora] = [$('#data-inicio').value, $('#periodo-horario').value];
+    else [data, hora] = [$('#story-date').value, $('#story-time').value];
+
+    const dados = {
+      tipo,
+      texto: tipo === 'texto' ? textoStatus.value.trim() : legenda.value.trim(),
+      cor: tipo === 'texto' ? corInput.value : null,
+      img: tipo === 'texto' ? null : (arquivoUrl || (editando && editando.tipo === tipo ? editando.img : null)),
+      recorrencia,
+      data,
+      hora: hora.slice(0, 5),
+      dias: $$('input[name="dias_semana"]:checked').map((c) => Number(c.value)),
+      periodo: recorrencia === 'personalizado'
+        ? { inicio: $('#data-inicio').value, fim: $('#data-fim').value, frequencia: $('#frequencia-periodo').value }
+        : null,
+      instancias: $('#instance-mode-all').checked ? TODAS : $$('input[name="instance_ids"]:checked').map((c) => c.value),
+      responsavel: $('#story-responsavel').value,
+    };
+    arquivoUrl = null; // a URL do arquivo passa a ser da publicação; não revogar no reset
+
+    if (editando) {
+      Object.assign(editando, dados, editando.recorrencia !== recorrencia ? { postado: null } : {});
+      toast('Status atualizado com sucesso');
+    } else {
+      STATUS.push(Object.assign({ id: `novo-${Date.now()}`, situacao: 'agendado', postado: null }, dados));
+      toast('Status criado com sucesso');
+    }
+    ordenar();
+    fecharModais();
+    renderizar();
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Seletor de cor personalizado (o painel do Pickr que o app cria, já capturado).
+  // Funciona com as amostras e o campo hexadecimal; arrastar na paleta fica de fora.
+  // ---------------------------------------------------------------------------------
+  $$('.pcr-swatches button').forEach((b) => {
+    const [r, g, bl] = (b.style.getPropertyValue('--pcr-color').match(/\d+/g) || []).map(Number);
+    b.dataset.cor = `#${[r, g, bl].map((n) => n.toString(16).padStart(2, '0')).join('')}`;
+  });
+
+  function abrirSeletorCor() {
+    const r = $('#custom-color-trigger').getBoundingClientRect();
+    seletorCor.classList.add('visible');
+    const largura = seletorCor.offsetWidth;
+    const altura = seletorCor.offsetHeight;
+    const esquerda = Math.max(8, Math.min(r.left + r.width / 2 - largura / 2, innerWidth - largura - 8));
+    const topo = r.bottom + 8 + altura > innerHeight ? Math.max(8, r.top - altura - 8) : r.bottom + 8;
+    seletorCor.style.left = `${esquerda}px`;
+    seletorCor.style.top = `${topo}px`;
+    $('.pcr-result', seletorCor).value = corInput.value.toUpperCase();
+    $('.pcr-last-color', seletorCor).style.setProperty('--pcr-color', corInput.value);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Eventos.
+  // ---------------------------------------------------------------------------------
+  document.addEventListener('click', (ev) => {
+    const alvo = ev.target;
+
+    // Painel de emojis e seletor de cor fecham ao clicar fora.
+    if (!alvo.closest('#emoji-picker, #emoji-picker-btn')) $('#emoji-picker').classList.add('hidden');
+    if (!alvo.closest('.pcr-app, #custom-color-trigger, .pcr-button')) seletorCor.classList.remove('visible');
+
+    const acao = alvo.closest('.status-mvp-action-btn');
+    if (acao) {
+      const s = STATUS.find((x) => x.id === acao.closest('tr').dataset.id);
+      if (acao.dataset.acao === 'editar') abrirModal(s);
+      if (acao.dataset.acao === 'cancelar' && confirm('Tem certeza que deseja cancelar este status?')) {
+        s.situacao = 'cancelado';
+        toast('Status cancelado com sucesso');
+        renderizar();
+      }
+      if (acao.dataset.acao === 'excluir' && confirm('Tem certeza que deseja excluir este status?')) {
+        STATUS = STATUS.filter((x) => x !== s);
+        toast('Status excluído com sucesso');
+        renderizar();
+      }
+      return;
+    }
+
+    if (alvo.closest('#new-story-btn')) { abrirModal(null); return; }
+    if (alvo.closest('.modal-close, .cancel-btn, #close-error-btn')) { fecharModais(); return; }
+    if (alvo.closest('#prev-page-btn')) { pagina -= 1; renderizar(); return; }
+    if (alvo.closest('#next-page-btn')) { pagina += 1; renderizar(); return; }
+
+    const chip = alvo.closest('.status-mvp-recurrence-chip');
+    if (chip) { $('#story-recurrence').value = chip.dataset.recorrencia; mostrarRecorrencia(); return; }
+
+    const amostra = alvo.closest('.status-mvp-color-swatch');
+    if (amostra) { definirCor(amostra.dataset.color); return; }
+
+    if (alvo.closest('#emoji-picker-btn')) {
+      ev.preventDefault();
+      const painel = $('#emoji-picker');
+      if (painel.classList.contains('hidden')) {
+        const r = $('#emoji-picker-btn').getBoundingClientRect();
+        painel.classList.remove('hidden');
+        Object.assign(painel.style, { position: 'fixed', top: `${r.bottom + 5}px`, right: `${innerWidth - r.right}px` });
+      } else {
+        painel.classList.add('hidden');
+      }
+      return;
+    }
+    const emoji = alvo.closest('.emoji-btn');
+    if (emoji) {
+      const pos = textoStatus.selectionStart;
+      textoStatus.value = textoStatus.value.slice(0, pos) + emoji.dataset.emoji + textoStatus.value.slice(pos);
+      textoStatus.setSelectionRange(pos + emoji.dataset.emoji.length, pos + emoji.dataset.emoji.length);
+      textoStatus.focus();
+      $('#emoji-picker').classList.add('hidden');
+      atualizarTexto();
+      return;
+    }
+
+    if (alvo.closest('#custom-color-trigger, .pcr-button')) {
+      ev.preventDefault();
+      if (seletorCor.classList.contains('visible')) seletorCor.classList.remove('visible');
+      else abrirSeletorCor();
+      return;
+    }
+    const amostraPickr = alvo.closest('.pcr-swatches button');
+    if (amostraPickr) { definirCor(amostraPickr.dataset.cor.toUpperCase()); $('.pcr-result', seletorCor).value = corInput.value; return; }
+    if (alvo.closest('.pcr-save')) {
+      const hex = $('.pcr-result', seletorCor).value.trim();
+      if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(hex)) definirCor(hex.toUpperCase());
+      seletorCor.classList.remove('visible');
+      return;
+    }
+
+    if (alvo.closest('#select-all-instances')) {
+      $$('input[name="instance_ids"]').forEach((c) => { c.checked = true; });
+      resumirInstancias();
+      return;
+    }
+    if (alvo.closest('#clear-all-instances')) {
+      $$('input[name="instance_ids"]').forEach((c) => { c.checked = false; });
+      resumirInstancias();
+    }
+  });
+
+  document.addEventListener('change', (ev) => {
+    const alvo = ev.target;
+    if (alvo.name === 'tipo') mostrarTipo();
+    else if (alvo.name === 'instance_mode') mostrarInstancias();
+    else if (alvo.name === 'instance_ids') resumirInstancias();
+    else if (alvo.id === 'imagem-input') {
+      limparArquivo();
+      const arquivo = alvo.files && alvo.files[0];
+      if (arquivo) arquivoUrl = URL.createObjectURL(arquivo);
+      mostrarMidia(arquivoUrl);
+    } else if (alvo.id === 'data-inicio') {
+      const fim = $('#data-fim');
+      fim.min = alvo.value;
+      if (fim.value && fim.value < alvo.value) fim.value = alvo.value;
+      resumirPeriodo();
+    } else if (alvo.closest('#periodo-fields')) {
+      resumirPeriodo();
+    } else if (alvo.matches('#filter-status, #filter-type')) {
+      aplicarFiltros();
+    }
+  });
+
+  $('#search-input').addEventListener('input', aplicarFiltros);
+  textoStatus.addEventListener('input', atualizarTexto);
+  legenda.addEventListener('input', () => {
+    const atual = $('img,video', previaMidia);
+    mostrarMidia(atual && atual.getAttribute('src'));
+  });
+  corInput.addEventListener('input', () => {
+    if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(corInput.value)) definirCor(corInput.value);
+    else atualizarTexto();
+  });
+  form.addEventListener('submit', salvar);
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && modal.style.display === 'flex') fecharModais();
+  });
+
+  // Estado inicial: igual ao que o app mostra depois de carregar.
+  ordenar();
+  resetarFormulario();
+  renderizar();
+})();
+</script>
+</body></html>
