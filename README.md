@@ -2,8 +2,8 @@
 
 Telas de demonstração para o cliente aprovar features antes de elas serem construídas no
 sistema. O visual é idêntico ao do produto: o CSS é copiado do app, e a marcação de cada tela
-base é capturada do app real rodando com dados fictícios. Não existe backend; o comportamento
-é escrito à mão, em JavaScript inline em cada página.
+é capturada do app real rodando com dados fictícios. Não existe backend; o comportamento é
+escrito à mão, em JavaScript inline no fim de cada página.
 
 Publicado pelo GitHub Pages a partir da `main`:
 **https://iautomatize.github.io/zapdorepresentantemockup/**
@@ -20,56 +20,75 @@ Publicado pelo GitHub Pages a partir da `main`:
 ## Estrutura
 
 ```
-index.html            lista dos protótipos (o que o cliente abre primeiro)
-chat.html             tela de Conversas: captura do app + bloco inline do mockup no fim
-css/                  cópia do CSS do app (não editar aqui; rode o sync)
-*.png, *.svg, *.ico   logos e favicon do app
-tools/sync.sh         atualiza css/ e imagens a partir do app
-tools/capture/        gera a base estática de uma tela a partir do app real
+index.html              lista das telas (o que o cliente abre primeiro)
+<tela>.html             uma página por tela, com o MESMO nome do app (dashboard.html,
+                        chats.html, kanban.html...), para os links da barra lateral funcionarem
+mockup-comum.js         o que é igual em todas as telas: selo "Protótipo", avisos, menu do
+                        celular, tema claro/escuro, "Sair", links para fora do protótipo
+css/                    cópia do CSS do app (não editar aqui; rode o sync)
+*.png, *.svg, *.ico     logos e favicon do app
+tools/sync.sh           atualiza css/ e imagens a partir do app
+tools/testar.mjs        abre uma tela como o Pages serve e aponta erros e 404
+tools/capture/          gera e atualiza a parte capturada de cada tela
+  mock-api.js           troca a API por um registro de rotas
+  fixtures/comum.js     universo fictício: conta, equipe, 24 contatos, 14 conversas, Kanban
+  fixtures/<tela>.js    rotas só daquela tela
+  capture.mjs           roda a tela do app no Chrome headless e salva o DOM em out/
+  montar.mjs            junta out/<tela>.html com o bloco MOCKUP da página
 ```
+
+Cada `<tela>.html` tem duas partes: em cima, a marcação capturada do app; no fim, depois de
+`<!-- MOCKUP:INICIO`, o bloco escrito à mão com os dados e o comportamento da tela.
 
 ## Mostrar uma feature nova ao cliente
 
-1. Copie a tela base: `cp chat.html chat-nome-da-feature.html`. Ou edite o `chat.html`, se a
-   feature for na própria tela de conversas.
-2. Edite à vontade. A marcação de cima é a do app; o bloco `MOCKUP` no fim do arquivo tem os
-   dados fictícios e o comportamento (trocar de conversa, enviar mensagem). Reaproveite as
-   classes que já existem para o visual continuar igual ao produto.
-3. Adicione um cartão em `index.html` apontando para a página nova.
-4. `git add -A && git commit -m "..." && git push`. O Pages publica em cerca de 1 minuto.
-5. Mande o link direto da página para o cliente.
+1. Copie a tela: `cp chats.html chats-nome-da-feature.html`. Ou edite a própria tela.
+2. Edite à vontade. Reaproveite as classes que já existem na marcação capturada para o
+   visual continuar igual ao produto, e escreva o comportamento no bloco MOCKUP.
+3. Se for uma página nova, acrescente o nome dela em `PAGINAS` no `mockup-comum.js` (senão
+   o link mostra o aviso de "fora do protótipo") e um cartão em `index.html`.
+4. Confira: `node tools/testar.mjs chats-nome-da-feature`.
+5. `git add -A && git commit -m "..." && git push`. O Pages publica em cerca de 1 minuto.
+6. Mande o link direto da página para o cliente.
 
 Abrir localmente: `python3 -m http.server 8000` na raiz e acesse `http://localhost:8000`.
 
-## Atualizar o visual quando o app mudar
+## Atualizar quando o app mudar
 
 ```bash
-./tools/sync.sh          # copia css/ e imagens de ../zap-empresarial
+./tools/sync.sh                                         # só o CSS e as imagens
+node tools/capture/capture.mjs kanban "/kanban.html"    # recaptura a marcação
+node tools/capture/montar.mjs kanban                    # troca a parte capturada, mantém o bloco MOCKUP
+node tools/testar.mjs kanban
 ```
 
-O sync atualiza só o CSS. A marcação das páginas fica como foi capturada; se o app mudar a
-estrutura de uma tela, recapture (abaixo) e refaça a página a partir da base nova.
-
-## Capturar uma tela nova do app
+## Capturar uma tela
 
 Precisa do Google Chrome, Node 22 e do app em `../zap-empresarial` (o `dist/` dele já vem
 compilado).
 
 ```bash
-node tools/capture/capture.mjs kanban "/kanban.html"
-node tools/capture/capture.mjs chat "/chats.html?chat=c1"
+node tools/capture/capture.mjs <tela> "/<tela>.html" [espera_ms] [ações...]
+node tools/capture/capture.mjs chats "/chats.html?chat=c1"
+node tools/capture/capture.mjs settings "/settings.html" 7000 "@[data-tab=tags]" "~1500"
 ```
 
-O script sobe um servidor local com os arquivos do app, troca a API inteira por respostas
-fixas (`tools/capture/mock-api.js`), abre a página no Chrome headless e salva em
-`tools/capture/out/` (fora do git):
+O script sobe um servidor local com os arquivos do app, injeta `mock-api.js`,
+`fixtures/comum.js` e `fixtures/<tela>.js`, abre a página no Chrome headless, executa as
+ações e salva em `tools/capture/out/` (fora do git):
 
-- `<nome>.raw.html`: o DOM exatamente como o navegador renderizou;
-- `<nome>.html`: o mesmo DOM, sem nenhum `<script>` e com caminhos relativos;
-- `<nome>.png`: print do estado capturado.
+- `<tela>.raw.html`: o DOM exatamente como o navegador renderizou;
+- `<tela>.html`: o mesmo DOM sem os scripts do app, com caminhos relativos, gráficos de
+  `<canvas>` convertidos em imagem e o `mockup-comum.js` no `<head>`;
+- `<tela>.png`: print do estado capturado.
 
-No fim ele lista as rotas da API que a página chamou e não tinham resposta preparada. Se a
-tela vier vazia, acrescente a fixture dessa rota no `mock-api.js` e capture de novo.
+Ações: `@seletor` clica, `~ms` espera, `js:expressão` avalia na página. No zsh, ponha cada
+ação entre aspas (`"~500"`), senão o `~` vira diretório.
 
-A captura nunca escreve na raiz. Para começar a página, copie `out/<nome>.html` para a raiz
-e escreva o bloco `MOCKUP` no fim, seguindo o do `chat.html`.
+No fim ele lista as rotas da API que a tela chamou sem resposta preparada. Se a tela vier
+vazia ou com erro, leia no app o formato que ela espera, acrescente a rota em
+`fixtures/<tela>.js` e capture de novo. Para várias capturas ao mesmo tempo, use portas
+diferentes: `PORTA_APP=47921 PORTA_CDP=9351`.
+
+A captura nunca escreve na raiz. `node tools/capture/montar.mjs <tela>` cria a página (com um
+bloco MOCKUP vazio) ou, se ela já existe, troca só a parte capturada.

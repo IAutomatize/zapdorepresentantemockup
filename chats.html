@@ -8,8 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Zap Rep">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>Conversas · Protótipo — Zap do Representante</title>
-<link rel="icon" href="favicon.svg">
+    <title>Conversas - Zap do Representante</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -48,7 +47,9 @@
             opacity: 1;
         }
     }
-</style><link rel="stylesheet" href="css/account-access.css"><link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"></head>
+</style><link rel="stylesheet" href="css/account-access.css"><link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+</head>
 <body class="font-sans dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 h-screen overflow-hidden flex flex-col chat-open-mobile bg-theme-surface">
 
     <div class="min-h-screen w-full relative">
@@ -72,7 +73,7 @@
           
         </a>
       
-        <a href="chat.html" class="sidebar-item sidebar-item-active" title="Conversas" aria-label="Conversas">
+        <a href="chats.html" class="sidebar-item sidebar-item-active" title="Conversas" aria-label="Conversas">
           <span class="sidebar-icon-wrap">
             <i class="ri-chat-3-line"></i>
           </span>
@@ -192,7 +193,7 @@
                                     <button id="main-tab-attendances" class="conv-main-tab active" type="button" title="Atendimentos">
                                         <i class="ri-message-3-line"></i>
                                         <span>Atendimentos</span>
-                                        <span id="main-tab-attendances-badge" class="conv-main-badge">8</span>
+                                        <span id="main-tab-attendances-badge" class="conv-main-badge">14</span>
                                     </button>
                                     <button id="main-tab-groups" class="conv-main-tab" type="button" title="Grupos">
                                         <i class="ri-group-line"></i>
@@ -241,7 +242,7 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="05/10/2026, 16:13">16:13</span>
+              <span class="conv-time" title="05/10/2026, 16:51">16:51</span>
             </span>
           </div>
           <div class="conv-preview-container">
@@ -264,7 +265,7 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="05/10/2026, 16:01">16:01</span>
+              <span class="conv-time" title="05/10/2026, 16:39">16:39</span>
             </span>
           </div>
           <div class="conv-preview-container">
@@ -291,7 +292,7 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="05/10/2026, 15:28">15:28</span>
+              <span class="conv-time" title="05/10/2026, 16:06">16:06</span>
             </span>
           </div>
           <div class="conv-preview-container">
@@ -314,7 +315,7 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="05/10/2026, 14:40">14:40</span>
+              <span class="conv-time" title="05/10/2026, 15:18">15:18</span>
             </span>
           </div>
           <div class="conv-preview-container">
@@ -337,7 +338,7 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="05/10/2026, 13:15">13:15</span>
+              <span class="conv-time" title="05/10/2026, 13:53">13:53</span>
             </span>
           </div>
           <div class="conv-preview-container">
@@ -360,7 +361,7 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="05/10/2026, 11:55">11:55</span>
+              <span class="conv-time" title="05/10/2026, 12:33">12:33</span>
             </span>
           </div>
           <div class="conv-preview-container">
@@ -383,7 +384,7 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="04/10/2026, 16:15">Ontem</span>
+              <span class="conv-time" title="04/10/2026, 16:53">Ontem</span>
             </span>
           </div>
           <div class="conv-preview-container">
@@ -406,11 +407,157 @@
             </span>
             <span class="conv-time-wrap">
               <span class="conv-unread-dot" aria-hidden="true"></span>
-              <span class="conv-time" title="03/10/2026, 15:55">03/10/26</span>
+              <span class="conv-time" title="03/10/2026, 16:33">03/10/26</span>
             </span>
           </div>
           <div class="conv-preview-container">
             <span class="conv-preview">Fechado. Aguardo a nota.</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in has-unread" data-id="c9" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">FO</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Fernanda Oliveira</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 16:28">16:28</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Pode me passar a tabela de atacado?</span>
+            
+              <div class="conv-badge">
+                <span class="conv-badge-text">3</span>
+              </div>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c10" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">SA</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Supermercado Avenida</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 15:43">15:43</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Segue o pedido da semana em anexo</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c11" data-favorite="true">
+        <div class="conv-avatar"><span class="conv-avatar-text">PG</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Patrícia Gomes</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 14:43">14:43</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Amei os produtos novos!</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#2563eb22; color:#2563eb; border-color:#2563eb55;" title="Instância: Pós-venda"><i class="ri-smartphone-line"></i>Pós-venda</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in has-unread" data-id="c12" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">AD</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Atacadão do Vale</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="05/10/2026, 11:53">11:53</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Consegue fazer 8% no volume de 200 caixas?</span>
+            
+              <div class="conv-badge">
+                <span class="conv-badge-text">2</span>
+              </div>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#16a34a22; color:#16a34a; border-color:#16a34a55;" title="Instância: Comercial"><i class="ri-smartphone-line"></i>Comercial</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c13" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">CR</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Camila Rocha</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="04/10/2026, 15:53">Ontem</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Obrigada pelo atendimento 😊</span>
+            
+          </div>
+          <div class="conv-meta-row">
+            <span class="conv-instance-inline" style="background:#2563eb22; color:#2563eb; border-color:#2563eb55;" title="Instância: Pós-venda"><i class="ri-smartphone-line"></i>Pós-venda</span>
+            <span class="conv-queue-inline" style="background:#f59e0b22; color:#f59e0b; border-color:#f59e0b55;" title="Fila: Vendas">Vendas</span>
+            
+          </div>
+        </div>
+      </div><div class="conv-item chat-animate-fade-in" data-id="c14" data-favorite="false">
+        <div class="conv-avatar"><span class="conv-avatar-text">RE</span></div>
+        <div class="conv-info">
+          <div class="conv-info-header">
+            <span class="conv-name-wrap">
+              <i class="ri-whatsapp-line conv-channel-icon" title="WhatsApp"></i>
+              <span class="conv-name">Rede Econômica</span>
+            </span>
+            <span class="conv-time-wrap">
+              <span class="conv-unread-dot" aria-hidden="true"></span>
+              <span class="conv-time" title="03/10/2026, 13:13">03/10/26</span>
+            </span>
+          </div>
+          <div class="conv-preview-container">
+            <span class="conv-preview">Vamos fechar o contrato trimestral</span>
             
           </div>
           <div class="conv-meta-row">
@@ -520,7 +667,7 @@
                             </div>
                         </div>
                         
-                        <div id="messages-container" class="message-list flex-1 p-4 signature-off" data-actions-bound="1"><div class="message-date-divider" data-day="2026-10-05"><span>Hoje</span></div><div class="message received chat-animate-slide-up" data-id="m-c1-1" data-message-type="text" data-sent-at="2026-10-05T18:11:11.588Z" data-sender-type="contact" data-external-id="EXT1" data-day="2026-10-05">
+                        <div id="messages-container" class="message-list flex-1 p-4 signature-off" data-actions-bound="1"><div class="message-date-divider" data-day="2026-10-05"><span>Hoje</span></div><div class="message received chat-animate-slide-up" data-id="m-c1-1" data-message-type="text" data-sent-at="2026-10-05T18:49:18.663Z" data-sender-type="contact" data-external-id="EXT1" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-1" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -530,10 +677,10 @@
         
         
         <div class="message-text-content">Oi Ana, bom dia! Tudo bem?</div>
-        <div class="message-time">15:11</div>
+        <div class="message-time">15:49</div>
         
       </div>
-    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-2" data-message-type="text" data-sent-at="2026-10-05T18:13:11.588Z" data-sender-type="user" data-external-id="EXT2" data-day="2026-10-05">
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-2" data-message-type="text" data-sent-at="2026-10-05T18:51:18.663Z" data-sender-type="user" data-external-id="EXT2" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-2" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -543,10 +690,10 @@
         <div class="message-sender message-sender--own">Ana:</div>
         
         <div class="message-text-content">Bom dia, Mariana! Tudo ótimo, e com você?</div>
-        <div class="message-time">15:13<span class="message-status" data-status="read">✓✓</span></div>
+        <div class="message-time">15:51<span class="message-status" data-status="read">✓✓</span></div>
         
       </div>
-    </div><div class="message received chat-animate-slide-up" data-id="m-c1-3" data-message-type="text" data-sent-at="2026-10-05T18:15:11.588Z" data-sender-type="contact" data-external-id="EXT3" data-day="2026-10-05">
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-3" data-message-type="text" data-sent-at="2026-10-05T18:53:18.663Z" data-sender-type="contact" data-external-id="EXT3" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-3" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -556,10 +703,10 @@
         
         
         <div class="message-text-content">Tudo certo! Queria saber se a tabela de outubro já saiu</div>
-        <div class="message-time">15:15</div>
+        <div class="message-time">15:53</div>
         
       </div>
-    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-4" data-message-type="text" data-sent-at="2026-10-05T18:17:11.588Z" data-sender-type="user" data-external-id="EXT4" data-day="2026-10-05">
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-4" data-message-type="text" data-sent-at="2026-10-05T18:55:18.663Z" data-sender-type="user" data-external-id="EXT4" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-4" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -569,10 +716,10 @@
         <div class="message-sender message-sender--own">Ana:</div>
         
         <div class="message-text-content">Saiu sim! Te mando agora 👇</div>
-        <div class="message-time">15:17<span class="message-status" data-status="read">✓✓</span></div>
+        <div class="message-time">15:55<span class="message-status" data-status="read">✓✓</span></div>
         
       </div>
-    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-5" data-message-type="document" data-sent-at="2026-10-05T18:18:11.588Z" data-sender-type="user" data-external-id="EXT5" data-day="2026-10-05">
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-5" data-message-type="document" data-sent-at="2026-10-05T18:56:18.663Z" data-sender-type="user" data-external-id="EXT5" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-5" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -603,10 +750,10 @@
       </div>
     
     
-        <div class="message-time">15:18<span class="message-status" data-status="read">✓✓</span></div>
+        <div class="message-time">15:56<span class="message-status" data-status="read">✓✓</span></div>
         
       </div>
-    </div><div class="message received chat-animate-slide-up" data-id="m-c1-6" data-message-type="text" data-sent-at="2026-10-05T18:45:11.588Z" data-sender-type="contact" data-external-id="EXT6" data-day="2026-10-05">
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-6" data-message-type="text" data-sent-at="2026-10-05T19:23:18.663Z" data-sender-type="contact" data-external-id="EXT6" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-6" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -616,10 +763,10 @@
         
         
         <div class="message-text-content">Obrigada! Os preços do achocolatado mudaram?</div>
-        <div class="message-time">15:45</div>
+        <div class="message-time">16:23</div>
         
       </div>
-    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-7" data-message-type="text" data-sent-at="2026-10-05T18:47:11.588Z" data-sender-type="user" data-external-id="EXT7" data-day="2026-10-05">
+    </div><div class="message sent chat-animate-slide-up" data-id="m-c1-7" data-message-type="text" data-sent-at="2026-10-05T19:25:18.663Z" data-sender-type="user" data-external-id="EXT7" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-7" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -629,10 +776,10 @@
         <div class="message-sender message-sender--own">Ana:</div>
         
         <div class="message-text-content">Ficaram iguais. Só a linha de biscoitos teve reajuste de 4%.</div>
-        <div class="message-time">15:47<span class="message-status" data-status="read">✓✓</span></div>
+        <div class="message-time">16:25<span class="message-status" data-status="read">✓✓</span></div>
         
       </div>
-    </div><div class="message received chat-animate-slide-up" data-id="m-c1-8" data-message-type="text" data-sent-at="2026-10-05T19:10:11.588Z" data-sender-type="contact" data-external-id="EXT8" data-day="2026-10-05">
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-8" data-message-type="text" data-sent-at="2026-10-05T19:48:18.663Z" data-sender-type="contact" data-external-id="EXT8" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-8" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -642,10 +789,10 @@
         
         
         <div class="message-text-content">Ótimo. Então quero repetir o último pedido</div>
-        <div class="message-time">16:10</div>
+        <div class="message-time">16:48</div>
         
       </div>
-    </div><div class="message received chat-animate-slide-up" data-id="m-c1-9" data-message-type="text" data-sent-at="2026-10-05T19:13:11.588Z" data-sender-type="contact" data-external-id="EXT9" data-day="2026-10-05">
+    </div><div class="message received chat-animate-slide-up" data-id="m-c1-9" data-message-type="text" data-sent-at="2026-10-05T19:51:18.663Z" data-sender-type="contact" data-external-id="EXT9" data-day="2026-10-05">
       <div class="message-bubble">
         
       <button type="button" class="message-actions-btn" data-message-actions="m-c1-9" title="Ações da mensagem" aria-label="Ações da mensagem" aria-haspopup="true">
@@ -655,7 +802,7 @@
         
         
         <div class="message-text-content">Perfeito, pode mandar o pedido de 40 caixas 👍</div>
-        <div class="message-time">16:13</div>
+        <div class="message-time">16:51</div>
         
       </div>
     </div></div>
@@ -972,7 +1119,7 @@
                                 <h5 class="contact-drawer-section-title">CRM</h5>
                                 <span id="drawer-crm-column-pill" class="contact-drawer-chip is-crm">EM NEGOCIAÇÃO</span>
                             </div>
-                            <select id="drawer-crm-select" class="contact-drawer-select"><option value="col-novo">Novo contato</option><option value="col-negociacao">Em negociação</option><option value="col-pedido">Pedido enviado</option></select>
+                            <select id="drawer-crm-select" class="contact-drawer-select"><option value="col-novo">Novo contato</option><option value="col-negociacao">Em negociação</option><option value="col-pedido">Pedido enviado</option><option value="col-posvenda">Pós-venda</option></select>
                             <p class="contact-drawer-line"><strong>Resp.:</strong> <span id="drawer-responsible-name">Ana</span></p>
                         </section>
 
@@ -1566,70 +1713,75 @@
   </div>
 </div>
 <div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div>
-<!-- =====================================================================================
-     MOCKUP — daqui para baixo é tudo escrito à mão. Não há backend: nada é salvo nem
-     enviado. A marcação acima é a captura do app real (tools/capture), então classes e
-     estrutura são as do produto. Para uma feature nova, edite direto neste arquivo.
-     ===================================================================================== -->
-<div class="mockup-selo" title="Protótipo para aprovação: nada aqui é salvo nem enviado">Protótipo</div>
-<div id="mockup-aviso" class="mockup-aviso" role="status" aria-live="polite"></div>
-
-<style>
-  .mockup-selo {
-    position: fixed; left: 12px; bottom: 12px; z-index: 9999;
-    padding: 3px 10px; border-radius: 999px;
-    background: rgba(15, 23, 42, .78); color: #fff;
-    font: 600 11px/1.6 Inter, system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase;
-    pointer-events: none;
-  }
-  @media (max-width: 768px) {
-    .mockup-selo { bottom: calc(84px + env(safe-area-inset-bottom)); }
-  }
-  .mockup-aviso {
-    position: fixed; left: 50%; bottom: 24px; z-index: 9999; transform: translate(-50%, 12px);
-    padding: 10px 16px; border-radius: 10px;
-    background: #0f172a; color: #fff; font: 500 13px/1.4 Inter, system-ui, sans-serif;
-    opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
-  }
-  .mockup-aviso.visivel { opacity: 1; transform: translate(-50%, 0); }
-</style>
-
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
+     (tools/capture/out/chats.html). Para recapturar sem perder este bloco:
+     node tools/capture/montar.mjs chats -->
 <script>
 (() => {
   // ---------------------------------------------------------------------------------
-  // Dados fictícios. Repositório público: nunca usar nome, telefone ou conversa real.
-  // `mensagens`: [quem, texto, hora] com quem = 'ela' (contato) | 'eu' (atendente) | 'doc-ela'
-  // A c1 não tem `mensagens` porque já está renderizada no HTML (captura do app).
+  // Dados fictícios (os mesmos de tools/capture/fixtures/comum.js). Repositório público.
+  // `mensagens`: [quem, texto, minutos antes da última] com quem = 'ela' | 'eu' | 'doc-ela'.
+  // `resp`: primeiro nome do responsável (padrão Ana).
+  // A hora de cada bolha sai do horário da conversa na lista, então continua coerente
+  // depois de recapturar. A c1 não tem `mensagens`: já está renderizada no HTML.
   // ---------------------------------------------------------------------------------
   const CONVERSAS = {
-    c1: { nome: 'Mariana Costa', fone: '5511990000101', coluna: 'col-negociacao', instancia: 'Comercial' },
-    c2: { nome: 'Mercado Bom Preço', fone: '5511990000102', coluna: 'col-novo', instancia: 'Comercial', dia: 'Hoje', mensagens: [
-      ['ela', 'Boa tarde! Aqui é o Roberto, do Mercado Bom Preço', '15:57'],
-      ['ela', 'Vocês têm o display novo em estoque?', '16:00'],
+    c1: { nome: 'Mariana Costa', fone: '5511990000101', coluna: 'col-negociacao' },
+    c2: { nome: 'Mercado Bom Preço', fone: '5511990000102', coluna: 'col-novo', mensagens: [
+      ['ela', 'Boa tarde! Aqui é o Roberto, do Mercado Bom Preço', 3],
+      ['ela', 'Vocês têm o display novo em estoque?', 0],
     ] },
-    c3: { nome: 'Pedro Almeida', fone: '5511990000103', coluna: 'col-pedido', instancia: 'Pós-venda', dia: 'Hoje', mensagens: [
-      ['eu', 'Pedro, segue o boleto do pedido 2231, vencimento dia 15.', '15:20'],
-      ['ela', 'Recebi o boleto, obrigado!', '15:27'],
+    c3: { nome: 'Pedro Almeida', fone: '5511990000103', coluna: 'col-posvenda', mensagens: [
+      ['eu', 'Pedro, segue o boleto do pedido 2231, vencimento dia 15.', 7],
+      ['ela', 'Recebi o boleto, obrigado!', 0],
     ] },
-    c4: { nome: 'Distribuidora Litoral', fone: '5511990000104', coluna: 'col-negociacao', instancia: 'Comercial', dia: 'Hoje', mensagens: [
-      ['eu', 'Oi! O pedido de vocês foi faturado hoje cedo.', '14:20'],
-      ['ela', 'Qual o prazo de entrega para Santos?', '14:39'],
+    c4: { nome: 'Distribuidora Litoral', fone: '5511990000104', coluna: 'col-negociacao', mensagens: [
+      ['eu', 'Oi! O pedido de vocês foi faturado hoje cedo.', 19],
+      ['ela', 'Qual o prazo de entrega para Santos?', 0],
     ] },
-    c5: { nome: 'Juliana Ribeiro', fone: '5511990000105', coluna: 'col-novo', instancia: 'Comercial', dia: 'Hoje', mensagens: [
-      ['eu', 'Juliana, consegui 5% de desconto à vista para o pedido acima de 30 caixas.', '13:02'],
-      ['ela', 'Vou ver com meu sócio e te retorno', '13:14'],
+    c5: { nome: 'Juliana Ribeiro', fone: '5511990000105', coluna: 'col-novo', mensagens: [
+      ['eu', 'Juliana, consegui 5% de desconto à vista para o pedido acima de 30 caixas.', 12],
+      ['ela', 'Vou ver com meu sócio e te retorno', 0],
     ] },
-    c6: { nome: 'Empório Central', fone: '5511990000106', coluna: 'col-pedido', instancia: 'Pós-venda', dia: 'Hoje', mensagens: [
-      ['ela', 'Bom dia! Pode me mandar o catálogo novo?', '11:40'],
-      ['eu', 'Claro! Acabei de pedir para o pessoal do marketing.', '11:45'],
-      ['doc-ela', 'Catalogo_Outubro.pdf', '11:54'],
+    c6: { nome: 'Empório Central', fone: '5511990000106', coluna: 'col-pedido', mensagens: [
+      ['ela', 'Bom dia! Pode me mandar o catálogo novo?', 14],
+      ['eu', 'Claro! Acabei de pedir para o pessoal do marketing.', 9],
+      ['doc-ela', 'Catalogo_Outubro.pdf', 0],
     ] },
-    c7: { nome: 'Carlos Mendes', fone: '5511990000107', coluna: 'col-novo', instancia: 'Comercial', dia: 'Ontem', mensagens: [
-      ['ela', 'Bom dia! Tudo certo para quinta?', '09:12'],
+    c7: { nome: 'Carlos Mendes', fone: '5511990000107', coluna: 'col-novo', mensagens: [
+      ['ela', 'Bom dia! Tudo certo para quinta?', 0],
     ] },
-    c8: { nome: 'Padaria Estrela', fone: '5511990000108', coluna: 'col-pedido', instancia: 'Comercial', dia: 'Sábado', mensagens: [
-      ['eu', 'Pedido confirmado: 12 caixas de biscoito sortido. A nota sai na segunda.', '17:35'],
-      ['ela', 'Fechado. Aguardo a nota.', '17:40'],
+    c8: { nome: 'Padaria Estrela', fone: '5511990000108', coluna: 'col-pedido', mensagens: [
+      ['eu', 'Pedido confirmado: 12 caixas de biscoito sortido. A nota sai na segunda.', 5],
+      ['ela', 'Fechado. Aguardo a nota.', 0],
+    ] },
+    c9: { nome: 'Fernanda Oliveira', fone: '5511990000109', coluna: 'col-novo', resp: 'Bruno', mensagens: [
+      ['ela', 'Oi! Vi o anúncio de vocês no Instagram', 4],
+      ['ela', 'Tenho uma loja em Osasco', 3],
+      ['ela', 'Pode me passar a tabela de atacado?', 0],
+    ] },
+    c10: { nome: 'Supermercado Avenida', fone: '5511990000110', coluna: 'col-pedido', resp: 'Carla', mensagens: [
+      ['eu', 'Bom dia! Já posso lançar o pedido da semana?', 40],
+      ['ela', 'Pode sim, mesmas quantidades da semana passada', 15],
+      ['ela', 'Segue o pedido da semana em anexo', 0],
+    ] },
+    c11: { nome: 'Patrícia Gomes', fone: '5511990000113', coluna: 'col-posvenda', resp: 'Carla', mensagens: [
+      ['eu', 'Patrícia, chegou tudo certinho?', 25],
+      ['ela', 'Chegou sim!', 2],
+      ['ela', 'Amei os produtos novos!', 0],
+    ] },
+    c12: { nome: 'Atacadão do Vale', fone: '5511990000114', coluna: 'col-negociacao', resp: 'Bruno', mensagens: [
+      ['eu', 'Segue a proposta para o pedido trimestral.', 60],
+      ['ela', 'Recebi a proposta.', 5],
+      ['ela', 'Consegue fazer 8% no volume de 200 caixas?', 0],
+    ] },
+    c13: { nome: 'Camila Rocha', fone: '5511990000117', coluna: 'col-posvenda', mensagens: [
+      ['eu', 'Camila, seu pedido saiu para entrega hoje.', 30],
+      ['ela', 'Obrigada pelo atendimento 😊', 0],
+    ] },
+    c14: { nome: 'Rede Econômica', fone: '5511990000122', coluna: 'col-negociacao', resp: 'Carla', mensagens: [
+      ['eu', 'Conversei com a diretoria: dá para manter o preço por 3 meses.', 45],
+      ['ela', 'Vamos fechar o contrato trimestral', 0],
     ] },
   };
 
@@ -1646,16 +1798,27 @@
     documento: $('.message[data-message-type="document"]', lista).cloneNode(true),
     divisor: $('.message-date-divider', lista).cloneNode(true),
   };
-  const historico = { c1: lista.innerHTML };
-  let atual = 'c1';
+  const historico = {};
+  let atual = null;
   let seq = 0;
 
-  function iniciais(nome) {
-    return nome.split(/\s+/).map((p) => p[0]).slice(0, 2).join('').toUpperCase();
+  const fmtHora = (d) => d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+  // Horário da última mensagem da conversa, lido do title da lista ("05/10/2026, 16:12").
+  function ultimaMensagemEm(id) {
+    const title = $(`.conv-item[data-id="${id}"] .conv-time`)?.title || '';
+    const m = title.match(/(\d{2})\/(\d{2})\/(\d{4}),?\s+(\d{2}):(\d{2})/);
+    return m ? new Date(+m[3], +m[2] - 1, +m[1], +m[4], +m[5]) : new Date();
   }
 
-  function horaAgora() {
-    return new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  function rotuloDoDia(data) {
+    const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    const dia = new Date(data); dia.setHours(0, 0, 0, 0);
+    const diff = Math.round((hoje - dia) / 86_400_000);
+    if (diff === 0) return 'Hoje';
+    if (diff === 1) return 'Ontem';
+    if (diff < 7) return dia.toLocaleDateString('pt-BR', { weekday: 'long' }).replace(/^./, (l) => l.toUpperCase());
+    return dia.toLocaleDateString('pt-BR');
   }
 
   function bolha(quem, texto, hora) {
@@ -1707,26 +1870,32 @@
   function selecionar(id) {
     const c = CONVERSAS[id];
     if (!c) return;
-    historico[atual] = lista.innerHTML;
+    if (atual) historico[atual] = lista.innerHTML;
     atual = id;
+    const item = $(`.conv-item[data-id="${id}"]`);
 
-    document.querySelectorAll('.conv-item').forEach((item) => {
-      const ativo = item.dataset.id === id;
-      item.classList.toggle('active', ativo);
+    document.querySelectorAll('.conv-item').forEach((el) => {
+      const ativo = el.dataset.id === id;
+      el.classList.toggle('active', ativo);
       if (ativo) {
-        item.classList.remove('has-unread');
-        item.querySelector('.conv-badge')?.remove();
-        item.querySelector('.conv-unread-dot')?.remove();
+        el.classList.remove('has-unread');
+        el.querySelector('.conv-badge')?.remove();
+        el.querySelector('.conv-unread-dot')?.remove();
       }
     });
 
+    const instancia = item?.querySelector('.conv-instance-inline')?.textContent.trim() || 'Comercial';
     $('#header-contact-name').textContent = c.nome;
     $('#header-contact-phone').textContent = c.fone;
     const avatarCabecalho = $('.chat-avatar-fallback');
     if (avatarCabecalho) avatarCabecalho.textContent = c.nome[0];
+    const chipCabecalho = $('.chat-context-instance span');
+    if (chipCabecalho) chipCabecalho.textContent = instancia;
     $('#drawer-contact-name').textContent = c.nome;
     $('#drawer-contact-phone').textContent = c.fone;
     $('#drawer-contact-avatar').textContent = c.nome[0];
+    const chipPainel = $('#drawer-instance-chip');
+    if (chipPainel) chipPainel.textContent = instancia;
     for (const campo of ['display-name', 'full-name']) {
       const el = $(`#drawer-data-${campo}`);
       if (el) el.textContent = c.nome;
@@ -1735,19 +1904,23 @@
       const el = $(`#drawer-data-${campo}`);
       if (el) el.textContent = c.fone;
     }
-    const chipCabecalho = $('.chat-context-instance span');
-    if (chipCabecalho) chipCabecalho.textContent = c.instancia;
-    const chipPainel = $('#drawer-instance-chip');
-    if (chipPainel) chipPainel.textContent = c.instancia;
+    // O app mostra só o primeiro nome do responsável.
+    for (const sel of ['#drawer-assignee-chip', '#drawer-responsible-name']) {
+      const el = $(sel);
+      if (el) el.textContent = c.resp || 'Ana';
+    }
     const crm = $('#drawer-crm-select');
     if (crm) { crm.value = c.coluna; atualizarSeloCrm(); }
 
     if (historico[id]) {
       lista.innerHTML = historico[id];
-    } else {
+    } else if (c.mensagens) {
+      const ultima = ultimaMensagemEm(id);
       lista.innerHTML = '';
-      lista.appendChild(divisor(c.dia || 'Hoje'));
-      for (const [quem, texto, hora] of c.mensagens || []) lista.appendChild(bolha(quem, texto, hora));
+      lista.appendChild(divisor(rotuloDoDia(ultima)));
+      for (const [quem, texto, antes] of c.mensagens) {
+        lista.appendChild(bolha(quem, texto, fmtHora(new Date(ultima - antes * 60_000))));
+      }
     }
     document.body.classList.add('chat-open-mobile');
     rolarParaFim();
@@ -1755,17 +1928,17 @@
 
   function enviar() {
     const texto = entrada.value.trim();
-    if (!texto) return;
-    const hora = horaAgora();
+    if (!texto || !atual) return;
+    const hora = fmtHora(new Date());
     const nova = bolha('eu', texto, hora);
     const status = nova.querySelector('.message-status');
     if (status) { status.dataset.status = 'sent'; status.textContent = '✓'; }
     lista.appendChild(nova);
     rolarParaFim();
-    // Simula o ACK do WhatsApp: entregue/lido um instante depois.
+    // Simula o ACK do WhatsApp: lido um instante depois.
     setTimeout(() => { if (status) { status.dataset.status = 'read'; status.textContent = '✓✓'; } }, 1200);
 
-    const item = document.querySelector(`.conv-item[data-id="${atual}"]`);
+    const item = $(`.conv-item[data-id="${atual}"]`);
     if (item) {
       item.querySelector('.conv-preview').textContent = texto;
       item.querySelector('.conv-time').textContent = hora;
@@ -1782,43 +1955,21 @@
     btnGravar.style.display = temTexto ? 'none' : 'inline-flex';
   }
 
-  let timerAviso;
-  function avisar(texto) {
-    const el = $('#mockup-aviso');
-    el.textContent = texto;
-    el.classList.add('visivel');
-    clearTimeout(timerAviso);
-    timerAviso = setTimeout(() => el.classList.remove('visivel'), 2200);
-  }
-
   // --- eventos ---------------------------------------------------------------------
   document.addEventListener('click', (ev) => {
     const item = ev.target.closest('.conv-item');
     if (item) { selecionar(item.dataset.id); return; }
-
-    if (ev.target.closest('#btn-mobile-back')) {
-      document.body.classList.remove('chat-open-mobile');
-      return;
-    }
-
+    if (ev.target.closest('#btn-mobile-back')) { document.body.classList.remove('chat-open-mobile'); return; }
     if (ev.target.closest('#btn-close-contact-drawer')) { painelContato(false); return; }
-    if (ev.target.closest('#contact-details')) { painelContato(true); return; }
-
-    // Link para tela que não existe no mockup: avisa em vez de dar 404.
-    const link = ev.target.closest('a[href]');
-    if (link) {
-      const destino = link.getAttribute('href');
-      const existe = ['chat.html', 'index.html'].includes(destino) || destino.startsWith('#');
-      if (!existe) { ev.preventDefault(); avisar('Essa tela não faz parte deste protótipo'); }
-    }
+    if (ev.target.closest('#contact-details')) { painelContato(true); }
   });
 
-  $('#message-form').addEventListener('submit', (ev) => { ev.preventDefault(); enviar(); });
+  $('#message-form').addEventListener('submit', enviar);
   entrada.addEventListener('input', alternarBotoes);
-  $('#drawer-crm-select')?.addEventListener('change', atualizarSeloCrm);
   entrada.addEventListener('keydown', (ev) => {
     if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); enviar(); }
   });
+  $('#drawer-crm-select')?.addEventListener('change', atualizarSeloCrm);
 
   // Estado inicial: c1 aberta no desktop, com o painel do contato ao lado. No celular
   // começa pela lista e o painel só abre tocando no cabeçalho, como no app.
@@ -1829,5 +1980,4 @@
   }
 })();
 </script>
-
 </body></html>
