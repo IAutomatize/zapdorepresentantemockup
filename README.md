@@ -44,6 +44,16 @@ tools/capture/          gera e atualiza a parte capturada de cada tela
 Cada `<tela>.html` tem duas partes: em cima, a marcação capturada do app; no fim, depois de
 `<!-- MOCKUP:INICIO`, o bloco escrito à mão com os dados e o comportamento da tela.
 
+## Documentação de cada recurso novo
+
+Todo recurso novo prototipado aqui tem uma pasta de documentação no repositório **privado**
+`zap-empresarial`, em `docs/novos-recursos/NNN-nome/`: o pedido e as decisões, o que foi feito no
+protótipo (arquivos e trechos desta página) e o briefing de transporte para o sistema real. Ela é
+criada junto com a página, para a idealização não se perder até a construção.
+
+Neste repositório, que é público, fica só a página. Nada de caminho, linha ou regra do sistema
+real aqui.
+
 ## Mostrar uma feature nova ao cliente
 
 1. Copie a tela: `cp chats.html chats-nome-da-feature.html`. Ou edite a própria tela.
