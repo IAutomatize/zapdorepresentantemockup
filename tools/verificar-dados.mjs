@@ -24,7 +24,26 @@ const DOMINIOS_OK = [
   /^empresa\.com(\.br)?$/, // placeholder do próprio app ("https://empresa.com.br")
 ];
 const EMAIL_OK = /(^|\.)(exemplo|empresa|email)\.com(\.br)?$/; // empresa.com, email.com: placeholders do app
-const telefoneFicticio = (digitos) => /^(55)?11990000(0[0-9]{2}|1[0-9]{2})$/.test(digitos);
+// 99000-00NN instâncias, 01NN contatos, 02NN representadas (mockup-vendas.js).
+const telefoneFicticio = (digitos) => /^(55)?11990000[0-2][0-9]{2}$/.test(digitos);
+
+/** CNPJ ou CPF com dígito verificador VÁLIDO pode ser de alguém real: o protótipo só usa inválidos. */
+function documentoValido(digitos) {
+  const n = digitos.split('').map(Number);
+  if (new Set(n).size === 1) return false;
+  const dv = (nums, pesos) => { const r = nums.reduce((a, x, i) => a + x * pesos[i], 0) % 11; return r < 2 ? 0 : 11 - r; };
+  if (n.length === 14) {
+    const d1 = dv(n.slice(0, 12), [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+    const d2 = dv(n.slice(0, 13), [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+    return d1 === n[12] && d2 === n[13];
+  }
+  if (n.length === 11) {
+    const d1 = dv(n.slice(0, 9), [10, 9, 8, 7, 6, 5, 4, 3, 2]);
+    const d2 = dv(n.slice(0, 10), [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]);
+    return d1 === n[9] && d2 === n[10];
+  }
+  return false;
+}
 // Placeholder óbvio: termina com o mesmo dígito repetido ou é o clássico 99999-1234.
 const placeholder = (digitos) => /(\d)\1{7}$/.test(digitos) || /999991234$/.test(digitos);
 
@@ -54,10 +73,13 @@ for (const arquivo of arquivos) {
     }
     for (const m of linha.matchAll(/https?:\/\/([^/"'\s)<>`]+)/g)) {
       const host = m[1].toLowerCase();
-      if (!/[a-z]/.test(host)) continue; // "https://..." de placeholder
+      if (!/[a-z]/.test(host) || host.startsWith('${')) continue; // "https://..." de placeholder e modelo de texto no JS
       if (!DOMINIOS_OK.some((re) => re.test(host))) achados.push(`${onde}  domínio ${host}`);
     }
     if (/wa\.me\/|api\.whatsapp\.com/.test(linha)) achados.push(`${onde}  link de WhatsApp`);
+    for (const m of linha.matchAll(/\b\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}\b|\b\d{3}\.\d{3}\.\d{3}-\d{2}\b/g)) {
+      if (documentoValido(m[0].replace(/\D/g, ''))) achados.push(`${onde}  CNPJ/CPF válido (pode ser real) ${m[0]}`);
+    }
   });
 }
 

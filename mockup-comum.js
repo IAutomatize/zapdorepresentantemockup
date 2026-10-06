@@ -13,6 +13,8 @@
   const PAGINAS = [
     'index.html', 'dashboard.html', 'chats.html', 'kanban.html', 'contacts.html', 'stories.html',
     'campaigns.html', 'agendadas.html', 'tasks.html', 'calendar.html', 'settings.html', 'ajuda.html',
+    // Módulo de vendas (recursos novos 001 a 005, em aprovação)
+    'clientes.html', 'pedidos.html', 'representadas.html',
   ];
 
   // Tema antes da pintura, com a mesma chave que o app usa.
@@ -65,6 +67,11 @@
         opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
       }
       .mockup-aviso.visivel { opacity: 1; transform: translate(-50%, 0); }
+      .mockup-novo {
+        display: inline-flex; align-items: center; margin-left: 8px; padding: 1px 7px; border-radius: 999px;
+        background: var(--ds-success-soft, rgba(22, 163, 74, .14)); color: var(--ds-success, #16a34a);
+        font-size: 10px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; line-height: 1.5;
+      }
     `;
     document.head.appendChild(estilo);
 
@@ -80,8 +87,48 @@
     document.body.append(selo, aviso);
   }
 
+  /**
+   * Itens novos da barra lateral (módulo de vendas, em aprovação). A barra capturada do
+   * app não tem essas telas: o item é clonado de um existente, para manter a marcação,
+   * e ganha o selo "Novo". Entram logo depois de Contatos.
+   */
+  const ITENS_NOVOS = [
+    { href: 'clientes.html', rotulo: 'Clientes', icone: 'ri-store-2-line' },
+    { href: 'pedidos.html', rotulo: 'Pedidos', icone: 'ri-file-list-3-line' },
+    { href: 'representadas.html', rotulo: 'Representadas', icone: 'ri-building-2-line' },
+  ];
+  function montarItensNovosDaBarra() {
+    const nav = document.querySelector('#mvp-sidebar nav');
+    const referencia = nav?.querySelector('a.sidebar-item[href="contacts.html"]');
+    if (!nav || !referencia || nav.querySelector('[data-mockup-novo]')) return;
+    const atual = location.pathname.split('/').pop() || 'index.html';
+    let depois = referencia;
+    for (const item of ITENS_NOVOS) {
+      const a = referencia.cloneNode(true);
+      a.setAttribute('href', item.href);
+      a.setAttribute('title', item.rotulo);
+      a.setAttribute('aria-label', item.rotulo);
+      a.setAttribute('data-mockup-novo', '');
+      a.classList.toggle('sidebar-item-active', atual === item.href);
+      a.querySelector('i').className = item.icone;
+      const rotulo = a.querySelector('.sidebar-label');
+      rotulo.textContent = item.rotulo;
+      const selo = document.createElement('span');
+      selo.className = 'mockup-novo';
+      selo.textContent = 'Novo';
+      rotulo.append(selo);
+      depois.after(a);
+      depois = a;
+    }
+    // Numa tela nova, nenhum item antigo fica marcado como atual.
+    if (ITENS_NOVOS.some((i) => i.href === atual)) {
+      nav.querySelectorAll('a.sidebar-item:not([data-mockup-novo])').forEach((a) => a.classList.remove('sidebar-item-active'));
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     montarSeloEAviso();
+    montarItensNovosDaBarra();
 
     // Formulário nunca recarrega a página; a tela trata o envio no próprio script.
     document.addEventListener('submit', (ev) => ev.preventDefault(), true);
