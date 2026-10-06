@@ -3175,7 +3175,7 @@ Esta ação não pode ser desfeita.</p>
   const linhas = new Map($$('tr.contact-row', tbody).map((tr) => [$('[data-contact-select]', tr).dataset.contactSelect, tr]));
   const ordem = () => [...linhas.keys()];
 
-  // --- mesmas regras do contacts.ts ------------------------------------------------------
+  // --- mesmas regras da tela de Contatos do app -------------------------------------------
   function formatarFone(bruto) {
     const d = String(bruto || '').replace(/\D/g, '');
     if (!d) return '';

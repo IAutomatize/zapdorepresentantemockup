@@ -47,6 +47,18 @@
     .item p { margin: 0; color: var(--suave); font-size: 14px; }
     .item .seta { margin-left: auto; color: var(--suave); font-size: 20px; }
     footer { margin-top: 40px; color: var(--suave); font-size: 13px; }
+    h2.secao { margin: 36px 0 6px; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--suave); }
+    .secao-desc { margin: 0 0 14px; color: var(--suave); font-size: 14px; line-height: 1.5; }
+    .novo {
+      display: inline-flex; align-items: center; margin-left: 8px; padding: 1px 8px; border-radius: 999px;
+      background: rgba(22, 163, 74, .12); color: #16a34a; font-size: 11px; font-weight: 700;
+      letter-spacing: .03em; text-transform: uppercase; vertical-align: 2px;
+    }
+    .restaurar {
+      margin-top: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--borda);
+      background: var(--cartao); color: var(--texto); font: 600 13px Inter, system-ui, sans-serif; cursor: pointer;
+    }
+    .restaurar:hover { border-color: var(--primaria); }
   </style>
 </head>
 <body>
@@ -57,9 +69,53 @@
     </header>
     <p class="intro">
       Telas de demonstração do Zap do Representante. Funcionam no navegador, mas nada aqui é
-      salvo nem enviado, e todos os contatos e conversas são fictícios.
+      enviado a lugar nenhum, e todos os contatos, conversas, clientes e pedidos são fictícios.
     </p>
 
+    <h2 class="secao">Em aprovação · Módulo de vendas</h2>
+    <p class="secao-desc">
+      Recursos novos para o representante registrar vendas: as empresas que representa, os
+      clientes, os pedidos e os indicadores. As telas conversam entre si: um pedido registrado
+      ao finalizar uma conversa aparece em Pedidos e nos Indicadores. No canto inferior
+      esquerdo, "Ver como" troca entre dona, administradora e vendedor para mostrar as permissões.
+      O que você cadastrar nessas telas fica guardado só neste navegador, sem ir a lugar nenhum;
+      "Restaurar dados de demonstração", no fim da lista, volta tudo ao início.
+    </p>
+    <div class="lista">
+      <a class="item" href="representadas.html">
+        <span class="icone"><i class="ri-building-2-line"></i></span>
+        <span><h2>Representadas<span class="novo">Novo</span></h2><p>Empresas representadas, comissão e cadastro pelo PDF do catálogo.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="clientes.html">
+        <span class="icone"><i class="ri-store-2-line"></i></span>
+        <span><h2>Clientes<span class="novo">Novo</span></h2><p>Carteira de clientes ligada aos contatos, marcadores e bloqueio.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="pedidos.html">
+        <span class="icone"><i class="ri-file-list-3-line"></i></span>
+        <span><h2>Pedidos<span class="novo">Novo</span></h2><p>Pedidos e orçamentos, com itens do catálogo e comissões.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="chats.html?chat=c1">
+        <span class="icone"><i class="ri-chat-check-line"></i></span>
+        <span><h2>Pedido ao finalizar a conversa<span class="novo">Novo</span></h2><p>Em "Finalizar atendimento", a opção de registrar a venda.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="settings.html?tab=usuarios&amp;secao=membros">
+        <span class="icone"><i class="ri-user-star-line"></i></span>
+        <span><h2>Vendedores e permissões<span class="novo">Novo</span></h2><p>Quem vende, a comissão de cada um e o que cada função pode ver.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+      <a class="item" href="dashboard.html?session=vendas">
+        <span class="icone"><i class="ri-line-chart-line"></i></span>
+        <span><h2>Indicadores de vendas<span class="novo">Novo</span></h2><p>Vendas, carteira de clientes, curva ABC e positivação.</p></span>
+        <i class="ri-arrow-right-s-line seta"></i>
+      </a>
+    </div>
+    <button type="button" class="restaurar" id="restaurar">Restaurar dados de demonstração</button>
+
+    <h2 class="secao">Telas atuais do sistema</h2>
     <div class="lista">
       <a class="item" href="dashboard.html">
         <span class="icone"><i class="ri-dashboard-line"></i></span>
@@ -120,5 +176,19 @@
 
     <footer>Abra no computador ou no celular. Dentro de qualquer tela, a barra lateral leva às outras.</footer>
   </main>
+  <script>
+    // O que o visitante cria nas telas de vendas fica salvo neste navegador. Antes de uma
+    // apresentação, este botão volta tudo ao estado inicial.
+    document.getElementById('restaurar').addEventListener('click', () => {
+      // Todas as chaves "zap-mockup:" são estado da demonstração: dados de vendas, "Ver como",
+      // marcadores criados em Clientes e filtros da aba Vendas do Dashboard.
+      try {
+        Object.keys(localStorage).filter((chave) => chave.startsWith('zap-mockup:')).forEach((chave) => localStorage.removeItem(chave));
+      } catch { /* sem armazenamento: nada a limpar */ }
+      const botao = document.getElementById('restaurar');
+      botao.textContent = 'Dados de demonstração restaurados';
+      setTimeout(() => { botao.textContent = 'Restaurar dados de demonstração'; }, 2500);
+    });
+  </script>
 </body>
 </html>

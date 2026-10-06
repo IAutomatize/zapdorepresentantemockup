@@ -309,10 +309,21 @@
   const TICKET_DO_PORTE = { 1: 70000, 2: 140000, 3: 260000, 4: 520000, 5: 950000 };
   const INTERVALO_DO_PORTE = { 1: 26, 2: 19, 3: 13, 4: 9, 5: 6 };
 
+  // Fisher–Yates com o sorteio da semente: o sort com comparador aleatório depende do motor
+  // (Chrome ordena diferente de Safari e Firefox) e daria pedidos diferentes no iPhone.
+  function embaralhar(lista) {
+    const copia = [...lista];
+    for (let i = copia.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(aleatorio() * (i + 1));
+      [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    return copia;
+  }
+
   function itensPara(representadaId, valorAlvo) {
     const catalogo = PRODUTOS.filter((p) => p.representadaId === representadaId);
     const quantos = Math.min(catalogo.length, entre(2, 5));
-    const escolhidos = [...catalogo].sort(() => aleatorio() - 0.5).slice(0, quantos);
+    const escolhidos = embaralhar(catalogo).slice(0, quantos);
     return escolhidos.map((produto) => {
       const fatia = valorAlvo / quantos;
       const quantidade = Math.max(1, Math.round(fatia / produto.preco));
@@ -333,9 +344,10 @@
     if (dias < 0) return null;
     const data = diasAtras(dias, entre(8, 17), entre(0, 59));
     if (data.getDay() === 0) data.setDate(data.getDate() - 1); // domingo não vende
-    // Pedido de hoje nunca fica com horário depois de agora.
-    const agora = new Date();
-    if (data > agora) data.setTime(agora.getTime() - entre(5, 90) * 60_000);
+    // Nada aqui pode depender da hora em que a página abre: um sorteio a mais ou a menos muda
+    // todos os pedidos seguintes. O horário sorteado (mesmo depois de agora) fica em `_ordem`,
+    // que numera os pedidos; os de mais tarde hoje são acertados no fim (antesDeAgora).
+    const ordem = data.getTime();
     const representadaId = extra.representadaId || escolher(cliente.representadaIds);
     const alvo = TICKET_DO_PORTE[cliente._porte] * (0.65 + aleatorio() * 0.7);
     const itens = extra.itens || itensPara(representadaId, alvo);
@@ -355,6 +367,7 @@
       notaFiscal: null,
       comissaoRepresentada: representada.comissao,
       comissaoVendedor: VENDEDORES[cliente.vendedorId].comissao,
+      _ordem: ordem,
     };
     if (['faturado', 'concluido'].includes(pedido.status)) pedido.notaFiscal = String(entre(10000, 99999));
     PEDIDOS_GERADOS.push(pedido);
@@ -398,12 +411,34 @@
     itens: [itemDe('ORV-013', 10), itemDe('ORV-012', 6)], observacoes: 'Ofereci 5% à vista; ela vai ver com o sócio.' });
   novoPedidoBase(porId('cli-12'), 3, { status: 'orcamento', representadaId: 'rep-tropeiro', itens: [itemDe('TRO-101', 6)] });
   novoPedidoBase(porId('cli-09'), 5, { status: 'orcamento', representadaId: 'rep-pedrafina', itens: [itemDe('PFI-203', 20), itemDe('PFI-201', 40)] });
+  // Um cliente novo (primeira compra), um reativado de inativo recente e um de inativo
+  // antigo no mês corrente, para a positivação mostrar as quatro situações.
+  const noMes = (dias) => Math.max(0, Math.min(dias, hoje().getDate() - 1));
+  novoPedidoBase(porId('cli-20'), noMes(3), { status: 'faturado', representadaId: 'rep-pedrafina',
+    itens: [itemDe('PFI-201', 30), itemDe('PFI-205', 10)], observacoes: 'Primeira compra.' });
+  novoPedidoBase(porId('cli-06'), noMes(2), { status: 'pedido', representadaId: 'rep-lumiar',
+    itens: [itemDe('LUM-001', 6), itemDe('LUM-004', 5)], observacoes: 'Voltou a comprar depois de quatro meses.' });
+  novoPedidoBase(porId('cli-35'), noMes(4), { status: 'concluido', representadaId: 'rep-pedrafina',
+    itens: [itemDe('PFI-203', 8), itemDe('PFI-204', 10)] });
   // Movimento de hoje e ontem, para a lista e os indicadores do dia não ficarem vazios.
   [['cli-23', 0, 'pedido'], ['cli-31', 0, 'orcamento'], ['cli-19', 1, 'pedido'], ['cli-27', 1, 'faturado'],
     ['cli-13', 1, 'faturado'], ['cli-34', 1, 'pedido']].forEach(([id, dias, status]) => novoPedidoBase(porId(id), dias, { status }));
 
-  PEDIDOS_GERADOS.sort((a, b) => a.emitidoEm.localeCompare(b.emitidoEm));
-  PEDIDOS_GERADOS.forEach((p, i) => { p.numero = 1001 + i; p.id = `ped-${p.numero}`; });
+  // Pedidos sorteados para mais tarde hoje ainda não aconteceram: ficam nos minutos antes de
+  // agora, na ordem do sorteio e depois do último que já passou. Assim o número (pela ordem
+  // sorteada, igual o dia todo) acompanha o horário mostrado na lista.
+  (function antesDeAgora() {
+    const agora = Date.now();
+    const futuros = PEDIDOS_GERADOS.filter((p) => p._ordem > agora).sort((a, b) => a._ordem - b._ordem);
+    if (!futuros.length) return;
+    const ultimoQueJaPassou = PEDIDOS_GERADOS.reduce((max, p) => (p._ordem <= agora && p._ordem > max ? p._ordem : max), 0);
+    const de = Math.max(ultimoQueJaPassou, agora - 90 * 60_000);
+    const passo = (agora - de) / (futuros.length + 1);
+    futuros.forEach((p, i) => { p.emitidoEm = new Date(de + passo * (i + 1)).toISOString(); });
+  })();
+
+  PEDIDOS_GERADOS.sort((a, b) => a._ordem - b._ordem);
+  PEDIDOS_GERADOS.forEach((p, i) => { p.numero = 1001 + i; p.id = `ped-${p.numero}`; delete p._ordem; });
 
   const CONFIG = {
     diasAtivo: 90,
@@ -765,10 +800,16 @@
   }
 
   /** Nome para um contato novo criado a partir do cliente: "Bom Preço 1", "Bom Preço 2"... */
+  /** Nome do próximo contato novo do cliente ("Padaria Bom Jardim 1", "… 2"), sem repetir um
+   * nome que já existe: depois de renomear o "… 1", a contagem sozinha sugeriria o "… 2" de novo. */
   function proximoNomeDeContato(cliente) {
     const base = cliente.nomeFantasia || cliente.razaoSocial;
-    const usados = bruto('contatos').filter((c) => c.nome.startsWith(`${base} `)).length;
-    return `${base} ${usados + 1}`;
+    const normalizar = (nome) => String(nome || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
+    const nomes = bruto('contatos').map((c) => c.nome);
+    const usados = new Set(nomes.map(normalizar));
+    let n = nomes.filter((nome) => nome.startsWith(`${base} `)).length + 1;
+    while (usados.has(normalizar(`${base} ${n}`))) n += 1;
+    return `${base} ${n}`;
   }
 
   /** Bloqueia ou desbloqueia o cliente e todos os contatos vinculados a ele. */
@@ -815,6 +856,8 @@
     resetar: () => { estado = estadoVazio(); gravarEstado(); avisar('todos', null); },
     // permissões
     verComo, definirVerComo, pode, enxerga, permissoesDoPapel,
+    /** O padrão de fábrica do papel, sem o que o visitante alterou (para "restaurar padrão"). */
+    permissoesPadrao: (papel) => copia(PERMISSOES[papel] || PERMISSOES.member),
     salvarPermissoes: (papel, parcial) => { estado.alterados.permissoes[papel] = { ...(estado.alterados.permissoes[papel] || {}), ...parcial }; gravarEstado(); avisar('permissoes', papel); },
     // regras
     ehVenda, situacaoDoCliente, carteira, curvaABC, positivacoes, resumo, comissoes, periodoDoMes, totalDosItens,
@@ -833,18 +876,20 @@
     if (document.getElementById('mockup-ver-como')) return;
     const estilo = document.createElement('style');
     estilo.textContent = `
+      /* Abaixo de qualquer modal do app (que começam em z-index 50) e acima da página. */
       .mockup-ver-como {
-        position: fixed; left: 118px; bottom: 12px; z-index: 9999;
+        position: fixed; left: 118px; bottom: 12px; z-index: 45;
         display: inline-flex; align-items: center; gap: 6px; padding: 3px 6px 3px 10px; border-radius: 999px;
         background: rgba(15, 23, 42, .78); color: #fff; font: 600 11px/1.6 Inter, system-ui, sans-serif;
       }
       .mockup-ver-como select {
-        border: 0; border-radius: 999px; padding: 1px 6px; background: rgba(255, 255, 255, .16); color: #fff;
-        font: 600 11px/1.6 Inter, system-ui, sans-serif; cursor: pointer;
+        max-width: 170px; border: 0; border-radius: 999px; padding: 1px 6px; background: rgba(255, 255, 255, .16); color: #fff;
+        font: 600 11px/1.6 Inter, system-ui, sans-serif !important; text-overflow: ellipsis; cursor: pointer;
       }
       .mockup-ver-como option { color: #0f172a; }
       @media (max-width: 768px) {
         .mockup-ver-como { left: auto; right: 12px; bottom: calc(118px + env(safe-area-inset-bottom)); }
+        .mockup-ver-como select { max-width: 120px; }
       }
     `;
     document.head.appendChild(estilo);

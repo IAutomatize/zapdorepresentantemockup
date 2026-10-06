@@ -1,0 +1,2681 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Clientes - Zap do Representante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+    
+    
+    
+    
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/new-design-vars.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
+    <link rel="stylesheet" href="css/contacts-layout.css">
+      <link rel="stylesheet" href="css/mobile-polish.css">
+<link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="stylesheet" href="css/account-access.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+<script src="mockup-vendas.js"></script>
+</head>
+  <body class="contacts-page clientes-page font-sans dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 bg-theme-surface">
+    <div class="min-h-screen w-full relative dashboard-modern-shell">
+      <div class="glow-blob" style="
+          width: 600px;
+          height: 600px;
+          top: -200px;
+          left: -180px;
+          background: radial-gradient(circle, rgba(180,200,220,0.35) 0%, transparent 70%);
+        "></div>
+      <div class="glow-blob" style="
+          width: 700px;
+          height: 700px;
+          bottom: -260px;
+          right: -220px;
+          background: radial-gradient(circle, rgba(197,213,228,0.3) 0%, transparent 70%);
+          animation-delay: 5s;
+        "></div>
+
+      <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+          background: rgba(255, 255, 255, 0.45);
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          border-right: 1px solid rgba(255, 255, 255, 0.5);
+        " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+
+      <main class="contacts-main-shell relative z-10 min-h-screen">
+        <section class="contacts-mvp-main h-full flex flex-col min-h-0 overflow-hidden">
+          <div class="contacts-mvp-bg pointer-events-none"></div>
+          <div class="contacts-mvp-shell relative z-10">
+            <header class="contacts-mvp-header">
+              <div class="contacts-mvp-title-row"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+                <i class="ri-store-2-line contacts-mvp-title-icon"></i>
+                <h1 class="contacts-mvp-title">Clientes</h1>
+              </div>
+              <div class="contacts-mvp-tabs" role="tablist" aria-label="Abas de clientes">
+                <button id="clientes-tab-btn" class="contacts-mvp-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="clientes-tab-panel" data-aba="clientes">
+                  <i class="ri-store-2-line"></i>
+                  Clientes
+                </button>
+                <button id="config-tab-btn" class="contacts-mvp-tab" type="button" role="tab" aria-selected="false" aria-controls="config-tab-panel" data-aba="config">
+                  <i class="ri-settings-3-line"></i>
+                  Configurações
+                </button>
+              </div>
+            </header>
+
+            <section id="clientes-tab-panel" class="contacts-tab-panel" role="tabpanel" aria-labelledby="clientes-tab-btn">
+            <section id="clientes-acoes-card" class="contacts-mvp-actions-card">
+              <div class="contacts-mvp-actions-left">
+                <div class="contacts-mvp-search-wrap">
+                  <i class="ri-search-line"></i>
+                  <input id="clientes-busca" type="text" placeholder="Buscar por nome, CNPJ, cidade ou contato..." class="search-bar contacts-mvp-search-input" aria-label="Buscar clientes" autocomplete="off">
+                </div>
+
+                <div class="relative">
+                  <button id="clientes-filtros-btn" class="contacts-mvp-btn contacts-mvp-btn-ghost" type="button" aria-expanded="false" aria-controls="clientes-filtros">
+                    <i class="ri-filter-line"></i>
+                    Filtros
+                    <span id="clientes-filtros-indicador" class="hidden ml-1 w-1.5 h-1.5 rounded-full bg-[#2196F3]"></span>
+                  </button>
+
+                  <div id="clientes-filtros" class="contacts-mvp-filter-dropdown hidden">
+                    <div class="p-4">
+                      <h3 class="contacts-mvp-filter-title">Filtrar clientes</h3>
+                      <div class="cli-filtros-grade">
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Situação na carteira</span>
+                          <select class="cli-select" data-filtro="situacao" aria-label="Situação na carteira"></select>
+                        </label>
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Vendedor</span>
+                          <select class="cli-select" data-filtro="vendedorId" aria-label="Vendedor"></select>
+                        </label>
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Segmento</span>
+                          <select class="cli-select" data-filtro="segmento" aria-label="Segmento"></select>
+                        </label>
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Rede</span>
+                          <select class="cli-select" data-filtro="rede" aria-label="Rede"></select>
+                        </label>
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Representada</span>
+                          <select class="cli-select" data-filtro="representadaId" aria-label="Representada"></select>
+                        </label>
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Marcador</span>
+                          <select class="cli-select" data-filtro="marcador" aria-label="Marcador"></select>
+                        </label>
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Cidade</span>
+                          <select class="cli-select" data-filtro="cidade" aria-label="Cidade"></select>
+                        </label>
+                        <label class="block">
+                          <span class="block text-[11px] font-bold uppercase tracking-wider mb-1.5" style="color:var(--ds-text-muted);">Bloqueio</span>
+                          <select class="cli-select" data-filtro="bloqueio" aria-label="Bloqueio"></select>
+                        </label>
+                      </div>
+                      <div class="contacts-mvp-filter-footer">
+                        <button id="clientes-limpar-filtros" class="contacts-mvp-link-btn" type="button">
+                          Limpar filtros
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contacts-mvp-actions-right">
+                <button id="clientes-exportar-btn" class="contacts-mvp-btn contacts-mvp-btn-secondary" type="button">
+                  <i class="ri-file-excel-2-line"></i>
+                  Exportar
+                </button>
+                <button id="novo-cliente-btn" class="contacts-mvp-btn contacts-mvp-btn-primary" type="button">
+                  <i class="ri-add-line"></i>
+                  Novo Cliente
+                </button>
+              </div>
+            </section>
+
+            <section id="clientes-lista-card" class="contacts-mvp-table-card contacts-table-fade-in">
+              <div class="contacts-mvp-table-headline">
+                <div class="cli-titulo-lista flex items-center gap-2 min-w-0">
+                  <h2>Lista de Clientes</h2>
+                  <span id="clientes-escopo" class="hidden contacts-mvp-table-counter"></span>
+                </div>
+                <span class="contacts-mvp-table-counter">
+                  Mostrando <span id="clientes-de">0</span>-<span id="clientes-ate">0</span> de <span id="clientes-total">0</span>
+                </span>
+              </div>
+
+              <div id="clientes-lote" class="hidden items-center justify-between gap-3 border-b bg-[#f8fafc] px-4 py-3 dark:bg-gray-800 border-theme-light">
+                <div class="flex flex-wrap items-center gap-2 text-sm">
+                  <span id="clientes-lote-contagem" class="font-medium text-theme-primary">0 clientes selecionados</span>
+                  <button type="button" id="clientes-lote-todos" class="hidden text-sm font-medium text-secondary-red underline">Selecionar todos os clientes</button>
+                  <button type="button" id="clientes-lote-limpar" class="text-sm underline text-theme-muted">Limpar seleção</button>
+                </div>
+                <button type="button" id="clientes-lote-excluir" class="contacts-mvp-btn contacts-mvp-btn-outline text-secondary-red">
+                  <i class="ri-delete-bin-6-line mr-1"></i>Excluir selecionados
+                </button>
+              </div>
+
+              <div class="contacts-table-scroll-area">
+                <div class="h-full overflow-y-auto">
+                  <table class="w-full contacts-mvp-table">
+                    <thead class="contacts-table-header-sticky contacts-mvp-thead">
+                      <tr>
+                        <th class="contacts-mvp-th-checkbox">
+                          <span class="contacts-mvp-checkbox-shell"><input type="checkbox" id="clientes-selecionar-pagina" aria-label="Selecionar todos desta página"></span>
+                        </th>
+                        <th class="contacts-mvp-th">Cliente</th>
+                        <th class="contacts-mvp-th cli-col-situacao">Situação</th>
+                        <th class="contacts-mvp-th cli-col-pedido">Último pedido</th>
+                        <th class="contacts-mvp-th cli-col-opcional">Vendedor</th>
+                        <th class="contacts-mvp-th cli-col-opcional">Cidade</th>
+                        <th class="contacts-mvp-th cli-col-opcional">Marcadores</th>
+                        <th class="contacts-mvp-th cli-col-opcional">Contatos</th>
+                        <th class="contacts-mvp-th contacts-mvp-th-actions">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody id="clientes-tbody" class="contacts-mvp-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="contacts-mvp-pagination">
+                <button id="clientes-pag-anterior" class="contacts-mvp-page-btn" type="button" disabled="">
+                  <i class="ri-arrow-left-s-line"></i> Anterior
+                </button>
+                <div id="clientes-pag-numeros" class="contacts-mvp-page-numbers"></div>
+                <button id="clientes-pag-proxima" class="contacts-mvp-page-btn" type="button">
+                  Próxima <i class="ri-arrow-right-s-line"></i>
+                </button>
+              </div>
+            </section>
+            </section>
+
+            <section id="config-tab-panel" class="contacts-tab-panel hidden" role="tabpanel" aria-labelledby="config-tab-btn">
+              <section class="contacts-mvp-table-card cli-config-card">
+                <div class="contacts-mvp-table-headline cli-config-titulo">
+                  <h2>Situação na carteira</h2>
+                  <span class="contacts-mvp-table-counter">Vale para a lista de clientes e para os Indicadores de vendas</span>
+                </div>
+                <form id="config-form" class="cli-config-corpo" novalidate="">
+                  <p class="text-[13px]" style="color:var(--ds-text-soft);">
+                    A situação conta os dias desde a última compra do cliente: pedido com status Pedido, Faturado ou
+                    Concluído. Orçamentos e pedidos cancelados não contam. Quem nunca comprou é prospect.
+                  </p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                    <div class="form-group">
+                      <label for="config-dias-ativo" class="form-label">Ativo até</label>
+                      <div class="flex items-center gap-2">
+                        <input type="number" id="config-dias-ativo" class="form-control" min="1" max="3650" step="1" inputmode="numeric">
+                        <span class="text-[13px] whitespace-nowrap" style="color:var(--ds-text-soft);">dias da última compra</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="config-dias-inativo" class="form-label">Inativo recente até</label>
+                      <div class="flex items-center gap-2">
+                        <input type="number" id="config-dias-inativo" class="form-control" min="2" max="3650" step="1" inputmode="numeric">
+                        <span class="text-[13px] whitespace-nowrap" style="color:var(--ds-text-soft);">dias; depois, inativo antigo</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-[11px] font-bold uppercase tracking-wider mt-2 mb-3 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Como fica a carteira com esses prazos</div>
+                  <div id="config-previa" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+                  <p id="config-erro" class="hidden text-[12px] mt-3" style="color:var(--ds-danger);"></p>
+                  <p id="config-somente-leitura" class="hidden text-[12px] mt-3" style="color:var(--ds-text-muted);">
+                    <i class="ri-lock-line"></i> Só o dono e os administradores da conta alteram os prazos.
+                  </p>
+                  <div class="flex flex-wrap justify-end gap-2 mt-6 pt-5" style="border-top:1px solid rgba(0,0,0,0.05);">
+                    <button type="button" id="config-restaurar" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-text-soft);">Restaurar padrão (90 e 180)</button>
+                    <button type="submit" id="config-salvar" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold text-white transition-all hover:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed" style="background:var(--ds-primary);box-shadow:0 2px 8px rgba(33,150,243,0.3);">Salvar prazos</button>
+                  </div>
+                </form>
+              </section>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="cliente-detalhe-root"></div>
+
+    <!-- Cadastro do cliente. O id é o do modal de contato do app de propósito: o CSS do
+         modal (contacts-layout.css) é todo escopado por #add-contact-modal. -->
+    <div id="add-contact-modal" class="modal" style="display: none;">
+      <div class="modal-content card-zap contact-modal-shell" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header contact-modal-header">
+          <h3 class="contact-modal-title">
+            <i id="modal-title-icon" class="ri-store-2-line"></i>
+            <span id="modal-title">Novo Cliente</span>
+          </h3>
+          <button type="button" class="close-btn contact-modal-close-btn" aria-label="Fechar modal">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+        <form id="cliente-form" class="contact-modal-form" novalidate="">
+          <div class="contact-modal-section-title">Tipo de cliente</div>
+          <div class="contact-modal-grid">
+            <label class="cli-tipo flex items-start gap-3 rounded-lg border p-3 cursor-pointer border-theme-light">
+              <input type="radio" name="cliente-tipo" value="PJ" class="mt-1" checked="">
+              <span class="text-sm">
+                <span class="font-medium text-theme-primary">Pessoa jurídica</span>
+                <span class="block text-theme-secondary">Empresa com CNPJ</span>
+              </span>
+            </label>
+            <label class="cli-tipo flex items-start gap-3 rounded-lg border p-3 cursor-pointer border-theme-light">
+              <input type="radio" name="cliente-tipo" value="PF" class="mt-1">
+              <span class="text-sm">
+                <span class="font-medium text-theme-primary">Pessoa física</span>
+                <span class="block text-theme-secondary">Produtor rural, autônomo: com CPF</span>
+              </span>
+            </label>
+          </div>
+
+          <div id="cliente-secao-dados" class="contact-modal-section-title">Dados da empresa</div>
+          <div class="contact-modal-grid">
+            <div class="form-group contact-modal-form-group">
+              <label for="cliente-documento" class="form-label">
+                <i class="ri-profile-line"></i><span id="cliente-documento-rotulo">CNPJ</span>
+              </label>
+              <div class="contact-cep-row cli-documento-linha">
+                <input type="text" id="cliente-documento" class="form-control" placeholder="00.000.000/0000-00" inputmode="numeric" autocomplete="off">
+                <button type="button" id="cliente-completar-btn" class="contact-cep-search-btn">
+                  <i class="ri-search-eye-line"></i>
+                  <span>Completar cadastro</span>
+                </button>
+              </div>
+              <p id="cliente-documento-ajuda" class="contact-modal-helper">Preenche razão social e endereço pela consulta pública do CNPJ.</p>
+            </div>
+            <div class="form-group contact-modal-form-group">
+              <label for="cliente-ie" class="form-label">
+                <i class="ri-file-list-line"></i><span id="cliente-ie-rotulo">Inscrição estadual</span>
+              </label>
+              <input type="text" id="cliente-ie" class="form-control" placeholder="Número ou ISENTO" autocomplete="off">
+            </div>
+            <div class="form-group contact-modal-form-group contact-custom-field-wide">
+              <label for="cliente-razao" class="form-label">
+                <i class="ri-building-line"></i><span id="cliente-razao-rotulo">Razão social</span>
+              </label>
+              <input type="text" id="cliente-razao" class="form-control" placeholder="Como está no cartão do CNPJ" autocomplete="off">
+            </div>
+            <div class="form-group contact-modal-form-group">
+              <label for="cliente-fantasia" class="form-label">
+                <i class="ri-store-2-line"></i>Nome fantasia
+              </label>
+              <input type="text" id="cliente-fantasia" class="form-control" placeholder="Como o cliente é conhecido" autocomplete="off">
+            </div>
+            <div id="cliente-suframa-grupo" class="form-group contact-modal-form-group">
+              <label for="cliente-suframa" class="form-label">
+                <i class="ri-map-pin-2-line"></i>SUFRAMA
+              </label>
+              <input type="text" id="cliente-suframa" class="form-control" placeholder="Só para a Zona Franca de Manaus" autocomplete="off">
+            </div>
+          </div>
+
+          <div id="cliente-secao-contatos" class="contact-modal-section-title">Contatos vinculados</div>
+          <p class="contact-modal-helper cli-ajuda-contatos">
+            Telefone e e-mail ficam no contato, que continua em Contatos e nas Conversas. Vincule um contato que já
+            existe ou crie um novo para este cliente. O primeiro da lista é o contato principal.
+          </p>
+          <div id="cliente-contatos-lista" class="flex flex-col gap-1.5 mt-3"></div>
+          <div class="contact-modal-inline-actions flex gap-2 mt-3">
+            <button type="button" id="cliente-vincular-btn" class="btn-outline-secondary px-3 py-2 text-sm whitespace-nowrap">
+              <i class="ri-links-line"></i> Vincular contato existente
+            </button>
+            <button type="button" id="cliente-novo-contato-btn" class="btn-outline-secondary px-3 py-2 text-sm whitespace-nowrap">
+              <i class="ri-user-add-line"></i> Novo contato
+            </button>
+          </div>
+
+          <div id="cliente-vincular-painel" class="hidden mt-3 rounded-[12px] p-3.5" style="background:rgba(33,150,243,0.04);border:1px solid rgba(33,150,243,0.16);">
+            <label for="cliente-vincular-busca" class="block text-[12px] font-semibold mb-1.5" style="color:var(--ds-text-soft);">Buscar contato existente</label>
+            <div class="relative mb-2">
+              <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--ds-text-muted);"></i>
+              <input id="cliente-vincular-busca" type="text" placeholder="Nome ou telefone..." autocomplete="off" class="w-full pl-10 pr-4 py-2.5 rounded-[12px] text-[13px] outline-none" style="background:rgba(var(--ds-glass-rgb),0.9);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);">
+            </div>
+            <div id="cliente-vincular-resultados" class="flex flex-col gap-1 max-h-[220px] overflow-y-auto"></div>
+          </div>
+
+          <div id="cliente-novo-contato-painel" class="hidden mt-3 rounded-[12px] p-3.5" style="background:rgba(33,150,243,0.04);border:1px solid rgba(33,150,243,0.16);">
+            <div id="cliente-novo-contato-titulo" class="block text-[12px] font-semibold mb-3" style="color:var(--ds-text-soft);">Novo contato deste cliente</div>
+            <div class="contact-modal-grid">
+              <div class="form-group contact-modal-form-group contact-field-name">
+                <label for="contact-name" class="form-label">
+                  <i class="ri-user-line"></i>Nome do contato
+                </label>
+                <input type="text" id="contact-name" class="form-control" placeholder="Nome do contato" autocomplete="off">
+                <p class="contact-modal-helper">Nasce com o nome do cliente numerado. Pode trocar pelo nome da pessoa.</p>
+              </div>
+              <div class="form-group contact-modal-form-group contact-field-phone">
+                <label class="form-label">
+                  <i class="ri-phone-line"></i>Número de Telefone
+                </label>
+                <div class="contact-phone-row flex gap-3">
+                  <input type="text" id="contact-ddi" class="form-control w-16 text-center" placeholder="55" value="55" inputmode="numeric" aria-label="DDI">
+                  <input type="text" id="contact-ddd" class="form-control w-20 text-center" placeholder="11" inputmode="numeric" aria-label="DDD">
+                  <input type="tel" id="contact-phone" class="form-control flex-1" placeholder="99999-9999" aria-label="Número">
+                </div>
+              </div>
+              <div class="form-group contact-modal-form-group contact-custom-field-wide">
+                <label for="contact-email" class="form-label">
+                  <i class="ri-mail-line"></i>Email (Opcional)
+                </label>
+                <input type="email" id="contact-email" class="form-control" placeholder="contato@exemplo.com" autocomplete="off">
+              </div>
+            </div>
+            <div id="cliente-novo-contato-erro" class="hidden mt-3 rounded-[10px] px-3 py-2 text-[12px]" style="background:var(--ds-warning-soft);color:var(--ds-text);"></div>
+            <div class="contact-modal-inline-actions flex gap-2 justify-end mt-3">
+              <button type="button" id="cliente-novo-contato-cancelar" class="btn-outline-secondary px-3 py-2 text-sm">Cancelar</button>
+              <button type="button" id="cliente-novo-contato-salvar" class="btn-primary px-3 py-2 text-sm">
+                <i class="ri-check-line"></i> <span id="cliente-novo-contato-rotulo">Adicionar contato</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="contact-modal-section-title">Venda</div>
+          <div class="contact-modal-grid">
+            <div class="form-group contact-modal-form-group">
+              <label for="cliente-segmento" class="form-label">
+                <i class="ri-price-tag-3-line"></i>Segmento
+              </label>
+              <select id="cliente-segmento" class="form-control"></select>
+              <div id="cliente-segmento-novo" class="hidden mt-2">
+                <div class="contact-modal-inline-actions flex gap-2">
+                  <input type="text" id="cliente-segmento-novo-nome" class="form-control flex-1" placeholder="Nome do segmento" maxlength="40" autocomplete="off">
+                  <button type="button" class="btn-primary px-3 py-2 text-sm" data-criar-lista="segmento">Criar</button>
+                  <button type="button" class="btn-outline-secondary px-3 py-2 text-sm" data-cancelar-lista="segmento" aria-label="Cancelar">✕</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group contact-modal-form-group">
+              <label for="cliente-rede" class="form-label">
+                <i class="ri-community-line"></i>Rede
+              </label>
+              <select id="cliente-rede" class="form-control"></select>
+              <div id="cliente-rede-novo" class="hidden mt-2">
+                <div class="contact-modal-inline-actions flex gap-2">
+                  <input type="text" id="cliente-rede-novo-nome" class="form-control flex-1" placeholder="Nome da rede" maxlength="60" autocomplete="off">
+                  <button type="button" class="btn-primary px-3 py-2 text-sm" data-criar-lista="rede">Criar</button>
+                  <button type="button" class="btn-outline-secondary px-3 py-2 text-sm" data-cancelar-lista="rede" aria-label="Cancelar">✕</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group contact-modal-form-group">
+              <label for="cliente-vendedor" class="form-label">
+                <i class="ri-user-star-line"></i>Vendedor responsável
+              </label>
+              <select id="cliente-vendedor" class="form-control"></select>
+              <p id="cliente-vendedor-ajuda" class="contact-modal-helper">Só aparecem os usuários marcados como vendedor em Usuários &amp; Acesso.</p>
+            </div>
+            <div class="form-group contact-modal-form-group">
+              <span class="form-label">
+                <i class="ri-pulse-line"></i>Situação na carteira
+              </span>
+              <div id="cliente-situacao" class="flex items-center gap-2 flex-wrap" style="min-height:44px;"></div>
+            </div>
+            <div class="form-group contact-modal-form-group contact-custom-field-wide">
+              <span class="form-label">
+                <i class="ri-building-2-line"></i>Representadas que atende
+              </span>
+              <div id="cliente-representadas" class="cli-representadas-grade"></div>
+            </div>
+          </div>
+
+          <div class="contact-modal-section-title">Marcadores</div>
+          <div class="form-group contact-modal-form-group contact-modal-tags-group">
+            <div id="selected-tags-container" class="flex flex-wrap gap-2 mb-2 min-h-[32px]"><span class="text-xs text-gray-400 italic">Nenhum marcador selecionado</span></div>
+            <div class="contact-modal-inline-actions flex gap-2">
+              <select id="contact-tag-add" class="form-control flex-1">
+                <option value="" selected="">Adicionar marcador existente...</option>
+              </select>
+              <button type="button" id="contact-tag-new-btn" class="btn-outline-secondary px-3 py-2 text-sm whitespace-nowrap">
+                <i class="ri-add-line"></i> Novo Marcador
+              </button>
+            </div>
+            <p class="contact-modal-helper">Os mesmos marcadores dos contatos.</p>
+            <div id="new-tag-form" class="hidden mt-3 p-3 rounded-lg border bg-bg-subtle border-theme-light">
+              <div class="contact-modal-inline-actions flex gap-2 items-end">
+                <div class="flex-1">
+                  <label class="form-label text-xs mb-1">Nome do marcador</label>
+                  <input type="text" id="new-tag-name" class="form-control" placeholder="Ex: Cliente VIP" maxlength="50">
+                </div>
+                <div>
+                  <label class="form-label text-xs mb-1">Cor</label>
+                  <input type="color" id="new-tag-color" class="h-10 w-14 cursor-pointer border rounded-md p-1 border-theme-light" value="#3b82f6">
+                </div>
+                <button type="button" id="new-tag-save-btn" class="btn-primary px-3 py-2 text-sm">
+                  Criar
+                </button>
+                <button type="button" id="new-tag-cancel-btn" class="btn-outline-secondary px-3 py-2 text-sm">
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-modal-section-title">Endereço</div>
+          <div class="contact-address-grid">
+            <div class="form-group contact-modal-form-group contact-address-field contact-address-field-cep">
+              <label for="contact-postal-code" class="form-label">CEP</label>
+              <div class="contact-cep-row">
+                <input type="text" id="contact-postal-code" class="form-control" placeholder="00000-000" maxlength="9" inputmode="numeric">
+                <button type="button" id="contact-cep-search-btn" class="contact-cep-search-btn">
+                  <i class="ri-search-line"></i>
+                  <span>Buscar</span>
+                </button>
+              </div>
+            </div>
+            <div class="form-group contact-modal-form-group contact-address-field contact-address-field-street">
+              <label for="contact-address" class="form-label">Endereço</label>
+              <input type="text" id="contact-address" class="form-control" placeholder="Preencha Endereço">
+            </div>
+            <div class="form-group contact-modal-form-group contact-address-field contact-address-field-number">
+              <label for="contact-address-number" class="form-label">Número</label>
+              <input type="text" id="contact-address-number" class="form-control" placeholder="Preencha Número">
+            </div>
+            <div class="form-group contact-modal-form-group contact-address-field contact-address-field-complement">
+              <label for="contact-address-complement" class="form-label">Complemento</label>
+              <input type="text" id="contact-address-complement" class="form-control" placeholder="Preencha Complemento">
+            </div>
+            <div class="form-group contact-modal-form-group contact-address-field contact-address-field-neighborhood">
+              <label for="contact-neighborhood" class="form-label">Bairro</label>
+              <input type="text" id="contact-neighborhood" class="form-control" placeholder="Preencha Bairro">
+            </div>
+            <div class="form-group contact-modal-form-group contact-address-field contact-address-field-city cli-cidade">
+              <label for="contact-city" class="form-label">Cidade</label>
+              <input type="text" id="contact-city" class="form-control" placeholder="Preencha Cidade">
+            </div>
+            <div class="form-group contact-modal-form-group contact-address-field contact-address-field-state">
+              <label for="contact-state" class="form-label">Estado</label>
+              <select id="contact-state" class="form-control">
+                <option value="" selected="">Selecione</option>
+                <option value="AC">AC</option>
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
+                <option value="PI">PI</option>
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="contact-modal-section-title">Informações adicionais</div>
+          <div class="form-group contact-modal-form-group">
+            <textarea id="cliente-informacoes" class="form-control" rows="3" placeholder="Horário de recebimento, condições combinadas, observações de entrega..."></textarea>
+          </div>
+
+          <div class="modal-footer contact-modal-footer">
+            <div class="flex gap-3 justify-end">
+              <button type="button" id="cliente-cancelar-btn" class="btn-outline-secondary contact-modal-cancel-btn">
+                Cancelar
+              </button>
+              <button type="submit" id="cliente-salvar-btn" class="btn-primary contact-modal-submit-btn">
+                <i class="ri-save-line" aria-hidden="true"></i>
+                <span id="cliente-salvar-rotulo">Salvar Cliente</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div><div class="fixed inset-0 bg-black bg-opacity-50 z-[10000] items-center justify-center hidden">
+      <div class="border border-white/10 rounded-lg p-6 w-full max-w-md mx-4 transform transition-transform duration-200 bg-theme-surface scale-95">
+        <div class="flex items-center gap-3 mb-4">
+          <i class="confirm-icon text-2xl ri-error-warning-line text-red-400"></i>
+          <h3 class="confirm-title text-lg font-semibold">Confirmar ação</h3>
+        </div>
+        <p class="confirm-message text-gray-300 mb-6"></p>
+        <div class="flex gap-3 justify-end">
+          <button class="confirm-cancel px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">Cancelar</button>
+          <button class="confirm-ok px-4 py-2 rounded-md transition-colors bg-red-600 text-white hover:bg-red-700">Confirmar</button>
+        </div>
+      </div>
+    </div>
+
+
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. Esta tela não existe no app: é o recurso
+     novo Clientes, do módulo de vendas, e por isso não tem captura nem fixture. A marcação acima
+     foi montada a partir de contacts.html, com as mesmas classes do app:
+       - head, barra lateral, cabeçalho com abas, cartão de busca e filtros, tabela, seleção em
+         lote, paginação e o modal de cadastro (o mesmo do contato) são os de Contatos;
+       - o detalhe do cliente é o modal de detalhes de grupo da mesma tela
+         (contacts-groups-overlay e contacts-groups-modal), com as mesmas linhas e seções;
+       - a confirmação é o modal de confirmação do app.
+     O pouco que não existe no CSS do app está no <style> abaixo, só com tokens --ds-* (claro e
+     escuro).
+
+     Dados e regras vêm do mockup-vendas.js (window.vendas): clientes, contatos, pedidos,
+     situação na carteira, permissões e o "Ver como". O que o visitante cria ou altera fica no
+     localStorage deste navegador e vale nas outras telas do módulo.
+
+     Endereços desta tela:
+       clientes.html?cliente=cli-01   abre o detalhe do cliente
+       clientes.html?novo=1           abre o cadastro de cliente novo
+       clientes.html?aba=config       abre a aba Configurações
+     E usa os da tela Pedidos: pedidos.html?novo=1&cliente=<id> (novo pedido do cliente),
+     ?pedido=<id> (abre o pedido) e ?cliente=<id> (pedidos do cliente). -->
+<style>
+  /* O cartão de ações precisa ficar acima da tabela para o menu de filtros abrir por cima
+     (o app faz o mesmo em #contacts-actions-card). */
+  #clientes-acoes-card { position: relative; z-index: 100; overflow: visible; }
+  #clientes-lista-card { position: relative; z-index: 1; }
+
+  /* Linha clicável: abre o detalhe. Cliente bloqueado fica apagado, menos o nome, a seleção e o menu. */
+  .cli-linha { cursor: pointer; }
+  .cli-linha.is-bloqueado > td:not(.contacts-mvp-actions-cell):not(.contacts-mvp-th-checkbox):not(.contacts-mvp-row-cell-contact) { opacity: .55; }
+  .cli-linha.is-bloqueado .contacts-mvp-avatar { filter: grayscale(1); opacity: .65; }
+  .cli-linha.is-bloqueado .contacts-mvp-contact-name { color: var(--ds-text-muted); }
+  /* Razão social longa encolhe com reticências em vez de apertar as outras colunas. */
+  .cli-cliente-texto { max-width: 300px; }
+
+  /* Contatos vinculados na lista: avatares pequenos, sobrepostos. */
+  .cli-contatos { display: flex; align-items: center; }
+  .cli-mini-avatar { width: 26px; height: 26px; border-radius: 8px; font-size: 10px; box-shadow: 0 0 0 2px var(--ds-surface); }
+  .cli-mini-avatar + .cli-mini-avatar { margin-left: -6px; }
+
+  /* Menu de filtros: vários campos, em duas colunas, alinhado pela direita do botão. */
+  #clientes-filtros { left: auto; right: 0; width: min(520px, calc(100vw - 32px)); max-height: min(70vh, 560px); overflow-y: auto; }
+  .cli-filtros-grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .cli-select {
+    width: 100%; min-height: 38px; padding: 7px 10px; border-radius: 10px; font-size: 13px;
+    border: 1px solid var(--ds-input-border); background: rgba(var(--ds-glass-rgb), 0.7); color: var(--ds-text);
+  }
+  .cli-select:focus { outline: none; border-color: rgba(33, 150, 243, 0.45); box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1); }
+
+  /* Cadastro: representadas em grade; cidade ocupa o lugar do país (cliente é sempre no Brasil). */
+  .cli-representadas-grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  #add-contact-modal .cli-cidade { grid-column: span 9; }
+  #add-contact-modal .contact-modal-helper.cli-ajuda-contatos { margin-top: -2px; }
+
+  /* Aba Configurações: o cartão não estica até o fim da tela. */
+  .cli-config-card { flex: 0 0 auto; }
+  .cli-config-corpo { padding: 20px 24px 24px; }
+  #config-form .form-control { max-width: 140px; }
+  #config-form .form-control:disabled { opacity: .6; cursor: not-allowed; }
+
+  .cli-so-celular { display: none; }
+
+  /* A mensagem do modal de confirmação do app é text-gray-300: quase ilegível no tema claro.
+     Aqui ela carrega a informação principal (quantos contatos serão bloqueados), então usa o
+     texto secundário do tema. */
+  .clientes-page .confirm-message { color: var(--ds-text-soft); }
+
+  @media (max-width: 860px) {
+    .cli-representadas-grade { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 768px) {
+    /* No celular a tabela fica com seleção, cliente e ações: a situação e o último pedido vão
+       para baixo do nome, e o texto do cliente encolhe com reticências em vez de empurrar a tabela. */
+    .cli-col-opcional, .cli-col-situacao, .cli-col-pedido { display: none; }
+    .cli-so-celular { display: block; margin-top: 6px; }
+    .cli-cliente-texto { max-width: calc(100vw - 196px); }
+    #add-contact-modal .cli-documento-linha { grid-template-columns: minmax(0, 1fr); }
+    .cli-titulo-lista { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .cli-titulo-lista h2 { white-space: nowrap; }
+    .cli-config-titulo { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .cli-filtros-grade { grid-template-columns: minmax(0, 1fr); }
+    .contacts-groups-modal.cli-detalhe { padding: 20px 16px; border-radius: 18px; }
+    .cli-detalhe [data-campo="acoes"] > * { padding-top: 12px; padding-bottom: 12px; }
+    .cli-detalhe [data-campo="resumo-pedidos"] { display: none; }
+    .cli-config-corpo { padding: 16px; }
+  }
+</style>
+
+<!-- Pílulas: situação na carteira (mesma pílula de "Aberto" dos grupos), bloqueado (a cinza de
+     Contatos Bloqueados, em Configurações), status do pedido (cor do status, como os marcadores
+     no painel do chat) e contato principal (a de "Admin" dos grupos). -->
+<template id="tpl-pilula">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold whitespace-nowrap"><i></i><span></span></span>
+</template>
+<template id="tpl-pilula-bloqueado">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold whitespace-nowrap" style="background:rgba(160,174,192,0.15);color:var(--ds-text-soft);"><i class="ri-prohibited-line"></i>Bloqueado</span>
+</template>
+<template id="tpl-pilula-status">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold whitespace-nowrap"></span>
+</template>
+<template id="tpl-pilula-principal">
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold whitespace-nowrap" style="background:rgba(246,173,85,0.15);color:var(--ds-warning);"><span class="inline-flex items-center gap-1"><i class="ri-star-fill"></i> Principal</span></span>
+</template>
+<template id="tpl-pilula-novo">
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold whitespace-nowrap" style="background:var(--ds-primary-soft);color:var(--ds-primary);">Novo</span>
+</template>
+<template id="tpl-pilula-alterado">
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold whitespace-nowrap" style="background:rgba(0,0,0,0.04);color:var(--ds-text-muted);">Alterado</span>
+</template>
+
+<!-- Linha da tabela (mesma estrutura da linha de contato). -->
+<template id="tpl-linha">
+<tr class="contact-row cli-linha">
+  <td class="contacts-mvp-row-cell contacts-mvp-th-checkbox">
+    <span class="contacts-mvp-checkbox-shell"><input type="checkbox" aria-label="Selecionar cliente" data-cliente-select=""></span>
+  </td>
+  <td class="contacts-mvp-row-cell contacts-mvp-row-cell-contact">
+    <div class="contacts-mvp-contact-wrap">
+      <div class="contacts-mvp-avatar">
+        <span class="contacts-mvp-avatar-initials"></span>
+      </div>
+      <div class="min-w-0 cli-cliente-texto">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="contacts-mvp-contact-name min-w-0" data-campo="nome"></div>
+          <span class="shrink-0" data-campo="bloqueado"></span>
+        </div>
+        <div class="text-[11px] mt-0.5 truncate" style="color:var(--ds-text-muted);" data-campo="sub"></div>
+        <div class="cli-so-celular">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span data-campo="situacao-celular"></span>
+            <span class="text-[11px] whitespace-nowrap" style="color:var(--ds-text-muted);" data-campo="ultimo-celular"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </td>
+  <td class="contacts-mvp-row-cell cli-col-situacao">
+    <div data-campo="situacao"></div>
+    <div class="text-[11px] mt-1 whitespace-nowrap" style="color:var(--ds-text-muted);" data-campo="dias"></div>
+  </td>
+  <td class="contacts-mvp-row-cell cli-col-pedido">
+    <div class="text-[13px] font-medium whitespace-nowrap" style="color:var(--ds-text);" data-campo="ultimo-data"></div>
+    <div class="text-[12px] mt-0.5 whitespace-nowrap tabular-nums" style="color:var(--ds-text-soft);" data-campo="ultimo-valor"></div>
+  </td>
+  <td class="contacts-mvp-row-cell cli-col-opcional">
+    <div class="text-[13px] whitespace-nowrap" style="color:var(--ds-text-soft);" data-campo="vendedor"></div>
+  </td>
+  <td class="contacts-mvp-row-cell cli-col-opcional">
+    <div class="text-[13px]" style="color:var(--ds-text-soft);" data-campo="cidade"></div>
+  </td>
+  <td class="contacts-mvp-row-cell cli-col-opcional">
+    <div class="contacts-mvp-tags" data-campo="marcadores"></div>
+  </td>
+  <td class="contacts-mvp-row-cell cli-col-opcional">
+    <div class="cli-contatos" data-campo="contatos"></div>
+  </td>
+  <td class="contacts-mvp-row-cell contacts-mvp-actions-cell">
+    <button class="contact-row-menu-toggle contacts-mvp-menu-trigger" type="button" aria-label="Abrir menu de ações">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <div class="contacts-mvp-row-menu hidden">
+      <button class="contacts-mvp-row-menu-item" type="button" data-acao="detalhe" title="Ver detalhes">
+        <i class="ri-eye-line"></i> Ver detalhes
+      </button>
+      <button class="contacts-mvp-row-menu-item" type="button" data-acao="editar" title="Editar">
+        <i class="ri-edit-line"></i> Editar
+      </button>
+      <a class="contacts-mvp-row-menu-item" href="pedidos.html" data-acao="novo-pedido" title="Novo pedido">
+        <i class="ri-file-add-line"></i> Novo pedido
+      </a>
+      <button class="contacts-mvp-row-menu-item danger" type="button" data-acao="bloquear" title="Bloquear cliente">
+        <i class="ri-prohibited-line"></i> <span>Bloquear cliente</span>
+      </button>
+      <button class="contacts-mvp-row-menu-item danger" type="button" data-acao="excluir" title="Excluir cliente">
+        <i class="ri-delete-bin-6-line"></i> Excluir
+      </button>
+    </div>
+  </td>
+</tr>
+</template>
+<template id="tpl-linha-vazia">
+<tr>
+  <td colspan="9" class="contacts-mvp-row-cell" style="padding:20px 24px;">
+    <div class="contacts-mvp-empty-panel">
+      <i></i>
+      <span class="text-[13px] text-center"></span>
+      <button type="button" class="contacts-mvp-link-btn" data-acao="limpar-filtros">Limpar busca e filtros</button>
+    </div>
+  </td>
+</tr>
+</template>
+<template id="tpl-marcador-tabela">
+<span class="contacts-mvp-tag"></span>
+</template>
+<template id="tpl-sem-marcador">
+<span class="contacts-mvp-empty-tag">Sem marcadores</span>
+</template>
+<template id="tpl-sem-contato">
+<span class="contacts-mvp-empty-tag">Nenhum</span>
+</template>
+<template id="tpl-mini-avatar">
+<span class="contacts-mvp-avatar cli-mini-avatar"><span class="contacts-mvp-avatar-initials"></span></span>
+</template>
+<template id="tpl-mini-contagem">
+<span class="text-[12px] ml-2 whitespace-nowrap" style="color:var(--ds-text-soft);"></span>
+</template>
+<template id="tpl-pagina">
+<button class="contacts-mvp-page-number" type="button"></button>
+</template>
+<template id="tpl-destaque">
+<mark class="bg-yellow-200 dark:bg-yellow-800"></mark>
+</template>
+
+<!-- Detalhe do cliente: o modal de detalhes de grupo de Contatos, com as mesmas seções. -->
+<template id="tpl-detalhe">
+<div class="contacts-groups-overlay" data-overlay="detalhe">
+  <div class="contacts-groups-modal cli-detalhe" role="dialog" aria-modal="true" aria-labelledby="detalhe-nome">
+    <div class="flex items-start justify-between gap-3 pb-5 mb-1" style="border-bottom:1px solid rgba(0,0,0,0.05);">
+      <div class="flex items-start gap-3 min-w-0">
+        <div class="flex items-center justify-center shrink-0 text-[14px] font-bold text-white" style="width:40px;height:40px;border-radius:12px;" data-campo="avatar"></div>
+        <div class="min-w-0">
+          <h2 id="detalhe-nome" class="text-[18px] font-bold break-words" style="color:var(--ds-text);" data-campo="nome"></h2>
+          <p class="text-[13px] mt-0.5 break-words" style="color:var(--ds-text-muted);" data-campo="sub"></p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span data-campo="situacao"></span>
+        <button data-acao="fechar-detalhe" type="button" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-black/5 transition-colors" aria-label="Fechar"><i class="ri-close-line" style="color:var(--ds-text-muted);"></i></button>
+      </div>
+    </div>
+
+    <div data-campo="aviso-bloqueio"></div>
+
+    <div class="flex items-center justify-between gap-3 mt-6 mb-4 pb-2" style="border-bottom:1px solid rgba(0,0,0,0.04);">
+      <div class="text-[11px] font-bold uppercase tracking-wider" style="color:var(--ds-text-muted);">Compras</div>
+      <select class="cli-select" style="width:auto;min-height:32px;padding:4px 8px;font-size:12px;" data-campo="periodo" aria-label="Período das compras">
+        <option value="mes">Este mês</option>
+        <option value="90d">Últimos 90 dias</option>
+        <option value="12m">Últimos 12 meses</option>
+        <option value="tudo">Desde o início</option>
+      </select>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-[13px]" data-campo="kpis"></div>
+
+    <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Ações</div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3" data-campo="acoes">
+      <a data-acao="novo-pedido" href="pedidos.html" class="flex items-center justify-center gap-2 py-4 rounded-[14px] transition-all hover:-translate-y-0.5" style="background:rgba(33,150,243,0.08);color:var(--ds-primary);">
+        <i class="ri-file-add-line"></i>
+        <span class="text-[13px] font-semibold">Novo pedido</span>
+      </a>
+      <a data-acao="conversar" href="chats.html" class="flex items-center justify-center gap-2 py-4 rounded-[14px] transition-all hover:-translate-y-0.5" style="background:rgba(33,150,243,0.08);color:var(--ds-primary);">
+        <i class="ri-chat-3-line"></i>
+        <span class="text-[13px] font-semibold">Conversar</span>
+      </a>
+      <button data-acao="bloquear" type="button" class="flex items-center justify-center gap-2 py-4 rounded-[14px] transition-all hover:-translate-y-0.5" style="background:rgba(245,101,101,0.08);color:var(--ds-danger);">
+        <i class="ri-prohibited-line"></i>
+        <span class="text-[13px] font-semibold">Bloquear cliente</span>
+      </button>
+    </div>
+
+    <div class="flex items-center justify-between gap-3 mt-6 mb-4 pb-2" style="border-bottom:1px solid rgba(0,0,0,0.04);">
+      <div class="text-[11px] font-bold uppercase tracking-wider" style="color:var(--ds-text-muted);" data-campo="titulo-contatos">Contatos vinculados</div>
+      <button type="button" data-acao="editar-contatos" class="contacts-mvp-link-btn text-[12px] whitespace-nowrap">Vincular contato</button>
+    </div>
+    <div class="flex flex-col gap-1" data-campo="contatos"></div>
+
+    <div class="flex items-center justify-between gap-3 mt-6 mb-4 pb-2" style="border-bottom:1px solid rgba(0,0,0,0.04);">
+      <div class="text-[11px] font-bold uppercase tracking-wider" style="color:var(--ds-text-muted);" data-campo="titulo-pedidos">Pedidos</div>
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="text-[12px] whitespace-nowrap" style="color:var(--ds-text-muted);" data-campo="resumo-pedidos"></span>
+        <a class="contacts-mvp-link-btn text-[12px] whitespace-nowrap" href="pedidos.html" data-campo="ver-pedidos">Ver em Pedidos</a>
+      </div>
+    </div>
+    <div class="flex flex-col gap-1" data-campo="pedidos"></div>
+    <button type="button" data-acao="mais-pedidos" class="contacts-mvp-link-btn text-[12px] mt-2"></button>
+
+    <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Dados do cliente</div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-[13px]" data-campo="dados"></div>
+
+    <div class="flex flex-wrap items-center justify-between gap-2 mt-7 pt-5" style="border-top:1px solid rgba(0,0,0,0.05);">
+      <button data-acao="excluir" type="button" class="px-4 py-2.5 rounded-[12px] text-[13px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-danger);"><i class="ri-delete-bin-6-line"></i> Excluir cliente</button>
+      <div class="flex gap-2 ml-auto">
+        <button data-acao="fechar-detalhe" type="button" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-text-soft);">Fechar</button>
+        <button data-acao="editar" type="button" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold text-white transition-all hover:-translate-y-px" style="background:var(--ds-primary);box-shadow:0 2px 8px rgba(33,150,243,0.3);">Editar cliente</button>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<template id="tpl-aviso-bloqueio">
+<div class="mt-5 rounded-[12px] p-3.5 flex items-start gap-3" style="background:var(--ds-danger-soft);border:1px solid rgba(245,101,101,0.25);">
+  <i class="ri-prohibited-line text-[18px]" style="color:var(--ds-danger);"></i>
+  <div class="flex-1 min-w-0">
+    <div class="text-[13px] font-semibold" style="color:var(--ds-text);" data-campo="titulo"></div>
+    <p class="text-[12px] mt-0.5" style="color:var(--ds-text-soft);" data-campo="texto"></p>
+  </div>
+</div>
+</template>
+<template id="tpl-info">
+<div class="min-w-0"><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1"></div><div style="color:var(--ds-text);" class="font-semibold break-words"></div></div>
+</template>
+<template id="tpl-kpi">
+<div class="min-w-0"><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1"></div><div style="color:var(--ds-text);" class="text-[16px] font-bold tabular-nums"></div><div style="color:var(--ds-text-muted);" class="text-[11px] mt-0.5"></div></div>
+</template>
+<template id="tpl-chip-representada">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[12px] font-semibold" style="background:rgba(var(--ds-glass-rgb),0.72);border:1px solid rgba(0,0,0,0.06);color:var(--ds-text);"><img class="w-4 h-4 rounded-md" alt=""><span></span></span>
+</template>
+<template id="tpl-detalhe-contato">
+<div class="flex items-center gap-3 px-3 py-2 rounded-[10px] transition-colors hover:bg-black/[0.02]">
+  <div class="w-9 h-9 rounded-[10px] flex items-center justify-center text-[12px] font-semibold text-white shrink-0" data-campo="avatar"></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-[14px] font-medium truncate" style="color:var(--ds-text);" data-campo="nome"></span>
+      <span class="inline-flex items-center gap-1" data-campo="pilulas"></span>
+    </div>
+    <div class="text-[12px] truncate" style="color:var(--ds-text-muted);" data-campo="canais"></div>
+  </div>
+  <a data-campo="conversa" href="chats.html" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] text-[12px] font-semibold transition-colors" style="background:rgba(33,150,243,0.08);color:var(--ds-primary);"><i class="ri-chat-3-line"></i><span>Conversa</span></a>
+</div>
+</template>
+<template id="tpl-sem-conversa">
+<span class="shrink-0 px-2.5 py-0.5 rounded-md text-[11px] font-semibold" style="background:rgba(0,0,0,0.04);color:var(--ds-text-muted);">Sem conversa</span>
+</template>
+<template id="tpl-detalhe-pedido">
+<a class="flex items-center gap-3 px-3 py-2 rounded-[10px] transition-colors hover:bg-black/[0.02]" href="pedidos.html" title="Abrir o pedido em Pedidos">
+  <img class="w-9 h-9 rounded-[10px] shrink-0 object-cover" alt="" data-campo="logo">
+  <div class="flex-1 min-w-0">
+    <div class="text-[14px] font-medium truncate" style="color:var(--ds-text);" data-campo="titulo"></div>
+    <div class="text-[12px] truncate" style="color:var(--ds-text-muted);" data-campo="sub"></div>
+  </div>
+  <div class="shrink-0 text-right">
+    <div class="text-[13px] font-semibold tabular-nums whitespace-nowrap" style="color:var(--ds-text);" data-campo="valor"></div>
+    <div class="mt-1" data-campo="status"></div>
+  </div>
+</a>
+</template>
+<template id="tpl-detalhe-vazio">
+<div class="px-3 py-4 text-[13px]" style="color:var(--ds-text-muted);"></div>
+</template>
+
+<!-- Cadastro: contato vinculado, resultado da busca de contato, representada e marcador. -->
+<template id="tpl-modal-contato">
+<div class="flex items-center gap-3 px-3 py-2 rounded-[12px]" style="background:rgba(var(--ds-glass-rgb),0.72);border:1px solid rgba(0,0,0,0.06);">
+  <div class="w-9 h-9 rounded-[10px] flex items-center justify-center text-[12px] font-semibold text-white shrink-0" data-campo="avatar"></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <span class="text-[13px] font-semibold truncate" style="color:var(--ds-text);" data-campo="nome"></span>
+      <span class="inline-flex items-center gap-1 flex-wrap" data-campo="pilulas"></span>
+    </div>
+    <div class="text-[12px] truncate" style="color:var(--ds-text-muted);" data-campo="canais"></div>
+  </div>
+  <div class="flex items-center gap-0.5 shrink-0">
+    <button type="button" data-acao-contato="principal" class="w-7 h-7 rounded-md flex items-center justify-center hover:bg-black/5 disabled:opacity-50" title="Tornar principal"><i class="ri-star-line" style="color:var(--ds-text-muted);"></i></button>
+    <button type="button" data-acao-contato="editar" class="w-7 h-7 rounded-md flex items-center justify-center hover:bg-black/5" title="Editar contato"><i class="ri-edit-line" style="color:var(--ds-text-muted);"></i></button>
+    <button type="button" data-acao-contato="desvincular" class="w-7 h-7 rounded-md flex items-center justify-center hover:bg-black/5" title="Desvincular do cliente"><i class="ri-link-unlink" style="color:var(--ds-text-muted);"></i></button>
+  </div>
+</div>
+</template>
+<template id="tpl-modal-sem-contatos">
+<span class="text-xs text-gray-400 italic">Nenhum contato vinculado ainda</span>
+</template>
+<template id="tpl-modal-resultado">
+<div class="flex items-center gap-3 px-3 py-2 rounded-[10px] transition-colors hover:bg-black/[0.02]">
+  <div class="w-9 h-9 rounded-[10px] flex items-center justify-center text-[12px] font-semibold text-white shrink-0" data-campo="avatar"></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <span class="text-[13px] font-semibold truncate" style="color:var(--ds-text);" data-campo="nome"></span>
+      <span class="inline-flex items-center gap-1" data-campo="pilulas"></span>
+    </div>
+    <div class="text-[12px] truncate" style="color:var(--ds-text-muted);" data-campo="sub"></div>
+  </div>
+  <button type="button" data-vincular="" class="shrink-0 px-3 py-1.5 rounded-[10px] text-[12px] font-semibold text-white transition-all" style="background:var(--ds-primary);">Vincular</button>
+</div>
+</template>
+<template id="tpl-modal-resultado-vazio">
+<div class="px-3 py-4 text-[13px]" style="color:var(--ds-text-muted);"></div>
+</template>
+<template id="tpl-modal-representada">
+<!-- display e margem no style: dentro de .form-group o app força label em bloco (zap-colors.css). -->
+<label class="flex items-center gap-3 rounded-[12px] px-3.5 py-3 cursor-pointer" style="display:flex;margin:0;background:rgba(var(--ds-glass-rgb),0.72);border:1px solid rgba(0,0,0,0.06);">
+  <input type="checkbox" class="w-4 h-4 accent-blue-500" data-representada="">
+  <img class="w-5 h-5 rounded-md shrink-0" alt="">
+  <span class="flex-1 min-w-0 text-[13px] font-semibold truncate" style="color:var(--ds-text);"></span>
+</label>
+</template>
+<template id="tpl-marcador-modal">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium">Marcador<button type="button" class="ml-1 hover:opacity-70 font-bold" data-remove-tag="" title="Remover marcador">✕</button></span>
+</template>
+<template id="tpl-sem-marcador-modal">
+<span class="text-xs text-gray-400 italic">Nenhum marcador selecionado</span>
+</template>
+
+<!-- Aba Configurações: um cartão por situação, com a faixa de dias e quantos clientes caem nela. -->
+<template id="tpl-previa">
+<div class="rounded-[12px] px-3.5 py-3" style="background:rgba(var(--ds-glass-rgb),0.72);border:1px solid rgba(0,0,0,0.06);">
+  <div data-campo="pilula"></div>
+  <div class="text-[13px] font-semibold mt-2" style="color:var(--ds-text);" data-campo="faixa"></div>
+  <div class="text-[11px] mt-0.5" style="color:var(--ds-text-muted);" data-campo="contagem"></div>
+</div>
+</template>
+<script>
+(() => {
+  const V = window.vendas;
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+  const avisar = (texto) => window.mockup.avisar(texto);
+  const clonar = (id) => document.getElementById(id).content.firstElementChild.cloneNode(true);
+  const campo = (raiz, nome) => raiz.querySelector(`[data-campo="${nome}"]`);
+  // Botões e grupos com display próprio no CSS do app ignoram a classe .hidden: some por estilo.
+  const mostrar = (el, sim) => { if (el) el.style.display = sim ? '' : 'none'; };
+  const espera = (ms) => new Promise((ok) => setTimeout(ok, ms));
+  const POR_PAGINA = 12; // PAGE_SIZE da lista de contatos do app
+
+  const soDigitos = (v) => String(v || '').replace(/\D/g, '');
+  const normalizar = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const porNome = (a, b) => String(a || '').localeCompare(String(b || ''), 'pt-BR');
+  const plural = (n, um, varios) => `${n} ${n === 1 ? um : varios}`;
+
+  // ---------------------------------------------------------------------------------
+  // Aparência: as mesmas regras da tela de Contatos do app (cor do avatar, iniciais, contraste)
+  // ---------------------------------------------------------------------------------
+  function corDoAvatar(semente) {
+    const paleta = ['#4CB874', '#A48AF2', '#EEA646', '#4BC0C8', '#F06565', '#7BA7D3'];
+    let hash = 0;
+    for (let i = 0; i < semente.length; i += 1) { hash = ((hash << 5) - hash) + semente.charCodeAt(i); hash |= 0; }
+    return paleta[Math.abs(hash) % paleta.length];
+  }
+  // Como no app, mas pulando palavras que não começam com letra ou número ("Almeida & Filhos" → AF).
+  const iniciais = (nome) => String(nome || '').split(' ').filter((p) => /^[\p{L}\p{N}]/u.test(p)).map((p) => p.charAt(0).toUpperCase()).slice(0, 2).join('') || '?';
+  function corDeContraste(hex) {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.5 ? '#000000' : '#FFFFFF';
+  }
+
+  // Situação na carteira: ícone e cores de cada uma (tokens do app, claro e escuro).
+  const SITUACOES = {
+    ativo: { icone: 'ri-checkbox-circle-line', cor: 'var(--ds-success)', fundo: 'var(--ds-success-soft)' },
+    inativo_recente: { icone: 'ri-time-line', cor: 'var(--ds-warning)', fundo: 'var(--ds-warning-soft)' },
+    inativo_antigo: { icone: 'ri-error-warning-line', cor: 'var(--ds-danger)', fundo: 'var(--ds-danger-soft)' },
+    prospect: { icone: 'ri-seedling-line', cor: 'var(--ds-primary)', fundo: 'var(--ds-primary-soft)' },
+  };
+  function pilulaSituacao(situacao) {
+    const s = SITUACOES[situacao];
+    const el = clonar('tpl-pilula');
+    el.style.background = s.fundo;
+    el.style.color = s.cor;
+    $('i', el).className = s.icone;
+    $('span', el).textContent = V.NOMES_DA_SITUACAO[situacao];
+    return el;
+  }
+  function pilulaStatus(status) {
+    const s = V.STATUS[status];
+    const el = clonar('tpl-pilula-status');
+    el.textContent = s.nome;
+    Object.assign(el.style, { background: `${s.cor}1f`, color: s.cor, border: `1px solid ${s.cor}55` });
+    return el;
+  }
+  function textoDaUltimaCompra(s) {
+    if (s.situacao === 'prospect') return 'Nunca comprou';
+    if (s.dias === 0) return 'Comprou hoje';
+    if (s.dias === 1) return 'Comprou ontem';
+    return `Comprou há ${s.dias} dias`;
+  }
+  const nomeDoCliente = (c) => c.nomeFantasia || c.razaoSocial;
+  function subDoCliente(c) {
+    const doc = c.documento ? (c.tipo === 'PF' ? `CPF ${c.documento}` : c.documento) : (c.tipo === 'PF' ? 'Pessoa física' : 'CNPJ não informado');
+    return [c.nomeFantasia && c.razaoSocial !== c.nomeFantasia ? c.razaoSocial : null, doc].filter(Boolean).join(' · ');
+  }
+  const cidadeDe = (c) => (c.endereco?.cidade ? [c.endereco.cidade, c.endereco.uf].filter(Boolean).join('/') : '');
+
+  // Marcadores: os mesmos dos contatos. Os criados nesta tela ficam guardados à parte, neste
+  // navegador, porque o mockup-vendas.js ainda não tem um tipo "marcadores".
+  const CHAVE_MARCADORES = 'zap-mockup:clientes:marcadores-novos:v1';
+  let marcadoresNovos = [];
+  try { marcadoresNovos = JSON.parse(localStorage.getItem(CHAVE_MARCADORES) || '[]'); } catch { /* sem armazenamento */ }
+  const marcadores = () => new Map([...V.MARCADORES, ...marcadoresNovos].map((m) => [m.id, m]));
+  function marcadorDaTabela(m) {
+    const el = clonar('tpl-marcador-tabela');
+    el.textContent = m.nome;
+    el.style.background = m.cor;
+    return el;
+  }
+  function marcadoresDaTabela(raiz, tags) {
+    const mapa = marcadores();
+    const lista = tags.map((id) => mapa.get(id)).filter(Boolean).sort((a, b) => porNome(a.nome, b.nome));
+    raiz.replaceChildren(...(lista.length ? lista.map(marcadorDaTabela) : [clonar('tpl-sem-marcador')]));
+  }
+
+  // Avatar com iniciais (o mesmo da linha de contato) em qualquer tamanho.
+  function pintarAvatar(el, semente, nome) {
+    el.style.background = corDoAvatar(semente);
+    const alvo = $('.contacts-mvp-avatar-initials', el) || el;
+    alvo.textContent = iniciais(nome);
+  }
+
+  // Realce da busca, como em Contatos: <mark> no trecho (a partir de 2 letras). Ignora acento,
+  // como a própria busca: "merc" realça "Comércio".
+  let termo = '';
+  function realcar(el, texto) {
+    el.replaceChildren();
+    const alvo = normalizar(termo);
+    const base = normalizar(texto);
+    if (alvo.length < 2 || base.length !== texto.length) { el.textContent = texto; return; }
+    let i = 0;
+    for (let achou = base.indexOf(alvo); achou >= 0; achou = base.indexOf(alvo, i)) {
+      if (achou > i) el.append(texto.slice(i, achou));
+      const m = clonar('tpl-destaque');
+      m.textContent = texto.slice(achou, achou + alvo.length);
+      el.append(m);
+      i = achou + alvo.length;
+    }
+    if (i < texto.length) el.append(texto.slice(i));
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Lista: o que cada linha mostra, filtros, busca e paginação
+  // ---------------------------------------------------------------------------------
+  const tbody = $('#clientes-tbody');
+  const filtros = { situacao: '', vendedorId: '', segmento: '', rede: '', representadaId: '', marcador: '', cidade: '', bloqueio: '' };
+  let pagina = 1;
+  let selecionados = new Set();
+  let todosDoFiltro = false;
+  let ultimaLista = [];
+
+  const escopoCarteira = () => V.permissoesDoPapel(V.verComo().papel).escopo === 'carteira';
+
+  /** Clientes que a pessoa vê, com situação, última compra e contatos (ordem alfabética, como Contatos). */
+  function linhas() {
+    const ultimaVenda = new Map();
+    for (const p of V.pedidos()) if (V.ehVenda(p) && !ultimaVenda.has(p.clienteId)) ultimaVenda.set(p.clienteId, p); // do mais novo para o mais antigo
+    const contatos = new Map(V.contatos().map((c) => [c.id, c]));
+    return V.clientes()
+      .map((c) => ({
+        cliente: c,
+        nome: nomeDoCliente(c),
+        situacao: V.situacaoDoCliente(c.id),
+        ultima: ultimaVenda.get(c.id) || null,
+        contatos: c.contatoIds.map((id) => contatos.get(id)).filter(Boolean),
+      }))
+      .sort((a, b) => porNome(a.nome, b.nome));
+  }
+
+  const casaLista = (valor, filtro) => !filtro || (filtro === '__sem' ? !valor : valor === filtro);
+  function casaFiltros(l) {
+    const c = l.cliente;
+    if (filtros.situacao && l.situacao.situacao !== filtros.situacao) return false;
+    if (filtros.vendedorId && c.vendedorId !== filtros.vendedorId) return false;
+    if (!casaLista(c.segmento, filtros.segmento) || !casaLista(c.rede, filtros.rede)) return false;
+    if (filtros.representadaId && !c.representadaIds.includes(filtros.representadaId)) return false;
+    if (filtros.marcador && (filtros.marcador === '__sem' ? c.tags.length > 0 : !c.tags.includes(filtros.marcador))) return false;
+    if (filtros.cidade && cidadeDe(c) !== filtros.cidade) return false;
+    if (filtros.bloqueio === 'bloqueados' && !c.bloqueado) return false;
+    if (filtros.bloqueio === 'liberados' && c.bloqueado) return false;
+    return true;
+  }
+  /** Busca por nome fantasia, razão social, CNPJ/CPF, cidade e pelos contatos (nome e telefone). */
+  function casaBusca(l) {
+    if (!termo) return true;
+    const t = normalizar(termo);
+    const c = l.cliente;
+    if ([c.nomeFantasia, c.razaoSocial, c.endereco?.cidade, ...l.contatos.map((x) => x.nome)].some((x) => normalizar(x).includes(t))) return true;
+    const digitos = soDigitos(termo);
+    return digitos.length >= 3 && (soDigitos(c.documento).includes(digitos) || l.contatos.some((x) => soDigitos(x.telefone).includes(digitos)));
+  }
+  const filtrosAtivos = () => Object.values(filtros).filter(Boolean).length;
+
+  // Opções dos filtros: montadas dos dados, com a contagem de cada uma, sem perder o escolhido.
+  function preencherSelect(select, opcoes, valor) {
+    select.replaceChildren(...opcoes.map(([v, rotulo]) => new Option(rotulo, v)));
+    select.value = opcoes.some(([v]) => v === valor) ? valor : '';
+  }
+  function renderOpcoesDosFiltros(todas) {
+    const contar = (fn) => { const m = new Map(); todas.forEach((l) => [].concat(fn(l)).filter((x) => x != null).forEach((k) => m.set(k, (m.get(k) || 0) + 1))); return m; };
+    const com = (mapa, chave, rotulo) => [chave, `${rotulo} (${mapa.get(chave) || 0})`];
+    const sel = (nome) => $(`#clientes-filtros [data-filtro="${nome}"]`);
+
+    const porSituacao = contar((l) => l.situacao.situacao);
+    preencherSelect(sel('situacao'), [['', 'Todas'], ...Object.keys(SITUACOES).map((s) => com(porSituacao, s, V.NOMES_DA_SITUACAO[s]))], filtros.situacao);
+
+    const porVendedor = contar((l) => l.cliente.vendedorId);
+    preencherSelect(sel('vendedorId'), [['', 'Todos'], ...V.vendedores().filter((v) => v.vendedor || porVendedor.has(v.id)).map((v) => com(porVendedor, v.id, v.nome))], filtros.vendedorId);
+    mostrar(sel('vendedorId').closest('label'), !escopoCarteira());
+
+    const porSegmento = contar((l) => l.cliente.segmento || '__sem');
+    preencherSelect(sel('segmento'), [['', 'Todos'], ...[...porSegmento.keys()].filter((k) => k !== '__sem').sort(porNome).map((k) => com(porSegmento, k, k)),
+      ...(porSegmento.has('__sem') ? [com(porSegmento, '__sem', 'Sem segmento')] : [])], filtros.segmento);
+
+    const porRede = contar((l) => l.cliente.rede || '__sem');
+    preencherSelect(sel('rede'), [['', 'Todas'], ...[...porRede.keys()].filter((k) => k !== '__sem').sort(porNome).map((k) => com(porRede, k, k)),
+      com(porRede, '__sem', 'Sem rede')], filtros.rede);
+
+    const porRepresentada = contar((l) => l.cliente.representadaIds);
+    preencherSelect(sel('representadaId'), [['', 'Todas'], ...V.representadas().sort((a, b) => porNome(a.nomeFantasia, b.nomeFantasia)).map((r) => com(porRepresentada, r.id, r.nomeFantasia || r.razaoSocial))], filtros.representadaId);
+
+    const porMarcador = contar((l) => (l.cliente.tags.length ? l.cliente.tags : ['__sem']));
+    preencherSelect(sel('marcador'), [['', 'Todos'], ...[...marcadores().values()].sort((a, b) => porNome(a.nome, b.nome)).map((m) => com(porMarcador, m.id, m.nome)),
+      com(porMarcador, '__sem', 'Sem marcador')], filtros.marcador);
+
+    const porCidade = contar((l) => cidadeDe(l.cliente) || null);
+    preencherSelect(sel('cidade'), [['', 'Todas'], ...[...porCidade.keys()].sort(porNome).map((k) => com(porCidade, k, k))], filtros.cidade);
+
+    const bloqueados = todas.filter((l) => l.cliente.bloqueado).length;
+    preencherSelect(sel('bloqueio'), [['', 'Todos'], ['liberados', `Sem bloqueio (${todas.length - bloqueados})`], ['bloqueados', `Bloqueados (${bloqueados})`]], filtros.bloqueio);
+
+    // Um valor que sumiu dos dados (ex.: cidade do único cliente excluído) deixa de filtrar.
+    for (const s of $$('#clientes-filtros [data-filtro]')) filtros[s.dataset.filtro] = s.value;
+    $('#clientes-filtros-indicador').classList.toggle('hidden', filtrosAtivos() === 0);
+  }
+
+  function linhaDaTabela(l) {
+    const c = l.cliente;
+    const tr = clonar('tpl-linha');
+    tr.dataset.clienteId = c.id;
+    tr.classList.toggle('is-bloqueado', Boolean(c.bloqueado));
+    $('[data-cliente-select]', tr).dataset.clienteSelect = c.id;
+    pintarAvatar($('.contacts-mvp-avatar', tr), c.id, l.nome);
+    realcar(campo(tr, 'nome'), l.nome);
+    if (c.bloqueado) campo(tr, 'bloqueado').append(clonar('tpl-pilula-bloqueado'));
+    realcar(campo(tr, 'sub'), subDoCliente(c));
+    campo(tr, 'situacao').append(pilulaSituacao(l.situacao.situacao));
+    campo(tr, 'situacao-celular').append(pilulaSituacao(l.situacao.situacao));
+    campo(tr, 'dias').textContent = textoDaUltimaCompra(l.situacao);
+    campo(tr, 'ultimo-data').textContent = l.ultima ? V.fmt.dia(l.ultima.emitidoEm) : '—';
+    campo(tr, 'ultimo-valor').textContent = l.ultima ? V.fmt.brl(l.ultima.valorTotal) : 'Nenhuma compra';
+    campo(tr, 'ultimo-celular').textContent = l.ultima ? `Último pedido: ${V.fmt.dia(l.ultima.emitidoEm)} · ${V.fmt.brl(l.ultima.valorTotal)}` : 'Nenhuma compra';
+    const vendedor = V.vendedor(c.vendedorId);
+    campo(tr, 'vendedor').textContent = vendedor ? `${vendedor.nome}${vendedor.id === V.verComo().id ? ' (você)' : ''}` : '—';
+    campo(tr, 'cidade').textContent = cidadeDe(c) || '—';
+    marcadoresDaTabela(campo(tr, 'marcadores'), c.tags);
+
+    const caixa = campo(tr, 'contatos');
+    if (!l.contatos.length) caixa.append(clonar('tpl-sem-contato'));
+    l.contatos.slice(0, 3).forEach((ct) => {
+      const a = clonar('tpl-mini-avatar');
+      pintarAvatar(a, ct.id, ct.nome);
+      a.title = ct.nome;
+      caixa.append(a);
+    });
+    if (l.contatos.length) {
+      const n = clonar('tpl-mini-contagem');
+      n.textContent = plural(l.contatos.length, 'contato', 'contatos');
+      caixa.append(n);
+    }
+
+    // Menu da linha: só o que a função de quem está vendo permite.
+    const menu = $('.contacts-mvp-row-menu', tr);
+    for (const item of $$('[data-acao]', menu)) item.dataset.id = c.id;
+    if (!V.pode('clientes', 'editar')) $('[data-acao="editar"]', menu).remove();
+    const pedido = $('[data-acao="novo-pedido"]', menu);
+    if (!V.pode('pedidos', 'editar') || c.bloqueado) pedido.remove();
+    else pedido.href = `pedidos.html?novo=1&cliente=${encodeURIComponent(c.id)}`;
+    const bloquear = $('[data-acao="bloquear"]', menu);
+    if (!V.pode('clientes', 'bloquear')) bloquear.remove();
+    else if (c.bloqueado) {
+      bloquear.classList.remove('danger');
+      bloquear.title = 'Desbloquear cliente';
+      $('i', bloquear).className = 'ri-lock-unlock-line';
+      $('span', bloquear).textContent = 'Desbloquear cliente';
+    }
+    if (!V.pode('clientes', 'excluir')) $('[data-acao="excluir"]', menu).remove();
+    return tr;
+  }
+
+  function linhaVazia(semPermissao) {
+    const tr = clonar('tpl-linha-vazia');
+    const painel = $('.contacts-mvp-empty-panel', tr);
+    $('i', painel).className = semPermissao ? 'ri-lock-line' : 'ri-store-2-line';
+    $('span', painel).textContent = semPermissao
+      ? 'Sua função não tem acesso aos clientes. Peça ao dono da conta para liberar em Usuários & Acesso.'
+      : (termo || filtrosAtivos() ? 'Nenhum cliente encontrado com essa busca e esses filtros.' : 'Nenhum cliente cadastrado ainda.');
+    mostrar($('[data-acao="limpar-filtros"]', painel), !semPermissao && Boolean(termo || filtrosAtivos()));
+    return tr;
+  }
+
+  function render() {
+    const podeVer = V.pode('clientes', 'ver');
+    const todas = podeVer ? linhas() : [];
+    renderOpcoesDosFiltros(todas);
+    const lista = todas.filter((l) => casaFiltros(l) && casaBusca(l));
+    ultimaLista = lista;
+    const total = lista.length;
+    const totalPaginas = Math.max(1, Math.ceil(total / POR_PAGINA));
+    pagina = Math.min(Math.max(1, pagina), totalPaginas);
+    const naPagina = lista.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA);
+    tbody.replaceChildren(...(naPagina.length ? naPagina.map(linhaDaTabela) : [linhaVazia(!podeVer)]));
+
+    $('#clientes-de').textContent = total ? (pagina - 1) * POR_PAGINA + 1 : 0;
+    $('#clientes-ate').textContent = Math.min(pagina * POR_PAGINA, total);
+    $('#clientes-total').textContent = total;
+    $('#clientes-pag-anterior').disabled = pagina <= 1;
+    $('#clientes-pag-proxima').disabled = pagina >= totalPaginas;
+    $('#clientes-pag-numeros').replaceChildren(...Array.from({ length: total ? totalPaginas : 0 }, (_, i) => {
+      const b = clonar('tpl-pagina');
+      b.textContent = i + 1;
+      b.dataset.pagina = i + 1;
+      b.classList.toggle('is-active', i + 1 === pagina);
+      return b;
+    }));
+    renderSelecao();
+  }
+
+  /** Vai para a página em que o cliente aparece (depois de cadastrar ou editar). */
+  function posicionar(id) {
+    const lista = linhas().filter((l) => casaFiltros(l) && casaBusca(l));
+    const pos = lista.findIndex((l) => l.cliente.id === id);
+    if (pos >= 0) pagina = Math.floor(pos / POR_PAGINA) + 1;
+  }
+
+  // --- seleção em lote (mesma lógica da lista de contatos) -------------------------------
+  const idsNaTela = () => $$('[data-cliente-select]', tbody).map((i) => i.dataset.clienteSelect);
+  const estaMarcado = (id) => todosDoFiltro || selecionados.has(id);
+  const quantosMarcados = () => (todosDoFiltro ? ultimaLista.length : selecionados.size);
+  const idsMarcados = () => (todosDoFiltro ? ultimaLista.map((l) => l.cliente.id) : [...selecionados]);
+
+  function renderSelecao() {
+    const naTela = idsNaTela();
+    for (const input of $$('[data-cliente-select]', tbody)) input.checked = estaMarcado(input.dataset.clienteSelect);
+    const cabecalho = $('#clientes-selecionar-pagina');
+    const marcadosNaTela = naTela.filter(estaMarcado).length;
+    cabecalho.checked = naTela.length > 0 && marcadosNaTela === naTela.length;
+    cabecalho.indeterminate = marcadosNaTela > 0 && marcadosNaTela < naTela.length;
+
+    const total = quantosMarcados();
+    const barra = $('#clientes-lote');
+    barra.classList.toggle('hidden', total === 0);
+    barra.classList.toggle('flex', total > 0);
+    $('#clientes-lote-contagem').textContent = todosDoFiltro
+      ? `Todos os ${ultimaLista.length} clientes do filtro estão selecionados`
+      : `${total} ${total === 1 ? 'cliente selecionado' : 'clientes selecionados'}`;
+    const todos = $('#clientes-lote-todos');
+    const paginaInteira = naTela.length > 0 && naTela.every((id) => selecionados.has(id));
+    todos.classList.toggle('hidden', !(paginaInteira && !todosDoFiltro && ultimaLista.length > naTela.length));
+    todos.textContent = `Selecionar todos os ${ultimaLista.length} clientes`;
+    mostrar($('#clientes-lote-excluir'), V.pode('clientes', 'excluir'));
+  }
+  function limparSelecao() {
+    selecionados = new Set();
+    todosDoFiltro = false;
+    renderSelecao();
+  }
+
+  // --- menu de ações da linha (o app move o menu para o <body> para escapar do overflow) --
+  let menuAberto = null;
+  function fecharMenu() {
+    if (!menuAberto) return;
+    const { menu, celula } = menuAberto;
+    menu.classList.add('hidden');
+    menu.removeAttribute('style');
+    if (celula.isConnected) celula.append(menu); else menu.remove();
+    menuAberto = null;
+  }
+  function abrirMenu(celula) {
+    const menu = $('.contacts-mvp-row-menu', celula);
+    document.body.append(menu);
+    menu.classList.remove('hidden');
+    Object.assign(menu.style, { position: 'fixed', visibility: 'hidden', left: '0px', top: '0px', right: 'auto' });
+    const r = celula.getBoundingClientRect();
+    const area = celula.closest('.contacts-table-scroll-area').getBoundingClientRect();
+    const { width: w = 190, height: h = 160 } = menu.getBoundingClientRect();
+    const abaixo = Math.min(area.bottom, window.innerHeight) - r.bottom;
+    const acima = r.top - area.top;
+    let top = abaixo < h + 8 && acima > abaixo ? r.top - h - 8 : r.bottom + 8;
+    let left = r.right - w;
+    left = Math.max(8, Math.min(left, window.innerWidth - w - 8));
+    top = Math.max(8, Math.min(top, window.innerHeight - h - 8));
+    Object.assign(menu.style, { left: `${Math.round(left)}px`, top: `${Math.round(top)}px`, zIndex: '10050', visibility: 'visible' });
+    menuAberto = { menu, celula };
+  }
+
+  // --- confirmação (o modal de confirmação do app, com os mesmos três tipos) --------------
+  const confirmacao = $('.confirm-title').closest('.fixed');
+  let respostaConfirmacao = null;
+  const APARENCIA = {
+    danger: [['ri-error-warning-line', 'text-red-400'], ['bg-red-600', 'text-white', 'hover:bg-red-700']],
+    warning: [['ri-alert-line', 'text-yellow-400'], ['bg-yellow-600', 'text-white', 'hover:bg-yellow-700']],
+    info: [['ri-information-line', 'text-blue-400'], ['bg-blue-600', 'text-white', 'hover:bg-blue-700']],
+  };
+  function confirmar({ titulo, mensagem, botao = 'Confirmar', tipo = 'warning', soAviso = false }) {
+    fecharConfirmacao(false, true);
+    const caixa = confirmacao.firstElementChild;
+    $('.confirm-title', caixa).textContent = titulo;
+    $('.confirm-message', caixa).textContent = mensagem;
+    const icone = $('.confirm-icon', caixa);
+    const ok = $('.confirm-ok', caixa);
+    icone.className = 'confirm-icon text-2xl';
+    ok.className = 'confirm-ok px-4 py-2 rounded-md transition-colors';
+    icone.classList.add(...APARENCIA[tipo][0]);
+    ok.classList.add(...APARENCIA[tipo][1]);
+    ok.textContent = botao;
+    mostrar($('.confirm-cancel', caixa), !soAviso);
+    confirmacao.classList.remove('hidden');
+    confirmacao.classList.add('flex');
+    setTimeout(() => { caixa.classList.remove('scale-95'); caixa.classList.add('scale-100'); }, 10);
+    return new Promise((resolver) => { respostaConfirmacao = resolver; });
+  }
+  function fecharConfirmacao(resultado, imediato = false) {
+    const resolver = respostaConfirmacao;
+    respostaConfirmacao = null;
+    const caixa = confirmacao.firstElementChild;
+    caixa.classList.remove('scale-100');
+    caixa.classList.add('scale-95');
+    const esconder = () => { confirmacao.classList.remove('flex'); confirmacao.classList.add('hidden'); resolver?.(resultado); };
+    if (imediato) esconder(); else setTimeout(esconder, 200);
+  }
+  const confirmacaoAberta = () => confirmacao.classList.contains('flex');
+
+  // ---------------------------------------------------------------------------------
+  // Ações sobre o cliente: bloquear, excluir, exportar
+  // ---------------------------------------------------------------------------------
+  async function alternarBloqueio(id) {
+    const c = V.cliente(id);
+    if (!c || !V.pode('clientes', 'bloquear')) return;
+    const contatos = V.contatosDoCliente(id);
+    const n = contatos.length;
+    const nomes = contatos.slice(0, 3).map((x) => x.nome).join(', ') + (n > 3 ? ` e mais ${n - 3}` : '');
+    const nome = nomeDoCliente(c);
+    if (!c.bloqueado) {
+      const mensagem = n
+        ? `Bloquear ${nome}? ${n === 1 ? `O contato vinculado (${nomes}) também será bloqueado` : `Os ${n} contatos vinculados (${nomes}) também serão bloqueados`}: contato bloqueado não aparece no chat nem nos seletores de envio. Enquanto estiver bloqueado, o cliente não recebe pedido novo.`
+        : `Bloquear ${nome}? Ele ainda não tem contatos vinculados; os que forem vinculados depois já entram bloqueados. Enquanto estiver bloqueado, o cliente não recebe pedido novo.`;
+      const ok = await confirmar({ titulo: 'Bloquear cliente', mensagem, botao: n ? `Bloquear cliente e ${plural(n, 'contato', 'contatos')}` : 'Bloquear cliente', tipo: 'danger' });
+      if (!ok) return;
+      V.bloquearCliente(id, true);
+      avisar(n ? `Cliente bloqueado, com ${plural(n, 'contato vinculado', 'contatos vinculados')}.` : 'Cliente bloqueado.');
+    } else {
+      const mensagem = `Desbloquear ${nome}? ${n ? `${n === 1 ? 'O contato vinculado também será desbloqueado e volta' : `Os ${n} contatos vinculados também serão desbloqueados e voltam`} a aparecer no chat e nos seletores de envio.` : ''}`.trim();
+      const ok = await confirmar({ titulo: 'Desbloquear cliente', mensagem, botao: 'Desbloquear', tipo: 'warning' });
+      if (!ok) return;
+      V.bloquearCliente(id, false);
+      avisar(n ? `Cliente desbloqueado, com ${plural(n, 'contato vinculado', 'contatos vinculados')}.` : 'Cliente desbloqueado.');
+    }
+  }
+
+  // Pedidos de todos os vendedores: a regra de exclusão vale para o cadastro, não para a carteira.
+  const pedidosDoCliente = (id) => V.pedidos({ respeitarPermissao: false }).filter((p) => p.clienteId === id);
+
+  async function excluirCliente(id) {
+    const c = V.cliente(id);
+    if (!c || !V.pode('clientes', 'excluir')) return;
+    const nome = nomeDoCliente(c);
+    const pedidos = pedidosDoCliente(id).length;
+    if (pedidos) {
+      await confirmar({
+        titulo: 'Cliente com pedidos',
+        mensagem: `${nome} tem ${plural(pedidos, 'pedido registrado', 'pedidos registrados')}, que precisam continuar ligados ao cadastro. Para parar de atender esse cliente, bloqueie o cliente.`,
+        botao: 'Entendi', tipo: 'info', soAviso: true,
+      });
+      return;
+    }
+    const ok = await confirmar({
+      titulo: 'Excluir cliente',
+      mensagem: `Excluir ${nome}? Os contatos vinculados continuam em Contatos e nas Conversas. Esta ação não pode ser desfeita.`,
+      botao: 'Excluir', tipo: 'danger',
+    });
+    if (!ok) return;
+    selecionados.delete(id);
+    if (detalhe.id === id) fecharDetalhe();
+    V.excluir('clientes', id);
+    avisar('Cliente excluído com sucesso!');
+  }
+
+  async function excluirSelecionados() {
+    const ids = idsMarcados();
+    if (!ids.length || !V.pode('clientes', 'excluir')) return;
+    const comPedidos = new Set(V.pedidos({ respeitarPermissao: false }).map((p) => p.clienteId));
+    const apagar = ids.filter((id) => !comPedidos.has(id));
+    const mantidos = ids.length - apagar.length;
+    if (!apagar.length) {
+      await confirmar({
+        titulo: 'Clientes com pedidos',
+        mensagem: `${ids.length === 1 ? 'O cliente selecionado tem pedidos registrados e não pode' : `Os ${ids.length} clientes selecionados têm pedidos registrados e não podem`} ser excluídos. Para parar de atender, bloqueie.`,
+        botao: 'Entendi', tipo: 'info', soAviso: true,
+      });
+      return;
+    }
+    const ok = await confirmar({
+      titulo: 'Excluir clientes',
+      mensagem: `Excluir ${plural(apagar.length, 'cliente', 'clientes')}?${mantidos ? ` ${plural(mantidos, 'cliente com pedidos fica', 'clientes com pedidos ficam')} no cadastro.` : ''} Os contatos vinculados continuam em Contatos. Esta ação não pode ser desfeita.`,
+      botao: `Excluir ${plural(apagar.length, 'cliente', 'clientes')}`, tipo: 'danger',
+    });
+    if (!ok) return;
+    apagar.forEach((id) => V.excluir('clientes', id));
+    limparSelecao();
+    // Mesma forma da frase da exclusão em massa de contatos.
+    avisar(`${plural(apagar.length, 'cliente excluído', 'clientes excluídos')}${mantidos ? `, ${mantidos} ${mantidos === 1 ? 'mantido' : 'mantidos'} por ter pedidos` : ''}.`);
+  }
+
+  function exportar() {
+    const n = quantosMarcados() || ultimaLista.length;
+    avisar(`${plural(n, 'cliente exportado', 'clientes exportados')}. No sistema, a planilha .xlsx é baixada.`);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Detalhe do cliente
+  // ---------------------------------------------------------------------------------
+  const raizDetalhe = $('#cliente-detalhe-root');
+  const detalhe = { id: null, periodo: '12m', limitePedidos: 6 };
+  const PERIODO_PADRAO = '12m';
+
+  function intervalo(periodo) {
+    const ate = new Date();
+    ate.setHours(23, 59, 59, 999);
+    const de = new Date();
+    de.setHours(0, 0, 0, 0);
+    if (periodo === 'mes') de.setDate(1);
+    else if (periodo === '90d') de.setDate(de.getDate() - 89);
+    else if (periodo === '12m') { de.setFullYear(de.getFullYear() - 1); de.setDate(de.getDate() + 1); }
+    else return { de: new Date(2000, 0, 1), ate };
+    return { de, ate };
+  }
+
+  function atualizarUrl() {
+    const url = new URL(location.href);
+    if (detalhe.id) url.searchParams.set('cliente', detalhe.id); else url.searchParams.delete('cliente');
+    url.searchParams.delete('novo');
+    history.replaceState(null, '', url);
+  }
+
+  function abrirDetalhe(id) {
+    const c = V.cliente(id);
+    if (!c || !V.pode('clientes', 'ver')) { avisar('Cliente não encontrado.'); return; }
+    if (!V.enxerga(c)) { avisar('Esse cliente não está na sua carteira.'); return; }
+    Object.assign(detalhe, { id, periodo: PERIODO_PADRAO, limitePedidos: 6 });
+    renderDetalhe(true);
+    atualizarUrl();
+  }
+  function fecharDetalhe() {
+    detalhe.id = null;
+    raizDetalhe.replaceChildren();
+    atualizarUrl();
+  }
+
+  function info(rotulo, valor, largo = false) {
+    const el = clonar('tpl-info');
+    if (largo) el.classList.add('col-span-full');
+    el.firstElementChild.textContent = rotulo;
+    if (valor instanceof Node) el.lastElementChild.replaceChildren(valor); else el.lastElementChild.textContent = valor || '—';
+    return el;
+  }
+  function kpi(rotulo, valor, sub) {
+    const el = clonar('tpl-kpi');
+    const [a, b, c] = el.children;
+    a.textContent = rotulo; b.textContent = valor; c.textContent = sub;
+    return el;
+  }
+  function desativarLink(a, motivo) {
+    a.removeAttribute('href');
+    a.setAttribute('aria-disabled', 'true');
+    a.title = motivo;
+    a.classList.add('opacity-50', 'cursor-not-allowed');
+    a.classList.remove('hover:-translate-y-0.5');
+  }
+
+  function renderDetalhe(inicio = false) {
+    if (!detalhe.id) return;
+    const c = V.cliente(detalhe.id);
+    if (!c || !V.pode('clientes', 'ver') || !V.enxerga(c)) {
+      fecharDetalhe();
+      if (c) avisar('Esse cliente não está na carteira de quem está vendo agora.');
+      return;
+    }
+    const anterior = $('.contacts-groups-modal', raizDetalhe);
+    const rolagem = inicio || !anterior ? 0 : anterior.scrollTop;
+    const el = clonar('tpl-detalhe');
+    const nome = nomeDoCliente(c);
+    const s = V.situacaoDoCliente(c.id);
+    const contatos = V.contatosDoCliente(c.id);
+    const pedidos = V.pedidos().filter((p) => p.clienteId === c.id); // no escopo de quem vê, do mais novo
+    const pode = { editar: V.pode('clientes', 'editar'), bloquear: V.pode('clientes', 'bloquear'), excluir: V.pode('clientes', 'excluir'), pedido: V.pode('pedidos', 'editar') };
+
+    // Cabeçalho
+    pintarAvatar(campo(el, 'avatar'), c.id, nome);
+    campo(el, 'nome').textContent = nome;
+    campo(el, 'sub').textContent = subDoCliente(c);
+    campo(el, 'situacao').append(pilulaSituacao(s.situacao));
+    if (c.bloqueado) {
+      const aviso = clonar('tpl-aviso-bloqueio');
+      campo(aviso, 'titulo').textContent = c.bloqueadoEm ? `Cliente bloqueado em ${V.fmt.dataHora(c.bloqueadoEm)}` : 'Cliente bloqueado';
+      campo(aviso, 'texto').textContent = contatos.length
+        ? `${contatos.length === 1 ? 'O contato vinculado também está bloqueado: não aparece' : `Os ${contatos.length} contatos vinculados também estão bloqueados: não aparecem`} no chat nem nos seletores de envio. Pedido novo fica suspenso até o desbloqueio.`
+        : 'Contatos vinculados a ele entram bloqueados. Pedido novo fica suspenso até o desbloqueio.';
+      campo(el, 'aviso-bloqueio').append(aviso);
+    }
+
+    // Compras no período
+    const periodo = campo(el, 'periodo');
+    periodo.value = detalhe.periodo;
+    const { de, ate } = intervalo(detalhe.periodo);
+    const vendas = pedidos.filter((p) => V.ehVenda(p) && new Date(p.emitidoEm) >= de && new Date(p.emitidoEm) <= ate);
+    const comprado = vendas.reduce((a, p) => a + p.valorTotal, 0);
+    const abc = V.curvaABC({ de, ate });
+    const posicao = abc.lista.findIndex((x) => x.cliente?.id === c.id);
+    campo(el, 'kpis').append(
+      kpi('Comprado', V.fmt.brl(comprado), plural(vendas.length, 'pedido no período', 'pedidos no período')),
+      kpi('Ticket médio', vendas.length ? V.fmt.brl(Math.round(comprado / vendas.length)) : '—', 'por pedido'),
+      kpi('Curva ABC', posicao >= 0 ? abc.lista[posicao].curva : '—', posicao >= 0 ? `${posicao + 1}º de ${abc.lista.length} clientes que compraram` : 'sem compras no período'),
+      kpi('Última compra', s.ultimaCompra ? V.fmt.data(s.ultimaCompra) : '—', textoDaUltimaCompra(s)),
+    );
+
+    // Ações
+    const acoes = campo(el, 'acoes');
+    const novoPedido = $('[data-acao="novo-pedido"]', acoes);
+    if (!pode.pedido) novoPedido.remove();
+    else if (c.bloqueado) desativarLink(novoPedido, 'Cliente bloqueado: desbloqueie para lançar pedido');
+    else novoPedido.href = `pedidos.html?novo=1&cliente=${encodeURIComponent(c.id)}`;
+    const comConversa = contatos.find((ct) => ct.conversaId && !ct.bloqueado);
+    const conversar = $('[data-acao="conversar"]', acoes);
+    if (c.bloqueado) desativarLink(conversar, 'Cliente bloqueado: os contatos dele estão bloqueados');
+    else if (comConversa) {
+      conversar.href = `chats.html?chat=${encodeURIComponent(comConversa.conversaId)}`;
+      conversar.title = `Abrir a conversa com ${comConversa.nome}`;
+    } else desativarLink(conversar, contatos.length ? 'Nenhum contato vinculado tem conversa aberta' : 'Nenhum contato vinculado');
+    const bloquear = $('[data-acao="bloquear"]', acoes);
+    if (!pode.bloquear) bloquear.remove();
+    else if (c.bloqueado) {
+      bloquear.style.background = 'rgba(72,187,120,0.1)';
+      bloquear.style.color = 'var(--ds-success)';
+      $('i', bloquear).className = 'ri-lock-unlock-line';
+      $('span', bloquear).textContent = 'Desbloquear cliente';
+    }
+    if (acoes.children.length < 3) { acoes.classList.remove('md:grid-cols-3'); acoes.classList.add('md:grid-cols-2'); }
+
+    // Contatos vinculados
+    campo(el, 'titulo-contatos').textContent = `Contatos vinculados (${contatos.length})`;
+    if (!pode.editar) $('[data-acao="editar-contatos"]', el).remove();
+    const todosOsClientes = V.clientes();
+    const listaContatos = campo(el, 'contatos');
+    if (!contatos.length) {
+      const vazio = clonar('tpl-detalhe-vazio');
+      vazio.textContent = 'Nenhum contato vinculado. Telefone e e-mail do cliente entram pelos contatos.';
+      listaContatos.append(vazio);
+    }
+    contatos.forEach((ct, i) => {
+      const item = clonar('tpl-detalhe-contato');
+      pintarAvatar(campo(item, 'avatar'), ct.id, ct.nome);
+      campo(item, 'nome').textContent = ct.nome;
+      if (i === 0) campo(item, 'pilulas').append(clonar('tpl-pilula-principal'));
+      if (ct.bloqueado) campo(item, 'pilulas').append(clonar('tpl-pilula-bloqueado'));
+      const outros = todosOsClientes.filter((x) => x.id !== c.id && x.contatoIds.includes(ct.id)).map(nomeDoCliente);
+      campo(item, 'canais').textContent = [V.fmt.telefone(ct.telefone), ct.email, outros.length ? `também em ${outros.join(', ')}` : null].filter(Boolean).join(' · ') || 'Sem telefone nem e-mail';
+      const link = campo(item, 'conversa');
+      if (ct.conversaId && !ct.bloqueado) {
+        link.href = `chats.html?chat=${encodeURIComponent(ct.conversaId)}`;
+        link.title = `Abrir a conversa com ${ct.nome}`;
+      } else link.replaceWith(clonar('tpl-sem-conversa'));
+      listaContatos.append(item);
+    });
+
+    // Pedidos (todos os status, do mais novo)
+    const vendasTotais = pedidos.filter(V.ehVenda);
+    campo(el, 'titulo-pedidos').textContent = `Pedidos (${pedidos.length})`;
+    campo(el, 'resumo-pedidos').textContent = vendasTotais.length ? `${V.fmt.brl(vendasTotais.reduce((a, p) => a + p.valorTotal, 0))} em vendas` : '';
+    const verPedidos = campo(el, 'ver-pedidos');
+    if (pedidos.length) verPedidos.href = `pedidos.html?cliente=${encodeURIComponent(c.id)}`; else verPedidos.remove();
+    const listaPedidos = campo(el, 'pedidos');
+    if (!pedidos.length) {
+      const vazio = clonar('tpl-detalhe-vazio');
+      vazio.textContent = 'Nenhum pedido ainda. O primeiro pedido tira o cliente de prospect.';
+      listaPedidos.append(vazio);
+    }
+    pedidos.slice(0, detalhe.limitePedidos).forEach((p) => {
+      const item = clonar('tpl-detalhe-pedido');
+      item.href = `pedidos.html?pedido=${encodeURIComponent(p.id)}`;
+      const rep = V.representada(p.representadaId);
+      if (rep) campo(item, 'logo').src = V.logoDaRepresentada(rep);
+      campo(item, 'titulo').textContent = `#${p.numero} · ${rep ? rep.nomeFantasia : 'Representada excluída'}`;
+      campo(item, 'sub').textContent = [V.fmt.data(p.emitidoEm), p.origem === 'conversa' ? 'pela conversa' : null,
+        p.itens?.length ? plural(p.itens.length, 'item', 'itens') : null, V.vendedor(p.vendedorId)?.nome].filter(Boolean).join(' · ');
+      campo(item, 'valor').textContent = V.fmt.brl(p.valorTotal);
+      campo(item, 'status').append(pilulaStatus(p.status));
+      listaPedidos.append(item);
+    });
+    const mais = $('[data-acao="mais-pedidos"]', el);
+    const restantes = pedidos.length - detalhe.limitePedidos;
+    if (restantes > 0) mais.textContent = `Mostrar mais ${Math.min(restantes, 10)} de ${restantes} restantes`; else mais.remove();
+
+    // Dados do cadastro
+    const dados = campo(el, 'dados');
+    const e = c.endereco || {};
+    const vendedor = V.vendedor(c.vendedorId);
+    const representadas = c.representadaIds.map((id) => V.representada(id)).filter(Boolean);
+    const chips = document.createElement('div');
+    chips.className = 'flex flex-wrap gap-1.5';
+    representadas.forEach((r) => {
+      const chip = clonar('tpl-chip-representada');
+      $('img', chip).src = V.logoDaRepresentada(r);
+      $('span', chip).textContent = r.nomeFantasia || r.razaoSocial;
+      chips.append(chip);
+    });
+    const tags = document.createElement('div');
+    tags.className = 'contacts-mvp-tags';
+    marcadoresDaTabela(tags, c.tags);
+    dados.append(
+      info('Tipo', c.tipo === 'PF' ? 'Pessoa física' : 'Pessoa jurídica'),
+      info(c.tipo === 'PF' ? 'CPF' : 'CNPJ', c.documento),
+      info(c.tipo === 'PF' ? 'Inscrição estadual (produtor rural)' : 'Inscrição estadual', c.inscricaoEstadual),
+      info('Segmento', c.segmento),
+      info('Rede', c.rede || 'Sem rede'),
+      info('Vendedor', vendedor?.nome),
+      ...(c.suframa ? [info('SUFRAMA', c.suframa)] : []),
+      info('Cliente desde', c.criadoEm ? V.fmt.data(c.criadoEm) : '—'),
+      info('Representadas', representadas.length ? chips : 'Nenhuma', true),
+      info('Endereço', [[e.logradouro, e.numero].filter(Boolean).join(', '), e.complemento, e.bairro, [e.cidade, e.uf].filter(Boolean).join('/'), e.cep ? `CEP ${e.cep}` : null].filter(Boolean).join(' · '), true),
+      info('Marcadores', tags, true),
+      ...(c.informacoes ? [info('Informações adicionais', c.informacoes, true)] : []),
+    );
+
+    // Rodapé
+    if (!pode.excluir) $('[data-acao="excluir"]', el).remove();
+    if (!pode.editar) $$('[data-acao="editar"]', el).forEach((b) => b.remove());
+
+    raizDetalhe.replaceChildren(el);
+    $('.contacts-groups-modal', raizDetalhe).scrollTop = rolagem;
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Cadastro (novo e editar)
+  // ---------------------------------------------------------------------------------
+  const modal = $('#add-contact-modal');
+  const form = $('#cliente-form');
+  const NOVO = '__novo';
+  let edicao = null;  // { id, contatos: [...], tags: [], listasNovas: { segmento: [], rede: [] } }
+  // O modal do app tem z-index 50 (!important em zap-colors.css), abaixo do painel de detalhe:
+  // editar a partir do detalhe fecha o detalhe e volta para ele quando o cadastro fecha.
+  let detalheParaVoltar = null;
+  let contatoEmEdicao = null; // índice do contato aberto no painel de contato, ou null para um novo
+  let seq = 0;
+
+  const valor = (id) => $(`#${id}`).value.trim();
+  const definir = (id, v) => { $(`#${id}`).value = v ?? ''; };
+
+  function mascaraDocumento(v, tipo) {
+    const d = soDigitos(v).slice(0, tipo === 'PF' ? 11 : 14);
+    if (tipo === 'PF') return [d.slice(0, 3), d.slice(3, 6), d.slice(6, 9)].filter(Boolean).join('.') + (d.length > 9 ? `-${d.slice(9)}` : '');
+    let s = d.slice(0, 2);
+    if (d.length > 2) s += `.${d.slice(2, 5)}`;
+    if (d.length > 5) s += `.${d.slice(5, 8)}`;
+    if (d.length > 8) s += `/${d.slice(8, 12)}`;
+    if (d.length > 12) s += `-${d.slice(12)}`;
+    return s;
+  }
+  const mascaraCep = (v) => { const d = soDigitos(v).slice(0, 8); return d.length > 5 ? `${d.slice(0, 5)}-${d.slice(5)}` : d; };
+  const tipoEscolhido = () => $('input[name="cliente-tipo"]:checked').value;
+
+  /** Outro cliente da conta com o mesmo documento (de qualquer carteira: o documento é único na conta). */
+  function clienteComDocumento(digitos, ignorarId) {
+    if (!digitos) return null;
+    return V.clientes({ respeitarPermissao: false }).find((c) => c.id !== ignorarId && soDigitos(c.documento) === digitos) || null;
+  }
+
+  function aplicarTipo(tipo) {
+    const pj = tipo === 'PJ';
+    for (const cartao of $$('.cli-tipo', modal)) {
+      const marcado = $('input', cartao).checked;
+      cartao.classList.toggle('border-blue-500', marcado);
+      cartao.classList.toggle('bg-blue-50', marcado);
+      cartao.classList.toggle('dark:bg-blue-900/20', marcado);
+      cartao.classList.toggle('border-theme-light', !marcado);
+    }
+    $('#cliente-secao-dados').textContent = pj ? 'Dados da empresa' : 'Dados do cliente';
+    $('#cliente-documento-rotulo').textContent = pj ? 'CNPJ' : 'CPF';
+    $('#cliente-documento').placeholder = pj ? '00.000.000/0000-00' : '000.000.000-00';
+    $('#cliente-documento-ajuda').textContent = pj
+      ? 'Preenche razão social e endereço pela consulta pública do CNPJ.'
+      : 'CPF não tem consulta pública: preencha os dados à mão.';
+    mostrar($('#cliente-completar-btn'), pj);
+    $('#cliente-razao-rotulo').textContent = pj ? 'Razão social' : 'Nome completo';
+    $('#cliente-razao').placeholder = pj ? 'Como está no cartão do CNPJ' : 'Nome completo do cliente';
+    $('#cliente-ie-rotulo').textContent = pj ? 'Inscrição estadual' : 'Inscrição estadual (produtor rural)';
+    mostrar($('#cliente-suframa-grupo'), pj);
+    definir('cliente-documento', mascaraDocumento(valor('cliente-documento'), tipo));
+  }
+
+  // Segmento e rede: lista da conta (a do módulo + as já usadas + as criadas agora) e "nova...".
+  function preencherLista(tipo, atual) {
+    const base = tipo === 'segmento' ? V.SEGMENTOS : V.REDES;
+    const usados = V.clientes({ respeitarPermissao: false }).map((c) => c[tipo]);
+    const valores = [...new Set([...base, ...usados, ...edicao.listasNovas[tipo], atual].filter(Boolean))].sort(porNome);
+    const select = $(`#cliente-${tipo}`);
+    select.replaceChildren(
+      new Option(tipo === 'segmento' ? 'Selecione...' : 'Sem rede', ''),
+      ...valores.map((v) => new Option(v, v)),
+      new Option(tipo === 'segmento' ? '+ Novo segmento...' : '+ Nova rede...', NOVO),
+    );
+    select.value = atual || '';
+    select.dataset.anterior = select.value;
+    $(`#cliente-${tipo}-novo`).classList.add('hidden');
+  }
+  function criarItemDeLista(tipo) {
+    const nome = valor(`cliente-${tipo}-novo-nome`);
+    if (!nome) { avisar(tipo === 'segmento' ? 'Informe o nome do segmento.' : 'Informe o nome da rede.'); return; }
+    edicao.listasNovas[tipo].push(nome);
+    preencherLista(tipo, nome);
+    definir(`cliente-${tipo}-novo-nome`, '');
+    avisar(tipo === 'segmento' ? `Segmento "${nome}" criado!` : `Rede "${nome}" criada!`);
+  }
+
+  // Vendedor: só quem tem a função de vendedor. Quem vê só a própria carteira cadastra para si.
+  function preencherVendedores(atualId) {
+    const eu = V.verComo();
+    const carteira = escopoCarteira();
+    let lista = V.vendedores().filter((v) => v.vendedor);
+    if (carteira) lista = [V.vendedor(eu.id) || eu];
+    else if (atualId && !lista.some((v) => v.id === atualId) && V.vendedor(atualId)) lista.push({ ...V.vendedor(atualId), foraDaLista: true });
+    const select = $('#cliente-vendedor');
+    select.replaceChildren(new Option('Selecione...', ''), ...lista.map((v) => new Option(`${v.nome}${v.foraDaLista ? ' (não é mais vendedor)' : ''}`, v.id)));
+    select.value = carteira ? eu.id : (atualId || (lista.some((v) => v.id === eu.id) ? eu.id : ''));
+    select.disabled = carteira;
+    $('#cliente-vendedor-ajuda').textContent = carteira
+      ? 'Na sua função, o cliente fica na sua carteira.'
+      : 'Só aparecem os usuários marcados como vendedor em Usuários & Acesso.';
+  }
+
+  function preencherRepresentadas(ids) {
+    const caixa = $('#cliente-representadas');
+    caixa.replaceChildren(...V.representadas().filter((r) => r.ativa !== false || ids.includes(r.id))
+      .sort((a, b) => porNome(a.nomeFantasia, b.nomeFantasia))
+      .map((r) => {
+        const el = clonar('tpl-modal-representada');
+        const input = $('input', el);
+        input.dataset.representada = r.id;
+        input.checked = ids.includes(r.id);
+        $('img', el).src = V.logoDaRepresentada(r);
+        $('span', el).textContent = r.nomeFantasia || r.razaoSocial;
+        return el;
+      }));
+  }
+
+  function renderSituacaoDoCadastro() {
+    const caixa = $('#cliente-situacao');
+    const nota = document.createElement('span');
+    nota.className = 'text-[12px]';
+    nota.style.color = 'var(--ds-text-muted)';
+    if (edicao.id) {
+      const s = V.situacaoDoCliente(edicao.id);
+      nota.textContent = textoDaUltimaCompra(s);
+      caixa.replaceChildren(pilulaSituacao(s.situacao), nota);
+    } else {
+      nota.textContent = 'Vira ativo no primeiro pedido';
+      caixa.replaceChildren(pilulaSituacao('prospect'), nota);
+    }
+  }
+
+  // Marcadores do cadastro (o mesmo componente do modal de contato).
+  function opcoesDeMarcador() {
+    const select = $('#contact-tag-add');
+    select.replaceChildren(new Option('Adicionar marcador existente...', ''), ...[...marcadores().values()].map((m) => new Option(m.nome, m.id)));
+    select.value = '';
+  }
+  function renderTagsDoCadastro() {
+    const mapa = marcadores();
+    const pilulas = edicao.tags.map((id) => mapa.get(id)).filter(Boolean).map((m) => {
+      const el = clonar('tpl-marcador-modal');
+      el.firstChild.textContent = m.nome;
+      el.style.backgroundColor = m.cor;
+      el.style.color = corDeContraste(m.cor);
+      $('[data-remove-tag]', el).dataset.removeTag = m.id;
+      return el;
+    });
+    $('#selected-tags-container').replaceChildren(...(pilulas.length ? pilulas : [clonar('tpl-sem-marcador-modal')]));
+  }
+  function criarMarcador() {
+    const nome = valor('new-tag-name');
+    if (!nome) { avisar('Informe o nome do marcador.'); return; }
+    const cor = $('#new-tag-color').value.toUpperCase();
+    seq += 1;
+    const m = { id: `tag-cli-${Date.now().toString(36)}${seq}`, nome, cor };
+    marcadoresNovos.push(m);
+    try { localStorage.setItem(CHAVE_MARCADORES, JSON.stringify(marcadoresNovos)); } catch { /* vale só nesta aba */ }
+    edicao.tags.push(m.id);
+    opcoesDeMarcador();
+    renderTagsDoCadastro();
+    $('#new-tag-form').classList.add('hidden');
+    definir('new-tag-name', '');
+    avisar(`Marcador "${nome}" criado!`);
+  }
+
+  // --- contatos vinculados ---------------------------------------------------------------
+  function renderContatosDoCadastro() {
+    const lista = $('#cliente-contatos-lista');
+    if (!edicao.contatos.length) { lista.replaceChildren(clonar('tpl-modal-sem-contatos')); return; }
+    lista.replaceChildren(...edicao.contatos.map((ct, i) => {
+      const el = clonar('tpl-modal-contato');
+      el.dataset.indice = i;
+      pintarAvatar(campo(el, 'avatar'), ct.id || ct.tmp, ct.nome);
+      campo(el, 'nome').textContent = ct.nome;
+      const pilulas = campo(el, 'pilulas');
+      if (i === 0) pilulas.append(clonar('tpl-pilula-principal'));
+      if (ct.novo) pilulas.append(clonar('tpl-pilula-novo'));
+      else if (ct.alterado) pilulas.append(clonar('tpl-pilula-alterado'));
+      if (ct.bloqueado) pilulas.append(clonar('tpl-pilula-bloqueado'));
+      campo(el, 'canais').textContent = [V.fmt.telefone(ct.telefone), ct.email].filter(Boolean).join(' · ') || 'Sem telefone nem e-mail';
+      const principal = $('[data-acao-contato="principal"]', el);
+      if (i === 0) {
+        principal.disabled = true;
+        principal.title = 'Contato principal';
+        $('i', principal).className = 'ri-star-fill';
+        $('i', principal).style.color = 'var(--ds-warning)';
+      }
+      return el;
+    }));
+  }
+
+  function fecharPaineisDeContato() {
+    $('#cliente-vincular-painel').classList.add('hidden');
+    $('#cliente-novo-contato-painel').classList.add('hidden');
+    contatoEmEdicao = null;
+  }
+
+  function renderResultadosVincular() {
+    const q = valor('cliente-vincular-busca');
+    const caixa = $('#cliente-vincular-resultados');
+    const vinculados = new Set(edicao.contatos.filter((c) => c.id).map((c) => c.id));
+    const t = normalizar(q);
+    const d = soDigitos(q);
+    const achados = V.contatos()
+      .filter((ct) => !vinculados.has(ct.id))
+      .filter((ct) => !q || normalizar(ct.nome).includes(t) || normalizar(ct.email).includes(t) || (d.length >= 2 && soDigitos(ct.telefone).includes(d)))
+      .sort((a, b) => porNome(a.nome, b.nome));
+    if (!achados.length) {
+      const vazio = clonar('tpl-modal-resultado-vazio');
+      vazio.textContent = q ? `Nenhum contato encontrado para "${q}". Use "Novo contato" para criar.` : 'Todos os contatos já estão vinculados a este cliente.';
+      caixa.replaceChildren(vazio);
+      return;
+    }
+    const clientes = V.clientes();
+    caixa.replaceChildren(...achados.slice(0, 40).map((ct) => {
+      const el = clonar('tpl-modal-resultado');
+      pintarAvatar(campo(el, 'avatar'), ct.id, ct.nome);
+      campo(el, 'nome').textContent = ct.nome;
+      if (ct.bloqueado) campo(el, 'pilulas').append(clonar('tpl-pilula-bloqueado'));
+      const em = clientes.filter((c) => c.id !== edicao.id && c.contatoIds.includes(ct.id)).map(nomeDoCliente);
+      campo(el, 'sub').textContent = [V.fmt.telefone(ct.telefone) || ct.email, em.length ? `já em ${em.join(', ')}` : null].filter(Boolean).join(' · ');
+      $('[data-vincular]', el).dataset.vincular = ct.id;
+      return el;
+    }));
+  }
+  function vincular(id) {
+    const ct = V.contato(id);
+    if (!ct || edicao.contatos.some((c) => c.id === id)) return;
+    edicao.contatos.push({ id: ct.id, nome: ct.nome, telefone: ct.telefone, email: ct.email, bloqueado: ct.bloqueado, conversaId: ct.conversaId, novo: false, alterado: false });
+    fecharPaineisDeContato();
+    renderContatosDoCadastro();
+    avisar(`${ct.nome} vinculado ao cliente.`);
+  }
+
+  /** Nome do contato novo: o nome do cliente numerado ("Bom Preço 1", "Bom Preço 2"...). */
+  function sugestaoDeNome() {
+    const base = valor('cliente-fantasia') || valor('cliente-razao');
+    if (!base) return '';
+    // Regra comum do módulo; aqui também pula os nomes já usados (por outro contato, ou por um
+    // contato novo ainda não salvo neste cadastro) para não repetir depois de uma renomeação.
+    const sugerido = V.proximoNomeDeContato({ nomeFantasia: base, razaoSocial: base });
+    const usados = new Set([...V.contatos().map((c) => c.nome), ...edicao.contatos.map((c) => c.nome)].map(normalizar));
+    let n = Number(sugerido.slice(base.length + 1)) || 1;
+    while (usados.has(normalizar(`${base} ${n}`))) n += 1;
+    return `${base} ${n}`;
+  }
+
+  function abrirPainelContato(indice = null) {
+    contatoEmEdicao = indice;
+    const ct = indice != null ? edicao.contatos[indice] : null;
+    $('#cliente-vincular-painel').classList.add('hidden');
+    $('#cliente-novo-contato-titulo').textContent = ct ? `Editar ${ct.nome}` : 'Novo contato deste cliente';
+    $('#cliente-novo-contato-rotulo').textContent = ct ? 'Salvar contato' : 'Adicionar contato';
+    const fone = soDigitos(ct?.telefone);
+    // Mesma divisão do modal de contato do app: DDI = 2 primeiros dígitos, DDD = 2 seguintes.
+    definir('contact-ddi', fone ? fone.slice(0, 2) : '55');
+    definir('contact-ddd', fone ? fone.slice(2, 4) : '');
+    definir('contact-phone', fone ? fone.slice(4) : '');
+    definir('contact-email', ct?.email || '');
+    definir('contact-name', ct ? ct.nome : sugestaoDeNome());
+    $('#cliente-novo-contato-erro').classList.add('hidden');
+    $('#cliente-novo-contato-painel').classList.remove('hidden');
+    const nome = $('#contact-name');
+    nome.focus();
+    nome.select();
+    if (!ct && !nome.value) avisar('Preencha o nome do cliente para o contato nascer com o nome numerado.');
+  }
+
+  function erroDeContato(texto, contatoExistente) {
+    const caixa = $('#cliente-novo-contato-erro');
+    caixa.replaceChildren(texto);
+    if (contatoExistente) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'contacts-mvp-link-btn ml-2 underline';
+      b.dataset.vincular = contatoExistente.id;
+      b.textContent = `Vincular ${contatoExistente.nome}`;
+      caixa.append(b);
+    }
+    caixa.classList.remove('hidden');
+  }
+
+  function salvarContatoDoPainel() {
+    const nome = valor('contact-name');
+    const [ddi, ddd, numero] = ['contact-ddi', 'contact-ddd', 'contact-phone'].map(valor);
+    const telefone = ddd || numero ? soDigitos(`${ddi || '55'}${ddd}${numero}`) : '';
+    const email = valor('contact-email');
+    if (!nome) { erroDeContato('Informe o nome do contato.'); return; }
+    if (!telefone && !email) { erroDeContato('Informe o telefone ou o e-mail: são os canais do contato.'); return; }
+    if (telefone && (soDigitos(ddd).length !== 2 || soDigitos(numero).length < 8)) { erroDeContato('Telefone incompleto: informe o DDD e o número.'); return; }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { erroDeContato('E-mail inválido.'); return; }
+    const atual = contatoEmEdicao != null ? edicao.contatos[contatoEmEdicao] : null;
+    if (telefone) {
+      // O telefone identifica o contato na conta: se já existe, o certo é vincular aquele.
+      const dono = V.contatos().find((c) => c.telefone === telefone && c.id !== atual?.id);
+      if (dono) { erroDeContato(`Este telefone já é do contato ${dono.nome}.`, edicao.contatos.some((c) => c.id === dono.id) ? null : dono); return; }
+      const repetido = edicao.contatos.find((c, i) => i !== contatoEmEdicao && c.telefone === telefone);
+      if (repetido) { erroDeContato(`Este telefone já está em ${repetido.nome}, na lista acima.`); return; }
+    }
+    if (atual) {
+      Object.assign(atual, { nome, telefone, email, alterado: !atual.novo });
+      avisar('Contato alterado. Ele é salvo junto com o cliente.');
+    } else {
+      seq += 1;
+      edicao.contatos.push({ tmp: `ct-novo-${seq}`, nome, telefone, email, novo: true, alterado: false, bloqueado: false, conversaId: null });
+      avisar(`Contato "${nome}" adicionado. Ele é criado junto com o cliente.`);
+    }
+    fecharPaineisDeContato();
+    renderContatosDoCadastro();
+  }
+
+  function abrirCadastro(id = null, { focoContatos = false } = {}) {
+    if (!V.pode('clientes', 'editar')) { avisar('Sua função não pode cadastrar nem editar clientes.'); return; }
+    const c = id ? V.cliente(id) : null;
+    if (id && (!c || !V.enxerga(c))) { avisar('Esse cliente não está na sua carteira.'); return; }
+    const contatos = c ? V.contatosDoCliente(c.id) : [];
+    edicao = {
+      id: c?.id || null,
+      contatos: contatos.map((ct) => ({ id: ct.id, nome: ct.nome, telefone: ct.telefone, email: ct.email, bloqueado: ct.bloqueado, conversaId: ct.conversaId, novo: false, alterado: false })),
+      tags: c ? [...c.tags] : [],
+      listasNovas: { segmento: [], rede: [] },
+    };
+    form.reset();
+    fecharPaineisDeContato();
+    $('#new-tag-form').classList.add('hidden');
+    $('#modal-title').textContent = c ? 'Editar Cliente' : 'Novo Cliente';
+    $('#modal-title-icon').className = c ? 'ri-edit-line' : 'ri-store-2-line';
+    $('#cliente-salvar-rotulo').textContent = c ? 'Atualizar Cliente' : 'Salvar Cliente';
+
+    $(`input[name="cliente-tipo"][value="${c?.tipo || 'PJ'}"]`).checked = true;
+    definir('cliente-documento', c?.documento);
+    aplicarTipo(c?.tipo || 'PJ');
+    definir('cliente-ie', c?.inscricaoEstadual);
+    definir('cliente-razao', c?.razaoSocial);
+    definir('cliente-fantasia', c?.nomeFantasia);
+    definir('cliente-suframa', c?.suframa);
+    const e = c?.endereco || {};
+    definir('contact-postal-code', mascaraCep(e.cep));
+    definir('contact-address', e.logradouro);
+    definir('contact-address-number', e.numero);
+    definir('contact-address-complement', e.complemento);
+    definir('contact-neighborhood', e.bairro);
+    definir('contact-city', e.cidade);
+    definir('contact-state', e.uf);
+    definir('cliente-informacoes', c?.informacoes);
+    preencherLista('segmento', c?.segmento || '');
+    preencherLista('rede', c?.rede || '');
+    preencherVendedores(c?.vendedorId);
+    preencherRepresentadas(c?.representadaIds || []);
+    renderSituacaoDoCadastro();
+    opcoesDeMarcador();
+    renderTagsDoCadastro();
+    renderContatosDoCadastro();
+
+    modal.style.display = 'flex';
+    $('.contact-modal-shell', modal).scrollTop = 0;
+    if (focoContatos) $('#cliente-secao-contatos').scrollIntoView({ block: 'start' });
+    else if (!c) $('#cliente-documento').focus();
+  }
+  function fecharCadastro() {
+    modal.style.display = 'none';
+    fecharPaineisDeContato();
+    edicao = null;
+    if (new URLSearchParams(location.search).has('novo')) atualizarUrl();
+    const voltar = detalheParaVoltar;
+    detalheParaVoltar = null;
+    if (voltar) abrirDetalhe(voltar);
+  }
+  function editarDoDetalhe(focoContatos = false) {
+    const id = detalhe.id;
+    if (!V.pode('clientes', 'editar')) { avisar('Sua função não pode editar clientes.'); return; }
+    fecharDetalhe();
+    detalheParaVoltar = id;
+    abrirCadastro(id, { focoContatos });
+  }
+
+  function salvarCliente() {
+    if (!edicao) return;
+    const tipo = tipoEscolhido();
+    const pj = tipo === 'PJ';
+    const razao = valor('cliente-razao');
+    if (!razao) { avisar(pj ? 'Informe a razão social.' : 'Informe o nome completo.'); $('#cliente-razao').focus(); return; }
+    const doc = soDigitos(valor('cliente-documento'));
+    if (doc && doc.length !== (pj ? 14 : 11)) { avisar(pj ? 'O CNPJ tem 14 números.' : 'O CPF tem 11 números.'); $('#cliente-documento').focus(); return; }
+    const outro = clienteComDocumento(doc, edicao.id);
+    if (outro) {
+      avisar(V.enxerga(outro) ? `Já existe o cliente ${nomeDoCliente(outro)} com este ${pj ? 'CNPJ' : 'CPF'}.` : `Este ${pj ? 'CNPJ' : 'CPF'} já é de um cliente da carteira de outro vendedor.`);
+      $('#cliente-documento').focus();
+      return;
+    }
+    const vendedorId = $('#cliente-vendedor').value;
+    if (!vendedorId) { avisar('Escolha o vendedor responsável.'); $('#cliente-vendedor').focus(); return; }
+    if (!$('#cliente-novo-contato-painel').classList.contains('hidden') && (valor('contact-phone') || valor('contact-email'))) {
+      avisar('Termine o contato que está sendo preenchido: adicione ou cancele.');
+      $('#cliente-novo-contato-painel').scrollIntoView({ block: 'center' });
+      return;
+    }
+
+    const anterior = edicao.id ? V.cliente(edicao.id) : null;
+    const bloqueado = Boolean(anterior?.bloqueado);
+    const cidade = valor('contact-city');
+    const uf = $('#contact-state').value;
+    let herdaramBloqueio = 0;
+
+    // 1) Contatos: cria os novos, grava os alterados. Vínculo novo de cliente bloqueado já
+    //    nasce bloqueado (bloquear o cliente bloqueia todos os contatos dele).
+    const contatoIds = edicao.contatos.map((ct) => {
+      if (ct.novo) {
+        if (bloqueado) herdaramBloqueio += 1;
+        return V.salvar('contatos', { nome: ct.nome, telefone: ct.telefone, email: ct.email || null, cidade, uf, tags: [], conversaId: null, bloqueado }).id;
+      }
+      const atual = V.contato(ct.id);
+      if (!atual) return null; // contato excluído em outra aba enquanto o cadastro estava aberto
+      const mudanca = {};
+      if (ct.alterado) Object.assign(mudanca, { nome: ct.nome, telefone: ct.telefone, email: ct.email || null });
+      if (bloqueado && !atual.bloqueado) { mudanca.bloqueado = true; herdaramBloqueio += 1; }
+      if (Object.keys(mudanca).length) V.salvar('contatos', { ...atual, ...mudanca });
+      return ct.id;
+    }).filter(Boolean);
+
+    // 2) Cliente
+    const dados = {
+      ...(anterior || {}),
+      tipo,
+      documento: doc ? mascaraDocumento(doc, tipo) : '',
+      razaoSocial: razao,
+      nomeFantasia: valor('cliente-fantasia'),
+      inscricaoEstadual: valor('cliente-ie'),
+      suframa: pj ? valor('cliente-suframa') : '',
+      segmento: $('#cliente-segmento').value || null,
+      rede: $('#cliente-rede').value || null,
+      endereco: {
+        cep: mascaraCep(valor('contact-postal-code')), logradouro: valor('contact-address'), numero: valor('contact-address-number'),
+        complemento: valor('contact-address-complement'), bairro: valor('contact-neighborhood'), cidade, uf,
+      },
+      informacoes: valor('cliente-informacoes'),
+      vendedorId,
+      representadaIds: $$('#cliente-representadas [data-representada]').filter((i) => i.checked).map((i) => i.dataset.representada),
+      tags: [...edicao.tags],
+      contatoIds,
+      bloqueado,
+      bloqueadoEm: anterior?.bloqueadoEm || null,
+    };
+    if (!anterior) delete dados.id;
+    const salvo = V.salvar('clientes', dados);
+    fecharCadastro();
+    posicionar(salvo.id);
+    avisar(`${anterior ? 'Cliente atualizado com sucesso!' : 'Cliente cadastrado com sucesso!'}${herdaramBloqueio ? ` ${plural(herdaramBloqueio, 'contato vinculado entrou bloqueado', 'contatos vinculados entraram bloqueados')}, como o cliente.` : ''}`);
+  }
+
+  // --- consultas simuladas: CNPJ e CEP -------------------------------------------------
+  // No protótipo não há consulta de verdade: os dados são inventados a partir dos números
+  // digitados (sempre os mesmos para o mesmo número). Nada aqui existe na Receita.
+  const RUAS = ['Rua das Acácias', 'Avenida dos Ipês', 'Rua do Comércio', 'Rua Sete de Setembro', 'Avenida Central', 'Rua das Palmeiras', 'Rua Boa Vista', 'Rua do Mercado'];
+  const BAIRROS = ['Centro', 'Jardim América', 'Vila Nova', 'Vila Industrial', 'Jardim das Flores', 'Parque Industrial', 'Vila Rica'];
+  const CIDADES = {
+    0: ['São Paulo', 'SP'], 1: ['Campinas', 'SP'], 2: ['Rio de Janeiro', 'RJ'], 3: ['Belo Horizonte', 'MG'], 4: ['Salvador', 'BA'],
+    5: ['Recife', 'PE'], 6: ['Fortaleza', 'CE'], 7: ['Brasília', 'DF'], 8: ['Curitiba', 'PR'], 9: ['Porto Alegre', 'RS'],
+  };
+  const CIDADES_SP = { '06': 'Osasco', '07': 'Guarulhos', '09': 'Santo André', 11: 'Santos', 12: 'São José dos Campos', 13: 'Campinas', 14: 'Ribeirão Preto', 18: 'Sorocaba' };
+  const somaDosDigitos = (d) => d.split('').reduce((a, x) => a + Number(x), 0);
+  function enderecoDoCep(d) {
+    const [cidadeBase, uf] = CIDADES[d[0]];
+    const cidade = CIDADES_SP[d.slice(0, 2)] || cidadeBase;
+    const soma = somaDosDigitos(d);
+    return { logradouro: RUAS[soma % RUAS.length], bairro: BAIRROS[(soma >> 1) % BAIRROS.length], cidade, uf };
+  }
+  const NOMES_FICTICIOS = ['Horizonte', 'Boa Safra', 'Vale Verde', 'Santa Clara', 'Sol Nascente', 'Bom Jardim', 'Nova Aurora', 'Serra Dourada'];
+  const MODELOS = [
+    (n) => [`Supermercado ${n} Ltda`, `Supermercado ${n}`],
+    (n) => [`Comercial ${n} de Alimentos Ltda`, `Mercado ${n}`],
+    (n) => [`Distribuidora ${n} Ltda`, `Distribuidora ${n}`],
+    (n) => [`Panificadora ${n} Ltda`, `Padaria ${n}`],
+  ];
+  function consultaCnpj(d) {
+    const soma = somaDosDigitos(d);
+    const [razaoSocial, nomeFantasia] = MODELOS[soma % MODELOS.length](NOMES_FICTICIOS[(soma >> 2) % NOMES_FICTICIOS.length]);
+    const cep = `1${String(3000 + (soma * 37) % 6000).padStart(4, '0')}${String((soma * 7) % 1000).padStart(3, '0')}`;
+    return { razaoSocial, nomeFantasia, cep, numero: String(100 + (soma * 53) % 1800), ...enderecoDoCep(cep) };
+  }
+  function botaoOcupado(botao, ocupado, texto) {
+    botao.disabled = ocupado;
+    $('i', botao).className = ocupado ? 'ri-loader-4-line animate-spin' : botao.dataset.icone;
+    $('span', botao).textContent = texto;
+  }
+  async function completarCadastro() {
+    const botao = $('#cliente-completar-btn');
+    const d = soDigitos(valor('cliente-documento'));
+    if (d.length !== 14) { avisar('Informe o CNPJ completo, com 14 números.'); $('#cliente-documento').focus(); return; }
+    const outro = clienteComDocumento(d, edicao.id);
+    if (outro) { avisar(V.enxerga(outro) ? `Este CNPJ já é do cliente ${nomeDoCliente(outro)}.` : 'Este CNPJ já é de um cliente da carteira de outro vendedor.'); return; }
+    botao.dataset.icone ||= $('i', botao).className;
+    botaoOcupado(botao, true, 'Consultando...');
+    await espera(700);
+    botaoOcupado(botao, false, 'Completar cadastro');
+    if (!edicao) return;
+    const r = consultaCnpj(d);
+    // Completa o que está em branco e não muda o que já foi digitado (como a importação de contatos).
+    const preenchidos = [];
+    const completar = (id, v, rotulo) => { if (!valor(id) && v) { definir(id, v); if (rotulo && !preenchidos.includes(rotulo)) preenchidos.push(rotulo); } };
+    completar('cliente-razao', r.razaoSocial, 'razão social');
+    completar('cliente-fantasia', r.nomeFantasia, 'nome fantasia');
+    completar('contact-postal-code', mascaraCep(r.cep), 'endereço');
+    completar('contact-address', r.logradouro, 'endereço');
+    completar('contact-address-number', r.numero, 'endereço');
+    completar('contact-neighborhood', r.bairro, 'endereço');
+    completar('contact-city', r.cidade, 'endereço');
+    if (!$('#contact-state').value) definir('contact-state', r.uf);
+    avisar(preenchidos.length
+      ? `Consulta do CNPJ: ${preenchidos.join(', ').replace(/, ([^,]*)$/, ' e $1')} preenchidos.`
+      : 'Nada a completar: esses campos já estavam preenchidos.');
+  }
+  async function buscarCep() {
+    const botao = $('#contact-cep-search-btn');
+    const d = soDigitos(valor('contact-postal-code'));
+    if (d.length !== 8) { avisar('Informe um CEP válido com 8 números.'); return; }
+    botao.dataset.icone ||= $('i', botao).className;
+    botaoOcupado(botao, true, 'Buscando...');
+    await espera(500);
+    botaoOcupado(botao, false, 'Buscar');
+    if (!edicao) return;
+    const e = enderecoDoCep(d);
+    definir('contact-address', e.logradouro);
+    definir('contact-neighborhood', e.bairro);
+    definir('contact-city', e.cidade);
+    definir('contact-state', e.uf);
+    $('#contact-address-number').focus();
+    avisar('Endereço preenchido pelo CEP.');
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Aba Configurações: prazos da carteira
+  // ---------------------------------------------------------------------------------
+  const podeConfigurar = () => ['owner', 'admin'].includes(V.verComo().papel);
+  function renderConfig(recarregar = true) {
+    const c = V.config();
+    const ativo = $('#config-dias-ativo');
+    const inativo = $('#config-dias-inativo');
+    if (recarregar) { ativo.value = c.diasAtivo; inativo.value = c.diasInativoRecente; }
+    const pode = podeConfigurar();
+    [ativo, inativo, $('#config-salvar'), $('#config-restaurar')].forEach((el) => { el.disabled = !pode; });
+    $('#config-somente-leitura').classList.toggle('hidden', pode);
+    renderPrevia();
+  }
+  function prazosDigitados() {
+    const ativo = Number($('#config-dias-ativo').value);
+    const inativo = Number($('#config-dias-inativo').value);
+    let erro = '';
+    if (!Number.isInteger(ativo) || ativo < 1 || ativo > 3650) erro = 'O prazo de ativo vai de 1 a 3650 dias.';
+    else if (!Number.isInteger(inativo) || inativo <= ativo || inativo > 3650) erro = 'O prazo de inativo recente precisa ser maior que o de ativo (até 3650 dias).';
+    return { ativo, inativo, erro };
+  }
+  function renderPrevia() {
+    const { ativo, inativo, erro } = prazosDigitados();
+    $('#config-erro').textContent = erro;
+    $('#config-erro').classList.toggle('hidden', !erro);
+    const contagem = { ativo: 0, inativo_recente: 0, inativo_antigo: 0, prospect: 0 };
+    for (const c of V.clientes()) {
+      const s = V.situacaoDoCliente(c.id);
+      if (s.situacao === 'prospect') contagem.prospect += 1;
+      else if (!erro) contagem[s.dias <= ativo ? 'ativo' : s.dias <= inativo ? 'inativo_recente' : 'inativo_antigo'] += 1;
+    }
+    const faixas = {
+      ativo: erro ? '—' : `0 a ${ativo} dias`,
+      inativo_recente: erro ? '—' : `${ativo + 1} a ${inativo} dias`,
+      inativo_antigo: erro ? '—' : `Mais de ${inativo} dias`,
+      prospect: 'Nunca comprou',
+    };
+    const onde = escopoCarteira() ? 'na sua carteira' : 'na conta';
+    $('#config-previa').replaceChildren(...Object.keys(SITUACOES).map((s) => {
+      const el = clonar('tpl-previa');
+      campo(el, 'pilula').append(pilulaSituacao(s));
+      campo(el, 'faixa').textContent = faixas[s];
+      campo(el, 'contagem').textContent = erro && s !== 'prospect' ? 'Ajuste os prazos' : `${plural(contagem[s], 'cliente', 'clientes')} ${onde}`;
+      return el;
+    }));
+  }
+  function salvarConfig() {
+    if (!podeConfigurar()) return;
+    const { ativo, inativo, erro } = prazosDigitados();
+    if (erro) { avisar(erro); return; }
+    V.salvarConfig({ diasAtivo: ativo, diasInativoRecente: inativo });
+    avisar('Prazos salvos. A situação dos clientes e os indicadores já usam os novos prazos.');
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Abas, permissões e redesenho
+  // ---------------------------------------------------------------------------------
+  function trocarAba(aba) {
+    const clientes = aba !== 'config';
+    for (const [botao, ativo] of [[$('#clientes-tab-btn'), clientes], [$('#config-tab-btn'), !clientes]]) {
+      botao.classList.toggle('is-active', ativo);
+      botao.setAttribute('aria-selected', String(ativo));
+    }
+    $('#clientes-tab-panel').classList.toggle('hidden', !clientes);
+    $('#config-tab-panel').classList.toggle('hidden', clientes);
+    if (!clientes) renderConfig();
+  }
+
+  /** O que muda com "Ver como": botões, escopo, avatar do canto. */
+  function aplicarPermissoes() {
+    const eu = V.verComo();
+    $('.dashboard-avatar-btn').textContent = iniciais(eu.nome);
+    $('.dashboard-avatar-btn').title = `${eu.nome} (${eu.papelNome})`;
+    mostrar($('#novo-cliente-btn'), V.pode('clientes', 'editar'));
+    mostrar($('#clientes-exportar-btn'), V.pode('clientes', 'ver'));
+    const escopo = $('#clientes-escopo');
+    escopo.textContent = escopoCarteira() ? `· carteira de ${eu.nome}` : '';
+    escopo.classList.toggle('hidden', !escopoCarteira());
+  }
+
+  function renderTudo() {
+    aplicarPermissoes();
+    render();
+    renderDetalhe();
+    if (!$('#config-tab-panel').classList.contains('hidden')) renderConfig(document.activeElement?.closest('#config-form') == null);
+  }
+  let redesenhoPendente = false;
+  function agendarRender() {
+    if (redesenhoPendente) return;
+    redesenhoPendente = true;
+    setTimeout(() => { redesenhoPendente = false; renderTudo(); }, 0);
+  }
+
+  V.aoMudar(({ tipo }) => {
+    if (tipo === 'ver-como' || tipo === 'permissoes' || tipo === 'todos') {
+      fecharMenu();
+      limparSelecao();
+      pagina = 1;
+      if (escopoCarteira()) filtros.vendedorId = '';
+      if (edicao && !V.pode('clientes', 'editar')) { detalheParaVoltar = null; fecharCadastro(); }
+      else if (edicao?.id && !V.enxerga(V.cliente(edicao.id))) { detalheParaVoltar = null; fecharCadastro(); }
+      else if (edicao) preencherVendedores($('#cliente-vendedor').value);
+    }
+    agendarRender();
+  });
+
+  // ---------------------------------------------------------------------------------
+  // Eventos
+  // ---------------------------------------------------------------------------------
+  const menuFiltros = $('#clientes-filtros');
+  function abrirFiltros(abrir) {
+    menuFiltros.classList.toggle('hidden', !abrir);
+    $('#clientes-filtros-btn').setAttribute('aria-expanded', String(abrir));
+  }
+  function limparBuscaEFiltros() {
+    Object.keys(filtros).forEach((k) => { filtros[k] = ''; });
+    termo = '';
+    $('#clientes-busca').value = '';
+    pagina = 1;
+    limparSelecao();
+    render();
+  }
+
+  document.addEventListener('click', (ev) => {
+    const alvo = ev.target;
+    if (!(alvo instanceof Element)) return;
+
+    // Confirmação
+    if (alvo.closest('.confirm-ok')) { fecharConfirmacao(true); return; }
+    if (alvo.closest('.confirm-cancel') || alvo === confirmacao) { fecharConfirmacao(false); return; }
+
+    // Menu da linha e seus itens
+    const gatilho = alvo.closest('.contact-row-menu-toggle');
+    if (gatilho) {
+      const celula = gatilho.closest('.contacts-mvp-actions-cell');
+      const mesmo = menuAberto?.celula === celula;
+      fecharMenu();
+      if (!mesmo) abrirMenu(celula);
+      return;
+    }
+    const item = alvo.closest('.contacts-mvp-row-menu-item');
+    if (item) {
+      const { acao, id } = item.dataset;
+      if (acao === 'novo-pedido') return; // é link: a navegação segue
+      fecharMenu();
+      if (acao === 'detalhe') abrirDetalhe(id);
+      else if (acao === 'editar') abrirCadastro(id);
+      else if (acao === 'bloquear') alternarBloqueio(id);
+      else if (acao === 'excluir') excluirCliente(id);
+      return;
+    }
+    if (!alvo.closest('.contacts-mvp-actions-cell')) fecharMenu();
+
+    // Filtros (fecham ao clicar fora, como em Contatos)
+    if (alvo.closest('#clientes-filtros-btn')) { abrirFiltros(menuFiltros.classList.contains('hidden')); return; }
+    if (!menuFiltros.contains(alvo)) abrirFiltros(false);
+    if (alvo.closest('#clientes-limpar-filtros, [data-acao="limpar-filtros"]')) { abrirFiltros(false); limparBuscaEFiltros(); return; }
+
+    // Abas
+    const aba = alvo.closest('[data-aba]');
+    if (aba) { trocarAba(aba.dataset.aba); return; }
+
+    // Paginação
+    const numero = alvo.closest('.contacts-mvp-page-number');
+    if (numero) { pagina = Number(numero.dataset.pagina); render(); return; }
+    if (alvo.closest('#clientes-pag-anterior')) { pagina -= 1; render(); return; }
+    if (alvo.closest('#clientes-pag-proxima')) { pagina += 1; render(); return; }
+
+    // Seleção em lote
+    if (alvo.closest('#clientes-lote-todos')) { todosDoFiltro = true; renderSelecao(); return; }
+    if (alvo.closest('#clientes-lote-limpar')) { limparSelecao(); return; }
+    if (alvo.closest('#clientes-lote-excluir')) { excluirSelecionados(); return; }
+
+    // Botões do topo
+    if (alvo.closest('#novo-cliente-btn')) { abrirCadastro(null); return; }
+    if (alvo.closest('#clientes-exportar-btn')) { exportar(); return; }
+
+    // Clique na linha (fora da seleção e do menu) abre o detalhe
+    const linha = alvo.closest('tr.cli-linha');
+    if (linha && !alvo.closest('.contacts-mvp-th-checkbox, .contacts-mvp-actions-cell')) { abrirDetalhe(linha.dataset.clienteId); return; }
+
+    // Detalhe do cliente
+    if (raizDetalhe.contains(alvo)) {
+      const sobreposicao = alvo.closest('[data-overlay]');
+      if (sobreposicao && alvo === sobreposicao) { fecharDetalhe(); return; }
+      const acao = alvo.closest('[data-acao]');
+      if (!acao) return;
+      if (acao.getAttribute('aria-disabled') === 'true') { ev.preventDefault(); avisar(acao.title); return; }
+      const tipo = acao.dataset.acao;
+      if (tipo === 'fechar-detalhe') fecharDetalhe();
+      else if (tipo === 'editar') editarDoDetalhe();
+      else if (tipo === 'editar-contatos') editarDoDetalhe(true);
+      else if (tipo === 'bloquear') alternarBloqueio(detalhe.id);
+      else if (tipo === 'excluir') excluirCliente(detalhe.id);
+      else if (tipo === 'mais-pedidos') { detalhe.limitePedidos += 10; renderDetalhe(); }
+      return; // novo-pedido e conversar são links: a navegação segue
+    }
+
+    // Cadastro
+    if (!modal.contains(alvo)) return;
+    if (alvo === modal || alvo.closest('.contact-modal-close-btn, #cliente-cancelar-btn')) { fecharCadastro(); return; }
+    if (alvo.closest('#cliente-completar-btn')) { completarCadastro(); return; }
+    if (alvo.closest('#contact-cep-search-btn')) { buscarCep(); return; }
+    if (alvo.closest('#cliente-vincular-btn')) {
+      const painel = $('#cliente-vincular-painel');
+      const abrir = painel.classList.contains('hidden');
+      fecharPaineisDeContato();
+      painel.classList.toggle('hidden', !abrir);
+      if (abrir) { definir('cliente-vincular-busca', ''); renderResultadosVincular(); $('#cliente-vincular-busca').focus(); }
+      return;
+    }
+    if (alvo.closest('#cliente-novo-contato-btn')) { abrirPainelContato(null); return; }
+    if (alvo.closest('#cliente-novo-contato-cancelar')) { fecharPaineisDeContato(); return; }
+    if (alvo.closest('#cliente-novo-contato-salvar')) { salvarContatoDoPainel(); return; }
+    const vincularBtn = alvo.closest('[data-vincular]');
+    if (vincularBtn) { vincular(vincularBtn.dataset.vincular); return; }
+    const acaoContato = alvo.closest('[data-acao-contato]');
+    if (acaoContato) {
+      const i = Number(acaoContato.closest('[data-indice]').dataset.indice);
+      const tipo = acaoContato.dataset.acaoContato;
+      if (tipo === 'principal' && i > 0) {
+        fecharPaineisDeContato();
+        edicao.contatos.unshift(...edicao.contatos.splice(i, 1));
+        avisar(`${edicao.contatos[0].nome} agora é o contato principal.`);
+      } else if (tipo === 'editar') { abrirPainelContato(i); return; }
+      else if (tipo === 'desvincular') {
+        const [ct] = edicao.contatos.splice(i, 1);
+        fecharPaineisDeContato();
+        avisar(ct.novo ? `${ct.nome} removido.` : `${ct.nome} desvinculado. O contato continua em Contatos.`);
+      }
+      renderContatosDoCadastro();
+      if (!$('#cliente-vincular-painel').classList.contains('hidden')) renderResultadosVincular();
+      return;
+    }
+    const criarLista = alvo.closest('[data-criar-lista]');
+    if (criarLista) { criarItemDeLista(criarLista.dataset.criarLista); return; }
+    const cancelarLista = alvo.closest('[data-cancelar-lista]');
+    if (cancelarLista) { $(`#cliente-${cancelarLista.dataset.cancelarLista}-novo`).classList.add('hidden'); return; }
+    const removerTag = alvo.closest('#selected-tags-container [data-remove-tag]');
+    if (removerTag) { edicao.tags = edicao.tags.filter((t) => t !== removerTag.dataset.removeTag); renderTagsDoCadastro(); return; }
+    if (alvo.closest('#contact-tag-new-btn')) { $('#new-tag-form').classList.toggle('hidden'); $('#new-tag-name').focus(); return; }
+    if (alvo.closest('#new-tag-cancel-btn')) { $('#new-tag-form').classList.add('hidden'); definir('new-tag-name', ''); return; }
+    if (alvo.closest('#new-tag-save-btn')) { criarMarcador(); }
+  });
+
+  document.addEventListener('change', (ev) => {
+    const alvo = ev.target;
+    if (alvo.matches('#clientes-filtros [data-filtro]')) {
+      filtros[alvo.dataset.filtro] = alvo.value;
+      pagina = 1;
+      limparSelecao();
+      render();
+    } else if (alvo.matches('input[data-cliente-select]')) {
+      if (todosDoFiltro) { todosDoFiltro = false; selecionados = new Set(idsNaTela()); }
+      if (alvo.checked) selecionados.add(alvo.dataset.clienteSelect); else selecionados.delete(alvo.dataset.clienteSelect);
+      renderSelecao();
+    } else if (alvo.id === 'clientes-selecionar-pagina') {
+      todosDoFiltro = false;
+      for (const id of idsNaTela()) { if (alvo.checked) selecionados.add(id); else selecionados.delete(id); }
+      renderSelecao();
+    } else if (alvo.matches('[data-campo="periodo"]')) {
+      detalhe.periodo = alvo.value;
+      renderDetalhe();
+    } else if (alvo.name === 'cliente-tipo') {
+      aplicarTipo(alvo.value);
+    } else if (alvo.id === 'cliente-segmento' || alvo.id === 'cliente-rede') {
+      const tipo = alvo.id.replace('cliente-', '');
+      if (alvo.value === NOVO) {
+        alvo.value = alvo.dataset.anterior || '';
+        $(`#cliente-${tipo}-novo`).classList.remove('hidden');
+        $(`#cliente-${tipo}-novo-nome`).focus();
+      } else alvo.dataset.anterior = alvo.value;
+    } else if (alvo.id === 'contact-tag-add') {
+      if (alvo.value && !edicao.tags.includes(alvo.value)) { edicao.tags.push(alvo.value); renderTagsDoCadastro(); }
+      alvo.value = '';
+    }
+  });
+
+  let timerBusca;
+  document.addEventListener('input', (ev) => {
+    const alvo = ev.target;
+    if (alvo.id === 'clientes-busca') {
+      clearTimeout(timerBusca);
+      timerBusca = setTimeout(() => {
+        const novo = alvo.value.trim();
+        if (novo !== termo) limparSelecao();
+        termo = novo;
+        pagina = 1;
+        render();
+      }, 200);
+    } else if (alvo.id === 'cliente-documento') {
+      alvo.value = mascaraDocumento(alvo.value, tipoEscolhido());
+    } else if (alvo.id === 'contact-postal-code') {
+      alvo.value = mascaraCep(alvo.value);
+    } else if (alvo.id === 'cliente-vincular-busca') {
+      renderResultadosVincular();
+    } else if (alvo.id === 'config-dias-ativo' || alvo.id === 'config-dias-inativo') {
+      renderPrevia();
+    }
+  });
+
+  document.addEventListener('keydown', (ev) => {
+    const alvo = ev.target;
+    if (ev.key === 'Enter' && alvo.matches?.('#cliente-segmento-novo-nome, #cliente-rede-novo-nome')) {
+      ev.preventDefault();
+      criarItemDeLista(alvo.id.includes('segmento') ? 'segmento' : 'rede');
+      return;
+    }
+    if (ev.key === 'Enter' && alvo.matches?.('#cliente-novo-contato-painel input')) { ev.preventDefault(); salvarContatoDoPainel(); return; }
+    if (ev.key === 'Enter' && alvo.id === 'cliente-vincular-busca') { ev.preventDefault(); return; }
+    if (ev.key === 'Enter' && alvo.id === 'contact-postal-code') { ev.preventDefault(); buscarCep(); return; }
+    if (ev.key === 'Enter' && alvo.id === 'new-tag-name') { ev.preventDefault(); criarMarcador(); return; }
+    if (ev.key !== 'Escape') return;
+    if (confirmacaoAberta()) fecharConfirmacao(false);
+    else if (menuAberto) fecharMenu();
+    else if (modal.style.display === 'flex') fecharCadastro();
+    else if (detalhe.id) fecharDetalhe();
+    else abrirFiltros(false);
+  });
+
+  form.addEventListener('submit', (ev) => { ev.preventDefault(); salvarCliente(); });
+  $('#config-form').addEventListener('submit', (ev) => { ev.preventDefault(); salvarConfig(); });
+  $('#config-restaurar').addEventListener('click', () => {
+    if (!podeConfigurar()) return;
+    V.salvarConfig({ diasAtivo: 90, diasInativoRecente: 180 });
+    $('#config-dias-ativo').value = 90;
+    $('#config-dias-inativo').value = 180;
+    renderPrevia();
+    avisar('Prazos padrão restaurados: ativo até 90 dias, inativo recente até 180.');
+  });
+  // Rolar a página fecha o menu da linha (ele é fixo na tela, a linha não).
+  window.addEventListener('scroll', () => fecharMenu(), true);
+
+  // Busca: no celular o texto de exemplo é curto, para caber no campo.
+  const telaPequena = window.matchMedia('(max-width: 768px)');
+  const ajustarBusca = () => { $('#clientes-busca').placeholder = telaPequena.matches ? 'Buscar clientes...' : 'Buscar por nome, CNPJ, cidade ou contato...'; };
+  telaPequena.addEventListener('change', ajustarBusca);
+  ajustarBusca();
+
+  // Estado inicial e endereços diretos (?cliente=, ?novo=1, ?aba=config).
+  renderTudo();
+  const params = new URLSearchParams(location.search);
+  if (params.get('aba') === 'config') trocarAba('config');
+  if (params.get('cliente')) abrirDetalhe(params.get('cliente'));
+  if (params.get('novo') === '1') abrirCadastro(null);
+})();
+</script>
+</body></html>

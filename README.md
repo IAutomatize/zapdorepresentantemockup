@@ -44,6 +44,35 @@ tools/capture/          gera e atualiza a parte capturada de cada tela
 Cada `<tela>.html` tem duas partes: em cima, a marcação capturada do app; no fim, depois de
 `<!-- MOCKUP:INICIO`, o bloco escrito à mão com os dados e o comportamento da tela.
 
+## Módulo de vendas (em aprovação)
+
+Representadas, Clientes, Pedidos, o pedido ao finalizar a conversa, vendedores e os indicadores
+de vendas. Peças:
+
+- `mockup-vendas.js`: o universo de vendas fictício e as regras (venda, carteira, curva ABC,
+  positivação, comissões, permissões), em `window.vendas`. Os dados-base são gerados a cada
+  carga com datas relativas a hoje: os indicadores nunca envelhecem e não precisam de recaptura.
+- O sorteio tem semente e **não pode depender da hora nem do navegador**: o que o visitante altera
+  é guardado pelo id do pedido (`ped-NNNN`), e um sorteio a mais ou a menos muda todos os pedidos
+  seguintes. Por isso: sortear sempre (nunca dentro de um `if` que dependa de agora), embaralhar com
+  `embaralhar` (Fisher–Yates), nunca `sort` com comparador aleatório, e ajustar horários só depois
+  de gerar tudo (`antesDeAgora`). Ao mexer no gerador, rode `node tools/conferir-vendas.mjs`:
+  simula nove horários do mesmo dia e falha se algum pedido mudar.
+- O que o visitante cria, altera ou exclui fica no `localStorage` do navegador e vale em todas as
+  telas. O botão "Restaurar dados de demonstração", no `index.html`, apaga todas as chaves
+  `zap-mockup:` (dados de vendas, "Ver como", marcadores novos de Clientes, filtros da aba Vendas)
+  e volta ao estado inicial. Use antes de apresentar.
+- As telas se ligam por endereço: `clientes.html?cliente=<id>`, `pedidos.html?pedido=<id>`,
+  `?cliente=<id>`, `?novo=1&cliente=<id>`, `?representada=<id>`, `chats.html?chat=<id>` e
+  `dashboard.html?session=vendas`.
+- "Ver como" (canto inferior esquerdo das telas de vendas) troca entre dona, administradora e
+  vendedor, para mostrar as permissões. É anotação do protótipo, não tela do produto.
+- `clientes.html`, `pedidos.html` e `representadas.html` são páginas novas: não existem no app,
+  então foram montadas a partir de telas capturadas (Contatos, Tarefas) e **não** entram no
+  `recapturar.sh`. As mudanças em telas que existem (`chats.html`, `dashboard.html`,
+  `settings.html`) ficam só dentro do bloco MOCKUP, para sobreviver à recaptura.
+- A barra lateral ganha os três itens novos pelo `mockup-comum.js`, com o selo "Novo".
+
 ## Documentação de cada recurso novo
 
 Todo recurso novo prototipado aqui tem uma pasta de documentação no repositório **privado**

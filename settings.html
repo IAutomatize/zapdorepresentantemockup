@@ -7882,7 +7882,25 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
      O __capturarMoldes() (em tools/capture/fixtures/settings.js) abre cada modal e estado que o
      app só desenha ao clicar e guarda a marcação em <template id="molde-..."> no fim do <body>.
      Este bloco clona esses moldes: nenhuma marcação de tela é escrita à mão aqui, a não ser os
-     estados vazios, copiados literalmente do código do app (indicado em cada um). -->
+     estados vazios, copiados literalmente do código do app (indicado em cada um).
+     Módulo de vendas (recurso 004, em aprovação): mockup-vendas.js traz os vendedores e as
+     permissões do módulo; a seção 13 do script abaixo liga isso a Usuários & Acesso. -->
+<script src="mockup-vendas.js"></script>
+<style>
+  /* Recurso 004. A matriz de permissões corta as opções no celular (a linha reserva 220px
+     para o texto e as opções vazam para fora do cartão): aqui elas descem para baixo do texto. */
+  @media (max-width: 640px) {
+    #as-role-modal .as-permission-row { grid-template-columns: 1fr; gap: 10px; }
+    #as-role-modal .as-permission-effects { justify-content: flex-start; }
+  }
+  /* No celular, o "Ver como" (anotação do protótipo) fica por cima dos botões dos modais. */
+  @media (max-width: 768px) {
+    body:has(.settings-modal.open, #checkout-modal.open) .mockup-ver-como { display: none; }
+  }
+  #as-seller-commission[aria-invalid="true"] { border-color: var(--ds-danger); box-shadow: 0 0 0 3px var(--ds-danger-soft); }
+  #as-seller-commission:disabled,
+  #as-seller-modal .settings-toggle:disabled { opacity: .55; cursor: not-allowed; }
+</style>
 <script>
 (() => {
   // ---------------------------------------------------------------------------------
@@ -8105,7 +8123,7 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     });
   }
 
-  /** Modal do confirm.ts (fica no <body> desde o carregamento). Usado no follow-up. */
+  /** Modal de confirmação do app (fica no <body> desde o carregamento). Usado no follow-up. */
   function confirmarAcao({ titulo, mensagem, botao = 'Confirmar', tipo = 'warning' }) {
     const modal = $('.confirm-title').closest('.fixed');
     const conteudo = modal.firstElementChild;
@@ -8171,7 +8189,8 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     $todos('.settings-tab-btn').forEach((b) => b.classList.toggle('active', b === botao));
     $todos('.tab-pane').forEach((p) => p.classList.toggle('active', p === painel));
     $('#settings-current-subtitle').textContent = botao.dataset.label || 'Configurações';
-    if (atualizarUrl) trocarEndereco({ tab: ABA_PARA_PARAM[id] || id });
+    // ?secao= (subseção de Usuários & Acesso) só vale nessa aba.
+    if (atualizarUrl) trocarEndereco({ tab: ABA_PARA_PARAM[id] || id, ...(id === 'collaborators' ? {} : { secao: null }) });
   }
   $todos('.settings-tab-btn').forEach((b) => b.addEventListener('click', () => ativarAba(b.dataset.tab, true)));
 
@@ -8288,12 +8307,23 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     if (total) total.firstElementChild.textContent = `Total: ${quantidade}`;
   }
 
+  // Subseções. Só no protótipo, ?secao= abre direto numa delas e acompanha o clique, para
+  // mandar ao cliente o link da tela certa (ex.: settings.html?tab=usuarios&secao=membros).
+  const SUBABA_DA_SECAO = { 'visao-geral': 'overview', membros: 'members', filas: 'queues', convites: 'invites', funcoes: 'roles', logs: 'logs' };
+  const SECAO_DA_SUBABA = Object.fromEntries(Object.entries(SUBABA_DA_SECAO).map(([secao, subaba]) => [subaba, secao]));
+  function ativarSubaba(subaba) {
+    const botao = $(`.as-subtab-btn[data-subtab="${subaba}"]`, acesso);
+    if (!botao) return;
+    $todos('.as-subtab-btn', acesso).forEach((b) => b.classList.toggle('active', b === botao));
+    $todos('.as-subtab-pane', acesso).forEach((p) => p.classList.toggle('active', p.id === `as-${subaba}`));
+  }
+
   acesso.addEventListener('click', (ev) => {
     const alvo = ev.target;
     const subaba = alvo.closest('.as-subtab-btn');
     if (subaba) {
-      $todos('.as-subtab-btn', acesso).forEach((b) => b.classList.toggle('active', b === subaba));
-      $todos('.as-subtab-pane', acesso).forEach((p) => p.classList.toggle('active', p.id === `as-${subaba.dataset.subtab}`));
+      ativarSubaba(subaba.dataset.subtab);
+      trocarEndereco({ secao: SECAO_DA_SUBABA[subaba.dataset.subtab] || null });
       return;
     }
     if (alvo.closest('#as-confirm-ok')) { encerrarConfirmacaoDeAcesso(true); return; }
@@ -8319,11 +8349,7 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
       return;
     }
     const permsDoMembro = alvo.closest('[data-action="member-role-perms"]');
-    if (permsDoMembro) {
-      const email = $('strong', permsDoMembro.closest('tr')).textContent;
-      abrirModalDeFuncao({ titulo: `Permissões de ${email}`, permissoes: PERMISSOES['role-member'], somenteLeitura: false });
-      return;
-    }
+    if (permsDoMembro) { abrirPermissoesDoMembro(permsDoMembro.closest('tr')); return; }
 
     // Convites
     const revogar = alvo.closest('[data-action="revoke-invite"]');
@@ -8343,16 +8369,24 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
       const id = editarFuncao.dataset.id;
       const global = ['role-owner', 'role-admin', 'role-member'].includes(id);
       const acessoTotal = id === 'role-owner' || id === 'role-admin';
+      const modulo = moduloDaFuncao(id);
       abrirModalDeFuncao({
         titulo: 'Permissões da Função',
-        permissoes: acessoTotal ? null : (PERMISSOES[id] || []),
+        permissoes: acessoTotal ? null : [...(PERMISSOES[id] || []), ...chavesDoModulo(modulo)],
         somenteLeitura: global,
         acessoTotal,
+        escopo: modulo.escopo,
+        contexto: `funcao:${id}`,
       });
       return;
     }
     const excluirFuncao = alvo.closest('[data-action="delete-role"]');
     if (excluirFuncao) {
+      // Como no app: função atribuída a alguém não pode ser excluída.
+      if ($todos('select[data-action="change-role"]', acesso).some((sel) => sel.value === excluirFuncao.dataset.name)) {
+        avisar('Esta função está em uso por usuários ou convites pendentes.');
+        return;
+      }
       confirmarNoAcesso(`Excluir a função "${excluirFuncao.dataset.name}"? Essa ação não pode ser desfeita.`, 'Excluir Função', () => {
         excluirFuncao.closest('tr').remove();
         $todos(`select[data-action="change-role"] option[value="${CSS.escape(excluirFuncao.dataset.name)}"]`).forEach((op) => op.remove());
@@ -8391,7 +8425,7 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     if (alvo.matches('select[data-action="change-role"]')) {
       const nome = alvo.selectedOptions[0]?.textContent || alvo.value;
       confirmarNoAcesso(`Alterar função para ${nome}?`, 'Confirmação',
-        () => { alvo.dataset.anterior = alvo.value; avisar('Atualizado'); },
+        () => { alvo.dataset.anterior = alvo.value; aoTrocarFuncaoDoMembro(alvo); avisar('Atualizado'); },
         () => { alvo.value = alvo.dataset.anterior; });
       return;
     }
@@ -8443,8 +8477,9 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     avisar(`Convite enviado para ${email}`);
   });
 
-  // Modal de função: nova (só o nome) ou matriz de permissões.
-  function abrirModalDeFuncao({ nova = false, titulo, permissoes, somenteLeitura = false, acessoTotal = false }) {
+  // Modal de função: nova (só o nome) ou matriz de permissões. `escopo` e `contexto` são do
+  // módulo de vendas (seção 13): o alcance da função e quem o modal está editando.
+  function abrirModalDeFuncao({ nova = false, titulo, permissoes, somenteLeitura = false, acessoTotal = false, escopo = 'carteira', contexto = '' }) {
     const form = $('#as-role-form');
     const nome = $('input[name="name"]', form);
     $('#as-role-modal-title').textContent = nova ? 'Nova Função' : titulo;
@@ -8457,6 +8492,7 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
       ? 'Esta função padrão possui acesso total por definição e é somente leitura. Duplique para criar uma função personalizada com a matriz atual.'
       : 'Funções padrão são somente leitura. Duplique esta função para personalizar as permissões da sua conta.';
     form.dataset.nova = nova ? '1' : '';
+    form.dataset.contexto = nova || somenteLeitura ? '' : contexto;
     nome.disabled = !nova;
     nome.required = nova;
     nome.value = '';
@@ -8466,14 +8502,20 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
         radio.checked = radio.value === (permitido ? 'allow' : '');
         radio.disabled = somenteLeitura;
       });
+      // Alcance no módulo de vendas: dono e administrador enxergam a conta toda.
+      $todos('input[data-escopo-vendas]', form).forEach((radio) => {
+        radio.checked = radio.value === (acessoTotal ? 'todos' : escopo);
+        radio.disabled = somenteLeitura;
+      });
     }
     abrirModal($('#as-role-modal'));
   }
   $('#as-role-form').addEventListener('submit', (ev) => {
     const form = ev.target;
     if (form.dataset.nova !== '1') {
+      const aviso = salvarMatrizDoModal(form);
       fecharModal($('#as-role-modal'));
-      avisar('Permissões salvas');
+      avisar(aviso);
       return;
     }
     const nome = $('input[name="name"]', form).value.trim();
@@ -10198,11 +10240,440 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     avisar('Assinatura mantida.');
   });
 
+  // =================================================================================
+  // 13. Módulo de vendas (recurso 004, em aprovação): vendedor e comissão de cada usuário
+  //     e as permissões do módulo nas funções. Os dados ficam em window.vendas
+  //     (mockup-vendas.js), de onde Clientes, Pedidos, Representadas e o Dashboard leem: o
+  //     que muda aqui aparece lá, trocando a pessoa no "Ver como".
+  // =================================================================================
+  const vendas = window.vendas;
+
+  // Grupos novos da matriz: [título, recurso em window.vendas, [ação, chave, rótulo, descrição]].
+  const GRUPOS_DO_MODULO = [
+    ['Clientes', 'clientes', [
+      ['ver', 'clientes.read', 'Ver clientes', 'Listar, buscar e abrir clientes e a carteira.'],
+      ['editar', 'clientes.write', 'Criar/editar clientes', 'Cadastrar e editar clientes e vincular contatos a eles.'],
+      ['excluir', 'clientes.delete', 'Excluir clientes', 'Excluir clientes e os vínculos com contatos.'],
+      ['bloquear', 'clientes.block', 'Bloquear clientes', 'Bloquear e desbloquear clientes, junto com os contatos vinculados.'],
+    ]],
+    ['Pedidos', 'pedidos', [
+      ['ver', 'pedidos.read', 'Ver pedidos', 'Listar e abrir pedidos e orçamentos.'],
+      ['editar', 'pedidos.write', 'Criar/editar pedidos', 'Criar pedidos e orçamentos, mudar o status e registrar o pedido ao finalizar a conversa.'],
+      ['excluir', 'pedidos.delete', 'Excluir pedidos', 'Excluir pedidos e orçamentos.'],
+    ]],
+    ['Representadas', 'representadas', [
+      ['ver', 'representadas.read', 'Ver representadas', 'Ver as representadas, a comissão de cada uma e o catálogo de produtos.'],
+      ['editar', 'representadas.write', 'Criar/editar representadas', 'Cadastrar e editar representadas e importar o catálogo em PDF.'],
+      ['excluir', 'representadas.delete', 'Excluir representadas', 'Excluir representadas e produtos do catálogo.'],
+    ]],
+    ['Indicadores de vendas', 'indicadores', [
+      ['ver', 'indicadores_vendas.read', 'Ver indicadores de vendas', 'Ver a seção de vendas do Dashboard: pedidos, carteira, curva ABC e positivação.'],
+    ]],
+  ];
+  const ACAO_DA_CHAVE = {};
+  GRUPOS_DO_MODULO.forEach(([, recurso, acoes]) => acoes.forEach(([acao, chave]) => { ACAO_DA_CHAVE[chave] = { recurso, acao }; }));
+  // Alcance da função no módulo, no lugar de "Não permitir" e "Permitir".
+  const ESCOPOS = [['carteira', 'Só a própria carteira'], ['todos', 'Toda a conta']];
+
+  // Matriz do módulo por função. Dono e administrador podem tudo por definição, como no resto
+  // da matriz. "membro" é a função padrão: o mesmo que mockup-vendas.js dá ao vendedor quando
+  // nada foi alterado. As funções da conta guardam a matriz só nesta visita, como as outras
+  // permissões delas.
+  const MODULO_TOTAL = { clientes: ['ver', 'editar', 'excluir', 'bloquear'], pedidos: ['ver', 'editar', 'excluir'], representadas: ['ver', 'editar', 'excluir'], indicadores: ['ver'], escopo: 'todos' };
+  const MODULO_DO_MEMBRO = { clientes: ['ver', 'editar'], pedidos: ['ver', 'editar'], representadas: ['ver'], indicadores: ['ver'], escopo: 'carteira' };
+  const MODULO_VAZIO = { clientes: [], pedidos: [], representadas: [], indicadores: [], escopo: 'carteira' };
+  const MODULO_DA_FUNCAO = {
+    'role-externo': { clientes: ['ver', 'editar'], pedidos: ['ver', 'editar'], representadas: ['ver'], indicadores: [], escopo: 'carteira' },
+  };
+  // "Editar permissões deste usuário": como no app, a pessoa passa a ter uma função só dela,
+  // que o seletor mostra como "Personalizado". As permissões gerais dela ficam nesta visita;
+  // as do módulo vão para window.vendas.
+  const PERMISSOES_PESSOAIS = {};
+  const PESSOAL = 'pessoal';
+
+  const copiaDoModulo = (m) => JSON.parse(JSON.stringify({ ...MODULO_VAZIO, ...(m || {}) }));
+  function moduloDaFuncao(id) {
+    if (id === 'role-owner' || id === 'role-admin') return copiaDoModulo(MODULO_TOTAL);
+    if (id === 'role-member') return copiaDoModulo(MODULO_DO_MEMBRO);
+    return copiaDoModulo(MODULO_DA_FUNCAO[id] || MODULO_VAZIO);
+  }
+  /** Chaves da matriz liberadas na matriz do módulo `m` (na ordem da tela). */
+  function chavesDoModulo(m) {
+    return Object.keys(ACAO_DA_CHAVE).filter((chave) => (m[ACAO_DA_CHAVE[chave].recurso] || []).includes(ACAO_DA_CHAVE[chave].acao));
+  }
+  const mesmoModulo = (a, b) => `${chavesDoModulo(a)}|${a.escopo || 'carteira'}` === `${chavesDoModulo(b)}|${b.escopo || 'carteira'}`;
+
+  const linhasDeMembro = () => $todos('#as-members-tbody tr').filter((tr) => $('select[data-action="change-role"]', tr));
+  const seletorDaLinha = (tr) => $('select[data-action="change-role"]', tr);
+  /** A pessoa da linha no universo de vendas, pelo e-mail. */
+  function usuarioDaLinha(tr) {
+    const email = $('strong', tr)?.textContent.trim();
+    return vendas?.usuarios().find((u) => u.email === email) || null;
+  }
+  /** Id da função a partir do valor do seletor de função do membro. */
+  function idDaFuncao(valor) {
+    const globais = { owner: 'role-owner', admin: 'role-admin', member: 'role-member' };
+    if (globais[valor]) return globais[valor];
+    if (valor === PESSOAL) return PESSOAL;
+    return $todos('#as-roles-tbody [data-action="delete-role"]').find((b) => b.dataset.name === valor)?.dataset.id || null;
+  }
+  /**
+   * Matriz do módulo que vale para a pessoa da linha. No protótipo, a do vendedor (papel
+   * "member" em window.vendas) é a que as outras telas usam quando o "Ver como" é ele.
+   */
+  function moduloDaLinha(tr) {
+    if (usuarioDaLinha(tr)?.papel === 'member') return copiaDoModulo(vendas.permissoesDoPapel('member'));
+    return moduloDaFuncao(idDaFuncao(seletorDaLinha(tr).value));
+  }
+
+  function abrirPermissoesDoMembro(tr) {
+    const email = $('strong', tr).textContent.trim();
+    const gerais = PERMISSOES_PESSOAIS[email] || PERMISSOES[idDaFuncao(seletorDaLinha(tr).value)] || PERMISSOES['role-member'];
+    const modulo = moduloDaLinha(tr);
+    abrirModalDeFuncao({
+      titulo: `Permissões de ${email}`,
+      permissoes: [...gerais, ...chavesDoModulo(modulo)],
+      escopo: modulo.escopo,
+      contexto: `membro:${email}`,
+    });
+  }
+
+  function marcarPersonalizado(select, ligar) {
+    let opcao = $(`option[value="${PESSOAL}"]`, select);
+    if (!ligar) { opcao?.remove(); return; }
+    if (!opcao) {
+      opcao = new Option('Personalizado', PESSOAL);
+      select.prepend(opcao);
+    }
+    select.value = PESSOAL;
+    select.dataset.anterior = PESSOAL;
+  }
+  /** O vendedor com matriz salva diferente da função dele aparece como "Personalizado". */
+  function conferirPersonalizado() {
+    linhasDeMembro().forEach((tr) => {
+      const select = seletorDaLinha(tr);
+      if (usuarioDaLinha(tr)?.papel !== 'member' || select.value === PESSOAL) return;
+      if (!mesmoModulo(vendas.permissoesDoPapel('member'), moduloDaFuncao(idDaFuncao(select.value)))) marcarPersonalizado(select, true);
+    });
+  }
+
+  /** Grava o que o modal de permissões mostra e devolve o aviso que o app dá. */
+  function salvarMatrizDoModal(form) {
+    const [tipo, alvo] = (form.dataset.contexto || '').split(/:(.*)/s);
+    const gerais = [];
+    const modulo = copiaDoModulo(MODULO_VAZIO);
+    $todos('input[data-perm-effect]:checked', form).forEach((radio) => {
+      if (radio.value !== 'allow') return;
+      const acao = ACAO_DA_CHAVE[radio.dataset.perm];
+      if (acao) modulo[acao.recurso].push(acao.acao);
+      else gerais.push(radio.dataset.perm);
+    });
+    modulo.escopo = $('input[data-escopo-vendas]:checked', form)?.value || 'carteira';
+    if (tipo === 'membro') {
+      const tr = linhasDeMembro().find((l) => $('strong', l).textContent.trim() === alvo);
+      PERMISSOES_PESSOAIS[alvo] = gerais;
+      if (tr) {
+        marcarPersonalizado(seletorDaLinha(tr), true);
+        if (usuarioDaLinha(tr)?.papel === 'member') vendas.salvarPermissoes('member', modulo);
+      }
+      return 'Permissões do usuário salvas';
+    }
+    if (tipo === 'funcao' && alvo) {
+      PERMISSOES[alvo] = gerais;
+      MODULO_DA_FUNCAO[alvo] = modulo;
+      // Quem está nessa função passa a valer a matriz nova.
+      linhasDeMembro().forEach((tr) => {
+        if (idDaFuncao(seletorDaLinha(tr).value) === alvo && usuarioDaLinha(tr)?.papel === 'member') vendas.salvarPermissoes('member', modulo);
+      });
+    }
+    return 'Permissões salvas';
+  }
+
+  /** Depois de confirmada a troca de função na linha de um membro. */
+  function aoTrocarFuncaoDoMembro(select) {
+    if (select.value !== PESSOAL) marcarPersonalizado(select, false);
+    const usuario = usuarioDaLinha(select.closest('tr'));
+    if (usuario?.papel === 'member') {
+      delete PERMISSOES_PESSOAIS[usuario.email];
+      vendas.salvarPermissoes('member', moduloDaFuncao(idDaFuncao(select.value)));
+    }
+    aplicarVerComo();
+  }
+
+  // --- Selo do vendedor e a ação "Vendedor e comissão" na lista de membros ------------
+  const seloNovo = () => Object.assign(document.createElement('span'), { className: 'mockup-novo', textContent: 'Novo' });
+  const formatoPct = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const pct = (n) => formatoPct.format(Number(n) || 0);
+  /** "3", "3,5", "3,50" ou "3.5" → 3.5; vazio → 0; fora de 0 a 100 ou com mais de 2 casas → null. */
+  function lerComissao(texto) {
+    const t = String(texto ?? '').replace(/[%\s]/g, '');
+    if (!t) return 0;
+    if (!/^\d{1,3}([.,]\d{1,2})?$/.test(t)) return null;
+    const n = Number(t.replace(',', '.'));
+    return n <= 100 ? n : null;
+  }
+  function rotuloDoVendedor(v) {
+    if (!v?.vendedor) return 'Não é vendedor';
+    return v.comissao > 0 ? `Vendedor · ${pct(v.comissao)}%` : 'Vendedor · sem comissão';
+  }
+
+  // O selo fica na coluna Tipo, embaixo da função, e é ele que abre "Vendedor e comissão".
+  // Coluna ou botão de ação a mais não cabem entre 1280 e 1366 px: a tabela corta o que passa
+  // da largura, e a coluna Ações sumia.
+  function montarVendedorNaLista() {
+    const cabecalhos = $todos('th', $('#as-members-tbody').closest('table').tHead);
+    cabecalhos.find((th) => th.textContent.trim() === 'Tipo')?.append(seloNovo());
+    linhasDeMembro().forEach((tr) => {
+      const selo = document.createElement('button');
+      selo.type = 'button';
+      selo.dataset.action = 'member-seller';
+      selo.dataset.id = $('[data-action="toggle-status"]', tr).dataset.id;
+      selo.dataset.mockVendedor = '';
+      selo.title = 'Vendedor e comissão';
+      Object.assign(selo.style, { display: 'flex', width: 'fit-content', marginTop: '6px' });
+      seletorDaLinha(tr).after(selo);
+    });
+  }
+  function atualizarVendedores() {
+    linhasDeMembro().forEach((tr) => {
+      const usuario = usuarioDaLinha(tr);
+      const selo = $('[data-mock-vendedor]', tr);
+      if (!usuario || !selo) return;
+      const v = vendas.vendedor(usuario.id);
+      // Mesmo selo das colunas da tabela, com o lápis das ações de editar.
+      const lapis = document.createElement('i');
+      lapis.className = 'ri-pencil-line';
+      selo.className = `settings-pill ${v?.vendedor ? 'settings-pill-blue' : 'settings-pill-gray'}`;
+      selo.replaceChildren(rotuloDoVendedor(v), lapis);
+    });
+  }
+
+  // --- Modal "Vendedor e comissão": o modal de convite, com a chave das Regras de ------
+  // --- Atendimento e o rótulo, campo e textos de ajuda que a seção já usa ---------------
+  const ui = {};
+  let vendedorEmEdicao = null;
+  function montarModalDeVendedor() {
+    const modal = $('#as-invite-modal').cloneNode(true);
+    modal.id = 'as-seller-modal';
+    modal.removeAttribute('data-bound');
+    $('.settings-section-icon i', modal).className = 'ri-hand-coin-line';
+    $('.settings-modal-title', modal).textContent = 'Vendedor e comissão';
+    $todos('[data-action="close-invite"]', modal).forEach((b) => { b.dataset.action = 'close-seller'; });
+    const form = $('form', modal);
+    form.id = 'as-seller-form';
+    const salvar = $('button[type="submit"]', form);
+    salvar.textContent = 'Salvar';
+    const ajuda = (texto) => {
+      const p = $('#as-role-basic-fields .settings-helper').cloneNode(false);
+      p.textContent = texto;
+      return p;
+    };
+
+    // Comissão: o bloco rótulo + campo do convite.
+    const blocoComissao = form.firstElementChild;
+    const rotulo = $('label', blocoComissao);
+    rotulo.textContent = 'Comissão do vendedor (%)';
+    rotulo.htmlFor = 'as-seller-commission';
+    const campo = $('input', blocoComissao);
+    campo.removeAttribute('required');
+    Object.assign(campo, { id: 'as-seller-commission', name: 'comissao', type: 'text', inputMode: 'decimal', placeholder: '0,00', autocomplete: 'off', maxLength: 6 });
+    const exemplo = ajuda('');
+    blocoComissao.append(
+      ajuda('Percentual sobre o valor dos pedidos que esta pessoa gerar. Não é a comissão da representada: aquela é o que a indústria paga ao representante e fica no cadastro de cada representada.'),
+      ajuda('Fica gravada em cada pedido quando ele é criado: mudar aqui não altera pedidos antigos.'),
+      exemplo,
+    );
+
+    // "É vendedor": a linha com chave liga/desliga das Regras de Atendimento.
+    const linhaDaChave = $('#rules-rating-stars-toggle').closest('.settings-list-row').cloneNode(true);
+    const chave = $('.settings-toggle', linhaDaChave);
+    chave.removeAttribute('id');
+    chave.dataset.sellerToggle = '';
+    $('span', linhaDaChave).textContent = 'É vendedor';
+    const blocoChave = document.createElement('div');
+    blocoChave.append(linhaDaChave, ajuda('Só quem é vendedor aparece para escolha em Clientes e Pedidos e tem carteira própria.'));
+
+    const quem = ajuda('');
+    quem.style.marginTop = '0';
+    const aviso = $('#as-role-global-notice').cloneNode(false);
+    aviso.id = 'as-seller-notice';
+    aviso.style.marginBottom = '0';
+    aviso.textContent = 'Só o dono da conta altera vendedor e comissão de um Dono ou Administrador.';
+
+    const corpo = $('#as-queue-modal .settings-queue-modal-scroll').cloneNode(false); // a coluna espaçada dos modais da seção
+    corpo.append(quem, aviso, blocoChave, blocoComissao);
+    form.prepend(corpo);
+    acesso.appendChild(modal);
+    const cancelar = $('.settings-modal-actions [data-action="close-seller"]', form);
+    Object.assign(ui, { modal, form, chave, campo, exemplo, aviso, quem, salvar, cancelar });
+
+    modal.addEventListener('click', (ev) => {
+      const toggle = ev.target.closest('[data-seller-toggle]');
+      if (toggle) {
+        // A chave fica dentro de <label>: o clique não pode cair duas vezes.
+        ev.preventDefault();
+        ligarToggle(toggle, !toggle.classList.contains('is-on'));
+        sincronizarComissao();
+        if (!campo.disabled) campo.focus();
+        return;
+      }
+      if (ev.target.closest('[data-action="close-seller"]')) fecharModal(modal);
+    });
+    campo.addEventListener('input', () => { campo.removeAttribute('aria-invalid'); sincronizarComissao(); });
+    campo.addEventListener('blur', () => {
+      const n = lerComissao(campo.value);
+      if (n !== null) campo.value = pct(n);
+    });
+    form.addEventListener('submit', () => {
+      if (!vendedorEmEdicao || ui.somenteLeitura) return;
+      const vende = chave.classList.contains('is-on');
+      const comissao = lerComissao(campo.value);
+      if (vende && comissao === null) {
+        campo.setAttribute('aria-invalid', 'true');
+        campo.focus();
+        avisar('Informe a comissão de 0 a 100%, com até duas casas decimais.');
+        return;
+      }
+      // Desligar a função não apaga a comissão: ela volta igual se a pessoa voltar a vender.
+      vendas.salvarVendedor(vendedorEmEdicao, vende ? { vendedor: true, comissao } : { vendedor: false });
+      fecharModal(modal);
+      avisar('Vendedor e comissão salvos');
+    });
+  }
+  function sincronizarComissao() {
+    const vende = ui.chave.classList.contains('is-on');
+    const n = lerComissao(ui.campo.value);
+    ui.campo.disabled = ui.somenteLeitura || !vende;
+    ui.exemplo.hidden = !vende;
+    ui.exemplo.textContent = n === null ? 'Use um percentual de 0 a 100, com até duas casas decimais (ex.: 3,50).'
+      : n === 0 ? 'Sem comissão: os pedidos desta pessoa não geram comissão de vendedor.'
+        : `Exemplo: num pedido de ${vendas.fmt.brl(1_000_000)}, a comissão do vendedor é de ${vendas.fmt.brl(Math.round(1_000_000 * n / 100))}.`;
+  }
+  function abrirModalDeVendedor(tr) {
+    const usuario = usuarioDaLinha(tr);
+    if (!usuario) return;
+    const atual = vendas.vendedor(usuario.id) || { vendedor: false, comissao: 0 };
+    // A mesma barreira das outras mudanças de membro: só o dono mexe em Dono ou Administrador.
+    ui.somenteLeitura = vendas.verComo().papel !== 'owner' && ['owner', 'admin'].includes(seletorDaLinha(tr).value);
+    vendedorEmEdicao = usuario.id;
+    ui.quem.textContent = `${usuario.nome} · ${usuario.email}`;
+    ui.aviso.classList.toggle('hidden', !ui.somenteLeitura);
+    ui.salvar.classList.toggle('hidden', ui.somenteLeitura);
+    ui.cancelar.textContent = ui.somenteLeitura ? 'Fechar' : 'Cancelar';
+    ligarToggle(ui.chave, Boolean(atual.vendedor));
+    ui.chave.disabled = ui.somenteLeitura;
+    ui.campo.value = pct(atual.comissao || 0);
+    ui.campo.removeAttribute('aria-invalid');
+    sincronizarComissao();
+    abrirModal(ui.modal);
+    if (!ui.somenteLeitura) (ui.campo.disabled ? ui.chave : ui.campo).focus();
+  }
+
+  // --- Grupos do módulo na matriz de permissões (clonados do grupo "Contatos") ----------
+  function montarMatrizDoModulo() {
+    const grupoModelo = $('#as-role-perms-container [data-perm="contacts.read"]').closest('.as-permission-group');
+    const linhaModelo = $('.as-permission-row', grupoModelo);
+    let depois = grupoModelo;
+    const novoGrupo = (titulo) => {
+      const grupo = grupoModelo.cloneNode(false);
+      const h4 = $('h4', grupoModelo).cloneNode(false);
+      h4.append(titulo, seloNovo());
+      grupo.append(h4);
+      grupo.dataset.moduloVendas = '';
+      depois.after(grupo);
+      depois = grupo;
+      return grupo;
+    };
+    const novaLinha = (rotulo, descricao) => {
+      const linha = linhaModelo.cloneNode(true);
+      $('.as-permission-info strong', linha).textContent = rotulo;
+      $('.as-permission-info small', linha).textContent = descricao;
+      $todos('input', linha).forEach((radio) => { radio.checked = false; radio.removeAttribute('checked'); });
+      return linha;
+    };
+    GRUPOS_DO_MODULO.forEach(([titulo, , acoes]) => {
+      const grupo = novoGrupo(titulo);
+      acoes.forEach(([, chave, rotulo, descricao]) => {
+        const linha = novaLinha(rotulo, descricao);
+        $todos('input', linha).forEach((radio) => {
+          radio.name = `perm-${chave.replace(/[^a-z0-9_-]/gi, '_')}`;
+          radio.dataset.perm = chave;
+        });
+        grupo.append(linha);
+      });
+    });
+    // Escopo: a mesma linha, com o alcance no lugar de "Não permitir" e "Permitir".
+    const linha = novaLinha('O que a função enxerga',
+      'Só a própria carteira: os clientes e pedidos em que a pessoa é a vendedora, e os indicadores deles. Toda a conta: os de todos os vendedores.');
+    $todos('.as-permission-effect', linha).forEach((opcao, i) => {
+      const radio = $('input', opcao);
+      radio.name = 'as-escopo-vendas';
+      radio.value = ESCOPOS[i][0];
+      radio.removeAttribute('data-perm');
+      radio.removeAttribute('data-perm-effect');
+      radio.dataset.escopoVendas = '';
+      $('span', opcao).textContent = ESCOPOS[i][1];
+    });
+    novoGrupo('Escopo do módulo de vendas').append(linha);
+  }
+
+  // --- "Ver como": Usuários & Acesso é só de dono e administrador, como no app ---------
+  // Tela de acesso negado da seção, copiada literalmente do app.
+  const acessoRestrito = elemento(`
+      <div class="settings-empty" style="min-height:220px;">
+        <i class="ri-shield-keyhole-line" style="font-size:28px;"></i>
+        <p class="mt-2 font-semibold">Acesso restrito</p>
+        <p class="settings-helper">Esta seção é permitida apenas para usuários owner/admin.</p>
+      </div>`);
+  function aplicarVerComo() {
+    if (!vendas) return;
+    const papel = vendas.verComo().papel;
+    const gestor = papel === 'owner' || papel === 'admin';
+    $('.settings-users-mvp', acesso).style.display = gestor ? '' : 'none';
+    acessoRestrito.style.display = gestor ? 'none' : '';
+    if (!gestor) {
+      if ($('#as-confirm-modal.open')) encerrarConfirmacaoDeAcesso(false);
+      $todos('.settings-modal.open', acesso).forEach(fecharModal);
+    }
+    // Só o dono concede ou altera Dono e Administrador (o app trava o seletor do mesmo jeito).
+    const dono = papel === 'owner';
+    linhasDeMembro().forEach((tr) => {
+      const select = seletorDaLinha(tr);
+      select.disabled = !dono && ['owner', 'admin'].includes(select.value);
+      [...select.options].forEach((op) => { op.disabled = !dono && ['owner', 'admin'].includes(op.value) && op.value !== select.value; });
+    });
+  }
+
+  if (vendas) {
+    montarVendedorNaLista();
+    montarMatrizDoModulo();
+    montarModalDeVendedor();
+    acesso.appendChild(acessoRestrito);
+    atualizarVendedores();
+    conferirPersonalizado();
+    aplicarVerComo();
+    acesso.addEventListener('click', (ev) => {
+      const botao = ev.target.closest('[data-action="member-seller"]');
+      if (botao) abrirModalDeVendedor(botao.closest('tr'));
+    });
+    vendas.aoMudar(({ tipo }) => {
+      if (tipo === 'vendedores' || tipo === 'todos') atualizarVendedores();
+      if (tipo === 'permissoes' || tipo === 'todos') conferirPersonalizado();
+      if (tipo === 'ver-como' || tipo === 'todos') {
+        fecharModal(ui.modal);
+        aplicarVerComo();
+      }
+    });
+  }
+
   // ---------------------------------------------------------------------------------
-  // Estado inicial a partir do endereço: ?tab=, ?channel= e ?plan= (como o app)
+  // Estado inicial a partir do endereço: ?tab=, ?channel= e ?plan= (como o app), e ?secao=
+  // (subseção de Usuários & Acesso, só do protótipo)
   // ---------------------------------------------------------------------------------
   const busca = new URLSearchParams(location.search);
   ativarAba(PARAM_PARA_ABA[(busca.get('tab') || '').toLowerCase()] || 'general', false);
+  const secaoInicial = SUBABA_DA_SECAO[(busca.get('secao') || '').toLowerCase()];
+  if (secaoInicial) ativarSubaba(secaoInicial);
   const canalInicial = (busca.get('channel') || '').toLowerCase();
   if (canalInicial && canalInicial !== 'whatsapp') ativarCanal(canalInicial, false);
   const planoDaUrl = busca.get('plan');

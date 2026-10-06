@@ -9048,6 +9048,9 @@
 <!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. A marcação acima é a captura do app
      (tools/capture/out/dashboard.html). Cada aba e cada período foram capturados do app de
      verdade e estão nos <template data-estado="periodo:aba"> dentro de #mockup-estados.
+     A aba Vendas (recurso novo, em aprovação) não é captura: entre VENDAS:INICIO e
+     VENDAS:FIM ficam o estilo, o Chart.js, o mockup-vendas.js e o script que desenha a
+     seção ao vivo com os dados do módulo de vendas.
      Para recapturar (abas, períodos e gráficos juntos) sem perder este bloco:
      node tools/capture/capture.mjs dashboard "/dashboard.html" 7000 "js:window.__mockDashboard.capturarEstados()"
      node tools/capture/montar.mjs dashboard -->
@@ -9069,6 +9072,1075 @@
     .dashboard-monitoring-quality-radar .chart-wrap:has(> img[data-mockup-canvas]) { height: auto !important; }
   }
 </style>
+<!-- VENDAS:INICIO — aba Vendas (indicadores de vendas, recurso novo em aprovação).
+     Desenhada ao vivo com window.vendas (mockup-vendas.js); os gráficos usam o mesmo
+     Chart.js do app. Fica antes do script das abas porque ele chama
+     window.mockupVendasDashboard já no carregamento (link ?session=vendas). -->
+<style>
+  /* ---- Aba Vendas (recurso novo, em aprovação) ------------------------------------
+     Só arranjo e ajustes finos. Cartões, listas, filtros, tabela e gráficos usam as
+     classes que o Dashboard do app já tem. Toda grade usa minmax(0, 1fr) e todo filho
+     tem min-width: 0, para nada largo empurrar a página para os lados no celular. */
+  .vendas-secao { grid-template-columns: minmax(0, 1fr); }
+  .vendas-secao > *,
+  .vendas-grade > * { min-width: 0; }
+  .vendas-grade { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 1024px) {
+    .vendas-grade--2-1 { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+    .vendas-grade--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .vendas-grade--2 > :only-child { grid-column: 1 / -1; }
+    .vendas-grade--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .vendas-grade--3 > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
+  @media (min-width: 1280px) {
+    .vendas-grade--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .vendas-grade--3 > :last-child:nth-child(odd) { grid-column: auto; }
+  }
+  .vendas-secao .vendas-kpis { margin-top: 0; }
+  .vendas-secao .vendas-aviso { margin: 0; }
+
+  /* Filtros: os itens do filtro de Chat > Horários; o intervalo personalizado usa as
+     datas do período personalizado de Campanhas. */
+  .vendas-intervalo .dashboard-campaigns-custom-controls { flex-wrap: wrap; margin-top: 4px; }
+  .vendas-intervalo .dashboard-campaigns-custom-feedback { margin-top: 6px; }
+
+  /* Gráficos de barras (Chart.js, como no app). */
+  .vendas-grafico { position: relative; height: 300px; }
+  .vendas-grafico--baixo { height: 240px; }
+
+  /* Roscas: o arranjo de rosca + lista do Monitoramento, empilhado (os cartões são
+     estreitos) e um pouco menor. */
+  .vendas-secao .vendas-donut { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-bottom: 0; }
+  .vendas-secao .vendas-donut .donut-wrap { height: 220px; max-width: 320px; margin: 0 auto; }
+  .vendas-secao .vendas-donut .donut-wrap .center strong { font-size: 28px; }
+  /* O canvas fica por cima do total do centro: o tooltip é desenhado no canvas e, assim,
+     cobre o total em vez de ficar por baixo dele (o fundo do canvas é transparente). */
+  .vendas-secao .vendas-donut .donut-wrap canvas { position: relative; z-index: 1; }
+
+  /* Listas com barra (itens de motivo do Monitoramento): nome longo corta, número não. */
+  .vendas-lista .dashboard-monitoring-reason-head { gap: 12px; }
+  .vendas-lista .dashboard-monitoring-reason-head span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vendas-lista .dashboard-monitoring-reason-head strong { flex-shrink: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .vendas-lista .dashboard-monitoring-reason-item:last-child { margin-bottom: 0; }
+  .vendas-lista [data-vendas-abc-filtrar] { cursor: pointer; border-radius: 10px; }
+  .vendas-lista [data-vendas-abc-filtrar]:focus-visible { outline: 2px solid var(--ds-primary); outline-offset: 4px; }
+  .vendas-nota { margin: 6px 0 0; color: var(--ds-text-muted); font-size: 12px; line-height: 1.35; }
+  .vendas-nota strong { color: var(--ds-text); font-weight: 800; }
+  .vendas-secao .vendas-desempenho { margin-bottom: 20px; }
+  .vendas-secao .vendas-prospects { margin-top: 16px; }
+
+  /* Tabela da curva ABC: a tabela do Monitoramento, sem largura mínima, com respiro
+     entre colunas. No celular saem a posição e o acumulado. */
+  .vendas-abc-filtros { margin-bottom: 12px; }
+  .vendas-abc-tabela th,
+  .vendas-abc-tabela td { padding-left: 10px; padding-right: 10px; }
+  .vendas-abc-tabela th:first-child,
+  .vendas-abc-tabela td:first-child { padding-left: 0; }
+  .vendas-abc-tabela th:last-child,
+  .vendas-abc-tabela td:last-child { padding-right: 0; }
+  .vendas-abc-tabela .vendas-num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .vendas-abc-tabela .vendas-col-pos { width: 1%; color: var(--ds-text-muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .vendas-abc-tabela .vendas-col-curva { width: 1%; }
+  .vendas-abc-tabela .vendas-abc-cliente { width: 100%; max-width: 0; }
+  .vendas-abc-tabela .dashboard-campaigns-campaign-name { display: block; width: auto; max-width: 100%; font-weight: 600; }
+  .vendas-abc-tabela .vendas-nota { margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vendas-abc-tabela .vendas-abc-vazio { text-align: center; color: var(--ds-text-muted); font-size: 13px; padding: 28px 12px; }
+  .vendas-abc-rodape { display: flex; justify-content: center; margin-top: 14px; }
+  .vendas-abc-nome { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .vendas-abc-nome a:hover { color: var(--ds-primary); text-decoration: underline; }
+  .vendas-abc-tabela .vendas-abc-selo { display: none; flex-shrink: 0; width: 22px; height: 22px; font-size: 11px; }
+  .vendas-rotulo-curto { display: none; }
+
+  @media (max-width: 768px) {
+    .vendas-grafico { height: 240px; }
+    .vendas-grafico--baixo { height: 200px; }
+    .vendas-secao .vendas-donut .donut-wrap { height: 200px; }
+  }
+  @media (max-width: 640px) {
+    .vendas-abc-tabela .vendas-col-pos,
+    .vendas-abc-tabela .vendas-col-curva,
+    .vendas-abc-tabela .vendas-col-acum { display: none; }
+    .vendas-abc-tabela .vendas-abc-cliente { padding-left: 0; }
+    .vendas-abc-tabela .vendas-abc-selo { display: inline-flex; }
+    .vendas-rotulo-longo { display: none; }
+    .vendas-rotulo-curto { display: inline; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+<script src="mockup-vendas.js"></script>
+<script>
+(() => {
+  // ---------------------------------------------------------------------------------
+  // ABA VENDAS: indicadores de vendas (recurso novo, em aprovação).
+  //
+  // Não é captura do app: a seção é desenhada ao vivo com window.vendas
+  // (mockup-vendas.js), a mesma fonte de Pedidos, Clientes e Representadas. Um pedido
+  // registrado em outra tela, ou em outra aba do navegador, muda os números na hora.
+  //
+  // Visual: só classes que o Dashboard já usa (filtros de Chat > Horários, cartões de
+  // KPI da Visão Geral, cartões e listas do Monitoramento, datas do período
+  // personalizado de Campanhas). Os gráficos são Chart.js com o estilo dos gráficos do
+  // app; aqui eles são de verdade, com tooltip, e não imagem como nas outras abas.
+  //
+  // Período: o seletor PERÍODO do cabeçalho vale para as outras abas (Hoje a 90 dias).
+  // A aba Vendas tem o próprio período, que começa no mês corrente; enquanto ela está
+  // aberta o seletor do cabeçalho some, para não haver dois períodos na tela. Voltando
+  // para outra aba, ele reaparece com o valor de antes.
+  //
+  // Para as abas capturadas: window.mockupVendasDashboard = { disponivel, mostrar,
+  // esconder, avisarIndisponivel }. O script das abas (logo abaixo) chama mostrar()
+  // quando a aba Vendas fica ativa e esconder() quando outra aba entra.
+  // ---------------------------------------------------------------------------------
+  const vendas = window.vendas;
+  const conteudo = document.getElementById('dashboard-session-content');
+  const nav = document.getElementById('dashboard-session-tabs');
+  if (!vendas || !conteudo || !nav) return;
+
+  const fmt = vendas.fmt;
+  const DIA = 86_400_000;
+  const CHAVE_FILTROS = 'zap-mockup:dashboard-vendas-filtros';
+  const LINHAS_ABC = 10;
+  const MAX_DIAS = 366;
+  const PERIODOS = {
+    mes: 'Este mês',
+    'mes-passado': 'Mês passado',
+    '30d': 'Últimos 30 dias',
+    '90d': 'Últimos 90 dias',
+    personalizado: 'Personalizado',
+  };
+
+  // Cores: todas do Dashboard do app (cores dos gráficos e tons dos cartões). Cor
+  // segue a coisa, não a posição: "Ativos" é verde em qualquer rosca, a curva A é
+  // sempre o azul, cada vendedor tem a cor dele.
+  const COR = {
+    barra: '#376AA8',
+    barraHover: '#2196F3',
+    positivacao: '#48BB78',
+    positivacaoHover: '#38A169',
+    situacao: { ativo: '#48BB78', inativo_recente: '#D69E2E', inativo_antigo: '#F56565', novo: '#9F7AEA' },
+    curva: { A: '#376AA8', B: '#4FC3B3', C: '#D69E2E' },
+    vendedores: ['#4A6FA5', '#F6AD55', '#B794F4', '#4FD1C5', '#48BB78', '#F56565'],
+    vazio: 'rgba(148, 163, 184, 0.22)',
+  };
+
+  /** Grade e eixos dos gráficos, claro ou escuro (mesmos valores dos gráficos do app). */
+  function paleta() {
+    const escuro = document.documentElement.classList.contains('dark');
+    return {
+      grade: escuro ? 'rgba(148,163,184,0.25)' : 'rgba(0,0,0,0.05)',
+      eixo: escuro ? '#9FB2C8' : '#8896A6',
+    };
+  }
+
+  // ---- utilitários -----------------------------------------------------------------
+  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const plural = (n, um, varios) => `${fmt.numero(n)} ${n === 1 ? um : varios}`;
+  const pct = (n, casas = 1) => fmt.pct(n, casas);
+  const larguraBarra = (p) => (p > 0 ? Math.max(2, Math.min(100, p)) : 0);
+  const normalizar = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const moedaCurta = (reais) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: 'compact', maximumFractionDigits: 1 }).format(reais);
+
+  const inicioDoDia = (d) => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
+  const fimDoDia = (d) => { const x = new Date(d); x.setHours(23, 59, 59, 999); return x; };
+  const somarDias = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const chaveDoDia = (d) => {
+    const x = new Date(d);
+    return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+  };
+  const dataDoCampo = (texto) => (/^\d{4}-\d{2}-\d{2}$/.test(texto || '') ? new Date(`${texto}T00:00:00`) : null);
+  const diaMes = (chave) => `${chave.slice(8, 10)}/${chave.slice(5, 7)}`;
+  const tituloDoDia = (chave) => {
+    const texto = new Date(`${chave}T12:00:00`).toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' });
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+  };
+
+  // ---- estado da tela --------------------------------------------------------------
+  const filtros = { periodo: 'mes', de: '', ate: '', representadaId: '', vendedorId: '' };
+  try {
+    const salvo = JSON.parse(sessionStorage.getItem(CHAVE_FILTROS) || '{}');
+    Object.keys(filtros).forEach((k) => { if (typeof salvo[k] === 'string') filtros[k] = salvo[k]; });
+  } catch { /* navegação privada: começa no padrão */ }
+  if (!PERIODOS[filtros.periodo]) filtros.periodo = 'mes';
+  if (filtros.periodo === 'personalizado' && validarIntervalo(filtros.de, filtros.ate).erro) filtros.periodo = 'mes';
+
+  const tela = {
+    ativo: false,
+    dados: null,
+    rascunho: null, // datas digitadas que ainda não valem (com erro)
+    erroIntervalo: '',
+    abcBusca: '',
+    abcCurva: '',
+    abcTodos: false,
+  };
+  let timerStatus;
+
+  function guardarFiltros() {
+    try { sessionStorage.setItem(CHAVE_FILTROS, JSON.stringify(filtros)); } catch { /* sem armazenamento */ }
+  }
+
+  // ---- permissão e escopo ----------------------------------------------------------
+  const disponivel = () => vendas.pode('indicadores', 'ver');
+  function escopo() {
+    const quem = vendas.verComo();
+    return { quem, carteira: vendas.permissoesDoPapel(quem.papel).escopo === 'carteira' };
+  }
+
+  // ---- período ---------------------------------------------------------------------
+  function validarIntervalo(deTexto, ateTexto) {
+    const de = dataDoCampo(deTexto);
+    const ate = dataDoCampo(ateTexto);
+    if (!de || !ate) return { erro: 'Informe as duas datas.' };
+    if (de > ate) return { erro: 'A data inicial deve ser menor ou igual à data final.' };
+    const hoje = inicioDoDia(new Date());
+    if (de > hoje) return { erro: 'A data inicial não pode ser depois de hoje.' };
+    const fim = fimDoDia(ate > hoje ? hoje : ate);
+    if (Math.round((inicioDoDia(fim) - de) / DIA) + 1 > MAX_DIAS) return { erro: `Escolha um intervalo de até ${MAX_DIAS} dias.` };
+    return { de, ate: fim };
+  }
+
+  /**
+   * Início e fim do período e o período de comparação (mesmo tamanho, logo antes).
+   * "Este mês" vai do dia 1 até hoje e compara com o mesmo trecho do mês anterior. O fim
+   * nunca passa de hoje: a carteira é calculada no último dia do período.
+   */
+  function periodo() {
+    const agora = new Date();
+    const hoje = inicioDoDia(agora);
+    let de; let ate; let antDe; let antAte;
+    if (filtros.periodo === 'mes-passado') {
+      de = new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1);
+      ate = fimDoDia(new Date(hoje.getFullYear(), hoje.getMonth(), 0));
+      antDe = new Date(de.getFullYear(), de.getMonth() - 1, 1);
+      antAte = fimDoDia(new Date(de.getFullYear(), de.getMonth(), 0));
+    } else if (filtros.periodo === '30d' || filtros.periodo === '90d') {
+      const dias = filtros.periodo === '30d' ? 30 : 90;
+      de = somarDias(hoje, -(dias - 1));
+      ate = fimDoDia(agora);
+      antDe = somarDias(de, -dias);
+      antAte = new Date(de.getTime() - 1);
+    } else if (filtros.periodo === 'personalizado') {
+      const intervalo = validarIntervalo(filtros.de, filtros.ate);
+      if (intervalo.erro) { // intervalo guardado que deixou de valer: volta ao padrão
+        filtros.periodo = 'mes';
+        return periodo();
+      }
+      ({ de, ate } = intervalo);
+      const dias = Math.round((inicioDoDia(ate) - de) / DIA) + 1;
+      antDe = somarDias(de, -dias);
+      antAte = new Date(de.getTime() - 1);
+    } else {
+      de = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+      ate = fimDoDia(agora);
+      antDe = new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1);
+      const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate();
+      antAte = fimDoDia(new Date(antDe.getFullYear(), antDe.getMonth(), Math.min(hoje.getDate(), ultimoDia)));
+    }
+    return { de, ate, anterior: { de: antDe, ate: antAte }, ateHoje: chaveDoDia(ate) === chaveDoDia(agora) };
+  }
+
+  // ---- números (tudo de window.vendas; o escopo "carteira" já vem filtrado de lá) ----
+  function calcular() {
+    const { quem, carteira } = escopo();
+    const representadas = vendas.representadas().sort((a, b) => a.nomeFantasia.localeCompare(b.nomeFantasia, 'pt-BR'));
+    if (filtros.representadaId && !representadas.some((r) => r.id === filtros.representadaId)) filtros.representadaId = '';
+    const vendedores = vendas.vendedores().filter((v) => v.vendedor);
+    if (carteira || (filtros.vendedorId && !vendedores.some((v) => v.id === filtros.vendedorId))) filtros.vendedorId = '';
+
+    const p = periodo();
+    const f = { de: p.de, ate: p.ate };
+    if (filtros.representadaId) f.representadaId = filtros.representadaId;
+    if (filtros.vendedorId) f.vendedorId = filtros.vendedorId;
+
+    const resumo = vendas.resumo(f);
+    const anterior = vendas.resumo({ ...f, de: p.anterior.de, ate: p.anterior.ate });
+    const pedidos = vendas.pedidos(f);
+    const vendidos = pedidos.filter(vendas.ehVenda);
+
+    const porDia = new Map();
+    const valorPorStatus = {};
+    const comissaoPorRepresentada = new Map();
+    const comissaoPorVendedor = new Map();
+    pedidos.forEach((pedido) => { valorPorStatus[pedido.status] = (valorPorStatus[pedido.status] || 0) + pedido.valorTotal; });
+    vendidos.forEach((pedido) => {
+      const dia = chaveDoDia(pedido.emitidoEm);
+      if (!porDia.has(dia)) porDia.set(dia, { vendas: 0, clientes: new Set() });
+      porDia.get(dia).vendas += 1;
+      porDia.get(dia).clientes.add(pedido.clienteId);
+      const c = vendas.comissoes(pedido);
+      comissaoPorRepresentada.set(pedido.representadaId, (comissaoPorRepresentada.get(pedido.representadaId) || 0) + c.representada);
+      comissaoPorVendedor.set(pedido.vendedorId, (comissaoPorVendedor.get(pedido.vendedorId) || 0) + c.vendedor);
+    });
+
+    return {
+      p, quem, carteira, representadas, vendedores, resumo, anterior, porDia, valorPorStatus,
+      comissaoPorRepresentada, comissaoPorVendedor,
+      clientes: vendas.carteira(f),
+      abc: vendas.curvaABC(f),
+      positivacao: vendas.positivacoes(f),
+      config: vendas.config(),
+    };
+  }
+
+  // ---- pedaços de marcação (classes do app) -----------------------------------------
+  const cabecalhoCartao = (icone, tom, titulo, sub) => `
+    <div class="dashboard-monitoring-head">
+      <div class="icon tone-${tom}"><i class="${icone}" aria-hidden="true"></i></div>
+      <div>
+        <h3>${titulo}</h3>
+        <p>${sub}</p>
+      </div>
+    </div>`;
+
+  /** Item de lista com barra (o "motivo" do Monitoramento): nome, número, %, nota. */
+  const itemLista = ({ nome, numero, percentual, cor, largura, nota = '', atributos = '' }) => `
+    <div class="dashboard-monitoring-reason-item"${atributos}>
+      <div class="dashboard-monitoring-reason-head">
+        <span title="${esc(nome)}">${esc(nome)}</span>
+        <strong>${numero} <em>${percentual}</em></strong>
+      </div>
+      <div class="dashboard-monitoring-reason-track"><span style="width:${largura}%;background:${cor};"></span></div>
+      ${nota ? `<p class="vendas-nota">${nota}</p>` : ''}
+    </div>`;
+
+  function chipVariacao(atual, anterior, comparacao) {
+    if (!anterior) {
+      return `<div class="dashboard-var-chip is-neutral" title="Nada no período de comparação (${esc(comparacao)})">${atual ? 'Com dados' : 'Sem dados'}</div>`;
+    }
+    const variacao = ((atual - anterior) / anterior) * 100;
+    const queda = variacao < 0;
+    return `
+      <div class="dashboard-var-chip${queda ? ' is-negative' : ''}" title="Comparado a ${esc(comparacao)}">
+        <i class="${queda ? 'ri-arrow-down-line' : 'ri-arrow-up-line'}"></i>
+        ${queda ? '-' : '+'}${pct(Math.abs(variacao))}
+      </div>`;
+  }
+  const chipNeutro = (texto, dica) => `<div class="dashboard-var-chip is-neutral" title="${esc(dica)}">${texto}</div>`;
+
+  const cartaoKpi = ({ titulo, valor, icone, tom, chip, dica }) => `
+    <article class="kpi-card dashboard-kpi-card-modern" title="${esc(dica)}">
+      <div class="dashboard-kpi-head-modern">
+        <div class="dashboard-kpi-icon tone-${tom}"><i class="${icone}"></i></div>
+        ${chip}
+      </div>
+      <p class="dashboard-kpi-label-modern">${titulo}</p>
+      <p class="dashboard-kpi-value-modern">${valor}</p>
+    </article>`;
+
+  function htmlCabecalho() {
+    const link = vendas.pode('pedidos', 'ver')
+      ? `<a href="pedidos.html" class="dashboard-chat-refresh-btn glass-card-sm"><i class="ri-file-list-3-line" aria-hidden="true"></i><span>Ver pedidos</span></a>`
+      : '';
+    return `
+      <section class="dashboard-chat-session-head">
+        <div>
+          <h2>Vendas</h2>
+          <p>Pedidos, carteira de clientes, curva ABC e positivação</p>
+        </div>
+        ${link}
+      </section>`;
+  }
+
+  function htmlFiltros(d) {
+    const selecao = (rotulo, chave, opcoes, valor) => `
+      <label class="dashboard-chat-filter-item dashboard-chat-filter-item--select">
+        <span>${rotulo}</span>
+        <select class="dashboard-chat-filter-select" data-vendas-filtro="${chave}">
+          ${opcoes.map(([v, texto]) => `<option value="${esc(v)}"${v === valor ? ' selected' : ''}>${esc(texto)}</option>`).join('')}
+        </select>
+        <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+      </label>`;
+    const representadas = [['', 'Todas as representadas'], ...d.representadas.map((r) => [r.id, `${r.nomeFantasia}${r.ativa === false ? ' (inativa)' : ''}`])];
+    const vendedor = d.carteira
+      ? `<div class="dashboard-chat-filter-item dashboard-chat-filter-item--readonly"><span>Vendedor</span><strong>${esc(d.quem.nome)} (sua carteira)</strong></div>`
+      : selecao('Vendedor', 'vendedor', [['', 'Todos os vendedores'], ...d.vendedores.map((v) => [v.id, v.nome])], filtros.vendedorId);
+
+    let intervalo;
+    if (filtros.periodo === 'personalizado') {
+      const hoje = chaveDoDia(new Date());
+      const de = tela.rascunho ? tela.rascunho.de : filtros.de;
+      const ate = tela.rascunho ? tela.rascunho.ate : filtros.ate;
+      intervalo = `
+        <div class="dashboard-chat-filter-item vendas-intervalo">
+          <span>Intervalo</span>
+          <div class="dashboard-campaigns-custom-controls">
+            <label class="dashboard-campaigns-custom-date"><input type="date" data-vendas-filtro="de" value="${esc(de)}" max="${hoje}" aria-label="Data inicial"></label>
+            <strong>até</strong>
+            <label class="dashboard-campaigns-custom-date"><input type="date" data-vendas-filtro="ate" value="${esc(ate)}" max="${hoje}" aria-label="Data final"></label>
+          </div>
+          ${tela.erroIntervalo ? `<p class="dashboard-campaigns-custom-feedback is-error" role="alert">${esc(tela.erroIntervalo)}</p>` : ''}
+        </div>`;
+    } else {
+      intervalo = `
+        <div class="dashboard-chat-filter-item dashboard-chat-filter-item--readonly">
+          <span>Intervalo</span>
+          <strong>${fmt.data(d.p.de)} a ${fmt.data(d.p.ate)}</strong>
+        </div>`;
+    }
+
+    return `
+      <section class="glass-card dashboard-chat-filter-row dashboard-chat-filter-row--horarios" data-vendas-filtros>
+        ${selecao('Período', 'periodo', Object.entries(PERIODOS), filtros.periodo)}
+        ${selecao('Representada', 'representada', representadas, filtros.representadaId)}
+        ${vendedor}
+        ${intervalo}
+      </section>`;
+  }
+
+  const htmlAvisoCarteira = (d) => `
+    <div class="dashboard-monitoring-notice vendas-aviso">
+      <i class="ri-information-line" aria-hidden="true"></i>
+      <span>Você vê os números da <strong>sua carteira</strong>: só os clientes e os pedidos em que ${esc(d.quem.nome)} é o vendedor. Quem tem acesso à conta toda vê os números de todos.</span>
+    </div>`;
+
+  function htmlKpis(d, entrada) {
+    const r = d.resumo;
+    const a = d.anterior;
+    const comparacao = `${fmt.data(d.p.anterior.de)} a ${fmt.data(d.p.anterior.ate)}`;
+    const orcamentos = r.porStatus.orcamento || 0;
+    const pos = d.positivacao;
+    const cartoes = [
+      {
+        titulo: 'Vendido', valor: fmt.brl(r.valor), icone: 'ri-money-dollar-circle-line', tom: 'green',
+        chip: chipVariacao(r.valor, a.valor, comparacao),
+        dica: 'Soma dos pedidos com status Pedido, Faturado ou Concluído no período',
+      },
+      {
+        titulo: 'Pedidos', valor: fmt.numero(r.vendas), icone: 'ri-file-list-3-line', tom: 'blue',
+        chip: chipNeutro(orcamentos ? `${fmt.numero(orcamentos)} em orçamento` : 'Sem orçamento', 'Orçamentos e cancelados não contam como venda'),
+        dica: 'Pedidos que contam como venda (Pedido, Faturado e Concluído)',
+      },
+      {
+        titulo: 'Ticket médio', valor: fmt.brl(r.ticketMedio), icone: 'ri-price-tag-3-line', tom: 'purple',
+        chip: chipVariacao(r.ticketMedio, a.ticketMedio, comparacao),
+        dica: 'Valor vendido dividido pelo número de pedidos',
+      },
+      {
+        titulo: 'Comissão das representadas', valor: fmt.brl(r.comissaoRepresentadas), icone: 'ri-hand-coin-line', tom: 'amber',
+        chip: chipVariacao(r.comissaoRepresentadas, a.comissaoRepresentadas, comparacao),
+        dica: 'O que as representadas pagam sobre os pedidos do período, pelo percentual gravado em cada pedido',
+      },
+      {
+        titulo: d.carteira ? 'Sua comissão' : 'Comissão dos vendedores', valor: fmt.brl(r.comissaoVendedores), icone: 'ri-wallet-3-line', tom: 'cyan',
+        chip: chipVariacao(r.comissaoVendedores, a.comissaoVendedores, comparacao),
+        dica: 'Comissão de cada vendedor sobre o valor dos pedidos que ele gerou (não é a comissão da representada)',
+      },
+      {
+        titulo: 'Clientes positivados', valor: fmt.numero(pos.total), icone: 'ri-user-follow-line', tom: 'rose',
+        chip: pos.ativosNoInicio
+          ? chipNeutro(`${pct(pos.percentualDosAtivos, 0)} dos ativos`, `${pos.ativo} de ${pos.ativosNoInicio} clientes ativos no início do período compraram`)
+          : chipNeutro(pos.total ? 'Com dados' : 'Sem dados', 'Nenhum cliente ativo no início do período'),
+        dica: 'Clientes com pelo menos uma venda no período',
+      },
+    ];
+    return `<section class="dashboard-kpi-generic-grid vendas-kpis${entrada ? ' stagger' : ''}">${cartoes.map(cartaoKpi).join('')}</section>`;
+  }
+
+  function htmlPedidos(d) {
+    const r = d.resumo;
+    const status = Object.entries(vendas.STATUS).map(([chave, s]) => {
+      const n = r.porStatus[chave] || 0;
+      const parte = r.pedidos ? (n / r.pedidos) * 100 : 0;
+      return itemLista({
+        nome: s.nome, numero: fmt.numero(n), percentual: pct(parte), cor: s.cor, largura: larguraBarra(parte),
+        nota: `${fmt.brl(d.valorPorStatus[chave] || 0)} · ${s.venda ? 'conta como venda' : 'não conta como venda'}`,
+      });
+    }).join('');
+    const temVenda = r.serie.some((x) => x.valor > 0);
+    return `
+      <section class="vendas-grade vendas-grade--2-1">
+        <article class="glass-card dashboard-monitoring-card">
+          ${cabecalhoCartao('ri-line-chart-line', 'blue', 'Evolução das vendas', `Valor vendido por dia · ${plural(r.vendas, 'pedido', 'pedidos')}, ${fmt.brl(r.valor)}`)}
+          ${temVenda
+            ? `<div class="mvp-chart-canvas-wrap vendas-grafico"><canvas id="vendas-grafico-evolucao" role="img" aria-label="Valor vendido por dia no período"></canvas></div>`
+            : '<div class="mvp-empty">Nenhuma venda no período</div>'}
+        </article>
+        <article class="glass-card dashboard-monitoring-card">
+          ${cabecalhoCartao('ri-file-list-3-line', 'purple', 'Pedidos por status', `${plural(r.pedidos, 'pedido', 'pedidos')} no período · ${plural(r.vendas, 'conta', 'contam')} como venda`)}
+          <div class="vendas-lista">${status}</div>
+        </article>
+      </section>`;
+  }
+
+  function htmlQuebras(d) {
+    const r = d.resumo;
+    const total = r.valor;
+    const usuarios = vendas.usuarios();
+    const notaComissao = (item) => {
+      if (!item.valor) return 'Sem vendas no período';
+      if (!item.comissao) return 'Sem comissão';
+      return `Comissão ${fmt.brl(item.comissao)} (${pct((item.comissao / item.valor) * 100, 2)})`;
+    };
+
+    const valorPorRepresentada = new Map(r.porRepresentada.map((x) => [x.id, x.valor]));
+    let representadas = d.representadas.map((rep) => ({ id: rep.id, nome: rep.nomeFantasia, cor: rep.cor || COR.barra }));
+    if (filtros.representadaId) representadas = representadas.filter((x) => x.id === filtros.representadaId);
+    valorPorRepresentada.forEach((_, id) => {
+      if (!representadas.some((x) => x.id === id)) representadas.push({ id, nome: 'Representada excluída', cor: COR.vazio });
+    });
+    representadas = representadas
+      .map((x) => ({ ...x, valor: valorPorRepresentada.get(x.id) || 0, comissao: d.comissaoPorRepresentada.get(x.id) || 0 }))
+      .sort((a, b) => b.valor - a.valor || a.nome.localeCompare(b.nome, 'pt-BR'));
+
+    const valorPorVendedor = new Map(r.porVendedor.map((x) => [x.id, x.valor]));
+    let vendedores = d.vendedores.map((v) => ({ id: v.id, nome: v.nome }));
+    if (filtros.vendedorId) vendedores = vendedores.filter((x) => x.id === filtros.vendedorId);
+    valorPorVendedor.forEach((_, id) => {
+      if (vendedores.some((x) => x.id === id)) return;
+      const usuario = usuarios.find((u) => u.id === id);
+      vendedores.push({ id, nome: usuario ? `${usuario.nome} (não é mais vendedor)` : 'Usuário removido' });
+    });
+    vendedores = vendedores
+      .map((x) => {
+        const i = usuarios.findIndex((u) => u.id === x.id);
+        return { ...x, cor: i >= 0 ? COR.vendedores[i % COR.vendedores.length] : COR.vazio, valor: valorPorVendedor.get(x.id) || 0, comissao: d.comissaoPorVendedor.get(x.id) || 0 };
+      })
+      .sort((a, b) => b.valor - a.valor || a.nome.localeCompare(b.nome, 'pt-BR'));
+
+    const linhas = (lista) => lista.map((x) => {
+      const parte = total ? (x.valor / total) * 100 : 0;
+      return itemLista({ nome: x.nome, numero: fmt.brl(x.valor), percentual: pct(parte), cor: x.cor, largura: larguraBarra(parte), nota: notaComissao(x) });
+    }).join('');
+
+    const porVendedor = d.carteira ? '' : `
+      <article class="glass-card dashboard-monitoring-card">
+        ${cabecalhoCartao('ri-team-line', 'green', 'Vendas por vendedor', 'Valor vendido e comissão de cada vendedor')}
+        <div class="vendas-lista">${linhas(vendedores)}</div>
+      </article>`;
+    return `
+      <section class="vendas-grade vendas-grade--2">
+        <article class="glass-card dashboard-monitoring-card">
+          ${cabecalhoCartao('ri-building-2-line', 'amber', 'Vendas por representada', 'Valor vendido e comissão que cada representada paga')}
+          <div class="vendas-lista">${linhas(representadas)}</div>
+        </article>
+        ${porVendedor}
+      </section>`;
+  }
+
+  const htmlRosca = (id, total, legenda, rotuloAria, detalhes) => `
+    <div class="dashboard-monitoring-motivos-top vendas-donut">
+      <div class="donut-col">
+        <div class="donut-wrap">
+          <canvas id="${id}" role="img" aria-label="${esc(rotuloAria)}"></canvas>
+          <div class="center"><strong>${fmt.numero(total)}</strong><span>${legenda}</span></div>
+        </div>
+      </div>
+      <div class="details-col vendas-lista">${detalhes}</div>
+    </div>`;
+
+  function htmlClientes(d) {
+    const cfg = d.config;
+    const c = d.clientes;
+    const carteira = [
+      ['ativo', 'Ativos', `compraram nos últimos ${cfg.diasAtivo} dias`],
+      ['inativo_recente', 'Inativos recentes', `última compra entre ${cfg.diasAtivo + 1} e ${cfg.diasInativoRecente} dias`],
+      ['inativo_antigo', 'Inativos antigos', `última compra há mais de ${cfg.diasInativoRecente} dias`],
+    ].map(([chave, nome, nota]) => {
+      const parte = c.total ? (c[chave] / c.total) * 100 : 0;
+      return itemLista({ nome, numero: fmt.numero(c[chave]), percentual: pct(parte), cor: COR.situacao[chave], largura: larguraBarra(parte), nota });
+    }).join('');
+    const prospects = `
+      <article class="mvp-list-item vendas-prospects">
+        <div>
+          <p class="mvp-list-title">Prospects</p>
+          <p class="mvp-list-subtitle">Cadastrados que nunca compraram (fora do total)</p>
+        </div>
+        <span class="mvp-badge is-neutral">${fmt.numero(c.prospect)}</span>
+      </article>`;
+
+    const abc = d.abc;
+    const clientesAbc = abc.lista.length;
+    const valorDaCurva = { A: 0, B: 0, C: 0 };
+    abc.lista.forEach((l) => { valorDaCurva[l.curva] += l.valor; });
+    const curvas = ['A', 'B', 'C'].map((k) => {
+      const parte = clientesAbc ? (abc[k] / clientesAbc) * 100 : 0;
+      const parteValor = abc.total ? (valorDaCurva[k] / abc.total) * 100 : 0;
+      return itemLista({
+        nome: `Curva ${k}`, numero: fmt.numero(abc[k]), percentual: pct(parte), cor: COR.curva[k], largura: larguraBarra(parte),
+        nota: `${fmt.brl(valorDaCurva[k])} · ${pct(parteValor)} do valor vendido`,
+        atributos: ` data-vendas-abc-filtrar="${k}" role="button" tabindex="0" title="Ver os clientes da curva ${k} na lista abaixo"`,
+      });
+    }).join('');
+    const regraAbc = `<p class="vendas-nota">A: os clientes que somam até ${cfg.curvaA}% do valor vendido · B: até ${cfg.curvaB}% · C: o restante.</p>`;
+
+    const pos = d.positivacao;
+    const positivados = [
+      ['novo', 'Novos', 'primeira compra'],
+      ['ativo', 'Ativos', 'já estavam comprando'],
+      ['inativo_recente', 'Inativos recentes', 'voltaram a comprar'],
+      ['inativo_antigo', 'Inativos antigos', `voltaram depois de mais de ${cfg.diasInativoRecente} dias`],
+    ].map(([chave, nome, nota]) => {
+      const parte = pos.total ? (pos[chave] / pos.total) * 100 : 0;
+      return itemLista({ nome, numero: fmt.numero(pos[chave]), percentual: pct(parte), cor: COR.situacao[chave], largura: larguraBarra(parte), nota });
+    }).join('');
+    const desempenho = `
+      <div class="dashboard-campaigns-performance-item vendas-desempenho">
+        <div class="dashboard-campaigns-performance-label-row">
+          <span>Ativos positivados</span>
+          <strong>${fmt.numero(pos.ativo)} de ${fmt.numero(pos.ativosNoInicio)}</strong>
+        </div>
+        <div class="dashboard-campaigns-performance-track"><span class="is-delivery" style="width:${Math.min(100, pos.percentualDosAtivos)}%"></span></div>
+        <p class="vendas-nota"><strong>${pct(pos.percentualDosAtivos)}</strong> dos clientes ativos foram positivados no período.</p>
+      </div>`;
+
+    const situacaoEm = `${fmt.data(d.p.ate)}${d.p.ateHoje ? ' (hoje)' : ''}`;
+    return `
+      <section class="vendas-grade vendas-grade--3">
+        <article class="glass-card dashboard-monitoring-card">
+          ${cabecalhoCartao('ri-store-2-line', 'blue', 'Carteira de clientes', `Situação em ${situacaoEm}, pela última compra`)}
+          ${htmlRosca('vendas-grafico-carteira', c.total, c.total === 1 ? 'cliente' : 'clientes', 'Carteira de clientes por situação', carteira + prospects)}
+        </article>
+        <article class="glass-card dashboard-monitoring-card">
+          ${cabecalhoCartao('ri-bar-chart-horizontal-line', 'purple', 'Curva ABC', 'Clientes que compraram no período, pelo valor')}
+          ${htmlRosca('vendas-grafico-abc', clientesAbc, clientesAbc === 1 ? 'cliente' : 'clientes', 'Clientes por curva ABC', curvas + regraAbc)}
+        </article>
+        <article class="glass-card dashboard-monitoring-card">
+          ${cabecalhoCartao('ri-user-follow-line', 'green', 'Positivação', 'Clientes com pelo menos uma venda no período')}
+          ${htmlRosca('vendas-grafico-positivacao', pos.total, pos.total === 1 ? 'positivado' : 'positivados', 'Clientes positivados por situação antes da compra', desempenho + positivados)}
+        </article>
+      </section>`;
+  }
+
+  function htmlPositivacaoDiaria(d) {
+    const serie = d.positivacao.serie;
+    const pico = serie.reduce((m, x) => (x.clientes > m.clientes ? x : m), { clientes: 0, dia: '' });
+    const sub = pico.clientes
+      ? `Clientes diferentes que compraram em cada dia · pico de ${plural(pico.clientes, 'cliente', 'clientes')} em ${diaMes(pico.dia)}`
+      : 'Clientes diferentes que compraram em cada dia';
+    return `
+      <article class="glass-card dashboard-monitoring-card">
+        ${cabecalhoCartao('ri-calendar-check-line', 'green', 'Positivações diárias', sub)}
+        ${pico.clientes
+          ? '<div class="mvp-chart-canvas-wrap vendas-grafico vendas-grafico--baixo"><canvas id="vendas-grafico-positivacoes" role="img" aria-label="Clientes positivados por dia"></canvas></div>'
+          : '<div class="mvp-empty">Nenhuma positivação no período</div>'}
+      </article>`;
+  }
+
+  function htmlTabelaAbc() {
+    const curvas = [['', 'Todas'], ['A', 'Curva A'], ['B', 'Curva B'], ['C', 'Curva C']];
+    return `
+      <article class="glass-card dashboard-monitoring-card" data-vendas-abc>
+        ${cabecalhoCartao('ri-trophy-line', 'yellow', 'Clientes na curva ABC', 'Do cliente que mais comprou ao que menos comprou no período')}
+        <div class="dashboard-monitoring-filter-grid vendas-abc-filtros">
+          <label class="search"><span>Pesquisar</span><div class="search-wrap"><i class="ri-search-line"></i><input type="text" placeholder="Cliente ou cidade..." value="${esc(tela.abcBusca)}" data-vendas-abc-busca></div></label>
+          <label><span>Curva</span><select data-vendas-abc-curva>${curvas.map(([v, t]) => `<option value="${v}"${v === tela.abcCurva ? ' selected' : ''}>${t}</option>`).join('')}</select></label>
+        </div>
+        <div data-vendas-abc-corpo>${htmlCorpoAbc()}</div>
+      </article>`;
+  }
+
+  function htmlCorpoAbc() {
+    const d = tela.dados;
+    const lista = d.abc.lista.map((l, i) => ({ ...l, posicao: i + 1 }));
+    const busca = normalizar(tela.abcBusca.trim());
+    const filtrando = Boolean(busca || tela.abcCurva);
+    const encontrados = lista.filter((l) => {
+      if (tela.abcCurva && l.curva !== tela.abcCurva) return false;
+      if (!busca) return true;
+      const c = l.cliente || {};
+      return normalizar([c.nomeFantasia, c.razaoSocial, c.endereco?.cidade].filter(Boolean).join(' ')).includes(busca);
+    });
+    const visiveis = filtrando || tela.abcTodos ? encontrados : encontrados.slice(0, LINHAS_ABC);
+    const usuarios = vendas.usuarios();
+
+    let contagem;
+    if (filtrando) contagem = `${fmt.numero(encontrados.length)} de ${plural(lista.length, 'cliente', 'clientes')}`;
+    else if (visiveis.length < lista.length) contagem = `Mostrando ${fmt.numero(visiveis.length)} de ${plural(lista.length, 'cliente', 'clientes')}`;
+    else contagem = plural(lista.length, 'cliente', 'clientes');
+
+    const linhas = visiveis.map((l) => {
+      const c = l.cliente;
+      const nome = c ? (c.nomeFantasia || c.razaoSocial) : 'Cliente excluído';
+      const vendedor = c ? usuarios.find((u) => u.id === c.vendedorId)?.nome : '';
+      const detalhe = [c?.endereco?.cidade, vendedor].filter(Boolean).join(' · ');
+      return `
+        <tr>
+          <td class="vendas-col-pos">${l.posicao}</td>
+          <td class="vendas-abc-cliente">
+            <div class="vendas-abc-nome">
+              <span class="dashboard-campaigns-rank-badge vendas-abc-selo" style="background:${COR.curva[l.curva]};" aria-hidden="true">${l.curva}</span>
+              ${c && vendas.pode('clientes', 'ver')
+                ? `<a class="dashboard-campaigns-campaign-name" href="clientes.html?cliente=${encodeURIComponent(c.id)}" title="Abrir ${esc(nome)} em Clientes">${esc(nome)}</a>`
+                : `<span class="dashboard-campaigns-campaign-name" title="${esc(nome)}">${esc(nome)}</span>`}
+            </div>
+            ${detalhe ? `<p class="vendas-nota">${esc(detalhe)}</p>` : ''}
+          </td>
+          <td class="vendas-col-curva"><span class="dashboard-campaigns-rank-badge" style="background:${COR.curva[l.curva]};" title="Curva ${l.curva}">${l.curva}</span></td>
+          <td class="vendas-num strong">${fmt.brl(l.valor)}</td>
+          <td class="vendas-num">${pct(l.participacao)}</td>
+          <td class="vendas-num vendas-col-acum">${pct(l.acumulado)}</td>
+        </tr>`;
+    }).join('');
+    const vazio = lista.length ? 'Nenhum cliente encontrado com esses filtros' : 'Nenhuma venda no período';
+    const rodape = !filtrando && lista.length > LINHAS_ABC
+      ? `<div class="vendas-abc-rodape"><button type="button" class="dashboard-campaigns-custom-action is-primary" data-vendas-abc-todos>${tela.abcTodos ? `Mostrar só os ${LINHAS_ABC} primeiros` : `Ver todos os ${fmt.numero(lista.length)} clientes`}</button></div>`
+      : '';
+
+    return `
+      <div class="dashboard-monitoring-report-count"><span>${contagem}</span></div>
+      <div class="dashboard-monitoring-table-wrap">
+        <table class="dashboard-monitoring-table vendas-abc-tabela">
+          <thead>
+            <tr>
+              <th class="vendas-col-pos">#</th>
+              <th>Cliente</th>
+              <th class="vendas-col-curva">Curva</th>
+              <th class="vendas-num">Valor</th>
+              <th class="vendas-num"><span class="vendas-rotulo-longo">Participação</span><span class="vendas-rotulo-curto">Part.</span></th>
+              <th class="vendas-num vendas-col-acum">Acumulado</th>
+            </tr>
+          </thead>
+          <tbody>${linhas || `<tr><td colspan="6" class="vendas-abc-vazio">${vazio}</td></tr>`}</tbody>
+        </table>
+      </div>
+      ${rodape}`;
+  }
+
+  // ---- gráficos (Chart.js, com o estilo dos gráficos do app) -------------------------
+  const graficos = new Map();
+  function destruirGraficos() {
+    graficos.forEach((g) => g.destroy());
+    graficos.clear();
+  }
+  function criarGrafico(id, config) {
+    const canvas = document.getElementById(id);
+    if (!canvas) return;
+    if (typeof window.Chart === 'undefined') {
+      canvas.parentElement.innerHTML = '<div class="mvp-empty">Não foi possível carregar o gráfico.</div>';
+      return;
+    }
+    graficos.set(id, new window.Chart(canvas.getContext('2d'), config));
+  }
+
+  /** Barras de uma série só: o título do cartão diz o que é, então não há legenda. */
+  function configBarras({ rotulos, valores, cor, corHover, titulos, formatarValor, formatarEixo, extras, inteiro }) {
+    const p = paleta();
+    return {
+      type: 'bar',
+      data: {
+        labels: rotulos,
+        datasets: [{ data: valores, backgroundColor: cor, hoverBackgroundColor: corHover, borderWidth: 0, borderRadius: 6, maxBarThickness: 28 }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: (itens) => titulos[itens[0].dataIndex],
+              label: (item) => ` ${formatarValor(item.raw)}`,
+              afterLabel: (item) => extras[item.dataIndex] || '',
+            },
+          },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: p.eixo, maxRotation: 0, autoSkip: true, maxTicksLimit: 10, font: { size: 10 } } },
+          y: {
+            beginAtZero: true,
+            grid: { color: p.grade },
+            ticks: { color: p.eixo, font: { size: 10 }, precision: inteiro ? 0 : undefined, callback: (v) => formatarEixo(v) },
+          },
+        },
+      },
+    };
+  }
+
+  /** Rosca do app (Monitoramento): sem borda, com respiro entre as fatias e cantos redondos. */
+  function configRosca({ rotulos, valores, cores, total, descrever, aoClicar }) {
+    const vazio = !total;
+    // Com uma fatia só, o respiro entre fatias viraria um corte no anel.
+    const umaFatia = valores.filter((v) => v > 0).length <= 1;
+    return {
+      type: 'doughnut',
+      data: {
+        labels: vazio ? ['Sem dados'] : rotulos,
+        datasets: [{
+          data: vazio ? [1] : valores,
+          backgroundColor: vazio ? [COR.vazio] : cores,
+          borderWidth: 0,
+          spacing: umaFatia ? 0 : 4,
+          borderRadius: umaFatia ? 0 : 5,
+          hoverOffset: vazio ? 0 : 4,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '72%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: !vazio, callbacks: { label: (item) => ` ${descrever(item.dataIndex)}` } },
+        },
+        onClick: aoClicar && !vazio ? (_, elementos) => { if (elementos[0]) aoClicar(elementos[0].index); } : undefined,
+        onHover: aoClicar && !vazio ? (ev, elementos) => { ev.native.target.style.cursor = elementos.length ? 'pointer' : 'default'; } : undefined,
+      },
+    };
+  }
+
+  function desenharGraficos(d) {
+    const r = d.resumo;
+    criarGrafico('vendas-grafico-evolucao', configBarras({
+      rotulos: r.serie.map((x) => diaMes(x.dia)),
+      valores: r.serie.map((x) => x.valor / 100),
+      cor: COR.barra,
+      corHover: COR.barraHover,
+      titulos: r.serie.map((x) => tituloDoDia(x.dia)),
+      formatarValor: (reais) => fmt.brl(Math.round(reais * 100)),
+      formatarEixo: moedaCurta,
+      extras: r.serie.map((x) => {
+        const n = d.porDia.get(x.dia)?.vendas || 0;
+        return n ? plural(n, 'pedido', 'pedidos') : 'Sem pedidos';
+      }),
+    }));
+
+    const serie = d.positivacao.serie;
+    criarGrafico('vendas-grafico-positivacoes', configBarras({
+      rotulos: serie.map((x) => diaMes(x.dia)),
+      valores: serie.map((x) => x.clientes),
+      cor: COR.positivacao,
+      corHover: COR.positivacaoHover,
+      titulos: serie.map((x) => tituloDoDia(x.dia)),
+      formatarValor: (n) => plural(n, 'cliente', 'clientes'),
+      formatarEixo: (n) => fmt.numero(n),
+      inteiro: true,
+      extras: serie.map((x) => {
+        const ids = [...(d.porDia.get(x.dia)?.clientes || [])];
+        const nomes = ids.map((id) => vendas.cliente(id)?.nomeFantasia || 'Cliente excluído');
+        return nomes.length > 4 ? [...nomes.slice(0, 4), `e mais ${nomes.length - 4}`] : nomes;
+      }),
+    }));
+
+    const c = d.clientes;
+    const nomesCarteira = ['Ativos', 'Inativos recentes', 'Inativos antigos'];
+    const valoresCarteira = [c.ativo, c.inativo_recente, c.inativo_antigo];
+    criarGrafico('vendas-grafico-carteira', configRosca({
+      rotulos: nomesCarteira,
+      valores: valoresCarteira,
+      cores: [COR.situacao.ativo, COR.situacao.inativo_recente, COR.situacao.inativo_antigo],
+      total: c.total,
+      descrever: (i) => `${nomesCarteira[i]}: ${plural(valoresCarteira[i], 'cliente', 'clientes')} (${pct((valoresCarteira[i] / c.total) * 100)})`,
+    }));
+
+    const abc = d.abc;
+    const totalAbc = abc.lista.length;
+    criarGrafico('vendas-grafico-abc', configRosca({
+      rotulos: ['Curva A', 'Curva B', 'Curva C'],
+      valores: [abc.A, abc.B, abc.C],
+      cores: [COR.curva.A, COR.curva.B, COR.curva.C],
+      total: totalAbc,
+      descrever: (i) => {
+        const k = 'ABC'[i];
+        return `Curva ${k}: ${plural(abc[k], 'cliente', 'clientes')} (${pct((abc[k] / totalAbc) * 100)})`;
+      },
+      aoClicar: (i) => filtrarAbc('ABC'[i]),
+    }));
+
+    const pos = d.positivacao;
+    const nomesPos = ['Novos', 'Ativos', 'Inativos recentes', 'Inativos antigos'];
+    const valoresPos = [pos.novo, pos.ativo, pos.inativo_recente, pos.inativo_antigo];
+    criarGrafico('vendas-grafico-positivacao', configRosca({
+      rotulos: nomesPos,
+      valores: valoresPos,
+      cores: [COR.situacao.novo, COR.situacao.ativo, COR.situacao.inativo_recente, COR.situacao.inativo_antigo],
+      total: pos.total,
+      descrever: (i) => `${nomesPos[i]}: ${plural(valoresPos[i], 'cliente', 'clientes')} (${pct((valoresPos[i] / pos.total) * 100)})`,
+    }));
+  }
+
+  // ---- desenhar --------------------------------------------------------------------
+  function renderizar({ entrada = false } = {}) {
+    const foco = document.activeElement?.closest?.('[data-vendas-filtro]')?.getAttribute('data-vendas-filtro');
+    destruirGraficos();
+    tela.dados = calcular();
+    conteudo.innerHTML = `
+      <section class="mvp-panel-grid vendas-secao${entrada ? ' animate-tab-enter' : ''}" data-vendas-secao>
+        ${htmlCabecalho()}
+        ${htmlFiltros(tela.dados)}
+        ${tela.dados.carteira ? htmlAvisoCarteira(tela.dados) : ''}
+        ${htmlKpis(tela.dados, entrada)}
+        ${htmlPedidos(tela.dados)}
+        ${htmlQuebras(tela.dados)}
+        ${htmlClientes(tela.dados)}
+        ${htmlPositivacaoDiaria(tela.dados)}
+        ${htmlTabelaAbc()}
+      </section>`;
+    desenharGraficos(tela.dados);
+    if (foco) conteudo.querySelector(`[data-vendas-filtro="${foco}"]`)?.focus();
+    const hora = document.getElementById('dashboard-generated-at');
+    if (hora) hora.textContent = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function atualizarTabelaAbc() {
+    const corpo = conteudo.querySelector('[data-vendas-abc-corpo]');
+    if (corpo && tela.dados) corpo.innerHTML = htmlCorpoAbc();
+  }
+
+  function filtrarAbc(curva) {
+    tela.abcCurva = tela.abcCurva === curva ? '' : curva;
+    const seletor = conteudo.querySelector('[data-vendas-abc-curva]');
+    if (seletor) seletor.value = tela.abcCurva;
+    atualizarTabelaAbc();
+    conteudo.querySelector('[data-vendas-abc]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ---- aba ---------------------------------------------------------------------------
+  // Clonada da última aba capturada, para manter a marcação; ganha o selo "Novo" como
+  // os itens novos da barra lateral.
+  let botao = nav.querySelector('[data-session-key="vendas"]');
+  if (!botao) {
+    const modelo = nav.querySelector('[data-session-key="monitoramento"]') || nav.querySelector('[data-session-key]');
+    botao = modelo.cloneNode(true);
+    botao.dataset.sessionKey = 'vendas';
+    botao.removeAttribute('data-feature');
+    botao.classList.remove('tab-pill-active');
+    botao.setAttribute('aria-selected', 'false');
+    botao.querySelector('i').className = 'ri-line-chart-line';
+    botao.querySelector('span').textContent = 'Vendas';
+    const selo = document.createElement('span');
+    selo.className = 'mockup-novo';
+    selo.style.marginLeft = '0';
+    selo.textContent = 'Novo';
+    botao.append(selo);
+    nav.append(botao);
+  }
+  const atualizarAba = () => { botao.style.display = disponivel() ? '' : 'none'; };
+  atualizarAba();
+
+  /** No celular a fileira de abas rola de lado: a aba Vendas, a última, precisa aparecer. */
+  function trazerAbaParaVista() {
+    if (!tela.ativo) return;
+    const caixa = nav.getBoundingClientRect();
+    const aba = botao.getBoundingClientRect();
+    if (aba.right > caixa.right) nav.scrollLeft += aba.right - caixa.right + 8;
+    else if (aba.left < caixa.left) nav.scrollLeft -= caixa.left - aba.left + 8;
+  }
+  // No link direto a aba é desenhada antes das fontes e do selo "Novo": mede de novo.
+  window.addEventListener('load', trazerAbaParaVista);
+  document.fonts?.ready?.then(trazerAbaParaVista);
+
+  const seletorDoCabecalho = () => document.querySelector('#mvp-header .dashboard-period-select');
+
+  function mostrar() {
+    if (!disponivel()) return;
+    tela.ativo = true;
+    const seletor = seletorDoCabecalho();
+    if (seletor) seletor.style.display = 'none';
+    renderizar({ entrada: true });
+    requestAnimationFrame(trazerAbaParaVista);
+  }
+
+  function esconder() {
+    if (!tela.ativo) return;
+    tela.ativo = false;
+    destruirGraficos();
+    const seletor = seletorDoCabecalho();
+    if (seletor) seletor.style.display = '';
+  }
+
+  /** O que o app faz quando a aba aberta deixa de ser permitida: aviso e volta à Visão Geral. */
+  function avisarIndisponivel() {
+    const status = document.getElementById('dashboard-status');
+    if (status) {
+      status.textContent = 'Sua sessão ativa ficou indisponível. Voltamos para uma sessão permitida.';
+      status.className = 'dashboard-hidden-status is-error is-visible';
+      clearTimeout(timerStatus);
+      timerStatus = setTimeout(() => { status.className = 'dashboard-hidden-status'; }, 8000);
+    }
+    window.mockup?.avisar?.(`${vendas.verComo().nome} não tem permissão para ver os indicadores de vendas`);
+  }
+
+  // ---- eventos -----------------------------------------------------------------------
+  conteudo.addEventListener('change', (ev) => {
+    if (!tela.ativo) return;
+    const alvo = ev.target;
+    if (alvo.matches('[data-vendas-abc-curva]')) {
+      tela.abcCurva = alvo.value;
+      atualizarTabelaAbc();
+      return;
+    }
+    const chave = alvo.getAttribute('data-vendas-filtro');
+    if (!chave) return;
+    if (chave === 'periodo') {
+      if (alvo.value === 'personalizado' && validarIntervalo(filtros.de, filtros.ate).erro) {
+        // Começa no período que estava na tela.
+        const atual = periodo();
+        filtros.de = chaveDoDia(atual.de);
+        filtros.ate = chaveDoDia(atual.ate);
+      }
+      filtros.periodo = alvo.value;
+      tela.rascunho = null;
+      tela.erroIntervalo = '';
+    } else if (chave === 'representada') {
+      filtros.representadaId = alvo.value;
+    } else if (chave === 'vendedor') {
+      filtros.vendedorId = alvo.value;
+    } else if (chave === 'de' || chave === 'ate') {
+      const de = conteudo.querySelector('[data-vendas-filtro="de"]')?.value || '';
+      const ate = conteudo.querySelector('[data-vendas-filtro="ate"]')?.value || '';
+      const valido = validarIntervalo(de, ate);
+      if (valido.erro) {
+        tela.rascunho = { de, ate };
+        tela.erroIntervalo = valido.erro;
+      } else {
+        filtros.de = de;
+        filtros.ate = ate;
+        tela.rascunho = null;
+        tela.erroIntervalo = '';
+      }
+    }
+    tela.abcTodos = false;
+    guardarFiltros();
+    renderizar();
+  });
+
+  conteudo.addEventListener('input', (ev) => {
+    if (!tela.ativo || !ev.target.matches('[data-vendas-abc-busca]')) return;
+    tela.abcBusca = ev.target.value;
+    atualizarTabelaAbc();
+  });
+
+  conteudo.addEventListener('click', (ev) => {
+    if (!tela.ativo) return;
+    if (ev.target.closest('[data-vendas-abc-todos]')) {
+      tela.abcTodos = !tela.abcTodos;
+      atualizarTabelaAbc();
+      return;
+    }
+    const curva = ev.target.closest('[data-vendas-abc-filtrar]');
+    if (curva) filtrarAbc(curva.getAttribute('data-vendas-abc-filtrar'));
+  });
+
+  conteudo.addEventListener('keydown', (ev) => {
+    if (!tela.ativo || (ev.key !== 'Enter' && ev.key !== ' ')) return;
+    const curva = ev.target.closest('[data-vendas-abc-filtrar]');
+    if (!curva) return;
+    ev.preventDefault();
+    filtrarAbc(curva.getAttribute('data-vendas-abc-filtrar'));
+  });
+
+  // Pedido novo, cliente editado, "Ver como" trocado (nesta aba ou em outra): redesenha.
+  vendas.aoMudar(() => {
+    atualizarAba();
+    if (!tela.ativo) return;
+    if (!disponivel()) {
+      window.mockupDashboardAbas?.redesenhar();
+      return;
+    }
+    renderizar();
+  });
+
+  // Tema claro/escuro: os gráficos são redesenhados com as cores do tema, como o app faz.
+  new MutationObserver(() => {
+    if (!tela.ativo || !tela.dados) return;
+    destruirGraficos();
+    desenharGraficos(tela.dados);
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  window.mockupVendasDashboard = { disponivel, mostrar, esconder, avisarIndisponivel };
+})();
+</script>
+<!-- VENDAS:FIM -->
 <script>
 (() => {
   // ---------------------------------------------------------------------------------
@@ -9081,7 +10153,8 @@
   const conteudo = $('#dashboard-session-content');
   const seletorPeriodo = $('#dashboard-range');
   const ROTULO_PERIODO = { today: 'Hoje', '7d': '7 dias', '30d': '30 dias', '90d': '90 dias' };
-  const SESSOES = ['overview', 'chat', 'kanban', 'tarefas', 'campanhas', 'automacoes', 'monitoramento'];
+  // 'vendas' é a aba nova (recurso em aprovação), desenhada pelo bloco VENDAS acima.
+  const SESSOES = ['overview', 'chat', 'kanban', 'tarefas', 'campanhas', 'automacoes', 'monitoramento', 'vendas'];
 
   const estado = {
     periodo: seletorPeriodo?.value || '30d',
@@ -9110,9 +10183,22 @@
   }
 
   function desenhar() {
-    const aba = estado.sessao === 'chat' ? `chat-${estado.subChat}` : estado.sessao;
-    const tpl = template(`${estado.periodo}:${aba}`);
-    if (tpl) conteudo.innerHTML = tpl.innerHTML;
+    // Aba Vendas: não tem template capturado; quem desenha é window.mockupVendasDashboard
+    // (bloco VENDAS), com os dados de mockup-vendas.js. Sem permissão, volta para a
+    // Visão Geral com o aviso do app.
+    const abaVendas = window.mockupVendasDashboard;
+    if (estado.sessao === 'vendas' && !abaVendas?.disponivel()) {
+      estado.sessao = 'overview';
+      abaVendas?.avisarIndisponivel();
+    }
+    if (estado.sessao === 'vendas') {
+      abaVendas.mostrar();
+    } else {
+      abaVendas?.esconder();
+      const aba = estado.sessao === 'chat' ? `chat-${estado.subChat}` : estado.sessao;
+      const tpl = template(`${estado.periodo}:${aba}`);
+      if (tpl) conteudo.innerHTML = tpl.innerHTML;
+    }
 
     todos('#dashboard-session-tabs [data-session-key]').forEach((botao) => {
       const ativo = botao.dataset.sessionKey === estado.sessao;
@@ -9270,6 +10356,9 @@
   conteudo.addEventListener('input', (ev) => {
     if (ev.target.closest('[data-monitor-filter="search"]')) filtrarRelatorio();
   });
+
+  // O bloco VENDAS pede um redesenho quando a pessoa do "Ver como" perde a permissão.
+  window.mockupDashboardAbas = { redesenhar: desenhar };
 
   marcarHorario();
   if (estado.sessao !== 'overview') desenhar();

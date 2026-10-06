@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="theme-color" content="#0C88F1">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Zap Rep">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Representadas - Zap do Representante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+    
+    
+    
+    
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/user-menu.css">
+    <link rel="stylesheet" href="css/new-design-vars.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/zap-colors.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
+    <link rel="stylesheet" href="css/contacts-layout.css">
+      <link rel="stylesheet" href="css/mobile-polish.css">
+<link id="zap-cloud-notifications-css" rel="stylesheet" href="css/cloud-notifications.css"><link rel="stylesheet" href="css/account-access.css"><link rel="icon" href="favicon.svg">
+<script src="mockup-comum.js"></script>
+<script src="mockup-vendas.js"></script>
+</head>
+  <body class="contacts-page representadas-page font-sans dark:bg-[#11181F] text-[#44505F] dark:text-[#EEF6FE] transition-all duration-200 bg-theme-surface">
+    <div class="min-h-screen w-full relative dashboard-modern-shell">
+      <div class="glow-blob" style="
+          width: 600px;
+          height: 600px;
+          top: -200px;
+          left: -180px;
+          background: radial-gradient(circle, rgba(180,200,220,0.35) 0%, transparent 70%);
+        "></div>
+      <div class="glow-blob" style="
+          width: 700px;
+          height: 700px;
+          bottom: -260px;
+          right: -220px;
+          background: radial-gradient(circle, rgba(197,213,228,0.3) 0%, transparent 70%);
+          animation-delay: 5s;
+        "></div>
+
+      <aside id="mvp-sidebar" class="sidebar-hover group fixed left-0 top-0 bottom-0 z-50 flex flex-col py-3 gap-1" style="
+          background: rgba(255, 255, 255, 0.45);
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          border-right: 1px solid rgba(255, 255, 255, 0.5);
+        " aria-label="Menu lateral"><button type="button" class="mvp-sidebar-close" title="Fechar menu" aria-label="Fechar menu"><i class="ri-close-line"></i></button>
+    <div class="flex items-center gap-3 px-3 mb-1 shrink-0">
+      <div class="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 overflow-hidden" title="Zap do Representante">
+        <img src="logo.png" alt="Logo Zap" class="w-full h-full object-contain" data-fallback-src="logosvg.svg">
+      </div>
+      <div class="sidebar-label flex items-center overflow-hidden">
+        <img src="secundary-logo.png" alt="Zap do Representante" class="h-12 w-auto object-contain" data-fallback-src="logosvg.svg">
+      </div>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-1 overflow-y-auto sidebar-scroll w-full px-3 min-h-0">
+      
+        <a href="dashboard.html" class="sidebar-item " title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-dashboard-line"></i>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+          
+        </a>
+      
+        <a href="chats.html" class="sidebar-item " title="Conversas" aria-label="Conversas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-chat-3-line"></i>
+          </span>
+          <span class="sidebar-label">Conversas</span>
+          
+        </a>
+      
+        <a href="contacts.html" class="sidebar-item " title="Contatos" aria-label="Contatos">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-contacts-book-line"></i>
+          </span>
+          <span class="sidebar-label">Contatos</span>
+          
+        </a>
+      
+        <a href="kanban.html" class="sidebar-item " title="Kanban" aria-label="Kanban">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-trello-line"></i>
+          </span>
+          <span class="sidebar-label">Kanban</span>
+          
+        </a>
+      
+        <a href="tasks.html" class="sidebar-item " title="Tarefas" aria-label="Tarefas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-task-line"></i>
+          </span>
+          <span class="sidebar-label">Tarefas</span>
+          <span class="sidebar-badge" data-sidebar-badge="tasks" hidden=""></span>
+        </a>
+      
+        <a href="calendar.html" class="sidebar-item " title="Calendário" aria-label="Calendário">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-calendar-line"></i>
+          </span>
+          <span class="sidebar-label">Calendário</span>
+          
+        </a>
+      
+        <a href="stories.html" class="sidebar-item " title="Status" aria-label="Status">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-image-circle-line"></i>
+          </span>
+          <span class="sidebar-label">Status</span>
+          
+        </a>
+      
+        <a href="campaigns.html" class="sidebar-item " title="Campanhas" aria-label="Campanhas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-megaphone-line"></i>
+          </span>
+          <span class="sidebar-label">Campanhas</span>
+          
+        </a>
+      
+        <a href="agendadas.html" class="sidebar-item " title="Agendadas" aria-label="Agendadas">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-time-line"></i>
+          </span>
+          <span class="sidebar-label">Agendadas</span>
+          
+        </a>
+      
+        <a href="settings.html" class="sidebar-item " title="Configurações" aria-label="Configurações">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-settings-3-line"></i>
+          </span>
+          <span class="sidebar-label">Configurações</span>
+          
+        </a>
+      
+        <a href="ajuda.html" class="sidebar-item " title="Ajuda" aria-label="Ajuda">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-question-line"></i>
+          </span>
+          <span class="sidebar-label">Ajuda</span>
+          
+        </a>
+      
+
+      <div class="flex flex-col gap-1 pt-2 mt-1 border-t border-black/5 w-full">
+        <button id="mvp-theme-trigger" type="button" class="sidebar-item" title="Tema claro" aria-label="Tema claro">
+          <span class="sidebar-icon-wrap">
+            <i class="ri-sun-line"></i>
+          </span>
+          <span class="sidebar-label">Tema claro</span>
+        </button>
+        
+      </div>
+    </nav>
+  </aside>
+
+
+      <!-- REPRESENTADAS (tela nova, não existe no app: marcação escrita à mão com o
+           vocabulário da aba "Grupos" de Contatos — barra de ações, grade de cartões,
+           modal de criação e de detalhes — e com o cartão de importação de catálogo do
+           agente de IA em Configurações). -->
+      <main class="contacts-main-shell relative z-10 min-h-screen">
+        <section class="contacts-mvp-main h-full flex flex-col min-h-0 overflow-hidden">
+          <div class="contacts-mvp-bg pointer-events-none"></div>
+          <div class="contacts-mvp-shell relative z-10">
+            <header class="contacts-mvp-header">
+              <div class="contacts-mvp-title-row"><button id="mvp-sidebar-toggle" type="button" class="mvp-sidebar-toggle is-embedded" title="Abrir menu" aria-label="Abrir menu" aria-controls="mvp-sidebar" aria-expanded="false"><i class="ri-menu-line"></i></button>
+                <i class="ri-building-2-line contacts-mvp-title-icon"></i>
+                <h1 class="contacts-mvp-title">Representadas</h1>
+              </div>
+            </header>
+
+            <!-- Barra de ações. O position/z-index inline repete a regra que o app aplica por id
+                 em #contacts-actions-card e #groups-actions-card: sem ela os cartões cobrem o
+                 dropdown de filtros. -->
+            <section id="representadas-actions-card" class="contacts-mvp-actions-card" style="position:relative;z-index:100;overflow:visible;">
+              <div class="contacts-mvp-actions-left">
+                <div class="contacts-mvp-search-wrap">
+                  <i class="ri-search-line"></i>
+                  <input id="representadas-busca" type="search" placeholder="Buscar por nome ou CNPJ..." class="contacts-mvp-search-input" aria-label="Buscar representadas por nome ou CNPJ" autocomplete="off">
+                </div>
+
+                <div class="relative">
+                  <button id="representadas-filtros-btn" class="contacts-mvp-btn contacts-mvp-btn-ghost" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="representadas-filtros">
+                    <i class="ri-filter-line"></i>
+                    Filtros
+                    <span id="representadas-filtro-indicador" class="hidden ml-1 w-1.5 h-1.5 rounded-full bg-[#2196F3]"></span>
+                  </button>
+                  <div id="representadas-filtros" class="contacts-mvp-filter-dropdown hidden">
+                    <div class="p-3">
+                      <div class="text-[11px] font-bold uppercase tracking-wider mb-2" style="color:var(--ds-text-muted);">Situação</div>
+                      <button class="contacts-mvp-gf-option" data-filtro-situacao="todas" type="button">Todas</button>
+                      <button class="contacts-mvp-gf-option" data-filtro-situacao="ativas" type="button"><i class="ri-checkbox-circle-line"></i> Ativas</button>
+                      <button class="contacts-mvp-gf-option" data-filtro-situacao="inativas" type="button"><i class="ri-pause-circle-line"></i> Inativas</button>
+                      <div class="text-[11px] font-bold uppercase tracking-wider mt-3 mb-2" style="color:var(--ds-text-muted);">Ordenar por</div>
+                      <button class="contacts-mvp-gf-option" data-filtro-ordem="nome" type="button"><i class="ri-sort-alphabet-asc"></i> Nome</button>
+                      <button class="contacts-mvp-gf-option" data-filtro-ordem="comissao" type="button"><i class="ri-percent-line"></i> Maior comissão</button>
+                      <button class="contacts-mvp-gf-option" data-filtro-ordem="vendas" type="button"><i class="ri-line-chart-line"></i> Mais vendas no mês</button>
+                      <div class="contacts-mvp-filter-footer">
+                        <button id="representadas-limpar-filtros" class="contacts-mvp-link-btn" type="button">Limpar filtros</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contacts-mvp-actions-right">
+                <button id="representadas-importar-btn" class="contacts-mvp-btn contacts-mvp-btn-outline" type="button">
+                  <i class="ri-file-pdf-2-line"></i>
+                  Importar do PDF
+                </button>
+                <button id="representadas-nova-btn" class="contacts-mvp-btn contacts-mvp-btn-primary" type="button">
+                  <i class="ri-add-line"></i>
+                  Nova Representada
+                </button>
+              </div>
+            </section>
+
+            <!-- Aviso de permissão e de escopo (vendedor vê só a carteira dele). -->
+            <div id="representadas-aviso" class="hidden rounded-[12px] p-3.5 text-[13px] items-start gap-2" style="background:rgba(33,150,243,0.04);border:1px solid rgba(33,150,243,0.16);color:var(--ds-text-soft);">
+              <i class="ri-information-line text-[16px]" style="color:var(--ds-primary);"></i>
+              <span data-texto></span>
+            </div>
+
+            <!-- Cartões. position/z-index inline: a mesma regra do app para #groups-content. -->
+            <div id="representadas-conteudo" style="position:relative;z-index:1;">
+              <div id="representadas-grade" class="contacts-groups-grid"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="representadas-modal-root"></div>
+
+    <!-- Seletor de PDFs do catálogo (o app cria um igual, escondido, no agente de IA). -->
+    <input id="representadas-pdf" type="file" accept=".pdf,application/pdf" multiple class="hidden" aria-hidden="true" tabindex="-1">
+
+    <!-- Menu "mais ações" do cartão: um só, posicionado ao lado do botão que abriu. -->
+    <div id="representadas-menu" class="contacts-mvp-row-menu hidden" role="menu">
+      <button class="contacts-mvp-row-menu-item" data-menu="situacao" type="button" role="menuitem"><i class="ri-pause-circle-line"></i> <span>Desativar</span></button>
+      <button class="contacts-mvp-row-menu-item danger" data-menu="excluir" type="button" role="menuitem"><i class="ri-delete-bin-6-line"></i> <span>Excluir</span></button>
+    </div>
+
+<div id="zap-cloud-notification-stack" class="zap-cloud-notification-stack" aria-live="polite" aria-atomic="false"></div><div id="mvp-sidebar-backdrop" class="mvp-sidebar-backdrop"></div><div id="notification-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div><div id="mvp-user-menu" class="user-menu-floating dashboard-user-menu">
+    <button type="button" class="dashboard-avatar-btn" data-user-btn="" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">AS</button>
+    <div class="dashboard-user-popover" data-user-popover="" role="menu" hidden=""></div>
+  </div>
+
+<!-- Confirmação: a mesma caixa do confirm do app (showConfirm), como na exclusão de contato. -->
+<div id="representadas-confirmacao" class="fixed inset-0 bg-black bg-opacity-50 z-[10000] items-center justify-center hidden">
+      <div class="border border-white/10 rounded-lg p-6 w-full max-w-md mx-4 transform transition-transform duration-200 bg-theme-surface scale-95">
+        <div class="flex items-center gap-3 mb-4">
+          <i class="confirm-icon text-2xl ri-error-warning-line text-red-400"></i>
+          <h3 class="confirm-title text-lg font-semibold">Excluir representada</h3>
+        </div>
+        <p class="confirm-message text-gray-300 mb-6"></p>
+        <div class="flex gap-3 justify-end">
+          <button class="confirm-cancel px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">Cancelar</button>
+          <button class="confirm-ok px-4 py-2 rounded-md transition-colors bg-red-600 text-white hover:bg-red-700">Excluir</button>
+        </div>
+      </div>
+    </div>
+
+<!-- Cartão de uma representada (o mesmo cartão da grade de Grupos). -->
+<template id="tpl-representada-cartao">
+<div class="contacts-group-card" data-representada-cartao>
+        <div class="flex items-start justify-between gap-3 mb-4">
+          <img data-logo src="" alt="" class="object-cover shrink-0" style="width:64px;height:64px;border-radius:16px;">
+          <span data-situacao class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold" style="background:rgba(72,187,120,0.1);color:var(--ds-success);">
+            <i class="ri-checkbox-circle-line"></i>
+            <span data-situacao-texto>Ativa</span>
+          </span>
+        </div>
+        <h3 data-nome class="text-[16px] font-bold mb-1 truncate" style="color:var(--ds-text);"></h3>
+        <p data-razao class="text-[12px] mb-3 truncate" style="color:var(--ds-text-muted);"></p>
+        <div class="flex items-center gap-1.5 text-[13px] mb-1.5" style="color:var(--ds-text-soft);">
+          <i class="ri-profile-line"></i>
+          <span data-cnpj></span>
+        </div>
+        <div class="flex items-center gap-1.5 text-[13px] mb-1.5" style="color:var(--ds-text-soft);">
+          <i class="ri-percent-line"></i>
+          <span>Comissão <span data-comissao class="font-semibold" style="color:var(--ds-text);"></span></span>
+        </div>
+        <div class="flex items-center gap-1.5 text-[13px] mb-1.5 min-w-0" style="color:var(--ds-text-soft);">
+          <i class="ri-phone-line"></i>
+          <span data-telefone class="truncate"></span>
+        </div>
+        <div class="flex items-center gap-1.5 text-[13px] min-w-0" style="color:var(--ds-text-soft);">
+          <i class="ri-mail-line"></i>
+          <span data-email class="truncate"></span>
+        </div>
+        <div class="grid grid-cols-3 gap-3 text-[13px] mt-4 pt-4" style="border-top:1px solid rgba(0,0,0,0.04);">
+          <div data-clientes-bloco><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Clientes</div><div data-clientes style="color:var(--ds-text);" class="font-semibold"></div></div>
+          <div class="min-w-0"><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Vendido no mês</div><div data-vendido style="color:var(--ds-text);" class="font-semibold truncate"></div><div data-comissao-mes class="text-[11px] mt-0.5 truncate" style="color:var(--ds-text-muted);"></div></div>
+          <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Catálogo</div><a data-catalogo href="pedidos.html" class="font-semibold hover:underline" style="color:var(--ds-primary);"></a></div>
+        </div>
+        <div class="flex gap-2 mt-4 pt-4" style="border-top:1px solid rgba(0,0,0,0.04);">
+          <button data-acao="abrir" type="button" class="flex-1 text-center py-2 rounded-[10px] text-[13px] font-semibold transition-colors" style="background:rgba(33,150,243,0.08);color:var(--ds-primary);border:none;cursor:pointer;">Editar</button>
+          <button data-acao="menu" type="button" class="contacts-mvp-menu-trigger" aria-label="Mais ações" aria-haspopup="true"><i class="ri-more-2-fill"></i></button>
+        </div>
+      </div>
+</template>
+
+<!-- Nenhuma representada para mostrar (o mesmo vazio da aba Grupos). -->
+<template id="tpl-representadas-vazio">
+<div class="text-center py-16 px-6 text-[13px]" style="background:rgba(var(--ds-glass-rgb),0.55);backdrop-filter:blur(25px);border:1px solid rgba(var(--ds-glass-rgb),0.5);border-radius:20px;color:var(--ds-text-muted);">
+          <i data-icone class="ri-building-2-line" style="font-size:28px;"></i>
+          <div data-titulo class="text-[14px] font-semibold mt-2" style="color:var(--ds-text-soft);">Nenhuma representada encontrada.</div>
+          <div data-texto class="mt-1"></div>
+          <button data-acao="limpar-filtros" class="contacts-mvp-link-btn mt-3" type="button">Limpar filtros</button>
+        </div>
+</template>
+
+<!-- Modal da representada: escolha (tem PDF?), progresso da leitura, formulário e
+     detalhes (só leitura). Mesma casca do modal "Novo Grupo" de Contatos. -->
+<template id="tpl-representada-modal">
+<div class="contacts-groups-overlay" data-overlay>
+        <div class="contacts-groups-modal contacts-groups-modal-create" data-modal-shell="1" role="dialog" aria-modal="true" aria-labelledby="representada-modal-titulo">
+          <div class="flex items-start justify-between gap-3 pb-5 mb-1" style="border-bottom:1px solid rgba(0,0,0,0.05);">
+            <div class="flex items-start gap-3 min-w-0">
+              <div data-icone class="w-10 h-10 rounded-xl flex items-center justify-center text-[20px] shrink-0 overflow-hidden" style="background:linear-gradient(135deg, rgba(74,111,165,0.2), rgba(79,209,197,0.15));"><i class="ri-building-2-line" style="color:var(--ds-primary);"></i></div>
+              <div class="min-w-0">
+                <h2 id="representada-modal-titulo" data-titulo class="text-[18px] font-bold" style="color:var(--ds-text);">Nova Representada</h2>
+                <p data-subtitulo class="text-[13px] mt-0.5" style="color:var(--ds-text-muted);">A empresa que você representa. O catálogo dela vai para Pedidos.</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span data-situacao class="hidden items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold"><i class="ri-checkbox-circle-line"></i><span data-situacao-texto>Ativa</span></span>
+              <button data-acao="fechar" type="button" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-black/5 transition-colors" aria-label="Fechar"><i class="ri-close-line" style="color:var(--ds-text-muted);"></i></button>
+            </div>
+          </div>
+
+          <!-- 1. Tem o PDF? (a mesma pergunta do agente de IA ao adicionar representada) -->
+          <div data-passo="escolha" class="hidden mt-5">
+            <div class="settings-ai-catalog-chooser" style="min-width:0;color:var(--ds-text);">
+              <span class="settings-ai-catalog-chooser-icon"><i class="ri-file-pdf-2-line"></i></span>
+              <strong>Você tem PDF do catálogo ou apresentação dessa empresa?</strong>
+              <p>Se tiver, a IA lê os arquivos, preenche os dados da empresa e manda os produtos para o catálogo de Pedidos.</p>
+              <div class="settings-ai-catalog-chooser-actions">
+                <button data-acao="escolher-pdf" type="button" class="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-[12px] text-[13px] font-semibold text-white transition-all hover:-translate-y-px" style="background:var(--ds-primary);box-shadow:0 2px 8px rgba(33,150,243,0.3);"><i class="ri-attachment-2"></i> Sim, enviar PDFs</button>
+                <button data-acao="manual" type="button" class="w-full px-5 py-2.5 rounded-[12px] text-[13px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-text-soft);">Não, preencher manualmente</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Lendo os PDFs (o mesmo cartão de progresso do agente de IA) -->
+          <div data-passo="progresso" class="hidden mt-5">
+            <div class="settings-ai-catalog-progress" role="status" aria-live="polite" style="min-width:0;color:var(--ds-text);">
+              <span class="settings-ai-catalog-progress-percent" data-catalog-progress-percent>0%</span>
+              <div class="settings-ai-catalog-progress-bar"><span data-catalog-progress-fill style="width:0%"></span></div>
+              <strong>Processando catálogos…</strong>
+              <p data-catalog-progress-stage></p>
+              <ul data-arquivos></ul>
+            </div>
+          </div>
+
+          <!-- 3. Formulário -->
+          <form data-passo="formulario" class="hidden" novalidate autocomplete="off">
+            <div data-resultado-pdf class="hidden mt-5 rounded-[12px] p-3.5" style="background:rgba(33,150,243,0.04);border:1px solid rgba(33,150,243,0.16);">
+              <div class="flex items-start gap-2.5">
+                <i class="ri-sparkling-line text-[18px]" style="color:var(--ds-primary);"></i>
+                <div class="min-w-0">
+                  <div data-resultado-titulo class="text-[13px] font-semibold" style="color:var(--ds-text);">A IA preencheu os dados da empresa</div>
+                  <p data-resultado-texto class="text-[12px] mt-0.5" style="color:var(--ds-text-soft);"></p>
+                </div>
+              </div>
+              <div data-resultado-produtos class="mt-3 flex flex-col gap-1 max-h-[220px] overflow-y-auto"></div>
+            </div>
+
+            <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Empresa</div>
+            <div class="flex items-center gap-4">
+              <img data-logo-previa src="" alt="Logo da representada" class="object-cover shrink-0" style="width:64px;height:64px;border-radius:16px;">
+              <div class="flex flex-col gap-1.5 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <button data-acao="enviar-logo" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[10px] text-[12px] font-semibold transition-colors" style="background:rgba(33,150,243,0.08);color:var(--ds-primary);"><i class="ri-image-add-line"></i> Enviar imagem</button>
+                  <button data-acao="remover-logo" type="button" class="hidden px-3 py-2 rounded-[10px] text-[12px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-text-soft);">Remover</button>
+                </div>
+                <p class="text-[11px]" style="color:var(--ds-text-muted);">PNG, JPG ou WEBP de até 5 MB. Sem imagem, fica o avatar com as iniciais.</p>
+              </div>
+              <input data-logo-arquivo type="file" accept="image/png,image/jpeg,image/webp" class="hidden" tabindex="-1">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div class="flex flex-col gap-1.5 md:col-span-2">
+                <label for="representada-fantasia" class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">Nome fantasia *</label>
+                <input id="representada-fantasia" data-campo="nomeFantasia" type="text" maxlength="120" placeholder="Ex.: Biscoitos Lumiar" class="px-3.5 py-2.5 rounded-[12px] text-[14px] outline-none transition-all" style="background:rgba(var(--ds-glass-rgb),0.7);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);">
+                <p data-erro="nomeFantasia" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+              </div>
+              <div class="flex flex-col gap-1.5 md:col-span-2">
+                <label for="representada-razao" class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">Razão social *</label>
+                <input id="representada-razao" data-campo="razaoSocial" type="text" maxlength="160" placeholder="Ex.: Biscoitos Lumiar Indústria de Alimentos Ltda" class="px-3.5 py-2.5 rounded-[12px] text-[14px] outline-none transition-all" style="background:rgba(var(--ds-glass-rgb),0.7);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);">
+                <p data-erro="razaoSocial" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="representada-cnpj" class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">CNPJ *</label>
+                <input id="representada-cnpj" data-campo="cnpj" type="text" maxlength="18" placeholder="00.000.000/0000-00" autocapitalize="characters" spellcheck="false" class="px-3.5 py-2.5 rounded-[12px] text-[14px] outline-none transition-all" style="background:rgba(var(--ds-glass-rgb),0.7);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);">
+                <p data-erro="cnpj" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="representada-comissao" class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">Comissão *</label>
+                <div class="relative">
+                  <input id="representada-comissao" data-campo="comissao" type="text" inputmode="decimal" maxlength="6" placeholder="0,75" class="w-full px-3.5 py-2.5 rounded-[12px] text-[14px] outline-none transition-all" style="background:rgba(var(--ds-glass-rgb),0.7);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);padding-right:34px;">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[13px] font-semibold pointer-events-none" style="color:var(--ds-text-muted);">%</span>
+                </div>
+                <p data-ajuda="comissao" class="text-[11px]" style="color:var(--ds-text-muted);">Quanto a representada paga a você sobre o valor de cada pedido.</p>
+                <p data-erro="comissao" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+              </div>
+            </div>
+
+            <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Contato</div>
+            <div class="grid grid-cols-1 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <span class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">Telefones</span>
+                <div data-lista="telefones" class="flex flex-col gap-2"></div>
+                <p data-erro="telefones" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+                <button data-acao="adicionar-telefone" type="button" class="contacts-mvp-link-btn inline-flex items-center gap-1" style="align-self:flex-start;"><i class="ri-add-line"></i> Adicionar telefone</button>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <span class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">E-mails</span>
+                <div data-lista="emails" class="flex flex-col gap-2"></div>
+                <p data-erro="emails" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+                <button data-acao="adicionar-email" type="button" class="contacts-mvp-link-btn inline-flex items-center gap-1" style="align-self:flex-start;"><i class="ri-add-line"></i> Adicionar e-mail</button>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="representada-site" class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">Site</label>
+                <input id="representada-site" data-campo="site" type="url" maxlength="200" placeholder="https://empresa.com.br" class="px-3.5 py-2.5 rounded-[12px] text-[14px] outline-none transition-all" style="background:rgba(var(--ds-glass-rgb),0.7);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);">
+                <p data-erro="site" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+              </div>
+            </div>
+
+            <div class="flex justify-end gap-2 mt-6 pt-5" style="border-top:1px solid rgba(0,0,0,0.05);">
+              <button data-acao="fechar" type="button" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-text-soft);">Cancelar</button>
+              <button data-acao="salvar" type="submit" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold text-white transition-all hover:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0" style="background:var(--ds-primary);box-shadow:0 2px 8px rgba(33,150,243,0.3);">Cadastrar representada</button>
+            </div>
+          </form>
+
+          <!-- 4. Detalhes, para quem só pode ver -->
+          <div data-passo="detalhes" class="hidden">
+            <div class="mt-5 rounded-[12px] p-3.5 text-[12px] flex items-start gap-2" style="background:rgba(33,150,243,0.04);border:1px solid rgba(33,150,243,0.16);color:var(--ds-text-soft);">
+              <i class="ri-eye-line text-[15px]" style="color:var(--ds-primary);"></i>
+              <span>Você pode ver as representadas, mas sua função não permite cadastrar nem alterar. Quem cuida do cadastro é o dono da conta ou um administrador.</span>
+            </div>
+            <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Empresa</div>
+            <div class="grid grid-cols-2 gap-4 text-[13px]">
+              <div class="col-span-2"><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Razão social</div><div data-ver="razaoSocial" style="color:var(--ds-text);" class="font-semibold"></div></div>
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">CNPJ</div><div data-ver="cnpj" style="color:var(--ds-text);" class="font-semibold"></div></div>
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Comissão</div><div data-ver="comissao" style="color:var(--ds-text);" class="font-semibold"></div></div>
+            </div>
+            <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Contato</div>
+            <div class="grid grid-cols-1 gap-4 text-[13px]">
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Telefones</div><div data-ver="telefones" style="color:var(--ds-text);" class="font-semibold"></div></div>
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">E-mails</div><div data-ver="emails" style="color:var(--ds-text);" class="font-semibold break-all"></div></div>
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Site</div><div data-ver="site" style="color:var(--ds-text);" class="font-semibold break-all"></div></div>
+            </div>
+            <div data-ver-numeros-titulo class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Movimento</div>
+            <div class="grid grid-cols-2 gap-4 text-[13px]">
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Clientes (90 dias)</div><div data-ver="clientes" style="color:var(--ds-text);" class="font-semibold"></div></div>
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Catálogo</div><a data-ver="catalogo" href="pedidos.html" style="color:var(--ds-primary);" class="font-semibold hover:underline"></a></div>
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Vendido no mês</div><div data-ver="vendido" style="color:var(--ds-text);" class="font-semibold"></div></div>
+              <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Comissão no mês</div><div data-ver="comissaoMes" style="color:var(--ds-text);" class="font-semibold"></div></div>
+            </div>
+            <div class="flex justify-end gap-2 mt-7 pt-5" style="border-top:1px solid rgba(0,0,0,0.05);">
+              <button data-acao="fechar" type="button" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-text-soft);">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</template>
+
+<!-- Linha de telefone ou e-mail no formulário (campo + remover). -->
+<template id="tpl-representada-item">
+<div class="flex items-center gap-2" data-item>
+                  <input type="text" class="flex-1 min-w-0 px-3.5 py-2.5 rounded-[12px] text-[14px] outline-none transition-all" style="background:rgba(var(--ds-glass-rgb),0.7);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);">
+                  <button data-acao="remover-item" type="button" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-black/5 transition-colors shrink-0" aria-label="Remover"><i class="ri-close-line" style="color:var(--ds-text-muted);"></i></button>
+                </div>
+</template>
+
+<!-- Produto lido do PDF, na lista do resultado da importação. -->
+<template id="tpl-representada-produto">
+<div class="flex items-center gap-3 px-3 py-2 rounded-[10px]" style="background:rgba(var(--ds-glass-rgb),0.72);border:1px solid rgba(0,0,0,0.06);">
+                <span data-codigo class="text-[11px] font-semibold shrink-0" style="color:var(--ds-text-muted);"></span>
+                <span data-nome class="flex-1 min-w-0 text-[13px] truncate" style="color:var(--ds-text);"></span>
+                <span data-preco class="text-[12px] shrink-0" style="color:var(--ds-text-soft);"></span>
+              </div>
+</template>
+
+<!-- MOCKUP:INICIO — daqui para baixo é escrito à mão. Esta tela é um recurso novo (módulo de
+     vendas) e não existe no app: não há captura para refazer. A marcação acima usa o casco de
+     contacts.html (cabeçalho, barra lateral, main) e o vocabulário que o app já tem na aba
+     Grupos de Contatos (barra de ações, grade de cartões, modal de criação e de detalhes) e no
+     agente de IA de Configurações (cartões "tem PDF?" e de progresso da leitura do catálogo).
+
+     Dados e regras vêm de window.vendas (mockup-vendas.js): o que se cria, altera ou exclui aqui
+     fica no navegador e aparece nas outras telas do módulo (os produtos lidos do PDF vão para o
+     catálogo de Pedidos). Avisos: window.mockup.avisar(texto).
+
+     Para demonstrar:
+       representadas.html?nova    abre direto o cadastro de uma representada nova
+       representadas.html?vazio   mostra a conta ainda sem nenhuma representada
+       "Ver como" (canto inferior esquerdo): Bruno, vendedor, só vê; Ana e Carla podem tudo. -->
+<style>
+  /* A mensagem do modal de confirmação do app é text-gray-300: quase ilegível no tema claro.
+     Aqui ela explica por que a representada não pode ser excluída, então usa o texto
+     secundário do tema (o mesmo ajuste de clientes.html). */
+  #representadas-confirmacao .confirm-message { color: var(--ds-text-soft); }
+
+  /* Cópia literal das regras que o app desenha na categoria "Representadas" do agente de IA
+     (Configurações › Agentes de IA): o cartão "tem PDF?" e o de progresso da leitura. */
+  .settings-ai-catalog-chooser,
+  .settings-ai-catalog-progress { position: relative; flex: 0 0 320px; min-width: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; padding: 22px 18px; border-radius: 14px; border: 1px dashed rgba(33,150,243,.5); background: rgba(33,150,243,.05); }
+  .settings-ai-catalog-chooser strong,
+  .settings-ai-catalog-progress strong { font-size: 14px; }
+  .settings-ai-catalog-chooser p,
+  .settings-ai-catalog-progress p { font-size: 12.5px; opacity: .75; line-height: 1.5; margin: 0; }
+  .settings-ai-catalog-chooser-icon { width: 42px; height: 42px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 21px; color: #C53030; background: rgba(245,101,101,.12); }
+  .settings-ai-catalog-chooser-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; width: 100%; }
+  .settings-ai-catalog-progress-percent { font-size: 26px; font-weight: 800; color: #2196F3; line-height: 1; font-variant-numeric: tabular-nums; }
+  .settings-ai-catalog-progress-bar { width: 100%; height: 8px; border-radius: 999px; background: rgba(33,150,243,.15); overflow: hidden; }
+  .settings-ai-catalog-progress-bar span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #2196F3, #0C88F1); transition: width .5s ease; }
+  .settings-ai-catalog-progress ul { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 3px; max-height: 110px; overflow-y: auto; width: 100%; }
+  .settings-ai-catalog-progress ul li { display: flex; align-items: center; gap: 6px; font-size: 12px; opacity: .8; justify-content: center; }
+  .settings-ai-catalog-progress ul li i { color: #C53030; }
+</style>
+<script>
+(() => {
+  const vendas = window.vendas;
+  const $ = (sel, raiz = document) => raiz.querySelector(sel);
+  const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
+  const avisar = (texto) => window.mockup.avisar(texto);
+  const parametros = new URLSearchParams(location.search);
+  const DIA = 86_400_000;
+
+  // ---------------------------------------------------------------------------------
+  // O que a "IA" devolve ao ler um PDF de catálogo. Tudo inventado: empresas fictícias,
+  // CNPJ com dígito verificador errado de propósito, telefones 11 99000-02NN e e-mails em
+  // exemplo.com.br. Cada leitura usa a primeira empresa que ainda não está cadastrada; com
+  // as duas já cadastradas, cai na primeira e mostra o caminho "já existe" (completa só os
+  // campos vazios e manda para Pedidos só os produtos que faltam).
+  // O catálogo não traz a comissão: ela fica em branco para quem cadastra preencher.
+  // produto: [código, nome, embalagem, preço da embalagem em centavos]
+  // ---------------------------------------------------------------------------------
+  const LEITURAS_DO_PDF = [
+    {
+      paginas: 12,
+      empresa: {
+        razaoSocial: 'Colina Dourada Indústria de Massas Ltda',
+        nomeFantasia: 'Massas Colina Dourada',
+        cnpj: '63.184.205/0001-95',
+        telefones: ['5511990000206'],
+        emails: ['comercial@colinadourada.exemplo.com.br', 'pedidos@colinadourada.exemplo.com.br'],
+        site: 'https://colinadourada.exemplo.com.br',
+      },
+      produtos: [
+        ['CDM-501', 'Espaguete de sêmola 500g', 'fardo 20 un', 8980],
+        ['CDM-502', 'Penne de sêmola 500g', 'fardo 20 un', 9180],
+        ['CDM-503', 'Parafuso com ovos 500g', 'fardo 20 un', 9580],
+        ['CDM-504', 'Talharim com ovos 500g', 'fardo 20 un', 9980],
+        ['CDM-505', 'Lasanha pré-cozida 500g', 'cx 12 un', 10680],
+        ['CDM-506', 'Massa para pastel 1kg', 'cx 10 un', 12900],
+        ['CDM-507', 'Nhoque de batata 500g', 'cx 12 un', 11280],
+        ['CDM-508', 'Molho de tomate tradicional 340g', 'cx 24 un', 7440],
+        ['CDM-509', 'Macarrão instantâneo sabor galinha 80g', 'cx 50 un', 8250],
+        ['CDM-510', 'Farinha de trigo tipo 1 1kg', 'fardo 10 un', 5490],
+      ],
+    },
+    {
+      paginas: 8,
+      empresa: {
+        razaoSocial: 'Ribeira Alta Temperos e Condimentos Ltda',
+        nomeFantasia: 'Temperos Ribeira Alta',
+        cnpj: '70.426.819/0001-00',
+        telefones: ['5511990000207'],
+        emails: ['vendas@ribeiraalta.exemplo.com.br'],
+        site: 'https://ribeiraalta.exemplo.com.br',
+      },
+      produtos: [
+        ['TRA-601', 'Colorau 100g', 'cx 24 un', 4560],
+        ['TRA-602', 'Pimenta-do-reino moída 50g', 'cx 24 un', 7680],
+        ['TRA-603', 'Orégano desidratado 10g', 'cx 48 un', 6240],
+        ['TRA-604', 'Alho e sal 300g', 'cx 24 un', 8160],
+        ['TRA-605', 'Caldo de galinha em tablete 57g', 'cx 40 un', 9200],
+        ['TRA-606', 'Cominho moído 50g', 'cx 24 un', 5520],
+        ['TRA-607', 'Tempero baiano 60g', 'cx 24 un', 5760],
+        ['TRA-608', 'Canela em pó 30g', 'cx 24 un', 6480],
+      ],
+    },
+  ];
+
+  // Cor do avatar de iniciais de cada representada nova (as 5 primeiras são as da base; o
+  // vermelho fica por último para o avatar não parecer aviso de erro).
+  const CORES = ['#d97706', '#2563eb', '#16a34a', '#0891b2', '#7c3aed', '#0d9488', '#4f46e5', '#db2777', '#ea580c', '#65a30d', '#dc2626'];
+  // Avatar enquanto o nome ainda não foi digitado: neutro, no cinza de texto apagado do app.
+  const COR_SEM_NOME = '#94a3b8';
+  // Limites: os mesmos do agente de IA para os PDFs; o logo é reduzido a 96 px para caber
+  // no armazenamento do navegador (no sistema ele vai para o armazenamento de arquivos).
+  const LIMITE = { telefones: 5, emails: 5, pdfs: 10, pdfMb: 200, imagemMb: 5, logoPx: 96 };
+
+  // ---------------------------------------------------------------------------------
+  // Formatos e máscaras
+  // ---------------------------------------------------------------------------------
+  const semAcento = (v) => String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const soDigitos = (v) => String(v || '').replace(/\D/g, '');
+  /** CNPJ sem pontuação e em maiúsculas. Aceita o CNPJ alfanumérico (letras nas 12 primeiras posições). */
+  const cnpjLimpo = (v) => String(v || '').toUpperCase().replace(/[^0-9A-Z]/g, '');
+
+  /** "63184205000195" → "63.184.205/0001-95", formatando enquanto se digita. */
+  function mascararCnpj(v) {
+    let s = cnpjLimpo(v).slice(0, 14);
+    // Os dois dígitos verificadores são sempre números.
+    if (s.length > 12) s = s.slice(0, 12) + s.slice(12).replace(/\D/g, '');
+    const [a, b, c, d, e] = [s.slice(0, 2), s.slice(2, 5), s.slice(5, 8), s.slice(8, 12), s.slice(12, 14)];
+    return a + (b ? `.${b}` : '') + (c ? `.${c}` : '') + (d ? `/${d}` : '') + (e ? `-${e}` : '');
+  }
+
+  /** "5511990000201" ou "11990000201" → "(11) 99000-0201", formatando enquanto se digita. */
+  function mascararTelefone(v) {
+    const d = soDigitos(v).replace(/^55(?=\d{10,11}$)/, '').slice(0, 11);
+    if (!d) return '';
+    if (d.length <= 2) return `(${d}`;
+    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  }
+
+  /** 0.75 → "0,75" (o campo mostra sem o %, que fica desenhado ao lado). */
+  const comissaoNoCampo = (n) => (typeof n === 'number' && Number.isFinite(n) ? vendas.fmt.pct(n).replace('%', '') : '');
+
+  function normalizarSite(v) {
+    const t = String(v || '').trim();
+    if (!t) return '';
+    return /^https?:\/\//i.test(t) ? t : `https://${t}`;
+  }
+  const siteValido = (v) => !v || /^https?:\/\/[^\s/.]+(\.[^\s/.]+)+(\/\S*)?$/i.test(v);
+  const emailValido = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const plural = (n, um, varios) => `${vendas.fmt.numero(n)} ${n === 1 ? um : varios}`;
+
+  // ---------------------------------------------------------------------------------
+  // Permissões de quem está usando (o "Ver como" troca a pessoa)
+  // ---------------------------------------------------------------------------------
+  function acesso() {
+    const pessoa = vendas.verComo();
+    return {
+      pessoa,
+      ver: vendas.pode('representadas', 'ver'),
+      editar: vendas.pode('representadas', 'editar'),
+      excluir: vendas.pode('representadas', 'excluir'),
+      carteira: vendas.permissoesDoPapel(pessoa.papel).escopo === 'carteira',
+    };
+  }
+  const semPermissao = (a, acao) => `Sua função (${a.pessoa.papelNome}) não permite ${acao} representadas.`;
+
+  /** Desliga um botão com o visual de desabilitado do app e explica o motivo no title. */
+  function travar(botao, livre, motivo, dica = '') {
+    botao.disabled = !livre;
+    botao.classList.toggle('opacity-50', !livre);
+    botao.classList.toggle('cursor-not-allowed', !livre);
+    if (!livre) botao.title = motivo;
+    else if (dica) botao.title = dica;
+    else botao.removeAttribute('title');
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Números do módulo em cada cartão. Respeitam o escopo de quem vê: o vendedor (escopo
+  // "carteira") enxerga só os pedidos em que ele é o vendedor.
+  //   clientes   compraram desta representada nos últimos N dias (N = dias de cliente ativo)
+  //   vendido    vendas do mês corrente (pedido, faturado ou concluído) e a comissão delas
+  //   produtos   itens ativos do catálogo, que é usado nos pedidos
+  // ---------------------------------------------------------------------------------
+  let cacheNumeros = new Map();
+  function numeros(rep) {
+    if (!cacheNumeros.has(rep.id)) {
+      const mes = vendas.resumo({ representadaId: rep.id });
+      const desde = new Date(Date.now() - vendas.config().diasAtivo * DIA);
+      const compradores = new Set(vendas.pedidos({ representadaId: rep.id, de: desde }).filter(vendas.ehVenda).map((p) => p.clienteId));
+      cacheNumeros.set(rep.id, {
+        vendido: mes.valor,
+        comissaoMes: mes.comissaoRepresentadas,
+        clientes: compradores.size,
+        produtos: vendas.produtos(rep.id).filter((p) => p.ativo !== false).length,
+      });
+    }
+    return cacheNumeros.get(rep.id);
+  }
+  /** Todos os pedidos da representada, de qualquer vendedor e status: decidem se dá para excluir. */
+  const pedidosDa = (rep) => vendas.pedidos({ representadaId: rep.id, respeitarPermissao: false }).length;
+
+  /** Logo enviado (pode ter fundo transparente) vai inteiro sobre fundo claro; sem logo, as iniciais. */
+  function pintarLogo(img, rep) {
+    img.src = vendas.logoDaRepresentada(rep);
+    const enviado = Boolean(rep.logo);
+    img.style.objectFit = enviado ? 'contain' : 'cover';
+    img.style.background = enviado ? '#fff' : '';
+    img.style.border = enviado ? '1px solid rgba(0,0,0,0.06)' : '';
+  }
+
+  /** Pílula Ativa / Inativa (mesmo formato da pílula Aberto / Fechado dos grupos). */
+  function pintarSituacao(el, ativa) {
+    el.style.background = ativa ? 'rgba(72,187,120,0.1)' : 'rgba(0,0,0,0.04)';
+    el.style.color = ativa ? 'var(--ds-success)' : 'var(--ds-text-muted)';
+    $('i', el).className = ativa ? 'ri-checkbox-circle-line' : 'ri-pause-circle-line';
+    $('[data-situacao-texto]', el).textContent = ativa ? 'Ativa' : 'Inativa';
+  }
+
+  /** Primeiro telefone ou e-mail, com "+N" quando há mais (todos no title). */
+  function preencherContato(el, lista, vazio) {
+    el.replaceChildren();
+    if (!lista.length) {
+      const nada = document.createElement('span');
+      nada.className = 'contacts-mvp-empty-tag';
+      nada.textContent = vazio;
+      el.append(nada);
+      el.removeAttribute('title');
+      return;
+    }
+    el.textContent = lista.length > 1 ? `${lista[0]} +${lista.length - 1}` : lista[0];
+    el.title = lista.join('\n');
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Lista: busca, filtros, ordenação e cartões
+  // ---------------------------------------------------------------------------------
+  const filtro = { busca: '', situacao: 'todas', ordem: 'nome' };
+  const grade = $('#representadas-grade');
+  const conteudo = $('#representadas-conteudo');
+  const moldeCartao = $('#tpl-representada-cartao').content.firstElementChild;
+  const moldeVazio = $('#tpl-representadas-vazio').content.firstElementChild;
+
+  /** Nome fantasia, razão social ou CNPJ (com ou sem pontuação). */
+  function casaBusca(rep) {
+    const termo = semAcento(filtro.busca.trim());
+    if (!termo) return true;
+    if (semAcento(rep.nomeFantasia).includes(termo) || semAcento(rep.razaoSocial).includes(termo)) return true;
+    return /\d/.test(termo) && cnpjLimpo(rep.cnpj).includes(cnpjLimpo(filtro.busca));
+  }
+
+  function listaFiltrada() {
+    if (parametros.has('vazio')) return [];
+    const porNome = (a, b) => String(a.nomeFantasia || '').localeCompare(String(b.nomeFantasia || ''), 'pt-BR');
+    const comparar = {
+      nome: porNome,
+      comissao: (a, b) => (b.comissao || 0) - (a.comissao || 0) || porNome(a, b),
+      vendas: (a, b) => numeros(b).vendido - numeros(a).vendido || porNome(a, b),
+    };
+    return vendas.representadas()
+      .filter(casaBusca)
+      .filter((r) => filtro.situacao === 'todas' || (filtro.situacao === 'ativas') === (r.ativa !== false))
+      // Ativas primeiro; dentro de cada grupo, a ordem escolhida.
+      .sort((a, b) => Number(a.ativa === false) - Number(b.ativa === false) || comparar[filtro.ordem](a, b));
+  }
+
+  function montarCartao(rep, a) {
+    const el = moldeCartao.cloneNode(true);
+    const n = numeros(rep);
+    el.dataset.id = rep.id;
+    const logo = $('[data-logo]', el);
+    pintarLogo(logo, rep);
+    logo.alt = `Logo ${rep.nomeFantasia}`;
+    pintarSituacao($('[data-situacao]', el), rep.ativa !== false);
+    const nome = $('[data-nome]', el);
+    nome.textContent = rep.nomeFantasia;
+    nome.title = rep.nomeFantasia;
+    const razao = $('[data-razao]', el);
+    razao.textContent = rep.razaoSocial || '';
+    razao.title = rep.razaoSocial || '';
+    $('[data-cnpj]', el).textContent = rep.cnpj ? `CNPJ ${rep.cnpj}` : 'CNPJ não informado';
+    $('[data-comissao]', el).textContent = vendas.fmt.pct(rep.comissao);
+    preencherContato($('[data-telefone]', el), (rep.telefones || []).map(vendas.fmt.telefone), 'Sem telefone');
+    preencherContato($('[data-email]', el), rep.emails || [], 'Sem e-mail');
+    $('[data-clientes]', el).textContent = vendas.fmt.numero(n.clientes);
+    $('[data-clientes-bloco]', el).title = `Clientes que compraram desta representada nos últimos ${vendas.config().diasAtivo} dias`;
+    $('[data-vendido]', el).textContent = vendas.fmt.brl(n.vendido);
+    $('[data-comissao-mes]', el).textContent = `comissão ${vendas.fmt.brl(n.comissaoMes)}`;
+    const catalogo = $('[data-catalogo]', el);
+    catalogo.textContent = plural(n.produtos, 'produto', 'produtos');
+    catalogo.href = `pedidos.html?representada=${encodeURIComponent(rep.id)}`;
+    catalogo.title = 'Ver o catálogo em Pedidos';
+    $('[data-acao="abrir"]', el).textContent = a.editar ? 'Editar' : 'Ver';
+    // Sem nada para fazer no menu (nem alterar nem excluir), o botão de mais ações sai. Ele
+    // não some com .hidden: a classe dele define display.
+    if (!a.editar && !a.excluir) $('[data-acao="menu"]', el).remove();
+    return el;
+  }
+
+  /** Nada para mostrar: sem acesso, conta sem representadas ou filtro sem resultado. */
+  function mostrarVazio(tipo) {
+    const el = moldeVazio.cloneNode(true);
+    const busca = filtro.busca.trim();
+    const situacao = { todas: '', ativas: 'ativa', inativas: 'inativa' }[filtro.situacao];
+    const semResultado = busca
+      ? `Nada encontrado para “${busca}”${situacao ? ` entre as ${situacao}s` : ''}.`
+      : `Nenhuma representada ${situacao || 'cadastrada'}.`;
+    const textos = {
+      'sem-acesso': ['ri-lock-line', 'Sua função não tem acesso às representadas.',
+        'Peça a quem administra a conta para liberar em Configurações › Usuários & Acesso.'],
+      'conta-vazia': ['ri-building-2-line', 'Nenhuma representada cadastrada ainda.',
+        'Cadastre as empresas que você representa, à mão ou pelo PDF do catálogo: a IA preenche os dados e manda os produtos para Pedidos.'],
+      filtro: ['ri-search-line', 'Nenhuma representada encontrada.', semResultado],
+    }[tipo];
+    $('[data-icone]', el).className = textos[0];
+    $('[data-titulo]', el).textContent = textos[1];
+    $('[data-texto]', el).textContent = textos[2];
+    $('[data-acao="limpar-filtros"]', el).classList.toggle('hidden', tipo !== 'filtro');
+    conteudo.replaceChildren(el);
+  }
+
+  function renderBarra(a) {
+    travar($('#representadas-nova-btn'), a.editar, semPermissao(a, 'cadastrar'));
+    travar($('#representadas-importar-btn'), a.editar, semPermissao(a, 'cadastrar'),
+      'A IA lê o PDF do catálogo, preenche a representada e manda os produtos para Pedidos');
+    $('#representadas-busca').disabled = !a.ver;
+    travar($('#representadas-filtros-btn'), a.ver, 'Sua função não tem acesso às representadas.');
+  }
+
+  /** Faixa de aviso: quem só vê, e o escopo dos números para quem vê só a própria carteira. */
+  function renderAviso(a) {
+    const partes = [];
+    if (a.ver && !a.editar) partes.push(`Sua função (${a.pessoa.papelNome}) pode ver as representadas, mas não cadastrar nem alterar.`);
+    if (a.ver && a.carteira) partes.push('Os números de vendas dos cartões são só da sua carteira.');
+    const aviso = $('#representadas-aviso');
+    aviso.classList.toggle('hidden', partes.length === 0);
+    aviso.classList.toggle('flex', partes.length > 0);
+    $('[data-texto]', aviso).textContent = partes.join(' ');
+  }
+
+  // Opção escolhida no filtro: mesmo destaque do filtro de grupos (azul e negrito).
+  function marcarOpcao(botao, escolhida) {
+    botao.style.color = escolhida ? 'var(--ds-primary)' : 'var(--ds-text-soft)';
+    botao.style.fontWeight = escolhida ? '600' : '400';
+  }
+  function renderFiltros() {
+    $$('#representadas-filtros [data-filtro-situacao]').forEach((b) => marcarOpcao(b, b.dataset.filtroSituacao === filtro.situacao));
+    $$('#representadas-filtros [data-filtro-ordem]').forEach((b) => marcarOpcao(b, b.dataset.filtroOrdem === filtro.ordem));
+    $('#representadas-filtro-indicador').classList.toggle('hidden', filtro.situacao === 'todas' && filtro.ordem === 'nome');
+  }
+
+  function render() {
+    const a = acesso();
+    renderBarra(a);
+    renderAviso(a);
+    renderFiltros();
+    if (!a.ver) { mostrarVazio('sem-acesso'); return; }
+    const lista = listaFiltrada();
+    if (!lista.length) { mostrarVazio(parametros.has('vazio') ? 'conta-vazia' : 'filtro'); return; }
+    grade.replaceChildren(...lista.map((rep) => montarCartao(rep, a)));
+    if (!conteudo.contains(grade)) conteudo.replaceChildren(grade);
+  }
+
+  // Várias gravações seguidas (produtos do PDF, exclusão em cascata) redesenham uma vez só.
+  let gravandoEmLote = false;
+  function emLote(fn) {
+    gravandoEmLote = true;
+    try { fn(); } finally { gravandoEmLote = false; }
+    cacheNumeros = new Map();
+    render();
+  }
+
+  // --- filtros (dropdown) ------------------------------------------------------------
+  const caixaFiltros = $('#representadas-filtros');
+  function abrirFiltros(abrir) {
+    caixaFiltros.classList.toggle('hidden', !abrir);
+    $('#representadas-filtros-btn').setAttribute('aria-expanded', String(abrir));
+    // No celular o botão fica na ponta direita: o dropdown abre para a esquerda para caber.
+    caixaFiltros.style.left = '';
+    caixaFiltros.style.right = '';
+    if (abrir && caixaFiltros.getBoundingClientRect().right > window.innerWidth - 8) {
+      caixaFiltros.style.left = 'auto';
+      caixaFiltros.style.right = '0';
+    }
+  }
+  function limparFiltros() {
+    Object.assign(filtro, { busca: '', situacao: 'todas', ordem: 'nome' });
+    $('#representadas-busca').value = '';
+    abrirFiltros(false);
+    render();
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Menu "mais ações" do cartão (desativar/reativar, excluir). Um menu só, posicionado
+  // ao lado do botão, como o menu de linha de Contatos.
+  // ---------------------------------------------------------------------------------
+  const menu = $('#representadas-menu');
+  let menuDe = null;
+  let gatilhoDoMenu = null;
+  function fecharMenu() {
+    if (!menuDe) return;
+    menu.classList.add('hidden');
+    menu.removeAttribute('style');
+    gatilhoDoMenu?.setAttribute('aria-expanded', 'false');
+    menuDe = null;
+    gatilhoDoMenu = null;
+  }
+  function abrirMenu(botao, rep) {
+    const a = acesso();
+    const ativa = rep.ativa !== false;
+    const situacao = $('[data-menu="situacao"]', menu);
+    $('i', situacao).className = ativa ? 'ri-pause-circle-line' : 'ri-play-circle-line';
+    $('span', situacao).textContent = ativa ? 'Desativar' : 'Reativar';
+    travar(situacao, a.editar, semPermissao(a, 'alterar'),
+      ativa ? 'Sai das listas de novos pedidos e continua nos pedidos antigos' : 'Volta a aparecer para novos pedidos');
+    const excluir = $('[data-menu="excluir"]', menu);
+    const total = pedidosDa(rep);
+    if (!a.excluir) travar(excluir, false, semPermissao(a, 'excluir'));
+    else if (total > 0 && !ativa) travar(excluir, false, `Tem ${plural(total, 'pedido', 'pedidos')}: não pode ser excluída. Ela já está desativada.`);
+    else travar(excluir, true, '');
+    menu.classList.remove('hidden');
+    Object.assign(menu.style, { position: 'fixed', visibility: 'hidden', left: '0px', top: '0px', right: 'auto', zIndex: '10050' });
+    const r = botao.getBoundingClientRect();
+    const { width: w, height: h } = menu.getBoundingClientRect();
+    let top = r.bottom + 8;
+    if (top + h > window.innerHeight - 8) top = r.top - h - 8;
+    const left = Math.max(8, Math.min(r.right - w, window.innerWidth - w - 8));
+    Object.assign(menu.style, { left: `${Math.round(left)}px`, top: `${Math.round(Math.max(8, top))}px`, visibility: 'visible' });
+    menuDe = rep.id;
+    gatilhoDoMenu = botao;
+    botao.setAttribute('aria-expanded', 'true');
+  }
+
+  function alternarSituacao(rep) {
+    if (!acesso().editar) return;
+    const ativa = rep.ativa !== false;
+    vendas.salvar('representadas', { ...rep, ativa: !ativa });
+    avisar(ativa ? `${rep.nomeFantasia} desativada: ela não aparece mais para novos pedidos.` : `${rep.nomeFantasia} reativada.`);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Confirmação (a mesma caixa e as mesmas três aparências do confirm do app)
+  // ---------------------------------------------------------------------------------
+  const confirmacao = $('#representadas-confirmacao');
+  const caixaConfirmacao = confirmacao.firstElementChild;
+  let responderConfirmacao = null;
+  const APARENCIAS = {
+    danger: [['ri-error-warning-line', 'text-red-400'], ['bg-red-600', 'text-white', 'hover:bg-red-700']],
+    warning: [['ri-alert-line', 'text-yellow-400'], ['bg-yellow-600', 'text-white', 'hover:bg-yellow-700']],
+    info: [['ri-information-line', 'text-blue-400'], ['bg-blue-600', 'text-white', 'hover:bg-blue-700']],
+  };
+  function confirmar({ titulo, mensagem, ok = 'Confirmar', cancelar = 'Cancelar', tipo = 'warning' }) {
+    fecharMenu();
+    return new Promise((resolver) => {
+      responderConfirmacao = resolver;
+      $('.confirm-title', confirmacao).textContent = titulo;
+      $('.confirm-message', confirmacao).textContent = mensagem;
+      $('.confirm-cancel', confirmacao).textContent = cancelar;
+      const botaoOk = $('.confirm-ok', confirmacao);
+      botaoOk.textContent = ok;
+      const [icone, botao] = APARENCIAS[tipo];
+      $('.confirm-icon', confirmacao).className = `confirm-icon text-2xl ${icone.join(' ')}`;
+      botaoOk.className = `confirm-ok px-4 py-2 rounded-md transition-colors ${botao.join(' ')}`;
+      confirmacao.classList.remove('hidden');
+      confirmacao.classList.add('flex');
+      setTimeout(() => caixaConfirmacao.classList.replace('scale-95', 'scale-100'), 10);
+    });
+  }
+  function fecharConfirmacao(resposta) {
+    if (!responderConfirmacao) return;
+    const resolver = responderConfirmacao;
+    responderConfirmacao = null;
+    caixaConfirmacao.classList.replace('scale-100', 'scale-95');
+    setTimeout(() => {
+      confirmacao.classList.remove('flex');
+      confirmacao.classList.add('hidden');
+      resolver(resposta);
+    }, 200);
+  }
+
+  /**
+   * Excluir. Com pedidos (qualquer status, de qualquer vendedor) a representada não pode
+   * sair: o histórico de pedidos e comissões depende dela. A confirmação oferece desativar.
+   * Sem pedidos, sai junto com o catálogo dela.
+   */
+  async function excluirRepresentada(rep) {
+    const a = acesso();
+    if (!a.excluir) return;
+    const total = pedidosDa(rep);
+    if (total > 0) {
+      const desativar = await confirmar({
+        tipo: 'warning',
+        titulo: 'Esta representada tem pedidos',
+        mensagem: `${rep.nomeFantasia} tem ${plural(total, 'pedido registrado', 'pedidos registrados')} e não pode ser excluída: o histórico de pedidos e comissões depende dela. Desative: ela deixa de aparecer para novos pedidos e continua nos pedidos antigos e nos indicadores.`,
+        ok: a.editar ? 'Desativar' : 'Entendi',
+      });
+      if (desativar && a.editar && rep.ativa !== false) alternarSituacao(rep);
+      return;
+    }
+    const produtos = vendas.produtos(rep.id);
+    const ok = await confirmar({
+      tipo: 'danger',
+      titulo: 'Excluir representada',
+      mensagem: `Excluir ${rep.nomeFantasia}? ${produtos.length ? `${produtos.length === 1 ? 'O produto' : `Os ${produtos.length} produtos`} do catálogo dela também ${produtos.length === 1 ? 'será excluído' : 'serão excluídos'}. ` : ''}Esta ação não pode ser desfeita.`,
+      ok: 'Excluir',
+    });
+    if (!ok) return;
+    emLote(() => {
+      produtos.forEach((p) => vendas.excluir('produtos', p.id));
+      // Clientes que tinham esta representada entre as que compram deixam de apontar para ela.
+      vendas.clientes({ respeitarPermissao: false })
+        .filter((c) => (c.representadaIds || []).includes(rep.id))
+        .forEach((c) => vendas.salvar('clientes', { ...c, representadaIds: c.representadaIds.filter((id) => id !== rep.id) }));
+      vendas.excluir('representadas', rep.id);
+    });
+    avisar(`${rep.nomeFantasia} excluída.`);
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Modal: escolha (tem PDF?) → progresso → formulário; ou detalhes, para quem só vê.
+  //   modal.modo     'nova' | 'editar' | 'ver'
+  //   modal.leitura  resultado da leitura do PDF (os produtos que vão para Pedidos ao salvar)
+  // ---------------------------------------------------------------------------------
+  const raizModal = $('#representadas-modal-root');
+  const moldeModal = $('#tpl-representada-modal').content.firstElementChild;
+  const moldeItem = $('#tpl-representada-item').content.firstElementChild;
+  const moldeProduto = $('#tpl-representada-produto').content.firstElementChild;
+  const BORDA = 'rgba(0,0,0,0.08)';
+  let modal = null;
+  const campo = (nome) => $(`[data-campo="${nome}"]`, modal.el);
+
+  function proximaCor() {
+    const usadas = new Set(vendas.representadas().map((r) => String(r.cor || '').toLowerCase()));
+    return CORES.find((c) => !usadas.has(c)) || CORES[vendas.representadas().length % CORES.length];
+  }
+
+  function abrirModal(modo, rep = null, passo = null) {
+    fecharMenu();
+    abrirFiltros(false);
+    fecharModal(true);
+    const el = moldeModal.cloneNode(true);
+    raizModal.replaceChildren(el);
+    modal = { el, modo, rep, leitura: null, logo: rep?.logo || null, cor: rep?.cor || proximaCor(), timers: [], lendo: false };
+    pintarCabecalho();
+    if (modo === 'ver') preencherDetalhes(rep);
+    else preencherFormulario(rep || {});
+    irPara(passo || { nova: 'escolha', editar: 'formulario', ver: 'detalhes' }[modo]);
+  }
+
+  /** Fecha o modal. Durante a leitura do PDF só fecha à força (troca de pessoa no "Ver como"). */
+  function fecharModal(forcar = false) {
+    if (!modal) return;
+    if (modal.lendo && !forcar) { avisar('Aguarde: já estamos processando o catálogo.'); return; }
+    modal.timers.forEach(clearTimeout);
+    raizModal.replaceChildren();
+    modal = null;
+  }
+
+  function irPara(passo) {
+    $$('[data-passo]', modal.el).forEach((p) => p.classList.toggle('hidden', p.dataset.passo !== passo));
+    $('[data-modal-shell]', modal.el).scrollTop = 0;
+  }
+
+  function pintarCabecalho() {
+    const { modo, rep } = modal;
+    const titulo = $('[data-titulo]', modal.el);
+    const subtitulo = $('[data-subtitulo]', modal.el);
+    const pilula = $('[data-situacao]', modal.el);
+    if (modo === 'nova') {
+      titulo.textContent = 'Nova Representada';
+      subtitulo.textContent = 'A empresa que você representa. O catálogo dela vai para Pedidos.';
+      pilula.classList.add('hidden');
+      pilula.classList.remove('inline-flex');
+      return;
+    }
+    titulo.textContent = modo === 'ver' ? rep.nomeFantasia : 'Editar Representada';
+    const quando = rep.criadoEm ? ` em ${vendas.fmt.data(rep.criadoEm)}` : '';
+    subtitulo.textContent = `${rep.origem === 'pdf' ? 'Cadastrada pelo PDF do catálogo' : 'Cadastrada manualmente'}${quando}.`;
+    const logo = document.createElement('img');
+    logo.alt = '';
+    logo.className = 'w-full h-full';
+    pintarLogo(logo, rep);
+    $('[data-icone]', modal.el).replaceChildren(logo);
+    pintarSituacao(pilula, rep.ativa !== false);
+    pilula.classList.remove('hidden');
+    pilula.classList.add('inline-flex');
+  }
+
+  // --- formulário ----------------------------------------------------------------------
+  function novaLinha(tipo, valor = '') {
+    const linha = moldeItem.cloneNode(true);
+    const input = $('input', linha);
+    input.dataset.tipo = tipo;
+    if (tipo === 'telefones') {
+      Object.assign(input, { type: 'tel', inputMode: 'tel', placeholder: '(11) 99999-9999', maxLength: 15 });
+      input.setAttribute('aria-label', 'Telefone');
+    } else {
+      Object.assign(input, { type: 'email', placeholder: 'comercial@empresa.com.br', maxLength: 160, spellcheck: false });
+      input.setAttribute('autocapitalize', 'off');
+      input.setAttribute('aria-label', 'E-mail');
+    }
+    input.value = valor;
+    $('[data-acao="remover-item"]', linha).setAttribute('aria-label', tipo === 'telefones' ? 'Remover telefone' : 'Remover e-mail');
+    return linha;
+  }
+  function atualizarBotaoAdicionar(tipo) {
+    const quantos = $$(`[data-lista="${tipo}"] [data-item]`, modal.el).length;
+    $(`[data-acao="adicionar-${tipo === 'telefones' ? 'telefone' : 'email'}"]`, modal.el).classList.toggle('hidden', quantos >= LIMITE[tipo]);
+  }
+  /** Sempre há ao menos uma linha em cada lista, pronta para digitar. */
+  function preencherLista(tipo, valores) {
+    $(`[data-lista="${tipo}"]`, modal.el).replaceChildren(...(valores.length ? valores : ['']).map((v) => novaLinha(tipo, v)));
+    atualizarBotaoAdicionar(tipo);
+  }
+  function adicionarLinha(tipo) {
+    const lista = $(`[data-lista="${tipo}"]`, modal.el);
+    if ($$('[data-item]', lista).length >= LIMITE[tipo]) return;
+    const linha = novaLinha(tipo);
+    lista.append(linha);
+    atualizarBotaoAdicionar(tipo);
+    $('input', linha).focus();
+  }
+  function removerLinha(linha) {
+    const lista = linha.parentElement;
+    const tipo = lista.dataset.lista;
+    if ($$('[data-item]', lista).length === 1) $('input', linha).value = '';
+    else linha.remove();
+    atualizarBotaoAdicionar(tipo);
+    limparErro(tipo);
+  }
+
+  function pintarLogoDoModal() {
+    const nome = campo('nomeFantasia').value.trim();
+    pintarLogo($('[data-logo-previa]', modal.el), { nomeFantasia: nome, cor: nome ? modal.cor : COR_SEM_NOME, logo: modal.logo });
+    $('[data-acao="remover-logo"]', modal.el).classList.toggle('hidden', !modal.logo);
+  }
+
+  function preencherFormulario(dados) {
+    campo('nomeFantasia').value = dados.nomeFantasia || '';
+    campo('razaoSocial').value = dados.razaoSocial || '';
+    campo('cnpj').value = mascararCnpj(dados.cnpj || '');
+    campo('comissao').value = comissaoNoCampo(dados.comissao);
+    campo('site').value = dados.site || '';
+    preencherLista('telefones', (dados.telefones || []).map(mascararTelefone));
+    preencherLista('emails', dados.emails || []);
+    $('[data-acao="salvar"]', modal.el).textContent = modal.modo === 'editar' ? 'Salvar alterações' : 'Cadastrar representada';
+    pintarLogoDoModal();
+    limparErros();
+  }
+
+  function focarPrimeiroVazio() {
+    const vazio = ['nomeFantasia', 'razaoSocial', 'cnpj', 'comissao'].map(campo).find((i) => !i.value.trim());
+    (vazio || campo('nomeFantasia')).focus();
+  }
+
+  // --- validação (mensagens embaixo do campo, borda vermelha e um aviso) -----------------
+  function limparErro(nome) {
+    const p = $(`[data-erro="${nome}"]`, modal.el);
+    if (p) { p.classList.add('hidden'); p.textContent = ''; }
+    const alvos = nome === 'telefones' || nome === 'emails' ? $$(`[data-lista="${nome}"] input`, modal.el) : [campo(nome)];
+    alvos.forEach((i) => { i.style.borderColor = BORDA; });
+  }
+  function limparErros() {
+    ['nomeFantasia', 'razaoSocial', 'cnpj', 'comissao', 'site', 'telefones', 'emails'].forEach(limparErro);
+  }
+  function marcarErro(nome, mensagem, inputs) {
+    const p = $(`[data-erro="${nome}"]`, modal.el);
+    p.textContent = mensagem;
+    p.classList.remove('hidden');
+    (inputs || [campo(nome)]).forEach((i) => { i.style.borderColor = 'var(--ds-danger)'; });
+  }
+
+  /** Lê e confere o formulário. Devolve os erros [campo, mensagem, inputs] e os dados prontos. */
+  function validar() {
+    const erros = [];
+    const texto = (nome) => campo(nome).value.trim().replace(/\s+/g, ' ');
+    const nomeFantasia = texto('nomeFantasia');
+    const razaoSocial = texto('razaoSocial');
+    if (!nomeFantasia) erros.push(['nomeFantasia', 'Informe o nome fantasia.']);
+    if (!razaoSocial) erros.push(['razaoSocial', 'Informe a razão social.']);
+
+    // CNPJ: 14 caracteres e único na conta. No protótipo não se confere o dígito verificador:
+    // os CNPJs fictícios têm o dígito errado de propósito.
+    const cnpj = cnpjLimpo(campo('cnpj').value);
+    if (!cnpj) erros.push(['cnpj', 'Informe o CNPJ.']);
+    else if (cnpj.length !== 14 || !/^\d{2}$/.test(cnpj.slice(12))) erros.push(['cnpj', 'CNPJ incompleto: são 14 caracteres.']);
+    else {
+      const igual = vendas.representadas().find((r) => r.id !== modal.rep?.id && cnpjLimpo(r.cnpj) === cnpj);
+      if (igual) erros.push(['cnpj', `Já existe uma representada com este CNPJ: ${igual.nomeFantasia}.`]);
+    }
+
+    // Comissão: de 0 a 100, até duas casas (0,75). Obrigatória, mesmo que seja zero.
+    const textoComissao = campo('comissao').value.trim().replace('%', '').trim();
+    let comissao = null;
+    if (!textoComissao) erros.push(['comissao', 'Informe a comissão (pode ser 0).']);
+    else if (!/^\d{1,3}([.,]\d+)?$/.test(textoComissao)) erros.push(['comissao', 'Use só números, como 0,75 ou 4.']);
+    else if (/[.,]\d{3,}$/.test(textoComissao)) erros.push(['comissao', 'Use até duas casas decimais, como 0,75.']);
+    else {
+      comissao = Number(textoComissao.replace(',', '.'));
+      if (comissao > 100) erros.push(['comissao', 'A comissão vai de 0 a 100%.']);
+    }
+
+    const camposTelefone = $$('[data-lista="telefones"] input', modal.el).filter((i) => i.value.trim());
+    const telefoneRuim = camposTelefone.filter((i) => ![10, 11].includes(soDigitos(i.value).length));
+    if (telefoneRuim.length) erros.push(['telefones', 'Telefone incompleto: use DDD e número, como (11) 99000-0201.', telefoneRuim]);
+    const camposEmail = $$('[data-lista="emails"] input', modal.el).filter((i) => i.value.trim());
+    const emailRuim = camposEmail.filter((i) => !emailValido(i.value.trim()));
+    if (emailRuim.length) erros.push(['emails', 'E-mail inválido: confira o endereço destacado.', emailRuim]);
+
+    const site = normalizarSite(campo('site').value);
+    if (!siteValido(site)) erros.push(['site', 'Confira o endereço do site.']);
+
+    return {
+      erros,
+      dados: {
+        nomeFantasia,
+        razaoSocial,
+        cnpj: mascararCnpj(cnpj),
+        comissao,
+        telefones: [...new Set(camposTelefone.map((i) => `55${soDigitos(i.value)}`))],
+        emails: [...new Set(camposEmail.map((i) => i.value.trim().toLowerCase()))],
+        site,
+        logo: modal.logo || null,
+      },
+    };
+  }
+
+  function salvar() {
+    if (!modal || modal.modo === 'ver' || modal.lendo) return;
+    const a = acesso();
+    if (!a.editar) { avisar(semPermissao(a, 'alterar')); return; }
+    limparErros();
+    const { erros, dados } = validar();
+    if (erros.length) {
+      erros.forEach(([nome, mensagem, inputs]) => marcarErro(nome, mensagem, inputs));
+      avisar(erros.length === 1 ? erros[0][1] : 'Confira os campos destacados.');
+      (erros[0][2]?.[0] || campo(erros[0][0])).focus();
+      return;
+    }
+    const { modo, rep, leitura, cor } = modal;
+    let produtos = 0;
+    emLote(() => {
+      const salva = modo === 'editar'
+        ? vendas.salvar('representadas', { ...rep, ...dados })
+        : vendas.salvar('representadas', { ...dados, cor, ativa: true, origem: leitura ? 'pdf' : 'manual' });
+      // Os produtos lidos do PDF entram no catálogo (usado nos itens dos pedidos) só agora,
+      // ao salvar: cancelar o cadastro não deixa produto solto.
+      (leitura?.produtosNovos || []).forEach(([codigo, nome, embalagem, preco]) => {
+        vendas.salvar('produtos', { representadaId: salva.id, codigo, nome, embalagem, preco, ativo: true, origem: 'pdf' });
+        produtos += 1;
+      });
+    });
+    const catalogo = produtos ? ` ${plural(produtos, 'produto foi', 'produtos foram')} para o catálogo de Pedidos.` : '';
+    fecharModal(true);
+    avisar(`${modo === 'editar' ? 'Representada atualizada.' : 'Representada cadastrada.'}${catalogo}`);
+  }
+
+  // --- logo ------------------------------------------------------------------------------
+  /** Reduz a imagem para no máximo `lado` px no lado maior. WEBP mantém a transparência. */
+  function reduzirImagem(arquivo, lado) {
+    return new Promise((resolver, rejeitar) => {
+      const url = URL.createObjectURL(arquivo);
+      const img = new Image();
+      img.onload = () => {
+        const escala = Math.min(1, lado / Math.max(img.naturalWidth, img.naturalHeight));
+        const tela = document.createElement('canvas');
+        tela.width = Math.max(1, Math.round(img.naturalWidth * escala));
+        tela.height = Math.max(1, Math.round(img.naturalHeight * escala));
+        const ctx = tela.getContext('2d');
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, tela.width, tela.height);
+        URL.revokeObjectURL(url);
+        resolver(tela.toDataURL('image/webp', 0.9));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); rejeitar(new Error('imagem ilegível')); };
+      img.src = url;
+    });
+  }
+  async function aoEscolherLogo(arquivo) {
+    if (!arquivo || !modal) return;
+    if (!/^image\/(png|jpeg|webp)$/.test(arquivo.type)) { avisar('Use uma imagem JPEG, PNG ou WEBP.'); return; }
+    if (arquivo.size > LIMITE.imagemMb * 1024 * 1024) { avisar(`A imagem deve ter no máximo ${LIMITE.imagemMb} MB.`); return; }
+    try {
+      const logo = await reduzirImagem(arquivo, LIMITE.logoPx);
+      if (!modal) return;
+      modal.logo = logo;
+      pintarLogoDoModal();
+    } catch {
+      avisar('Não foi possível ler a imagem escolhida.');
+    }
+  }
+
+  // --- detalhes (só leitura) -------------------------------------------------------------
+  function linhas(el, lista, vazio) {
+    if (!lista.length) { el.textContent = vazio; return; }
+    el.replaceChildren(...lista.map((t) => { const d = document.createElement('div'); d.textContent = t; return d; }));
+  }
+  function preencherDetalhes(rep) {
+    const n = numeros(rep);
+    const ver = (k) => $(`[data-ver="${k}"]`, modal.el);
+    ver('razaoSocial').textContent = rep.razaoSocial || 'Não informada';
+    ver('cnpj').textContent = rep.cnpj || 'Não informado';
+    ver('comissao').textContent = vendas.fmt.pct(rep.comissao);
+    linhas(ver('telefones'), (rep.telefones || []).map(vendas.fmt.telefone), 'Nenhum telefone');
+    linhas(ver('emails'), rep.emails || [], 'Nenhum e-mail');
+    ver('site').textContent = rep.site || 'Não informado';
+    ver('clientes').textContent = vendas.fmt.numero(n.clientes);
+    ver('vendido').textContent = vendas.fmt.brl(n.vendido);
+    ver('comissaoMes').textContent = vendas.fmt.brl(n.comissaoMes);
+    const catalogo = ver('catalogo');
+    catalogo.textContent = plural(n.produtos, 'produto', 'produtos');
+    catalogo.href = `pedidos.html?representada=${encodeURIComponent(rep.id)}`;
+    $('[data-ver-numeros-titulo]', modal.el).textContent = acesso().carteira ? 'Movimento da sua carteira' : 'Movimento';
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Importação do PDF (simulada). O mesmo caminho do agente de IA: escolher os PDFs → o
+  // cartão de progresso com as etapas da leitura → o formulário preenchido. Nada é enviado:
+  // as etapas são cronometradas e o resultado é uma das LEITURAS_DO_PDF acima.
+  // ---------------------------------------------------------------------------------
+  const seletorPdf = $('#representadas-pdf');
+  function pedirPdf() {
+    const a = acesso();
+    if (!a.editar) { avisar(semPermissao(a, 'cadastrar')); return; }
+    if (modal?.lendo) { avisar('Aguarde: já estamos processando o catálogo.'); return; }
+    seletorPdf.value = '';
+    seletorPdf.click();
+  }
+  function aoEscolherPdfs(arquivos) {
+    if (!arquivos.length) return;
+    if (arquivos.length > LIMITE.pdfs) { avisar(`Envie no máximo ${LIMITE.pdfs} PDFs por vez.`); return; }
+    for (const arquivo of arquivos) {
+      if (!/\.pdf$/i.test(arquivo.name)) { avisar(`Apenas PDFs são aceitos. Arquivo inválido: ${arquivo.name}`); return; }
+      if (arquivo.size > LIMITE.pdfMb * 1024 * 1024) { avisar(`O arquivo "${arquivo.name}" passa de ${LIMITE.pdfMb}MB. Comprima o PDF e tente de novo.`); return; }
+    }
+    if (!modal || modal.modo !== 'nova') abrirModal('nova', null, 'progresso');
+    lerPdfs(arquivos);
+  }
+
+  function progresso(percentual, etapa) {
+    const p = Math.max(0, Math.min(100, Math.round(percentual)));
+    $('[data-catalog-progress-percent]', modal.el).textContent = `${p}%`;
+    $('[data-catalog-progress-fill]', modal.el).style.width = `${p}%`;
+    if (etapa) $('[data-catalog-progress-stage]', modal.el).textContent = etapa;
+  }
+
+  /** Primeira empresa fictícia ainda não cadastrada (pelo CNPJ). */
+  function escolherLeitura() {
+    const cadastrados = new Set(vendas.representadas().map((r) => cnpjLimpo(r.cnpj)));
+    return LEITURAS_DO_PDF.find((l) => !cadastrados.has(cnpjLimpo(l.empresa.cnpj))) || LEITURAS_DO_PDF[0];
+  }
+
+  function lerPdfs(arquivos) {
+    irPara('progresso');
+    modal.lendo = true;
+    $('[data-arquivos]', modal.el).replaceChildren(...arquivos.map((arquivo) => {
+      const item = document.createElement('li');
+      const icone = document.createElement('i');
+      icone.className = 'ri-file-pdf-2-line';
+      item.append(icone, arquivo.name);
+      return item;
+    }));
+    progresso(0, `A IA está lendo ${arquivos.length} PDF(s). Isso pode levar alguns minutos — não feche esta janela.`);
+    const leitura = escolherLeitura();
+    // Etapas e percentuais da leitura real: 2% a 80% lendo os arquivos (texto e, nos PDFs
+    // feitos de imagem, as páginas por visão), 82% organizando empresa e produtos, 97% fim.
+    const etapas = [[1, 'Arquivos enviados. Iniciando a leitura…'], [2, 'Preparando os arquivos…']];
+    const fatia = 78 / arquivos.length;
+    arquivos.forEach((arquivo, i) => {
+      const base = 2 + i * fatia;
+      etapas.push([base, `Lendo "${arquivo.name}"…`]);
+      etapas.push([base + fatia * 0.3, `Texto de "${arquivo.name}" extraído…`]);
+      if (i === 0) {
+        // O primeiro arquivo da demonstração é de imagem: a IA lê as páginas por visão.
+        for (let pagina = 1; pagina <= leitura.paginas; pagina += 4) {
+          const ate = Math.min(leitura.paginas, pagina + 3);
+          etapas.push([base + fatia * (0.3 + 0.7 * ((pagina - 1) / leitura.paginas)),
+            `Lendo por imagem as páginas ${pagina}–${ate} de ${leitura.paginas} de "${arquivo.name}"…`]);
+        }
+      }
+      etapas.push([2 + (i + 1) * fatia, `"${arquivo.name}" concluído.`]);
+    });
+    etapas.push([82, 'Organizando empresa e produtos com a IA…'], [97, 'Finalizando cadastro…'], [100, 'Concluído!']);
+    let espera = 0;
+    etapas.forEach(([percentual, etapa]) => {
+      espera += 450;
+      modal.timers.push(setTimeout(() => progresso(percentual, etapa), espera));
+    });
+    modal.timers.push(setTimeout(() => aplicarLeitura(leitura), espera + 600));
+  }
+
+  /** Só os campos vazios recebem o que veio do PDF (a representada já existia). */
+  function completarVazios(rep, empresa) {
+    const dados = { ...rep };
+    ['nomeFantasia', 'razaoSocial', 'cnpj', 'site'].forEach((k) => { if (!String(dados[k] || '').trim()) dados[k] = empresa[k]; });
+    ['telefones', 'emails'].forEach((k) => { if (!(dados[k] || []).length) dados[k] = [...empresa[k]]; });
+    return dados;
+  }
+
+  function aplicarLeitura(leitura) {
+    if (!modal) return;
+    modal.lendo = false;
+    const { empresa } = leitura;
+    const existente = vendas.representadas().find((r) => cnpjLimpo(r.cnpj) === cnpjLimpo(empresa.cnpj));
+    const codigos = new Set(existente ? vendas.produtos(existente.id).map((p) => p.codigo) : []);
+    const produtosNovos = leitura.produtos.filter(([codigo]) => !codigos.has(codigo));
+    modal.leitura = { produtosNovos };
+
+    if (existente) {
+      // Mesmo CNPJ já cadastrado: abre o cadastro dela e completa só o que está vazio.
+      Object.assign(modal, { modo: 'editar', rep: existente, logo: existente.logo || null, cor: existente.cor || modal.cor });
+      pintarCabecalho();
+      preencherFormulario(completarVazios(existente, empresa));
+    } else {
+      preencherFormulario({ ...empresa, comissao: null });
+      // O catálogo não diz quanto a representada paga: a comissão fica para quem cadastra.
+      const ajuda = $('[data-ajuda="comissao"]', modal.el);
+      ajuda.textContent = 'O catálogo não informa a comissão: preencha o percentual combinado com a representada.';
+      ajuda.style.color = 'var(--ds-warning)';
+    }
+
+    const caixa = $('[data-resultado-pdf]', modal.el);
+    caixa.classList.remove('hidden');
+    const total = leitura.produtos.length;
+    const novos = produtosNovos.length;
+    $('[data-resultado-titulo]', caixa).textContent = existente
+      ? `${existente.nomeFantasia} já está cadastrada`
+      : 'A IA preencheu os dados da empresa';
+    $('[data-resultado-texto]', caixa).textContent = existente
+      ? `O PDF é de uma representada com o mesmo CNPJ: completamos só os campos vazios. ${novos
+        ? `${plural(novos, 'produto novo vai', 'produtos novos vão')} para o catálogo de Pedidos quando você salvar${total > novos ? `; ${plural(total - novos, 'já estava', 'já estavam')} lá` : ''}.`
+        : `Os ${total} produtos do PDF já estão no catálogo de Pedidos.`}`
+      : `Confira antes de salvar. ${plural(novos, 'produto do catálogo vai', 'produtos do catálogo vão')} para o catálogo de Pedidos quando você salvar.`;
+    $('[data-resultado-produtos]', caixa).replaceChildren(...produtosNovos.map(([codigo, nome, embalagem, preco]) => {
+      const linha = moldeProduto.cloneNode(true);
+      $('[data-codigo]', linha).textContent = codigo;
+      $('[data-nome]', linha).textContent = nome;
+      $('[data-nome]', linha).title = nome;
+      $('[data-preco]', linha).textContent = `${embalagem} · ${vendas.fmt.brl(preco)}`;
+      return linha;
+    }));
+    $('[data-resultado-produtos]', caixa).classList.toggle('hidden', novos === 0);
+
+    irPara('formulario');
+    avisar(existente
+      ? `${existente.nomeFantasia} já estava cadastrada: completamos os campos vazios.`
+      : `Catálogo lido: empresa e ${plural(novos, 'produto preenchido', 'produtos preenchidos')}. Revise e salve.`);
+    focarPrimeiroVazio();
+  }
+
+  // ---------------------------------------------------------------------------------
+  // Eventos
+  // ---------------------------------------------------------------------------------
+  function abrirRepresentada(id) {
+    const rep = vendas.representada(id);
+    if (!rep) return;
+    const a = acesso();
+    if (!a.ver) return;
+    abrirModal(a.editar ? 'editar' : 'ver', rep);
+  }
+
+  document.addEventListener('click', (ev) => {
+    const alvo = ev.target;
+    if (!(alvo instanceof Element)) return;
+
+    // Clique fora fecha o menu e os filtros.
+    if (menuDe && !alvo.closest('#representadas-menu') && !alvo.closest('[data-acao="menu"]')) fecharMenu();
+    if (!caixaFiltros.classList.contains('hidden') && !alvo.closest('#representadas-filtros') && !alvo.closest('#representadas-filtros-btn')) abrirFiltros(false);
+
+    if (alvo.closest('#representadas-filtros-btn')) { abrirFiltros(caixaFiltros.classList.contains('hidden')); return; }
+    const opcaoSituacao = alvo.closest('#representadas-filtros [data-filtro-situacao]');
+    if (opcaoSituacao) { filtro.situacao = opcaoSituacao.dataset.filtroSituacao; render(); return; }
+    const opcaoOrdem = alvo.closest('#representadas-filtros [data-filtro-ordem]');
+    if (opcaoOrdem) { filtro.ordem = opcaoOrdem.dataset.filtroOrdem; render(); return; }
+    if (alvo.closest('#representadas-limpar-filtros, [data-acao="limpar-filtros"]')) { limparFiltros(); return; }
+
+    if (alvo.closest('#representadas-nova-btn')) { if (acesso().editar) abrirModal('nova'); return; }
+    if (alvo.closest('#representadas-importar-btn')) { pedirPdf(); return; }
+
+    const item = alvo.closest('#representadas-menu [data-menu]');
+    if (item) {
+      if (item.disabled) return;
+      const rep = vendas.representada(menuDe);
+      fecharMenu();
+      if (!rep) return;
+      if (item.dataset.menu === 'situacao') alternarSituacao(rep);
+      else excluirRepresentada(rep);
+      return;
+    }
+
+    const cartao = alvo.closest('[data-representada-cartao]');
+    if (cartao) {
+      if (alvo.closest('[data-catalogo]')) return; // o link segue para Pedidos
+      const gatilho = alvo.closest('[data-acao="menu"]');
+      if (gatilho) {
+        const aberto = menuDe === cartao.dataset.id;
+        fecharMenu();
+        if (!aberto) abrirMenu(gatilho, vendas.representada(cartao.dataset.id));
+        return;
+      }
+      abrirRepresentada(cartao.dataset.id);
+      return;
+    }
+
+    if (alvo.closest('.confirm-ok') && responderConfirmacao) { fecharConfirmacao(true); return; }
+    if ((alvo.closest('.confirm-cancel') || alvo === confirmacao) && responderConfirmacao) fecharConfirmacao(false);
+  });
+
+  // Esc fecha, na ordem: confirmação, menu, filtros, modal.
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Escape') return;
+    if (responderConfirmacao) { fecharConfirmacao(false); return; }
+    if (menuDe) { fecharMenu(); return; }
+    if (!caixaFiltros.classList.contains('hidden')) { abrirFiltros(false); return; }
+    if (modal) fecharModal();
+  });
+
+  $('#representadas-busca').addEventListener('input', (ev) => { filtro.busca = ev.target.value; render(); });
+  seletorPdf.addEventListener('change', () => {
+    const arquivos = [...seletorPdf.files];
+    seletorPdf.value = '';
+    aoEscolherPdfs(arquivos);
+  });
+  window.addEventListener('resize', fecharMenu);
+  window.addEventListener('scroll', fecharMenu, true);
+
+  // Dentro do modal (ele é recriado a cada abertura: os eventos ficam na raiz).
+  raizModal.addEventListener('click', (ev) => {
+    if (!modal) return;
+    const alvo = ev.target;
+    if (alvo.matches('[data-overlay]')) { fecharModal(); return; }
+    const acao = alvo.closest('[data-acao]')?.dataset.acao;
+    if (acao === 'fechar') fecharModal();
+    else if (acao === 'escolher-pdf') pedirPdf();
+    else if (acao === 'manual') { irPara('formulario'); focarPrimeiroVazio(); }
+    else if (acao === 'enviar-logo') $('[data-logo-arquivo]', modal.el).click();
+    else if (acao === 'remover-logo') { modal.logo = null; pintarLogoDoModal(); }
+    else if (acao === 'adicionar-telefone') adicionarLinha('telefones');
+    else if (acao === 'adicionar-email') adicionarLinha('emails');
+    else if (acao === 'remover-item') removerLinha(alvo.closest('[data-item]'));
+  });
+  raizModal.addEventListener('submit', (ev) => { ev.preventDefault(); salvar(); });
+  raizModal.addEventListener('input', (ev) => {
+    if (!modal) return;
+    const alvo = ev.target;
+    if (alvo.dataset.tipo === 'telefones') { alvo.value = mascararTelefone(alvo.value); limparErro('telefones'); return; }
+    if (alvo.dataset.tipo === 'emails') { limparErro('emails'); return; }
+    const nome = alvo.dataset.campo;
+    if (!nome) return;
+    if (nome === 'cnpj') alvo.value = mascararCnpj(alvo.value);
+    if (nome === 'comissao') alvo.value = alvo.value.replace(/[^\d.,]/g, '');
+    if (nome === 'nomeFantasia') pintarLogoDoModal(); // as iniciais acompanham o nome
+    limparErro(nome);
+  });
+  raizModal.addEventListener('change', (ev) => {
+    if (ev.target.matches('[data-logo-arquivo]')) {
+      const arquivo = ev.target.files[0];
+      ev.target.value = '';
+      aoEscolherLogo(arquivo);
+    }
+  });
+
+  // Qualquer mudança no módulo (nesta aba, em outra ou no "Ver como") redesenha a lista.
+  vendas.aoMudar(() => {
+    if (gravandoEmLote) return;
+    cacheNumeros = new Map();
+    fecharMenu();
+    // Se a pessoa perdeu a permissão do que estava fazendo, o modal fecha.
+    const a = acesso();
+    if (modal && (!a.ver || (modal.modo !== 'ver' && !a.editar))) fecharModal(true);
+    render();
+  });
+
+  render();
+  if (parametros.has('nova') && acesso().editar) abrirModal('nova');
+})();
+</script>
+</body></html>
