@@ -9587,8 +9587,8 @@
   // Não existe meta da empresa: existe a meta de cada representada (quanto se quer vender
   // para ela) e a de cada vendedor (quanto ele deve vender). Sem filtro, o objetivo é a soma
   // das metas das representadas ativas; com uma representada, a dela; com um vendedor (ou o
-  // vendedor na própria carteira), a dele. Vendedor e representada juntos, ou os filtros de
-  // cliente, não têm meta cadastrada.
+  // vendedor na própria carteira), a dele. Vendedor e representada juntos ficam sem meta. Os
+  // filtros de cliente não mudam a meta (só escolhem quais vendas entram no faturamento).
   // O objetivo de cada dia é a meta do mês dividida pelos dias úteis do mês (segunda a sexta,
   // menos os feriados nacionais, vendas.ehDiaUtil): no fim de semana e no feriado a linha
   // fica reta. A previsão segue a média por dia útil até hoje.
@@ -9606,27 +9606,30 @@
   }
 
   function metaDoRecorte(d) {
-    if (filtros.rede || filtros.cidade || filtros.situacao || filtros.bloqueio) {
-      return { valor: 0, origem: 'Sem meta para esse recorte: as metas são por representada e por vendedor.' };
-    }
     const vendedorId = d.carteira ? d.quem.id : filtros.vendedorId;
     if (vendedorId && filtros.representadaId) {
-      return { valor: 0, origem: 'Sem meta para vendedor e representada juntos: a meta do vendedor vale para todas as representadas.' };
+      return { valor: 0, origem: 'Sem meta para vendedor e representada juntos: a meta do vendedor vale para todas as representadas. Tire um dos dois filtros para ver a meta.' };
     }
+    let meta;
     if (vendedorId) {
       const v = vendas.vendedor(vendedorId);
-      return v?.meta ? { valor: v.meta, origem: `Meta de ${v.nome} (Configurações › Usuários & Acesso).` } : { valor: 0, origem: `${v?.nome || 'Este vendedor'} não tem meta cadastrada.` };
-    }
-    if (filtros.representadaId) {
+      meta = v?.meta ? { valor: v.meta, origem: `Meta de ${v.nome} (Configurações › Usuários & Acesso).` } : { valor: 0, origem: `${v?.nome || 'Este vendedor'} não tem meta cadastrada.` };
+    } else if (filtros.representadaId) {
       const r = vendas.representada(filtros.representadaId);
-      return r?.metaMensal ? { valor: r.metaMensal, origem: `Meta da ${r.nomeFantasia} (cadastro em Representadas).` } : { valor: 0, origem: `${r?.nomeFantasia || 'Esta representada'} não tem meta cadastrada.` };
+      meta = r?.metaMensal ? { valor: r.metaMensal, origem: `Meta da ${r.nomeFantasia} (cadastro em Representadas).` } : { valor: 0, origem: `${r?.nomeFantasia || 'Esta representada'} não tem meta cadastrada.` };
+    } else {
+      const ativas = vendas.representadas().filter((r) => r.ativa !== false);
+      const soma = ativas.reduce((a, r) => a + (r.metaMensal || 0), 0);
+      const comMeta = ativas.filter((r) => r.metaMensal).length;
+      meta = soma
+        ? { valor: soma, origem: `Soma das metas de ${plural(comMeta, 'representada', 'representadas')}: quanto você quer vender para cada uma.` }
+        : { valor: 0, origem: 'Nenhuma representada tem meta cadastrada.' };
     }
-    const ativas = vendas.representadas().filter((r) => r.ativa !== false);
-    const soma = ativas.reduce((a, r) => a + (r.metaMensal || 0), 0);
-    const comMeta = ativas.filter((r) => r.metaMensal).length;
-    return soma
-      ? { valor: soma, origem: `Soma das metas de ${plural(comMeta, 'representada', 'representadas')}: quanto você quer vender para cada uma.` }
-      : { valor: 0, origem: 'Nenhuma representada tem meta cadastrada.' };
+    // Rede, cidade, situação e bloqueio não mudam de quem é a meta: só escolhem quais vendas
+    // entram no faturamento. A meta continua a mesma, com o aviso.
+    const deCliente = ['rede', 'cidade', 'situacao', 'bloqueio'].filter((k) => filtros[PARAMETROS[k].campo]).map((k) => PARAMETROS[k].nome);
+    if (meta.valor && deCliente.length) meta.origem += ` Com o filtro de ${juntar(deCliente)}, o faturamento conta só parte das vendas.`;
+    return meta;
   }
 
   function faturamentoDoPeriodo(d, f) {
