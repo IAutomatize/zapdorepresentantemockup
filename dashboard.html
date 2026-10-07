@@ -9979,7 +9979,7 @@
         <p class="dashboard-kpi-label-modern">${noMes ? 'Objetivo do mês' : 'Objetivo no período'}</p>
         <p class="vendas-meta-valor">${fmt.brl(rs.meta)}</p>
         <div class="dashboard-campaigns-performance-track"><span class="is-delivery" style="width:${Math.min(100, rs.percentual)}%;background:${COR.objetivo};"></span></div>
-        <p class="vendas-nota"><strong>${pct(rs.percentual)}</strong> realizado · ${esc(rs.origemDaMeta)}</p>
+        <p class="vendas-nota" title="${esc(rs.origemDaMeta)}"><strong>${pct(rs.percentual)}</strong> realizado</p>
       </div>` : `
       <div class="vendas-meta-bloco">
         <p class="dashboard-kpi-label-modern">${noMes ? 'Objetivo do mês' : 'Objetivo no período'}</p>
@@ -9992,7 +9992,6 @@
         <div class="vendas-meta-bloco">
           <p class="dashboard-kpi-label-modern">Necessário faturar</p>
           <p class="vendas-meta-valor">${rs.necessario != null ? `${fmt.brl(rs.necessario)} <small>por dia útil</small>` : '—'}</p>
-          <p class="vendas-nota">${fmt.brl(rs.falta)} em ${plural(rs.uteisRestantes, 'dia útil', 'dias úteis')}, de hoje a ${fmt.data(rs.fim)}${rs.feriados?.length ? ` (sem ${rs.feriados.length === 1 ? 'o feriado de' : 'os feriados de'} ${juntar(rs.feriados)})` : ''}.${rs.previsaoFinal != null ? ` No ritmo atual, o mês fecha em <strong>${fmt.brl(rs.previsaoFinal)}</strong> (${pct((rs.previsaoFinal / rs.meta) * 100, 0)} da meta).` : ''}</p>
         </div>` : `
         <div class="vendas-meta-bloco">
           <p class="dashboard-kpi-label-modern">Meta batida</p>
