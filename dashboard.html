@@ -9293,16 +9293,16 @@
   // Cada métrica lista os filtros com que ela continua útil. Com um desses filtros ligado,
   // só ficam na tela as métricas que o têm na lista (com dois ou mais, as que têm todos);
   // sem filtro, aparece tudo. O período vale para todas e não entra nessa conta.
-  //   - Venda (vendido, pedidos, ticket, evolução, status, positivação, ABC): vendedor,
-  //     representada, rede e cidade mudam a resposta. Bloqueio e situação não: quem compra
-  //     no período está ativo no fim dele, e cliente bloqueado não compra.
-  //   - Comissões: dizem quem paga (representada) e quem recebe (vendedor); por rede ou
-  //     cidade não respondem nada.
-  //   - As quebras somem quando filtradas pelo que quebram (por representada com uma
-  //     representada só). Vendas por vendedor serve para representada e cidade (território);
-  //     positivações diárias, ritmo de vendedor e de representada.
-  //   - Carteira de clientes é a única que responde a bloqueio e situação: é a lista de quem
-  //     reativar ("inativos recentes, sem bloqueio").
+  // Regra (Washington, 07/10/2026): aparece tudo o que continua útil com o filtro; some só o
+  // que fica redundante ou vazio por definição:
+  //   - as quebras pelo próprio filtro: "Vendas por representada" com uma representada só,
+  //     "Vendas por vendedor" com um vendedor só;
+  //   - com situação na carteira: "Pedidos por status", a rosca de positivação (ela já divide
+  //     os clientes pela situação de antes do período) e as positivações diárias;
+  //   - positivações diárias também com rede, cidade e bloqueio: poucos clientes por dia.
+  // A situação do filtro é a do INÍCIO do período, a mesma régua da positivação: "Ativo" =
+  // quem já comprava, "Inativo" = reativação, "Prospect" = cliente novo. No fim do período
+  // todo cliente que comprou está ativo, e o filtro não diria nada sobre as vendas.
   const PARAMETROS = {
     vendedor: { campo: 'vendedorId', nome: 'vendedor' },
     representada: { campo: 'representadaId', nome: 'representada' },
@@ -9311,23 +9311,24 @@
     bloqueio: { campo: 'bloqueio', nome: 'bloqueio' },
     situacao: { campo: 'situacao', nome: 'situação na carteira' },
   };
-  const DE_VENDA = ['vendedor', 'representada', 'rede', 'cidade'];
+  const TODOS = ['vendedor', 'representada', 'rede', 'cidade', 'bloqueio', 'situacao'];
+  const sem = (...fora) => TODOS.filter((p) => !fora.includes(p));
   const METRICAS = {
-    vendido: { nome: 'vendido', util: DE_VENDA },
-    pedidos: { nome: 'pedidos', util: DE_VENDA },
-    ticket: { nome: 'ticket médio', util: DE_VENDA },
-    comissaoRepresentadas: { nome: 'comissão das representadas', util: ['vendedor', 'representada'] },
-    comissaoVendedores: { nome: 'comissão dos vendedores', util: ['vendedor', 'representada'] },
-    positivados: { nome: 'clientes positivados', util: DE_VENDA },
-    evolucao: { nome: 'evolução das vendas', util: DE_VENDA },
-    status: { nome: 'pedidos por status', util: DE_VENDA },
-    porRepresentada: { nome: 'vendas por representada', util: ['vendedor', 'rede', 'cidade'] },
-    porVendedor: { nome: 'vendas por vendedor', util: ['representada', 'cidade'] },
-    carteira: { nome: 'carteira de clientes', util: ['vendedor', 'representada', 'rede', 'cidade', 'bloqueio', 'situacao'] },
-    abc: { nome: 'curva ABC', util: DE_VENDA },
-    positivacao: { nome: 'positivação', util: DE_VENDA },
+    vendido: { nome: 'vendido', util: TODOS },
+    pedidos: { nome: 'pedidos', util: TODOS },
+    ticket: { nome: 'ticket médio', util: TODOS },
+    comissaoRepresentadas: { nome: 'comissão das representadas', util: TODOS },
+    comissaoVendedores: { nome: 'comissão dos vendedores', util: TODOS },
+    positivados: { nome: 'clientes positivados', util: TODOS },
+    evolucao: { nome: 'evolução das vendas', util: TODOS },
+    status: { nome: 'pedidos por status', util: sem('situacao') },
+    porRepresentada: { nome: 'vendas por representada', util: sem('representada') },
+    porVendedor: { nome: 'vendas por vendedor', util: sem('vendedor') },
+    carteira: { nome: 'carteira de clientes', util: TODOS },
+    abc: { nome: 'curva ABC', util: TODOS },
+    positivacao: { nome: 'positivação', util: sem('situacao') },
     positivacaoDiaria: { nome: 'positivações diárias', util: ['vendedor', 'representada'] },
-    tabelaAbc: { nome: 'clientes na curva ABC', util: DE_VENDA },
+    tabelaAbc: { nome: 'clientes na curva ABC', util: TODOS },
   };
   const SEM_REDE = 'sem-rede';
   const BLOQUEIO = { desbloqueados: 'Sem bloqueio', bloqueados: 'Bloqueados' };
@@ -9340,7 +9341,7 @@
     barraHover: '#2196F3',
     positivacao: '#48BB78',
     positivacaoHover: '#38A169',
-    situacao: { ativo: '#48BB78', inativo_recente: '#D69E2E', inativo_antigo: '#F56565', novo: '#9F7AEA' },
+    situacao: { ativo: '#48BB78', inativo_recente: '#D69E2E', inativo_antigo: '#F56565', novo: '#9F7AEA', prospect: '#7A8AA1' },
     curva: { A: '#376AA8', B: '#4FC3B3', C: '#D69E2E' },
     vendedores: ['#4A6FA5', '#F6AD55', '#B794F4', '#4FD1C5', '#48BB78', '#F56565'],
     vazio: 'rgba(148, 163, 184, 0.22)',
@@ -9467,8 +9468,8 @@
 
   /**
    * Rede, cidade, bloqueio e situação são atributos do cliente: viram a lista de clientes
-   * que entram na conta (null = sem esses filtros). A situação é a do fim do período, a
-   * mesma da carteira, olhando só a representada filtrada, se houver.
+   * que entram na conta (null = sem esses filtros). A situação é a do início do período (a
+   * véspera do primeiro dia, como na positivação), olhando só a representada filtrada.
    */
   function clientesDoFiltro(p) {
     const { rede, cidade, bloqueio, situacao } = filtros;
@@ -9478,7 +9479,7 @@
       if (cidade && c.endereco?.cidade !== cidade) return false;
       if (bloqueio === 'bloqueados' && !c.bloqueado) return false;
       if (bloqueio === 'desbloqueados' && c.bloqueado) return false;
-      if (situacao && vendas.situacaoDoCliente(c.id, p.ate, { representadaId: filtros.representadaId }).situacao !== situacao) return false;
+      if (situacao && vendas.situacaoDoCliente(c.id, new Date(p.de.getTime() - 1), { representadaId: filtros.representadaId }).situacao !== situacao) return false;
       return true;
     }).map((c) => c.id);
   }
@@ -9690,11 +9691,19 @@
     const ficam = d.totalMetricas - d.ocultas.length;
     const texto = ficam === 1 && d.visiveis.has('carteira')
       ? `Com ${d.ativos.length > 1 ? 'esses filtros' : 'esse filtro'}, só a <strong>carteira de clientes</strong> faz sentido: as outras métricas são de venda e de comissão, e não mudam com ${d.ativos.length > 1 ? 'eles' : 'ele'}. Clique numa situação da carteira para ver os clientes.`
-      : `Aparecem só as métricas que mudam com ${d.ativos.length > 1 ? 'esses filtros' : 'esse filtro'} (${ficam} de ${d.totalMetricas}). Ficaram de fora: ${juntar(d.ocultas.map((id) => nomeDaMetrica(id, d)))}.`;
+      : `Aparecem todas as métricas úteis para ${d.ativos.length > 1 ? 'esses filtros' : 'esse filtro'} (${ficam} de ${d.totalMetricas}). Ficaram de fora: ${juntar(d.ocultas.map((id) => nomeDaMetrica(id, d)))}.`;
+    const regua = filtros.situacao
+      ? ` A situação é a do início do período: ${{
+        ativo: '"Ativo" mostra as vendas para quem já comprava',
+        inativo_recente: '"Inativo recente" mostra o que voltou de quem tinha parado há pouco',
+        inativo_antigo: '"Inativo antigo" mostra o que voltou de quem tinha parado há muito tempo',
+        prospect: '"Prospect" mostra as vendas para clientes novos',
+      }[filtros.situacao]}.`
+      : '';
     return `
       <div class="dashboard-monitoring-notice vendas-aviso vendas-aviso-filtros">
         <i class="ri-filter-3-line" aria-hidden="true"></i>
-        <span>Filtrando por <strong>${esc(filtrosLigados)}</strong>. ${texto}</span>
+        <span>Filtrando por <strong>${esc(filtrosLigados)}</strong>. ${texto}${regua}</span>
         <button type="button" class="vendas-link" data-vendas-limpar>Limpar filtros</button>
       </div>`;
   }
@@ -9863,28 +9872,34 @@
       <div class="details-col vendas-lista">${detalhes}</div>
     </div>`;
 
-  function htmlClientes(d) {
+  /**
+   * Fatias da rosca da carteira: ativos, inativos e prospects, todos no total. Antes os
+   * prospects ficavam num quadro à parte, fora do total, e o filtro "Prospect" mostrava a
+   * rosca com 0, como se não houvesse nenhum.
+   */
+  function fatiasDaCarteira(d) {
     const cfg = d.config;
-    const c = d.clientes;
-    const carteira = [
+    const fatias = [
       ['ativo', 'Ativos', `compraram nos últimos ${cfg.diasAtivo} dias`],
       ['inativo_recente', 'Inativos recentes', `última compra entre ${cfg.diasAtivo + 1} e ${cfg.diasInativoRecente} dias`],
       ['inativo_antigo', 'Inativos antigos', `última compra há mais de ${cfg.diasInativoRecente} dias`],
-    ].map(([chave, nome, nota]) => {
-      const parte = c.total ? (c[chave] / c.total) * 100 : 0;
+      ['prospect', 'Prospects', 'cadastrados que nunca compraram; orçamento em aberto ainda é prospecção'],
+    ].map(([chave, nome, nota]) => ({ chave, nome, nota, n: d.clientes[chave] || 0, cor: COR.situacao[chave] }));
+    const total = fatias.reduce((a, f) => a + f.n, 0);
+    return { fatias, total, legenda: total === 1 ? 'cliente' : 'clientes' };
+  }
+
+  function htmlClientes(d) {
+    const cfg = d.config;
+    const c = d.clientes;
+    const fc = fatiasDaCarteira(d);
+    const carteira = fc.fatias.map((f) => {
+      const parte = fc.total ? (f.n / fc.total) * 100 : 0;
       return itemLista({
-        nome, numero: fmt.numero(c[chave]), percentual: pct(parte), cor: COR.situacao[chave], largura: larguraBarra(parte), nota,
-        detalhe: c[chave] ? abreDetalhe('carteira', `Ver os clientes ${nome.toLowerCase()}`, { recorte: chave }) : '',
+        nome: f.nome, numero: fmt.numero(f.n), percentual: pct(parte), cor: f.cor, largura: larguraBarra(parte), nota: f.nota,
+        detalhe: f.n ? abreDetalhe('carteira', `Ver os clientes ${f.nome.toLowerCase()}`, { recorte: f.chave }) : '',
       });
     }).join('');
-    const prospects = `
-      <article class="mvp-list-item vendas-prospects"${c.prospect ? abreDetalhe('carteira', 'Ver os prospects', { recorte: 'prospect' }) : ''}>
-        <div>
-          <p class="mvp-list-title">Prospects</p>
-          <p class="mvp-list-subtitle">Cadastrados que nunca compraram (fora do total)</p>
-        </div>
-        <span class="mvp-badge is-neutral">${fmt.numero(c.prospect)}${c.prospect ? SETA : ''}</span>
-      </article>`;
 
     const abc = d.abc;
     const clientesAbc = abc.lista.length;
@@ -9934,8 +9949,10 @@
     if (d.visiveis.has('carteira')) {
       cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
-          ${cabecalhoCartao('ri-store-2-line', 'blue', 'Carteira de clientes', `Situação em ${situacaoEm}, pela última compra`)}
-          ${htmlRosca('vendas-grafico-carteira', c.total, c.total === 1 ? 'cliente' : 'clientes', 'Carteira de clientes por situação', carteira + prospects)}
+          ${cabecalhoCartao('ri-store-2-line', 'blue', 'Carteira de clientes', filtros.situacao
+            ? `Onde estão em ${situacaoEm} os clientes que eram ${vendas.NOMES_DA_SITUACAO[filtros.situacao].toLowerCase()} no início do período`
+            : `Situação em ${situacaoEm}, pela última compra`)}
+          ${htmlRosca('vendas-grafico-carteira', fc.total, fc.legenda, 'Carteira de clientes por situação', carteira)}
         </article>`);
     }
     if (d.visiveis.has('abc')) {
@@ -10171,16 +10188,14 @@
       }),
     }));
 
-    const c = d.clientes;
-    const nomesCarteira = ['Ativos', 'Inativos recentes', 'Inativos antigos'];
-    const valoresCarteira = [c.ativo, c.inativo_recente, c.inativo_antigo];
+    const fc = fatiasDaCarteira(d);
     criarGrafico('vendas-grafico-carteira', configRosca({
-      rotulos: nomesCarteira,
-      valores: valoresCarteira,
-      cores: [COR.situacao.ativo, COR.situacao.inativo_recente, COR.situacao.inativo_antigo],
-      total: c.total,
-      descrever: (i) => `${nomesCarteira[i]}: ${plural(valoresCarteira[i], 'cliente', 'clientes')} (${pct((valoresCarteira[i] / c.total) * 100)})`,
-      aoClicar: (i) => abrirDetalhe('carteira', { recorte: ['ativo', 'inativo_recente', 'inativo_antigo'][i] }),
+      rotulos: fc.fatias.map((f) => f.nome),
+      valores: fc.fatias.map((f) => f.n),
+      cores: fc.fatias.map((f) => f.cor),
+      total: fc.total,
+      descrever: (i) => `${fc.fatias[i].nome}: ${plural(fc.fatias[i].n, 'cliente', 'clientes')} (${pct((fc.fatias[i].n / fc.total) * 100)})`,
+      aoClicar: (i) => abrirDetalhe('carteira', { recorte: fc.fatias[i].chave }),
     }));
 
     const abc = d.abc;
@@ -10280,12 +10295,20 @@
       : '<span class="vendas-sub">Sem contato vinculado</span>';
   }
   const cidadeDe = (c) => [c?.endereco?.cidade, c?.rede].filter(Boolean).join(' · ');
-  const COR_PROSPECT = '#7A8AA1';
+  const COR_PROSPECT = COR.situacao.prospect;
   const COR_BLOQUEADO = '#64748B';
   const corDaSituacao = (s) => COR.situacao[s] || COR_PROSPECT;
   const pillBloqueado = (c) => (c?.bloqueado ? pill('Bloqueado', COR_BLOQUEADO, 'ri-lock-line') : '');
   const contar = (total, visiveis, um, varios) => (visiveis === total ? plural(total, um, varios) : `${fmt.numero(visiveis)} de ${plural(total, um, varios)}`);
   const haQuantosDias = (dias) => (dias === 0 ? 'hoje' : dias === 1 ? 'há 1 dia' : `há ${fmt.numero(dias)} dias`);
+
+  /** Orçamento em aberto mais recente de cada cliente até o fim do período: a prospecção em andamento. */
+  function orcamentosEmAberto(d) {
+    const mapa = new Map();
+    vendas.pedidos({ ate: d.p.ate, representadaId: filtros.representadaId }).filter((p) => p.status === 'orcamento')
+      .forEach((p) => { if (!mapa.has(p.clienteId)) mapa.set(p.clienteId, p); });
+    return mapa;
+  }
 
   /** Última venda de cada cliente até o fim do período (com a representada filtrada). */
   function ultimasVendas(d) {
@@ -10466,16 +10489,23 @@
       const recortes = [{ chave: '', rotulo: 'Todos', n: todos.length },
         ...ORDEM.filter((k) => conta[k] || detalhe.recorte === k).map((chave) => ({ chave, rotulo: ROTULO[chave], n: conta[chave] || 0 }))];
       const ultimas = ultimasVendas(d);
+      const orcamentos = orcamentosEmAberto(d);
+      const diasDeCadastro = (c) => (c.criadoEm ? Math.max(0, Math.round((inicioDoDia(d.p.ate) - inicioDoDia(c.criadoEm)) / DIA)) : null);
+      // Prospects: primeiro os que têm orçamento em aberto (o mais recente antes), depois os
+      // cadastrados há menos tempo. Os demais: situação, depois a compra mais recente.
       const lista = (detalhe.recorte ? todos.filter((l) => l.situacao === detalhe.recorte) : todos)
         .sort((a, b) => ORDEM.indexOf(a.situacao) - ORDEM.indexOf(b.situacao)
           || (b.ultimaCompra || '').localeCompare(a.ultimaCompra || '')
+          || (orcamentos.get(b.cliente.id)?.emitidoEm || '').localeCompare(orcamentos.get(a.cliente.id)?.emitidoEm || '')
+          || (b.cliente.criadoEm || '').localeCompare(a.cliente.criadoEm || '')
           || nomeDoCliente(a.cliente).localeCompare(nomeDoCliente(b.cliente), 'pt-BR'));
+      const soProspects = detalhe.recorte === 'prospect';
       const situacaoEm = `${fmt.data(d.p.ate)}${d.p.ateHoje ? ' (hoje)' : ''}`;
       const explicacao = {
         ativo: `compraram nos últimos ${d.config.diasAtivo} dias`,
         inativo_recente: 'pararam há pouco: os mais fáceis de reativar vêm primeiro',
         inativo_antigo: `sem comprar há mais de ${d.config.diasInativoRecente} dias`,
-        prospect: 'cadastrados que nunca compraram',
+        prospect: 'cadastrados que nunca compraram (orçamento em aberto ainda é prospecção); primeiro os que têm orçamento',
       }[detalhe.recorte];
       return {
         titulo: detalhe.recorte ? `Carteira · ${ROTULO[detalhe.recorte]}` : 'Carteira de clientes',
@@ -10483,17 +10513,28 @@
         recortes,
         placeholder: 'Cliente, cidade, rede ou vendedor...',
         larga: true,
-        colunas: [['Cliente'], ['Situação'], ['Última compra'], ['Valor', 'vendas-num'], ['Vendedor'], ['Contato']],
+        colunas: soProspects
+          ? [['Cliente'], ['Situação'], ['Cadastro'], ['Orçamento em aberto', 'vendas-num'], ['Vendedor'], ['Contato']]
+          : [['Cliente'], ['Situação'], ['Última compra'], ['Valor', 'vendas-num'], ['Vendedor'], ['Contato']],
         linhas: lista.map((l) => {
           const c = l.cliente;
           const ultimo = ultimas.get(c.id);
+          const orcamento = l.situacao === 'prospect' ? orcamentos.get(c.id) : null;
+          const cadastro = diasDeCadastro(c);
+          // Prospect não tem compra: no lugar dela, o cadastro e o orçamento em aberto, se houver.
+          const compra = l.situacao === 'prospect'
+            ? `${soProspects ? (c.criadoEm ? fmt.data(c.criadoEm) : '—') : 'Nunca comprou'}<span class="vendas-sub">${cadastro != null ? `cadastrado ${haQuantosDias(cadastro)}` : ''}</span>`
+            : `${l.ultimaCompra ? fmt.data(l.ultimaCompra) : 'Nunca comprou'}<span class="vendas-sub">${l.dias != null ? haQuantosDias(l.dias) : ''}${ultimo ? ` · ${linkPedido(ultimo)}` : ''}</span>`;
+          const valor = l.situacao === 'prospect'
+            ? (orcamento ? `${fmt.brl(orcamento.valorTotal)}<span class="vendas-sub">${linkPedido(orcamento)} · ${fmt.data(orcamento.emitidoEm)}</span>` : (soProspects ? '<span class="vendas-sub">Nenhum</span>' : '—'))
+            : (ultimo ? fmt.brl(ultimo.valorTotal) : '—');
           return {
-            valor: ultimo?.valorTotal || 0,
-            texto: [nomeDoCliente(c), c.razaoSocial, cidadeDe(c), nomeDoUsuario(c.vendedorId), vendas.NOMES_DA_SITUACAO[l.situacao], c.bloqueado ? 'bloqueado' : ''].join(' '),
+            valor: (l.situacao === 'prospect' ? orcamento?.valorTotal : ultimo?.valorTotal) || 0,
+            texto: [nomeDoCliente(c), c.razaoSocial, cidadeDe(c), nomeDoUsuario(c.vendedorId), vendas.NOMES_DA_SITUACAO[l.situacao], c.bloqueado ? 'bloqueado' : '', orcamento ? `orçamento ${orcamento.numero}` : ''].join(' '),
             html: `<td>${linkCliente(c)}<span class="vendas-sub">${esc(cidadeDe(c))}</span></td>
               <td>${pill(vendas.NOMES_DA_SITUACAO[l.situacao], corDaSituacao(l.situacao))}${pillBloqueado(c)}</td>
-              <td>${l.ultimaCompra ? fmt.data(l.ultimaCompra) : 'Nunca comprou'}<span class="vendas-sub">${l.dias != null ? haQuantosDias(l.dias) : ''}${ultimo ? ` · ${linkPedido(ultimo)}` : ''}</span></td>
-              <td class="vendas-num">${ultimo ? fmt.brl(ultimo.valorTotal) : '—'}</td>
+              <td>${compra}</td>
+              <td class="vendas-num">${valor}</td>
               <td>${esc(nomeDoUsuario(c.vendedorId))}</td>
               <td>${celulaContato(c.id)}</td>`,
           };
