@@ -9897,13 +9897,13 @@
         id: 'vendido', detalhe: abreDetalhe('vendas', 'Ver as vendas que somam o valor vendido'),
         titulo: 'Vendido', valor: fmt.brl(r.valor), icone: 'ri-money-dollar-circle-line', tom: 'green',
         chip: chipVariacao(r.valor, a.valor, comparacao),
-        dica: 'Soma dos pedidos com status Pedido, Faturado ou Concluído no período',
+        dica: 'Soma dos pedidos com status Pedido ou Concluído no período',
       },
       {
         id: 'pedidos', detalhe: abreDetalhe('pedidos', 'Ver os pedidos do período'),
         titulo: 'Pedidos', valor: fmt.numero(r.vendas), icone: 'ri-file-list-3-line', tom: 'blue',
         chip: chipNeutro(orcamentos ? `${fmt.numero(orcamentos)} em orçamento` : 'Sem orçamento', 'Orçamentos e cancelados não contam como venda'),
-        dica: 'Pedidos que contam como venda (Pedido, Faturado e Concluído)',
+        dica: 'Pedidos que contam como venda (Pedido e Concluído)',
       },
       {
         id: 'ticket', // sem detalhe: o que importa é a média, não as linhas
@@ -10660,7 +10660,7 @@
       const st = vendas.STATUS[detalhe.recorte];
       return {
         titulo: st ? `Pedidos · ${st.nome}` : 'Pedidos',
-        sub: `${plural(d.pedidos.length, 'pedido', 'pedidos')} no período; ${plural(d.resumo.vendas, 'conta', 'contam')} como venda (Pedido, Faturado e Concluído). Orçamentos em aberto são os que ainda dá para fechar.`,
+        sub: `${plural(d.pedidos.length, 'pedido', 'pedidos')} no período; ${plural(d.resumo.vendas, 'conta', 'contam')} como venda (Pedido e Concluído). Orçamentos em aberto são os que ainda dá para fechar.`,
         recortes,
         placeholder: 'Pedido, cliente, cidade, representada ou vendedor...',
         larga: true,

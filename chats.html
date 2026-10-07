@@ -2492,7 +2492,7 @@
     return v.salvar('pedidos', {
       clienteId: comprador.id, representadaId: dados.representadaId, vendedorId, status: 'pedido', emitidoEm: agora,
       itens: [], valorTotal: dados.valorTotal, origem: 'conversa', conversaId: chatAtual,
-      condicaoPagamento: '', observacoes: '', notaFiscal: null, criadoPor: eu.id,
+      condicaoPagamento: '', observacoes: '', criadoPor: eu.id,
       finalizacao: { motivo: motivoTexto, observacoes: notas, em: agora },
       historico: [{ status: 'pedido', em: agora, por: eu.id, nota: `Registrado ao finalizar a conversa com ${contato?.nome || 'o contato'}` }],
     });

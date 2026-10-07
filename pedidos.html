@@ -274,10 +274,10 @@
                     </section>
 
                     <section class="tasks-kpi-grid" id="pedidos-kpis">
-                        <article class="tasks-kpi-card" title="Soma dos pedidos com status Pedido, Faturado ou Concluído. Orçamento e cancelado não contam.">
+                        <article class="tasks-kpi-card" title="Soma dos pedidos com status Pedido ou Concluído. Orçamento e cancelado não contam.">
                             <div class="tasks-kpi-value tone-blue pedidos-kpi-dinheiro" id="kpi-vendido">R$ 0</div>
                             <div class="tasks-kpi-label">VENDIDO</div>
-                            <div class="pedidos-kpi-sub" id="kpi-vendido-sub">pedido, faturado e concluído</div>
+                            <div class="pedidos-kpi-sub" id="kpi-vendido-sub">pedido e concluído</div>
                         </article>
                         <article class="tasks-kpi-card" title="Pedidos que contam como venda no período.">
                             <div class="tasks-kpi-value tone-navy" id="kpi-pedidos">0</div>
@@ -568,10 +568,6 @@
                         <span class="tasks-kpi-label">Condição de pagamento</span>
                         <span id="det-condicao"></span>
                     </div>
-                    <div>
-                        <span class="tasks-kpi-label">Nota fiscal</span>
-                        <span id="det-nf"></span>
-                    </div>
                     <div class="pedidos-detalhe-largo">
                         <span class="tasks-kpi-label">Origem</span>
                         <span id="det-origem"></span>
@@ -633,7 +629,7 @@
     <div id="pedido-acao-modal" class="modal tasks-modal">
         <div class="tasks-modal-content" role="dialog" aria-modal="true" aria-labelledby="acao-titulo">
             <div class="tasks-modal-header">
-                <h3 id="acao-titulo"><i class="ri-bill-line"></i><span>Faturar pedido</span></h3>
+                <h3 id="acao-titulo"><i class="ri-checkbox-circle-line"></i><span>Concluir pedido</span></h3>
                 <button type="button" class="tasks-close-btn close-btn" data-modal-close="" aria-label="Fechar">
                     <i class="ri-close-line"></i>
                 </button>
@@ -642,7 +638,7 @@
                 <div class="tasks-modal-body">
                     <p id="acao-mensagem" class="tasks-confirm-message"></p>
                     <div id="acao-campo" class="tasks-field-full pedidos-acao-campo">
-                        <label for="acao-texto" id="acao-rotulo">Número da nota fiscal <span>*</span></label>
+                        <label for="acao-texto" id="acao-rotulo">Motivo <span>*</span></label>
                         <input id="acao-texto" type="text" maxlength="20">
                         <textarea id="acao-motivo" rows="3" maxlength="300" class="hidden"></textarea>
                     </div>
@@ -1288,7 +1284,7 @@
   }
 
   // ---------------------------------------------------------------------------------
-  // Indicadores do recorte (mesmas regras de vendas.resumo: venda = pedido, faturado ou
+  // Indicadores do recorte (mesmas regras de vendas.resumo: venda = pedido ou
   // concluído; comissões pelos percentuais gravados em cada pedido)
   // ---------------------------------------------------------------------------------
   function indicadores(lista) {
@@ -1551,10 +1547,8 @@
     const emitido = new Date(p.emitidoEm).getTime();
     const passos = [{ status: p.status === 'orcamento' ? 'orcamento' : 'pedido', em: p.emitidoEm, por: p.vendedorId,
       nota: p.origem === 'conversa' ? 'Registrado ao finalizar a conversa' : '' }];
-    if (p.status === 'faturado' || p.status === 'concluido') {
-      const faturado = Math.min(emitido + (1 + (p.numero % 3)) * DIA, agora);
-      passos.push({ status: 'faturado', em: ate(faturado), nota: p.notaFiscal ? `Nota fiscal ${p.notaFiscal}` : '' });
-      if (p.status === 'concluido') passos.push({ status: 'concluido', em: ate(faturado + (4 + (p.numero % 5)) * DIA), nota: 'Entregue e recebido' });
+    if (p.status === 'concluido') {
+      passos.push({ status: 'concluido', em: ate(emitido + (5 + (p.numero % 6)) * DIA), nota: 'Entregue e recebido' });
     }
     if (p.status === 'cancelado') passos.push({ status: 'cancelado', em: ate(emitido + DIA), nota: p.motivoCancelamento || 'Cliente desistiu da compra' });
     return passos;
@@ -1599,7 +1593,6 @@
     $('#det-vend-nome').textContent = nomeVendedor;
     $('#det-emitido').textContent = fmt.dataHora(p.emitidoEm);
     $('#det-condicao').textContent = p.condicaoPagamento || 'A combinar';
-    $('#det-nf').textContent = p.notaFiscal ? `NF ${p.notaFiscal}` : (p.status === 'cancelado' ? '—' : 'Ainda não faturado');
 
     const origem = $('#det-origem');
     origem.className = 'pedidos-detalhe-origem';
@@ -1664,7 +1657,8 @@
     $('#det-editar').classList.toggle('hidden', !podeEditar || p.status === 'cancelado');
     $('#det-cancelar').classList.toggle('hidden', !podeEditar || ['cancelado', 'concluido'].includes(p.status));
     $('#det-cancelar').lastChild.textContent = p.status === 'orcamento' ? ' Cancelar orçamento' : ' Cancelar pedido';
-    const proximo = { orcamento: ['confirmar', 'Confirmar pedido', 'ri-check-line'], pedido: ['faturar', 'Faturar', 'ri-bill-line'], faturado: ['concluir', 'Concluir', 'ri-checkbox-circle-line'] }[p.status];
+    // Sem a etapa de faturar: Em orçamento → Pedido → Concluído.
+    const proximo = { orcamento: ['confirmar', 'Confirmar pedido', 'ri-check-line'], pedido: ['concluir', 'Concluir', 'ri-checkbox-circle-line'] }[p.status];
     const avancar = $('#det-avancar');
     avancar.classList.toggle('hidden', !podeEditar || !proximo);
     if (proximo) {
@@ -1679,18 +1673,12 @@
     if (!p) return null;
     const passo = { status: novo, em: new Date().toISOString(), por: eu().id, nota: extra.nota || '' };
     const dados = { id, status: novo, historico: [...historicoDo(p), passo] };
-    if (novo === 'faturado') dados.notaFiscal = extra.notaFiscal;
     if (novo === 'cancelado') dados.motivoCancelamento = extra.nota;
     return v.salvar('pedidos', dados);
   }
 
   // Ações que pedem confirmação (ou um dado) num modal pequeno por cima do detalhe.
   const ACOES = {
-    faturar: {
-      titulo: 'Faturar pedido', icone: 'ri-bill-line', botao: 'Faturar', classe: 'tasks-btn-primary',
-      mensagem: (p, c) => `O pedido #${p.numero} de ${c} passa para Faturado. Informe a nota fiscal emitida pela representada.`,
-      campo: 'texto', rotulo: 'Número da nota fiscal', dica: 'Ex.: 48213',
-    },
     concluir: {
       titulo: 'Concluir pedido', icone: 'ri-checkbox-circle-line', botao: 'Concluir', classe: 'tasks-btn-primary',
       mensagem: (p, c) => `Confirme que o pedido #${p.numero} de ${c} foi entregue e recebido.`,
@@ -1741,12 +1729,7 @@
     const { nome, id } = acaoAtual;
     const p = v.pedido(id);
     if (!p) { fecharModal('pedido-acao-modal'); return; }
-    if (nome === 'faturar') {
-      const nf = $('#acao-texto').value.trim();
-      if (!nf) { notificar('Informe o número da nota fiscal.', 'error'); $('#acao-texto').focus(); return; }
-      mudarStatus(id, 'faturado', { notaFiscal: nf, nota: `Nota fiscal ${nf}` });
-      notificar(`Pedido #${p.numero} faturado.`);
-    } else if (nome === 'concluir') {
+    if (nome === 'concluir') {
       mudarStatus(id, 'concluido', { nota: 'Entregue e recebido' });
       notificar(`Pedido #${p.numero} concluído.`);
     } else if (nome === 'cancelar') {
@@ -1958,7 +1941,7 @@
     opcoes(tipo, null, tipoEditavel ? [['pedido', 'Pedido'], ['orcamento', 'Orçamento']] : [[pedido.status, v.STATUS[pedido.status].nome]]);
     tipo.value = pedido ? pedido.status : 'pedido';
     tipo.disabled = !tipoEditavel;
-    tipo.title = tipoEditavel ? '' : 'O status muda pelo detalhe do pedido (faturar, concluir, cancelar)';
+    tipo.title = tipoEditavel ? '' : 'O status muda pelo detalhe do pedido (concluir, cancelar)';
 
     itensForm = (pedido?.itens || []).map((it) => ({ ...it }));
     definirModo(pedido && !pedido.itens?.length ? 'total' : 'itens', { manterValor: true });
@@ -2280,7 +2263,7 @@
 
     const agora = new Date().toISOString();
     const salvo = v.salvar('pedidos', {
-      ...dados, status: tipo, origem: 'pedidos', conversaId: null, notaFiscal: null, emitidoEm: agora, criadoPor: eu().id,
+      ...dados, status: tipo, origem: 'pedidos', conversaId: null, emitidoEm: agora, criadoPor: eu().id,
       historico: [{ status: tipo, em: agora, por: eu().id, nota: tipo === 'orcamento' ? 'Orçamento lançado na página Pedidos' : 'Pedido lançado na página Pedidos' }],
     });
     fecharModal('pedido-modal');

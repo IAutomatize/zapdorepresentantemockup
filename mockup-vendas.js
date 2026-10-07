@@ -18,7 +18,7 @@
  * as telas e abas. vendas.resetar() volta ao estado inicial.
  *
  * Regras (as mesmas que o briefing de transporte leva para o sistema):
- *   venda          pedido com status pedido, faturado ou concluído (orçamento e
+ *   venda          pedido com status pedido ou concluído (orçamento e
  *                  cancelado não contam para faturamento, carteira, ABC nem positivação)
  *   carteira       ativo: comprou nos últimos 90 dias; inativo recente: 91 a 180;
  *                  inativo antigo: mais de 180; prospect: nunca comprou (CONFIG)
@@ -348,7 +348,6 @@
   const STATUS = {
     orcamento: { nome: 'Em orçamento', cor: '#d97706', venda: false },
     pedido: { nome: 'Pedido', cor: '#2563eb', venda: true },
-    faturado: { nome: 'Faturado', cor: '#7c3aed', venda: true },
     concluido: { nome: 'Concluído', cor: '#16a34a', venda: true },
     cancelado: { nome: 'Cancelado', cor: '#64748b', venda: false },
   };
@@ -417,7 +416,12 @@
       comissaoVendedor: VENDEDORES[cliente.vendedorId].comissao,
       _ordem: ordem,
     };
-    if (['faturado', 'concluido'].includes(pedido.status)) pedido.notaFiscal = String(entre(10000, 99999));
+    // Sem a etapa de faturar (decisão de 07/10/2026): o sorteio de antes continua igual, para os
+    // pedidos seguintes não mudarem, e o status "faturado" vira pedido em andamento (recente) ou
+    // concluído (antigo). Não há nota fiscal.
+    if (['faturado', 'concluido'].includes(pedido.status)) entre(10000, 99999);
+    if (pedido.status === 'faturado') pedido.status = Math.round((hoje() - inicioDoDia(data)) / DIA) <= 12 ? 'pedido' : 'concluido';
+    delete pedido.notaFiscal;
     PEDIDOS_GERADOS.push(pedido);
     return pedido;
   }
@@ -556,7 +560,10 @@
       const excluidos = new Set(estado.excluidos[tipo]);
       const base = (BASE[tipo] || []).filter((x) => !excluidos.has(x.id))
         .map((x) => (alterados[x.id] ? { ...x, ...alterados[x.id] } : x));
-      cache.set(tipo, [...base, ...estado.criados[tipo].filter((x) => !excluidos.has(x.id))]);
+      let lista = [...base, ...estado.criados[tipo].filter((x) => !excluidos.has(x.id))];
+      // Pedido faturado guardado neste navegador antes de a etapa sair: volta a ser Pedido.
+      if (tipo === 'pedidos') lista = lista.map((x) => (x.status === 'faturado' ? { ...x, status: 'pedido' } : x));
+      cache.set(tipo, lista);
     }
     return cache.get(tipo);
   }
