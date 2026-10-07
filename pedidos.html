@@ -442,12 +442,20 @@
 
                     <div class="tasks-field-grid two">
                         <div>
-                            <label for="pedido-representada">Representada <span>*</span></label>
-                            <select id="pedido-representada"></select>
+                            <label for="pedido-representada-busca">Representada <span>*</span></label>
+                            <div class="agendadas-contact-autocomplete pedidos-busca">
+                                <input id="pedido-representada-busca" type="text" placeholder="Digite o nome da representada..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pedido-representada-lista">
+                                <div id="pedido-representada-lista" class="agendadas-contact-suggestions hidden" role="listbox"></div>
+                            </div>
+                            <input type="hidden" id="pedido-representada">
                         </div>
                         <div>
-                            <label for="pedido-vendedor">Vendedor <span>*</span></label>
-                            <select id="pedido-vendedor"></select>
+                            <label for="pedido-vendedor-busca">Vendedor <span>*</span></label>
+                            <div class="agendadas-contact-autocomplete pedidos-busca">
+                                <input id="pedido-vendedor-busca" type="text" placeholder="Digite o nome do vendedor..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pedido-vendedor-lista">
+                                <div id="pedido-vendedor-lista" class="agendadas-contact-suggestions hidden" role="listbox"></div>
+                            </div>
+                            <input type="hidden" id="pedido-vendedor">
                         </div>
                     </div>
 
@@ -510,11 +518,6 @@
                             <span class="tasks-kpi-label">Total</span>
                             <strong id="resumo-total">R$ 0,00</strong>
                             <small id="resumo-itens">nenhum item</small>
-                        </div>
-                        <div>
-                            <span class="tasks-kpi-label">Comissão da representada</span>
-                            <strong id="resumo-com-rep">R$ 0,00</strong>
-                            <small id="resumo-com-rep-pct">escolha a representada</small>
                         </div>
                         <div>
                             <span class="tasks-kpi-label">Comissão do vendedor</span>
@@ -775,7 +778,11 @@
 </div></div>
 <div data-molde="item"><div class="pedidos-item">
     <div class="pedidos-item-produto">
-        <select aria-label="Produto" data-campo="produto"><option value="">Escolha o produto</option></select>
+        <div class="agendadas-contact-autocomplete pedidos-busca">
+            <input type="text" placeholder="Digite o código ou o nome..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-label="Produto" data-campo="produto-busca">
+            <div class="agendadas-contact-suggestions hidden" role="listbox" data-campo="produto-lista"></div>
+        </div>
+        <input type="hidden" data-campo="produto">
         <small class="pedidos-dica" data-campo="embalagem"></small>
     </div>
     <input type="number" min="1" step="1" value="1" inputmode="numeric" aria-label="Quantidade de embalagens" data-campo="quantidade">
@@ -971,8 +978,13 @@
   .pedidos-item input[data-campo="quantidade"] { padding-left: 10px; padding-right: 4px; }
   .pedidos-item-subtotal { padding-top: 11px; font-size: 13px; font-weight: 700; text-align: right; white-space: nowrap; color: var(--tasks-ink); }
   .pedidos-item .tasks-icon-btn { margin-top: 6px; }
+  /* Campos com busca (representada, vendedor, produto): o componente de sugestões do app,
+     o mesmo do cliente. A opção escolhida pelo teclado ganha o fundo do hover. */
+  .pedidos-busca .ag-contact-option.is-ativa { background: rgba(33, 150, 243, 0.08); }
+  .pedidos-busca .ag-contact-option[aria-disabled="true"] { cursor: not-allowed; opacity: 0.55; }
+  .pedidos-busca input:disabled { cursor: not-allowed; opacity: 0.7; }
   .pedidos-resumo {
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
     margin: 4px 0 14px; padding: 14px 16px; border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.06); background: rgba(var(--ds-glass-rgb), 0.6);
   }
@@ -1787,19 +1799,137 @@
   let itensForm = [];
   let cadastroRapido = false;
 
+  // --- campo com busca: digita e escolhe na lista ------------------------------------------
+  // O componente de sugestões do app (.agendadas-contact-autocomplete, -suggestions e
+  // .ag-contact-option), o mesmo da busca do cliente. Setas e Enter escolhem; Esc fecha só a
+  // lista. O id escolhido fica no campo escondido; `opcoes(termo)` devolve
+  // [{ id, nome, sub, desativada }].
+  const casaTermo = (termo, ...textos) => !termo || semAcento(textos.filter(Boolean).join(' ')).includes(semAcento(termo));
+  function campoComBusca({ input, oculto, painel = document.getElementById(input.getAttribute('aria-controls')), opcoes: listar, aoEscolher }) {
+    let itens = [];
+    let ativo = -1;
+    function fechar() {
+      painel.classList.add('hidden');
+      painel.replaceChildren();
+      input.setAttribute('aria-expanded', 'false');
+      ativo = -1;
+    }
+    function marcar(i) {
+      const botoes = [...painel.querySelectorAll('[data-opcao]')];
+      ativo = Math.max(0, Math.min(i, botoes.length - 1));
+      botoes.forEach((b, k) => b.classList.toggle('is-ativa', k === ativo));
+      botoes[ativo]?.scrollIntoView({ block: 'nearest' });
+    }
+    function abrir() {
+      if (input.disabled) return;
+      // Com um nome já escolhido no campo, a lista mostra tudo de novo para trocar.
+      const termo = input.value === input.dataset.escolhido ? '' : input.value.trim();
+      itens = listar(termo);
+      painel.replaceChildren(...(itens.length ? itens.map((item, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ag-contact-option';
+        b.setAttribute('role', 'option');
+        b.dataset.opcao = String(i);
+        if (item.desativada) b.setAttribute('aria-disabled', 'true');
+        const nome = document.createElement('div');
+        nome.className = 'ag-contact-option-name';
+        nome.textContent = item.nome;
+        const sub = document.createElement('div');
+        sub.className = 'ag-contact-option-phone';
+        sub.textContent = item.sub || '';
+        b.append(nome, sub);
+        return b;
+      }) : [(() => {
+        const vazio = document.createElement('div');
+        vazio.className = 'ag-contact-option';
+        vazio.innerHTML = '<div class="ag-contact-option-name">Nada encontrado</div><div class="ag-contact-option-phone">Confira o que foi digitado.</div>';
+        return vazio;
+      })()]));
+      painel.classList.remove('hidden');
+      input.setAttribute('aria-expanded', 'true');
+      ativo = -1;
+    }
+    function escolher(item, { silencioso = false } = {}) {
+      if (item?.desativada) return;
+      oculto.value = item?.id || '';
+      input.value = item ? item.nome : '';
+      input.dataset.escolhido = input.value;
+      fechar();
+      if (!silencioso) aoEscolher(item || null);
+    }
+    input.addEventListener('focus', abrir);
+    input.addEventListener('input', () => {
+      if (oculto.value && input.value !== input.dataset.escolhido) {
+        oculto.value = '';
+        input.dataset.escolhido = '';
+        aoEscolher(null);
+      }
+      abrir();
+    });
+    input.addEventListener('keydown', (ev) => {
+      const aberta = !painel.classList.contains('hidden');
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); if (!aberta) abrir(); marcar(ativo + 1); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); if (aberta) marcar(ativo - 1); }
+      else if (ev.key === 'Enter') { if (aberta && ativo >= 0) escolher(itens[ativo]); ev.preventDefault(); }
+      else if (ev.key === 'Escape' && aberta) { ev.stopPropagation(); fechar(); }
+    });
+    painel.addEventListener('mousedown', (ev) => ev.preventDefault()); // o campo não perde o foco
+    painel.addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-opcao]');
+      if (b) escolher(itens[Number(b.dataset.opcao)]);
+    });
+    input.addEventListener('blur', () => setTimeout(fechar, 120));
+    return { escolher };
+  }
+
+  // Representada e vendedor: só o nome (a comissão não aparece na frente do nome).
+  let repsDoFormulario = [];
+  let vendedoresDoFormulario = [];
+  const opcaoDaRepresentada = (r) => ({ id: r.id, nome: r.nomeFantasia, sub: [r.razaoSocial, r.ativa === false ? 'inativa' : ''].filter(Boolean).join(' · ') });
+  const NOMES_DO_PAPEL = { owner: 'Dono', admin: 'Administrador', member: 'Membro' };
+  const opcaoDoVendedor = (u) => ({ id: u.id, nome: u.nome, sub: [u.funcao || NOMES_DO_PAPEL[u.papel], u.id === eu().id ? 'você' : ''].filter(Boolean).join(' · ') });
+  const buscaRepresentada = campoComBusca({
+    input: $('#pedido-representada-busca'),
+    oculto: $('#pedido-representada'),
+    opcoes: (termo) => repsDoFormulario
+      .filter((r) => casaTermo(termo, r.nomeFantasia, r.razaoSocial, r.documento))
+      .map(opcaoDaRepresentada),
+    aoEscolher: (item) => {
+      trocarRepresentada();
+      if (item) setTimeout(() => (vendedoresDoFormulario.length > 1 && !$('#pedido-vendedor').value ? $('#pedido-vendedor-busca') : null)?.focus(), 0);
+    },
+  });
+  const buscaVendedor = campoComBusca({
+    input: $('#pedido-vendedor-busca'),
+    oculto: $('#pedido-vendedor'),
+    opcoes: (termo) => vendedoresDoFormulario.filter((u) => casaTermo(termo, u.nome)).map(opcaoDoVendedor),
+    aoEscolher: atualizarResumo,
+  });
+  function definirRepresentada(id) {
+    const rep = repsDoFormulario.find((r) => r.id === id);
+    buscaRepresentada.escolher(rep ? opcaoDaRepresentada(rep) : null, { silencioso: true });
+  }
+  function definirVendedor(id) {
+    const u = vendedoresDoFormulario.find((x) => x.id === id);
+    buscaVendedor.escolher(u ? opcaoDoVendedor(u) : null, { silencioso: true });
+  }
+
   function preencherSelectsDoFormulario(pedido) {
-    const reps = v.representadas().filter((r) => r.ativa !== false || r.id === pedido?.representadaId);
-    opcoes($('#pedido-representada'), 'Escolha a representada', reps.map((r) => [r.id, `${r.nomeFantasia} · comissão ${fmt.pct(r.comissao)}`]));
-    const seletor = $('#pedido-vendedor');
-    const vendedores = v.vendedores().filter((u) => u.vendedor || u.id === pedido?.vendedorId);
+    repsDoFormulario = v.representadas()
+      .filter((r) => r.ativa !== false || r.id === pedido?.representadaId)
+      .sort((a, b) => a.nomeFantasia.localeCompare(b.nomeFantasia, 'pt-BR'));
+    definirRepresentada('');
+    const campoVendedor = $('#pedido-vendedor-busca');
     if (soCarteira()) {
       // Quem só vê a própria carteira lança pedidos em nome próprio.
-      opcoes(seletor, null, [[eu().id, `${eu().nome} · ${fmt.pct(v.vendedor(eu().id)?.comissao || 0)}`]]);
-      seletor.disabled = true;
+      vendedoresDoFormulario = v.vendedores().filter((u) => u.id === eu().id);
+      campoVendedor.disabled = true;
     } else {
-      opcoes(seletor, 'Escolha o vendedor', vendedores.map((u) => [u.id, `${u.nome} · ${fmt.pct(u.comissao || 0)}`]));
-      seletor.disabled = false;
+      vendedoresDoFormulario = v.vendedores().filter((u) => u.vendedor || u.id === pedido?.vendedorId);
+      campoVendedor.disabled = false;
     }
+    definirVendedor('');
   }
 
   function abrirFormulario(pedido = null, extra = {}) {
@@ -1816,13 +1946,13 @@
     fecharCadastroRapido();
     definirCliente(pedido?.clienteId || extra.clienteId || null, { sugerirRepresentada: !pedido });
     if (pedido) {
-      $('#pedido-representada').value = pedido.representadaId;
-      $('#pedido-vendedor').value = soCarteira() ? eu().id : pedido.vendedorId;
+      definirRepresentada(pedido.representadaId);
+      definirVendedor(soCarteira() ? eu().id : pedido.vendedorId);
       $('#pedido-observacoes').value = pedido.observacoes || '';
       $('#pedido-condicao').value = pedido.condicaoPagamento || '';
     } else {
-      $('#pedido-vendedor').value = soCarteira() ? eu().id : vendedorPadrao(v.cliente(extra.clienteId));
-      if (extra.representadaId) $('#pedido-representada').value = extra.representadaId;
+      definirVendedor(soCarteira() ? eu().id : vendedorPadrao(v.cliente(extra.clienteId)));
+      if (extra.representadaId) definirRepresentada(extra.representadaId);
     }
 
     // Tipo: na edição, só orçamento e pedido trocam por aqui; o resto muda pelo detalhe.
@@ -1880,8 +2010,8 @@
       // Atalho: a representada do último pedido do cliente (ou a primeira que ele compra).
       const ultimo = v.pedidos({ respeitarPermissao: false }).find((p) => p.clienteId === c.id);
       const sugerida = ultimo?.representadaId || c.representadaIds?.[0];
-      if (sugerida && [...$('#pedido-representada').options].some((o) => o.value === sugerida)) {
-        $('#pedido-representada').value = sugerida;
+      if (sugerida && repsDoFormulario.some((r) => r.id === sugerida)) {
+        definirRepresentada(sugerida);
         trocarRepresentada();
       }
     }
@@ -1902,7 +2032,7 @@
     const opcao = ev.target.closest('[data-cliente-id]');
     if (!opcao) return;
     definirCliente(opcao.dataset.clienteId, { sugerirRepresentada: !editando });
-    if (!editando && !soCarteira() && !v.vendedor(eu().id)?.vendedor) $('#pedido-vendedor').value = vendedorPadrao(v.cliente(opcao.dataset.clienteId));
+    if (!editando && !soCarteira() && !v.vendedor(eu().id)?.vendedor) definirVendedor(vendedorPadrao(v.cliente(opcao.dataset.clienteId)));
     atualizarResumo();
   });
   document.addEventListener('click', (ev) => {
@@ -1977,16 +2107,27 @@
   function pintarItens() {
     const repId = $('#pedido-representada').value;
     const catalogo = repId ? v.produtos(repId).filter((x) => x.ativo !== false) : [];
+    const opcaoDoProduto = (x) => ({ id: x.id, nome: `${x.codigo} · ${x.nome}`, sub: [x.embalagem, fmt.brl(x.preco)].filter(Boolean).join(' · ') });
     $('#pedido-itens').replaceChildren(...itensForm.map((item, i) => {
       const linha = molde('item');
       linha.dataset.indice = String(i);
-      const seletor = campo(linha, 'produto');
-      seletor.replaceChildren(new Option(repId ? 'Escolha o produto' : 'Escolha a representada primeiro', ''),
-        ...catalogo.map((x) => new Option(`${x.codigo} · ${x.nome}`, x.id)));
+      // Produto com busca: digita o código ou o nome e escolhe no catálogo da representada.
+      const busca = campo(linha, 'produto-busca');
+      const painel = campo(linha, 'produto-lista');
+      painel.id = `pedido-item-produtos-${i}`;
+      busca.setAttribute('aria-controls', painel.id);
+      busca.placeholder = repId ? 'Digite o código ou o nome...' : 'Escolha a representada primeiro';
+      busca.disabled = !repId;
+      const produto = campoComBusca({
+        input: busca,
+        oculto: campo(linha, 'produto'),
+        painel,
+        opcoes: (termo) => catalogo.filter((x) => casaTermo(termo, x.codigo, x.nome)).map(opcaoDoProduto),
+        aoEscolher: (escolhido) => escolherProduto(linha, escolhido?.id || ''),
+      });
+      const doCatalogo = catalogo.find((x) => x.id === item.produtoId);
       // Item de produto que saiu do catálogo: fica com a descrição e o preço gravados.
-      if (item.produtoId && !catalogo.some((x) => x.id === item.produtoId)) seletor.append(new Option(`${item.descricao} (fora do catálogo)`, item.produtoId));
-      seletor.value = item.produtoId || '';
-      seletor.disabled = !repId;
+      if (item.produtoId) produto.escolher(doCatalogo ? opcaoDoProduto(doCatalogo) : { id: item.produtoId, nome: `${item.descricao} (fora do catálogo)` }, { silencioso: true });
       campo(linha, 'quantidade').value = String(item.quantidade || 1);
       campo(linha, 'preco').value = item.precoUnitario ? fmt.brl(item.precoUnitario) : '';
       pintarLinhaDoItem(linha, item);
@@ -2010,18 +2151,17 @@
     atualizarResumo();
   }
 
-  $('#pedido-itens').addEventListener('change', (ev) => {
-    const linha = ev.target.closest('.pedidos-item');
-    if (!linha || ev.target.dataset.campo !== 'produto') return;
+  function escolherProduto(linha, produtoId) {
     const item = itensForm[Number(linha.dataset.indice)];
-    const produto = v.produtos().find((x) => x.id === ev.target.value);
+    const produto = v.produtos().find((x) => x.id === produtoId);
     Object.assign(item, produto
       ? { produtoId: produto.id, descricao: produto.nome, embalagem: produto.embalagem, precoUnitario: produto.preco }
       : { produtoId: '', descricao: '', embalagem: '', precoUnitario: 0 });
     campo(linha, 'preco').value = item.precoUnitario ? fmt.brl(item.precoUnitario) : '';
     pintarLinhaDoItem(linha, item);
     atualizarResumo();
-  });
+    if (produto) setTimeout(() => campo(linha, 'quantidade').select(), 0);
+  }
   $('#pedido-itens').addEventListener('input', (ev) => {
     const linha = ev.target.closest('.pedidos-item');
     if (!linha) return;
@@ -2040,16 +2180,14 @@
     atualizarResumo();
   });
   $('#pedido-item-novo').addEventListener('click', () => {
-    if (!$('#pedido-representada').value) { notificar('Escolha a representada para ver o catálogo dela.', 'info'); $('#pedido-representada').focus(); return; }
+    if (!$('#pedido-representada').value) { notificar('Escolha a representada para ver o catálogo dela.', 'info'); $('#pedido-representada-busca').focus(); return; }
     itensForm.push({ produtoId: '', quantidade: 1, precoUnitario: 0 });
     pintarItens();
     atualizarResumo();
-    todos('#pedido-itens [data-campo="produto"]').pop()?.focus();
+    todos('#pedido-itens [data-campo="produto-busca"]').pop()?.focus();
   });
   todos('[data-modo]').forEach((b) => b.addEventListener('click', () => { definirModo(b.dataset.modo); atualizarResumo(); }));
   $('#pedido-valor-total').addEventListener('input', (ev) => { mascararMoeda(ev.target); atualizarResumo(); });
-  $('#pedido-representada').addEventListener('change', trocarRepresentada);
-  $('#pedido-vendedor').addEventListener('change', atualizarResumo);
   $('#pedido-tipo').addEventListener('change', atualizarResumo);
 
   function totalDoFormulario() {
@@ -2070,14 +2208,12 @@
   }
   function atualizarResumo() {
     const total = totalDoFormulario();
-    const { rep, vend, pctRep, pctVend } = percentuais();
+    const { vend, pctVend } = percentuais(); // a comissão da representada não aparece aqui
     $('#resumo-total').textContent = fmt.brl(total);
     const comProduto = itensForm.filter((it) => it.produtoId);
     $('#resumo-itens').textContent = modo === 'total'
       ? 'valor informado, sem itens'
       : (comProduto.length ? `${plural(comProduto.length, 'item', 'itens')} · ${plural(comProduto.reduce((a, it) => a + (it.quantidade || 0), 0), 'embalagem', 'embalagens')}` : 'nenhum item');
-    $('#resumo-com-rep').textContent = pctRep == null ? '—' : fmt.brl(Math.round((total * pctRep) / 100));
-    $('#resumo-com-rep-pct').textContent = pctRep == null ? 'escolha a representada' : `${fmt.pct(pctRep)} de ${rep.nomeFantasia}`;
     $('#resumo-com-vend').textContent = pctVend == null ? '—' : fmt.brl(Math.round((total * pctVend) / 100));
     $('#resumo-com-vend-pct').textContent = pctVend == null ? 'escolha o vendedor' : `${fmt.pct(pctVend)} de ${vend.nome}`;
     const orcamento = $('#pedido-tipo').value === 'orcamento';
@@ -2100,8 +2236,8 @@
     } else if (!clienteId) {
       return erro('Escolha o cliente na lista ou use o cadastro rápido.', '#pedido-cliente-busca');
     }
-    if (!representadaId) return erro('Escolha a representada.', '#pedido-representada');
-    if (!vendedorId) return erro('Escolha o vendedor.', '#pedido-vendedor');
+    if (!representadaId) return erro('Escolha a representada na lista.', '#pedido-representada-busca');
+    if (!vendedorId) return erro('Escolha o vendedor na lista.', '#pedido-vendedor-busca');
     let itens = [];
     if (modo === 'itens') {
       itens = itensForm.filter((it) => it.produtoId).map((it) => ({

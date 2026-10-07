@@ -2027,10 +2027,18 @@
 </button></div>
 <div data-molde="campos"><div id="finalize-chat-order-fields" class="finalize-chat-order-fields hidden">
     <label for="finalize-chat-order-company">Empresa <span>*</span></label>
-    <select id="finalize-chat-order-company"></select>
+    <div class="agendadas-contact-autocomplete finalize-chat-order-busca">
+        <input id="finalize-chat-order-company" type="text" placeholder="Digite o nome da representada..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="finalize-chat-order-company-list">
+        <div id="finalize-chat-order-company-list" class="agendadas-contact-suggestions hidden" role="listbox"></div>
+    </div>
+    <input type="hidden" id="finalize-chat-order-company-id">
 
     <label for="finalize-chat-order-client">Cliente <span>*</span></label>
-    <select id="finalize-chat-order-client"></select>
+    <div class="agendadas-contact-autocomplete finalize-chat-order-busca">
+        <input id="finalize-chat-order-client" type="text" placeholder="Digite o nome, CNPJ ou cidade do cliente..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="finalize-chat-order-client-list">
+        <div id="finalize-chat-order-client-list" class="agendadas-contact-suggestions hidden" role="listbox"></div>
+    </div>
+    <input type="hidden" id="finalize-chat-order-client-id">
 
     <div id="finalize-chat-order-quick" class="finalize-chat-order-quick hidden">
         <div class="contact-modal-grid">
@@ -2063,6 +2071,15 @@
   .finalize-chat-order-fields .contact-modal-muted { margin: -4px 0 12px; line-height: 1.45; }
   .finalize-chat-order-fields .contact-modal-muted:empty { display: none; }
   .finalize-chat-order-quick { margin-bottom: 4px; }
+  /* Empresa e cliente com busca: o componente de sugestões do app (Agendadas, Pedidos).
+     A lista abre por cima do resto do modal; a opção escolhida pelo teclado ganha o mesmo
+     fundo do hover; cliente bloqueado aparece, mas não dá para escolher. */
+  .finalize-chat-order-busca { margin-bottom: 14px; }
+  .finalize-chat-order-busca input { margin-bottom: 0 !important; }
+  .finalize-chat-order-busca .agendadas-contact-suggestions { z-index: 5; }
+  .finalize-chat-order-busca .ag-contact-option.is-ativa { background: rgba(33, 150, 243, 0.08); }
+  .finalize-chat-order-busca .ag-contact-option[aria-disabled="true"] { cursor: not-allowed; opacity: 0.55; }
+  .finalize-chat-order-busca .ag-contact-option.is-novo .ag-contact-option-name { color: var(--ds-primary); }
   /* Com os campos do pedido o modal fica alto: o corpo rola e o rodapé fica à vista. */
   #finalize-chat-modal .finalize-chat-modal-card { display: flex; flex-direction: column; max-height: calc(100dvh - 40px); }
   #finalize-chat-modal .contact-modal-header, #finalize-chat-modal .contact-modal-footer { flex-shrink: 0; }
@@ -2112,7 +2129,9 @@
   const campos = molde('campos');
   $('.finalize-chat-target', modal).after(chavePedido, campos);
   const empresa = $('#finalize-chat-order-company');
+  const empresaId = $('#finalize-chat-order-company-id');
   const cliente = $('#finalize-chat-order-client');
+  const clienteId = $('#finalize-chat-order-client-id');
   const valor = $('#finalize-chat-order-value');
   const nomeRapido = $('#finalize-chat-order-name');
   const documentoRapido = $('#finalize-chat-order-document');
@@ -2218,44 +2237,178 @@
   }
 
   // ---------------------------------------------------------------------------------
+  // Campo com busca: digita o nome e escolhe na lista (o componente de sugestões do app:
+  // .agendadas-contact-autocomplete, .agendadas-contact-suggestions e .ag-contact-option,
+  // o mesmo de Mensagens Agendadas e de Pedidos). Setas e Enter escolhem; Esc fecha a lista
+  // sem fechar o modal. O id escolhido fica no campo escondido.
+  // ---------------------------------------------------------------------------------
+  const semAcento = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  function campoComBusca({ input, oculto, opcoes, aoEscolher }) {
+    const painel = document.getElementById(input.getAttribute('aria-controls'));
+    let itens = [];
+    let ativo = -1;
+    function fechar() {
+      painel.classList.add('hidden');
+      painel.replaceChildren();
+      input.setAttribute('aria-expanded', 'false');
+      ativo = -1;
+    }
+    function marcar(i) {
+      const botoes = [...painel.querySelectorAll('[data-opcao]')];
+      ativo = Math.max(0, Math.min(i, botoes.length - 1));
+      botoes.forEach((b, k) => b.classList.toggle('is-ativa', k === ativo));
+      botoes[ativo]?.scrollIntoView({ block: 'nearest' });
+    }
+    function abrir() {
+      // Com um nome já escolhido no campo, a lista mostra tudo de novo para trocar.
+      const termo = input.value === input.dataset.escolhido ? '' : input.value.trim();
+      itens = opcoes(termo);
+      painel.replaceChildren(...itens.map((item, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = `ag-contact-option${item.novo ? ' is-novo' : ''}`;
+        b.setAttribute('role', 'option');
+        b.dataset.opcao = String(i);
+        if (item.desativada) b.setAttribute('aria-disabled', 'true');
+        const nome = document.createElement('div');
+        nome.className = 'ag-contact-option-name';
+        nome.textContent = item.nome;
+        const sub = document.createElement('div');
+        sub.className = 'ag-contact-option-phone';
+        sub.textContent = item.sub || '';
+        b.append(nome, sub);
+        return b;
+      }));
+      painel.classList.toggle('hidden', !itens.length);
+      input.setAttribute('aria-expanded', String(Boolean(itens.length)));
+      ativo = -1;
+    }
+    function escolher(item, { silencioso = false } = {}) {
+      if (item?.desativada) return;
+      oculto.value = item?.id || '';
+      input.value = item ? (item.noCampo ?? item.nome) : '';
+      input.dataset.escolhido = input.value;
+      fechar();
+      if (!silencioso) aoEscolher(item || null, input.value);
+    }
+    input.addEventListener('focus', abrir);
+    input.addEventListener('input', () => {
+      if (oculto.value && input.value !== input.dataset.escolhido) {
+        oculto.value = '';
+        input.dataset.escolhido = '';
+        aoEscolher(null, '');
+      }
+      abrir();
+    });
+    input.addEventListener('keydown', (ev) => {
+      const aberta = !painel.classList.contains('hidden');
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); if (!aberta) abrir(); marcar(ativo + 1); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); if (aberta) marcar(ativo - 1); }
+      else if (ev.key === 'Enter' && aberta && ativo >= 0) { ev.preventDefault(); escolher(itens[ativo]); }
+      else if (ev.key === 'Escape' && aberta) { ev.stopPropagation(); fechar(); }
+    });
+    painel.addEventListener('mousedown', (ev) => ev.preventDefault()); // o campo não perde o foco
+    painel.addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-opcao]');
+      if (b) escolher(itens[Number(b.dataset.opcao)]);
+    });
+    input.addEventListener('blur', () => setTimeout(fechar, 120));
+    return { escolher, fechar };
+  }
+
+  // ---------------------------------------------------------------------------------
   // Campos do pedido: empresa, cliente (vinculados ao contato primeiro) e valor
   // ---------------------------------------------------------------------------------
-  function preencherCamposDoPedido() {
-    empresa.replaceChildren(new Option('Selecione a representada', ''),
-      ...v.representadas().filter((r) => r.ativa !== false).map((r) => new Option(`${r.nomeFantasia} · comissão ${fmt.pct(r.comissao)}`, r.id)));
-    empresa.value = '';
+  const casa = (termo, ...textos) => !termo || semAcento(textos.filter(Boolean).join(' ')).includes(semAcento(termo))
+    || (digitos(termo).length >= 3 && textos.some((t) => digitos(t).includes(digitos(termo))));
 
-    const contato = contatoDaConversa(chatAtual);
-    // Os clientes ligados ao contato aparecem mesmo fora da carteira de quem finaliza:
-    // senão o vendedor criaria um cliente repetido para a mesma loja.
-    const vinculados = contato ? v.clientes({ respeitarPermissao: false }).filter((c) => c.contatoIds.includes(contato.id)) : [];
-    const outros = v.clientes()
-      .filter((c) => !c.bloqueado && !vinculados.some((x) => x.id === c.id))
-      .sort((a, b) => a.nomeFantasia.localeCompare(b.nomeFantasia, 'pt-BR'));
-    cliente.replaceChildren(new Option('Selecione o cliente', ''));
-    const grupo = (rotulo, lista) => {
-      const g = document.createElement('optgroup');
-      g.label = rotulo;
-      lista.forEach((c) => {
-        const opcao = new Option(c.bloqueado ? `${c.nomeFantasia} (bloqueado)` : c.nomeFantasia, c.id);
-        opcao.disabled = c.bloqueado;
-        g.append(opcao);
-      });
-      return g;
+  const opcaoDaEmpresa = (r) => ({ id: r.id, nome: r.nomeFantasia, sub: r.razaoSocial });
+  const buscaEmpresa = campoComBusca({
+    input: empresa,
+    oculto: empresaId,
+    opcoes: (termo) => v.representadas()
+      .filter((r) => r.ativa !== false && casa(termo, r.nomeFantasia, r.razaoSocial, r.documento))
+      .sort((a, b) => a.nomeFantasia.localeCompare(b.nomeFantasia, 'pt-BR'))
+      .map(opcaoDaEmpresa),
+    aoEscolher: (item) => {
+      atualizarResumo();
+      if (item && !clienteId.value) setTimeout(() => cliente.focus(), 0);
+      else if (item) setTimeout(() => valor.focus(), 0);
+    },
+  });
+
+  // Os clientes ligados ao contato aparecem mesmo fora da carteira de quem finaliza (senão o
+  // vendedor criaria um cliente repetido para a mesma loja), primeiro e marcados como tal.
+  let vinculados = [];
+  let contatoAtual = null;
+  function opcaoDoCliente(c) {
+    const ligado = vinculados.some((x) => x.id === c.id);
+    return {
+      id: c.id,
+      nome: c.nomeFantasia,
+      sub: [ligado && contatoAtual ? `Vinculado a ${contatoAtual.nome}` : '', c.documento, c.endereco?.cidade, c.bloqueado ? 'bloqueado' : ''].filter(Boolean).join(' · '),
+      desativada: Boolean(c.bloqueado),
     };
-    if (vinculados.length) cliente.append(grupo(`Vinculados a ${contato.nome}`, vinculados));
-    if (outros.length) cliente.append(grupo('Outros clientes', outros));
-    const novo = document.createElement('optgroup');
-    novo.label = 'Não está na lista?';
-    novo.append(new Option('+ Cadastro rápido de cliente', NOVO_CLIENTE));
-    cliente.append(novo);
+  }
+  const buscaCliente = campoComBusca({
+    input: cliente,
+    oculto: clienteId,
+    opcoes: (termo) => {
+      const outros = v.clientes()
+        .filter((c) => !c.bloqueado && !vinculados.some((x) => x.id === c.id))
+        .sort((a, b) => a.nomeFantasia.localeCompare(b.nomeFantasia, 'pt-BR'));
+      const achados = [...vinculados, ...outros]
+        .filter((c) => casa(termo, c.nomeFantasia, c.razaoSocial, c.documento, c.endereco?.cidade))
+        .slice(0, 30)
+        .map(opcaoDoCliente);
+      // Sempre por último: o cadastro rápido, já com o nome digitado.
+      achados.push({
+        id: NOVO_CLIENTE, novo: true,
+        nome: termo ? `+ Cadastrar "${termo}"` : '+ Cadastro rápido de cliente',
+        sub: termo && achados.length ? 'Não é nenhum desses? Cadastre o cliente agora' : 'Cliente novo, já com o contato desta conversa',
+        noCampo: 'Cliente novo (cadastro rápido)',
+        termo,
+      });
+      return achados;
+    },
+    aoEscolher: (item) => {
+      sincronizarCadastroRapido();
+      if (item?.id === NOVO_CLIENTE) {
+        if (item.termo) nomeRapido.value = item.termo;
+        setTimeout(() => (item.termo ? documentoRapido : nomeRapido).focus(), 0);
+      } else if (item) {
+        sugerirEmpresa(v.cliente(item.id));
+        setTimeout(() => (empresaId.value ? valor : empresa).focus(), 0);
+      }
+      atualizarResumo();
+    },
+  });
+
+  /** Sem empresa escolhida, sugere a representada do último pedido do cliente (como em Pedidos). */
+  function sugerirEmpresa(c) {
+    if (!c || empresaId.value) return;
+    const ultimo = v.pedidos({ respeitarPermissao: false }).find((p) => p.clienteId === c.id);
+    const rep = v.representada(ultimo?.representadaId || c.representadaIds?.[0]);
+    if (rep && rep.ativa !== false) buscaEmpresa.escolher(opcaoDaEmpresa(rep), { silencioso: true });
+  }
+
+  function preencherCamposDoPedido() {
+    buscaEmpresa.escolher(null, { silencioso: true });
+    contatoAtual = contatoDaConversa(chatAtual);
+    vinculados = contatoAtual ? v.clientes({ respeitarPermissao: false }).filter((c) => c.contatoIds.includes(contatoAtual.id)) : [];
     const disponiveis = vinculados.filter((c) => !c.bloqueado);
-    cliente.value = disponiveis.length === 1 ? disponiveis[0].id : '';
+    // Um cliente só ligado ao contato: já vem escolhido, com a representada do último pedido.
+    if (disponiveis.length === 1) {
+      buscaCliente.escolher(opcaoDoCliente(disponiveis[0]), { silencioso: true });
+      sugerirEmpresa(disponiveis[0]);
+    } else {
+      buscaCliente.escolher(null, { silencioso: true });
+    }
 
     nomeRapido.value = '';
     documentoRapido.value = '';
-    $('#finalize-chat-order-quick-hint').textContent = contato
-      ? `${contato.nome} (${fmt.telefone(contato.telefone)}) fica vinculado ao cliente novo. O resto do cadastro fica para depois, em Clientes.`
+    $('#finalize-chat-order-quick-hint').textContent = contatoAtual
+      ? `${contatoAtual.nome} (${fmt.telefone(contatoAtual.telefone)}) fica vinculado ao cliente novo. O resto do cadastro fica para depois, em Clientes.`
       : 'O resto do cadastro fica para depois, em Clientes.';
     valor.value = '';
     sincronizarCadastroRapido();
@@ -2263,17 +2416,20 @@
   }
 
   function sincronizarCadastroRapido() {
-    const rapido = cliente.value === NOVO_CLIENTE;
+    const rapido = clienteId.value === NOVO_CLIENTE;
     $('#finalize-chat-order-quick').classList.toggle('hidden', !rapido);
   }
 
+  /** Resumo embaixo do valor: status, vendedor e a comissão do vendedor (não a da representada). */
   function atualizarResumo() {
-    const escolhido = cliente.value && cliente.value !== NOVO_CLIENTE ? v.cliente(cliente.value) : null;
+    const escolhido = clienteId.value && clienteId.value !== NOVO_CLIENTE ? v.cliente(clienteId.value) : null;
     const vendedor = v.vendedor(vendedorDaVenda(escolhido));
-    const rep = v.representada(empresa.value);
+    const percentual = vendedor?.comissao || 0;
     const total = lerMoeda(valor);
     const partes = ['Entra em Pedidos com status Pedido', `vendedor: ${vendedor?.nome || v.verComo().nome}`];
-    if (rep && total) partes.push(`comissão da ${rep.nomeFantasia} (${fmt.pct(rep.comissao)}): ${fmt.brl(Math.round((total * rep.comissao) / 100))}`);
+    partes.push(total
+      ? `comissão do vendedor (${fmt.pct(percentual)}): ${fmt.brl(Math.round((total * percentual) / 100))}`
+      : `comissão do vendedor: ${fmt.pct(percentual)}`);
     $('#finalize-chat-order-summary').textContent = `${partes.join(' · ')}.`;
   }
 
@@ -2287,7 +2443,7 @@
     if (ligar && !motivo.value && sucesso) { motivo.value = sucesso.id; motivoAutomatico = true; }
     if (!ligar && motivoAutomatico && motivo.value === sucesso?.id) { motivo.value = ''; motivoAutomatico = false; }
     sincronizarOutroMotivo();
-    if (ligar) setTimeout(() => (empresa.value ? valor : empresa).focus(), 60);
+    if (ligar) setTimeout(() => (!empresaId.value ? empresa : !clienteId.value ? cliente : valor).focus(), 60);
   }
 
   // ---------------------------------------------------------------------------------
@@ -2300,20 +2456,20 @@
   }
 
   function lerPedido() {
-    if (!empresa.value) return erro('Selecione a empresa (representada) da venda.', empresa);
+    if (!empresaId.value) return erro('Escolha a empresa (representada) da venda na lista.', empresa);
     let rapido = null;
-    if (cliente.value === NOVO_CLIENTE) {
+    if (clienteId.value === NOVO_CLIENTE) {
       rapido = { nome: nomeRapido.value.trim(), documento: digitos(documentoRapido.value) };
       if (!rapido.nome) return erro('Informe o nome fantasia do cliente.', nomeRapido);
       if (![11, 14].includes(rapido.documento.length)) return erro('Informe um CNPJ (14 dígitos) ou CPF (11 dígitos).', documentoRapido);
       const repetido = v.clientes({ respeitarPermissao: false }).find((c) => digitos(c.documento) === rapido.documento);
       if (repetido) return erro(`Já existe um cliente com este documento: ${repetido.nomeFantasia}. Escolha-o na lista.`, documentoRapido);
-    } else if (!cliente.value) {
-      return erro('Selecione o cliente ou use o cadastro rápido.', cliente);
+    } else if (!clienteId.value) {
+      return erro('Escolha o cliente na lista ou use o cadastro rápido.', cliente);
     }
     const total = lerMoeda(valor);
     if (!total) return erro('Informe o valor da venda.', valor);
-    return { representadaId: empresa.value, clienteId: rapido ? null : cliente.value, rapido, valorTotal: total };
+    return { representadaId: empresaId.value, clienteId: rapido ? null : clienteId.value, rapido, valorTotal: total };
   }
 
   function registrarPedido(dados, motivoTexto, notas) {
@@ -2400,12 +2556,6 @@
   chaveAgendar.addEventListener('click', () => { agendar = !agendar; pintarChave(chaveAgendar, agendar); });
   chavePedido.addEventListener('click', () => ligarPedido(!comPedido));
   motivo.addEventListener('change', () => { motivoAutomatico = false; sincronizarOutroMotivo(); });
-  empresa.addEventListener('change', atualizarResumo);
-  cliente.addEventListener('change', () => {
-    sincronizarCadastroRapido();
-    atualizarResumo();
-    if (cliente.value === NOVO_CLIENTE) setTimeout(() => nomeRapido.focus(), 60);
-  });
   valor.addEventListener('input', () => { mascararMoeda(valor); atualizarResumo(); });
   documentoRapido.addEventListener('input', () => { documentoRapido.value = formatarDocumento(digitos(documentoRapido.value).slice(0, 14)); });
 
