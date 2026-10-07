@@ -10416,6 +10416,18 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     if (!v?.vendedor) return 'Não é vendedor';
     return v.comissao > 0 ? `Vendedor · ${pct(v.comissao)}%` : 'Vendedor · sem comissão';
   }
+  // Meta de vendas do mês, em centavos: o campo usa a máscara de moeda (só dígitos).
+  const lerMeta = (texto) => Number(String(texto ?? '').replace(/\D/g, '').slice(0, 12)) || 0;
+  /** Dias úteis (segunda a sexta) do mês de `referencia`; feriados não entram. */
+  function diasUteisDoMes(referencia = new Date()) {
+    const ultimo = new Date(referencia.getFullYear(), referencia.getMonth() + 1, 0).getDate();
+    let n = 0;
+    for (let d = 1; d <= ultimo; d += 1) {
+      const dia = new Date(referencia.getFullYear(), referencia.getMonth(), d).getDay();
+      if (dia !== 0 && dia !== 6) n += 1;
+    }
+    return n;
+  }
 
   // O selo fica na coluna Tipo, embaixo da função, e é ele que abre "Vendedor e comissão".
   // Coluna ou botão de ação a mais não cabem entre 1280 e 1366 px: a tabela corta o que passa
@@ -10445,6 +10457,7 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
       lapis.className = 'ri-pencil-line';
       selo.className = `settings-pill ${v?.vendedor ? 'settings-pill-blue' : 'settings-pill-gray'}`;
       selo.replaceChildren(rotuloDoVendedor(v), lapis);
+      selo.title = v?.vendedor && v.meta ? `Vendedor e comissão · meta de ${vendas.fmt.brl(v.meta)} por mês` : 'Vendedor e comissão';
     });
   }
 
@@ -10484,6 +10497,21 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
       exemplo,
     );
 
+    // Meta de vendas do mês: o mesmo bloco rótulo + campo, com máscara de moeda.
+    const blocoMeta = document.createElement('div');
+    blocoMeta.className = blocoComissao.className;
+    const rotuloMeta = rotulo.cloneNode(false);
+    rotuloMeta.textContent = 'Meta de vendas por mês (R$)';
+    rotuloMeta.htmlFor = 'as-seller-goal';
+    const campoMeta = campo.cloneNode(false);
+    Object.assign(campoMeta, { id: 'as-seller-goal', name: 'meta', type: 'text', inputMode: 'numeric', placeholder: 'R$ 0,00', autocomplete: 'off', maxLength: 20 });
+    const exemploMeta = ajuda('');
+    blocoMeta.append(
+      rotuloMeta, campoMeta,
+      ajuda('Quanto esta pessoa deve vender no mês, somando todas as representadas. Aparece no Dashboard (aba Vendas) quando o filtro é este vendedor e para ele, na própria carteira. Em branco: sem meta.'),
+      exemploMeta,
+    );
+
     // "É vendedor": a linha com chave liga/desliga das Regras de Atendimento.
     const linhaDaChave = $('#rules-rating-stars-toggle').closest('.settings-list-row').cloneNode(true);
     const chave = $('.settings-toggle', linhaDaChave);
@@ -10501,11 +10529,11 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     aviso.textContent = 'Só o dono da conta altera vendedor e comissão de um Dono ou Administrador.';
 
     const corpo = $('#as-queue-modal .settings-queue-modal-scroll').cloneNode(false); // a coluna espaçada dos modais da seção
-    corpo.append(quem, aviso, blocoChave, blocoComissao);
+    corpo.append(quem, aviso, blocoChave, blocoComissao, blocoMeta);
     form.prepend(corpo);
     acesso.appendChild(modal);
     const cancelar = $('.settings-modal-actions [data-action="close-seller"]', form);
-    Object.assign(ui, { modal, form, chave, campo, exemplo, aviso, quem, salvar, cancelar });
+    Object.assign(ui, { modal, form, chave, campo, exemplo, campoMeta, exemploMeta, aviso, quem, salvar, cancelar });
 
     modal.addEventListener('click', (ev) => {
       const toggle = ev.target.closest('[data-seller-toggle]');
@@ -10520,6 +10548,11 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
       if (ev.target.closest('[data-action="close-seller"]')) fecharModal(modal);
     });
     campo.addEventListener('input', () => { campo.removeAttribute('aria-invalid'); sincronizarComissao(); });
+    campoMeta.addEventListener('input', () => {
+      const centavos = lerMeta(campoMeta.value);
+      campoMeta.value = centavos ? vendas.fmt.brl(centavos) : '';
+      sincronizarComissao();
+    });
     campo.addEventListener('blur', () => {
       const n = lerComissao(campo.value);
       if (n !== null) campo.value = pct(n);
@@ -10534,10 +10567,10 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
         avisar('Informe a comissão de 0 a 100%, com até duas casas decimais.');
         return;
       }
-      // Desligar a função não apaga a comissão: ela volta igual se a pessoa voltar a vender.
-      vendas.salvarVendedor(vendedorEmEdicao, vende ? { vendedor: true, comissao } : { vendedor: false });
+      // Desligar a função não apaga comissão nem meta: voltam iguais se a pessoa voltar a vender.
+      vendas.salvarVendedor(vendedorEmEdicao, vende ? { vendedor: true, comissao, meta: lerMeta(campoMeta.value) } : { vendedor: false });
       fecharModal(modal);
-      avisar('Vendedor e comissão salvos');
+      avisar('Vendedor, comissão e meta salvos');
     });
   }
   function sincronizarComissao() {
@@ -10548,11 +10581,18 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     ui.exemplo.textContent = n === null ? 'Use um percentual de 0 a 100, com até duas casas decimais (ex.: 3,50).'
       : n === 0 ? 'Sem comissão: os pedidos desta pessoa não geram comissão de vendedor.'
         : `Exemplo: num pedido de ${vendas.fmt.brl(1_000_000)}, a comissão do vendedor é de ${vendas.fmt.brl(Math.round(1_000_000 * n / 100))}.`;
+    ui.campoMeta.disabled = ui.somenteLeitura || !vende;
+    const meta = lerMeta(ui.campoMeta.value);
+    const uteis = diasUteisDoMes();
+    ui.exemploMeta.hidden = !vende || !meta;
+    ui.exemploMeta.textContent = meta
+      ? `Neste mês (${uteis} dias úteis), dá ${vendas.fmt.brl(Math.round(meta / uteis))} por dia útil.`
+      : '';
   }
   function abrirModalDeVendedor(tr) {
     const usuario = usuarioDaLinha(tr);
     if (!usuario) return;
-    const atual = vendas.vendedor(usuario.id) || { vendedor: false, comissao: 0 };
+    const atual = vendas.vendedor(usuario.id) || { vendedor: false, comissao: 0, meta: 0 };
     // A mesma barreira das outras mudanças de membro: só o dono mexe em Dono ou Administrador.
     ui.somenteLeitura = vendas.verComo().papel !== 'owner' && ['owner', 'admin'].includes(seletorDaLinha(tr).value);
     vendedorEmEdicao = usuario.id;
@@ -10564,6 +10604,7 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
     ui.chave.disabled = ui.somenteLeitura;
     ui.campo.value = pct(atual.comissao || 0);
     ui.campo.removeAttribute('aria-invalid');
+    ui.campoMeta.value = atual.meta ? vendas.fmt.brl(atual.meta) : '';
     sincronizarComissao();
     abrirModal(ui.modal);
     if (!ui.somenteLeitura) (ui.campo.disabled ? ui.chave : ui.campo).focus();

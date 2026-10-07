@@ -9104,6 +9104,21 @@
   .vendas-intervalo .dashboard-campaigns-custom-controls { flex-wrap: wrap; margin-top: 4px; }
   .vendas-intervalo .dashboard-campaigns-custom-feedback { margin-top: 6px; }
 
+  /* Evolução do faturamento: gráfico de linhas e, ao lado, faturado, objetivo e o que falta
+     (os rótulos e números dos cartões de KPI do app, a barra de "Ativos positivados"). */
+  .vendas-faturamento { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  @media (min-width: 1024px) { .vendas-faturamento { grid-template-columns: minmax(0, 1fr) 280px; align-items: start; } }
+  .vendas-faturamento-lado { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .vendas-meta-bloco { min-width: 0; }
+  .vendas-meta-bloco + .vendas-meta-bloco { padding-top: 16px; border-top: 1px solid rgba(0, 0, 0, 0.05); }
+  .dark .vendas-meta-bloco + .vendas-meta-bloco { border-top-color: rgba(148, 163, 184, 0.18); }
+  .vendas-meta-bloco .dashboard-kpi-label-modern { margin: 0; }
+  .vendas-meta-valor { margin: 6px 0 6px; color: var(--ds-text); font-size: 24px; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .vendas-meta-valor small { font-size: 13px; font-weight: 600; color: var(--ds-text-soft); }
+  .vendas-meta-valor--vazio { color: var(--ds-text-muted); font-size: 20px; }
+  .vendas-meta-bloco .dashboard-campaigns-performance-track { margin: 4px 0 2px; }
+  .vendas-grafico--faturamento { height: 340px; }
+
   /* Gráficos de barras (Chart.js, como no app). */
   .vendas-grafico { position: relative; height: 300px; }
   .vendas-grafico--baixo { height: 240px; }
@@ -9233,6 +9248,7 @@
 
   @media (max-width: 768px) {
     .vendas-grafico { height: 240px; }
+    .vendas-grafico--faturamento { height: 280px; }
     .vendas-grafico--baixo { height: 200px; }
     .vendas-secao .vendas-donut .donut-wrap { height: 200px; }
   }
@@ -9320,7 +9336,7 @@
     comissaoRepresentadas: { nome: 'comissão das representadas', util: TODOS },
     comissaoVendedores: { nome: 'comissão dos vendedores', util: TODOS },
     positivados: { nome: 'clientes positivados', util: TODOS },
-    evolucao: { nome: 'evolução das vendas', util: TODOS },
+    evolucao: { nome: 'evolução do faturamento', util: TODOS },
     status: { nome: 'pedidos por status', util: sem('situacao') },
     porRepresentada: { nome: 'vendas por representada', util: sem('representada') },
     porVendedor: { nome: 'vendas por vendedor', util: sem('vendedor') },
@@ -9344,6 +9360,9 @@
     situacao: { ativo: '#48BB78', inativo_recente: '#D69E2E', inativo_antigo: '#F56565', novo: '#9F7AEA', prospect: '#7A8AA1' },
     curva: { A: '#376AA8', B: '#4FC3B3', C: '#D69E2E' },
     vendedores: ['#4A6FA5', '#F6AD55', '#B794F4', '#4FD1C5', '#48BB78', '#F56565'],
+    // Evolução do faturamento: realizado (verde), objetivo (roxo), previsão (âmbar,
+    // tracejada) e mês anterior (cinza, escondido até clicar na legenda).
+    faturamento: '#48BB78', objetivo: '#9F7AEA', previsao: '#D69E2E', mesAnterior: '#A0AEC0',
     vazio: 'rgba(148, 163, 184, 0.22)',
   };
 
@@ -9551,7 +9570,7 @@
     const semCompra = vendas.carteira({ ...f, ate: vespera }).lista
       .filter((l) => l.situacao === 'ativo' && !compras.has(l.cliente.id));
 
-    return {
+    const dados = {
       p, quem, carteira, representadas, vendedores, redes, cidades, resumo, anterior, porDia, valorPorStatus,
       comissaoPorRepresentada, comissaoPorVendedor, pedidos, vendidos, positivados, semCompra,
       ativos, visiveis, ocultas, totalMetricas: existentes.length,
@@ -9559,6 +9578,149 @@
       abc: vendas.curvaABC(f),
       positivacao: vendas.positivacoes(f),
       config: vendas.config(),
+    };
+    dados.faturamento = faturamentoDoPeriodo(dados, f);
+    return dados;
+  }
+
+  // ---- evolução do faturamento: realizado, objetivo (meta), previsão --------------------
+  // A meta é mensal e vem do cadastro: sem filtro, a soma das metas das representadas ativas;
+  // com uma representada, a dela; com um vendedor (ou o vendedor na própria carteira), a dele.
+  // Vendedor e representada juntos, ou os filtros de cliente, não têm meta cadastrada.
+  // O objetivo de cada dia é a meta do mês dividida pelos dias úteis (segunda a sexta) do
+  // mês: no fim de semana a linha fica reta. A previsão segue a média por dia útil até hoje.
+  const LETRA_DO_DIA = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  const ehDiaUtil = (x) => x.getDay() !== 0 && x.getDay() !== 6;
+  function diasUteisEntre(de, ate) {
+    let n = 0;
+    for (let x = inicioDoDia(de); x <= ate; x = somarDias(x, 1)) if (ehDiaUtil(x)) n += 1;
+    return n;
+  }
+  const diasUteisDoMes = (ano, mes) => diasUteisEntre(new Date(ano, mes, 1), fimDoDia(new Date(ano, mes + 1, 0)));
+
+  function metaDoRecorte(d) {
+    if (filtros.rede || filtros.cidade || filtros.situacao || filtros.bloqueio) {
+      return { valor: 0, origem: 'Sem meta para esse recorte: as metas são por representada e por vendedor.' };
+    }
+    const vendedorId = d.carteira ? d.quem.id : filtros.vendedorId;
+    if (vendedorId && filtros.representadaId) {
+      return { valor: 0, origem: 'Sem meta para vendedor e representada juntos: a meta do vendedor vale para todas as representadas.' };
+    }
+    if (vendedorId) {
+      const v = vendas.vendedor(vendedorId);
+      return v?.meta ? { valor: v.meta, origem: `Meta de ${v.nome} (Configurações › Usuários & Acesso).` } : { valor: 0, origem: `${v?.nome || 'Este vendedor'} não tem meta cadastrada.` };
+    }
+    if (filtros.representadaId) {
+      const r = vendas.representada(filtros.representadaId);
+      return r?.metaMensal ? { valor: r.metaMensal, origem: `Meta da ${r.nomeFantasia} (cadastro em Representadas).` } : { valor: 0, origem: `${r?.nomeFantasia || 'Esta representada'} não tem meta cadastrada.` };
+    }
+    const ativas = vendas.representadas().filter((r) => r.ativa !== false);
+    const soma = ativas.reduce((a, r) => a + (r.metaMensal || 0), 0);
+    const comMeta = ativas.filter((r) => r.metaMensal).length;
+    return soma
+      ? { valor: soma, origem: `Soma das metas de ${plural(comMeta, 'representada', 'representadas')}.` }
+      : { valor: 0, origem: 'Nenhuma representada tem meta cadastrada.' };
+  }
+
+  function faturamentoDoPeriodo(d, f) {
+    const hoje = inicioDoDia(new Date());
+    const mesCheio = filtros.periodo === 'mes' || filtros.periodo === 'mes-passado';
+    const emAndamento = filtros.periodo === 'mes';
+    // Eixo: o mês inteiro em "Este mês" e "Mês passado"; nos outros, o período.
+    const inicio = inicioDoDia(d.p.de);
+    const fim = mesCheio ? fimDoDia(new Date(inicio.getFullYear(), inicio.getMonth() + 1, 0)) : d.p.ate;
+    const dias = [];
+    for (let x = new Date(inicio); x <= fim; x = somarDias(x, 1)) dias.push(new Date(x));
+    const modo = dias.length > 62 ? 'mes' : 'dia';
+    const meta = metaDoRecorte(d);
+
+    const porDia = new Map();
+    vendas.pedidos({ ...f, de: inicio, ate: fim }).filter(vendas.ehVenda)
+      .forEach((p) => { const k = chaveDoDia(p.emitidoEm); porDia.set(k, (porDia.get(k) || 0) + p.valorTotal); });
+    const objetivoDoDia = (x) => (meta.valor && ehDiaUtil(x) ? meta.valor / diasUteisDoMes(x.getFullYear(), x.getMonth()) : 0);
+
+    // Pontos do eixo: um por dia, ou um por mês quando o período passa de dois meses.
+    let pontos = dias.map((x) => ({
+      chave: chaveDoDia(x), data: x, valor: porDia.get(chaveDoDia(x)) || 0, objetivo: objetivoDoDia(x),
+      futuro: x > hoje, fimDeSemana: !ehDiaUtil(x),
+    }));
+    if (modo === 'mes') {
+      const meses = new Map();
+      pontos.forEach((pt) => {
+        const k = pt.chave.slice(0, 7);
+        if (!meses.has(k)) meses.set(k, { chave: k, data: new Date(pt.data.getFullYear(), pt.data.getMonth(), 1), valor: 0, objetivo: 0, futuro: false, fimDeSemana: false });
+        meses.get(k).valor += pt.valor;
+        meses.get(k).objetivo += pt.objetivo;
+      });
+      pontos = [...meses.values()];
+    }
+
+    let acumulado = 0;
+    let objetivo = 0;
+    const realizado = [];
+    const objetivos = [];
+    pontos.forEach((pt) => {
+      acumulado += pt.valor;
+      objetivo += pt.objetivo;
+      realizado.push(pt.futuro ? null : acumulado);
+      objetivos.push(meta.valor ? Math.round(objetivo) : null);
+    });
+    const indiceHoje = modo === 'dia' ? pontos.findIndex((pt) => pt.chave === chaveDoDia(hoje)) : -1;
+    const faturado = pontos.reduce((a, pt) => a + (pt.futuro ? 0 : pt.valor), 0);
+    const hojeValor = indiceHoje >= 0 ? pontos[indiceHoje].valor : null;
+
+    // Previsão (só no mês em andamento): o faturado até hoje mais a média por dia útil
+    // decorrido, somada em cada dia útil que falta.
+    let previsao = null;
+    const uteisDecorridos = emAndamento ? diasUteisEntre(inicio, fimDoDia(hoje)) : 0;
+    if (emAndamento && indiceHoje >= 0 && uteisDecorridos) {
+      const media = faturado / uteisDecorridos;
+      previsao = pontos.map(() => null);
+      previsao[indiceHoje] = realizado[indiceHoje];
+      for (let i = indiceHoje + 1; i < pontos.length; i += 1) previsao[i] = previsao[i - 1] + (pontos[i].fimDeSemana ? 0 : media);
+      previsao = previsao.map((x) => (x == null ? null : Math.round(x)));
+    }
+
+    // Mês anterior (no eixo de um mês): o acumulado dele no mesmo dia do mês.
+    let mesAnterior = null;
+    if (mesCheio && modo === 'dia') {
+      const deAnt = new Date(inicio.getFullYear(), inicio.getMonth() - 1, 1);
+      const ateAnt = fimDoDia(new Date(inicio.getFullYear(), inicio.getMonth(), 0));
+      const porDiaDoMes = new Map();
+      vendas.pedidos({ ...f, de: deAnt, ate: ateAnt }).filter(vendas.ehVenda)
+        .forEach((p) => { const dia = new Date(p.emitidoEm).getDate(); porDiaDoMes.set(dia, (porDiaDoMes.get(dia) || 0) + p.valorTotal); });
+      let soma = 0;
+      mesAnterior = pontos.map((pt) => { soma += porDiaDoMes.get(pt.data.getDate()) || 0; return soma; });
+    }
+
+    // Painel ao lado: faturado, objetivo e quanto falta (ou o resultado, ou a média).
+    const metaDoPeriodo = meta.valor ? (mesCheio ? meta.valor : Math.round(objetivo)) : 0;
+    const resumo = {
+      faturado, hoje: hojeValor, meta: metaDoPeriodo, origemDaMeta: meta.origem,
+      percentual: metaDoPeriodo ? (faturado / metaDoPeriodo) * 100 : null,
+      tipo: emAndamento ? 'andamento' : (mesCheio ? 'encerrado' : 'periodo'),
+      fim,
+    };
+    if (emAndamento && metaDoPeriodo) {
+      const uteisRestantes = diasUteisEntre(hoje, fim); // contando hoje, como o "necessário" do dia
+      const falta = Math.max(0, metaDoPeriodo - (faturado - (hojeValor || 0)));
+      Object.assign(resumo, { uteisRestantes, falta, necessario: uteisRestantes ? Math.round(falta / uteisRestantes) : null, previsaoFinal: previsao ? previsao[previsao.length - 1] : null });
+    } else if (!emAndamento && !mesCheio) {
+      const uteis = diasUteisEntre(inicio, fim);
+      Object.assign(resumo, { uteis, mediaPorDiaUtil: uteis ? Math.round(faturado / uteis) : 0 });
+    }
+
+    const tituloDoPonto = (pt) => (modo === 'mes'
+      ? (() => { const t = pt.data.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }); return t.charAt(0).toUpperCase() + t.slice(1); })()
+      : tituloDoDia(pt.chave));
+    const rotuloDoPonto = (pt) => {
+      if (modo === 'mes') return pt.data.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '') + `/${String(pt.data.getFullYear()).slice(2)}`;
+      return [mesCheio ? String(pt.data.getDate()) : diaMes(pt.chave), LETRA_DO_DIA[pt.data.getDay()]];
+    };
+    return {
+      modo, mesCheio, emAndamento, meta,
+      rotulos: pontos.map(rotuloDoPonto), titulos: pontos.map(tituloDoPonto), fimDeSemana: pontos.map((pt) => pt.fimDeSemana),
+      realizado, objetivos, previsao, mesAnterior, indiceHoje, resumo,
     };
   }
 
@@ -9765,37 +9927,95 @@
     return `<section class="dashboard-kpi-generic-grid vendas-kpis${visiveis.length === 4 ? ' vendas-kpis--4' : ''}${entrada ? ' stagger' : ''}">${visiveis.map(cartaoKpi).join('')}</section>`;
   }
 
-  function htmlPedidos(d) {
+  /** "Pedidos por status": vai para a fileira das quebras, ao lado de representada e vendedor. */
+  function cartaoDeStatus(d) {
     const r = d.resumo;
-    const status = Object.entries(vendas.STATUS).map(([chave, s]) => {
+    const status = Object.entries(vendas.STATUS).map(([chave, st]) => {
       const n = r.porStatus[chave] || 0;
       const parte = r.pedidos ? (n / r.pedidos) * 100 : 0;
       return itemLista({
-        nome: s.nome, numero: fmt.numero(n), percentual: pct(parte), cor: s.cor, largura: larguraBarra(parte),
-        nota: `${fmt.brl(d.valorPorStatus[chave] || 0)} · ${s.venda ? 'conta como venda' : 'não conta como venda'}`,
-        detalhe: n ? abreDetalhe('pedidos', `Ver os pedidos com status ${s.nome}`, { recorte: chave }) : '',
+        nome: st.nome, numero: fmt.numero(n), percentual: pct(parte), cor: st.cor, largura: larguraBarra(parte),
+        nota: `${fmt.brl(d.valorPorStatus[chave] || 0)} · ${st.venda ? 'conta como venda' : 'não conta como venda'}`,
+        detalhe: n ? abreDetalhe('pedidos', `Ver os pedidos com status ${st.nome}`, { recorte: chave }) : '',
       });
     }).join('');
-    const temVenda = r.serie.some((x) => x.valor > 0);
-    const cartoes = [];
-    if (d.visiveis.has('evolucao')) {
-      cartoes.push(`
-        <article class="glass-card dashboard-monitoring-card">
-          ${cabecalhoCartao('ri-line-chart-line', 'blue', 'Evolução das vendas', `Valor vendido por dia · ${plural(r.vendas, 'pedido', 'pedidos')}, ${fmt.brl(r.valor)}`)}
+    return `
+      <article class="glass-card dashboard-monitoring-card">
+        ${cabecalhoCartao('ri-file-list-3-line', 'purple', 'Pedidos por status', `${plural(r.pedidos, 'pedido', 'pedidos')} no período · ${plural(r.vendas, 'conta', 'contam')} como venda`)}
+        <div class="vendas-lista">${status}</div>
+      </article>`;
+  }
+
+  /**
+   * Evolução do faturamento: o acumulado do período contra o objetivo (a meta distribuída
+   * pelos dias úteis) e a previsão no ritmo atual; ao lado, faturado, objetivo e o que falta.
+   */
+  function htmlFaturamento(d) {
+    if (!d.visiveis.has('evolucao')) return '';
+    const fa = d.faturamento;
+    const rs = fa.resumo;
+    const noMes = fa.mesCheio;
+    const temVenda = rs.faturado > 0 || (fa.objetivos.some((x) => x)) ;
+    const sub = `${fa.modo === 'mes' ? 'Acumulado por mês' : 'Acumulado por dia'} · ${rs.meta ? 'linha do objetivo pela meta' : 'sem meta para esse recorte'}`;
+
+    const blocoFaturado = `
+      <div class="vendas-meta-bloco">
+        <p class="dashboard-kpi-label-modern">${noMes ? 'Faturamento no mês' : 'Faturamento no período'}</p>
+        <p class="vendas-meta-valor">${fmt.brl(rs.faturado)}</p>
+        <p class="vendas-nota">${rs.hoje != null ? `Hoje: <strong>${fmt.brl(rs.hoje)}</strong>` : `${fmt.data(d.p.de)} a ${fmt.data(fa.resumo.fim)}`}</p>
+      </div>`;
+    const blocoObjetivo = rs.meta ? `
+      <div class="vendas-meta-bloco">
+        <p class="dashboard-kpi-label-modern">${noMes ? 'Objetivo do mês' : 'Objetivo no período'}</p>
+        <p class="vendas-meta-valor">${fmt.brl(rs.meta)}</p>
+        <div class="dashboard-campaigns-performance-track"><span class="is-delivery" style="width:${Math.min(100, rs.percentual)}%;background:${COR.objetivo};"></span></div>
+        <p class="vendas-nota"><strong>${pct(rs.percentual)}</strong> realizado · ${esc(rs.origemDaMeta)}</p>
+      </div>` : `
+      <div class="vendas-meta-bloco">
+        <p class="dashboard-kpi-label-modern">${noMes ? 'Objetivo do mês' : 'Objetivo no período'}</p>
+        <p class="vendas-meta-valor vendas-meta-valor--vazio">Sem meta</p>
+        <p class="vendas-nota">${esc(rs.origemDaMeta)}</p>
+      </div>`;
+    let blocoTerceiro = '';
+    if (rs.tipo === 'andamento' && rs.meta) {
+      blocoTerceiro = rs.falta > 0 ? `
+        <div class="vendas-meta-bloco">
+          <p class="dashboard-kpi-label-modern">Necessário faturar</p>
+          <p class="vendas-meta-valor">${rs.necessario != null ? `${fmt.brl(rs.necessario)} <small>por dia útil</small>` : '—'}</p>
+          <p class="vendas-nota">${fmt.brl(rs.falta)} em ${plural(rs.uteisRestantes, 'dia útil', 'dias úteis')}, de hoje a ${fmt.data(rs.fim)}.${rs.previsaoFinal != null ? ` No ritmo atual, o mês fecha em <strong>${fmt.brl(rs.previsaoFinal)}</strong> (${pct((rs.previsaoFinal / rs.meta) * 100, 0)} da meta).` : ''}</p>
+        </div>` : `
+        <div class="vendas-meta-bloco">
+          <p class="dashboard-kpi-label-modern">Meta batida</p>
+          <p class="vendas-meta-valor" style="color:${COR.faturamento};">${fmt.brl(rs.faturado - rs.meta)} <small>acima</small></p>
+          <p class="vendas-nota">O que entrar até ${fmt.data(rs.fim)} soma à folga.</p>
+        </div>`;
+    } else if (rs.tipo === 'encerrado' && rs.meta) {
+      const diferenca = rs.faturado - rs.meta;
+      blocoTerceiro = `
+        <div class="vendas-meta-bloco">
+          <p class="dashboard-kpi-label-modern">Resultado do mês</p>
+          <p class="vendas-meta-valor" style="color:${diferenca >= 0 ? COR.faturamento : 'var(--ds-danger)'};">${pct(rs.percentual, 0)} <small>da meta</small></p>
+          <p class="vendas-nota">${diferenca >= 0 ? `${fmt.brl(diferenca)} acima da meta.` : `Faltaram ${fmt.brl(-diferenca)}.`}</p>
+        </div>`;
+    } else if (rs.tipo === 'periodo') {
+      blocoTerceiro = `
+        <div class="vendas-meta-bloco">
+          <p class="dashboard-kpi-label-modern">Média por dia útil</p>
+          <p class="vendas-meta-valor">${fmt.brl(rs.mediaPorDiaUtil)}</p>
+          <p class="vendas-nota">em ${plural(rs.uteis, 'dia útil', 'dias úteis')} no período</p>
+        </div>`;
+    }
+
+    return `
+      <article class="glass-card dashboard-monitoring-card">
+        ${cabecalhoCartao('ri-line-chart-line', 'blue', 'Evolução do faturamento', sub)}
+        <div class="vendas-faturamento">
           ${temVenda
-            ? `<div class="mvp-chart-canvas-wrap vendas-grafico"><canvas id="vendas-grafico-evolucao" role="img" aria-label="Valor vendido por dia no período"></canvas></div>`
-            : '<div class="mvp-empty">Nenhuma venda no período</div>'}
-        </article>`);
-    }
-    if (d.visiveis.has('status')) {
-      cartoes.push(`
-        <article class="glass-card dashboard-monitoring-card">
-          ${cabecalhoCartao('ri-file-list-3-line', 'purple', 'Pedidos por status', `${plural(r.pedidos, 'pedido', 'pedidos')} no período · ${plural(r.vendas, 'conta', 'contam')} como venda`)}
-          <div class="vendas-lista">${status}</div>
-        </article>`);
-    }
-    if (!cartoes.length) return '';
-    return `<section class="vendas-grade${cartoes.length === 2 ? ' vendas-grade--2-1' : ''}">${cartoes.join('')}</section>`;
+            ? `<div class="mvp-chart-canvas-wrap vendas-grafico vendas-grafico--faturamento"><canvas id="vendas-grafico-faturamento" role="img" aria-label="Faturamento acumulado, objetivo e previsão no período"></canvas></div>`
+            : '<div class="mvp-empty">Nenhuma venda e nenhuma meta no período</div>'}
+          <div class="vendas-faturamento-lado">${blocoFaturado}${blocoObjetivo}${blocoTerceiro}</div>
+        </div>
+      </article>`;
   }
 
   function htmlQuebras(d) {
@@ -9843,6 +10063,7 @@
     }).join('');
 
     const cartoes = [];
+    if (d.visiveis.has('status')) cartoes.push(cartaoDeStatus(d));
     if (d.visiveis.has('porRepresentada')) {
       cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
@@ -9858,7 +10079,7 @@
         </article>`);
     }
     if (!cartoes.length) return '';
-    return `<section class="vendas-grade vendas-grade--2">${cartoes.join('')}</section>`;
+    return `<section class="vendas-grade ${cartoes.length === 3 ? 'vendas-grade--3' : 'vendas-grade--2'}">${cartoes.join('')}</section>`;
   }
 
   const htmlRosca = (id, total, legenda, rotuloAria, detalhes) => `
@@ -10123,6 +10344,89 @@
     };
   }
 
+  /**
+   * Linhas do faturamento (Chart.js, no estilo dos gráficos do app): realizado com pontos,
+   * objetivo contínuo, previsão tracejada e o mês anterior, escondido até clicar na legenda.
+   * Uma linha vertical tracejada marca hoje; outra acompanha o cursor.
+   */
+  const linhaVertical = {
+    id: 'vendasLinhaVertical',
+    afterDatasetsDraw(chart, _args, opcoes) {
+      const { ctx, chartArea, scales } = chart;
+      const desenhar = (indice, cor, tracejado) => {
+        if (indice == null || indice < 0) return;
+        const x = scales.x.getPixelForValue(indice);
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash(tracejado ? [4, 4] : []);
+        ctx.moveTo(x, chartArea.top);
+        ctx.lineTo(x, chartArea.bottom);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = cor;
+        ctx.stroke();
+        ctx.restore();
+      };
+      desenhar(opcoes.hoje, opcoes.corHoje, true);
+      const ativo = chart.tooltip?.getActiveElements?.()?.[0];
+      if (ativo) desenhar(ativo.index, opcoes.corCursor, false);
+    },
+  };
+  function configFaturamento(fa) {
+    const p = paleta();
+    const escuro = document.documentElement.classList.contains('dark');
+    const linha = (rotulo, dados, cor, extra = {}) => ({
+      label: rotulo, data: dados, borderColor: cor, backgroundColor: cor, borderWidth: 2,
+      pointRadius: 0, pointHoverRadius: 4, tension: 0, spanGaps: false, ...extra,
+    });
+    const datasets = [
+      linha('Faturamento', fa.realizado, COR.faturamento, { borderWidth: 2.5, pointRadius: fa.modo === 'dia' ? 2.5 : 3.5 }),
+    ];
+    if (fa.objetivos.some((x) => x != null)) datasets.push(linha('Objetivo', fa.objetivos, COR.objetivo));
+    if (fa.previsao) datasets.push(linha('Previsão de faturamento', fa.previsao, COR.previsao, { borderDash: [6, 4] }));
+    if (fa.mesAnterior) datasets.push(linha('Mês anterior', fa.mesAnterior, COR.mesAnterior, { borderDash: [3, 3], hidden: true }));
+    const maior = Math.max(0, ...datasets.flatMap((ds) => (ds.hidden ? [] : ds.data.filter((x) => x != null))));
+    const fraco = escuro ? 'rgba(159,178,200,0.45)' : 'rgba(136,150,166,0.45)';
+    return {
+      type: 'line',
+      data: { labels: fa.rotulos, datasets },
+      plugins: [linhaVertical],
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            display: true, position: 'bottom',
+            labels: { color: p.eixo, usePointStyle: true, pointStyle: 'line', boxWidth: 24, font: { size: 11 } },
+          },
+          tooltip: {
+            callbacks: {
+              title: (itens) => fa.titulos[itens[0].dataIndex],
+              label: (item) => ` ${item.dataset.label}: ${fmt.brl(Math.round(item.raw))}`,
+            },
+            filter: (item) => item.raw != null,
+          },
+          vendasLinhaVertical: { hoje: fa.indiceHoje, corHoje: escuro ? 'rgba(159,178,200,0.6)' : 'rgba(136,150,166,0.7)', corCursor: escuro ? 'rgba(238,246,254,0.35)' : 'rgba(68,80,95,0.35)' },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: (ctx) => (fa.fimDeSemana[ctx.index] ? fraco : p.eixo),
+              maxRotation: 0, autoSkip: true, maxTicksLimit: fa.modo === 'dia' ? 31 : 13, font: { size: 10 },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: maior ? maior * 1.08 : undefined,
+            grid: { color: p.grade },
+            ticks: { color: p.eixo, font: { size: 10 }, callback: (v) => moedaCurta(v / 100) },
+          },
+        },
+      },
+    };
+  }
+
   /** Rosca do app (Monitoramento): sem borda, com respiro entre as fatias e cantos redondos. */
   function configRosca({ rotulos, valores, cores, total, descrever, aoClicar }) {
     const vazio = !total;
@@ -10157,19 +10461,7 @@
 
   function desenharGraficos(d) {
     const r = d.resumo;
-    criarGrafico('vendas-grafico-evolucao', configBarras({
-      rotulos: r.serie.map((x) => diaMes(x.dia)),
-      valores: r.serie.map((x) => x.valor / 100),
-      cor: COR.barra,
-      corHover: COR.barraHover,
-      titulos: r.serie.map((x) => tituloDoDia(x.dia)),
-      formatarValor: (reais) => fmt.brl(Math.round(reais * 100)),
-      formatarEixo: moedaCurta,
-      extras: r.serie.map((x) => {
-        const n = d.porDia.get(x.dia)?.vendas || 0;
-        return n ? plural(n, 'pedido', 'pedidos') : 'Sem pedidos';
-      }),
-    }));
+    criarGrafico('vendas-grafico-faturamento', configFaturamento(d.faturamento));
 
     const serie = d.positivacao.serie;
     criarGrafico('vendas-grafico-positivacoes', configBarras({
@@ -10237,7 +10529,7 @@
         ${htmlAvisoFiltros(tela.dados)}
         ${tela.dados.carteira ? htmlAvisoCarteira(tela.dados) : ''}
         ${htmlKpis(tela.dados, entrada)}
-        ${htmlPedidos(tela.dados)}
+        ${htmlFaturamento(tela.dados)}
         ${htmlQuebras(tela.dados)}
         ${htmlClientes(tela.dados)}
         ${htmlPositivacaoDiaria(tela.dados)}

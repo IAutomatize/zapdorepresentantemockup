@@ -298,6 +298,10 @@
           <span>Comissão <span data-comissao class="font-semibold" style="color:var(--ds-text);"></span></span>
         </div>
         <div class="flex items-center gap-1.5 text-[13px] mb-1.5 min-w-0" style="color:var(--ds-text-soft);">
+          <i class="ri-flag-2-line"></i>
+          <span data-meta class="truncate"></span>
+        </div>
+        <div class="flex items-center gap-1.5 text-[13px] mb-1.5 min-w-0" style="color:var(--ds-text-soft);">
           <i class="ri-phone-line"></i>
           <span data-telefone class="truncate"></span>
         </div>
@@ -421,6 +425,12 @@
                 <p data-ajuda="comissao" class="text-[11px]" style="color:var(--ds-text-muted);">Quanto a representada paga a você sobre o valor de cada pedido.</p>
                 <p data-erro="comissao" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
               </div>
+              <div class="flex flex-col gap-1.5 md:col-span-2">
+                <label for="representada-meta" class="text-[12px] font-semibold" style="color:var(--ds-text-soft);">Meta de vendas por mês</label>
+                <input id="representada-meta" data-campo="meta" type="text" inputmode="numeric" maxlength="20" placeholder="R$ 0,00" autocomplete="off" class="px-3.5 py-2.5 rounded-[12px] text-[14px] outline-none transition-all" style="background:rgba(var(--ds-glass-rgb),0.7);border:1px solid rgba(0,0,0,0.08);color:var(--ds-text);">
+                <p data-ajuda="meta" class="text-[11px]" style="color:var(--ds-text-muted);">Quanto você quer vender desta representada por mês. É o objetivo do gráfico "Evolução do faturamento" no Dashboard. Em branco: sem meta.</p>
+                <p data-erro="meta" class="hidden text-[11px]" style="color:var(--ds-danger);"></p>
+              </div>
             </div>
 
             <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Contato</div>
@@ -461,6 +471,7 @@
               <div class="col-span-2"><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Razão social</div><div data-ver="razaoSocial" style="color:var(--ds-text);" class="font-semibold"></div></div>
               <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">CNPJ</div><div data-ver="cnpj" style="color:var(--ds-text);" class="font-semibold"></div></div>
               <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Comissão</div><div data-ver="comissao" style="color:var(--ds-text);" class="font-semibold"></div></div>
+              <div class="col-span-2"><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Meta de vendas por mês</div><div data-ver="meta" style="color:var(--ds-text);" class="font-semibold"></div></div>
             </div>
             <div class="text-[11px] font-bold uppercase tracking-wider mt-6 mb-4 pb-2" style="color:var(--ds-text-muted);border-bottom:1px solid rgba(0,0,0,0.04);">Contato</div>
             <div class="grid grid-cols-1 gap-4 text-[13px]">
@@ -474,6 +485,7 @@
               <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Catálogo</div><a data-ver="catalogo" href="pedidos.html" style="color:var(--ds-primary);" class="font-semibold hover:underline"></a></div>
               <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Vendido no mês</div><div data-ver="vendido" style="color:var(--ds-text);" class="font-semibold"></div></div>
               <div><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Comissão no mês</div><div data-ver="comissaoMes" style="color:var(--ds-text);" class="font-semibold"></div></div>
+              <div data-ver-meta-bloco class="col-span-2"><div style="color:var(--ds-text-muted);" class="text-[11px] uppercase font-semibold mb-1">Meta do mês</div><div data-ver="metaMes" style="color:var(--ds-text);" class="font-semibold"></div></div>
             </div>
             <div class="flex justify-end gap-2 mt-7 pt-5" style="border-top:1px solid rgba(0,0,0,0.05);">
               <button data-acao="fechar" type="button" class="px-5 py-2.5 rounded-[12px] text-[13px] font-semibold transition-colors hover:bg-black/5" style="color:var(--ds-text-soft);">Fechar</button>
@@ -640,6 +652,17 @@
 
   /** 0.75 → "0,75" (o campo mostra sem o %, que fica desenhado ao lado). */
   const comissaoNoCampo = (n) => (typeof n === 'number' && Number.isFinite(n) ? vendas.fmt.pct(n).replace('%', '') : '');
+  // Meta de vendas do mês, em centavos: o campo usa a máscara de moeda (só dígitos).
+  const lerMeta = (texto) => Number(String(texto ?? '').replace(/\D/g, '').slice(0, 12)) || 0;
+  /**
+   * A meta no cartão e no detalhe. A % do mês só aparece para quem vê a conta toda: no
+   * escopo "carteira" o vendido do cartão é só o do vendedor, e a meta é da representada.
+   */
+  function textoDaMeta(rep, n, comPercentual) {
+    if (!rep.metaMensal) return 'Sem meta de vendas';
+    const meta = `Meta ${vendas.fmt.brl(rep.metaMensal)} por mês`;
+    return comPercentual ? `${meta} · ${vendas.fmt.pct((n.vendido / rep.metaMensal) * 100, 0)} no mês` : meta;
+  }
 
   function normalizarSite(v) {
     const t = String(v || '').trim();
@@ -780,6 +803,9 @@
     razao.title = rep.razaoSocial || '';
     $('[data-cnpj]', el).textContent = rep.cnpj ? `CNPJ ${rep.cnpj}` : 'CNPJ não informado';
     $('[data-comissao]', el).textContent = vendas.fmt.pct(rep.comissao);
+    const meta = $('[data-meta]', el);
+    meta.textContent = textoDaMeta(rep, n, !acesso().carteira);
+    meta.title = meta.textContent;
     preencherContato($('[data-telefone]', el), (rep.telefones || []).map(vendas.fmt.telefone), 'Sem telefone');
     preencherContato($('[data-email]', el), rep.emails || [], 'Sem e-mail');
     $('[data-clientes]', el).textContent = vendas.fmt.numero(n.clientes);
@@ -1140,6 +1166,7 @@
     campo('razaoSocial').value = dados.razaoSocial || '';
     campo('cnpj').value = mascararCnpj(dados.cnpj || '');
     campo('comissao').value = comissaoNoCampo(dados.comissao);
+    campo('meta').value = dados.metaMensal ? vendas.fmt.brl(dados.metaMensal) : '';
     campo('site').value = dados.site || '';
     preencherLista('telefones', (dados.telefones || []).map(mascararTelefone));
     preencherLista('emails', dados.emails || []);
@@ -1217,6 +1244,7 @@
         razaoSocial,
         cnpj: mascararCnpj(cnpj),
         comissao,
+        metaMensal: lerMeta(campo('meta').value),
         telefones: [...new Set(camposTelefone.map((i) => `55${soDigitos(i.value)}`))],
         emails: [...new Set(camposEmail.map((i) => i.value.trim().toLowerCase()))],
         site,
@@ -1301,6 +1329,12 @@
     ver('razaoSocial').textContent = rep.razaoSocial || 'Não informada';
     ver('cnpj').textContent = rep.cnpj || 'Não informado';
     ver('comissao').textContent = vendas.fmt.pct(rep.comissao);
+    ver('meta').textContent = rep.metaMensal ? vendas.fmt.brl(rep.metaMensal) : 'Sem meta';
+    const carteira = acesso().carteira;
+    $('[data-ver-meta-bloco]', modal.el).classList.toggle('hidden', !rep.metaMensal || carteira);
+    if (rep.metaMensal && !carteira) {
+      ver('metaMes').textContent = `${vendas.fmt.pct((n.vendido / rep.metaMensal) * 100, 0)} (${vendas.fmt.brl(n.vendido)} de ${vendas.fmt.brl(rep.metaMensal)})`;
+    }
     linhas(ver('telefones'), (rep.telefones || []).map(vendas.fmt.telefone), 'Nenhum telefone');
     linhas(ver('emails'), rep.emails || [], 'Nenhum e-mail');
     ver('site').textContent = rep.site || 'Não informado';
@@ -1549,6 +1583,7 @@
     if (!nome) return;
     if (nome === 'cnpj') alvo.value = mascararCnpj(alvo.value);
     if (nome === 'comissao') alvo.value = alvo.value.replace(/[^\d.,]/g, '');
+    if (nome === 'meta') { const centavos = lerMeta(alvo.value); alvo.value = centavos ? vendas.fmt.brl(centavos) : ''; }
     if (nome === 'nomeFantasia') pintarLogoDoModal(); // as iniciais acompanham o nome
     limparErro(nome);
   });

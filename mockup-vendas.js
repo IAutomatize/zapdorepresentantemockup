@@ -103,11 +103,14 @@
     { id: 'usr-bruno', nome: 'Bruno Lima', email: 'bruno@exemplo.com.br', papel: 'member', papelNome: 'Vendedor' },
   ];
 
-  /** Quem vende e quanto ganha sobre o valor do pedido. A dona não tira comissão de si. */
+  /**
+   * Quem vende, quanto ganha sobre o valor do pedido e a meta de vendas do mês (centavos).
+   * A dona não tira comissão de si.
+   */
   const VENDEDORES = {
-    'usr-ana': { vendedor: true, comissao: 0 },
-    'usr-carla': { vendedor: true, comissao: 2.5 },
-    'usr-bruno': { vendedor: true, comissao: 3 },
+    'usr-ana': { vendedor: true, comissao: 0, meta: 15000000 },
+    'usr-carla': { vendedor: true, comissao: 2.5, meta: 14000000 },
+    'usr-bruno': { vendedor: true, comissao: 3, meta: 1500000 },
   };
 
   const MARCADORES = [
@@ -200,9 +203,12 @@
 
   const REPRESENTADAS = [];
   const PRODUTOS = [];
+  // Meta de vendas do mês de cada representada (centavos): um pouco acima do que a base vende
+  // por mês (R$ 250 a 290 mil no total), para o Dashboard mostrar quanto falta.
+  const META_DA_REPRESENTADA = { 'rep-orvalho': 9000000, 'rep-lumiar': 8500000, 'rep-tropeiro': 6500000, 'rep-pedrafina': 4500000, 'rep-bemcuidar': 4500000 };
   BASE_REPRESENTADAS.forEach(([id, razao, fantasia, base, comissao, cor, sufixo, email, site, produtos], i) => {
     REPRESENTADAS.push({
-      id, razaoSocial: razao, nomeFantasia: fantasia, cnpj: cnpjFicticio(base), comissao, cor,
+      id, razaoSocial: razao, nomeFantasia: fantasia, cnpj: cnpjFicticio(base), comissao, metaMensal: META_DA_REPRESENTADA[id] || 0, cor,
       logo: null, telefones: [`55119900002${sufixo.slice(1)}`], emails: [email], site: `https://${site}`,
       ativa: true, origem: i < 2 ? 'pdf' : 'manual', criadoEm: diasAtras(320 - i * 20).toISOString(),
     });
