@@ -293,6 +293,14 @@
       _perfil: perfil, _porte: porte,
     };
   });
+  // Dois clientes bloqueados (pararam de pagar e saíram do atendimento), para o filtro de
+  // bloqueio ter o que mostrar. Nenhum dos dois tem contato vinculado, então nada muda nas
+  // conversas. Sem sorteio aqui: os pedidos gerados depois continuam os mesmos.
+  [['cli-30', 21], ['cli-38', 48]].forEach(([id, dias]) => {
+    const cliente = CLIENTES.find((c) => c.id === id);
+    cliente.bloqueado = true;
+    cliente.bloqueadoEm = diasAtras(dias).toISOString();
+  });
 
   // ---------------------------------------------------------------------------------
   // Pedidos
@@ -374,6 +382,12 @@
     return pedido;
   }
 
+  // Os dois clientes que voltam a comprar neste mês (mais abaixo) precisam estar inativos no
+  // início do mês em qualquer dia dele: o inativo recente com a última compra a pelo menos
+  // 125 dias de hoje (no dia 31, 94 antes do mês) e o antigo a pelo menos 212 (181). O
+  // histórico deles é empurrado para trás inteiro, com o mesmo número de sorteios, para os
+  // outros pedidos não mudarem.
+  const ULTIMA_COMPRA_MINIMA = { 'cli-06': 125, 'cli-35': 212 };
   CLIENTES.forEach((cliente) => {
     const perfil = cliente._perfil;
     if (perfil === 'p') return;
@@ -382,7 +396,8 @@
     if (perfil === 'a') { ultima = entre(0, Math.min(60, intervalo * 2)); inicio = 260; }
     else if (perfil === 'r') { ultima = entre(96, 172); inicio = 320; }
     else { ultima = entre(190, 280); inicio = 380; }
-    for (let dias = ultima; dias <= inicio; dias += Math.max(2, intervalo + entre(-3, 4))) novoPedidoBase(cliente, dias);
+    const recuo = Math.max(0, (ULTIMA_COMPRA_MINIMA[cliente.id] || 0) - ultima);
+    for (let dias = ultima + recuo; dias <= inicio + recuo; dias += Math.max(2, intervalo + entre(-3, 4))) novoPedidoBase(cliente, dias);
   });
 
   // Pedidos que as conversas do protótipo citam (chats.html), para a história fechar.
@@ -602,16 +617,22 @@
     return { de, ate };
   }
 
-  /** Filtros: { de, ate, representadaId, vendedorId, respeitarPermissao (padrão true) }. */
+  /**
+   * Filtros: { de, ate, representadaId, vendedorId, clienteIds, respeitarPermissao (padrão
+   * true) }. `clienteIds` é o recorte por atributo do cliente (rede, cidade, bloqueio,
+   * situação), já resolvido em ids por quem chama.
+   */
   function pedidosFiltrados(f = {}) {
     const de = f.de ? new Date(f.de) : null;
     const ate = f.ate ? new Date(f.ate) : null;
+    const clienteIds = f.clienteIds ? new Set(f.clienteIds) : null;
     return bruto('pedidos').filter((p) => {
       const em = new Date(p.emitidoEm);
       if (de && em < de) return false;
       if (ate && em > ate) return false;
       if (f.representadaId && p.representadaId !== f.representadaId) return false;
       if (f.vendedorId && p.vendedorId !== f.vendedorId) return false;
+      if (clienteIds && !clienteIds.has(p.clienteId)) return false;
       if (f.respeitarPermissao !== false && !enxerga(p)) return false;
       return true;
     });
@@ -634,9 +655,11 @@
   };
 
   function clientesVisiveis(f = {}) {
+    const clienteIds = f.clienteIds ? new Set(f.clienteIds) : null;
     return bruto('clientes').filter((c) => {
       if (f.vendedorId && c.vendedorId !== f.vendedorId) return false;
       if (f.representadaId && !c.representadaIds.includes(f.representadaId)) return false;
+      if (clienteIds && !clienteIds.has(c.id)) return false;
       if (f.respeitarPermissao !== false && !enxerga(c)) return false;
       return true;
     });

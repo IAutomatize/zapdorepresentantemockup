@@ -9151,6 +9151,86 @@
   .vendas-abc-tabela .vendas-abc-selo { display: none; flex-shrink: 0; width: 22px; height: 22px; font-size: 11px; }
   .vendas-rotulo-curto { display: none; }
 
+  /* Filtros: oito campos em duas fileiras de quatro (a grade do filtro de Chat > Horários);
+     no celular, dois por linha em vez de um, para a barra não ocupar a tela inteira. */
+  @media (max-width: 767px) {
+    .vendas-filtros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .vendas-filtros .vendas-intervalo { grid-column: 1 / -1; }
+  }
+  .vendas-filtros .dashboard-chat-filter-select { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vendas-aviso-filtros { align-items: center; }
+  .vendas-aviso-filtros span { flex: 1; min-width: 0; }
+  .vendas-link { flex-shrink: 0; border: 0; padding: 0; background: none; color: var(--ds-primary); font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .vendas-link:hover { text-decoration: underline; }
+
+  /* Grades que mudam com os filtros: 4 indicadores em 4 colunas; a carteira sozinha (filtro
+     de bloqueio ou de situação) ocupa a largura toda, com a rosca ao lado da lista. */
+  @media (min-width: 1280px) {
+    .vendas-secao .vendas-kpis--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (min-width: 768px) {
+    .vendas-secao .vendas-grade--sozinho .vendas-donut { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); align-items: center; }
+  }
+
+  /* Métrica com detalhe: o cartão (ou o item da lista) abre o modal com as linhas que formam
+     o número. A seta ao lado do rótulo avisa; métrica sem detalhe não tem seta. */
+  .vendas-secao [data-vendas-detalhe] { cursor: pointer; }
+  .vendas-secao [data-vendas-detalhe]:focus-visible { outline: 2px solid var(--ds-primary); outline-offset: 3px; }
+  .vendas-secao .kpi-card[data-vendas-detalhe] { transition: transform 160ms ease, box-shadow 160ms ease; }
+  .vendas-secao .kpi-card[data-vendas-detalhe]:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08); }
+  .vendas-seta { margin-left: 2px; font-size: 15px; vertical-align: -3px; color: var(--ds-text-muted); transition: color 160ms ease, transform 160ms ease; display: inline-block; }
+  .vendas-secao [data-vendas-detalhe]:hover .vendas-seta { color: var(--ds-primary); transform: translateX(2px); }
+  .vendas-lista .dashboard-monitoring-reason-item[data-vendas-detalhe],
+  .vendas-secao .vendas-prospects[data-vendas-detalhe] { border-radius: 10px; transition: background 160ms ease; }
+  .vendas-lista .dashboard-monitoring-reason-item[data-vendas-detalhe] { margin-left: -8px; margin-right: -8px; padding: 6px 8px; }
+  .vendas-lista .dashboard-monitoring-reason-item[data-vendas-detalhe]:hover,
+  .vendas-secao .vendas-prospects[data-vendas-detalhe]:hover { background: rgba(var(--ds-glass-rgb), 0.5); }
+
+  /* Modal de detalhe: a casca do modal de regra do Monitoramento, larga, com a tabela do
+     relatório do Monitoramento dentro (cabeçalho fixo, rolagem própria e contador) e os
+     botões de período de Campanhas para os recortes. */
+  .vendas-detalhe[hidden] { display: none; }
+  .vendas-detalhe .vendas-detalhe-dialog { max-width: 1000px; max-height: calc(100vh - 32px); padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .vendas-detalhe-cabecalho { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 22px 22px 14px; }
+  .vendas-detalhe-cabecalho > div { min-width: 0; }
+  .vendas-detalhe .vendas-detalhe-cabecalho h3 { margin: 0; font-size: 18px; }
+  .vendas-detalhe-cabecalho p { margin: 4px 0 0; color: var(--ds-text-soft); font-size: 13px; line-height: 1.4; }
+  .vendas-detalhe-cabecalho .vendas-detalhe-filtros { color: var(--ds-text-muted); font-size: 12px; }
+  .vendas-detalhe-fechar { flex-shrink: 0; width: 36px; height: 36px; border: 0; border-radius: 10px; background: var(--ds-surface-2); color: var(--ds-text-soft); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; }
+  .vendas-detalhe-fechar:hover { color: var(--ds-text); }
+  .vendas-detalhe-corpo { padding: 0 22px 22px; display: flex; flex-direction: column; min-height: 0; flex: 1; }
+  .vendas-detalhe-tabela { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+  .vendas-detalhe .vendas-detalhe-recortes { display: inline-flex; flex-wrap: wrap; max-width: 100%; margin-bottom: 14px; }
+  .vendas-detalhe .vendas-detalhe-recortes .dashboard-campaigns-period-pill { min-width: 0; gap: 6px; }
+  .vendas-recorte-n { font-variant-numeric: tabular-nums; opacity: 0.75; }
+  .vendas-detalhe .dashboard-monitoring-filter-grid { grid-template-columns: minmax(0, 1fr); max-width: 440px; margin-bottom: 12px; }
+  .vendas-detalhe .dashboard-monitoring-filter-grid .search-wrap input { padding-left: 38px; }
+  .vendas-detalhe .dashboard-monitoring-report-count { justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .vendas-detalhe .dashboard-monitoring-report-count > span:last-child { margin-left: auto; }
+  .vendas-detalhe .dashboard-monitoring-table-wrap.report { max-height: none; flex: 1; min-height: 120px; }
+  .vendas-detalhe .dashboard-monitoring-table.report { min-width: 0; }
+  .vendas-detalhe .dashboard-monitoring-table.report.vendas-detalhe-larga { min-width: 760px; }
+  .vendas-detalhe .dashboard-monitoring-table.report td { padding: 11px 16px; font-size: 13px; }
+  .vendas-detalhe .dashboard-monitoring-table.report tfoot td { position: sticky; bottom: 0; background: var(--ds-surface-2); font-weight: 800; border-top: 1px solid rgba(0, 0, 0, 0.08); }
+  .vendas-detalhe .vendas-detalhe-grupo td { background: rgba(var(--ds-glass-rgb), 0.55); color: var(--ds-text); font-size: 12px; font-weight: 800; padding: 9px 16px; }
+  .vendas-detalhe .vendas-detalhe-grupo td span { color: var(--ds-text-soft); font-weight: 600; }
+  .vendas-detalhe .vendas-num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .vendas-detalhe .vendas-col-data { white-space: nowrap; color: var(--ds-text-soft); }
+  .vendas-detalhe .vendas-sub { display: block; margin-top: 3px; color: var(--ds-text-muted); font-size: 12px; font-weight: 500; }
+  .vendas-detalhe td a { color: inherit; font-weight: 700; }
+  .vendas-detalhe td a:hover { color: var(--ds-primary); text-decoration: underline; }
+  .vendas-detalhe .vendas-origem { margin-left: 4px; color: var(--ds-primary); font-size: 13px; vertical-align: -2px; }
+  .vendas-detalhe .vendas-detalhe-vazio { text-align: center; color: var(--ds-text-muted); padding: 32px 12px; }
+  .vendas-pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 8px; font-size: 11px; font-weight: 700; white-space: nowrap; color: var(--vendas-pill); background: color-mix(in srgb, var(--vendas-pill) 14%, transparent); }
+  .vendas-pill + .vendas-pill { margin-left: 4px; }
+  .vendas-chip-tirar { display: inline-flex; align-items: center; gap: 4px; border: 0; cursor: pointer; }
+  @media (max-width: 640px) {
+    .vendas-detalhe { padding: 10px; }
+    .vendas-detalhe .vendas-detalhe-dialog { max-height: calc(100vh - 20px); }
+    .vendas-detalhe-cabecalho { padding: 18px 16px 12px; }
+    .vendas-detalhe-corpo { padding: 0 16px 16px; }
+  }
+
   @media (max-width: 768px) {
     .vendas-grafico { height: 240px; }
     .vendas-grafico--baixo { height: 200px; }
@@ -9209,6 +9289,49 @@
     personalizado: 'Personalizado',
   };
 
+  // ---- que métrica serve para que filtro -----------------------------------------------
+  // Cada métrica lista os filtros com que ela continua útil. Com um desses filtros ligado,
+  // só ficam na tela as métricas que o têm na lista (com dois ou mais, as que têm todos);
+  // sem filtro, aparece tudo. O período vale para todas e não entra nessa conta.
+  //   - Venda (vendido, pedidos, ticket, evolução, status, positivação, ABC): vendedor,
+  //     representada, rede e cidade mudam a resposta. Bloqueio e situação não: quem compra
+  //     no período está ativo no fim dele, e cliente bloqueado não compra.
+  //   - Comissões: dizem quem paga (representada) e quem recebe (vendedor); por rede ou
+  //     cidade não respondem nada.
+  //   - As quebras somem quando filtradas pelo que quebram (por representada com uma
+  //     representada só). Vendas por vendedor serve para representada e cidade (território);
+  //     positivações diárias, ritmo de vendedor e de representada.
+  //   - Carteira de clientes é a única que responde a bloqueio e situação: é a lista de quem
+  //     reativar ("inativos recentes, sem bloqueio").
+  const PARAMETROS = {
+    vendedor: { campo: 'vendedorId', nome: 'vendedor' },
+    representada: { campo: 'representadaId', nome: 'representada' },
+    rede: { campo: 'rede', nome: 'rede' },
+    cidade: { campo: 'cidade', nome: 'cidade' },
+    bloqueio: { campo: 'bloqueio', nome: 'bloqueio' },
+    situacao: { campo: 'situacao', nome: 'situação na carteira' },
+  };
+  const DE_VENDA = ['vendedor', 'representada', 'rede', 'cidade'];
+  const METRICAS = {
+    vendido: { nome: 'vendido', util: DE_VENDA },
+    pedidos: { nome: 'pedidos', util: DE_VENDA },
+    ticket: { nome: 'ticket médio', util: DE_VENDA },
+    comissaoRepresentadas: { nome: 'comissão das representadas', util: ['vendedor', 'representada'] },
+    comissaoVendedores: { nome: 'comissão dos vendedores', util: ['vendedor', 'representada'] },
+    positivados: { nome: 'clientes positivados', util: DE_VENDA },
+    evolucao: { nome: 'evolução das vendas', util: DE_VENDA },
+    status: { nome: 'pedidos por status', util: DE_VENDA },
+    porRepresentada: { nome: 'vendas por representada', util: ['vendedor', 'rede', 'cidade'] },
+    porVendedor: { nome: 'vendas por vendedor', util: ['representada', 'cidade'] },
+    carteira: { nome: 'carteira de clientes', util: ['vendedor', 'representada', 'rede', 'cidade', 'bloqueio', 'situacao'] },
+    abc: { nome: 'curva ABC', util: DE_VENDA },
+    positivacao: { nome: 'positivação', util: DE_VENDA },
+    positivacaoDiaria: { nome: 'positivações diárias', util: ['vendedor', 'representada'] },
+    tabelaAbc: { nome: 'clientes na curva ABC', util: DE_VENDA },
+  };
+  const SEM_REDE = 'sem-rede';
+  const BLOQUEIO = { desbloqueados: 'Sem bloqueio', bloqueados: 'Bloqueados' };
+
   // Cores: todas do Dashboard do app (cores dos gráficos e tons dos cartões). Cor
   // segue a coisa, não a posição: "Ativos" é verde em qualquer rosca, a curva A é
   // sempre o azul, cada vendedor tem a cor dele.
@@ -9255,7 +9378,7 @@
   };
 
   // ---- estado da tela --------------------------------------------------------------
-  const filtros = { periodo: 'mes', de: '', ate: '', representadaId: '', vendedorId: '' };
+  const filtros = { periodo: 'mes', de: '', ate: '', representadaId: '', vendedorId: '', rede: '', cidade: '', situacao: '', bloqueio: '' };
   try {
     const salvo = JSON.parse(sessionStorage.getItem(CHAVE_FILTROS) || '{}');
     Object.keys(filtros).forEach((k) => { if (typeof salvo[k] === 'string') filtros[k] = salvo[k]; });
@@ -9339,17 +9462,54 @@
   }
 
   // ---- números (tudo de window.vendas; o escopo "carteira" já vem filtrado de lá) ----
+  /** Filtros ligados pelo usuário. O escopo "carteira" não conta: é permissão, não filtro. */
+  const parametrosAtivos = () => Object.keys(PARAMETROS).filter((chave) => Boolean(filtros[PARAMETROS[chave].campo]));
+
+  /**
+   * Rede, cidade, bloqueio e situação são atributos do cliente: viram a lista de clientes
+   * que entram na conta (null = sem esses filtros). A situação é a do fim do período, a
+   * mesma da carteira, olhando só a representada filtrada, se houver.
+   */
+  function clientesDoFiltro(p) {
+    const { rede, cidade, bloqueio, situacao } = filtros;
+    if (!rede && !cidade && !bloqueio && !situacao) return null;
+    return vendas.clientes().filter((c) => {
+      if (rede === SEM_REDE ? Boolean(c.rede) : rede && c.rede !== rede) return false;
+      if (cidade && c.endereco?.cidade !== cidade) return false;
+      if (bloqueio === 'bloqueados' && !c.bloqueado) return false;
+      if (bloqueio === 'desbloqueados' && c.bloqueado) return false;
+      if (situacao && vendas.situacaoDoCliente(c.id, p.ate, { representadaId: filtros.representadaId }).situacao !== situacao) return false;
+      return true;
+    }).map((c) => c.id);
+  }
+
   function calcular() {
     const { quem, carteira } = escopo();
     const representadas = vendas.representadas().sort((a, b) => a.nomeFantasia.localeCompare(b.nomeFantasia, 'pt-BR'));
     if (filtros.representadaId && !representadas.some((r) => r.id === filtros.representadaId)) filtros.representadaId = '';
     const vendedores = vendas.vendedores().filter((v) => v.vendedor);
     if (carteira || (filtros.vendedorId && !vendedores.some((v) => v.id === filtros.vendedorId))) filtros.vendedorId = '';
+    const todosOsClientes = vendas.clientes();
+    const redes = [...new Set([...vendas.REDES, ...todosOsClientes.map((c) => c.rede).filter(Boolean)])].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    if (filtros.rede && filtros.rede !== SEM_REDE && !redes.includes(filtros.rede)) filtros.rede = '';
+    const cidades = [...new Set(todosOsClientes.map((c) => c.endereco?.cidade).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    if (filtros.cidade && !cidades.includes(filtros.cidade)) filtros.cidade = '';
+    if (filtros.situacao && !vendas.NOMES_DA_SITUACAO[filtros.situacao]) filtros.situacao = '';
+    if (filtros.bloqueio && !BLOQUEIO[filtros.bloqueio]) filtros.bloqueio = '';
+
+    // Que métricas ficam na tela. "Vendas por vendedor" nunca aparece para quem vê só a
+    // própria carteira, então nem entra na conta.
+    const ativos = parametrosAtivos();
+    const existentes = Object.keys(METRICAS).filter((id) => !(carteira && id === 'porVendedor'));
+    const visiveis = new Set(existentes.filter((id) => ativos.every((chave) => METRICAS[id].util.includes(chave))));
+    const ocultas = existentes.filter((id) => !visiveis.has(id));
 
     const p = periodo();
     const f = { de: p.de, ate: p.ate };
     if (filtros.representadaId) f.representadaId = filtros.representadaId;
     if (filtros.vendedorId) f.vendedorId = filtros.vendedorId;
+    const clienteIds = clientesDoFiltro(p);
+    if (clienteIds) f.clienteIds = clienteIds;
 
     const resumo = vendas.resumo(f);
     const anterior = vendas.resumo({ ...f, de: p.anterior.de, ate: p.anterior.ate });
@@ -9360,6 +9520,7 @@
     const valorPorStatus = {};
     const comissaoPorRepresentada = new Map();
     const comissaoPorVendedor = new Map();
+    const compras = new Map(); // cliente → vendas do período, para o detalhe dos positivados
     pedidos.forEach((pedido) => { valorPorStatus[pedido.status] = (valorPorStatus[pedido.status] || 0) + pedido.valorTotal; });
     vendidos.forEach((pedido) => {
       const dia = chaveDoDia(pedido.emitidoEm);
@@ -9369,11 +9530,30 @@
       const c = vendas.comissoes(pedido);
       comissaoPorRepresentada.set(pedido.representadaId, (comissaoPorRepresentada.get(pedido.representadaId) || 0) + c.representada);
       comissaoPorVendedor.set(pedido.vendedorId, (comissaoPorVendedor.get(pedido.vendedorId) || 0) + c.vendedor);
+      if (!compras.has(pedido.clienteId)) compras.set(pedido.clienteId, []);
+      compras.get(pedido.clienteId).push(pedido);
     });
 
+    // Positivados com a situação de antes do período (a mesma regra de vendas.positivacoes)
+    // e os ativos do início do período que ainda não compraram nele.
+    const vespera = new Date(p.de.getTime() - 1);
+    const positivados = [...compras.entries()].map(([clienteId, lista]) => {
+      const antes = vendas.situacaoDoCliente(clienteId, vespera, { representadaId: filtros.representadaId }).situacao;
+      return {
+        cliente: vendas.cliente(clienteId),
+        antes: antes === 'prospect' ? 'novo' : antes,
+        ultimo: lista[0], // vendas.pedidos() vem do mais novo para o mais antigo
+        valor: lista.reduce((a, x) => a + x.valorTotal, 0),
+        quantos: lista.length,
+      };
+    });
+    const semCompra = vendas.carteira({ ...f, ate: vespera }).lista
+      .filter((l) => l.situacao === 'ativo' && !compras.has(l.cliente.id));
+
     return {
-      p, quem, carteira, representadas, vendedores, resumo, anterior, porDia, valorPorStatus,
-      comissaoPorRepresentada, comissaoPorVendedor,
+      p, quem, carteira, representadas, vendedores, redes, cidades, resumo, anterior, porDia, valorPorStatus,
+      comissaoPorRepresentada, comissaoPorVendedor, pedidos, vendidos, positivados, semCompra,
+      ativos, visiveis, ocultas, totalMetricas: existentes.length,
       clientes: vendas.carteira(f),
       abc: vendas.curvaABC(f),
       positivacao: vendas.positivacoes(f),
@@ -9391,12 +9571,18 @@
       </div>
     </div>`;
 
+  /** O que abre o modal de detalhe: tipo, recorte inicial e o rótulo para leitor de tela. */
+  const SETA = '<i class="ri-arrow-right-s-line vendas-seta" aria-hidden="true"></i>';
+  const abreDetalhe = (tipo, rotulo, extra = {}) => ` data-vendas-detalhe="${tipo}"${Object.entries(extra)
+    .filter(([, v]) => v)
+    .map(([k, v]) => ` data-${k}="${esc(v)}"`).join('')} role="button" tabindex="0" aria-haspopup="dialog" aria-label="${esc(rotulo)}"`;
+
   /** Item de lista com barra (o "motivo" do Monitoramento): nome, número, %, nota. */
-  const itemLista = ({ nome, numero, percentual, cor, largura, nota = '', atributos = '' }) => `
-    <div class="dashboard-monitoring-reason-item"${atributos}>
+  const itemLista = ({ nome, numero, percentual, cor, largura, nota = '', atributos = '', detalhe = '' }) => `
+    <div class="dashboard-monitoring-reason-item"${atributos}${detalhe}>
       <div class="dashboard-monitoring-reason-head">
         <span title="${esc(nome)}">${esc(nome)}</span>
-        <strong>${numero} <em>${percentual}</em></strong>
+        <strong>${numero} <em>${percentual}</em>${detalhe ? SETA : ''}</strong>
       </div>
       <div class="dashboard-monitoring-reason-track"><span style="width:${largura}%;background:${cor};"></span></div>
       ${nota ? `<p class="vendas-nota">${nota}</p>` : ''}
@@ -9416,13 +9602,13 @@
   }
   const chipNeutro = (texto, dica) => `<div class="dashboard-var-chip is-neutral" title="${esc(dica)}">${texto}</div>`;
 
-  const cartaoKpi = ({ titulo, valor, icone, tom, chip, dica }) => `
-    <article class="kpi-card dashboard-kpi-card-modern" title="${esc(dica)}">
+  const cartaoKpi = ({ titulo, valor, icone, tom, chip, dica, detalhe = '' }) => `
+    <article class="kpi-card dashboard-kpi-card-modern" title="${esc(dica)}"${detalhe}>
       <div class="dashboard-kpi-head-modern">
         <div class="dashboard-kpi-icon tone-${tom}"><i class="${icone}"></i></div>
         ${chip}
       </div>
-      <p class="dashboard-kpi-label-modern">${titulo}</p>
+      <p class="dashboard-kpi-label-modern">${titulo}${detalhe ? SETA : ''}</p>
       <p class="dashboard-kpi-value-modern">${valor}</p>
     </article>`;
 
@@ -9449,10 +9635,14 @@
         </select>
         <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
       </label>`;
-    const representadas = [['', 'Todas as representadas'], ...d.representadas.map((r) => [r.id, `${r.nomeFantasia}${r.ativa === false ? ' (inativa)' : ''}`])];
+    const representadas = [['', 'Todas'], ...d.representadas.map((r) => [r.id, `${r.nomeFantasia}${r.ativa === false ? ' (inativa)' : ''}`])];
     const vendedor = d.carteira
       ? `<div class="dashboard-chat-filter-item dashboard-chat-filter-item--readonly"><span>Vendedor</span><strong>${esc(d.quem.nome)} (sua carteira)</strong></div>`
-      : selecao('Vendedor', 'vendedor', [['', 'Todos os vendedores'], ...d.vendedores.map((v) => [v.id, v.nome])], filtros.vendedorId);
+      : selecao('Vendedor', 'vendedor', [['', 'Todos'], ...d.vendedores.map((v) => [v.id, v.nome])], filtros.vendedorId);
+    const redes = [['', 'Todas'], ...d.redes.map((r) => [r, r]), [SEM_REDE, 'Sem rede']];
+    const cidades = [['', 'Todas'], ...d.cidades.map((c) => [c, c])];
+    const situacoes = [['', 'Todas'], ...Object.entries(vendas.NOMES_DA_SITUACAO)];
+    const bloqueio = [['', 'Todos'], ...Object.entries(BLOQUEIO)];
 
     let intervalo;
     if (filtros.periodo === 'personalizado') {
@@ -9471,19 +9661,42 @@
         </div>`;
     } else {
       intervalo = `
-        <div class="dashboard-chat-filter-item dashboard-chat-filter-item--readonly">
+        <div class="dashboard-chat-filter-item dashboard-chat-filter-item--readonly vendas-intervalo">
           <span>Intervalo</span>
           <strong>${fmt.data(d.p.de)} a ${fmt.data(d.p.ate)}</strong>
         </div>`;
     }
 
     return `
-      <section class="glass-card dashboard-chat-filter-row dashboard-chat-filter-row--horarios" data-vendas-filtros>
+      <section class="glass-card dashboard-chat-filter-row dashboard-chat-filter-row--horarios vendas-filtros" data-vendas-filtros>
         ${selecao('Período', 'periodo', Object.entries(PERIODOS), filtros.periodo)}
-        ${selecao('Representada', 'representada', representadas, filtros.representadaId)}
-        ${vendedor}
         ${intervalo}
+        ${vendedor}
+        ${selecao('Representada', 'representada', representadas, filtros.representadaId)}
+        ${selecao('Rede', 'rede', redes, filtros.rede)}
+        ${selecao('Cidade', 'cidade', cidades, filtros.cidade)}
+        ${selecao('Situação na carteira', 'situacao', situacoes, filtros.situacao)}
+        ${selecao('Bloqueio', 'bloqueio', bloqueio, filtros.bloqueio)}
       </section>`;
+  }
+
+  const juntar = (lista) => (lista.length > 1 ? `${lista.slice(0, -1).join(', ')} e ${lista[lista.length - 1]}` : lista[0] || '');
+  const nomeDaMetrica = (id, d) => (id === 'comissaoVendedores' && d.carteira ? 'sua comissão' : METRICAS[id].nome);
+
+  /** Com filtro ligado, diz quais métricas saíram da tela e por quê, e oferece limpar. */
+  function htmlAvisoFiltros(d) {
+    if (!d.ativos.length) return '';
+    const filtrosLigados = juntar(d.ativos.map((chave) => PARAMETROS[chave].nome));
+    const ficam = d.totalMetricas - d.ocultas.length;
+    const texto = ficam === 1 && d.visiveis.has('carteira')
+      ? `Com ${d.ativos.length > 1 ? 'esses filtros' : 'esse filtro'}, só a <strong>carteira de clientes</strong> faz sentido: as outras métricas são de venda e de comissão, e não mudam com ${d.ativos.length > 1 ? 'eles' : 'ele'}. Clique numa situação da carteira para ver os clientes.`
+      : `Aparecem só as métricas que mudam com ${d.ativos.length > 1 ? 'esses filtros' : 'esse filtro'} (${ficam} de ${d.totalMetricas}). Ficaram de fora: ${juntar(d.ocultas.map((id) => nomeDaMetrica(id, d)))}.`;
+    return `
+      <div class="dashboard-monitoring-notice vendas-aviso vendas-aviso-filtros">
+        <i class="ri-filter-3-line" aria-hidden="true"></i>
+        <span>Filtrando por <strong>${esc(filtrosLigados)}</strong>. ${texto}</span>
+        <button type="button" class="vendas-link" data-vendas-limpar>Limpar filtros</button>
+      </div>`;
   }
 
   const htmlAvisoCarteira = (d) => `
@@ -9500,31 +9713,37 @@
     const pos = d.positivacao;
     const cartoes = [
       {
+        id: 'vendido', detalhe: abreDetalhe('vendas', 'Ver as vendas que somam o valor vendido'),
         titulo: 'Vendido', valor: fmt.brl(r.valor), icone: 'ri-money-dollar-circle-line', tom: 'green',
         chip: chipVariacao(r.valor, a.valor, comparacao),
         dica: 'Soma dos pedidos com status Pedido, Faturado ou Concluído no período',
       },
       {
+        id: 'pedidos', detalhe: abreDetalhe('pedidos', 'Ver os pedidos do período'),
         titulo: 'Pedidos', valor: fmt.numero(r.vendas), icone: 'ri-file-list-3-line', tom: 'blue',
         chip: chipNeutro(orcamentos ? `${fmt.numero(orcamentos)} em orçamento` : 'Sem orçamento', 'Orçamentos e cancelados não contam como venda'),
         dica: 'Pedidos que contam como venda (Pedido, Faturado e Concluído)',
       },
       {
+        id: 'ticket', // sem detalhe: o que importa é a média, não as linhas
         titulo: 'Ticket médio', valor: fmt.brl(r.ticketMedio), icone: 'ri-price-tag-3-line', tom: 'purple',
         chip: chipVariacao(r.ticketMedio, a.ticketMedio, comparacao),
         dica: 'Valor vendido dividido pelo número de pedidos',
       },
       {
+        id: 'comissaoRepresentadas', detalhe: abreDetalhe('comissao-representadas', 'Ver a comissão de cada pedido, por representada'),
         titulo: 'Comissão das representadas', valor: fmt.brl(r.comissaoRepresentadas), icone: 'ri-hand-coin-line', tom: 'amber',
         chip: chipVariacao(r.comissaoRepresentadas, a.comissaoRepresentadas, comparacao),
         dica: 'O que as representadas pagam sobre os pedidos do período, pelo percentual gravado em cada pedido',
       },
       {
+        id: 'comissaoVendedores', detalhe: abreDetalhe('comissao-vendedores', 'Ver a comissão de cada pedido, por vendedor'),
         titulo: d.carteira ? 'Sua comissão' : 'Comissão dos vendedores', valor: fmt.brl(r.comissaoVendedores), icone: 'ri-wallet-3-line', tom: 'cyan',
         chip: chipVariacao(r.comissaoVendedores, a.comissaoVendedores, comparacao),
         dica: 'Comissão de cada vendedor sobre o valor dos pedidos que ele gerou (não é a comissão da representada)',
       },
       {
+        id: 'positivados', detalhe: abreDetalhe('positivados', 'Ver os clientes positivados e o último pedido de cada um'),
         titulo: 'Clientes positivados', valor: fmt.numero(pos.total), icone: 'ri-user-follow-line', tom: 'rose',
         chip: pos.ativosNoInicio
           ? chipNeutro(`${pct(pos.percentualDosAtivos, 0)} dos ativos`, `${pos.ativo} de ${pos.ativosNoInicio} clientes ativos no início do período compraram`)
@@ -9532,7 +9751,9 @@
         dica: 'Clientes com pelo menos uma venda no período',
       },
     ];
-    return `<section class="dashboard-kpi-generic-grid vendas-kpis${entrada ? ' stagger' : ''}">${cartoes.map(cartaoKpi).join('')}</section>`;
+    const visiveis = cartoes.filter((c) => d.visiveis.has(c.id));
+    if (!visiveis.length) return '';
+    return `<section class="dashboard-kpi-generic-grid vendas-kpis${visiveis.length === 4 ? ' vendas-kpis--4' : ''}${entrada ? ' stagger' : ''}">${visiveis.map(cartaoKpi).join('')}</section>`;
   }
 
   function htmlPedidos(d) {
@@ -9543,22 +9764,29 @@
       return itemLista({
         nome: s.nome, numero: fmt.numero(n), percentual: pct(parte), cor: s.cor, largura: larguraBarra(parte),
         nota: `${fmt.brl(d.valorPorStatus[chave] || 0)} · ${s.venda ? 'conta como venda' : 'não conta como venda'}`,
+        detalhe: n ? abreDetalhe('pedidos', `Ver os pedidos com status ${s.nome}`, { recorte: chave }) : '',
       });
     }).join('');
     const temVenda = r.serie.some((x) => x.valor > 0);
-    return `
-      <section class="vendas-grade vendas-grade--2-1">
+    const cartoes = [];
+    if (d.visiveis.has('evolucao')) {
+      cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
           ${cabecalhoCartao('ri-line-chart-line', 'blue', 'Evolução das vendas', `Valor vendido por dia · ${plural(r.vendas, 'pedido', 'pedidos')}, ${fmt.brl(r.valor)}`)}
           ${temVenda
             ? `<div class="mvp-chart-canvas-wrap vendas-grafico"><canvas id="vendas-grafico-evolucao" role="img" aria-label="Valor vendido por dia no período"></canvas></div>`
             : '<div class="mvp-empty">Nenhuma venda no período</div>'}
-        </article>
+        </article>`);
+    }
+    if (d.visiveis.has('status')) {
+      cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
           ${cabecalhoCartao('ri-file-list-3-line', 'purple', 'Pedidos por status', `${plural(r.pedidos, 'pedido', 'pedidos')} no período · ${plural(r.vendas, 'conta', 'contam')} como venda`)}
           <div class="vendas-lista">${status}</div>
-        </article>
-      </section>`;
+        </article>`);
+    }
+    if (!cartoes.length) return '';
+    return `<section class="vendas-grade${cartoes.length === 2 ? ' vendas-grade--2-1' : ''}">${cartoes.join('')}</section>`;
   }
 
   function htmlQuebras(d) {
@@ -9596,24 +9824,32 @@
       })
       .sort((a, b) => b.valor - a.valor || a.nome.localeCompare(b.nome, 'pt-BR'));
 
-    const linhas = (lista) => lista.map((x) => {
+    // Cada linha abre as vendas daquela representada (ou daquele vendedor).
+    const linhas = (lista, chave) => lista.map((x) => {
       const parte = total ? (x.valor / total) * 100 : 0;
-      return itemLista({ nome: x.nome, numero: fmt.brl(x.valor), percentual: pct(parte), cor: x.cor, largura: larguraBarra(parte), nota: notaComissao(x) });
+      return itemLista({
+        nome: x.nome, numero: fmt.brl(x.valor), percentual: pct(parte), cor: x.cor, largura: larguraBarra(parte), nota: notaComissao(x),
+        detalhe: x.valor ? abreDetalhe('vendas', `Ver as vendas de ${x.nome}`, { [chave]: x.id }) : '',
+      });
     }).join('');
 
-    const porVendedor = d.carteira ? '' : `
-      <article class="glass-card dashboard-monitoring-card">
-        ${cabecalhoCartao('ri-team-line', 'green', 'Vendas por vendedor', 'Valor vendido e comissão de cada vendedor')}
-        <div class="vendas-lista">${linhas(vendedores)}</div>
-      </article>`;
-    return `
-      <section class="vendas-grade vendas-grade--2">
+    const cartoes = [];
+    if (d.visiveis.has('porRepresentada')) {
+      cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
           ${cabecalhoCartao('ri-building-2-line', 'amber', 'Vendas por representada', 'Valor vendido e comissão que cada representada paga')}
-          <div class="vendas-lista">${linhas(representadas)}</div>
-        </article>
-        ${porVendedor}
-      </section>`;
+          <div class="vendas-lista">${linhas(representadas, 'representada')}</div>
+        </article>`);
+    }
+    if (d.visiveis.has('porVendedor')) {
+      cartoes.push(`
+        <article class="glass-card dashboard-monitoring-card">
+          ${cabecalhoCartao('ri-team-line', 'green', 'Vendas por vendedor', 'Valor vendido e comissão de cada vendedor')}
+          <div class="vendas-lista">${linhas(vendedores, 'vendedor')}</div>
+        </article>`);
+    }
+    if (!cartoes.length) return '';
+    return `<section class="vendas-grade vendas-grade--2">${cartoes.join('')}</section>`;
   }
 
   const htmlRosca = (id, total, legenda, rotuloAria, detalhes) => `
@@ -9636,15 +9872,18 @@
       ['inativo_antigo', 'Inativos antigos', `última compra há mais de ${cfg.diasInativoRecente} dias`],
     ].map(([chave, nome, nota]) => {
       const parte = c.total ? (c[chave] / c.total) * 100 : 0;
-      return itemLista({ nome, numero: fmt.numero(c[chave]), percentual: pct(parte), cor: COR.situacao[chave], largura: larguraBarra(parte), nota });
+      return itemLista({
+        nome, numero: fmt.numero(c[chave]), percentual: pct(parte), cor: COR.situacao[chave], largura: larguraBarra(parte), nota,
+        detalhe: c[chave] ? abreDetalhe('carteira', `Ver os clientes ${nome.toLowerCase()}`, { recorte: chave }) : '',
+      });
     }).join('');
     const prospects = `
-      <article class="mvp-list-item vendas-prospects">
+      <article class="mvp-list-item vendas-prospects"${c.prospect ? abreDetalhe('carteira', 'Ver os prospects', { recorte: 'prospect' }) : ''}>
         <div>
           <p class="mvp-list-title">Prospects</p>
           <p class="mvp-list-subtitle">Cadastrados que nunca compraram (fora do total)</p>
         </div>
-        <span class="mvp-badge is-neutral">${fmt.numero(c.prospect)}</span>
+        <span class="mvp-badge is-neutral">${fmt.numero(c.prospect)}${c.prospect ? SETA : ''}</span>
       </article>`;
 
     const abc = d.abc;
@@ -9670,8 +9909,16 @@
       ['inativo_antigo', 'Inativos antigos', `voltaram depois de mais de ${cfg.diasInativoRecente} dias`],
     ].map(([chave, nome, nota]) => {
       const parte = pos.total ? (pos[chave] / pos.total) * 100 : 0;
-      return itemLista({ nome, numero: fmt.numero(pos[chave]), percentual: pct(parte), cor: COR.situacao[chave], largura: larguraBarra(parte), nota });
+      return itemLista({
+        nome, numero: fmt.numero(pos[chave]), percentual: pct(parte), cor: COR.situacao[chave], largura: larguraBarra(parte), nota,
+        detalhe: pos[chave] ? abreDetalhe('positivados', `Ver os positivados que eram ${nome.toLowerCase()} antes do período`, { recorte: chave }) : '',
+      });
     }).join('');
+    // Quem não comprou ainda: os ativos do início do período sem venda nele.
+    const faltam = d.semCompra.length;
+    const verFaltam = faltam
+      ? ` <button type="button" class="vendas-link"${abreDetalhe('positivados', 'Ver os clientes ativos que ainda não compraram no período', { recorte: 'sem-compra' })}>Ver ${faltam === 1 ? 'o que ainda não comprou' : `os ${fmt.numero(faltam)} que ainda não compraram`}</button>`
+      : '';
     const desempenho = `
       <div class="dashboard-campaigns-performance-item vendas-desempenho">
         <div class="dashboard-campaigns-performance-label-row">
@@ -9679,28 +9926,40 @@
           <strong>${fmt.numero(pos.ativo)} de ${fmt.numero(pos.ativosNoInicio)}</strong>
         </div>
         <div class="dashboard-campaigns-performance-track"><span class="is-delivery" style="width:${Math.min(100, pos.percentualDosAtivos)}%"></span></div>
-        <p class="vendas-nota"><strong>${pct(pos.percentualDosAtivos)}</strong> dos clientes ativos foram positivados no período.</p>
+        <p class="vendas-nota"><strong>${pct(pos.percentualDosAtivos)}</strong> dos clientes ativos foram positivados no período.${verFaltam}</p>
       </div>`;
 
     const situacaoEm = `${fmt.data(d.p.ate)}${d.p.ateHoje ? ' (hoje)' : ''}`;
-    return `
-      <section class="vendas-grade vendas-grade--3">
+    const cartoes = [];
+    if (d.visiveis.has('carteira')) {
+      cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
           ${cabecalhoCartao('ri-store-2-line', 'blue', 'Carteira de clientes', `Situação em ${situacaoEm}, pela última compra`)}
           ${htmlRosca('vendas-grafico-carteira', c.total, c.total === 1 ? 'cliente' : 'clientes', 'Carteira de clientes por situação', carteira + prospects)}
-        </article>
+        </article>`);
+    }
+    if (d.visiveis.has('abc')) {
+      // A curva ABC não abre modal: a tabela "Clientes na curva ABC", logo abaixo, é a lista.
+      cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
           ${cabecalhoCartao('ri-bar-chart-horizontal-line', 'purple', 'Curva ABC', 'Clientes que compraram no período, pelo valor')}
           ${htmlRosca('vendas-grafico-abc', clientesAbc, clientesAbc === 1 ? 'cliente' : 'clientes', 'Clientes por curva ABC', curvas + regraAbc)}
-        </article>
+        </article>`);
+    }
+    if (d.visiveis.has('positivacao')) {
+      cartoes.push(`
         <article class="glass-card dashboard-monitoring-card">
           ${cabecalhoCartao('ri-user-follow-line', 'green', 'Positivação', 'Clientes com pelo menos uma venda no período')}
           ${htmlRosca('vendas-grafico-positivacao', pos.total, pos.total === 1 ? 'positivado' : 'positivados', 'Clientes positivados por situação antes da compra', desempenho + positivados)}
-        </article>
-      </section>`;
+        </article>`);
+    }
+    if (!cartoes.length) return '';
+    const grade = { 1: 'vendas-grade--sozinho', 2: 'vendas-grade--2', 3: 'vendas-grade--3' }[cartoes.length];
+    return `<section class="vendas-grade ${grade}">${cartoes.join('')}</section>`;
   }
 
   function htmlPositivacaoDiaria(d) {
+    if (!d.visiveis.has('positivacaoDiaria')) return '';
     const serie = d.positivacao.serie;
     const pico = serie.reduce((m, x) => (x.clientes > m.clientes ? x : m), { clientes: 0, dia: '' });
     const sub = pico.clientes
@@ -9715,7 +9974,8 @@
       </article>`;
   }
 
-  function htmlTabelaAbc() {
+  function htmlTabelaAbc(d) {
+    if (!d.visiveis.has('tabelaAbc')) return '';
     const curvas = [['', 'Todas'], ['A', 'Curva A'], ['B', 'Curva B'], ['C', 'Curva C']];
     return `
       <article class="glass-card dashboard-monitoring-card" data-vendas-abc>
@@ -9920,6 +10180,7 @@
       cores: [COR.situacao.ativo, COR.situacao.inativo_recente, COR.situacao.inativo_antigo],
       total: c.total,
       descrever: (i) => `${nomesCarteira[i]}: ${plural(valoresCarteira[i], 'cliente', 'clientes')} (${pct((valoresCarteira[i] / c.total) * 100)})`,
+      aoClicar: (i) => abrirDetalhe('carteira', { recorte: ['ativo', 'inativo_recente', 'inativo_antigo'][i] }),
     }));
 
     const abc = d.abc;
@@ -9945,6 +10206,7 @@
       cores: [COR.situacao.novo, COR.situacao.ativo, COR.situacao.inativo_recente, COR.situacao.inativo_antigo],
       total: pos.total,
       descrever: (i) => `${nomesPos[i]}: ${plural(valoresPos[i], 'cliente', 'clientes')} (${pct((valoresPos[i] / pos.total) * 100)})`,
+      aoClicar: (i) => abrirDetalhe('positivados', { recorte: ['novo', 'ativo', 'inativo_recente', 'inativo_antigo'][i] }),
     }));
   }
 
@@ -9957,15 +10219,17 @@
       <section class="mvp-panel-grid vendas-secao${entrada ? ' animate-tab-enter' : ''}" data-vendas-secao>
         ${htmlCabecalho()}
         ${htmlFiltros(tela.dados)}
+        ${htmlAvisoFiltros(tela.dados)}
         ${tela.dados.carteira ? htmlAvisoCarteira(tela.dados) : ''}
         ${htmlKpis(tela.dados, entrada)}
         ${htmlPedidos(tela.dados)}
         ${htmlQuebras(tela.dados)}
         ${htmlClientes(tela.dados)}
         ${htmlPositivacaoDiaria(tela.dados)}
-        ${htmlTabelaAbc()}
+        ${htmlTabelaAbc(tela.dados)}
       </section>`;
     desenharGraficos(tela.dados);
+    if (detalhe.tipo) pintarDetalhe(); // o modal aberto acompanha a mudança (outra aba, "Ver como")
     if (foco) conteudo.querySelector(`[data-vendas-filtro="${foco}"]`)?.focus();
     const hora = document.getElementById('dashboard-generated-at');
     if (hora) hora.textContent = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
@@ -9983,6 +10247,439 @@
     atualizarTabelaAbc();
     conteudo.querySelector('[data-vendas-abc]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  // ---- detalhe: as linhas que formam o número ---------------------------------------
+  // Têm detalhe as métricas em que ver as linhas leva a uma ação: Vendido (quem comprou),
+  // Pedidos e Pedidos por status (o que está em aberto), as duas comissões (conferir o
+  // extrato da representada, fechar o pagamento do vendedor), Vendas por representada e
+  // por vendedor (o que cada um vende), Clientes positivados e Positivação (quem comprou e
+  // quem dos ativos ainda não comprou) e Carteira (quem reativar). Não têm: ticket médio,
+  // evolução das vendas e positivações diárias, em que a conta é o que importa; a curva
+  // ABC já tem a lista na tabela "Clientes na curva ABC".
+  // As linhas são exatamente as que entraram no número: mesmos filtros, mesmo escopo.
+  const detalhe = { tipo: '', recorte: '', busca: '', representadaId: '', vendedorId: '', origem: null };
+  let modal = null;
+  let overflowAntes = '';
+
+  const soma = (lista, campo = 'valor') => lista.reduce((a, x) => a + (x[campo] || 0), 0);
+  const nomeDoCliente = (c) => (c ? c.nomeFantasia || c.razaoSocial : 'Cliente excluído');
+  const nomeDaRepresentada = (id) => vendas.representada(id)?.nomeFantasia || 'Representada excluída';
+  const nomeDoUsuario = (id) => vendas.usuarios().find((u) => u.id === id)?.nome || 'Sem vendedor';
+  const pill = (texto, cor, icone = '') => `<span class="vendas-pill" style="--vendas-pill:${cor};">${icone ? `<i class="${icone}" aria-hidden="true"></i>` : ''}${esc(texto)}</span>`;
+  const linkCliente = (c) => (c && vendas.pode('clientes', 'ver')
+    ? `<a href="clientes.html?cliente=${encodeURIComponent(c.id)}" title="Abrir em Clientes">${esc(nomeDoCliente(c))}</a>`
+    : `<strong>${esc(nomeDoCliente(c))}</strong>`);
+  const linkPedido = (p) => (vendas.pode('pedidos', 'ver')
+    ? `<a href="pedidos.html?pedido=${encodeURIComponent(p.id)}" title="Abrir em Pedidos">#${p.numero}</a>`
+    : `#${p.numero}`);
+  /** Contato principal (o primeiro vinculado), com o telefone: é para quem se manda a mensagem. */
+  function celulaContato(clienteId) {
+    const contato = vendas.contatosDoCliente(clienteId)[0];
+    return contato
+      ? `${esc(contato.nome)}<span class="vendas-sub">${esc(fmt.telefone(contato.telefone))}</span>`
+      : '<span class="vendas-sub">Sem contato vinculado</span>';
+  }
+  const cidadeDe = (c) => [c?.endereco?.cidade, c?.rede].filter(Boolean).join(' · ');
+  const COR_PROSPECT = '#7A8AA1';
+  const COR_BLOQUEADO = '#64748B';
+  const corDaSituacao = (s) => COR.situacao[s] || COR_PROSPECT;
+  const pillBloqueado = (c) => (c?.bloqueado ? pill('Bloqueado', COR_BLOQUEADO, 'ri-lock-line') : '');
+  const contar = (total, visiveis, um, varios) => (visiveis === total ? plural(total, um, varios) : `${fmt.numero(visiveis)} de ${plural(total, um, varios)}`);
+  const haQuantosDias = (dias) => (dias === 0 ? 'hoje' : dias === 1 ? 'há 1 dia' : `há ${fmt.numero(dias)} dias`);
+
+  /** Última venda de cada cliente até o fim do período (com a representada filtrada). */
+  function ultimasVendas(d) {
+    const mapa = new Map();
+    vendas.pedidos({ ate: d.p.ate, representadaId: filtros.representadaId }).filter(vendas.ehVenda)
+      .forEach((p) => { if (!mapa.has(p.clienteId)) mapa.set(p.clienteId, p); });
+    return mapa;
+  }
+
+  const DETALHES = {
+    /** Vendido (e as linhas de Vendas por representada / por vendedor): nome e valor. */
+    vendas(d) {
+      let lista = d.vendidos;
+      if (detalhe.representadaId) lista = lista.filter((p) => p.representadaId === detalhe.representadaId);
+      if (detalhe.vendedorId) lista = lista.filter((p) => p.vendedorId === detalhe.vendedorId);
+      const recorte = detalhe.representadaId ? nomeDaRepresentada(detalhe.representadaId) : detalhe.vendedorId ? nomeDoUsuario(detalhe.vendedorId) : '';
+      return {
+        titulo: recorte ? `Vendas · ${recorte}` : 'Vendido',
+        sub: `${plural(lista.length, 'pedido que conta', 'pedidos que contam')} como venda, somando ${fmt.brl(soma(lista, 'valorTotal'))}. Do mais recente ao mais antigo.`,
+        tirar: recorte,
+        placeholder: 'Cliente, pedido, representada ou vendedor...',
+        colunas: [['Cliente'], ['Data', 'vendas-col-data'], ['Valor', 'vendas-num']],
+        linhas: lista.map((p) => {
+          const c = vendas.cliente(p.clienteId);
+          return {
+            valor: p.valorTotal,
+            texto: [nomeDoCliente(c), c?.razaoSocial, p.numero, nomeDaRepresentada(p.representadaId), nomeDoUsuario(p.vendedorId)].join(' '),
+            html: `<td>${linkCliente(c)}<span class="vendas-sub">${linkPedido(p)} · ${esc(nomeDaRepresentada(p.representadaId))} · ${esc(nomeDoUsuario(p.vendedorId))}</span></td>
+              <td class="vendas-col-data">${fmt.data(p.emitidoEm)}</td>
+              <td class="vendas-num strong">${fmt.brl(p.valorTotal)}</td>`,
+          };
+        }),
+        contagem: (v, total) => contar(total, v.length, 'venda', 'vendas'),
+        rodape: (v) => `<td colspan="2">Total</td><td class="vendas-num">${fmt.brl(soma(v))}</td>`,
+        vazio: 'Nenhuma venda no período',
+      };
+    },
+
+    /** Pedidos (e as linhas de Pedidos por status): todos os pedidos, detalhados. */
+    pedidos(d) {
+      const porStatus = {};
+      d.pedidos.forEach((p) => { porStatus[p.status] = (porStatus[p.status] || 0) + 1; });
+      const recortes = [{ chave: '', rotulo: 'Todos', n: d.pedidos.length },
+        ...Object.entries(vendas.STATUS)
+          .filter(([chave]) => porStatus[chave] || detalhe.recorte === chave)
+          .map(([chave, st]) => ({ chave, rotulo: st.nome, n: porStatus[chave] || 0 }))];
+      const lista = detalhe.recorte ? d.pedidos.filter((p) => p.status === detalhe.recorte) : d.pedidos;
+      const st = vendas.STATUS[detalhe.recorte];
+      return {
+        titulo: st ? `Pedidos · ${st.nome}` : 'Pedidos',
+        sub: `${plural(d.pedidos.length, 'pedido', 'pedidos')} no período; ${plural(d.resumo.vendas, 'conta', 'contam')} como venda (Pedido, Faturado e Concluído). Orçamentos em aberto são os que ainda dá para fechar.`,
+        recortes,
+        placeholder: 'Pedido, cliente, cidade, representada ou vendedor...',
+        larga: true,
+        colunas: [['Pedido'], ['Cliente'], ['Status'], ['Representada'], ['Vendedor'], ['Valor', 'vendas-num']],
+        linhas: lista.map((p) => {
+          const c = vendas.cliente(p.clienteId);
+          const s = vendas.STATUS[p.status];
+          const itens = p.itens?.length ? plural(p.itens.length, 'item', 'itens') : 'só o valor';
+          return {
+            valor: p.valorTotal,
+            texto: [p.numero, nomeDoCliente(c), c?.endereco?.cidade, s?.nome, nomeDaRepresentada(p.representadaId), nomeDoUsuario(p.vendedorId)].join(' '),
+            html: `<td class="vendas-col-data">${linkPedido(p)}${p.origem === 'conversa' ? '<i class="ri-chat-3-line vendas-origem" title="Registrado ao finalizar a conversa" aria-label="pela conversa"></i>' : ''}<span class="vendas-sub">${fmt.data(p.emitidoEm)} ${fmt.hora(p.emitidoEm)} · ${itens}</span></td>
+              <td>${linkCliente(c)}<span class="vendas-sub">${esc(cidadeDe(c))}</span></td>
+              <td>${pill(s?.nome || p.status, s?.cor || COR_PROSPECT)}</td>
+              <td>${esc(nomeDaRepresentada(p.representadaId))}</td>
+              <td>${esc(nomeDoUsuario(p.vendedorId))}</td>
+              <td class="vendas-num strong">${fmt.brl(p.valorTotal)}</td>`,
+          };
+        }),
+        contagem: (v, total) => contar(total, v.length, 'pedido', 'pedidos'),
+        rodape: (v) => `<td colspan="5">Total da lista</td><td class="vendas-num">${fmt.brl(soma(v))}</td>`,
+        vazio: 'Nenhum pedido no período',
+      };
+    },
+
+    /** Comissão das representadas: pedido a pedido, por representada (o extrato a conferir). */
+    'comissao-representadas'(d) {
+      return detalheDeComissao(d, {
+        titulo: 'Comissão das representadas',
+        sub: 'O que cada representada paga sobre os pedidos do período, pelo percentual gravado em cada pedido. É a conta para conferir com o extrato de comissão dela.',
+        grupoDe: (p) => p.representadaId,
+        nomeDoGrupo: nomeDaRepresentada,
+        percentual: (p) => p.comissaoRepresentada,
+        comissao: (p) => vendas.comissoes(p).representada,
+        colunaExtra: null,
+      });
+    },
+
+    /** Comissão dos vendedores: pedido a pedido, por vendedor (o fechamento do pagamento). */
+    'comissao-vendedores'(d) {
+      return detalheDeComissao(d, {
+        titulo: d.carteira ? 'Sua comissão' : 'Comissão dos vendedores',
+        sub: d.carteira
+          ? 'Sua comissão sobre cada pedido que você gerou no período, pelo percentual gravado no pedido.'
+          : 'A comissão de cada vendedor sobre os pedidos que gerou no período, pelo percentual gravado no pedido. É a conta para fechar o pagamento de cada um.',
+        grupoDe: (p) => p.vendedorId,
+        nomeDoGrupo: nomeDoUsuario,
+        percentual: (p) => p.comissaoVendedor,
+        comissao: (p) => vendas.comissoes(p).vendedor,
+        colunaExtra: ['Representada', (p) => esc(nomeDaRepresentada(p.representadaId))],
+      });
+    },
+
+    /** Clientes positivados (e a rosca de positivação): o cliente e o último pedido dele. */
+    positivados(d) {
+      const ANTES = { novo: 'Novos', ativo: 'Ativos', inativo_recente: 'Inativos recentes', inativo_antigo: 'Inativos antigos' };
+      const conta = {};
+      d.positivados.forEach((x) => { conta[x.antes] = (conta[x.antes] || 0) + 1; });
+      const recortes = [{ chave: '', rotulo: 'Todos', n: d.positivados.length },
+        ...Object.entries(ANTES).filter(([k]) => conta[k] || detalhe.recorte === k).map(([chave, rotulo]) => ({ chave, rotulo, n: conta[chave] || 0 })),
+        { chave: 'sem-compra', rotulo: 'Ativos sem compra', n: d.semCompra.length }];
+      const placeholder = 'Cliente, cidade ou vendedor...';
+
+      if (detalhe.recorte === 'sem-compra') {
+        const ultimas = ultimasVendas(d);
+        const lista = [...d.semCompra].sort((a, b) => (b.dias ?? 0) - (a.dias ?? 0));
+        return {
+          titulo: 'Ativos sem compra no período',
+          sub: `${plural(lista.length, 'cliente ativo', 'clientes ativos')} no início do período ainda sem venda nele. Primeiro os que estão há mais tempo sem comprar, mais perto de ficar inativos.`,
+          recortes, placeholder,
+          larga: true,
+          colunas: [['Cliente'], ['Última compra'], ['Valor', 'vendas-num'], ['Vendedor'], ['Contato']],
+          linhas: lista.map((l) => {
+            const c = l.cliente;
+            const ultimo = ultimas.get(c.id);
+            return {
+              valor: ultimo?.valorTotal || 0,
+              texto: [nomeDoCliente(c), c.razaoSocial, cidadeDe(c), nomeDoUsuario(c.vendedorId)].join(' '),
+              html: `<td>${linkCliente(c)}<span class="vendas-sub">${esc(cidadeDe(c))}</span></td>
+                <td>${l.ultimaCompra ? fmt.data(l.ultimaCompra) : '—'}<span class="vendas-sub">${l.dias != null ? haQuantosDias(l.dias + Math.round((inicioDoDia(d.p.ate) - inicioDoDia(d.p.de)) / DIA) + 1) : ''}${ultimo ? ` · ${linkPedido(ultimo)}` : ''}</span></td>
+                <td class="vendas-num">${ultimo ? fmt.brl(ultimo.valorTotal) : '—'}</td>
+                <td>${esc(nomeDoUsuario(c.vendedorId))}</td>
+                <td>${celulaContato(c.id)}</td>`,
+            };
+          }),
+          contagem: (v, total) => contar(total, v.length, 'cliente', 'clientes'),
+          vazio: 'Todos os clientes ativos já compraram no período',
+        };
+      }
+
+      const lista = (detalhe.recorte ? d.positivados.filter((x) => x.antes === detalhe.recorte) : d.positivados)
+        .sort((a, b) => b.ultimo.emitidoEm.localeCompare(a.ultimo.emitidoEm));
+      const corDoAntes = (k) => (k === 'novo' ? COR.situacao.novo : COR.situacao[k]);
+      const nomeDoAntes = { novo: 'Novo', ativo: 'Ativo', inativo_recente: 'Inativo recente', inativo_antigo: 'Inativo antigo' };
+      return {
+        titulo: detalhe.recorte ? `Positivados · ${ANTES[detalhe.recorte]}` : 'Clientes positivados',
+        sub: `${plural(lista.length, 'cliente', 'clientes')} com pelo menos uma venda no período, com a situação de antes dele e o último pedido. Do pedido mais recente ao mais antigo.`,
+        recortes, placeholder,
+        larga: true,
+        colunas: [['Cliente'], ['Antes do período'], ['Último pedido'], ['Valor', 'vendas-num'], ['Vendedor'], ['Contato']],
+        linhas: lista.map((x) => {
+          const c = x.cliente;
+          const p = x.ultimo;
+          return {
+            valor: p.valorTotal,
+            texto: [nomeDoCliente(c), c?.razaoSocial, cidadeDe(c), nomeDoUsuario(p.vendedorId), p.numero].join(' '),
+            html: `<td>${linkCliente(c)}<span class="vendas-sub">${esc(cidadeDe(c))}</span></td>
+              <td>${pill(nomeDoAntes[x.antes], corDoAntes(x.antes))}</td>
+              <td>${linkPedido(p)} · ${fmt.data(p.emitidoEm)}<span class="vendas-sub">${esc(nomeDaRepresentada(p.representadaId))}${x.quantos > 1 ? ` · ${plural(x.quantos, 'pedido', 'pedidos')} no período, ${fmt.brl(x.valor)}` : ''}</span></td>
+              <td class="vendas-num strong">${fmt.brl(p.valorTotal)}</td>
+              <td>${esc(nomeDoUsuario(p.vendedorId))}</td>
+              <td>${c ? celulaContato(c.id) : ''}</td>`,
+          };
+        }),
+        contagem: (v, total) => contar(total, v.length, 'cliente', 'clientes'),
+        vazio: 'Nenhum cliente positivado no período',
+      };
+    },
+
+    /** Carteira de clientes por situação: quem reativar, com a última compra e o contato. */
+    carteira(d) {
+      const ORDEM = ['ativo', 'inativo_recente', 'inativo_antigo', 'prospect'];
+      const ROTULO = { ativo: 'Ativos', inativo_recente: 'Inativos recentes', inativo_antigo: 'Inativos antigos', prospect: 'Prospects' };
+      const todos = d.clientes.lista;
+      const conta = {};
+      todos.forEach((l) => { conta[l.situacao] = (conta[l.situacao] || 0) + 1; });
+      const recortes = [{ chave: '', rotulo: 'Todos', n: todos.length },
+        ...ORDEM.filter((k) => conta[k] || detalhe.recorte === k).map((chave) => ({ chave, rotulo: ROTULO[chave], n: conta[chave] || 0 }))];
+      const ultimas = ultimasVendas(d);
+      const lista = (detalhe.recorte ? todos.filter((l) => l.situacao === detalhe.recorte) : todos)
+        .sort((a, b) => ORDEM.indexOf(a.situacao) - ORDEM.indexOf(b.situacao)
+          || (b.ultimaCompra || '').localeCompare(a.ultimaCompra || '')
+          || nomeDoCliente(a.cliente).localeCompare(nomeDoCliente(b.cliente), 'pt-BR'));
+      const situacaoEm = `${fmt.data(d.p.ate)}${d.p.ateHoje ? ' (hoje)' : ''}`;
+      const explicacao = {
+        ativo: `compraram nos últimos ${d.config.diasAtivo} dias`,
+        inativo_recente: 'pararam há pouco: os mais fáceis de reativar vêm primeiro',
+        inativo_antigo: `sem comprar há mais de ${d.config.diasInativoRecente} dias`,
+        prospect: 'cadastrados que nunca compraram',
+      }[detalhe.recorte];
+      return {
+        titulo: detalhe.recorte ? `Carteira · ${ROTULO[detalhe.recorte]}` : 'Carteira de clientes',
+        sub: `Situação em ${situacaoEm}, pela última compra${explicacao ? `: ${explicacao}` : ''}. Com o contato principal, para mandar mensagem.`,
+        recortes,
+        placeholder: 'Cliente, cidade, rede ou vendedor...',
+        larga: true,
+        colunas: [['Cliente'], ['Situação'], ['Última compra'], ['Valor', 'vendas-num'], ['Vendedor'], ['Contato']],
+        linhas: lista.map((l) => {
+          const c = l.cliente;
+          const ultimo = ultimas.get(c.id);
+          return {
+            valor: ultimo?.valorTotal || 0,
+            texto: [nomeDoCliente(c), c.razaoSocial, cidadeDe(c), nomeDoUsuario(c.vendedorId), vendas.NOMES_DA_SITUACAO[l.situacao], c.bloqueado ? 'bloqueado' : ''].join(' '),
+            html: `<td>${linkCliente(c)}<span class="vendas-sub">${esc(cidadeDe(c))}</span></td>
+              <td>${pill(vendas.NOMES_DA_SITUACAO[l.situacao], corDaSituacao(l.situacao))}${pillBloqueado(c)}</td>
+              <td>${l.ultimaCompra ? fmt.data(l.ultimaCompra) : 'Nunca comprou'}<span class="vendas-sub">${l.dias != null ? haQuantosDias(l.dias) : ''}${ultimo ? ` · ${linkPedido(ultimo)}` : ''}</span></td>
+              <td class="vendas-num">${ultimo ? fmt.brl(ultimo.valorTotal) : '—'}</td>
+              <td>${esc(nomeDoUsuario(c.vendedorId))}</td>
+              <td>${celulaContato(c.id)}</td>`,
+          };
+        }),
+        contagem: (v, total) => contar(total, v.length, 'cliente', 'clientes'),
+        vazio: 'Nenhum cliente nessa situação',
+      };
+    },
+  };
+
+  /** As duas comissões: mesma tabela, agrupada por quem paga ou por quem recebe. */
+  function detalheDeComissao(d, o) {
+    const porGrupo = new Map();
+    d.vendidos.forEach((p) => porGrupo.set(o.grupoDe(p), (porGrupo.get(o.grupoDe(p)) || 0) + o.comissao(p)));
+    const ordem = [...porGrupo.entries()].sort((a, b) => b[1] - a[1]).map(([id]) => id);
+    const lista = [...d.vendidos].sort((a, b) => ordem.indexOf(o.grupoDe(a)) - ordem.indexOf(o.grupoDe(b)) || b.emitidoEm.localeCompare(a.emitidoEm));
+    const total = soma(lista.map((p) => ({ v: o.comissao(p) })), 'v');
+    const extra = o.colunaExtra ? 1 : 0;
+    return {
+      titulo: o.titulo,
+      sub: `${fmt.brl(total)} sobre ${plural(lista.length, 'pedido', 'pedidos')}. ${o.sub}`,
+      placeholder: 'Pedido, cliente, representada ou vendedor...',
+      larga: true,
+      colunas: [['Pedido'], ['Cliente'], ...(extra ? [[o.colunaExtra[0]]] : []), ['Valor do pedido', 'vendas-num'], ['%', 'vendas-num'], ['Comissão', 'vendas-num']],
+      grupo: (id, doGrupo) => `${esc(o.nomeDoGrupo(id))} <span>· ${plural(doGrupo.length, 'pedido', 'pedidos')} · ${fmt.brl(soma(doGrupo, 'comissao'))}</span>`,
+      linhas: lista.map((p) => {
+        const c = vendas.cliente(p.clienteId);
+        return {
+          grupo: o.grupoDe(p),
+          valor: p.valorTotal,
+          comissao: o.comissao(p),
+          texto: [p.numero, nomeDoCliente(c), nomeDaRepresentada(p.representadaId), nomeDoUsuario(p.vendedorId)].join(' '),
+          html: `<td>${linkPedido(p)}<span class="vendas-sub">${fmt.data(p.emitidoEm)}</span></td>
+            <td>${linkCliente(c)}</td>
+            ${extra ? `<td>${o.colunaExtra[1](p)}</td>` : ''}
+            <td class="vendas-num">${fmt.brl(p.valorTotal)}</td>
+            <td class="vendas-num">${pct(o.percentual(p) || 0, 2)}</td>
+            <td class="vendas-num strong">${fmt.brl(o.comissao(p))}</td>`,
+        };
+      }),
+      contagem: (v, totalDeLinhas) => contar(totalDeLinhas, v.length, 'pedido', 'pedidos'),
+      rodape: (v) => `<td colspan="${2 + extra}">Total</td><td class="vendas-num">${fmt.brl(soma(v))}</td><td></td><td class="vendas-num">${fmt.brl(soma(v, 'comissao'))}</td>`,
+      vazio: 'Nenhuma venda no período',
+    };
+  }
+
+  /** Período e filtros, numa linha, para o modal dizer de onde vêm as linhas. */
+  function descreverFiltros(d) {
+    const partes = [`${PERIODOS[filtros.periodo]}, ${fmt.data(d.p.de)} a ${fmt.data(d.p.ate)}`];
+    if (d.carteira) partes.push(`carteira de ${d.quem.nome}`);
+    if (filtros.vendedorId) partes.push(nomeDoUsuario(filtros.vendedorId));
+    if (filtros.representadaId) partes.push(nomeDaRepresentada(filtros.representadaId));
+    if (filtros.rede) partes.push(filtros.rede === SEM_REDE ? 'sem rede' : filtros.rede);
+    if (filtros.cidade) partes.push(filtros.cidade);
+    if (filtros.situacao) partes.push(vendas.NOMES_DA_SITUACAO[filtros.situacao]);
+    if (filtros.bloqueio) partes.push(BLOQUEIO[filtros.bloqueio]);
+    return partes.join(' · ');
+  }
+
+  function criarModal() {
+    if (modal) return modal;
+    modal = document.createElement('div');
+    modal.className = 'dashboard-monitoring-rule-modal vendas-detalhe';
+    modal.hidden = true;
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'vendas-detalhe-titulo');
+    modal.innerHTML = `
+      <div class="dashboard-monitoring-rule-modal-dialog vendas-detalhe-dialog">
+        <header class="vendas-detalhe-cabecalho">
+          <div>
+            <h3 id="vendas-detalhe-titulo"></h3>
+            <p data-vendas-detalhe-sub></p>
+            <p class="vendas-detalhe-filtros" data-vendas-detalhe-filtros></p>
+          </div>
+          <button type="button" class="vendas-detalhe-fechar" data-vendas-detalhe-fechar aria-label="Fechar"><i class="ri-close-line" aria-hidden="true"></i></button>
+        </header>
+        <div class="vendas-detalhe-corpo">
+          <div data-vendas-detalhe-recortes></div>
+          <div class="dashboard-monitoring-filter-grid">
+            <label class="search"><span>Pesquisar</span><div class="search-wrap"><i class="ri-search-line" aria-hidden="true"></i><input type="text" data-vendas-detalhe-busca autocomplete="off"></div></label>
+          </div>
+          <div class="vendas-detalhe-tabela" data-vendas-detalhe-tabela></div>
+        </div>
+      </div>`;
+    document.body.append(modal);
+
+    modal.addEventListener('click', (ev) => {
+      if (ev.target === modal || ev.target.closest('[data-vendas-detalhe-fechar]')) { fecharDetalhe(); return; }
+      const recorte = ev.target.closest('[data-vendas-recorte]');
+      if (recorte) {
+        detalhe.recorte = recorte.getAttribute('data-vendas-recorte');
+        pintarDetalhe();
+        return;
+      }
+      if (ev.target.closest('[data-vendas-detalhe-tirar]')) {
+        detalhe.representadaId = '';
+        detalhe.vendedorId = '';
+        pintarDetalhe();
+      }
+    });
+    modal.addEventListener('input', (ev) => {
+      if (!ev.target.matches('[data-vendas-detalhe-busca]')) return;
+      detalhe.busca = ev.target.value;
+      pintarTabelaDoDetalhe(); // só a tabela: o campo de busca mantém o foco
+    });
+    return modal;
+  }
+
+  let montado = null; // a definição do modal aberto, recalculada a cada pintura
+  function tabelaDoDetalhe(m) {
+    const busca = normalizar(detalhe.busca.trim());
+    const visiveis = busca ? m.linhas.filter((l) => normalizar(l.texto).includes(busca)) : m.linhas;
+    let corpo;
+    if (m.grupo) {
+      corpo = [...new Set(visiveis.map((l) => l.grupo))].map((g) => {
+        const doGrupo = visiveis.filter((l) => l.grupo === g);
+        return `<tr class="vendas-detalhe-grupo"><td colspan="${m.colunas.length}">${m.grupo(g, doGrupo)}</td></tr>${doGrupo.map((l) => `<tr>${l.html}</tr>`).join('')}`;
+      }).join('');
+    } else {
+      corpo = visiveis.map((l) => `<tr>${l.html}</tr>`).join('');
+    }
+    const vazio = m.linhas.length ? 'Nada encontrado com essa pesquisa' : m.vazio;
+    const tirar = m.tirar
+      ? `<button type="button" class="dashboard-var-chip is-neutral vendas-chip-tirar" data-vendas-detalhe-tirar title="Ver todas as vendas do período">Só ${esc(m.tirar)} <i class="ri-close-line" aria-hidden="true"></i></button>`
+      : '';
+    return `
+      <div class="dashboard-monitoring-report-count">${tirar}<span>${m.contagem(visiveis, m.linhas.length)}</span></div>
+      <div class="dashboard-monitoring-table-wrap report">
+        <table class="dashboard-monitoring-table report${m.larga ? ' vendas-detalhe-larga' : ''}">
+          <thead><tr>${m.colunas.map(([texto, classe]) => `<th${classe ? ` class="${classe}"` : ''}>${texto}</th>`).join('')}</tr></thead>
+          <tbody>${corpo || `<tr><td colspan="${m.colunas.length}" class="vendas-detalhe-vazio">${vazio}</td></tr>`}</tbody>
+          ${visiveis.length && m.rodape ? `<tfoot><tr>${m.rodape(visiveis)}</tr></tfoot>` : ''}
+        </table>
+      </div>`;
+  }
+
+  function pintarDetalhe() {
+    if (!modal || modal.hidden || !detalhe.tipo || !tela.dados) return;
+    montado = DETALHES[detalhe.tipo](tela.dados);
+    modal.querySelector('#vendas-detalhe-titulo').textContent = montado.titulo;
+    modal.querySelector('[data-vendas-detalhe-sub]').textContent = montado.sub;
+    modal.querySelector('[data-vendas-detalhe-filtros]').textContent = descreverFiltros(tela.dados);
+    const busca = modal.querySelector('[data-vendas-detalhe-busca]');
+    busca.placeholder = montado.placeholder;
+    busca.setAttribute('aria-label', `Pesquisar em ${montado.titulo}`);
+    modal.querySelector('[data-vendas-detalhe-recortes]').innerHTML = montado.recortes?.length
+      ? `<div class="dashboard-campaigns-period-pills vendas-detalhe-recortes" role="group" aria-label="Recorte">${montado.recortes.map((r) => `
+          <button type="button" class="dashboard-campaigns-period-pill${r.chave === detalhe.recorte ? ' is-active' : ''}" data-vendas-recorte="${esc(r.chave)}" aria-pressed="${r.chave === detalhe.recorte}">
+            ${esc(r.rotulo)} <span class="vendas-recorte-n">${fmt.numero(r.n)}</span>
+          </button>`).join('')}</div>`
+      : '';
+    modal.querySelector('[data-vendas-detalhe-tabela]').innerHTML = tabelaDoDetalhe(montado);
+  }
+
+  function pintarTabelaDoDetalhe() {
+    if (montado) modal.querySelector('[data-vendas-detalhe-tabela]').innerHTML = tabelaDoDetalhe(montado);
+  }
+
+  function abrirDetalhe(tipo, { recorte = '', representadaId = '', vendedorId = '' } = {}) {
+    if (!DETALHES[tipo] || !tela.dados) return;
+    Object.assign(detalhe, { tipo, recorte, busca: '', representadaId, vendedorId, origem: document.activeElement });
+    criarModal();
+    modal.querySelector('[data-vendas-detalhe-busca]').value = '';
+    const estavaFechado = modal.hidden;
+    modal.hidden = false;
+    if (estavaFechado) {
+      overflowAntes = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    }
+    pintarDetalhe();
+    modal.querySelector('[data-vendas-detalhe-fechar]').focus();
+  }
+
+  function fecharDetalhe() {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.style.overflow = overflowAntes;
+    detalhe.tipo = '';
+    montado = null;
+    if (detalhe.origem?.isConnected) detalhe.origem.focus();
+  }
+
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && modal && !modal.hidden) fecharDetalhe();
+  });
 
   // ---- aba ---------------------------------------------------------------------------
   // Clonada da última aba capturada, para manter a marcação; ganha o selo "Novo" como
@@ -10033,6 +10730,7 @@
   function esconder() {
     if (!tela.ativo) return;
     tela.ativo = false;
+    fecharDetalhe();
     destruirGraficos();
     const seletor = seletorDoCabecalho();
     if (seletor) seletor.style.display = '';
@@ -10075,6 +10773,8 @@
       filtros.representadaId = alvo.value;
     } else if (chave === 'vendedor') {
       filtros.vendedorId = alvo.value;
+    } else if (['rede', 'cidade', 'situacao', 'bloqueio'].includes(chave)) {
+      filtros[chave] = alvo.value;
     } else if (chave === 'de' || chave === 'ate') {
       const de = conteudo.querySelector('[data-vendas-filtro="de"]')?.value || '';
       const ate = conteudo.querySelector('[data-vendas-filtro="ate"]')?.value || '';
@@ -10100,11 +10800,32 @@
     atualizarTabelaAbc();
   });
 
+  /** Abre o detalhe a partir do elemento clicado (cartão, item de lista ou link). */
+  function abrirDetalheDe(el) {
+    abrirDetalhe(el.getAttribute('data-vendas-detalhe'), {
+      recorte: el.getAttribute('data-recorte') || '',
+      representadaId: el.getAttribute('data-representada') || '',
+      vendedorId: el.getAttribute('data-vendedor') || '',
+    });
+  }
+
   conteudo.addEventListener('click', (ev) => {
     if (!tela.ativo) return;
     if (ev.target.closest('[data-vendas-abc-todos]')) {
       tela.abcTodos = !tela.abcTodos;
       atualizarTabelaAbc();
+      return;
+    }
+    if (ev.target.closest('[data-vendas-limpar]')) {
+      Object.values(PARAMETROS).forEach(({ campo }) => { filtros[campo] = ''; });
+      tela.abcTodos = false;
+      guardarFiltros();
+      renderizar();
+      return;
+    }
+    const comDetalhe = ev.target.closest('[data-vendas-detalhe]');
+    if (comDetalhe) {
+      abrirDetalheDe(comDetalhe);
       return;
     }
     const curva = ev.target.closest('[data-vendas-abc-filtrar]');
@@ -10113,6 +10834,12 @@
 
   conteudo.addEventListener('keydown', (ev) => {
     if (!tela.ativo || (ev.key !== 'Enter' && ev.key !== ' ')) return;
+    const comDetalhe = ev.target.closest('[data-vendas-detalhe]');
+    if (comDetalhe && comDetalhe.tagName !== 'BUTTON') {
+      ev.preventDefault();
+      abrirDetalheDe(comDetalhe);
+      return;
+    }
     const curva = ev.target.closest('[data-vendas-abc-filtrar]');
     if (!curva) return;
     ev.preventDefault();
