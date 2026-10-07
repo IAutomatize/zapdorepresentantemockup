@@ -9584,19 +9584,26 @@
   }
 
   // ---- evolução do faturamento: realizado, objetivo (meta), previsão --------------------
-  // A meta é mensal e vem do cadastro: sem filtro, a soma das metas das representadas ativas;
-  // com uma representada, a dela; com um vendedor (ou o vendedor na própria carteira), a dele.
-  // Vendedor e representada juntos, ou os filtros de cliente, não têm meta cadastrada.
-  // O objetivo de cada dia é a meta do mês dividida pelos dias úteis (segunda a sexta) do
-  // mês: no fim de semana a linha fica reta. A previsão segue a média por dia útil até hoje.
+  // Não existe meta da empresa: existe a meta de cada representada (quanto se quer vender
+  // para ela) e a de cada vendedor (quanto ele deve vender). Sem filtro, o objetivo é a soma
+  // das metas das representadas ativas; com uma representada, a dela; com um vendedor (ou o
+  // vendedor na própria carteira), a dele. Vendedor e representada juntos, ou os filtros de
+  // cliente, não têm meta cadastrada.
+  // O objetivo de cada dia é a meta do mês dividida pelos dias úteis do mês (segunda a sexta,
+  // menos os feriados nacionais, vendas.ehDiaUtil): no fim de semana e no feriado a linha
+  // fica reta. A previsão segue a média por dia útil até hoje.
   const LETRA_DO_DIA = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
-  const ehDiaUtil = (x) => x.getDay() !== 0 && x.getDay() !== 6;
-  function diasUteisEntre(de, ate) {
-    let n = 0;
-    for (let x = inicioDoDia(de); x <= ate; x = somarDias(x, 1)) if (ehDiaUtil(x)) n += 1;
-    return n;
-  }
+  const ehDiaUtil = (x) => vendas.ehDiaUtil(x);
+  const diasUteisEntre = (de, ate) => vendas.diasUteis(de, ate);
   const diasUteisDoMes = (ano, mes) => diasUteisEntre(new Date(ano, mes, 1), fimDoDia(new Date(ano, mes + 1, 0)));
+  /** Feriados nacionais em dia de semana entre duas datas, como "12/10". */
+  function feriadosEntre(de, ate) {
+    const lista = [];
+    for (let x = inicioDoDia(de); x <= ate; x = somarDias(x, 1)) {
+      if (x.getDay() !== 0 && x.getDay() !== 6 && vendas.feriado(x)) lista.push(`${String(x.getDate()).padStart(2, '0')}/${String(x.getMonth() + 1).padStart(2, '0')}`);
+    }
+    return lista;
+  }
 
   function metaDoRecorte(d) {
     if (filtros.rede || filtros.cidade || filtros.situacao || filtros.bloqueio) {
@@ -9618,7 +9625,7 @@
     const soma = ativas.reduce((a, r) => a + (r.metaMensal || 0), 0);
     const comMeta = ativas.filter((r) => r.metaMensal).length;
     return soma
-      ? { valor: soma, origem: `Soma das metas de ${plural(comMeta, 'representada', 'representadas')}.` }
+      ? { valor: soma, origem: `Soma das metas de ${plural(comMeta, 'representada', 'representadas')}: quanto você quer vender para cada uma.` }
       : { valor: 0, origem: 'Nenhuma representada tem meta cadastrada.' };
   }
 
@@ -9642,13 +9649,13 @@
     // Pontos do eixo: um por dia, ou um por mês quando o período passa de dois meses.
     let pontos = dias.map((x) => ({
       chave: chaveDoDia(x), data: x, valor: porDia.get(chaveDoDia(x)) || 0, objetivo: objetivoDoDia(x),
-      futuro: x > hoje, fimDeSemana: !ehDiaUtil(x),
+      futuro: x > hoje, naoUtil: !ehDiaUtil(x), feriado: vendas.feriado(x),
     }));
     if (modo === 'mes') {
       const meses = new Map();
       pontos.forEach((pt) => {
         const k = pt.chave.slice(0, 7);
-        if (!meses.has(k)) meses.set(k, { chave: k, data: new Date(pt.data.getFullYear(), pt.data.getMonth(), 1), valor: 0, objetivo: 0, futuro: false, fimDeSemana: false });
+        if (!meses.has(k)) meses.set(k, { chave: k, data: new Date(pt.data.getFullYear(), pt.data.getMonth(), 1), valor: 0, objetivo: 0, futuro: false, naoUtil: false, feriado: null });
         meses.get(k).valor += pt.valor;
         meses.get(k).objetivo += pt.objetivo;
       });
@@ -9677,7 +9684,7 @@
       const media = faturado / uteisDecorridos;
       previsao = pontos.map(() => null);
       previsao[indiceHoje] = realizado[indiceHoje];
-      for (let i = indiceHoje + 1; i < pontos.length; i += 1) previsao[i] = previsao[i - 1] + (pontos[i].fimDeSemana ? 0 : media);
+      for (let i = indiceHoje + 1; i < pontos.length; i += 1) previsao[i] = previsao[i - 1] + (pontos[i].naoUtil ? 0 : media);
       previsao = previsao.map((x) => (x == null ? null : Math.round(x)));
     }
 
@@ -9704,7 +9711,7 @@
     if (emAndamento && metaDoPeriodo) {
       const uteisRestantes = diasUteisEntre(hoje, fim); // contando hoje, como o "necessário" do dia
       const falta = Math.max(0, metaDoPeriodo - (faturado - (hojeValor || 0)));
-      Object.assign(resumo, { uteisRestantes, falta, necessario: uteisRestantes ? Math.round(falta / uteisRestantes) : null, previsaoFinal: previsao ? previsao[previsao.length - 1] : null });
+      Object.assign(resumo, { uteisRestantes, falta, necessario: uteisRestantes ? Math.round(falta / uteisRestantes) : null, previsaoFinal: previsao ? previsao[previsao.length - 1] : null, feriados: feriadosEntre(hoje, fim) });
     } else if (!emAndamento && !mesCheio) {
       const uteis = diasUteisEntre(inicio, fim);
       Object.assign(resumo, { uteis, mediaPorDiaUtil: uteis ? Math.round(faturado / uteis) : 0 });
@@ -9712,14 +9719,14 @@
 
     const tituloDoPonto = (pt) => (modo === 'mes'
       ? (() => { const t = pt.data.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }); return t.charAt(0).toUpperCase() + t.slice(1); })()
-      : tituloDoDia(pt.chave));
+      : `${tituloDoDia(pt.chave)}${pt.feriado ? ` · feriado: ${pt.feriado}` : ''}`);
     const rotuloDoPonto = (pt) => {
       if (modo === 'mes') return pt.data.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '') + `/${String(pt.data.getFullYear()).slice(2)}`;
       return [mesCheio ? String(pt.data.getDate()) : diaMes(pt.chave), LETRA_DO_DIA[pt.data.getDay()]];
     };
     return {
       modo, mesCheio, emAndamento, meta,
-      rotulos: pontos.map(rotuloDoPonto), titulos: pontos.map(tituloDoPonto), fimDeSemana: pontos.map((pt) => pt.fimDeSemana),
+      rotulos: pontos.map(rotuloDoPonto), titulos: pontos.map(tituloDoPonto), naoUtil: pontos.map((pt) => pt.naoUtil),
       realizado, objetivos, previsao, mesAnterior, indiceHoje, resumo,
     };
   }
@@ -9982,7 +9989,7 @@
         <div class="vendas-meta-bloco">
           <p class="dashboard-kpi-label-modern">Necessário faturar</p>
           <p class="vendas-meta-valor">${rs.necessario != null ? `${fmt.brl(rs.necessario)} <small>por dia útil</small>` : '—'}</p>
-          <p class="vendas-nota">${fmt.brl(rs.falta)} em ${plural(rs.uteisRestantes, 'dia útil', 'dias úteis')}, de hoje a ${fmt.data(rs.fim)}.${rs.previsaoFinal != null ? ` No ritmo atual, o mês fecha em <strong>${fmt.brl(rs.previsaoFinal)}</strong> (${pct((rs.previsaoFinal / rs.meta) * 100, 0)} da meta).` : ''}</p>
+          <p class="vendas-nota">${fmt.brl(rs.falta)} em ${plural(rs.uteisRestantes, 'dia útil', 'dias úteis')}, de hoje a ${fmt.data(rs.fim)}${rs.feriados?.length ? ` (sem ${rs.feriados.length === 1 ? 'o feriado de' : 'os feriados de'} ${juntar(rs.feriados)})` : ''}.${rs.previsaoFinal != null ? ` No ritmo atual, o mês fecha em <strong>${fmt.brl(rs.previsaoFinal)}</strong> (${pct((rs.previsaoFinal / rs.meta) * 100, 0)} da meta).` : ''}</p>
         </div>` : `
         <div class="vendas-meta-bloco">
           <p class="dashboard-kpi-label-modern">Meta batida</p>
@@ -10002,7 +10009,7 @@
         <div class="vendas-meta-bloco">
           <p class="dashboard-kpi-label-modern">Média por dia útil</p>
           <p class="vendas-meta-valor">${fmt.brl(rs.mediaPorDiaUtil)}</p>
-          <p class="vendas-nota">em ${plural(rs.uteis, 'dia útil', 'dias úteis')} no período</p>
+          <p class="vendas-nota">em ${plural(rs.uteis, 'dia útil', 'dias úteis')} no período, sem fins de semana e feriados nacionais</p>
         </div>`;
     }
 
@@ -10412,7 +10419,7 @@
           x: {
             grid: { display: false },
             ticks: {
-              color: (ctx) => (fa.fimDeSemana[ctx.index] ? fraco : p.eixo),
+              color: (ctx) => (fa.naoUtil[ctx.index] ? fraco : p.eixo), // fim de semana e feriado mais claros
               maxRotation: 0, autoSkip: true, maxTicksLimit: fa.modo === 'dia' ? 31 : 13, font: { size: 10 },
             },
           },

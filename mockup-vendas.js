@@ -65,6 +65,40 @@
   }
   const inicioDoDia = (d) => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
   const fimDoDia = (d) => { const x = new Date(d); x.setHours(23, 59, 59, 999); return x; };
+
+  // Dias úteis: segunda a sexta, menos os feriados nacionais (federais). Carnaval, Quarta de
+  // Cinzas e Corpus Christi são ponto facultativo no calendário federal: contam como dia útil.
+  // Feriados estaduais e municipais não entram (decisão de 07/10/2026).
+  const FERIADOS_FIXOS = {
+    '01-01': 'Confraternização Universal', '04-21': 'Tiradentes', '05-01': 'Dia do Trabalho',
+    '09-07': 'Independência do Brasil', '10-12': 'Nossa Senhora Aparecida', '11-02': 'Finados',
+    '11-15': 'Proclamação da República', '11-20': 'Dia Nacional de Zumbi e da Consciência Negra', '12-25': 'Natal',
+  };
+  /** Domingo de Páscoa (algoritmo de Meeus/Jones/Butcher, calendário gregoriano). */
+  function pascoa(ano) {
+    const a = ano % 19; const b = Math.floor(ano / 100); const c = ano % 100;
+    const d = Math.floor(b / 4); const e = b % 4; const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3); const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4); const k = c % 4; const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    return new Date(ano, Math.floor((h + l - 7 * m + 114) / 31) - 1, ((h + l - 7 * m + 114) % 31) + 1);
+  }
+  /** Nome do feriado nacional na data, ou null. A Paixão de Cristo é a sexta antes da Páscoa. */
+  function feriado(data) {
+    const x = new Date(data);
+    const fixo = FERIADOS_FIXOS[`${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`];
+    if (fixo) return fixo;
+    const paixao = pascoa(x.getFullYear());
+    paixao.setDate(paixao.getDate() - 2);
+    return paixao.getMonth() === x.getMonth() && paixao.getDate() === x.getDate() ? 'Paixão de Cristo' : null;
+  }
+  const ehDiaUtil = (data) => { const x = new Date(data); return x.getDay() !== 0 && x.getDay() !== 6 && !feriado(x); };
+  /** Dias úteis de `de` a `ate`, os dois inclusive. */
+  function diasUteis(de, ate) {
+    let n = 0;
+    for (let x = inicioDoDia(de); x <= ate; x.setDate(x.getDate() + 1)) if (ehDiaUtil(x)) n += 1;
+    return n;
+  }
   const chaveDoDia = (d) => {
     const x = new Date(d);
     return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
@@ -889,6 +923,7 @@
     permissoesPadrao: (papel) => copia(PERMISSOES[papel] || PERMISSOES.member),
     salvarPermissoes: (papel, parcial) => { estado.alterados.permissoes[papel] = { ...(estado.alterados.permissoes[papel] || {}), ...parcial }; gravarEstado(); avisar('permissoes', papel); },
     // regras
+    feriado, ehDiaUtil, diasUteis,
     ehVenda, situacaoDoCliente, carteira, curvaABC, positivacoes, resumo, comissoes, periodoDoMes, totalDosItens,
     // formatos
     fmt, logoDaRepresentada,

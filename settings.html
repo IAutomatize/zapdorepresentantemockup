@@ -10418,16 +10418,11 @@ Rosquinha de coco 350 g — R$ 6,20</textarea>
   }
   // Meta de vendas do mês, em centavos: o campo usa a máscara de moeda (só dígitos).
   const lerMeta = (texto) => Number(String(texto ?? '').replace(/\D/g, '').slice(0, 12)) || 0;
-  /** Dias úteis (segunda a sexta) do mês de `referencia`; feriados não entram. */
-  function diasUteisDoMes(referencia = new Date()) {
-    const ultimo = new Date(referencia.getFullYear(), referencia.getMonth() + 1, 0).getDate();
-    let n = 0;
-    for (let d = 1; d <= ultimo; d += 1) {
-      const dia = new Date(referencia.getFullYear(), referencia.getMonth(), d).getDay();
-      if (dia !== 0 && dia !== 6) n += 1;
-    }
-    return n;
-  }
+  /** Dias úteis do mês de `referencia`: segunda a sexta, menos os feriados nacionais. */
+  const diasUteisDoMes = (referencia = new Date()) => vendas.diasUteis(
+    new Date(referencia.getFullYear(), referencia.getMonth(), 1),
+    new Date(referencia.getFullYear(), referencia.getMonth() + 1, 0, 23, 59, 59, 999),
+  );
 
   // O selo fica na coluna Tipo, embaixo da função, e é ele que abre "Vendedor e comissão".
   // Coluna ou botão de ação a mais não cabem entre 1280 e 1366 px: a tabela corta o que passa
