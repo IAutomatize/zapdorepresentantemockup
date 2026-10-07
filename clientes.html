@@ -736,6 +736,7 @@
     border: 1px solid var(--ds-input-border); background: rgba(var(--ds-glass-rgb), 0.7); color: var(--ds-text);
   }
   .cli-select:focus { outline: none; border-color: rgba(33, 150, 243, 0.45); box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1); }
+  .cli-select:disabled { opacity: 0.7; cursor: not-allowed; } /* vendedor travado na própria carteira */
 
   /* Cadastro: representadas em grade; cidade ocupa o lugar do país (cliente é sempre no Brasil). */
   .cli-representadas-grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
@@ -1268,8 +1269,19 @@
     preencherSelect(sel('situacao'), [['', 'Todas'], ...Object.keys(SITUACOES).map((s) => com(porSituacao, s, V.NOMES_DA_SITUACAO[s]))], filtros.situacao);
 
     const porVendedor = contar((l) => l.cliente.vendedorId);
-    preencherSelect(sel('vendedorId'), [['', 'Todos'], ...V.vendedores().filter((v) => v.vendedor || porVendedor.has(v.id)).map((v) => com(porVendedor, v.id, v.nome))], filtros.vendedorId);
-    mostrar(sel('vendedorId').closest('label'), !escopoCarteira());
+    const campoVendedor = sel('vendedorId');
+    if (escopoCarteira()) {
+      // Quem vê só a própria carteira (o membro vendedor): o filtro aparece travado no nome da
+      // pessoa, como no Dashboard e em Pedidos. Dono e administrador têm "Todos".
+      preencherSelect(campoVendedor, [['', `${V.verComo().nome} (${todas.length})`]], '');
+      campoVendedor.disabled = true;
+      campoVendedor.title = 'Você vê só os clientes da sua carteira';
+    } else {
+      preencherSelect(campoVendedor, [['', 'Todos'], ...V.vendedores().filter((v) => v.vendedor || porVendedor.has(v.id)).map((v) => com(porVendedor, v.id, v.nome))], filtros.vendedorId);
+      campoVendedor.disabled = false;
+      campoVendedor.title = '';
+    }
+    mostrar(campoVendedor.closest('label'), true);
 
     const porSegmento = contar((l) => l.cliente.segmento || '__sem');
     preencherSelect(sel('segmento'), [['', 'Todos'], ...[...porSegmento.keys()].filter((k) => k !== '__sem').sort(porNome).map((k) => com(porSegmento, k, k)),
